@@ -107,14 +107,14 @@ export async function POST(request: NextRequest) {
 
       // Get all tool use blocks
       const toolUseBlocks = response.content.filter(
-        (block): block is Anthropic.ContentBlockParam & { type: "tool_use"; id: string; name: string; input: Record<string, unknown> } =>
+        (block): block is Anthropic.Messages.ToolUseBlock =>
           block.type === "tool_use"
       );
 
       // Add assistant response with tool calls
       allMessages.push({
         role: "assistant",
-        content: response.content as Anthropic.ContentBlockParam[],
+        content: response.content,
       });
 
       // Execute all tool calls and build tool results
@@ -149,7 +149,7 @@ export async function POST(request: NextRequest) {
 
     // Extract text response
     const textBlocks = response.content.filter(
-      (block): block is Anthropic.TextBlock => block.type === "text"
+      (block): block is Anthropic.Messages.TextBlock => block.type === "text"
     );
     const fullResponse = textBlocks.map((b) => b.text).join("\n");
 

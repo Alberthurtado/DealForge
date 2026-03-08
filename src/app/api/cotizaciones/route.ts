@@ -160,7 +160,7 @@ export async function POST(request: NextRequest) {
               aprobadorNombre: aprob.aprobadorNombre,
               razon: aprob.razon,
               empresa: { nombre: empresaData?.nombre || "DealForge", colorPrimario: empresaData?.colorPrimario || "#3a9bb5" },
-              lineItems: processedItems.map((i) => ({ descripcion: i.descripcion, cantidad: i.cantidad, total: i.total })),
+              lineItems: processedItems.map((i: { descripcion: string; cantidad: number; total: number }) => ({ descripcion: i.descripcion, cantidad: i.cantidad, total: i.total })),
             });
             await sendEmail({
               to: aprob.aprobadorEmail,

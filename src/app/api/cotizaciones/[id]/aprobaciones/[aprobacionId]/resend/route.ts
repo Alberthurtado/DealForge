@@ -68,14 +68,14 @@ export async function POST(
       numero: aprobacion.cotizacion.numero,
       total: aprobacion.cotizacion.total,
       moneda: aprobacion.cotizacion.moneda,
+      fechaEmision: aprobacion.cotizacion.fechaEmision,
       cliente: aprobacion.cotizacion.cliente.nombre,
-      lineItems: aprobacion.cotizacion.lineItems,
     },
+    lineItems: aprobacion.cotizacion.lineItems,
     aprobadorNombre: aprobacion.aprobadorNombre,
     razon: regla?.nombre || "Regla comercial",
     empresa: {
       nombre: empresa?.nombre || "DealForge",
-      logoUrl: empresa?.logoUrl || null,
       colorPrimario: empresa?.colorPrimario || "#3a9bb5",
     },
   });

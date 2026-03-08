@@ -107,8 +107,11 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   let priceId: string | null = null;
 
   if (subscriptionId) {
-    const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-    currentPeriodEnd = new Date(subscription.current_period_end * 1000);
+    const subscription = await stripe.subscriptions.retrieve(subscriptionId) as Stripe.Subscription;
+    const itemPeriodEnd = subscription.items?.data?.[0]?.current_period_end;
+    if (itemPeriodEnd) {
+      currentPeriodEnd = new Date(itemPeriodEnd * 1000);
+    }
     priceId = subscription.items.data[0]?.price.id || null;
   }
 
@@ -137,7 +140,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
 
   const updateData: Record<string, unknown> = {
     planStatus: status === "active" ? "active" : status === "past_due" ? "past_due" : "canceled",
-    currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+    currentPeriodEnd: new Date((subscription.items?.data?.[0]?.current_period_end || 0) * 1000),
     stripePriceId: priceId || undefined,
     stripeSubscriptionId: subscription.id,
   };
