@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="256" y1="32" x2="256" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#99CDE3"/>
+      <stop offset="1" stop-color="#49BABC"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="32" y="32" width="448" height="448" rx="92" fill="url(#bg)"/>
+
+  <!-- Left tray -->
+  <path d="M124 250H201V337C165 334 137 316 117 286C109 274 102 262 98 250H124Z" fill="white"/>
+
+  <!-- Main anvil -->
+  <path d="M215 250H401V259C401 271 393 281 382 284L333 302C307 311 282 331 282 360C282 375 289 384 308 390L323 395C334 399 342 409 342 421V429H193V421C193 409 201 399 212 395L227 390C246 384 253 375 253 360C253 331 228 311 202 302L215 250Z" fill="white"/>
+
+  <!-- Divider -->
+  <rect x="206" y="250" width="9" height="87" fill="url(#bg)"/>
+
+  <!-- Flame 1 -->
+  <path d="M255 120C254 148 228 163 216 181C206 196 205 216 214 232C219 241 225 250 231 258C230 238 242 225 257 212C281 191 296 165 292 138C290 126 286 114 276 100C273 110 266 116 255 120Z" fill="white"/>
+
+  <!-- Flame 2 -->
+  <path d="M313 149C307 163 294 172 283 181C271 192 265 206 267 220C269 232 276 242 287 249C286 234 294 223 305 214C320 202 331 186 329 167C328 160 324 153 319 146C318 147 316 148 313 149Z" fill="white"/>
+</svg>

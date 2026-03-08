@@ -1,0 +1,198 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+model Cliente {
+  id           String       @id @default(cuid())
+  nombre       String
+  ruc          String?
+  email        String?
+  telefono     String?
+  direccion    String?
+  ciudad       String?
+  pais         String?
+  sector       String?
+  notas        String?
+  contactos    Contacto[]
+  cotizaciones Cotizacion[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Contacto {
+  id        String   @id @default(cuid())
+  nombre    String
+  cargo     String?
+  email     String?
+  telefono  String?
+  principal Boolean  @default(false)
+  clienteId String
+  cliente   Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Categoria {
+  id        String     @id @default(cuid())
+  nombre    String     @unique
+  productos Producto[]
+}
+
+model Producto {
+  id          String              @id @default(cuid())
+  nombre      String
+  descripcion String?
+  sku         String              @unique
+  precioBase  Float
+  unidad      String              @default("unidad")
+  activo      Boolean             @default(true)
+  categoriaId String?
+  categoria   Categoria?          @relation(fields: [categoriaId], references: [id])
+  variantes   VarianteProducto[]
+  lineItems   LineItem[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+model VarianteProducto {
+  id             String     @id @default(cuid())
+  productoId     String
+  producto       Producto   @relation(fields: [productoId], references: [id], onDelete: Cascade)
+  nombre         String
+  sku            String     @unique
+  precioOverride Float?
+  atributos      String     @default("{}")
+  activo         Boolean    @default(true)
+  lineItems      LineItem[]
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Cotizacion {
+  id               String      @id @default(cuid())
+  numero           String      @unique
+  clienteId        String
+  cliente          Cliente     @relation(fields: [clienteId], references: [id])
+  estado           String      @default("BORRADOR")
+  fechaEmision     DateTime    @default(now())
+  fechaVencimiento DateTime?
+  contactoNombre   String?
+  subtotal         Float       @default(0)
+  descuentoGlobal  Float       @default(0)
+  impuesto         Float       @default(0)
+  total            Float       @default(0)
+  moneda           String      @default("EUR")
+  notas            String?
+  condiciones      String?
+  version          Int         @default(1)
+  lineItems        LineItem[]
+  actividades      Actividad[]
+  aprobaciones     Aprobacion[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model LineItem {
+  id             String            @id @default(cuid())
+  cotizacionId   String
+  cotizacion     Cotizacion        @relation(fields: [cotizacionId], references: [id], onDelete: Cascade)
+  productoId     String?
+  producto       Producto?         @relation(fields: [productoId], references: [id])
+  varianteId     String?
+  variante       VarianteProducto? @relation(fields: [varianteId], references: [id])
+  descripcion    String
+  cantidad       Float             @default(1)
+  precioUnitario Float
+  descuento      Float             @default(0)
+  total          Float
+  orden          Int               @default(0)
+  createdAt      DateTime          @default(now())
+}
+
+model Actividad {
+  id             String     @id @default(cuid())
+  cotizacionId   String
+  cotizacion     Cotizacion @relation(fields: [cotizacionId], references: [id], onDelete: Cascade)
+  tipo           String
+  descripcion    String
+  estadoAnterior String?
+  estadoNuevo    String?
+  createdAt      DateTime   @default(now())
+}
+
+model ReglaComercial {
+  id            String   @id @default(cuid())
+  nombre        String
+  tipo          String   // LIMITE_DESCUENTO | PRODUCTO_OBLIGATORIO | APROBACION | PROMOCION
+  activa        Boolean  @default(true)
+  prioridad     Int      @default(0)
+  configuracion String   // JSON text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Aprobacion {
+  id              String     @id @default(cuid())
+  cotizacionId    String
+  cotizacion      Cotizacion @relation(fields: [cotizacionId], references: [id], onDelete: Cascade)
+  reglaId         String
+  aprobadorNombre String
+  aprobadorEmail  String
+  estado          String     @default("PENDIENTE")
+  comentario      String?
+  token           String?    @unique
+  emailEnviadoAt  DateTime?
+  respondidoAt    DateTime?
+  createdAt       DateTime   @default(now())
+}
+
+model Empresa {
+  id            String   @id @default("default")
+  nombre        String   @default("Mi Empresa")
+  cif           String?
+  email         String?
+  telefono      String?
+  direccion     String?
+  ciudad        String?
+  pais          String?
+  web           String?
+  logoUrl       String?
+  plantillaPdf      String   @default("moderna")
+  colorPrimario     String   @default("#3a9bb5")
+  prefijoCotizacion String   @default("COT")
+  diasVencimiento   Int      @default(30)
+  condicionesDefecto String?
+  smtpHost          String?
+  smtpPort          Int?     @default(587)
+  smtpUser          String?
+  smtpPass          String?
+  smtpSecure        Boolean  @default(false)
+  usuarios          Usuario[]
+  createdAt         DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Usuario {
+  id           String   @id @default(cuid())
+  nombre       String
+  email        String   @unique
+  passwordHash String
+  plan         String   @default("starter")
+  rol          String   @default("admin")
+  empresaId    String   @default("default")
+  empresa      Empresa  @relation(fields: [empresaId], references: [id])
+  activo       Boolean  @default(true)
+  // Stripe subscription fields
+  stripeCustomerId     String?  @unique
+  stripeSubscriptionId String?
+  stripePriceId        String?
+  planStatus           String   @default("active") // active | past_due | canceled
+  currentPeriodEnd     DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
