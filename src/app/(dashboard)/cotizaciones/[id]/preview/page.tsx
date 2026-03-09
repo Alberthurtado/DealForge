@@ -515,10 +515,16 @@ export default function CotizacionPreviewPage() {
                     <span>-{formatCurrency(discountAmount)}</span>
                   </div>
                 )}
-                <div className="flex justify-between text-sm text-gray-600">
-                  <span>IVA ({cotizacion.impuesto}%)</span>
-                  <span>{formatCurrency(ivaAmount)}</span>
-                </div>
+                {cotizacion.impuesto > 0 ? (
+                  <div className="flex justify-between text-sm text-gray-600">
+                    <span>IVA ({cotizacion.impuesto}%)</span>
+                    <span>{formatCurrency(ivaAmount)}</span>
+                  </div>
+                ) : (
+                  <div className="flex justify-between text-sm text-gray-400 italic">
+                    <span>IVA no incluido</span>
+                  </div>
+                )}
                 {plantilla === "moderna" ? (
                   <div
                     className="flex justify-between pt-3 mt-2 rounded-lg px-3 py-2 text-white"

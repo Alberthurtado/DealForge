@@ -40,6 +40,7 @@ interface WizardData {
   contactoNombre: string;
   lineItems: LineItemInput[];
   descuentoGlobal: number;
+  incluirIva: boolean;
   impuesto: number;
   moneda: string;
   notas: string;
@@ -95,6 +96,7 @@ export function CotizacionWizard({
     contactoNombre: "",
     lineItems: [],
     descuentoGlobal: 0,
+    incluirIva: true,
     impuesto: 21,
     moneda: "EUR",
     notas: "",
@@ -117,7 +119,8 @@ export function CotizacionWizard({
     if (step !== 3 || form.lineItems.length === 0) return;
     const sub = form.lineItems.reduce((s, i) => s + i.cantidad * i.precioUnitario * (1 - i.descuento / 100), 0);
     const subDesc = sub * (1 - form.descuentoGlobal / 100);
-    const tot = subDesc + subDesc * (form.impuesto / 100);
+    const ivaEff = form.incluirIva ? form.impuesto : 0;
+    const tot = subDesc + subDesc * (ivaEff / 100);
     fetch("/api/reglas/validar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -131,7 +134,7 @@ export function CotizacionWizard({
       .then((r) => r.json())
       .then(setValidationResult)
       .catch(() => {});
-  }, [step, form.lineItems, form.descuentoGlobal, form.impuesto]);
+  }, [step, form.lineItems, form.descuentoGlobal, form.impuesto, form.incluirIva]);
 
   const selectedCliente = clientes.find((c) => c.id === form.clienteId);
 
@@ -235,7 +238,8 @@ export function CotizacionWizard({
     return sum + item.cantidad * item.precioUnitario * (1 - item.descuento / 100);
   }, 0);
   const subtotalConDescuento = subtotal * (1 - form.descuentoGlobal / 100);
-  const impuestoMonto = subtotalConDescuento * (form.impuesto / 100);
+  const impuestoEfectivo = form.incluirIva ? form.impuesto : 0;
+  const impuestoMonto = subtotalConDescuento * (impuestoEfectivo / 100);
   const total = subtotalConDescuento + impuestoMonto;
 
   const canProceed = () => {
@@ -580,20 +584,51 @@ export function CotizacionWizard({
             </div>
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
-                IVA (%)
+                IVA
               </label>
-              <input
-                type="number"
-                min="0"
-                value={form.impuesto}
-                onChange={(e) =>
-                  setForm((f) => ({
-                    ...f,
-                    impuesto: parseFloat(e.target.value) || 0,
-                  }))
-                }
-                className={inputClass}
-              />
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={form.incluirIva}
+                    onClick={() =>
+                      setForm((f) => ({ ...f, incluirIva: !f.incluirIva }))
+                    }
+                    className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                      form.incluirIva ? "bg-primary" : "bg-gray-300"
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform ${
+                        form.incluirIva ? "translate-x-[18px]" : "translate-x-[3px]"
+                      }`}
+                    />
+                  </button>
+                  <span className="text-sm text-foreground">
+                    {form.incluirIva ? "Incluir IVA" : "Sin IVA"}
+                  </span>
+                </label>
+                {form.incluirIva && (
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="0.5"
+                      value={form.impuesto}
+                      onChange={(e) =>
+                        setForm((f) => ({
+                          ...f,
+                          impuesto: parseFloat(e.target.value) || 0,
+                        }))
+                      }
+                      className={`${inputClass} w-24`}
+                    />
+                    <span className="text-sm text-muted-foreground">%</span>
+                  </div>
+                )}
+              </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
@@ -673,12 +708,18 @@ export function CotizacionWizard({
                 </span>
               </div>
             )}
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">
-                IVA ({form.impuesto}%)
-              </span>
-              <span>{formatCurrency(impuestoMonto)}</span>
-            </div>
+            {form.incluirIva ? (
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">
+                  IVA ({form.impuesto}%)
+                </span>
+                <span>{formatCurrency(impuestoMonto)}</span>
+              </div>
+            ) : (
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground italic">IVA no incluido</span>
+              </div>
+            )}
             <div className="flex justify-between text-base font-bold border-t border-border pt-2">
               <span>Total</span>
               <span>{formatCurrency(total)}</span>
@@ -797,10 +838,16 @@ export function CotizacionWizard({
                   </span>
                 </div>
               )}
-              <div className="flex justify-between text-sm">
-                <span>IVA ({form.impuesto}%)</span>
-                <span>{formatCurrency(impuestoMonto)}</span>
-              </div>
+              {form.incluirIva ? (
+                <div className="flex justify-between text-sm">
+                  <span>IVA ({form.impuesto}%)</span>
+                  <span>{formatCurrency(impuestoMonto)}</span>
+                </div>
+              ) : (
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground italic">IVA no incluido</span>
+                </div>
+              )}
               <div className="flex justify-between text-lg font-bold border-t border-border pt-2 mt-2">
                 <span>Total</span>
                 <span>{formatCurrency(total)}</span>
@@ -832,7 +879,7 @@ export function CotizacionWizard({
           </button>
         ) : (
           <button
-            onClick={() => onSubmit(form)}
+            onClick={() => onSubmit({ ...form, impuesto: impuestoEfectivo })}
             disabled={saving}
             className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 transition-colors"
           >

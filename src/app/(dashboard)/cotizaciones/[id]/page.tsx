@@ -618,18 +618,24 @@ export default function CotizacionDetailPage() {
                     </span>
                   </div>
                 )}
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">
-                    IVA ({cotizacion.impuesto}%)
-                  </span>
-                  <span>
-                    {formatCurrency(
-                      cotizacion.subtotal *
-                        (1 - cotizacion.descuentoGlobal / 100) *
-                        (cotizacion.impuesto / 100)
-                    )}
-                  </span>
-                </div>
+                {cotizacion.impuesto > 0 ? (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">
+                      IVA ({cotizacion.impuesto}%)
+                    </span>
+                    <span>
+                      {formatCurrency(
+                        cotizacion.subtotal *
+                          (1 - cotizacion.descuentoGlobal / 100) *
+                          (cotizacion.impuesto / 100)
+                      )}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground italic">IVA no incluido</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
                   <span>Total</span>
                   <span>{formatCurrency(cotizacion.total)}</span>

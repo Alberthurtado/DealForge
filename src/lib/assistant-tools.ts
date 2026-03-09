@@ -201,7 +201,7 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "crear_cotizacion",
     description:
-      "Crea una nueva cotizacion para un cliente con lineas de producto. Calcula automaticamente subtotal, impuesto (21% IVA) y total.",
+      "Crea una nueva cotizacion para un cliente con lineas de producto. Calcula automaticamente subtotal, impuesto y total. El IVA se puede incluir o no, y su porcentaje es configurable (por defecto 21%).",
     input_schema: {
       type: "object" as const,
       properties: {
@@ -210,6 +210,8 @@ export const toolDefinitions: Anthropic.Tool[] = [
         notas: { type: "string", description: "Notas internas sobre la cotizacion" },
         condiciones: { type: "string", description: "Condiciones comerciales" },
         descuentoGlobal: { type: "number", description: "Porcentaje de descuento global (0-100)" },
+        incluirIva: { type: "boolean", description: "Si se incluye IVA en la cotizacion (por defecto true). Si es false, el total no incluye impuestos." },
+        impuesto: { type: "number", description: "Porcentaje de IVA a aplicar (por defecto 21). Solo se aplica si incluirIva es true. Valores comunes: 21 (general), 10 (reducido), 4 (superreducido)." },
         items: {
           type: "array",
           description: "Lineas de la cotizacion. Cada item tiene productoId o descripcion manual, cantidad, y opcionalmente descuento, precioUnitario override y varianteId.",
@@ -1043,7 +1045,8 @@ async function crearCotizacion(input: Record<string, unknown>) {
 
     const descuentoGlobal = (input.descuentoGlobal as number) || 0;
     const subtotalConDescuento = subtotal * (1 - descuentoGlobal / 100);
-    const impuestoPct = 21; // 21% IVA
+    const incluirIva = input.incluirIva !== false; // default true
+    const impuestoPct = incluirIva ? ((input.impuesto as number) ?? 21) : 0;
     const total = subtotalConDescuento * (1 + impuestoPct / 100);
 
     const cotizacion = await prisma.cotizacion.create({

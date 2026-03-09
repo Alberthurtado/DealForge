@@ -117,7 +117,7 @@ export default function TerminosPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-sm mb-4">Los precios indicados no incluyen impuestos aplicables (IVA). DealForge se reserva el derecho de modificar los precios con un preaviso minimo de 30 dias.</p>
+          <p className="text-sm mb-4">Los precios de los planes indicados no incluyen impuestos aplicables (IVA). En las cotizaciones generadas con DealForge, el usuario puede elegir si incluir o no el IVA, asi como configurar el porcentaje aplicable. DealForge se reserva el derecho de modificar los precios de sus planes con un preaviso minimo de 30 dias.</p>
 
           <h3 className="text-base font-semibold text-gray-800 mb-2">6.2. Facturacion y pago</h3>
           <ul className="list-disc pl-6 space-y-2">
