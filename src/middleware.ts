@@ -39,6 +39,7 @@ const PROTECTED_API_PREFIXES = [
   "/api/integraciones",
   "/api/stripe/checkout",
   "/api/stripe/portal",
+  "/api/blog",
 ];
 
 // Always public

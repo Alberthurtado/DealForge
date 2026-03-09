@@ -12,8 +12,14 @@ export const metadata: Metadata = {
   },
   description:
     "Sistema CPQ (Configure, Price, Quote) inteligente para PYMEs. Gestiona clientes, productos y cotizaciones con asistente IA integrado.",
-  keywords: ["CPQ", "cotizaciones", "PYMEs", "ventas", "CRM", "DealForge"],
+  keywords: [
+    "CPQ", "cotizaciones", "PYMEs", "ventas", "CRM", "DealForge",
+    "Configure Price Quote", "software cotizaciones", "automatizar ventas",
+    "asistente IA ventas", "propuestas comerciales", "Forge IA",
+  ],
   authors: [{ name: "DealForge", url: "https://dealforge.es" }],
+  creator: "DealForge",
+  publisher: "DealForge",
   openGraph: {
     title: "DealForge - CPQ Inteligente para PYMEs",
     description:
@@ -21,8 +27,71 @@ export const metadata: Metadata = {
     siteName: "DealForge",
     locale: "es_ES",
     type: "website",
+    url: "https://dealforge.es",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "DealForge - CPQ Inteligente para PYMEs",
+    description:
+      "Gestiona clientes, productos y cotizaciones con asistente IA integrado.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://dealforge.es",
+  },
+  category: "technology",
   metadataBase: new URL("https://dealforge.es"),
+};
+
+// Organization + WebSite JSON-LD (global)
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "DealForge",
+  url: "https://dealforge.es",
+  logo: "https://dealforge.es/logo.svg",
+  description:
+    "Sistema CPQ inteligente con IA para PYMEs. Automatiza cotizaciones comerciales.",
+  email: "info@dealforge.es",
+  sameAs: [],
+  foundingDate: "2026",
+  knowsAbout: [
+    "CPQ", "Configure Price Quote", "Sales Automation",
+    "Artificial Intelligence", "Small Business Software",
+  ],
+};
+
+const webSiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "DealForge",
+  url: "https://dealforge.es",
+  description:
+    "Sistema CPQ inteligente con IA para PYMEs. Cotizaciones profesionales en minutos.",
+  publisher: {
+    "@type": "Organization",
+    name: "DealForge",
+    url: "https://dealforge.es",
+  },
+  inLanguage: "es",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://dealforge.es/blog?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default function RootLayout({
@@ -33,6 +102,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
+        {/* Organization + WebSite structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([organizationJsonLd, webSiteJsonLd]),
+          }}
+        />
+        {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"

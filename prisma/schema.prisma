@@ -199,3 +199,23 @@ model Usuario {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+model BlogPost {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  titulo      String
+  extracto    String    // Short excerpt for previews and meta description
+  contenido   String    // Full HTML content
+  imagen      String?   // Featured image URL
+  autor       String    @default("DealForge")
+  categoria   String    @default("general") // ventas, cpq, ia, producto, guias
+  tags        String    @default("[]")      // JSON array of tags
+  publicado   Boolean   @default(false)
+  publishedAt DateTime?
+  // SEO fields
+  metaTitulo      String?  // Override for <title> tag
+  metaDescripcion String?  // Override for meta description
+  metaKeywords    String?  // Comma-separated keywords
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

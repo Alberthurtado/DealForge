@@ -248,6 +248,23 @@ export const stripeCheckoutSchema = z.object({
   plan: z.enum(["pro", "business"], { message: "Plan invalido" }),
 });
 
+// ─── Blog ───────────────────────────────────────
+
+export const blogPostCreateSchema = z.object({
+  titulo: requiredString("Titulo"),
+  slug: z.string().optional(),
+  extracto: requiredString("Extracto"),
+  contenido: z.string().min(1, "Contenido es obligatorio"),
+  imagen: optionalString,
+  autor: z.string().default("DealForge"),
+  categoria: z.enum(["ventas", "cpq", "ia", "producto", "guias", "general"]).default("general"),
+  tags: z.array(z.string()).optional(),
+  publicado: z.boolean().default(false),
+  metaTitulo: optionalString,
+  metaDescripcion: optionalString,
+  metaKeywords: optionalString,
+});
+
 // ─── AI Assistant ────────────────────────────────
 
 export const assistantChatSchema = z.object({

@@ -1,0 +1,61 @@
+# DealForge — CPQ Inteligente con IA para PYMEs
+
+> DealForge es un sistema CPQ (Configure, Price, Quote) basado en la nube, diseñado para PYMEs que necesitan automatizar la creación de cotizaciones comerciales con inteligencia artificial.
+
+## Qué es DealForge
+
+DealForge permite a equipos comerciales configurar productos, calcular precios con reglas automatizadas y generar cotizaciones PDF profesionales en minutos. Incluye Forge, un asistente de IA que puede crear cotizaciones desde instrucciones en lenguaje natural.
+
+## Funcionalidades principales
+
+- **Gestión de clientes**: CRM con contactos, historial y vista 360°
+- **Catálogo de productos**: Productos con variantes, SKU, categorías y precios base
+- **Cotizaciones inteligentes**: Wizard de 4 pasos con cálculos automáticos
+- **Forge IA**: Asistente de inteligencia artificial para crear cotizaciones desde texto natural
+- **Reglas comerciales**: Límites de descuento, productos obligatorios, aprobaciones automáticas y promociones
+- **Aprobaciones**: Flujo de aprobación por email con tokens seguros
+- **3 plantillas PDF**: Moderna, clásica y minimalista con personalización de marca
+- **Reportes**: Dashboard con KPIs, gráficos y análisis de ventas
+- **Integraciones**: Exportación CSV, importación de datos, API REST, Zapier
+
+## Planes y precios
+
+- **Starter** (Gratis): 10 cotizaciones/mes, 5 clientes, Forge IA incluido
+- **Pro** (29€/mes): 100 cotizaciones/mes, clientes ilimitados, 3 plantillas PDF
+- **Business** (79€/mes): Cotizaciones ilimitadas, reglas comerciales, aprobaciones, prioridad
+- **Enterprise**: Personalizado, contactar para más información
+
+## Tecnología
+
+- Aplicación web (SaaS) — no requiere instalación
+- Next.js 16, React 19, TypeScript
+- Base de datos PostgreSQL (Supabase, EU)
+- Alojado en Vercel (Edge Network)
+- Cifrado TLS 1.3, bcrypt, JWT
+- Cumplimiento RGPD completo
+
+## Seguridad y privacidad
+
+- Datos almacenados en la UE (aws-eu-west-1)
+- Cifrado en reposo (AES-256) y en tránsito (TLS 1.3)
+- Autenticación JWT con cookies httpOnly
+- Rate limiting, validación de entrada, reCAPTCHA v3
+- Headers de seguridad: CSP, HSTS, X-Frame-Options
+- Sin venta de datos a terceros
+
+## Contacto
+
+- Web: https://dealforge.es
+- Email: info@dealforge.es
+- Documentación: https://dealforge.es/documentacion
+- Changelog: https://dealforge.es/changelog
+
+## Páginas disponibles
+
+- https://dealforge.es — Página principal con funcionalidades, precios y FAQ
+- https://dealforge.es/blog — Blog con artículos sobre ventas, CPQ e IA
+- https://dealforge.es/documentacion — Guía completa de uso
+- https://dealforge.es/changelog — Historial de versiones
+- https://dealforge.es/privacidad — Política de privacidad
+- https://dealforge.es/terminos — Términos de servicio
+- https://dealforge.es/rgpd — Cumplimiento RGPD
