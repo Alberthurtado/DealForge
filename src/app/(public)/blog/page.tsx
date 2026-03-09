@@ -4,6 +4,8 @@ import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { Calendar, Clock, ArrowRight, Flame } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Blog — DealForge",
   description:

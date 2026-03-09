@@ -5,6 +5,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, ArrowLeft, Flame } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -54,11 +56,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const posts = await prisma.blogPost.findMany({
-    where: { publicado: true },
-    select: { slug: true },
-  });
-  return posts.map((post) => ({ slug: post.slug }));
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { publicado: true },
+      select: { slug: true },
+    });
+    return posts.map((post) => ({ slug: post.slug }));
+  } catch {
+    return [];
+  }
 }
 
 function formatDate(date: Date): string {
