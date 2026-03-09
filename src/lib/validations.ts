@@ -52,6 +52,18 @@ export const registroSchema = z.object({
   recaptchaToken: z.string().optional().nullable(),
 });
 
+export const recuperarSchema = z.object({
+  email: emailField,
+  recaptchaToken: z.string().optional().nullable(),
+});
+
+export const resetPasswordSchema = z.object({
+  token: z.string().min(1, "Token es obligatorio"),
+  password: z
+    .string()
+    .min(8, "La contrasena debe tener al menos 8 caracteres"),
+});
+
 // ─── Contacto (nested) ──────────────────────────
 
 const contactoSchema = z.object({

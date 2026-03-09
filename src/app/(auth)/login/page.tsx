@@ -114,6 +114,15 @@ function LoginForm() {
             </div>
           </div>
 
+          <div className="flex justify-end">
+            <Link
+              href="/recuperar"
+              className="text-xs text-[#3a9bb5] hover:text-[#2d7d94] font-medium transition-colors"
+            >
+              ¿Olvidaste tu contrasena?
+            </Link>
+          </div>
+
           <button
             type="submit"
             disabled={loading}

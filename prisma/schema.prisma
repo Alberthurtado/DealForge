@@ -187,6 +187,9 @@ model Usuario {
   empresaId    String   @default("default")
   empresa      Empresa  @relation(fields: [empresaId], references: [id])
   activo       Boolean  @default(true)
+  // Password reset
+  resetToken       String?   @unique
+  resetTokenExpiry DateTime?
   // Stripe subscription fields
   stripeCustomerId     String?  @unique
   stripeSubscriptionId String?

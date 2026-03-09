@@ -68,6 +68,55 @@ export async function sendEmail(options: {
   });
 }
 
+export async function sendPasswordResetEmail(
+  to: string,
+  nombre: string,
+  resetUrl: string
+) {
+  const config = await getSmtpConfig();
+  if (!config) {
+    throw new Error("SMTP no configurado");
+  }
+
+  const transporter = createTransporter(config);
+  const from = config.email
+    ? `"${config.nombre}" <${config.email}>`
+    : `"${config.nombre}" <${config.smtpUser}>`;
+
+  await transporter.sendMail({
+    from,
+    to,
+    subject: "DealForge - Restablecer contrasena",
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 520px; margin: 0 auto; padding: 32px 20px;">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <h2 style="color: #1a1a1a; font-size: 22px; margin: 0;">Restablecer contrasena</h2>
+        </div>
+        <p style="color: #4a4a4a; font-size: 15px; line-height: 1.6;">
+          Hola <strong>${nombre}</strong>,
+        </p>
+        <p style="color: #4a4a4a; font-size: 15px; line-height: 1.6;">
+          Recibimos una solicitud para restablecer la contrasena de tu cuenta en DealForge.
+          Haz clic en el boton de abajo para crear una nueva contrasena:
+        </p>
+        <div style="text-align: center; margin: 32px 0;">
+          <a href="${resetUrl}"
+             style="display: inline-block; background: #3a9bb5; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 32px; border-radius: 10px;">
+            Restablecer contrasena
+          </a>
+        </div>
+        <p style="color: #888; font-size: 13px; line-height: 1.6;">
+          Este enlace expira en <strong>1 hora</strong>. Si no solicitaste este cambio, puedes ignorar este email.
+        </p>
+        <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />
+        <p style="color: #aaa; font-size: 12px; text-align: center;">
+          &copy; ${new Date().getFullYear()} ${config.nombre} &mdash; DealForge
+        </p>
+      </div>
+    `,
+  });
+}
+
 export async function testSmtpConnection() {
   const config = await getSmtpConfig();
   if (!config) {
