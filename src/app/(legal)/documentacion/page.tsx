@@ -94,7 +94,7 @@ export default function DocumentacionPage() {
         <Field name="Confirmar contrasena" desc="Debe coincidir exactamente con la contrasena." required />
       </ul>
       <Step n={3}>Haz clic en <strong>&quot;Crear cuenta&quot;</strong>. Seras redirigido automaticamente al panel de control.</Step>
-      <P>Tu cuenta empieza con el <strong>plan Starter (gratuito)</strong>, que incluye hasta 50 cotizaciones/mes, 25 productos y el asistente Forge IA basico.</P>
+      <P>Tu cuenta empieza con el <strong>plan Starter (gratuito)</strong>, que incluye hasta 10 cotizaciones/mes, 5 clientes, 20 productos y 5 consultas de Forge IA (Haiku). Si necesitas mas capacidad, puedes mejorar tu plan en cualquier momento desde <strong>Configuracion → Plan</strong>.</P>
 
       <H3 id="configurar-empresa">1.2. Configurar los datos de tu empresa</H3>
       <P>Lo primero que debes hacer tras registrarte es configurar tu empresa. Ve a <strong>Configuracion</strong> desde el menu lateral izquierdo.</P>

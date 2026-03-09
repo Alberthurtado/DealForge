@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { validarCotizacion, type ProductoCategoriaMap } from "@/lib/reglas-engine";
 import { getSmtpConfig, sendEmail } from "@/lib/email";
 import { buildApprovalRequestEmail } from "@/lib/approval-email";
+import { getSession } from "@/lib/auth";
+import { checkLimit } from "@/lib/plan-limits";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -31,6 +33,28 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  // ── Plan limit check ──
+  const session = await getSession();
+  const plan = session?.plan || "starter";
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const currentCotizacionesMes = await prisma.cotizacion.count({
+    where: { createdAt: { gte: startOfMonth } },
+  });
+  const limit = checkLimit(plan, "cotizacionesMes", currentCotizacionesMes);
+
+  if (!limit.allowed) {
+    return NextResponse.json(
+      {
+        error: "PLAN_LIMIT_REACHED",
+        message: `Has alcanzado el limite de ${limit.limit} ${limit.resource} de tu plan ${limit.planLabel}. Mejora tu plan para crear mas cotizaciones.`,
+        current: limit.current,
+        limit: limit.limit,
+      },
+      { status: 403 }
+    );
+  }
+
   const body = await request.json();
   const { lineItems, ...cotizacionData } = body;
 
