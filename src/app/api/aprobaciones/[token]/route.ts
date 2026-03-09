@@ -2,12 +2,19 @@ import { prisma } from "@/lib/prisma";
 import { getSmtpConfig, sendEmail } from "@/lib/email";
 import { buildApprovalResolvedEmail } from "@/lib/approval-email";
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
+import { aprobacionResolveSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ token: string }> }
 ) {
   const { token } = await params;
+
+  // Rate limit: 10 per minute per token
+  const limit = checkRateLimit(`approval:${token}`, RATE_LIMITS.approval);
+  if (!limit.allowed) return rateLimitResponse(limit.resetAt);
 
   const aprobacion = await prisma.aprobacion.findUnique({
     where: { token },
@@ -76,11 +83,8 @@ export async function PUT(
 ) {
   const { token } = await params;
   const body = await request.json();
-  const { estado, comentario } = body;
-
-  if (!estado || !["APROBADA", "RECHAZADA"].includes(estado)) {
-    return NextResponse.json({ error: "Estado invalido" }, { status: 400 });
-  }
+  const { data, error } = validateBody(aprobacionResolveSchema, body);
+  if (error) return error;
 
   const aprobacion = await prisma.aprobacion.findUnique({
     where: { token },
@@ -103,19 +107,19 @@ export async function PUT(
   const updated = await prisma.aprobacion.update({
     where: { token },
     data: {
-      estado,
-      comentario: comentario || null,
+      estado: data.estado,
+      comentario: data.comentario || null,
       respondidoAt: new Date(),
     },
   });
 
   // Log activity
-  const statusLabel = estado === "APROBADA" ? "aprobada" : "rechazada";
+  const statusLabel = data.estado === "APROBADA" ? "aprobada" : "rechazada";
   await prisma.actividad.create({
     data: {
       cotizacionId: aprobacion.cotizacionId,
       tipo: "APROBACION_RESUELTA",
-      descripcion: `Cotizacion ${statusLabel} por ${aprobacion.aprobadorNombre}${comentario ? `: ${comentario}` : ""}`,
+      descripcion: `Cotizacion ${statusLabel} por ${aprobacion.aprobadorNombre}${data.comentario ? `: ${data.comentario}` : ""}`,
     },
   });
 
@@ -139,8 +143,8 @@ export async function PUT(
           cliente: aprobacion.cotizacion.cliente.nombre,
         },
         aprobadorNombre: aprobacion.aprobadorNombre,
-        estado: estado as "APROBADA" | "RECHAZADA",
-        comentario: comentario || null,
+        estado: data.estado,
+        comentario: data.comentario || null,
         empresa: {
           nombre: empresa?.nombre || "DealForge",
           colorPrimario: empresa?.colorPrimario || "#3a9bb5",

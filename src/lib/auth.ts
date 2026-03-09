@@ -3,9 +3,18 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 const COOKIE_NAME = "dealforge_token";
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "dealforge_dev_secret_change_me"
-);
+
+function getJwtSecret(): Uint8Array {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error(
+      "FATAL: JWT_SECRET no esta definido. Configura la variable de entorno JWT_SECRET."
+    );
+  }
+  return new TextEncoder().encode(secret);
+}
+
+const JWT_SECRET = getJwtSecret();
 
 export interface JWTPayload {
   userId: string;

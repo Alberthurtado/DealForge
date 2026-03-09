@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
+import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 const COOKIE_NAME = "dealforge_token";
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "dealforge_dev_secret_change_me"
-);
+
+function getJwtSecret(): Uint8Array {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error("FATAL: JWT_SECRET no esta definido.");
+  }
+  return new TextEncoder().encode(secret);
+}
+
+const JWT_SECRET = getJwtSecret();
 
 // Routes that require authentication
 const PROTECTED_PREFIXES = [
@@ -80,6 +88,14 @@ export async function middleware(request: NextRequest) {
 
   try {
     await jwtVerify(token, JWT_SECRET);
+
+    // Rate limit write operations on protected APIs (60/min per IP)
+    if (isProtectedAPI && ["POST", "PUT", "DELETE", "PATCH"].includes(request.method)) {
+      const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+      const limit = checkRateLimit(`api-write:${ip}`, { maxRequests: 60, windowSeconds: 60 });
+      if (!limit.allowed) return rateLimitResponse(limit.resetAt);
+    }
+
     return NextResponse.next();
   } catch {
     // Invalid token — clear it and redirect

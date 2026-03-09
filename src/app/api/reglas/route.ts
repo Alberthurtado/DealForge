@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { reglaCreateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -20,22 +22,16 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { nombre, tipo, configuracion, activa, prioridad } = body;
-
-  if (!nombre || !tipo || !configuracion) {
-    return NextResponse.json(
-      { error: "Nombre, tipo y configuracion son requeridos" },
-      { status: 400 }
-    );
-  }
+  const { data, error } = validateBody(reglaCreateSchema, body);
+  if (error) return error;
 
   const regla = await prisma.reglaComercial.create({
     data: {
-      nombre,
-      tipo,
-      configuracion: typeof configuracion === "string" ? configuracion : JSON.stringify(configuracion),
-      activa: activa ?? true,
-      prioridad: prioridad ?? 0,
+      nombre: data.nombre,
+      tipo: data.tipo,
+      configuracion: typeof data.configuracion === "string" ? data.configuracion : JSON.stringify(data.configuracion),
+      activa: data.activa,
+      prioridad: data.prioridad,
     },
   });
 

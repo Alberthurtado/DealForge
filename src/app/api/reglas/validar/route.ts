@@ -1,14 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { validarCotizacion, type ProductoCategoriaMap } from "@/lib/reglas-engine";
+import { reglasValidarSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { lineItems, descuentoGlobal, subtotal, total } = body;
-
-  if (!lineItems) {
-    return NextResponse.json({ error: "lineItems requerido" }, { status: 400 });
-  }
+  const { data, error } = validateBody(reglasValidarSchema, body);
+  if (error) return error;
 
   const [reglas, productos] = await Promise.all([
     prisma.reglaComercial.findMany({ where: { activa: true } }),
@@ -22,7 +21,7 @@ export async function POST(request: NextRequest) {
 
   const result = validarCotizacion(
     reglas,
-    { lineItems, descuentoGlobal: descuentoGlobal ?? 0, subtotal: subtotal ?? 0, total: total ?? 0 },
+    { lineItems: data.lineItems, descuentoGlobal: data.descuentoGlobal, subtotal: data.subtotal, total: data.total },
     catMap
   );
 

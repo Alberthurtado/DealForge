@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { cotizacionUpdateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(
   request: NextRequest,
@@ -34,16 +36,21 @@ export async function PUT(
 ) {
   const { id } = await params;
   const body = await request.json();
+  const { data, error } = validateBody(cotizacionUpdateSchema, body);
+  if (error) return error;
+
+  // Use a mutable copy for the update logic
+  const updateData: Record<string, unknown> = { ...data };
 
   // Handle status change
-  if (body.estado) {
+  if (updateData.estado) {
     const current = await prisma.cotizacion.findUnique({
       where: { id },
       select: { estado: true, condiciones: true },
     });
 
     // Block BORRADOR → ENVIADA if no terms & conditions
-    if (body.estado === "ENVIADA" && !current?.condiciones?.trim()) {
+    if (updateData.estado === "ENVIADA" && !current?.condiciones?.trim()) {
       return NextResponse.json(
         { error: "No se puede enviar la cotizacion sin terminos y condiciones." },
         { status: 400 }
@@ -51,7 +58,7 @@ export async function PUT(
     }
 
     // Block BORRADOR → ENVIADA if approvals are pending or rejected
-    if (body.estado === "ENVIADA" && current?.estado === "BORRADOR") {
+    if (updateData.estado === "ENVIADA" && current?.estado === "BORRADOR") {
       const blockingApprovals = await prisma.aprobacion.findMany({
         where: { cotizacionId: id, estado: { in: ["PENDIENTE", "RECHAZADA"] } },
         select: { estado: true, aprobadorNombre: true },
@@ -70,25 +77,25 @@ export async function PUT(
       }
     }
 
-    if (current && current.estado !== body.estado) {
+    if (current && current.estado !== updateData.estado) {
       await prisma.actividad.create({
         data: {
           cotizacionId: id,
           tipo: "ESTADO_CAMBIADO",
-          descripcion: `Estado cambiado de ${current.estado} a ${body.estado}`,
+          descripcion: `Estado cambiado de ${current.estado} a ${updateData.estado}`,
           estadoAnterior: current.estado,
-          estadoNuevo: body.estado,
+          estadoNuevo: updateData.estado as string,
         },
       });
     }
   }
 
   // Handle line items update
-  if (body.lineItems) {
+  if (updateData.lineItems) {
     await prisma.lineItem.deleteMany({ where: { cotizacionId: id } });
 
     let subtotal = 0;
-    const items = body.lineItems.map(
+    const items = (updateData.lineItems as Record<string, unknown>[]).map(
       (item: Record<string, unknown>, index: number) => {
         const cantidad = Number(item.cantidad) || 1;
         const precioUnitario = Number(item.precioUnitario) || 0;
@@ -111,19 +118,19 @@ export async function PUT(
 
     await prisma.lineItem.createMany({ data: items });
 
-    const descuentoGlobal = Number(body.descuentoGlobal) ?? 0;
-    const impuesto = Number(body.impuesto) ?? 21;
+    const descuentoGlobal = Number(updateData.descuentoGlobal) ?? 0;
+    const impuesto = Number(updateData.impuesto) ?? 21;
     const subtotalConDescuento = subtotal * (1 - descuentoGlobal / 100);
     const total = subtotalConDescuento * (1 + impuesto / 100);
 
-    body.subtotal = Math.round(subtotal * 100) / 100;
-    body.total = Math.round(total * 100) / 100;
-    delete body.lineItems;
+    updateData.subtotal = Math.round(subtotal * 100) / 100;
+    updateData.total = Math.round(total * 100) / 100;
+    delete updateData.lineItems;
   }
 
   const cotizacion = await prisma.cotizacion.update({
     where: { id },
-    data: body,
+    data: updateData,
     include: {
       cliente: true,
       lineItems: { orderBy: { orden: "asc" } },

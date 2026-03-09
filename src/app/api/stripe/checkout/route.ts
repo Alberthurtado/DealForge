@@ -6,6 +6,8 @@ import {
   getOrCreateStripeCustomer,
   getAppUrl,
 } from "@/lib/stripe";
+import { stripeCheckoutSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function POST(request: NextRequest) {
   const session = await getSession();
@@ -14,16 +16,10 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { plan } = body as { plan: string };
+  const { data, error } = validateBody(stripeCheckoutSchema, body);
+  if (error) return error;
 
-  // Validate plan
-  const priceId = PLAN_PRICE_MAP[plan];
-  if (!priceId) {
-    return NextResponse.json(
-      { error: `Plan invalido: ${plan}. Planes disponibles: pro, business` },
-      { status: 400 }
-    );
-  }
+  const priceId = PLAN_PRICE_MAP[data.plan];
 
   try {
     // Get or create Stripe customer
@@ -44,12 +40,12 @@ export async function POST(request: NextRequest) {
       cancel_url: `${appUrl}/checkout/cancelado`,
       metadata: {
         dealforge_userId: session.userId,
-        dealforge_plan: plan,
+        dealforge_plan: data.plan,
       },
       subscription_data: {
         metadata: {
           dealforge_userId: session.userId,
-          dealforge_plan: plan,
+          dealforge_plan: data.plan,
         },
       },
       allow_promotion_codes: true,
@@ -58,10 +54,10 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ url: checkoutSession.url });
-  } catch (error) {
-    console.error("Stripe checkout error:", error);
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
     const message =
-      error instanceof Error ? error.message : "Error desconocido";
+      err instanceof Error ? err.message : "Error desconocido";
     return NextResponse.json(
       { error: `Error al crear la sesion de pago: ${message}` },
       { status: 500 }

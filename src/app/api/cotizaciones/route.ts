@@ -5,6 +5,8 @@ import { getSmtpConfig, sendEmail } from "@/lib/email";
 import { buildApprovalRequestEmail } from "@/lib/approval-email";
 import { getSession } from "@/lib/auth";
 import { checkLimit } from "@/lib/plan-limits";
+import { cotizacionCreateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -56,7 +58,9 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { lineItems, ...cotizacionData } = body;
+  const { data, error } = validateBody(cotizacionCreateSchema, body);
+  if (error) return error;
+  const { lineItems, ...cotizacionData } = data;
 
   // Generate quote number with configurable prefix
   const empresa = await prisma.empresa.findUnique({ where: { id: "default" }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true } });

@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { productoUpdateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(
   request: NextRequest,
@@ -27,7 +29,9 @@ export async function PUT(
 ) {
   const { id } = await params;
   const body = await request.json();
-  const { variantes, ...productoData } = body;
+  const { data, error } = validateBody(productoUpdateSchema, body);
+  if (error) return error;
+  const { variantes, ...productoData } = data;
 
   // Update product data
   const producto = await prisma.producto.update({
@@ -38,8 +42,8 @@ export async function PUT(
   // Sync variants if provided
   if (variantes !== undefined) {
     const incomingIds = variantes
-      .filter((v: { id?: string }) => v.id)
-      .map((v: { id: string }) => v.id);
+      .filter((v) => v.id)
+      .map((v) => v.id as string);
 
     // Delete variants not in the incoming list
     await prisma.varianteProducto.deleteMany({

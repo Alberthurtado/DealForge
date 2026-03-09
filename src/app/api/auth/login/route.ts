@@ -1,21 +1,33 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { verifyPassword, createToken, getCookieName } from "@/lib/auth";
+import { checkRateLimit, RATE_LIMITS, getClientIp, rateLimitResponse } from "@/lib/rate-limit";
+import { loginSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
+import { verifyRecaptcha } from "@/lib/recaptcha";
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const { email, password } = body;
+  // Rate limit: 5 attempts per 15 minutes per IP
+  const ip = getClientIp(request);
+  const limit = checkRateLimit(`login:${ip}`, RATE_LIMITS.login);
+  if (!limit.allowed) return rateLimitResponse(limit.resetAt);
 
-  if (!email?.trim() || !password) {
+  const body = await request.json();
+  const { data, error } = validateBody(loginSchema, body);
+  if (error) return error;
+
+  // Verify reCAPTCHA (if configured)
+  const captcha = await verifyRecaptcha(data.recaptchaToken, "login");
+  if (!captcha.success) {
     return NextResponse.json(
-      { error: "Email y contrasena son obligatorios" },
-      { status: 400 }
+      { error: "Verificacion de seguridad fallida. Intenta de nuevo." },
+      { status: 403 }
     );
   }
 
   // Find user
   const usuario = await prisma.usuario.findUnique({
-    where: { email: email.trim().toLowerCase() },
+    where: { email: data.email },
   });
 
   if (!usuario || !usuario.activo) {
@@ -26,7 +38,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Verify password
-  const valid = await verifyPassword(password, usuario.passwordHash);
+  const valid = await verifyPassword(data.password, usuario.passwordHash);
   if (!valid) {
     return NextResponse.json(
       { error: "Email o contrasena incorrectos" },

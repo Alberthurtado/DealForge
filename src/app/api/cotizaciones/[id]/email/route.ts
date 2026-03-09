@@ -1,26 +1,35 @@
 import { prisma } from "@/lib/prisma";
+import { sendEmail } from "@/lib/email";
+import { generateCotizacionPdf } from "@/lib/pdf-cotizacion";
+import { NextRequest, NextResponse } from "next/server";
+import { getSession } from "@/lib/auth";
+import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
+import { sendEmailSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 function defaultEmailBody(numero: string) {
   return `<p>Adjuntamos la cotizacion ${numero}.</p>`;
 }
-import { sendEmail } from "@/lib/email";
-import { generateCotizacionPdf } from "@/lib/pdf-cotizacion";
-import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Rate limit: 5 emails per minute per user
+  const session = await getSession();
+  if (session) {
+    const limit = checkRateLimit(`email:${session.userId}`, RATE_LIMITS.email);
+    if (!limit.allowed) return rateLimitResponse(limit.resetAt);
+  }
+
   const { id } = await params;
   const body = await request.json();
-  const { to, subject, htmlBody } = body;
+  const { data, error } = validateBody(sendEmailSchema, body);
+  if (error) return error;
 
-  if (!to || !subject) {
-    return NextResponse.json(
-      { error: "Faltan campos requeridos (to, subject)" },
-      { status: 400 }
-    );
-  }
+  // Sanitize HTML body if provided
+  const safeHtmlBody = data.htmlBody ? sanitizeHtml(data.htmlBody) : undefined;
 
   // Verify cotizacion exists
   const cotizacion = await prisma.cotizacion.findUnique({
@@ -38,9 +47,9 @@ export async function POST(
 
     // Send the email
     await sendEmail({
-      to,
-      subject,
-      html: htmlBody || defaultEmailBody(cotizacion.numero),
+      to: data.to,
+      subject: data.subject,
+      html: safeHtmlBody || defaultEmailBody(cotizacion.numero),
       attachments: [
         {
           filename: `${cotizacion.numero}.pdf`,
@@ -55,13 +64,13 @@ export async function POST(
       data: {
         cotizacionId: id,
         tipo: "EMAIL_ENVIADO",
-        descripcion: `Cotizacion enviada por email a ${to}`,
+        descripcion: `Cotizacion enviada por email a ${data.to}`,
       },
     });
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "Error al enviar email";
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error al enviar email";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

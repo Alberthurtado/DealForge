@@ -5,6 +5,9 @@ import { buildPageContext, buildSystemPrompt } from "@/lib/assistant-context";
 import { routeMessage } from "@/lib/assistant-router";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
+import { assistantChatSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || "",
@@ -25,19 +28,19 @@ interface ChatMessage {
 }
 
 export async function POST(request: NextRequest) {
+  // Rate limit: 10 per minute per user
+  const session = await getSession();
+  if (session) {
+    const limit = checkRateLimit(`assistant:${session.userId}`, RATE_LIMITS.assistant);
+    if (!limit.allowed) return rateLimitResponse(limit.resetAt);
+  }
+
   const body = await request.json();
-  const {
-    message,
-    context,
-    history = [],
-  }: {
-    message: string;
-    context: { pathname: string; entityId?: string };
-    history: ChatMessage[];
-  } = body;
+  const { data, error } = validateBody(assistantChatSchema, body);
+  if (error) return error;
 
   // ===== STEP 1: Try predefined responses (0 tokens) =====
-  const routerResult = routeMessage(message);
+  const routerResult = routeMessage(data.message);
   if (routerResult.handled) {
     return NextResponse.json({
       response: routerResult.response,
@@ -55,7 +58,6 @@ export async function POST(request: NextRequest) {
   }
 
   // Get user plan from DB (fresh, not from JWT which may be stale after upgrade)
-  const session = await getSession();
   let userPlan = "starter";
   if (session?.userId) {
     const dbUser = await prisma.usuario.findUnique({
@@ -68,8 +70,8 @@ export async function POST(request: NextRequest) {
 
   // Build context
   const pageContext = await buildPageContext(
-    context.pathname,
-    context.entityId
+    data.context.pathname,
+    data.context.entityId
   );
   const systemPrompt = buildSystemPrompt(pageContext);
 
@@ -77,7 +79,7 @@ export async function POST(request: NextRequest) {
   const messages: Anthropic.MessageParam[] = [];
 
   // Only keep last 6 messages (3 exchanges) to save tokens
-  for (const msg of history.slice(-6)) {
+  for (const msg of data.history.slice(-6)) {
     messages.push({
       role: msg.role,
       content: msg.content,
@@ -85,7 +87,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Add current user message
-  messages.push({ role: "user", content: message });
+  messages.push({ role: "user", content: data.message });
 
   try {
     // Tool use loop - Claude may call multiple tools
@@ -171,12 +173,12 @@ export async function POST(request: NextRequest) {
       suggestedActions,
       source: "claude", // For debugging/analytics
     });
-  } catch (error: unknown) {
-    console.error("Assistant error:", error);
-    const message =
-      error instanceof Error ? error.message : "Error desconocido";
+  } catch (err: unknown) {
+    console.error("Assistant error:", err);
+    const errMessage =
+      err instanceof Error ? err.message : "Error desconocido";
     return NextResponse.json(
-      { error: `Error al comunicarse con el asistente: ${message}` },
+      { error: `Error al comunicarse con el asistente: ${errMessage}` },
       { status: 500 }
     );
   }

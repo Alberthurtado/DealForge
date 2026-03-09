@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { checkLimit } from "@/lib/plan-limits";
+import { clienteCreateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -52,7 +54,9 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { contactos, ...clienteData } = body;
+  const { data, error } = validateBody(clienteCreateSchema, body);
+  if (error) return error;
+  const { contactos, ...clienteData } = data;
 
   const cliente = await prisma.cliente.create({
     data: {

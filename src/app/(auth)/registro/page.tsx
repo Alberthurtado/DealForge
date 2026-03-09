@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Flame, Eye, EyeOff, Loader2, CheckCircle } from "lucide-react";
+import { useRecaptcha } from "@/hooks/useRecaptcha";
 
 export default function RegistroPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function RegistroPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { getToken } = useRecaptcha();
 
   const passwordValid = password.length >= 8;
   const passwordsMatch = password === confirmPassword && confirmPassword.length > 0;
@@ -36,10 +38,12 @@ export default function RegistroPage() {
     setLoading(true);
 
     try {
+      const recaptchaToken = await getToken("registro");
+
       const res = await fetch("/api/auth/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, email, password }),
+        body: JSON.stringify({ nombre, email, password, recaptchaToken }),
       });
 
       const data = await res.json();

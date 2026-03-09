@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { clienteUpdateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(
   request: NextRequest,
@@ -30,7 +32,9 @@ export async function PUT(
 ) {
   const { id } = await params;
   const body = await request.json();
-  const { contactos, ...clienteData } = body;
+  const { data, error } = validateBody(clienteUpdateSchema, body);
+  if (error) return error;
+  const { contactos, ...clienteData } = data;
 
   const cliente = await prisma.cliente.update({
     where: { id },

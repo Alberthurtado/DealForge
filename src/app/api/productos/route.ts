@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { checkLimit } from "@/lib/plan-limits";
+import { productoCreateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -52,10 +54,9 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { variantes, ...productoData } = body;
-
-  // Clean empty categoriaId to null
-  if (!productoData.categoriaId) productoData.categoriaId = null;
+  const { data, error } = validateBody(productoCreateSchema, body);
+  if (error) return error;
+  const { variantes, ...productoData } = data;
 
   const producto = await prisma.producto.create({
     data: {

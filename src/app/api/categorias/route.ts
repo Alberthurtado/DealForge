@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { categoriaCreateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET() {
   const categorias = await prisma.categoria.findMany({
@@ -11,20 +13,13 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { nombre } = await req.json();
-
-    if (!nombre || typeof nombre !== "string" || nombre.trim().length === 0) {
-      return NextResponse.json(
-        { error: "El nombre de la categoria es obligatorio" },
-        { status: 400 }
-      );
-    }
-
-    const trimmed = nombre.trim();
+    const body = await req.json();
+    const { data, error } = validateBody(categoriaCreateSchema, body);
+    if (error) return error;
 
     // Check if category already exists (case-insensitive)
     const existing = await prisma.categoria.findFirst({
-      where: { nombre: { equals: trimmed, mode: "insensitive" } },
+      where: { nombre: { equals: data.nombre, mode: "insensitive" } },
     });
 
     if (existing) {
@@ -32,7 +27,7 @@ export async function POST(req: NextRequest) {
     }
 
     const categoria = await prisma.categoria.create({
-      data: { nombre: trimmed },
+      data: { nombre: data.nombre },
     });
 
     return NextResponse.json(categoria, { status: 201 });

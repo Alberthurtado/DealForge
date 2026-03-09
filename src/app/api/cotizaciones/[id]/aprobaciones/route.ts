@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { aprobacionCreateSchema } from "@/lib/validations";
+import { validateBody } from "@/lib/validate";
 
 export async function GET(
   _request: NextRequest,
@@ -18,13 +20,21 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const body = await request.json();
+  const bodyRaw = await request.json();
 
   // body can be a single approval or array
-  const items = Array.isArray(body) ? body : [body];
+  const items = Array.isArray(bodyRaw) ? bodyRaw : [bodyRaw];
+
+  // Validate each item individually
+  const validatedItems = [];
+  for (const item of items) {
+    const { data, error } = validateBody(aprobacionCreateSchema, item);
+    if (error) return error;
+    validatedItems.push(data);
+  }
 
   const created = await Promise.all(
-    items.map((item: { reglaId: string; aprobadorNombre: string; aprobadorEmail: string }) =>
+    validatedItems.map((item) =>
       prisma.aprobacion.create({
         data: {
           cotizacionId: id,
