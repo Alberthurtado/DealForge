@@ -9,7 +9,7 @@ export default function EditarProductoPage() {
   const router = useRouter();
   const params = useParams();
   const [producto, setProducto] = useState<Record<string, unknown> | null>(null);
-  const [categorias, setCategorias] = useState([]);
+  const [categorias, setCategorias] = useState<Array<{ id: string; nombre: string }>>([]);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -61,6 +61,7 @@ export default function EditarProductoPage() {
         <ProductoForm
           initialData={producto as Record<string, unknown>}
           categorias={categorias}
+          onCategoriasChange={setCategorias}
           onSubmit={handleSubmit}
           saving={saving}
         />

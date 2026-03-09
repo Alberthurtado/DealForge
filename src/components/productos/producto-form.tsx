@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Save, Plus, Trash2, X } from "lucide-react";
+import { Save, Plus, Trash2, X, FolderPlus, Loader2 } from "lucide-react";
 
 interface VarianteInput {
   id?: string;
@@ -34,6 +34,7 @@ interface Props {
     }>;
   };
   categorias: Array<{ id: string; nombre: string }>;
+  onCategoriasChange?: (categorias: Array<{ id: string; nombre: string }>) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (data: any) => void;
   saving?: boolean;
@@ -47,7 +48,41 @@ function parseAtributos(raw: string): Record<string, string> {
   }
 }
 
-export function ProductoForm({ initialData, categorias, onSubmit, saving }: Props) {
+export function ProductoForm({ initialData, categorias, onCategoriasChange, onSubmit, saving }: Props) {
+  const [showNewCategoria, setShowNewCategoria] = useState(false);
+  const [newCategoriaName, setNewCategoriaName] = useState("");
+  const [creatingCategoria, setCreatingCategoria] = useState(false);
+  const [categoriaError, setCategoriaError] = useState("");
+
+  async function handleCreateCategoria() {
+    const name = newCategoriaName.trim();
+    if (!name) return;
+
+    setCreatingCategoria(true);
+    setCategoriaError("");
+    try {
+      const res = await fetch("/api/categorias", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre: name }),
+      });
+      if (res.ok) {
+        const cat = await res.json();
+        onCategoriasChange?.([...categorias, cat].sort((a, b) => a.nombre.localeCompare(b.nombre)));
+        setForm((f) => ({ ...f, categoriaId: cat.id }));
+        setNewCategoriaName("");
+        setShowNewCategoria(false);
+      } else {
+        const err = await res.json();
+        setCategoriaError(err.error || "Error al crear categoria");
+      }
+    } catch {
+      setCategoriaError("Error de conexion");
+    } finally {
+      setCreatingCategoria(false);
+    }
+  }
+
   const [form, setForm] = useState<ProductoFormData>({
     nombre: initialData?.nombre || "",
     descripcion: initialData?.descripcion || "",
@@ -177,20 +212,77 @@ export function ProductoForm({ initialData, categorias, onSubmit, saving }: Prop
             <label className="block text-sm font-medium text-foreground mb-1">
               Categoria
             </label>
-            <select
-              value={form.categoriaId}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, categoriaId: e.target.value }))
-              }
-              className={inputClass}
-            >
-              <option value="">Sin categoria</option>
-              {categorias.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.nombre}
-                </option>
-              ))}
-            </select>
+            <div className="flex items-center gap-2">
+              <select
+                value={form.categoriaId}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, categoriaId: e.target.value }))
+                }
+                className={`${inputClass} flex-1`}
+              >
+                <option value="">Sin categoria</option>
+                {categorias.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.nombre}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={() => setShowNewCategoria(!showNewCategoria)}
+                className="flex-shrink-0 p-2 text-primary border border-primary/30 rounded-lg hover:bg-primary/5 transition-colors"
+                title="Crear nueva categoria"
+              >
+                <FolderPlus className="w-4 h-4" />
+              </button>
+            </div>
+            {showNewCategoria && (
+              <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-border space-y-2">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={newCategoriaName}
+                    onChange={(e) => setNewCategoriaName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleCreateCategoria();
+                      }
+                    }}
+                    className={`${inputClass} flex-1`}
+                    placeholder="Nombre de la categoria"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={handleCreateCategoria}
+                    disabled={creatingCategoria || !newCategoriaName.trim()}
+                    className="inline-flex items-center gap-1 px-3 py-2 text-xs font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
+                  >
+                    {creatingCategoria ? (
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    ) : (
+                      <Plus className="w-3.5 h-3.5" />
+                    )}
+                    Crear
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowNewCategoria(false);
+                      setNewCategoriaName("");
+                      setCategoriaError("");
+                    }}
+                    className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+                {categoriaError && (
+                  <p className="text-xs text-red-500">{categoriaError}</p>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

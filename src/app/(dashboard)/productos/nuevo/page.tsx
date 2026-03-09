@@ -9,7 +9,7 @@ import { UpgradeBanner } from "@/components/layout/upgrade-banner";
 export default function NuevoProductoPage() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
-  const [categorias, setCategorias] = useState([]);
+  const [categorias, setCategorias] = useState<Array<{ id: string; nombre: string }>>([]);
   const [limitError, setLimitError] = useState<{
     message: string;
     current: number;
@@ -64,6 +64,7 @@ export default function NuevoProductoPage() {
       <div className="p-6 max-w-2xl">
         <ProductoForm
           categorias={categorias}
+          onCategoriasChange={setCategorias}
           onSubmit={handleSubmit}
           saving={saving}
         />
