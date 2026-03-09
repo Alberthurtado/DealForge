@@ -577,10 +577,10 @@ function Footer() {
           <div>
             <h4 className="font-semibold text-white text-sm mb-4">Legal</h4>
             <ul className="space-y-2.5 text-sm">
-              <li><span className="text-gray-500">Politica de privacidad</span></li>
-              <li><span className="text-gray-500">Terminos de servicio</span></li>
-              <li><span className="text-gray-500">RGPD</span></li>
-              <li><span className="text-gray-500">Contacto</span></li>
+              <li><Link href="/privacidad" className="hover:text-white transition-colors">Politica de privacidad</Link></li>
+              <li><Link href="/terminos" className="hover:text-white transition-colors">Terminos de servicio</Link></li>
+              <li><Link href="/rgpd" className="hover:text-white transition-colors">RGPD</Link></li>
+              <li><a href="mailto:info@dealforge.es" className="hover:text-white transition-colors">Contacto</a></li>
             </ul>
           </div>
         </div>
