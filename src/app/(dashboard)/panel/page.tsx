@@ -12,9 +12,10 @@ import { RecentActivity } from "@/components/dashboard/recent-activity";
 import { QuickActions } from "@/components/dashboard/quick-actions";
 import { RevenueChart } from "@/components/dashboard/revenue-chart";
 import { ConversionFunnel } from "@/components/dashboard/conversion-funnel";
+import { OnboardingChecklist } from "@/components/dashboard/onboarding-checklist";
 
 async function getDashboardData() {
-  const [cotizaciones, totalClientes, recentActivities] = await Promise.all([
+  const [cotizaciones, totalClientes, recentActivities, empresa, totalProductos] = await Promise.all([
     prisma.cotizacion.findMany({
       select: { id: true, estado: true, total: true, fechaEmision: true },
     }),
@@ -28,6 +29,8 @@ async function getDashboardData() {
         },
       },
     }),
+    prisma.empresa.findUnique({ where: { id: "default" }, select: { nombre: true, email: true } }),
+    prisma.producto.count(),
   ]);
 
   const activas = cotizaciones.filter((c) => c.estado !== "ARCHIVADA");
@@ -105,6 +108,12 @@ async function getDashboardData() {
       clienteNombre: a.cotizacion.cliente.nombre,
       fecha: a.createdAt.toISOString(),
     })),
+    onboardingSteps: {
+      empresaConfigured: !!(empresa && (empresa.nombre !== "Mi Empresa" || empresa.email)),
+      hasClientes: totalClientes > 0,
+      hasProductos: totalProductos > 0,
+      hasCotizaciones: cotizaciones.length > 0,
+    },
   };
 }
 
@@ -118,6 +127,7 @@ export default async function DashboardPage() {
         description="Vision general de tu negocio"
       />
       <div className="p-6 space-y-6">
+        <OnboardingChecklist steps={data.onboardingSteps} />
         <KpiCards kpis={data.kpis} />
 
         {/* Row 2: Pipeline + Quick Actions */}

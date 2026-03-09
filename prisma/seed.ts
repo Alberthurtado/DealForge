@@ -3,6 +3,12 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+  // Guard: never run seed in production
+  if (process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "production") {
+    console.error("ERROR: Seed script must not run in production. Aborting.");
+    process.exit(1);
+  }
+
   // Clean existing data (order matters for foreign keys)
   await prisma.aprobacion.deleteMany();
   await prisma.actividad.deleteMany();
