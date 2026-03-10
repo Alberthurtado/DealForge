@@ -54,7 +54,7 @@ export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
     },
     {
       key: "producto",
-      label: "Agrega un producto al catalogo",
+      label: "Agrega un producto al catálogo",
       desc: "Crea productos o servicios con precios",
       href: "/productos/nuevo",
       icon: Package,
@@ -62,7 +62,7 @@ export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
     },
     {
       key: "cotizacion",
-      label: "Crea tu primera cotizacion",
+      label: "Crea tu primera cotización",
       desc: "Genera una propuesta comercial profesional",
       href: "/cotizaciones/nueva",
       icon: FileText,
@@ -71,7 +71,7 @@ export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
     {
       key: "forge",
       label: "Prueba Forge IA",
-      desc: "Tu asistente inteligente — haz clic en el boton de Forge abajo a la derecha",
+      desc: "Tu asistente inteligente — haz clic en el botón de Forge abajo a la derecha",
       href: null,
       icon: Flame,
       done: forgeUsed,
@@ -105,7 +105,7 @@ export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
           </div>
           <div>
             <h3 className="text-lg font-semibold text-gray-900">
-              Guia de inicio rapido
+              Guía de inicio rápido
             </h3>
             <p className="text-sm text-gray-500">
               Completa estos pasos para configurar DealForge
@@ -115,7 +115,7 @@ export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
         <button
           onClick={handleDismiss}
           className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
-          title="Ocultar guia"
+          title="Ocultar guía"
         >
           <X className="w-4 h-4" />
         </button>

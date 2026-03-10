@@ -83,9 +83,9 @@ const BUSINESS_KEYWORDS = [
 // ===== PREDEFINED RESPONSES =====
 
 const GREETINGS = [
-  "Hola! Soy Forge, tu asistente comercial. ¿En que puedo ayudarte hoy? Puedo buscar clientes, crear cotizaciones, revisar el pipeline o lo que necesites.",
-  "Buenas! ¿Que necesitas? Estoy listo para ayudarte con clientes, productos o cotizaciones.",
-  "Hola! ¿Que hacemos hoy? Puedo crear registros, buscar informacion o analizar tus datos comerciales.",
+  "Hola! Soy Forge, tu asistente comercial. ¿En qué puedo ayudarte hoy? Puedo buscar clientes, crear cotizaciones, revisar el pipeline o lo que necesites.",
+  "Buenas! ¿Qué necesitas? Estoy listo para ayudarte con clientes, productos o cotizaciones.",
+  "Hola! ¿Qué hacemos hoy? Puedo crear registros, buscar información o analizar tus datos comerciales.",
 ];
 
 const FAREWELLS = [
@@ -95,33 +95,33 @@ const FAREWELLS = [
 ];
 
 const THANKS_RESPONSES = [
-  "De nada! Si necesitas algo mas, aqui estoy. 🔥",
-  "Para eso estoy! ¿Algo mas en lo que pueda ayudar?",
+  "De nada! Si necesitas algo más, aquí estoy. 🔥",
+  "Para eso estoy! ¿Algo más en lo que pueda ayudar?",
   "Un placer! No dudes en preguntarme lo que sea sobre tu negocio.",
 ];
 
 const IDENTITY_RESPONSES = [
-  "Soy **Forge**, el asistente comercial de DealForge. Puedo consultar y crear registros en tu sistema: clientes, productos, cotizaciones. Tambien analizo datos, sugiero follow-ups y te ayudo a cerrar mas deals. 🔥",
+  "Soy **Forge**, el asistente comercial de DealForge. Puedo consultar y crear registros en tu sistema: clientes, productos, cotizaciones. También analizo datos, sugiero follow-ups y te ayudo a cerrar más deals. 🔥",
 ];
 
-const OFF_TOPIC_RESPONSE = "Lo siento, solo puedo ayudarte con temas relacionados con tu negocio: **clientes, productos, cotizaciones, seguimientos y analisis comercial**. ¿En que puedo ayudarte con eso?";
+const OFF_TOPIC_RESPONSE = "Lo siento, solo puedo ayudarte con temas relacionados con tu negocio: **clientes, productos, cotizaciones, seguimientos y análisis comercial**. ¿En qué puedo ayudarte con eso?";
 
 const HELP_RESPONSE = `Puedo ayudarte con todo lo relacionado a tu negocio:
 
 📋 **Consultar**
 • Buscar clientes, productos y cotizaciones
-• Ver estadisticas y metricas del pipeline
+• Ver estadísticas y métricas del pipeline
 • Identificar cotizaciones que necesitan follow-up
 
 ✏️ **Crear**
 • Crear clientes nuevos con contactos
-• Agregar productos al catalogo
-• Generar cotizaciones completas con calculos automaticos
+• Agregar productos al catálogo
+• Generar cotizaciones completas con cálculos automáticos
 
 📊 **Analizar**
 • Analizar rendimiento de un cliente
 • Recomendar productos por sector
-• Revisar tasa de conversion y tendencias
+• Revisar tasa de conversión y tendencias
 
 🔄 **Gestionar**
 • Cambiar estado de cotizaciones

@@ -9,7 +9,7 @@ type ImportType = "clientes" | "productos";
 const TEMPLATES: Record<ImportType, { headers: string[]; example: string[][] }> = {
   clientes: {
     headers: ["nombre", "email", "telefono", "direccion", "ciudad", "pais", "sector", "cif", "contacto_principal_nombre", "contacto_principal_email", "contacto_principal_cargo"],
-    example: [["Acme Corp", "info@acme.com", "+34 600 123 456", "Calle Mayor 1", "Madrid", "Espana", "Tecnologia", "B12345678", "Juan Perez", "juan@acme.com", "Director Comercial"]],
+    example: [["Acme Corp", "info@acme.com", "+34 600 123 456", "Calle Mayor 1", "Madrid", "España", "Tecnología", "B12345678", "Juan Pérez", "juan@acme.com", "Director Comercial"]],
   },
   productos: {
     headers: ["nombre", "sku", "descripcion", "precio_base", "unidad", "categoria"],
@@ -85,7 +85,7 @@ export function ImportPanel() {
       const data = await res.json();
       setResult(data);
     } catch {
-      setResult({ created: 0, updated: 0, errors: ["Error de conexion"] });
+      setResult({ created: 0, updated: 0, errors: ["Error de conexión"] });
     } finally {
       setImporting(false);
     }
@@ -163,10 +163,10 @@ export function ImportPanel() {
           >
             <FileUp className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
             <p className="text-sm font-medium text-foreground">
-              Arrastra tu archivo CSV aqui
+              Arrastra tu archivo CSV aquí
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              o haz click para seleccionar
+              o haz clic para seleccionar
             </p>
             <input
               ref={fileRef}
@@ -212,7 +212,7 @@ export function ImportPanel() {
                   ))}
                   {headers.length > 8 && (
                     <th className="text-left px-2 py-1.5 font-medium text-muted-foreground">
-                      +{headers.length - 8} mas
+                      +{headers.length - 8} más
                     </th>
                   )}
                 </tr>
@@ -222,7 +222,7 @@ export function ImportPanel() {
                   <tr key={i} className="border-b border-border">
                     {headers.slice(0, 8).map((h) => (
                       <td key={h} className="px-2 py-1.5 text-foreground whitespace-nowrap max-w-[200px] truncate">
-                        {row[h] || <span className="text-muted-foreground italic">vacio</span>}
+                        {row[h] || <span className="text-muted-foreground italic">vacío</span>}
                       </td>
                     ))}
                     {headers.length > 8 && <td className="px-2 py-1.5 text-muted-foreground">...</td>}
@@ -263,7 +263,7 @@ export function ImportPanel() {
             ) : (
               <AlertTriangle className="w-6 h-6 text-amber-500" />
             )}
-            <h4 className="text-base font-semibold">Resultado de la importacion</h4>
+            <h4 className="text-base font-semibold">Resultado de la importación</h4>
           </div>
           <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="text-center p-3 bg-green-50 rounded-lg">

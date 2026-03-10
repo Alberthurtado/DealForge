@@ -7,7 +7,7 @@ import { getPlanLimits } from "@/lib/plan-limits";
 
 export const metadata: Metadata = {
   title: "Cotizaciones",
-  description: "Gestion de cotizaciones y pipeline de ventas.",
+  description: "Gestión de cotizaciones y pipeline de ventas.",
 };
 import { CotizacionTable } from "@/components/cotizaciones/cotizacion-table";
 import Link from "next/link";
@@ -60,7 +60,7 @@ export default async function CotizacionesPage() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               <Plus className="w-4 h-4" />
-              Nueva Cotizacion
+              Nueva Cotización
             </Link>
           )
         }

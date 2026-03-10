@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "Vision general del negocio - metricas, pipeline y actividad reciente.",
+  description: "Visión general del negocio - métricas, pipeline y actividad reciente.",
 };
 import { KpiCards } from "@/components/dashboard/kpi-cards";
 import { PipelineChart } from "@/components/dashboard/pipeline-chart";
@@ -52,7 +52,7 @@ async function getDashboardData() {
   const pipelineByStatus = [
     { estado: "Borrador", valor: 0, cantidad: 0, color: "#94a3b8" },
     { estado: "Enviada", valor: 0, cantidad: 0, color: "#3b82f6" },
-    { estado: "Negociacion", valor: 0, cantidad: 0, color: "#f59e0b" },
+    { estado: "Negociación", valor: 0, cantidad: 0, color: "#f59e0b" },
     { estado: "Ganada", valor: 0, cantidad: 0, color: "#22c55e" },
     { estado: "Perdida", valor: 0, cantidad: 0, color: "#ef4444" },
   ];
@@ -124,7 +124,7 @@ export default async function DashboardPage() {
     <div>
       <PageHeader
         title="Dashboard"
-        description="Vision general de tu negocio"
+        description="Visión general de tu negocio"
       />
       <div className="p-6 space-y-6">
         <OnboardingChecklist steps={data.onboardingSteps} />

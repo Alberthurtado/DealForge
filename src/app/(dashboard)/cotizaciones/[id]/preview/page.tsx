@@ -117,12 +117,12 @@ export default function CotizacionPreviewPage() {
           className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Volver a cotizacion
+          Volver a cotización
         </button>
         <div className="flex items-center gap-3">
           {isExpired && (
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-medium">
-              Cotizacion vencida
+              Cotización vencida
             </span>
           )}
           <span className="text-xs text-gray-400">v{cotizacion.version}</span>
@@ -172,11 +172,11 @@ export default function CotizacionPreviewPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <h2 className="text-2xl font-bold tracking-tight">COTIZACION</h2>
+                  <h2 className="text-2xl font-bold tracking-tight">COTIZACIÓN</h2>
                   <p className="text-lg font-semibold mt-1">{cotizacion.numero}</p>
                   <div className="mt-2 space-y-0.5">
                     <p className="text-xs text-white/70">
-                      Emision: {formatDate(cotizacion.fechaEmision)}
+                      Emisión: {formatDate(cotizacion.fechaEmision)}
                     </p>
                     {cotizacion.fechaVencimiento && (
                       <p className={`text-xs ${isExpired ? "text-red-200 font-medium" : "text-white/70"}`}>
@@ -219,14 +219,14 @@ export default function CotizacionPreviewPage() {
                 </div>
                 <div className="text-right">
                   <h2 className="text-2xl font-bold text-gray-800 tracking-wider">
-                    COTIZACION
+                    COTIZACIÓN
                   </h2>
                   <p className="text-lg font-semibold text-gray-800 mt-1">
                     {cotizacion.numero}
                   </p>
                   <div className="mt-2 space-y-0.5">
                     <p className="text-xs text-gray-500">
-                      <span className="text-gray-400">Emision:</span>{" "}
+                      <span className="text-gray-400">Emisión:</span>{" "}
                       {formatDate(cotizacion.fechaEmision)}
                     </p>
                     {cotizacion.fechaVencimiento && (
@@ -269,7 +269,7 @@ export default function CotizacionPreviewPage() {
                 </div>
                 <div className="text-right">
                   <h2 className="text-xl text-gray-400 font-light tracking-widest">
-                    COTIZACION
+                    COTIZACIÓN
                   </h2>
                   <p className="text-base text-gray-600 mt-1">{cotizacion.numero}</p>
                   <div className="mt-2 space-y-0.5">
@@ -278,7 +278,7 @@ export default function CotizacionPreviewPage() {
                     </p>
                     {cotizacion.fechaVencimiento && (
                       <p className={`text-xs ${isExpired ? "text-red-500" : "text-gray-400"}`}>
-                        Valida hasta: {formatDate(cotizacion.fechaVencimiento)}
+                        Válida hasta: {formatDate(cotizacion.fechaVencimiento)}
                         {isExpired && " (VENCIDA)"}
                       </p>
                     )}
@@ -393,7 +393,7 @@ export default function CotizacionPreviewPage() {
                       #
                     </th>
                     <th className="text-left py-2.5 px-3 text-[10px] font-semibold uppercase tracking-wider text-gray-600 border border-gray-300">
-                      Descripcion
+                      Descripción
                     </th>
                     <th className="text-right py-2.5 px-3 text-[10px] font-semibold uppercase tracking-wider text-gray-600 border border-gray-300">
                       Cant.
@@ -447,7 +447,7 @@ export default function CotizacionPreviewPage() {
                       #
                     </th>
                     <th className="text-left py-2.5 px-3 text-[10px] font-semibold uppercase tracking-wider text-gray-500">
-                      Descripcion
+                      Descripción
                     </th>
                     <th className="text-right py-2.5 px-3 text-[10px] font-semibold uppercase tracking-wider text-gray-500">
                       Cant.
@@ -571,7 +571,7 @@ export default function CotizacionPreviewPage() {
               {cotizacion.condiciones && (
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Terminos y Condiciones
+                    Términos y Condiciones
                   </p>
                   <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-line">
                     {cotizacion.condiciones}
@@ -592,12 +592,12 @@ export default function CotizacionPreviewPage() {
           >
             <div className="flex items-center justify-between">
               <p className="text-[10px] text-gray-400">
-                Cotizacion generada por {empresa.nombre}
+                Cotización generada por {empresa.nombre}
                 {empresa.web ? ` \u2022 ${empresa.web}` : ""}
               </p>
               <p className="text-[10px] text-gray-400">
                 {cotizacion.fechaVencimiento
-                  ? `Valida hasta: ${formatDate(cotizacion.fechaVencimiento)}`
+                  ? `Válida hasta: ${formatDate(cotizacion.fechaVencimiento)}`
                   : `Emitida: ${formatDate(cotizacion.fechaEmision)}`}
               </p>
             </div>

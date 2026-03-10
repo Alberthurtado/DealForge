@@ -68,7 +68,7 @@ export function ReportesContent({ data }: Props) {
               {data.totalGanadas}
             </p>
             <p className="text-sm text-muted-foreground">
-              Ganadas ({tasaConversion}% conversion)
+              Ganadas ({tasaConversion}% conversión)
             </p>
           </div>
         </div>
@@ -150,7 +150,7 @@ export function ReportesContent({ data }: Props) {
             ))}
             {data.topClientes.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-4">
-                No hay datos todavia
+                No hay datos todavía
               </p>
             )}
           </div>
@@ -159,7 +159,7 @@ export function ReportesContent({ data }: Props) {
         {/* Top Products */}
         <div className="bg-white rounded-xl border border-border p-6">
           <h3 className="text-lg font-semibold text-foreground mb-4">
-            Productos Mas Cotizados
+            Productos Más Cotizados
           </h3>
           <div className="space-y-3">
             {data.topProductos.map((prod, i) => (
@@ -187,7 +187,7 @@ export function ReportesContent({ data }: Props) {
             ))}
             {data.topProductos.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-4">
-                No hay datos todavia
+                No hay datos todavía
               </p>
             )}
           </div>

@@ -62,7 +62,7 @@ export function AprobacionForm({ initial, onSave, saving }: Props) {
         <label className="block text-xs font-medium text-muted-foreground mb-1">
           Nombre *
         </label>
-        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} required placeholder="Aprobacion Dir. Comercial" />
+        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} required placeholder="Aprobación Dir. Comercial" />
       </div>
 
       <div>
@@ -80,7 +80,7 @@ export function AprobacionForm({ initial, onSave, saving }: Props) {
                 onChange={(e) => updateCondicion(i, "tipo", e.target.value)}
                 className="flex-1 px-2 py-1.5 text-sm border border-border rounded-lg bg-white"
               >
-                <option value="descuento_linea">Descuento linea</option>
+                <option value="descuento_linea">Descuento línea</option>
                 <option value="descuento_global">Descuento global</option>
                 <option value="monto_total">Monto total</option>
               </select>
@@ -119,7 +119,7 @@ export function AprobacionForm({ initial, onSave, saving }: Props) {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-xs text-muted-foreground mb-1">Nombre *</label>
-            <input type="text" value={aprobNombre} onChange={(e) => setAprobNombre(e.target.value)} className={inputClass} required placeholder="Ana Garcia" />
+            <input type="text" value={aprobNombre} onChange={(e) => setAprobNombre(e.target.value)} className={inputClass} required placeholder="Ana García" />
           </div>
           <div>
             <label className="block text-xs text-muted-foreground mb-1">Email *</label>

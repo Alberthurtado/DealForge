@@ -20,17 +20,17 @@ const sanitizedText = z
 
 const emailField = z
   .string()
-  .email("Email invalido")
+  .email("Email inválido")
   .transform((v) => v.trim().toLowerCase());
 
 const optionalEmail = z
-  .union([z.string().email("Email invalido"), z.literal(""), z.null(), z.undefined()])
+  .union([z.string().email("Email inválido"), z.literal(""), z.null(), z.undefined()])
   .transform((v) => (v ? v.trim().toLowerCase() : null))
   .nullable()
   .optional();
 
 const positiveNumber = (field: string) =>
-  z.number({ message: `${field} debe ser un numero` }).min(0, `${field} debe ser >= 0`);
+  z.number({ message: `${field} debe ser un número` }).min(0, `${field} debe ser >= 0`);
 
 const percentage = (field: string) =>
   z.number().min(0, `${field} debe ser >= 0`).max(100, `${field} debe ser <= 100`);
@@ -39,7 +39,7 @@ const percentage = (field: string) =>
 
 export const loginSchema = z.object({
   email: emailField,
-  password: z.string().min(1, "La contrasena es obligatoria"),
+  password: z.string().min(1, "La contraseña es obligatoria"),
   turnstileToken: z.string().optional().nullable(),
 });
 
@@ -48,7 +48,7 @@ export const registroSchema = z.object({
   email: emailField,
   password: z
     .string()
-    .min(8, "La contrasena debe tener al menos 8 caracteres"),
+    .min(8, "La contraseña debe tener al menos 8 caracteres"),
   turnstileToken: z.string().optional().nullable(),
 });
 
@@ -61,7 +61,7 @@ export const resetPasswordSchema = z.object({
   token: z.string().min(1, "Token es obligatorio"),
   password: z
     .string()
-    .min(8, "La contrasena debe tener al menos 8 caracteres"),
+    .min(8, "La contraseña debe tener al menos 8 caracteres"),
 });
 
 // ─── Contacto (nested) ──────────────────────────
@@ -120,17 +120,17 @@ export const productoUpdateSchema = productoCreateSchema.partial().extend({
 // ─── Categoria ───────────────────────────────────
 
 export const categoriaCreateSchema = z.object({
-  nombre: requiredString("Nombre de la categoria"),
+  nombre: requiredString("Nombre de la categoría"),
 });
 
 // ─── Line Item (nested) ──────────────────────────
 
 const lineItemSchema = z.object({
-  descripcion: z.string().min(1, "Descripcion del item es obligatoria"),
+  descripcion: z.string().min(1, "Descripción del item es obligatoria"),
   productoId: z.string().nullable().optional().transform((v) => v ?? null),
   varianteId: z.string().nullable().optional().transform((v) => v ?? null),
   cantidad: z.number().min(0.01, "Cantidad debe ser mayor a 0").default(1),
-  precioUnitario: z.number().min(0, "Precio unitario invalido"),
+  precioUnitario: z.number().min(0, "Precio unitario inválido"),
   descuento: percentage("Descuento").default(0),
 });
 
@@ -176,7 +176,7 @@ export const reglaCreateSchema = z.object({
   nombre: requiredString("Nombre de la regla"),
   tipo: z.enum(
     ["LIMITE_DESCUENTO", "PRODUCTO_OBLIGATORIO", "APROBACION", "PROMOCION"],
-    { message: "Tipo de regla invalido" }
+    { message: "Tipo de regla inválido" }
   ),
   configuracion: z.union([z.string(), z.record(z.string(), z.unknown())]),
   activa: z.boolean().default(true),
@@ -209,7 +209,7 @@ export const empresaUpdateSchema = z.object({
   plantillaPdf: z.string().optional(),
   colorPrimario: z
     .string()
-    .regex(/^#[0-9a-fA-F]{6}$/, "Color invalido")
+    .regex(/^#[0-9a-fA-F]{6}$/, "Color inválido")
     .optional(),
   prefijoCotizacion: z.string().max(10).optional(),
   diasVencimiento: z.number().int().min(1).max(365).optional(),
@@ -238,20 +238,20 @@ export const aprobacionCreateSchema = z.object({
 });
 
 export const aprobacionResolveSchema = z.object({
-  estado: z.enum(["APROBADA", "RECHAZADA"], { message: "Estado invalido" }),
+  estado: z.enum(["APROBADA", "RECHAZADA"], { message: "Estado inválido" }),
   comentario: sanitizedText,
 });
 
 // ─── Stripe Checkout ─────────────────────────────
 
 export const stripeCheckoutSchema = z.object({
-  plan: z.enum(["pro", "business"], { message: "Plan invalido" }),
+  plan: z.enum(["pro", "business"], { message: "Plan inválido" }),
 });
 
 // ─── Blog ───────────────────────────────────────
 
 export const blogPostCreateSchema = z.object({
-  titulo: requiredString("Titulo"),
+  titulo: requiredString("Título"),
   slug: z.string().optional(),
   extracto: requiredString("Extracto"),
   contenido: z.string().min(1, "Contenido es obligatorio"),

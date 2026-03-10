@@ -60,7 +60,7 @@ export function ProductoTable({
           onChange={(e) => setCategoriaFilter(e.target.value)}
           className="px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white"
         >
-          <option value="">Todas las categorias</option>
+          <option value="">Todas las categorías</option>
           {categorias.map((c) => (
             <option key={c.id} value={c.id}>
               {c.nombre}
@@ -80,7 +80,7 @@ export function ProductoTable({
                 SKU
               </th>
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Categoria
+                Categoría
               </th>
               <th className="text-right px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Precio Base
@@ -167,7 +167,7 @@ export function ProductoTable({
                   <EmptyState
                     variant="search"
                     title="Sin resultados"
-                    description="No se encontraron productos con ese criterio de busqueda."
+                    description="No se encontraron productos con ese criterio de búsqueda."
                   />
                 </td>
               </tr>

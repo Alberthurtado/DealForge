@@ -10,7 +10,7 @@ import { sanitizeHtml } from "@/lib/sanitize";
 import { getPlanFeatures, planFeatureResponse } from "@/lib/plan-limits";
 
 function defaultEmailBody(numero: string) {
-  return `<p>Adjuntamos la cotizacion ${numero}.</p>`;
+  return `<p>Adjuntamos la cotización ${numero}.</p>`;
 }
 
 export async function POST(
@@ -42,7 +42,7 @@ export async function POST(
     select: { numero: true, estado: true },
   });
   if (!cotizacion) {
-    return NextResponse.json({ error: "Cotizacion no encontrada" }, { status: 404 });
+    return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
   }
 
   // Block email if quote is still BORRADOR with pending/rejected approvals
@@ -53,7 +53,7 @@ export async function POST(
     });
     if (blockingApprovals.length > 0) {
       return NextResponse.json(
-        { error: "No se puede enviar por email una cotizacion con aprobaciones pendientes." },
+        { error: "No se puede enviar por email una cotización con aprobaciones pendientes." },
         { status: 400 }
       );
     }
@@ -83,7 +83,7 @@ export async function POST(
       data: {
         cotizacionId: id,
         tipo: "EMAIL_ENVIADO",
-        descripcion: `Cotizacion enviada por email a ${data.to}`,
+        descripcion: `Cotización enviada por email a ${data.to}`,
       },
     });
 

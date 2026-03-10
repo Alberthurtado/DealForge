@@ -7,7 +7,7 @@ import { getPlanLimits } from "@/lib/plan-limits";
 
 export const metadata: Metadata = {
   title: "Productos",
-  description: "Catalogo de productos y precios.",
+  description: "Catálogo de productos y precios.",
 };
 import { ProductoTable } from "@/components/productos/producto-table";
 import Link from "next/link";
@@ -42,7 +42,7 @@ export default async function ProductosPage() {
     <div>
       <PageHeader
         title="Productos"
-        description={`Catalogo de productos y servicios${limits.productos > 0 ? ` (${totalProductos}/${limits.productos})` : ""}`}
+        description={`Catálogo de productos y servicios${limits.productos > 0 ? ` (${totalProductos}/${limits.productos})` : ""}`}
         actions={
           limitReached ? (
             <Link

@@ -10,39 +10,39 @@ interface FAQItem {
 
 const FAQS: FAQItem[] = [
   {
-    question: "Que es un CPQ y por que lo necesito?",
+    question: "¿Qué es un CPQ y por qué lo necesito?",
     answer:
-      "CPQ significa Configure, Price, Quote (Configurar, Precio, Cotizar). Es un sistema que automatiza la creacion de cotizaciones comerciales, asegurando precios correctos, descuentos autorizados y documentos profesionales. Si cotizas con hojas de calculo, un CPQ te ahorra horas cada semana y elimina errores.",
+      "CPQ significa Configure, Price, Quote (Configurar, Precio, Cotizar). Es un sistema que automatiza la creación de cotizaciones comerciales, asegurando precios correctos, descuentos autorizados y documentos profesionales. Si cotizas con hojas de cálculo, un CPQ te ahorra horas cada semana y elimina errores.",
   },
   {
-    question: "Que puede hacer Forge, el asistente IA?",
+    question: "¿Qué puede hacer Forge, el asistente IA?",
     answer:
-      "Forge puede crear cotizaciones completas desde una instruccion en lenguaje natural, analizar tu pipeline de ventas, recomendar acciones de follow-up, buscar informacion de clientes y productos, crear reglas comerciales y mucho mas. Funciona como un asistente comercial que conoce todos tus datos en tiempo real.",
+      "Forge puede crear cotizaciones completas desde una instrucción en lenguaje natural, analizar tu pipeline de ventas, recomendar acciones de follow-up, buscar información de clientes y productos, crear reglas comerciales y mucho más. Funciona como un asistente comercial que conoce todos tus datos en tiempo real.",
   },
   {
-    question: "Mis datos estan seguros?",
+    question: "¿Mis datos están seguros?",
     answer:
-      "Si. Tus datos se almacenan de forma segura y encriptada. No compartimos datos con terceros. La IA procesa consultas en tiempo real sin almacenar conversaciones. Cumplimos con el RGPD y la normativa europea de proteccion de datos.",
+      "Sí. Tus datos se almacenan de forma segura y encriptada. No compartimos datos con terceros. La IA procesa consultas en tiempo real sin almacenar conversaciones. Cumplimos con el RGPD y la normativa europea de protección de datos.",
   },
   {
-    question: "Puedo importar mis datos existentes?",
+    question: "¿Puedo importar mis datos existentes?",
     answer:
-      "Si. Puedes importar clientes y productos desde archivos CSV directamente desde la seccion de Integraciones. El sistema detecta duplicados y actualiza registros existentes automaticamente. Tambien puedes exportar todos tus datos en cualquier momento.",
+      "Sí. Puedes importar clientes y productos desde archivos CSV directamente desde la sección de Integraciones. El sistema detecta duplicados y actualiza registros existentes automáticamente. También puedes exportar todos tus datos en cualquier momento.",
   },
   {
-    question: "Que pasa si supero el limite de cotizaciones?",
+    question: "¿Qué pasa si supero el límite de cotizaciones?",
     answer:
-      "Te notificaremos cuando estes cerca del limite de tu plan. Puedes actualizar tu plan en cualquier momento desde la configuracion sin perder ningun dato. El cambio es inmediato y se prorratea automaticamente.",
+      "Te notificaremos cuando estés cerca del límite de tu plan. Puedes actualizar tu plan en cualquier momento desde la configuración sin perder ningún dato. El cambio es inmediato y se prorratea automáticamente.",
   },
   {
-    question: "Hay compromiso de permanencia?",
+    question: "¿Hay compromiso de permanencia?",
     answer:
-      "No. Todos los planes son mensuales y puedes cancelar cuando quieras. No hay penalizaciones ni periodos minimos. Tus datos te pertenecen y puedes exportarlos antes de cancelar.",
+      "No. Todos los planes son mensuales y puedes cancelar cuando quieras. No hay penalizaciones ni períodos mínimos. Tus datos te pertenecen y puedes exportarlos antes de cancelar.",
   },
   {
-    question: "Puedo personalizar las cotizaciones con mi marca?",
+    question: "¿Puedo personalizar las cotizaciones con mi marca?",
     answer:
-      "Si. Configura tu logo, colores corporativos y datos de empresa. Las cotizaciones PDF se generan automaticamente con tu identidad visual. En los planes superiores tienes acceso a plantillas adicionales y personalizacion avanzada.",
+      "Sí. Configura tu logo, colores corporativos y datos de empresa. Las cotizaciones PDF se generan automáticamente con tu identidad visual. En los planes superiores tienes acceso a plantillas adicionales y personalización avanzada.",
   },
 ];
 

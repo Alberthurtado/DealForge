@@ -21,14 +21,14 @@ export async function POST(request: NextRequest) {
   const turnstileResult = await verifyTurnstile(data.turnstileToken ?? null);
   if (!turnstileResult.success) {
     return NextResponse.json(
-      { error: "Verificacion de seguridad fallida. Recarga la pagina." },
+      { error: "Verificación de seguridad fallida. Recarga la página." },
       { status: 403 }
     );
   }
 
   // Always return success to prevent email enumeration
   const successResponse = NextResponse.json({
-    message: "Si el email existe, recibiras un enlace para restablecer tu contrasena.",
+    message: "Si el email existe, recibirás un enlace para restablecer tu contraseña.",
   });
 
   try {

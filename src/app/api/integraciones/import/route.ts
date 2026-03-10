@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
   const rows = parsed.data as Record<string, string>[];
 
   if (rows.length === 0) {
-    return NextResponse.json({ created: 0, skipped: 0, errors: ["El archivo esta vacio"] });
+    return NextResponse.json({ created: 0, skipped: 0, errors: ["El archivo está vacío"] });
   }
 
   let created = 0;

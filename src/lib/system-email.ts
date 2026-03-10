@@ -48,7 +48,7 @@ export async function sendSystemEmail(options: SystemEmailOptions): Promise<{ su
     return { success: true };
   } catch (err) {
     console.error("[system-email] Error:", err);
-    return { success: false, error: "Error de conexion con el servicio de email" };
+    return { success: false, error: "Error de conexión con el servicio de email" };
   }
 }
 

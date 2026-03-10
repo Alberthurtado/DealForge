@@ -148,7 +148,7 @@ export default async function BlogPage() {
                 href="/"
                 className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
               >
-                Volver a la pagina principal
+                Volver a la página principal
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

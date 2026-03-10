@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/layout/page-header";
 
 export const metadata: Metadata = {
   title: "Reportes",
-  description: "Reportes y analitica del negocio.",
+  description: "Reportes y analítica del negocio.",
 };
 import { ReportesContent } from "@/components/reportes/reportes-content";
 
@@ -91,7 +91,7 @@ export default async function ReportesPage() {
     <div>
       <PageHeader
         title="Reportes"
-        description="Analisis y metricas de tu negocio"
+        description="Análisis y métricas de tu negocio"
       />
       <div className="p-6">
         <ReportesContent data={data} />

@@ -24,38 +24,38 @@ const CAPABILITIES: Capability[] = [
     title: "Crea cotizaciones al instante",
     subtitle: "Pide lo que necesites en lenguaje natural",
     messages: [
-      { role: "user", content: "Hazme una cotizacion para Empresa ABC con 10 licencias Premium y 5 basicas" },
-      { role: "forge", content: "He creado la cotizacion **COT-2026-0142** para Empresa ABC:\n\n- 10x Licencia Premium — 1.500,00 EUR\n- 5x Licencia Basica — 250,00 EUR\n\n**Subtotal:** 1.750,00 EUR\n**IVA (21%):** 367,50 EUR\n**Total:** 2.117,50 EUR\n\nLos terminos y condiciones por defecto ya estan aplicados.", action: "Ver cotizacion" },
+      { role: "user", content: "Hazme una cotización para Empresa ABC con 10 licencias Premium y 5 básicas" },
+      { role: "forge", content: "He creado la cotización **COT-2026-0142** para Empresa ABC:\n\n- 10x Licencia Premium — 1.500,00 EUR\n- 5x Licencia Básica — 250,00 EUR\n\n**Subtotal:** 1.750,00 EUR\n**IVA (21%):** 367,50 EUR\n**Total:** 2.117,50 EUR\n\nLos términos y condiciones por defecto ya están aplicados.", action: "Ver cotización" },
     ],
   },
   {
     id: "analisis",
     icon: BarChart3,
     title: "Analiza tu pipeline",
-    subtitle: "Metricas en tiempo real de tu negocio",
+    subtitle: "Métricas en tiempo real de tu negocio",
     messages: [
       { role: "user", content: "Dame un resumen del pipeline de ventas" },
-      { role: "forge", content: "Tu pipeline actual:\n\n📊 **8 cotizaciones activas** por 24.350 EUR\n✅ **Tasa de conversion:** 67%\n💰 **Ticket promedio:** 3.044 EUR\n📈 **Ingresos este mes:** 12.175 EUR\n\nTienes **3 cotizaciones en negociacion** que suman 15.200 EUR. Recomiendo hacer follow-up a las que llevan mas de 5 dias sin actividad." },
+      { role: "forge", content: "Tu pipeline actual:\n\n📊 **8 cotizaciones activas** por 24.350 EUR\n✅ **Tasa de conversión:** 67%\n💰 **Ticket promedio:** 3.044 EUR\n📈 **Ingresos este mes:** 12.175 EUR\n\nTienes **3 cotizaciones en negociación** que suman 15.200 EUR. Recomiendo hacer follow-up a las que llevan más de 5 días sin actividad." },
     ],
   },
   {
     id: "followup",
     icon: Lightbulb,
     title: "Recomendaciones inteligentes",
-    subtitle: "Forge detecta oportunidades automaticamente",
+    subtitle: "Forge detecta oportunidades automáticamente",
     messages: [
-      { role: "user", content: "Que clientes necesitan follow-up?" },
-      { role: "forge", content: "Encontre **3 cotizaciones** que necesitan atencion:\n\n1. **COT-2026-0089** — Industrias Metalicas (12.500 EUR)\n   Estado: Negociacion · Sin actividad: 8 dias\n\n2. **COT-2026-0091** — Tech Solutions (5.800 EUR)\n   Estado: Enviada · Sin abrir: 5 dias\n\n3. **COT-2026-0095** — Distribuciones Martinez (3.200 EUR)\n   Estado: Negociacion · Vence en 3 dias\n\nSugerencia: Empezar por Industrias Metalicas, es la de mayor valor.", action: "Ver cotizacion" },
+      { role: "user", content: "¿Qué clientes necesitan follow-up?" },
+      { role: "forge", content: "Encontré **3 cotizaciones** que necesitan atención:\n\n1. **COT-2026-0089** — Industrias Metálicas (12.500 EUR)\n   Estado: Negociación · Sin actividad: 8 días\n\n2. **COT-2026-0091** — Tech Solutions (5.800 EUR)\n   Estado: Enviada · Sin abrir: 5 días\n\n3. **COT-2026-0095** — Distribuciones Martínez (3.200 EUR)\n   Estado: Negociación · Vence en 3 días\n\nSugerencia: Empezar por Industrias Metálicas, es la de mayor valor.", action: "Ver cotización" },
     ],
   },
   {
     id: "productos",
     icon: Package,
-    title: "Gestiona tu catalogo",
+    title: "Gestiona tu catálogo",
     subtitle: "Crea y modifica productos conversando",
     messages: [
-      { role: "user", content: "Crea un producto Consultoria Premium a 175 EUR/hora en la categoria Servicios" },
-      { role: "forge", content: "Producto creado:\n\n🏷️ **Consultoria Premium**\nSKU: SRV-CON-001\nPrecio: 175,00 EUR/hora\nCategoria: Servicios\nEstado: Activo\n\nYa puedes incluirlo en tus cotizaciones.", action: "Ver producto" },
+      { role: "user", content: "Crea un producto Consultoría Premium a 175 EUR/hora en la categoría Servicios" },
+      { role: "forge", content: "Producto creado:\n\n🏷️ **Consultoría Premium**\nSKU: SRV-CON-001\nPrecio: 175,00 EUR/hora\nCategoría: Servicios\nEstado: Activo\n\nYa puedes incluirlo en tus cotizaciones.", action: "Ver producto" },
     ],
   },
 ];
@@ -88,7 +88,7 @@ export function ForgeShowcase() {
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Forge entiende tu negocio, tus productos y tus clientes.
-            Pide lo que necesites en lenguaje natural y el se encarga del resto.
+            Pide lo que necesites en lenguaje natural y él se encarga del resto.
           </p>
         </div>
 
@@ -141,7 +141,7 @@ export function ForgeShowcase() {
                 </div>
                 <div className="ml-auto flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-xs text-green-600 font-medium">En linea</span>
+                  <span className="text-xs text-green-600 font-medium">En línea</span>
                 </div>
               </div>
 

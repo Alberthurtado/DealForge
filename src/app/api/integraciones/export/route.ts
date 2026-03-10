@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
   const tipo = request.nextUrl.searchParams.get("tipo");
 
   if (!tipo || !["clientes", "productos", "cotizaciones"].includes(tipo)) {
-    return new Response(JSON.stringify({ error: "Tipo invalido" }), {
+    return new Response(JSON.stringify({ error: "Tipo inválido" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
     });
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
       precio_base: p.precioBase,
       unidad: p.unidad,
       categoria: p.categoria?.nombre || "",
-      activo: p.activo ? "Si" : "No",
+      activo: p.activo ? "Sí" : "No",
     }));
   } else if (tipo === "cotizaciones") {
     const cotizaciones = await prisma.cotizacion.findMany({

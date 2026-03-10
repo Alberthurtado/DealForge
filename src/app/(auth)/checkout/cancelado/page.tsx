@@ -16,8 +16,8 @@ export default function CheckoutCanceladoPage() {
           Pago cancelado
         </h1>
         <p className="text-gray-600 mb-6">
-          No se ha realizado ningun cobro. Puedes volver a intentarlo cuando quieras
-          desde la seccion de Configuracion.
+          No se ha realizado ningún cobro. Puedes volver a intentarlo cuando quieras
+          desde la sección de Configuración.
         </p>
 
         <Link
@@ -25,7 +25,7 @@ export default function CheckoutCanceladoPage() {
           className="inline-flex items-center justify-center gap-2 w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Volver a Configuracion
+          Volver a Configuración
         </Link>
       </div>
     </div>

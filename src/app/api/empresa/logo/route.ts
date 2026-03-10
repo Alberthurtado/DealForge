@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   // Max 500KB (plenty for a logo)
   if (file.size > 500 * 1024) {
     return NextResponse.json(
-      { error: "El archivo es demasiado grande. Maximo 500KB para logos." },
+      { error: "El archivo es demasiado grande. Máximo 500KB para logos." },
       { status: 400 }
     );
   }

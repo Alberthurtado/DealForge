@@ -44,7 +44,7 @@ function NuevaCotizacionContent() {
   return (
     <div>
       <PageHeader
-        title="Nueva Cotizacion"
+        title="Nueva Cotización"
         breadcrumbs={[
           { label: "Cotizaciones", href: "/cotizaciones" },
           { label: "Nueva" },

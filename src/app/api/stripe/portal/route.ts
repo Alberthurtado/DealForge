@@ -17,7 +17,7 @@ export async function POST() {
 
   if (!user?.stripeCustomerId) {
     return NextResponse.json(
-      { error: "No tienes una suscripcion activa" },
+      { error: "No tienes una suscripción activa" },
       { status: 400 }
     );
   }

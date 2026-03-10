@@ -56,7 +56,7 @@ export default function ApprovalPage() {
   useEffect(() => {
     fetch(`/api/aprobaciones/${params.token}`)
       .then((r) => {
-        if (!r.ok) throw new Error("Token invalido o expirado");
+        if (!r.ok) throw new Error("Token inválido o expirado");
         return r.json();
       })
       .then(setData)
@@ -87,10 +87,10 @@ export default function ApprovalPage() {
         }
       } else {
         const err = await res.json();
-        setError(err.error || "Error al procesar la aprobacion");
+        setError(err.error || "Error al procesar la aprobación");
       }
     } catch {
-      setError("Error de conexion");
+      setError("Error de conexión");
     } finally {
       setSubmitting(false);
     }
@@ -109,8 +109,8 @@ export default function ApprovalPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="bg-white rounded-xl shadow-lg p-8 max-w-md mx-4 text-center">
           <XCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-          <h1 className="text-xl font-bold text-gray-900 mb-2">Enlace invalido</h1>
-          <p className="text-sm text-gray-500">{error || "No se encontro la aprobacion solicitada."}</p>
+          <h1 className="text-xl font-bold text-gray-900 mb-2">Enlace inválido</h1>
+          <p className="text-sm text-gray-500">{error || "No se encontró la aprobación solicitada."}</p>
         </div>
       </div>
     );
@@ -127,7 +127,7 @@ export default function ApprovalPage() {
       <div className="py-6 px-4" style={{ backgroundColor: color }}>
         <div className="max-w-2xl mx-auto">
           <h1 className="text-xl font-bold text-white">{empresa.nombre}</h1>
-          <p className="text-white/70 text-sm mt-1">Aprobacion de cotizacion</p>
+          <p className="text-white/70 text-sm mt-1">Aprobación de cotización</p>
         </div>
       </div>
 
@@ -149,7 +149,7 @@ export default function ApprovalPage() {
               <XCircle className="w-12 h-12 text-red-500 mx-auto mb-3" />
             )}
             <h2 className="text-lg font-bold text-gray-900 mb-1">
-              Cotizacion {aprobacion.estado === "APROBADA" ? "aprobada" : "rechazada"}
+              Cotización {aprobacion.estado === "APROBADA" ? "aprobada" : "rechazada"}
             </h2>
             <p className="text-sm text-gray-500">
               {resolved ? "Tu respuesta ha sido registrada." : `Resuelta el ${aprobacion.respondidoAt ? formatDate(aprobacion.respondidoAt) : ""}`}
@@ -168,7 +168,7 @@ export default function ApprovalPage() {
           <div className="p-6 border-b border-gray-100">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Cotizacion</p>
+                <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Cotización</p>
                 <h3 className="text-xl font-bold text-gray-900">{cotizacion.numero}</h3>
                 <p className="text-sm text-gray-500 mt-1">{cotizacion.cliente}</p>
               </div>
@@ -197,7 +197,7 @@ export default function ApprovalPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="text-xs text-gray-400 uppercase tracking-wider">
-                  <th className="text-left pb-2 font-semibold">Descripcion</th>
+                  <th className="text-left pb-2 font-semibold">Descripción</th>
                   <th className="text-right pb-2 font-semibold">Cant.</th>
                   <th className="text-right pb-2 font-semibold">Precio</th>
                   <th className="text-right pb-2 font-semibold">Total</th>
@@ -254,7 +254,7 @@ export default function ApprovalPage() {
                   onChange={(e) => setComentario(e.target.value)}
                   rows={2}
                   className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white resize-none"
-                  placeholder="Anade un comentario..."
+                  placeholder="Añade un comentario..."
                 />
               </div>
               <div className="flex gap-3">

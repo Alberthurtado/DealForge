@@ -26,11 +26,11 @@ export async function POST(
   });
 
   if (!aprobacion) {
-    return NextResponse.json({ error: "Aprobacion no encontrada" }, { status: 404 });
+    return NextResponse.json({ error: "Aprobación no encontrada" }, { status: 404 });
   }
 
   if (aprobacion.estado !== "PENDIENTE") {
-    return NextResponse.json({ error: "Esta aprobacion ya fue resuelta" }, { status: 400 });
+    return NextResponse.json({ error: "Esta aprobación ya fue resuelta" }, { status: 400 });
   }
 
   if (!isSystemEmailConfigured()) {
@@ -81,7 +81,7 @@ export async function POST(
 
   const emailResult = await sendSystemEmail({
     to: aprobacion.aprobadorEmail,
-    subject: `Aprobacion requerida: ${aprobacion.cotizacion.numero}`,
+    subject: `Aprobación requerida: ${aprobacion.cotizacion.numero}`,
     html,
   });
 

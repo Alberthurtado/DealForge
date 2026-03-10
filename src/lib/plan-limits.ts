@@ -88,7 +88,7 @@ export function requiredPlanFor(feature: keyof PlanFeatures): string {
 export function planFeatureResponse(feature: keyof PlanFeatures) {
   const plan = requiredPlanFor(feature);
   return NextResponse.json(
-    { error: "PLAN_FEATURE_RESTRICTED", message: `Esta funcion requiere el plan ${plan} o superior.`, requiredPlan: plan },
+    { error: "PLAN_FEATURE_RESTRICTED", message: `Esta función requiere el plan ${plan} o superior.`, requiredPlan: plan },
     { status: 403 }
   );
 }

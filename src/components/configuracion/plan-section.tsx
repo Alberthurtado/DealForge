@@ -44,7 +44,7 @@ const PLANS: Record<
       "5 clientes",
       "20 productos",
       "5 consultas Forge IA (Haiku)",
-      "Exportacion CSV",
+      "Exportación CSV",
     ],
     iaModel: "Claude Haiku",
   },
@@ -59,9 +59,9 @@ const PLANS: Record<
       "200 productos",
       "Forge IA ilimitado (Sonnet)",
       "Import / Export CSV",
-      "Envio de emails",
+      "Envío de emails",
       "PDF con marca",
-      "Reglas basicas",
+      "Reglas básicas",
     ],
     iaModel: "Claude Sonnet",
   },
@@ -76,7 +76,7 @@ const PLANS: Record<
       "Productos ilimitados",
       "Forge IA prioridad (Sonnet)",
       "Import / Export CSV",
-      "Envio de emails",
+      "Envío de emails",
       "Aprobaciones",
       "Reglas avanzadas",
       "Integraciones CRM",
@@ -137,7 +137,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
         setUpgrading(null);
       }
     } catch {
-      alert("Error de conexion");
+      alert("Error de conexión");
       setUpgrading(null);
     }
   }
@@ -154,7 +154,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
         setManagingPortal(false);
       }
     } catch {
-      alert("Error de conexion");
+      alert("Error de conexión");
       setManagingPortal(false);
     }
   }
@@ -206,7 +206,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
                       Pago pendiente
                     </span>
                   ) : (
-                    <>Proximo cobro: {nextBilling}</>
+                    <>Próximo cobro: {nextBilling}</>
                   )}
                 </p>
               )}
@@ -219,7 +219,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
           >
             <LogOut className="w-4 h-4" />
-            {loggingOut ? "Cerrando..." : "Cerrar Sesion"}
+            {loggingOut ? "Cerrando..." : "Cerrar Sesión"}
           </button>
         </div>
 
@@ -254,7 +254,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
               )}
               {managingPortal
                 ? "Abriendo portal..."
-                : "Gestionar Suscripcion"}
+                : "Gestionar Suscripción"}
             </button>
             <p className="text-xs text-muted-foreground mt-1.5">
               Cambia de plan, actualiza tu tarjeta o consulta facturas

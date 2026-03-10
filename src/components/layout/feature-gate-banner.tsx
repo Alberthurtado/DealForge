@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Lock } from "lucide-react";
 
 interface FeatureGateBannerProps {
-  feature: string;       // e.g. "Reglas comerciales", "Envio de emails"
+  feature: string;       // e.g. "Reglas comerciales", "Envío de emails"
   requiredPlan: string;  // e.g. "Pro", "Business"
   description?: string;
 }
@@ -19,7 +19,7 @@ export function FeatureGateBanner({ feature, requiredPlan, description }: Featur
         {feature}
       </h3>
       <p className="text-sm text-purple-700 mb-4 max-w-md mx-auto">
-        {description || `Esta funcionalidad esta disponible a partir del plan ${requiredPlan}. Mejora tu plan para desbloquearla.`}
+        {description || `Esta funcionalidad está disponible a partir del plan ${requiredPlan}. Mejora tu plan para desbloquearla.`}
       </p>
       <Link
         href="/configuracion"

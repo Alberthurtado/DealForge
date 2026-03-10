@@ -7,7 +7,7 @@ const COOKIE_NAME = "dealforge_token";
 function getJwtSecret(): Uint8Array {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    throw new Error("FATAL: JWT_SECRET no esta definido.");
+    throw new Error("FATAL: JWT_SECRET no está definido.");
   }
   return new TextEncoder().encode(secret);
 }
@@ -101,7 +101,7 @@ export async function middleware(request: NextRequest) {
   } catch {
     // Invalid token — clear it and redirect
     if (isProtectedAPI) {
-      return NextResponse.json({ error: "Token invalido" }, { status: 401 });
+      return NextResponse.json({ error: "Token inválido" }, { status: 401 });
     }
     const loginUrl = new URL("/login", request.url);
     const response = NextResponse.redirect(loginUrl);

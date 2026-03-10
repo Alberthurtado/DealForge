@@ -11,32 +11,32 @@ const variants: Record<
 > = {
   clientes: {
     icon: Users,
-    title: "Sin clientes todavia",
+    title: "Sin clientes todavía",
     description: "Agrega tu primer cliente para empezar a crear cotizaciones.",
     color: "text-blue-400",
   },
   productos: {
     icon: Package,
-    title: "Sin productos todavia",
-    description: "Agrega productos a tu catalogo para incluirlos en cotizaciones.",
+    title: "Sin productos todavía",
+    description: "Agrega productos a tu catálogo para incluirlos en cotizaciones.",
     color: "text-purple-400",
   },
   cotizaciones: {
     icon: FileText,
-    title: "Sin cotizaciones todavia",
-    description: "Crea tu primera cotizacion para empezar a vender.",
+    title: "Sin cotizaciones todavía",
+    description: "Crea tu primera cotización para empezar a vender.",
     color: "text-primary",
   },
   search: {
     icon: Search,
     title: "Sin resultados",
-    description: "No se encontraron resultados para tu busqueda. Intenta con otros terminos.",
+    description: "No se encontraron resultados para tu búsqueda. Intenta con otros términos.",
     color: "text-gray-400",
   },
   generic: {
     icon: FileText,
     title: "No hay datos",
-    description: "No hay informacion disponible en este momento.",
+    description: "No hay información disponible en este momento.",
     color: "text-gray-400",
   },
 };

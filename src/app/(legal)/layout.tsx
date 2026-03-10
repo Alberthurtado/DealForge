@@ -4,7 +4,7 @@ import { Navbar } from "@/app/_landing/navbar";
 
 const LEGAL_LINKS = [
   { label: "Privacidad", href: "/privacidad" },
-  { label: "Terminos", href: "/terminos" },
+  { label: "Términos", href: "/terminos" },
   { label: "RGPD", href: "/rgpd" },
 ];
 

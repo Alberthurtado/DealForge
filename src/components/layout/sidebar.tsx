@@ -40,7 +40,7 @@ const navigation: NavItem[] = [
   { name: "Reglas", href: "/reglas", icon: ShieldCheck, requiredFeature: "reglasComerciales", requiredPlanLabel: "Pro" },
   { name: "Reportes", href: "/reportes", icon: BarChart3 },
   { name: "Integraciones", href: "/integraciones", icon: Plug },
-  { name: "Configuracion", href: "/configuracion", icon: Settings },
+  { name: "Configuración", href: "/configuracion", icon: Settings },
 ];
 
 const PLAN_LABELS: Record<string, { label: string; color: string }> = {
@@ -79,7 +79,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
   return (
     <aside
       role="navigation"
-      aria-label="Menu principal"
+      aria-label="Menú principal"
       data-sidebar
       className={cn(
         "flex flex-col bg-white border-r border-border transition-all duration-300",
@@ -194,7 +194,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
             <button
               onClick={handleLogout}
               disabled={loggingOut}
-              aria-label="Cerrar sesion"
+              aria-label="Cerrar sesión"
               className="flex items-center justify-center w-full py-2 text-muted-foreground hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
             >
               <LogOut className="w-4 h-4" />
@@ -207,7 +207,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
       <div className="px-2 py-3 border-t border-border">
         <button
           onClick={() => setCollapsed(!collapsed)}
-          aria-label={collapsed ? "Expandir menu" : "Colapsar menu"}
+          aria-label={collapsed ? "Expandir menú" : "Colapsar menú"}
           className="flex items-center justify-center w-full py-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted transition-colors"
         >
           {collapsed ? (

@@ -165,7 +165,7 @@ function evaluarLimiteDescuento(
         reglaNombre: regla.nombre,
         tipo: regla.tipo,
         severidad: "advertencia",
-        mensaje: `Descuento de linea (${item.descuento}%) en "${item.descripcion}" excede el limite de ${maxDescuentoLinea}%`,
+        mensaje: `Descuento de línea (${item.descuento}%) en "${item.descripcion}" excede el límite de ${maxDescuentoLinea}%`,
       });
     }
   }
@@ -178,7 +178,7 @@ function evaluarLimiteDescuento(
         reglaNombre: regla.nombre,
         tipo: regla.tipo,
         severidad: "advertencia",
-        mensaje: `Descuento global (${quote.descuentoGlobal}%) excede el limite de ${maxDescuentoGlobal}%`,
+        mensaje: `Descuento global (${quote.descuentoGlobal}%) excede el límite de ${maxDescuentoGlobal}%`,
       });
     }
   }
@@ -215,7 +215,7 @@ function evaluarProductoObligatorio(
       reglaNombre: regla.nombre,
       tipo: regla.tipo,
       severidad: "advertencia",
-      mensaje: mensaje || `Faltan productos obligatorios segun la regla "${regla.nombre}"`,
+      mensaje: mensaje || `Faltan productos obligatorios según la regla "${regla.nombre}"`,
       productosFaltantes: missing,
     });
   }
@@ -238,7 +238,7 @@ function evaluarAprobacion(
       triggered = cond.operador === "mayor_que"
         ? maxLineDiscount > cond.umbral
         : maxLineDiscount >= cond.umbral;
-      if (triggered) razon = `Descuento de linea (${maxLineDiscount}%) supera el umbral de ${cond.umbral}%`;
+      if (triggered) razon = `Descuento de línea (${maxLineDiscount}%) supera el umbral de ${cond.umbral}%`;
     } else if (cond.tipo === "descuento_global") {
       triggered = cond.operador === "mayor_que"
         ? quote.descuentoGlobal > cond.umbral
@@ -296,7 +296,7 @@ function evaluarPromocion(
     productoIds: matchingProducts,
     tipoPromocion,
     valor,
-    mensaje: mensaje || `Promocion "${regla.nombre}" disponible`,
+    mensaje: mensaje || `Promoción "${regla.nombre}" disponible`,
   });
 }
 

@@ -80,7 +80,7 @@ export function Cliente360({ cliente, stats }: Props) {
             color: "text-red-600 bg-red-50",
           },
           {
-            label: "Conversion",
+            label: "Conversión",
             value: formatPercent(stats.tasaConversion),
             icon: TrendingUp,
             color: "text-purple-600 bg-purple-50",
@@ -197,7 +197,7 @@ export function Cliente360({ cliente, stats }: Props) {
               href={`/cotizaciones/nueva?clienteId=${cliente.id}`}
               className="text-sm text-primary hover:text-primary/80 font-medium"
             >
-              + Nueva Cotizacion
+              + Nueva Cotización
             </Link>
           </div>
           <div className="space-y-3">
@@ -226,7 +226,7 @@ export function Cliente360({ cliente, stats }: Props) {
             ))}
             {cliente.cotizaciones.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-8">
-                Este cliente no tiene cotizaciones todavia
+                Este cliente no tiene cotizaciones todavía
               </p>
             )}
           </div>

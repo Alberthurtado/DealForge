@@ -107,7 +107,7 @@ export function AssistantPanel() {
         {
           id: Date.now().toString(),
           role: "assistant",
-          content: "Lo siento, hubo un error de conexion. Intenta de nuevo.",
+          content: "Lo siento, hubo un error de conexión. Intenta de nuevo.",
         },
       ]);
     } finally {
@@ -187,15 +187,15 @@ export function AssistantPanel() {
                 Hola, soy Forge
               </h3>
               <p className="text-sm text-gray-500 mb-6">
-                Tu asistente comercial inteligente. Preguntame sobre clientes,
+                Tu asistente comercial inteligente. Pregúntame sobre clientes,
                 cotizaciones, productos o estrategia de ventas.
               </p>
               <div className="grid gap-2 w-full max-w-xs">
                 {[
-                  "Que cotizaciones necesitan follow-up?",
+                  "Qué cotizaciones necesitan follow-up?",
                   "Dame un resumen del negocio",
-                  "Que clientes tengo?",
-                  "Que puedes hacer?",
+                  "Qué clientes tengo?",
+                  "Qué puedes hacer?",
                 ].map((suggestion) => (
                   <button
                     key={suggestion}
@@ -246,7 +246,7 @@ export function AssistantPanel() {
             </button>
           </div>
           <p className="mt-1.5 text-center text-[10px] text-gray-400">
-            Forge usa IA para asistirte. Verifica la informacion importante.
+            Forge usa IA para asistirte. Verifica la información importante.
           </p>
         </div>
       </div>

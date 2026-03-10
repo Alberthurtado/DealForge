@@ -40,14 +40,14 @@ export function ExportPanel() {
     {
       tipo: "productos",
       label: "Productos",
-      description: "Exporta el catalogo de productos con SKU, precios y categorias. Compatible con SAP, Odoo, Holded.",
+      description: "Exporta el catálogo de productos con SKU, precios y categorías. Compatible con SAP, Odoo, Holded.",
       icon: Package,
       count: counts.productos ?? null,
     },
     {
       tipo: "cotizaciones",
       label: "Cotizaciones",
-      description: "Exporta todas las cotizaciones con estado, cliente, totales y fechas. Ideal para analisis en Excel.",
+      description: "Exporta todas las cotizaciones con estado, cliente, totales y fechas. Ideal para análisis en Excel.",
       icon: FileText,
       count: counts.cotizaciones ?? null,
     },
@@ -78,7 +78,7 @@ export function ExportPanel() {
     <div className="space-y-4">
       <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3">
         <p className="text-sm text-blue-800">
-          <strong>Formato CSV</strong> — Los archivos exportados usan formato CSV (separado por comas) compatible con Excel, Google Sheets, y la mayoria de CRMs y ERPs.
+          <strong>Formato CSV</strong> — Los archivos exportados usan formato CSV (separado por comas) compatible con Excel, Google Sheets, y la mayoría de CRMs y ERPs.
         </p>
       </div>
 

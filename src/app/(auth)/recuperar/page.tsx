@@ -38,7 +38,7 @@ export default function RecuperarPage() {
 
       setSent(true);
     } catch {
-      setError("Error de conexion. Intenta de nuevo.");
+      setError("Error de conexión. Intenta de nuevo.");
       setLoading(false);
     }
   }
@@ -55,8 +55,8 @@ export default function RecuperarPage() {
               Revisa tu email
             </h1>
             <p className="text-sm text-gray-500 mb-6">
-              Si existe una cuenta con <strong>{email}</strong>, recibiras un
-              enlace para restablecer tu contrasena. Revisa tambien tu carpeta
+              Si existe una cuenta con <strong>{email}</strong>, recibirás un
+              enlace para restablecer tu contraseña. Revisa también tu carpeta
               de spam.
             </p>
             <Link
@@ -81,11 +81,11 @@ export default function RecuperarPage() {
             <Flame className="w-6 h-6 text-[#3a9bb5]" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Recuperar contrasena
+            Recuperar contraseña
           </h1>
           <p className="text-sm text-gray-500 mt-1">
             Introduce tu email y te enviaremos un enlace para restablecer tu
-            contrasena
+            contraseña
           </p>
         </div>
 

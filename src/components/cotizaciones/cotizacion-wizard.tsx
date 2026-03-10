@@ -351,7 +351,7 @@ export function CotizacionWizard({
           {/* Product catalog */}
           <div className="bg-white rounded-xl border border-border p-6">
             <h3 className="text-base font-semibold text-foreground mb-3">
-              Catalogo de Productos
+              Catálogo de Productos
             </h3>
             <div className="relative mb-3">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -445,7 +445,7 @@ export function CotizacionWizard({
               onClick={addCustomLine}
               className="mt-3 w-full py-2 border border-dashed border-border rounded-lg text-sm text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
             >
-              + Agregar linea personalizada
+              + Agregar línea personalizada
             </button>
           </div>
 
@@ -456,7 +456,7 @@ export function CotizacionWizard({
             </h3>
             {form.lineItems.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">
-                Agrega productos del catalogo
+                Agrega productos del catálogo
               </p>
             ) : (
               <div className="space-y-3">
@@ -473,7 +473,7 @@ export function CotizacionWizard({
                           updateLineItem(i, "descripcion", e.target.value)
                         }
                         className="text-sm font-medium bg-transparent focus:outline-none flex-1"
-                        placeholder="Descripcion"
+                        placeholder="Descripción"
                       />
                       <button
                         onClick={() => removeLineItem(i)}
@@ -681,7 +681,7 @@ export function CotizacionWizard({
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Terminos y Condiciones
+              Términos y Condiciones
             </label>
             <textarea
               value={form.condiciones}
@@ -732,7 +732,7 @@ export function CotizacionWizard({
       {step === 3 && (
         <div className="bg-white rounded-xl border border-border p-6 max-w-3xl mx-auto">
           <h3 className="text-lg font-semibold text-foreground mb-4">
-            Resumen de la Cotizacion
+            Resumen de la Cotización
           </h3>
           {validationResult && (
             <div className="mb-4">
@@ -793,7 +793,7 @@ export function CotizacionWizard({
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-2">Descripcion</th>
+                  <th className="text-left py-2">Descripción</th>
                   <th className="text-right py-2">Cant.</th>
                   <th className="text-right py-2">Precio</th>
                   <th className="text-right py-2">Dto.</th>
@@ -887,8 +887,8 @@ export function CotizacionWizard({
             {saving
               ? "Creando..."
               : validationResult?.aprobacionesRequeridas?.length
-                ? "Crear Cotizacion (Requiere Aprobacion)"
-                : "Crear Cotizacion"}
+                ? "Crear Cotización (Requiere Aprobación)"
+                : "Crear Cotización"}
           </button>
         )}
       </div>

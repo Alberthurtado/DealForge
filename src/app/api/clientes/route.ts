@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: "PLAN_LIMIT_REACHED",
-        message: `Has alcanzado el limite de ${limit.limit} ${limit.resource} de tu plan ${limit.planLabel}. Mejora tu plan para crear mas clientes.`,
+        message: `Has alcanzado el límite de ${limit.limit} ${limit.resource} de tu plan ${limit.planLabel}. Mejora tu plan para crear más clientes.`,
         current: limit.current,
         limit: limit.limit,
       },

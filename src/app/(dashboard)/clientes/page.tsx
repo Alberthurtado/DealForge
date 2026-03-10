@@ -7,7 +7,7 @@ import { getPlanLimits } from "@/lib/plan-limits";
 
 export const metadata: Metadata = {
   title: "Clientes",
-  description: "Listado y gestion de clientes.",
+  description: "Listado y gestión de clientes.",
 };
 import { ClienteTable } from "@/components/clientes/cliente-table";
 import Link from "next/link";

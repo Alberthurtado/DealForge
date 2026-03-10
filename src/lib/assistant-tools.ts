@@ -6,7 +6,7 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "buscar_clientes",
     description:
-      "Busca clientes en la base de datos. Puede filtrar por nombre, sector o ciudad. Devuelve lista de clientes con sus datos basicos y numero de cotizaciones.",
+      "Busca clientes en la base de datos. Puede filtrar por nombre, sector o ciudad. Devuelve lista de clientes con sus datos básicos y número de cotizaciones.",
     input_schema: {
       type: "object" as const,
       properties: {
@@ -36,15 +36,15 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "buscar_productos",
     description:
-      "Busca productos en el catalogo. Puede filtrar por nombre, SKU o categoria. Incluye variantes de cada producto si existen.",
+      "Busca productos en el catálogo. Puede filtrar por nombre, SKU o categoría. Incluye variantes de cada producto si existen.",
     input_schema: {
       type: "object" as const,
       properties: {
         query: {
           type: "string",
-          description: "Texto para buscar en nombre, SKU o descripcion",
+          description: "Texto para buscar en nombre, SKU o descripción",
         },
-        categoriaId: { type: "string", description: "Filtrar por categoria" },
+        categoriaId: { type: "string", description: "Filtrar por categoría" },
       },
     },
   },
@@ -67,11 +67,11 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "obtener_cotizacion",
     description:
-      "Obtiene el detalle completo de una cotizacion: cliente, line items con productos, actividades/historial, totales.",
+      "Obtiene el detalle completo de una cotización: cliente, line items con productos, actividades/historial, totales.",
     input_schema: {
       type: "object" as const,
       properties: {
-        cotizacionId: { type: "string", description: "ID de la cotizacion" },
+        cotizacionId: { type: "string", description: "ID de la cotización" },
       },
       required: ["cotizacionId"],
     },
@@ -79,7 +79,7 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "obtener_estadisticas",
     description:
-      "Obtiene las metricas generales del negocio: pipeline total, tasa de conversion, ticket promedio, ingresos ganados, total clientes, cotizaciones activas.",
+      "Obtiene las métricas generales del negocio: pipeline total, tasa de conversión, ticket promedio, ingresos ganados, total clientes, cotizaciones activas.",
     input_schema: {
       type: "object" as const,
       properties: {},
@@ -88,14 +88,14 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "cotizaciones_pendientes_followup",
     description:
-      "Encuentra cotizaciones que fueron enviadas o estan en negociacion hace mas de N dias y no han sido cerradas. Util para identificar oportunidades que necesitan seguimiento.",
+      "Encuentra cotizaciones que fueron enviadas o están en negociación hace más de N días y no han sido cerradas. Útil para identificar oportunidades que necesitan seguimiento.",
     input_schema: {
       type: "object" as const,
       properties: {
         diasMinimos: {
           type: "number",
           description:
-            "Dias minimos desde el envio para considerar que necesita follow-up (default: 7)",
+            "Días mínimos desde el envío para considerar que necesita follow-up (default: 7)",
         },
       },
     },
@@ -103,7 +103,7 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "recomendar_productos",
     description:
-      "Recomienda productos para un cliente basandose en su sector, historial de compras y productos mas cotizados a clientes similares.",
+      "Recomienda productos para un cliente basándose en su sector, historial de compras y productos más cotizados a clientes similares.",
     input_schema: {
       type: "object" as const,
       properties: {
@@ -115,7 +115,7 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "analizar_cliente",
     description:
-      "Analiza en profundidad un cliente: tasa de conversion, ticket promedio, productos mas comprados, tiempo medio de cierre, tendencia.",
+      "Analiza en profundidad un cliente: tasa de conversión, ticket promedio, productos más comprados, tiempo medio de cierre, tendencia.",
     input_schema: {
       type: "object" as const,
       properties: {
@@ -129,23 +129,23 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "crear_cliente",
     description:
-      "Crea un nuevo cliente en el sistema. Requiere al menos el nombre. Opcionalmente puede incluir email, telefono, direccion, ciudad, pais, sector, RUC/NIF y notas. Tambien puede crear un contacto principal.",
+      "Crea un nuevo cliente en el sistema. Requiere al menos el nombre. Opcionalmente puede incluir email, teléfono, dirección, ciudad, país, sector, RUC/NIF y notas. También puede crear un contacto principal.",
     input_schema: {
       type: "object" as const,
       properties: {
-        nombre: { type: "string", description: "Nombre o razon social del cliente" },
+        nombre: { type: "string", description: "Nombre o razón social del cliente" },
         email: { type: "string", description: "Email del cliente" },
-        telefono: { type: "string", description: "Telefono del cliente" },
-        direccion: { type: "string", description: "Direccion fiscal" },
+        telefono: { type: "string", description: "Teléfono del cliente" },
+        direccion: { type: "string", description: "Dirección fiscal" },
         ciudad: { type: "string", description: "Ciudad" },
-        pais: { type: "string", description: "Pais (default: Espana)" },
+        pais: { type: "string", description: "País (default: España)" },
         sector: { type: "string", description: "Sector o industria" },
         ruc: { type: "string", description: "RUC, NIF o CIF" },
         notas: { type: "string", description: "Notas adicionales" },
         contactoNombre: { type: "string", description: "Nombre del contacto principal" },
         contactoCargo: { type: "string", description: "Cargo del contacto principal" },
         contactoEmail: { type: "string", description: "Email del contacto principal" },
-        contactoTelefono: { type: "string", description: "Telefono del contacto principal" },
+        contactoTelefono: { type: "string", description: "Teléfono del contacto principal" },
       },
       required: ["nombre"],
     },
@@ -159,9 +159,9 @@ export const toolDefinitions: Anthropic.Tool[] = [
       properties: {
         clienteId: { type: "string", description: "ID del cliente" },
         nombre: { type: "string", description: "Nombre completo del contacto" },
-        cargo: { type: "string", description: "Cargo o posicion" },
+        cargo: { type: "string", description: "Cargo o posición" },
         email: { type: "string", description: "Email del contacto" },
-        telefono: { type: "string", description: "Telefono del contacto" },
+        telefono: { type: "string", description: "Teléfono del contacto" },
         principal: { type: "boolean", description: "Si es el contacto principal (default: false)" },
       },
       required: ["clienteId", "nombre"],
@@ -170,25 +170,25 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "crear_producto",
     description:
-      "Crea un nuevo producto en el catalogo. Requiere nombre, SKU y precio base. Opcionalmente incluye descripcion, unidad, categoria y variantes (color, talla, etc.).",
+      "Crea un nuevo producto en el catálogo. Requiere nombre, SKU y precio base. Opcionalmente incluye descripción, unidad, categoría y variantes (color, talla, etc.).",
     input_schema: {
       type: "object" as const,
       properties: {
         nombre: { type: "string", description: "Nombre del producto" },
-        sku: { type: "string", description: "Codigo SKU unico del producto" },
+        sku: { type: "string", description: "Código SKU único del producto" },
         precioBase: { type: "number", description: "Precio base en EUR" },
-        descripcion: { type: "string", description: "Descripcion del producto" },
+        descripcion: { type: "string", description: "Descripción del producto" },
         unidad: { type: "string", description: "Unidad de medida (default: unidad). Ej: unidad, hora, mes, licencia, metro, kg" },
-        categoriaNombre: { type: "string", description: "Nombre de la categoria. Si no existe, se crea automaticamente." },
+        categoriaNombre: { type: "string", description: "Nombre de la categoría. Si no existe, se crea automáticamente." },
         variantes: {
           type: "array",
-          description: "Variantes opcionales del producto (color, talla, configuracion, etc.).",
+          description: "Variantes opcionales del producto (color, talla, configuración, etc.).",
           items: {
             type: "object",
             properties: {
               nombre: { type: "string", description: "Nombre de la variante. Ej: Rojo, Talla L, Premium" },
-              sku: { type: "string", description: "SKU unico de la variante. Ej: PROD-001-ROJO" },
-              precioOverride: { type: "number", description: "Precio especifico de esta variante. Si no se indica, usa el precio base del producto." },
+              sku: { type: "string", description: "SKU único de la variante. Ej: PROD-001-ROJO" },
+              precioOverride: { type: "number", description: "Precio específico de esta variante. Si no se indica, usa el precio base del producto." },
               atributos: { type: "object", description: "Pares clave-valor con atributos. Ej: {\"color\": \"rojo\", \"talla\": \"L\"}" },
             },
             required: ["nombre", "sku"],
@@ -201,29 +201,29 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "crear_cotizacion",
     description:
-      "Crea una nueva cotizacion para un cliente con lineas de producto. Calcula automaticamente subtotal, impuesto y total. El IVA se puede incluir o no, y su porcentaje es configurable (por defecto 21%).",
+      "Crea una nueva cotización para un cliente con líneas de producto. Calcula automáticamente subtotal, impuesto y total. El IVA se puede incluir o no, y su porcentaje es configurable (por defecto 21%).",
     input_schema: {
       type: "object" as const,
       properties: {
         clienteId: { type: "string", description: "ID del cliente" },
-        contactoNombre: { type: "string", description: "Nombre del contacto para la cotizacion" },
-        notas: { type: "string", description: "Notas internas sobre la cotizacion" },
+        contactoNombre: { type: "string", description: "Nombre del contacto para la cotización" },
+        notas: { type: "string", description: "Notas internas sobre la cotización" },
         condiciones: { type: "string", description: "Condiciones comerciales" },
         descuentoGlobal: { type: "number", description: "Porcentaje de descuento global (0-100)" },
-        incluirIva: { type: "boolean", description: "Si se incluye IVA en la cotizacion (por defecto true). Si es false, el total no incluye impuestos." },
+        incluirIva: { type: "boolean", description: "Si se incluye IVA en la cotización (por defecto true). Si es false, el total no incluye impuestos." },
         impuesto: { type: "number", description: "Porcentaje de IVA a aplicar (por defecto 21). Solo se aplica si incluirIva es true. Valores comunes: 21 (general), 10 (reducido), 4 (superreducido)." },
         items: {
           type: "array",
-          description: "Lineas de la cotizacion. Cada item tiene productoId o descripcion manual, cantidad, y opcionalmente descuento, precioUnitario override y varianteId.",
+          description: "Líneas de la cotización. Cada item tiene productoId o descripción manual, cantidad, y opcionalmente descuento, precioUnitario override y varianteId.",
           items: {
             type: "object",
             properties: {
-              productoId: { type: "string", description: "ID del producto del catalogo" },
+              productoId: { type: "string", description: "ID del producto del catálogo" },
               varianteId: { type: "string", description: "ID de la variante del producto (opcional, si el producto tiene variantes)" },
-              descripcion: { type: "string", description: "Descripcion manual (si no hay productoId)" },
+              descripcion: { type: "string", description: "Descripción manual (si no hay productoId)" },
               cantidad: { type: "number", description: "Cantidad (default: 1)" },
               precioUnitario: { type: "number", description: "Precio unitario override (si no se usa, se toma del producto o variante)" },
-              descuento: { type: "number", description: "Porcentaje descuento linea (0-100, default: 0)" },
+              descuento: { type: "number", description: "Porcentaje descuento línea (0-100, default: 0)" },
             },
           },
         },
@@ -234,11 +234,11 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "cambiar_estado_cotizacion",
     description:
-      "Cambia el estado de una cotizacion. Estados validos: BORRADOR, ENVIADA, NEGOCIACION, GANADA, PERDIDA, ARCHIVADA. Usa ARCHIVADA para archivar cotizaciones invalidas o erroneas (no afecta metricas). Registra la transicion como actividad automaticamente.",
+      "Cambia el estado de una cotización. Estados válidos: BORRADOR, ENVIADA, NEGOCIACION, GANADA, PERDIDA, ARCHIVADA. Usa ARCHIVADA para archivar cotizaciones inválidas o erróneas (no afecta métricas). Registra la transición como actividad automáticamente.",
     input_schema: {
       type: "object" as const,
       properties: {
-        cotizacionId: { type: "string", description: "ID de la cotizacion" },
+        cotizacionId: { type: "string", description: "ID de la cotización" },
         nuevoEstado: {
           type: "string",
           description: "Nuevo estado: BORRADOR, ENVIADA, NEGOCIACION, GANADA, PERDIDA, ARCHIVADA",
@@ -251,16 +251,16 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "registrar_actividad",
     description:
-      "Registra una actividad o nota en una cotizacion. Tipos: NOTA, LLAMADA, REUNION, EMAIL, SEGUIMIENTO.",
+      "Registra una actividad o nota en una cotización. Tipos: NOTA, LLAMADA, REUNION, EMAIL, SEGUIMIENTO.",
     input_schema: {
       type: "object" as const,
       properties: {
-        cotizacionId: { type: "string", description: "ID de la cotizacion" },
+        cotizacionId: { type: "string", description: "ID de la cotización" },
         tipo: {
           type: "string",
           description: "Tipo de actividad: NOTA, LLAMADA, REUNION, EMAIL, SEGUIMIENTO",
         },
-        descripcion: { type: "string", description: "Descripcion de la actividad" },
+        descripcion: { type: "string", description: "Descripción de la actividad" },
       },
       required: ["cotizacionId", "tipo", "descripcion"],
     },
@@ -285,16 +285,16 @@ export const toolDefinitions: Anthropic.Tool[] = [
     name: "crear_regla",
     description: `Crea una nueva regla comercial. Hay 4 tipos con configuraciones diferentes:
 
-1. LIMITE_DESCUENTO: Define descuento maximo permitido.
+1. LIMITE_DESCUENTO: Define descuento máximo permitido.
    configuracion: { tipoLimite: "linea"|"global"|"ambos", maxDescuentoLinea?: number, maxDescuentoGlobal?: number }
 
 2. PRODUCTO_OBLIGATORIO: Cuando se incluye un producto/categoria, obliga a incluir otros productos.
    configuracion: { condicion: { tipo: "producto"|"categoria", ids: string[] }, productosRequeridos: string[], mensaje?: string }
 
-3. APROBACION: Requiere aprobacion cuando se cumplen condiciones.
+3. APROBACION: Requiere aprobación cuando se cumplen condiciones.
    configuracion: { condiciones: [{ tipo: "descuento_linea"|"descuento_global"|"monto_total", umbral: number, operador: "mayor_que"|"mayor_igual" }], aprobador: { nombre: string, email: string } }
 
-4. PROMOCION: Promocion temporal para productos especificos.
+4. PROMOCION: Promoción temporal para productos específicos.
    configuracion: { fechaInicio: "YYYY-MM-DD", fechaFin: "YYYY-MM-DD", productoIds: string[], tipoPromocion: "descuento_porcentaje"|"precio_fijo", valor: number, mensaje?: string }`,
     input_schema: {
       type: "object" as const,
@@ -306,10 +306,10 @@ export const toolDefinitions: Anthropic.Tool[] = [
         },
         configuracion: {
           type: "object",
-          description: "Objeto de configuracion segun el tipo de regla (ver descripcion del tool)",
+          description: "Objeto de configuración según el tipo de regla (ver descripción del tool)",
         },
-        prioridad: { type: "number", description: "Prioridad (1-100, default: 50). Mayor = se evalua primero." },
-        activa: { type: "boolean", description: "Si la regla esta activa (default: true)" },
+        prioridad: { type: "number", description: "Prioridad (1-100, default: 50). Mayor = se evalúa primero." },
+        activa: { type: "boolean", description: "Si la regla está activa (default: true)" },
       },
       required: ["nombre", "tipo", "configuracion"],
     },
@@ -317,13 +317,13 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "editar_regla",
     description:
-      "Edita una regla comercial existente. Puede cambiar nombre, configuracion, prioridad o estado activo/inactivo.",
+      "Edita una regla comercial existente. Puede cambiar nombre, configuración, prioridad o estado activo/inactivo.",
     input_schema: {
       type: "object" as const,
       properties: {
         reglaId: { type: "string", description: "ID de la regla a editar" },
         nombre: { type: "string", description: "Nuevo nombre" },
-        configuracion: { type: "object", description: "Nueva configuracion" },
+        configuracion: { type: "object", description: "Nueva configuración" },
         prioridad: { type: "number", description: "Nueva prioridad" },
         activa: { type: "boolean", description: "Activar o desactivar" },
       },
@@ -346,29 +346,29 @@ export const toolDefinitions: Anthropic.Tool[] = [
   {
     name: "actualizar_empresa",
     description:
-      "Actualiza los datos de configuracion de la empresa: nombre, CIF, email, telefono, direccion, ciudad, pais, web, plantilla PDF (moderna/clasica/minimalista), color primario (hex), prefijo de cotizacion, dias de vencimiento por defecto, terminos y condiciones por defecto.",
+      "Actualiza los datos de configuración de la empresa: nombre, CIF, email, teléfono, dirección, ciudad, país, web, plantilla PDF (moderna/clásica/minimalista), color primario (hex), prefijo de cotización, días de vencimiento por defecto, términos y condiciones por defecto.",
     input_schema: {
       type: "object" as const,
       properties: {
         nombre: { type: "string", description: "Nombre de la empresa" },
         cif: { type: "string", description: "CIF/NIF" },
         email: { type: "string", description: "Email de la empresa" },
-        telefono: { type: "string", description: "Telefono" },
-        direccion: { type: "string", description: "Direccion" },
+        telefono: { type: "string", description: "Teléfono" },
+        direccion: { type: "string", description: "Dirección" },
         ciudad: { type: "string", description: "Ciudad" },
-        pais: { type: "string", description: "Pais" },
+        pais: { type: "string", description: "País" },
         web: { type: "string", description: "Sitio web" },
-        plantillaPdf: { type: "string", description: "Plantilla PDF: moderna, clasica, minimalista" },
+        plantillaPdf: { type: "string", description: "Plantilla PDF: moderna, clásica, minimalista" },
         colorPrimario: { type: "string", description: "Color primario en formato hex (#RRGGBB)" },
-        prefijoCotizacion: { type: "string", description: "Prefijo para numeracion de cotizaciones (ej: COT, PRES, QUO)" },
-        diasVencimiento: { type: "number", description: "Dias de vencimiento por defecto para cotizaciones nuevas (ej: 30)" },
-        condicionesDefecto: { type: "string", description: "Terminos y condiciones por defecto para cotizaciones nuevas" },
+        prefijoCotizacion: { type: "string", description: "Prefijo para numeración de cotizaciones (ej: COT, PRES, QUO)" },
+        diasVencimiento: { type: "number", description: "Días de vencimiento por defecto para cotizaciones nuevas (ej: 30)" },
+        condicionesDefecto: { type: "string", description: "Términos y condiciones por defecto para cotizaciones nuevas" },
       },
     },
   },
   {
     name: "obtener_empresa",
-    description: "Obtiene los datos actuales de configuracion de la empresa.",
+    description: "Obtiene los datos actuales de configuración de la empresa.",
     input_schema: {
       type: "object" as const,
       properties: {},
@@ -568,7 +568,7 @@ async function obtenerCotizacion(input: Record<string, unknown>) {
     },
   });
   if (!cotizacion)
-    return JSON.stringify({ error: "Cotizacion no encontrada" });
+    return JSON.stringify({ error: "Cotización no encontrada" });
   return JSON.stringify(cotizacion);
 }
 
@@ -981,7 +981,7 @@ async function crearCotizacion(input: Record<string, unknown>) {
     // Process line items
     const items = (input.items as any[]) || [];
     if (items.length === 0) {
-      return JSON.stringify({ error: "La cotizacion necesita al menos un item" });
+      return JSON.stringify({ error: "La cotización necesita al menos un item" });
     }
 
     // Fetch product data for items with productoId
@@ -1022,7 +1022,7 @@ async function crearCotizacion(input: Record<string, unknown>) {
         return JSON.stringify({ error: `Item ${i + 1} necesita un precioUnitario` });
       }
       if (!descripcion) {
-        return JSON.stringify({ error: `Item ${i + 1} necesita una descripcion o productoId` });
+        return JSON.stringify({ error: `Item ${i + 1} necesita una descripción o productoId` });
       }
 
       const cantidad = (item.cantidad as number) || 1;
@@ -1065,7 +1065,7 @@ async function crearCotizacion(input: Record<string, unknown>) {
         actividades: {
           create: {
             tipo: "SISTEMA",
-            descripcion: "Cotizacion creada por Forge (asistente IA)",
+            descripcion: "Cotización creada por Forge (asistente IA)",
           },
         },
       },
@@ -1080,7 +1080,7 @@ async function crearCotizacion(input: Record<string, unknown>) {
 
     return JSON.stringify({
       success: true,
-      mensaje: `Cotizacion ${cotizacion.numero} creada para ${cliente.nombre} por ${total.toFixed(2)} EUR`,
+      mensaje: `Cotización ${cotizacion.numero} creada para ${cliente.nombre} por ${total.toFixed(2)} EUR`,
       cotizacion: {
         id: cotizacion.id,
         numero: cotizacion.numero,
@@ -1101,7 +1101,7 @@ async function crearCotizacion(input: Record<string, unknown>) {
     });
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : "Error desconocido";
-    return JSON.stringify({ error: `Error al crear cotizacion: ${msg}` });
+    return JSON.stringify({ error: `Error al crear cotización: ${msg}` });
   }
 }
 
@@ -1112,7 +1112,7 @@ async function cambiarEstadoCotizacion(input: Record<string, unknown>) {
 
     if (!estadosValidos.includes(nuevoEstado)) {
       return JSON.stringify({
-        error: `Estado invalido "${nuevoEstado}". Estados validos: ${estadosValidos.join(", ")}`,
+        error: `Estado inválido "${nuevoEstado}". Estados válidos: ${estadosValidos.join(", ")}`,
       });
     }
 
@@ -1121,11 +1121,11 @@ async function cambiarEstadoCotizacion(input: Record<string, unknown>) {
       where: { id: input.cotizacionId as string },
       select: { numero: true, estado: true, cliente: { select: { nombre: true } } },
     });
-    if (!cotizacion) return JSON.stringify({ error: "Cotizacion no encontrada" });
+    if (!cotizacion) return JSON.stringify({ error: "Cotización no encontrada" });
 
     if (cotizacion.estado === nuevoEstado) {
       return JSON.stringify({
-        error: `La cotizacion ya esta en estado ${nuevoEstado}`,
+        error: `La cotización ya está en estado ${nuevoEstado}`,
       });
     }
 
@@ -1149,7 +1149,7 @@ async function cambiarEstadoCotizacion(input: Record<string, unknown>) {
 
     return JSON.stringify({
       success: true,
-      mensaje: `Cotizacion ${cotizacion.numero} (${cotizacion.cliente.nombre}) cambiada de ${cotizacion.estado} a ${nuevoEstado}`,
+      mensaje: `Cotización ${cotizacion.numero} (${cotizacion.cliente.nombre}) cambiada de ${cotizacion.estado} a ${nuevoEstado}`,
       cotizacion: {
         id: updated.id,
         numero: cotizacion.numero,
@@ -1170,7 +1170,7 @@ async function registrarActividad(input: Record<string, unknown>) {
 
     if (!tiposValidos.includes(tipo)) {
       return JSON.stringify({
-        error: `Tipo invalido "${tipo}". Tipos validos: ${tiposValidos.join(", ")}`,
+        error: `Tipo inválido "${tipo}". Tipos válidos: ${tiposValidos.join(", ")}`,
       });
     }
 
@@ -1179,7 +1179,7 @@ async function registrarActividad(input: Record<string, unknown>) {
       where: { id: input.cotizacionId as string },
       select: { numero: true, cliente: { select: { nombre: true } } },
     });
-    if (!cotizacion) return JSON.stringify({ error: "Cotizacion no encontrada" });
+    if (!cotizacion) return JSON.stringify({ error: "Cotización no encontrada" });
 
     const actividad = await prisma.actividad.create({
       data: {
@@ -1233,7 +1233,7 @@ async function crearRegla(input: Record<string, unknown>) {
     const tiposValidos = ["LIMITE_DESCUENTO", "PRODUCTO_OBLIGATORIO", "APROBACION", "PROMOCION"];
     const tipo = input.tipo as string;
     if (!tiposValidos.includes(tipo)) {
-      return JSON.stringify({ error: `Tipo invalido. Tipos validos: ${tiposValidos.join(", ")}` });
+      return JSON.stringify({ error: `Tipo inválido. Tipos válidos: ${tiposValidos.join(", ")}` });
     }
 
     const regla = await prisma.reglaComercial.create({
@@ -1344,7 +1344,7 @@ async function actualizarEmpresa(input: Record<string, unknown>) {
 
     return JSON.stringify({
       success: true,
-      mensaje: `Configuracion de empresa actualizada: ${Object.keys(data).join(", ")}`,
+      mensaje: `Configuración de empresa actualizada: ${Object.keys(data).join(", ")}`,
       empresa: {
         nombre: empresa.nombre,
         cif: empresa.cif,

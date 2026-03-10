@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
   const existing = await prisma.blogPost.findUnique({ where: { slug } });
   if (existing) {
     return NextResponse.json(
-      { error: "Ya existe un articulo con ese slug" },
+      { error: "Ya existe un artículo con ese slug" },
       { status: 409 }
     );
   }

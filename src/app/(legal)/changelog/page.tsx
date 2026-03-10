@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Changelog — DealForge",
   description:
-    "Historial de cambios y actualizaciones de DealForge. Consulta las nuevas funcionalidades, mejoras y correcciones de cada version.",
+    "Historial de cambios y actualizaciones de DealForge. Consulta las nuevas funcionalidades, mejoras y correcciones de cada versión.",
 };
 
 /* ── tipos ── */
@@ -30,111 +30,111 @@ const releases: Release[] = [
     date: "9 de marzo de 2026",
     title: "Lanzamiento oficial",
     summary:
-      "Primera version publica de DealForge. Incluye todas las funcionalidades principales para la gestion de cotizaciones B2B con inteligencia artificial.",
+      "Primera versión pública de DealForge. Incluye todas las funcionalidades principales para la gestión de cotizaciones B2B con inteligencia artificial.",
     changes: [
-      /* ── Autenticacion y cuentas ── */
-      { type: "new", text: "Registro de usuarios con email y contrasena segura (minimo 8 caracteres)" },
-      { type: "new", text: "Inicio de sesion con proteccion contra intentos fallidos" },
-      { type: "new", text: "Sistema de sesiones con JWT y renovacion automatica" },
+      /* ── Autenticación y cuentas ── */
+      { type: "new", text: "Registro de usuarios con email y contraseña segura (mínimo 8 caracteres)" },
+      { type: "new", text: "Inicio de sesión con protección contra intentos fallidos" },
+      { type: "new", text: "Sistema de sesiones con JWT y renovación automática" },
 
       /* ── Panel de control ── */
-      { type: "new", text: "Dashboard con 6 KPIs en tiempo real: pipeline total, tasa de conversion, ticket medio, ingresos, clientes y cotizaciones activas" },
-      { type: "new", text: "Grafico de pipeline por estado (Borrador, Enviada, Negociacion, Ganada, Perdida)" },
-      { type: "new", text: "Grafico de ingresos de los ultimos 6 meses" },
-      { type: "new", text: "Funnel de conversion visual" },
-      { type: "new", text: "Acciones rapidas: nueva cotizacion, nuevo cliente, nuevo producto" },
-      { type: "new", text: "Timeline de actividad reciente con las ultimas acciones del usuario" },
+      { type: "new", text: "Dashboard con 6 KPIs en tiempo real: pipeline total, tasa de conversión, ticket medio, ingresos, clientes y cotizaciones activas" },
+      { type: "new", text: "Gráfico de pipeline por estado (Borrador, Enviada, Negociación, Ganada, Perdida)" },
+      { type: "new", text: "Gráfico de ingresos de los últimos 6 meses" },
+      { type: "new", text: "Funnel de conversión visual" },
+      { type: "new", text: "Acciones rápidas: nueva cotización, nuevo cliente, nuevo producto" },
+      { type: "new", text: "Timeline de actividad reciente con las últimas acciones del usuario" },
 
-      /* ── Gestion de clientes ── */
-      { type: "new", text: "CRUD completo de clientes con datos de empresa, direccion y notas" },
-      { type: "new", text: "Contactos multiples por cliente con roles (nombre, cargo, email, telefono)" },
-      { type: "new", text: "Designacion de contacto principal por cliente" },
-      { type: "new", text: "Vista 360 del cliente: metricas, cotizaciones relacionadas, contactos e historial" },
-      { type: "new", text: "Listado de clientes con busqueda, filtrado por sector y ordenacion por columnas" },
+      /* ── Gestión de clientes ── */
+      { type: "new", text: "CRUD completo de clientes con datos de empresa, dirección y notas" },
+      { type: "new", text: "Contactos múltiples por cliente con roles (nombre, cargo, email, teléfono)" },
+      { type: "new", text: "Designación de contacto principal por cliente" },
+      { type: "new", text: "Vista 360 del cliente: métricas, cotizaciones relacionadas, contactos e historial" },
+      { type: "new", text: "Listado de clientes con búsqueda, filtrado por sector y ordenación por columnas" },
 
-      /* ── Catalogo de productos ── */
-      { type: "new", text: "CRUD de productos con nombre, descripcion, SKU, categoria, precio base y unidad" },
-      { type: "new", text: "6 tipos de unidad: unidad, hora, mes, licencia/ano, kg, m2" },
-      { type: "new", text: "Variantes de producto con SKU propio, precio override y atributos clave-valor" },
-      { type: "new", text: "Filtrado por categoria y busqueda por nombre o SKU" },
+      /* ── Catálogo de productos ── */
+      { type: "new", text: "CRUD de productos con nombre, descripción, SKU, categoría, precio base y unidad" },
+      { type: "new", text: "6 tipos de unidad: unidad, hora, mes, licencia/año, kg, m2" },
+      { type: "new", text: "Variantes de producto con SKU propio, precio personalizado y atributos clave-valor" },
+      { type: "new", text: "Filtrado por categoría y búsqueda por nombre o SKU" },
       { type: "new", text: "Toggle de producto activo/inactivo" },
 
       /* ── Cotizaciones ── */
-      { type: "new", text: "Wizard de creacion en 4 pasos: cliente, productos, condiciones y resumen" },
-      { type: "new", text: "Selector de cliente con busqueda y contacto opcional" },
-      { type: "new", text: "Selector de productos del catalogo con busqueda y selector de variantes" },
-      { type: "new", text: "Lineas personalizadas (items sin producto del catalogo)" },
-      { type: "new", text: "Cantidades decimales, precios editables y descuento por linea" },
-      { type: "new", text: "Descuento global porcentual, IVA configurable, seleccion de moneda (EUR, USD, GBP)" },
+      { type: "new", text: "Wizard de creación en 4 pasos: cliente, productos, condiciones y resumen" },
+      { type: "new", text: "Selector de cliente con búsqueda y contacto opcional" },
+      { type: "new", text: "Selector de productos del catálogo con búsqueda y selector de variantes" },
+      { type: "new", text: "Líneas personalizadas (items sin producto del catálogo)" },
+      { type: "new", text: "Cantidades decimales, precios editables y descuento por línea" },
+      { type: "new", text: "Descuento global porcentual, IVA configurable, selección de moneda (EUR, USD, GBP)" },
       { type: "new", text: "Fecha de vencimiento, notas internas y condiciones comerciales" },
-      { type: "new", text: "Numeracion automatica configurable con prefijo (ej: DF-2026-0001)" },
-      { type: "new", text: "Flujo de estados: Borrador → Enviada → Negociacion → Ganada/Perdida + Archivada" },
+      { type: "new", text: "Numeración automática configurable con prefijo (ej: DF-2026-0001)" },
+      { type: "new", text: "Flujo de estados: Borrador → Enviada → Negociación → Ganada/Perdida + Archivada" },
       { type: "new", text: "Acciones contextuales por estado: enviar, negociar, ganar, perder, duplicar, archivar" },
-      { type: "new", text: "Envio de cotizacion por email con PDF adjunto automatico" },
-      { type: "new", text: "Duplicar cotizacion con un clic para crear versiones rapidas" },
-      { type: "new", text: "Vista detalle completa: info cliente, line items, totales, notas, condiciones y timeline" },
+      { type: "new", text: "Envío de cotización por email con PDF adjunto automático" },
+      { type: "new", text: "Duplicar cotización con un clic para crear versiones rápidas" },
+      { type: "new", text: "Vista detalle completa: info cliente, líneas de items, totales, notas, condiciones y timeline" },
 
       /* ── Plantillas PDF ── */
-      { type: "new", text: "3 plantillas PDF profesionales: Moderna (gradiente), Clasica (formal) y Minimalista" },
-      { type: "new", text: "Previsualizacion de PDF en navegador antes de enviar" },
-      { type: "new", text: "Impresion y descarga directa desde la previsualizacion" },
-      { type: "new", text: "Inclusion automatica de logo, datos empresa, cliente, items, totales y condiciones" },
+      { type: "new", text: "3 plantillas PDF profesionales: Moderna (gradiente), Clásica (formal) y Minimalista" },
+      { type: "new", text: "Previsualización de PDF en navegador antes de enviar" },
+      { type: "new", text: "Impresión y descarga directa desde la previsualización" },
+      { type: "new", text: "Inclusión automática de logo, datos empresa, cliente, items, totales y condiciones" },
 
       /* ── Reglas comerciales ── */
-      { type: "new", text: "Limites de descuento: maximo por linea y global, con ambito por producto o categoria" },
-      { type: "new", text: "Productos obligatorios: reglas que exigen incluir un producto cuando se anade otro" },
-      { type: "new", text: "Reglas de aprobacion automatica por umbral de descuento o importe total" },
-      { type: "new", text: "Promociones con rango de fechas, productos seleccionados y tipo descuento o precio fijo" },
-      { type: "new", text: "Activacion/desactivacion de reglas con toggle individual" },
+      { type: "new", text: "Límites de descuento: máximo por línea y global, con ámbito por producto o categoría" },
+      { type: "new", text: "Productos obligatorios: reglas que exigen incluir un producto cuando se añade otro" },
+      { type: "new", text: "Reglas de aprobación automática por umbral de descuento o importe total" },
+      { type: "new", text: "Promociones con rango de fechas, productos seleccionados y tipo de descuento o precio fijo" },
+      { type: "new", text: "Activación/desactivación de reglas con toggle individual" },
 
       /* ── Aprobaciones ── */
-      { type: "new", text: "Flujo de aprobaciones automatico basado en reglas comerciales" },
-      { type: "new", text: "Email al aprobador con enlace seguro y unico (token)" },
-      { type: "new", text: "Pagina de aprobacion publica (sin necesidad de login) con detalle de la cotizacion" },
+      { type: "new", text: "Flujo de aprobaciones automático basado en reglas comerciales" },
+      { type: "new", text: "Email al aprobador con enlace seguro y único (token)" },
+      { type: "new", text: "Página de aprobación pública (sin necesidad de login) con detalle de la cotización" },
       { type: "new", text: "Aprobar o rechazar con comentario opcional" },
-      { type: "new", text: "Bloqueo de envio hasta que todas las aprobaciones esten resueltas" },
-      { type: "new", text: "Reenvio de email de aprobacion desde el detalle de la cotizacion" },
+      { type: "new", text: "Bloqueo de envío hasta que todas las aprobaciones estén resueltas" },
+      { type: "new", text: "Reenvío de email de aprobación desde el detalle de la cotización" },
 
       /* ── Reportes ── */
-      { type: "new", text: "Metricas generales: total cotizaciones, ganadas y perdidas" },
-      { type: "new", text: "Grafico mensual de cotizaciones ganadas vs perdidas con valor monetario" },
+      { type: "new", text: "Métricas generales: total cotizaciones, ganadas y perdidas" },
+      { type: "new", text: "Gráfico mensual de cotizaciones ganadas vs perdidas con valor monetario" },
       { type: "new", text: "Top 10 clientes por ingresos generados" },
-      { type: "new", text: "Top 10 productos mas cotizados" },
+      { type: "new", text: "Top 10 productos más cotizados" },
 
-      /* ── Configuracion ── */
-      { type: "new", text: "Configuracion de empresa: nombre, CIF, email, telefono, direccion, logo y color primario" },
-      { type: "new", text: "Configuracion SMTP personalizada para envio de emails (Gmail, Outlook, Yahoo)" },
-      { type: "new", text: "Prefijo de numeracion de cotizaciones configurable" },
-      { type: "new", text: "Dias de vencimiento por defecto y condiciones comerciales predeterminadas" },
-      { type: "new", text: "Seleccion de plantilla PDF preferida" },
+      /* ── Configuración ── */
+      { type: "new", text: "Configuración de empresa: nombre, CIF, email, teléfono, dirección, logo y color primario" },
+      { type: "new", text: "Configuración SMTP personalizada para envío de emails (Gmail, Outlook, Yahoo)" },
+      { type: "new", text: "Prefijo de numeración de cotizaciones configurable" },
+      { type: "new", text: "Días de vencimiento por defecto y condiciones comerciales predeterminadas" },
+      { type: "new", text: "Selección de plantilla PDF preferida" },
 
       /* ── Integraciones ── */
-      { type: "new", text: "Exportacion de cotizaciones a CSV" },
-      { type: "new", text: "Exportacion de productos a Excel" },
-      { type: "new", text: "Importacion de productos desde CSV con mapeo de campos y validacion" },
-      { type: "new", text: "Importacion de clientes desde CSV con mapeo de campos y validacion" },
-      { type: "new", text: "Conector Zapier via webhook para automatizaciones externas" },
+      { type: "new", text: "Exportación de cotizaciones a CSV" },
+      { type: "new", text: "Exportación de productos a Excel" },
+      { type: "new", text: "Importación de productos desde CSV con mapeo de campos y validación" },
+      { type: "new", text: "Importación de clientes desde CSV con mapeo de campos y validación" },
+      { type: "new", text: "Conector Zapier vía webhook para automatizaciones externas" },
 
       /* ── Forge IA ── */
       { type: "new", text: "Forge IA: asistente inteligente integrado en panel lateral" },
-      { type: "new", text: "Consultas en lenguaje natural: navegacion, creacion de cotizaciones, analisis de pipeline" },
+      { type: "new", text: "Consultas en lenguaje natural: navegación, creación de cotizaciones, análisis de pipeline" },
       { type: "new", text: "Modelo Haiku para plan Starter, Sonnet para planes Pro y Business" },
-      { type: "new", text: "Sugerencias contextuales basadas en la pagina actual" },
+      { type: "new", text: "Sugerencias contextuales basadas en la página actual" },
 
-      /* ── Planes y facturacion ── */
-      { type: "new", text: "3 planes de suscripcion: Starter (gratis), Pro (29€/mes) y Business (79€/mes)" },
-      { type: "new", text: "Facturacion mensual segura con Stripe" },
-      { type: "new", text: "Gestion de suscripcion: cambiar plan, cancelar y portal de facturacion" },
+      /* ── Planes y facturación ── */
+      { type: "new", text: "3 planes de suscripción: Starter (gratis), Pro (29€/mes) y Business (79€/mes)" },
+      { type: "new", text: "Facturación mensual segura con Stripe" },
+      { type: "new", text: "Gestión de suscripción: cambiar plan, cancelar y portal de facturación" },
 
       /* ── Seguridad y legal ── */
-      { type: "new", text: "Encriptacion TLS 1.3 en transito y AES-256 en reposo" },
-      { type: "new", text: "Hashing de contrasenas con bcrypt (12 rounds)" },
+      { type: "new", text: "Encriptación TLS 1.3 en tránsito y AES-256 en reposo" },
+      { type: "new", text: "Hashing de contraseñas con bcrypt (12 rounds)" },
       { type: "new", text: "Cabeceras de seguridad HTTP: HSTS, CSP, X-Frame-Options, X-Content-Type-Options" },
-      { type: "new", text: "Politica de privacidad, terminos de servicio y pagina de cumplimiento RGPD" },
+      { type: "new", text: "Política de privacidad, términos de servicio y página de cumplimiento RGPD" },
 
       /* ── Infraestructura ── */
-      { type: "new", text: "Despliegue en Vercel con CDN global y escalado automatico" },
-      { type: "new", text: "Base de datos PostgreSQL en Supabase (region EU West)" },
+      { type: "new", text: "Despliegue en Vercel con CDN global y escalado automático" },
+      { type: "new", text: "Base de datos PostgreSQL en Supabase (región EU West)" },
       { type: "new", text: "Arquitectura Next.js 16 con App Router y React 19" },
     ],
   },
@@ -159,7 +159,7 @@ function badgeLabel(type: ChangeType): string {
     case "improved":
       return "Mejora";
     case "fix":
-      return "Correccion";
+      return "Corrección";
   }
 }
 
@@ -173,9 +173,9 @@ export default function ChangelogPage() {
           Changelog
         </h1>
         <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-          Historial de cambios y actualizaciones de DealForge. Aqui encontraras
+          Historial de cambios y actualizaciones de DealForge. Aquí encontrarás
           todas las nuevas funcionalidades, mejoras y correcciones de cada
-          version.
+          versión.
         </p>
 
         {/* Leyenda */}
@@ -246,7 +246,7 @@ export default function ChangelogPage() {
       {/* Footer nota */}
       <div className="mt-16 pt-8 border-t border-gray-800">
         <p className="text-gray-500 text-sm">
-          ¿Tienes sugerencias o has encontrado un error? Escribenos a{" "}
+          ¿Tienes sugerencias o has encontrado un error? Escríbenos a{" "}
           <a
             href="mailto:info@dealforge.es"
             className="text-[#3a9bb5] hover:underline"
@@ -255,7 +255,7 @@ export default function ChangelogPage() {
           </a>{" "}
           o consulta nuestra{" "}
           <Link href="/documentacion" className="text-[#3a9bb5] hover:underline">
-            documentacion
+            documentación
           </Link>
           .
         </p>

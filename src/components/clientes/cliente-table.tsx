@@ -142,7 +142,7 @@ export function ClienteTable({ clientes }: { clientes: ClienteRow[] }) {
                   <EmptyState
                     variant="search"
                     title="Sin resultados"
-                    description="No se encontraron clientes con ese criterio de busqueda."
+                    description="No se encontraron clientes con ese criterio de búsqueda."
                   />
                 </td>
               </tr>

@@ -9,7 +9,7 @@ import { getPlanFeatures } from "@/lib/plan-limits";
 export const metadata: Metadata = {
   title: "Reglas Comerciales",
   description:
-    "Gestiona limites de descuento, productos obligatorios, aprobaciones y promociones.",
+    "Gestiona límites de descuento, productos obligatorios, aprobaciones y promociones.",
 };
 
 async function getData() {
@@ -36,7 +36,7 @@ export default async function ReglasPage() {
       <div>
         <PageHeader
           title="Reglas Comerciales"
-          description="Limites, productos obligatorios, aprobaciones y promociones"
+          description="Límites, productos obligatorios, aprobaciones y promociones"
         />
         <FeatureGateBanner
           feature="Reglas Comerciales"
@@ -53,7 +53,7 @@ export default async function ReglasPage() {
     <div>
       <PageHeader
         title="Reglas Comerciales"
-        description="Limites, productos obligatorios, aprobaciones y promociones"
+        description="Límites, productos obligatorios, aprobaciones y promociones"
       />
       <div className="p-6">
         <ReglasManager

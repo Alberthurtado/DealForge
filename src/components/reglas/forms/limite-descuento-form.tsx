@@ -47,7 +47,7 @@ export function LimiteDescuentoForm({ initial, onSave, saving }: Props) {
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
           className={inputClass}
-          placeholder="Limite general de descuento"
+          placeholder="Límite general de descuento"
           required
         />
       </div>
@@ -60,15 +60,15 @@ export function LimiteDescuentoForm({ initial, onSave, saving }: Props) {
           onChange={(e) => setTipoLimite(e.target.value)}
           className={inputClass}
         >
-          <option value="ambos">Descuento de linea y global</option>
-          <option value="linea">Solo descuento de linea</option>
+          <option value="ambos">Descuento de línea y global</option>
+          <option value="linea">Solo descuento de línea</option>
           <option value="global">Solo descuento global</option>
         </select>
       </div>
       {(tipoLimite === "linea" || tipoLimite === "ambos") && (
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Descuento maximo por linea (%)
+            Descuento máximo por línea (%)
           </label>
           <input
             type="number"
@@ -83,7 +83,7 @@ export function LimiteDescuentoForm({ initial, onSave, saving }: Props) {
       {(tipoLimite === "global" || tipoLimite === "ambos") && (
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Descuento global maximo (%)
+            Descuento global máximo (%)
           </label>
           <input
             type="number"

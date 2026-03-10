@@ -32,7 +32,7 @@ export async function GET(
   });
 
   if (!aprobacion) {
-    return NextResponse.json({ error: "Token invalido" }, { status: 404 });
+    return NextResponse.json({ error: "Token inválido" }, { status: 404 });
   }
 
   // Get the rule to show the reason
@@ -96,11 +96,11 @@ export async function PUT(
   });
 
   if (!aprobacion) {
-    return NextResponse.json({ error: "Token invalido" }, { status: 404 });
+    return NextResponse.json({ error: "Token inválido" }, { status: 404 });
   }
 
   if (aprobacion.estado !== "PENDIENTE") {
-    return NextResponse.json({ error: "Esta aprobacion ya fue resuelta" }, { status: 400 });
+    return NextResponse.json({ error: "Esta aprobación ya fue resuelta" }, { status: 400 });
   }
 
   // Update approval
@@ -119,7 +119,7 @@ export async function PUT(
     data: {
       cotizacionId: aprobacion.cotizacionId,
       tipo: "APROBACION_RESUELTA",
-      descripcion: `Cotizacion ${statusLabel} por ${aprobacion.aprobadorNombre}${data.comentario ? `: ${data.comentario}` : ""}`,
+      descripcion: `Cotización ${statusLabel} por ${aprobacion.aprobadorNombre}${data.comentario ? `: ${data.comentario}` : ""}`,
     },
   });
 
@@ -152,7 +152,7 @@ export async function PUT(
 
       await sendSystemEmail({
         to: toEmail,
-        subject: `Cotizacion ${aprobacion.cotizacion.numero} ${statusLabel}`,
+        subject: `Cotización ${aprobacion.cotizacion.numero} ${statusLabel}`,
         html,
       });
     }

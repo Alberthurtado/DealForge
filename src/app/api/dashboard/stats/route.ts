@@ -37,7 +37,7 @@ export async function GET() {
   const pipelineByStatus = [
     { estado: "Borrador", valor: 0, cantidad: 0, color: "#94a3b8" },
     { estado: "Enviada", valor: 0, cantidad: 0, color: "#3b82f6" },
-    { estado: "Negociacion", valor: 0, cantidad: 0, color: "#f59e0b" },
+    { estado: "Negociación", valor: 0, cantidad: 0, color: "#f59e0b" },
     { estado: "Ganada", valor: 0, cantidad: 0, color: "#22c55e" },
     { estado: "Perdida", valor: 0, cantidad: 0, color: "#ef4444" },
   ];

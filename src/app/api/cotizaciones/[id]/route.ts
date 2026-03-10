@@ -27,7 +27,7 @@ export async function GET(
   });
 
   if (!cotizacion) {
-    return NextResponse.json({ error: "Cotizacion no encontrada" }, { status: 404 });
+    return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
   }
 
   return NextResponse.json(cotizacion);
@@ -120,7 +120,7 @@ async function evaluateAndCreateApprovals(
       data: {
         cotizacionId,
         tipo: "APROBACION_REQUERIDA",
-        descripcion: `Aprobacion requerida de: ${newApprovals.map((a) => a.aprobadorNombre).join(", ")}`,
+        descripcion: `Aprobación requerida de: ${newApprovals.map((a) => a.aprobadorNombre).join(", ")}`,
       },
     });
 
@@ -158,7 +158,7 @@ async function evaluateAndCreateApprovals(
           });
           const emailResult = await sendSystemEmail({
             to: aprob.aprobadorEmail,
-            subject: `Aprobacion requerida: ${cotizacion.numero}`,
+            subject: `Aprobación requerida: ${cotizacion.numero}`,
             html,
           });
           if (emailResult.success) {
@@ -201,7 +201,7 @@ export async function PUT(
     // Block BORRADOR → ENVIADA if no terms & conditions
     if (updateData.estado === "ENVIADA" && !current?.condiciones?.trim()) {
       return NextResponse.json(
-        { error: "No se puede enviar la cotizacion sin terminos y condiciones." },
+        { error: "No se puede enviar la cotización sin términos y condiciones." },
         { status: 400 }
       );
     }
@@ -219,12 +219,12 @@ export async function PUT(
       if (blockingApprovals.length > 0) {
         const pending = blockingApprovals.filter((a) => a.estado === "PENDIENTE");
         const rejected = blockingApprovals.filter((a) => a.estado === "RECHAZADA");
-        let msg = "No se puede enviar la cotizacion.";
+        let msg = "No se puede enviar la cotización.";
         if (rejected.length > 0) {
           msg += ` Rechazada por: ${rejected.map((a) => a.aprobadorNombre).join(", ")}.`;
         }
         if (pending.length > 0) {
-          msg += ` Pendiente de aprobacion de: ${pending.map((a) => a.aprobadorNombre).join(", ")}.`;
+          msg += ` Pendiente de aprobación de: ${pending.map((a) => a.aprobadorNombre).join(", ")}.`;
         }
         return NextResponse.json({ error: msg }, { status: 400 });
       }

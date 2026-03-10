@@ -41,7 +41,7 @@ function LoginForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Error al iniciar sesion");
+        setError(data.error || "Error al iniciar sesión");
         setLoading(false);
         return;
       }
@@ -49,7 +49,7 @@ function LoginForm() {
       // Success — redirect
       router.push(redirect);
     } catch {
-      setError("Error de conexion. Intenta de nuevo.");
+      setError("Error de conexión. Intenta de nuevo.");
       setLoading(false);
     }
   }
@@ -64,7 +64,7 @@ function LoginForm() {
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Bienvenido de vuelta</h1>
           <p className="text-sm text-gray-500 mt-1">
-            Inicia sesion para acceder a tu cuenta
+            Inicia sesión para acceder a tu cuenta
           </p>
         </div>
 
@@ -94,7 +94,7 @@ function LoginForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contrasena
+              Contraseña
             </label>
             <div className="relative">
               <input
@@ -103,7 +103,7 @@ function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
-                placeholder="Tu contrasena"
+                placeholder="Tu contraseña"
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all pr-10"
               />
               <button
@@ -125,7 +125,7 @@ function LoginForm() {
               href="/recuperar"
               className="text-xs text-[#3a9bb5] hover:text-[#2d7d94] font-medium transition-colors"
             >
-              ¿Olvidaste tu contrasena?
+              ¿Olvidaste tu contraseña?
             </Link>
           </div>
 
@@ -139,10 +139,10 @@ function LoginForm() {
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Iniciando sesion...
+                Iniciando sesión...
               </>
             ) : (
-              "Iniciar Sesion"
+              "Iniciar Sesión"
             )}
           </button>
         </form>
@@ -155,7 +155,7 @@ function LoginForm() {
               href="/registro"
               className="font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
             >
-              Registrate gratis
+              Regístrate gratis
             </Link>
           </p>
         </div>

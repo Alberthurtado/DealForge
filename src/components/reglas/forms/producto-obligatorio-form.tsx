@@ -61,17 +61,17 @@ export function ProductoObligatorioForm({ productos, categorias, initial, onSave
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Cuando la cotizacion incluye...
+          Cuando la cotización incluye...
         </label>
         <select value={condTipo} onChange={(e) => { setCondTipo(e.target.value); setCondIds([]); }} className={inputClass}>
-          <option value="producto">Un producto especifico</option>
-          <option value="categoria">Una categoria</option>
+          <option value="producto">Un producto específico</option>
+          <option value="categoria">Una categoría</option>
         </select>
       </div>
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Seleccionar {condTipo === "producto" ? "productos" : "categorias"} disparadores
+          Seleccionar {condTipo === "producto" ? "productos" : "categorías"} disparadores
         </label>
         <div className="max-h-32 overflow-y-auto border border-border rounded-lg p-2 space-y-1">
           {options.map((opt) => (
@@ -112,7 +112,7 @@ export function ProductoObligatorioForm({ productos, categorias, initial, onSave
         <label className="block text-xs font-medium text-muted-foreground mb-1">
           Mensaje personalizado (opcional)
         </label>
-        <input type="text" value={mensaje} onChange={(e) => setMensaje(e.target.value)} className={inputClass} placeholder="Soporte Basico es obligatorio con licencias" />
+        <input type="text" value={mensaje} onChange={(e) => setMensaje(e.target.value)} className={inputClass} placeholder="Soporte Básico es obligatorio con licencias" />
       </div>
 
       <div className="flex justify-end pt-2">

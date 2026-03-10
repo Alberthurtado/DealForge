@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const actions = [
   {
-    label: "Nueva Cotizacion",
+    label: "Nueva Cotización",
     href: "/cotizaciones/nueva",
     icon: Plus,
     color: "bg-primary/10 text-primary",
@@ -34,7 +34,7 @@ export function QuickActions() {
   return (
     <div className="bg-white rounded-xl border border-border p-6">
       <h3 className="text-lg font-semibold text-foreground mb-4">
-        Acciones Rapidas
+        Acciones Rápidas
       </h3>
       <div className="grid grid-cols-2 gap-3">
         {actions.map((action) => (

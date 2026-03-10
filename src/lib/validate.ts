@@ -16,7 +16,7 @@ export function validateBody<T extends z.ZodType>(
     const path = firstIssue?.path?.join(".") || "";
     const message = path
       ? `${path}: ${firstIssue.message}`
-      : firstIssue?.message || "Datos invalidos";
+      : firstIssue?.message || "Datos inválidos";
 
     return {
       error: NextResponse.json(

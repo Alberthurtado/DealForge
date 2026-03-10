@@ -125,7 +125,7 @@ function HeroSection() {
               <div className="grid grid-cols-4 gap-4 mb-6">
                 {[
                   { label: "Pipeline", value: "24.350 EUR", color: "text-[#3a9bb5]" },
-                  { label: "Conversion", value: "67%", color: "text-green-600" },
+                  { label: "Conversión", value: "67%", color: "text-green-600" },
                   { label: "Ticket medio", value: "3.044 EUR", color: "text-purple-600" },
                   { label: "Ingresos", value: "18.175 EUR", color: "text-amber-600" },
                 ].map((kpi) => (
@@ -151,7 +151,7 @@ function HeroSection() {
                   ))}
                 </div>
                 <div className="bg-white rounded-xl p-4 border border-gray-100 space-y-2">
-                  {["Borrador", "Enviada", "Negociacion", "Ganada"].map((s, i) => (
+                  {["Borrador", "Enviada", "Negociación", "Ganada"].map((s, i) => (
                     <div key={s} className="flex items-center gap-2">
                       <span
                         className="w-2.5 h-2.5 rounded-full"
@@ -172,7 +172,7 @@ function HeroSection() {
           {[
             { value: "500+", label: "Cotizaciones creadas" },
             { value: "95%", label: "Menos tiempo" },
-            { value: "3x", label: "Mas conversiones" },
+            { value: "3x", label: "Más conversiones" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="text-3xl font-bold text-[#3a9bb5]">{stat.value}</p>
@@ -191,19 +191,19 @@ function ProblemSection() {
     {
       icon: Clock,
       title: "Horas perdidas",
-      desc: "Crear una cotizacion manualmente toma entre 30-60 minutos. Buscar precios, calcular descuentos, formatear el documento...",
+      desc: "Crear una cotización manualmente toma entre 30-60 minutos. Buscar precios, calcular descuentos, formatear el documento...",
       color: "text-red-500 bg-red-50",
     },
     {
       icon: AlertTriangle,
       title: "Errores costosos",
-      desc: "Precios desactualizados, descuentos no autorizados, calculos incorrectos. Un solo error puede costar un cliente.",
+      desc: "Precios desactualizados, descuentos no autorizados, cálculos incorrectos. Un solo error puede costar un cliente.",
       color: "text-orange-500 bg-orange-50",
     },
     {
       icon: TrendingDown,
       title: "Oportunidades perdidas",
-      desc: "Mientras preparas la cotizacion, tu competencia ya envio la suya. La velocidad cierra negocios.",
+      desc: "Mientras preparas la cotización, tu competencia ya envió la suya. La velocidad cierra negocios.",
       color: "text-amber-500 bg-amber-50",
     },
   ];
@@ -213,10 +213,10 @@ function ProblemSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            El proceso de cotizaciones esta roto
+            El proceso de cotizaciones está roto
           </h2>
           <p className="text-lg text-gray-600 max-w-xl mx-auto">
-            Si todavia cotizas con hojas de calculo, tu equipo pierde horas cada semana
+            Si todavía cotizas con hojas de cálculo, tu equipo pierde horas cada semana
           </p>
         </div>
 
@@ -242,14 +242,14 @@ function ProblemSection() {
 /* ─── FEATURES GRID ───────────────────────────────────────────── */
 function FeaturesGrid() {
   const features = [
-    { icon: Users, title: "Gestion de Clientes", desc: "Base de datos completa con contactos, historial y segmentacion por sector." },
-    { icon: Package, title: "Catalogo de Productos", desc: "Productos con variantes, categorias y precios configurables." },
-    { icon: FileText, title: "Cotizaciones PDF", desc: "Genera PDFs profesionales con tu marca. Envia por email y rastrea el estado." },
-    { icon: ShieldCheck, title: "Reglas Comerciales", desc: "Limites de descuento, productos obligatorios y aprobaciones automaticas." },
-    { icon: BarChart3, title: "Reportes y Metricas", desc: "Pipeline visual, ingresos por mes, conversion y mas datos en tiempo real." },
+    { icon: Users, title: "Gestión de Clientes", desc: "Base de datos completa con contactos, historial y segmentación por sector." },
+    { icon: Package, title: "Catálogo de Productos", desc: "Productos con variantes, categorías y precios configurables." },
+    { icon: FileText, title: "Cotizaciones PDF", desc: "Genera PDFs profesionales con tu marca. Envía por email y rastrea el estado." },
+    { icon: ShieldCheck, title: "Reglas Comerciales", desc: "Límites de descuento, productos obligatorios y aprobaciones automáticas." },
+    { icon: BarChart3, title: "Reportes y Métricas", desc: "Pipeline visual, ingresos por mes, conversión y más datos en tiempo real." },
     { icon: Flame, title: "Forge IA Integrado", desc: "Asistente inteligente que crea cotizaciones, analiza datos y recomienda acciones." },
-    { icon: Mail, title: "Envio de Emails", desc: "Envia cotizaciones directamente desde la plataforma con SMTP propio." },
-    { icon: CheckCircle, title: "Aprobaciones", desc: "Flujos de aprobacion con enlaces unicos. Aprueba o rechaza desde cualquier dispositivo." },
+    { icon: Mail, title: "Envío de Emails", desc: "Envía cotizaciones directamente desde la plataforma con SMTP propio." },
+    { icon: CheckCircle, title: "Aprobaciones", desc: "Flujos de aprobación con enlaces únicos. Aprueba o rechaza desde cualquier dispositivo." },
     { icon: Plug, title: "Importar / Exportar", desc: "Importa clientes y productos desde CSV. Exporta datos cuando necesites." },
   ];
 
@@ -297,13 +297,13 @@ function HowItWorks() {
       num: "2",
       icon: Flame,
       title: "Cotiza",
-      desc: "Pide a Forge que cree la cotizacion o hazla tu mismo con el wizard. En minutos, no horas.",
+      desc: "Pide a Forge que cree la cotización o hazla tú mismo con el wizard. En minutos, no horas.",
     },
     {
       num: "3",
       icon: Trophy,
       title: "Cierra",
-      desc: "Envia, rastrea y cierra. El pipeline te muestra donde esta cada oportunidad.",
+      desc: "Envía, rastrea y cierra. El pipeline te muestra dónde está cada oportunidad.",
     },
   ];
 
@@ -355,8 +355,8 @@ function PricingSection() {
         { text: "5 clientes", included: true },
         { text: "20 productos", included: true },
         { text: "5 consultas Forge IA", included: true },
-        { text: "Exportacion CSV", included: true },
-        { text: "Envio de emails", included: false },
+        { text: "Exportación CSV", included: true },
+        { text: "Envío de emails", included: false },
         { text: "Aprobaciones", included: false },
         { text: "Reglas comerciales", included: false },
         { text: "Integraciones CRM", included: false },
@@ -375,9 +375,9 @@ function PricingSection() {
         { text: "200 productos", included: true },
         { text: "Forge IA ilimitado", included: true },
         { text: "Import / Export CSV", included: true },
-        { text: "Envio de emails", included: true },
+        { text: "Envío de emails", included: true },
         { text: "PDF con marca", included: true },
-        { text: "Reglas basicas", included: true },
+        { text: "Reglas básicas", included: true },
         { text: "Integraciones CRM", included: false },
       ],
     },
@@ -394,7 +394,7 @@ function PricingSection() {
         { text: "Productos ilimitados", included: true },
         { text: "Forge IA prioridad", included: true },
         { text: "Import / Export CSV", included: true },
-        { text: "Envio de emails", included: true },
+        { text: "Envío de emails", included: true },
         { text: "Aprobaciones", included: true },
         { text: "Reglas avanzadas", included: true },
         { text: "Integraciones CRM", included: true },
@@ -447,7 +447,7 @@ function PricingSection() {
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#3a9bb5] text-white text-xs font-bold rounded-full">
                     <Sparkles className="w-3 h-3" />
-                    Mas popular
+                    Más popular
                   </span>
                 </div>
               )}
@@ -516,10 +516,10 @@ function CTASection() {
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <Flame className="w-12 h-12 text-white/80 mx-auto mb-6" />
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-          Empieza a cotizar mas rapido hoy
+          Empieza a cotizar más rápido hoy
         </h2>
         <p className="text-lg text-white/80 mb-10">
-          Configura tu cuenta en 2 minutos. Sin tarjeta de credito.
+          Configura tu cuenta en 2 minutos. Sin tarjeta de crédito.
         </p>
         <Link
           href="/registro"
@@ -568,7 +568,7 @@ function Footer() {
             <ul className="space-y-2.5 text-sm">
               <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
               <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-              <li><Link href="/documentacion" className="hover:text-white transition-colors">Documentacion</Link></li>
+              <li><Link href="/documentacion" className="hover:text-white transition-colors">Documentación</Link></li>
               <li><Link href="/changelog" className="hover:text-white transition-colors">Changelog</Link></li>
             </ul>
           </div>
@@ -577,8 +577,8 @@ function Footer() {
           <div>
             <h4 className="font-semibold text-white text-sm mb-4">Legal</h4>
             <ul className="space-y-2.5 text-sm">
-              <li><Link href="/privacidad" className="hover:text-white transition-colors">Politica de privacidad</Link></li>
-              <li><Link href="/terminos" className="hover:text-white transition-colors">Terminos de servicio</Link></li>
+              <li><Link href="/privacidad" className="hover:text-white transition-colors">Política de privacidad</Link></li>
+              <li><Link href="/terminos" className="hover:text-white transition-colors">Términos de servicio</Link></li>
               <li><Link href="/rgpd" className="hover:text-white transition-colors">RGPD</Link></li>
               <li><a href="mailto:info@dealforge.es" className="hover:text-white transition-colors">Contacto</a></li>
             </ul>

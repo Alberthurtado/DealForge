@@ -23,7 +23,7 @@ const ESTADOS = [
   { value: "", label: "Todos" },
   { value: "BORRADOR", label: "Borrador" },
   { value: "ENVIADA", label: "Enviada" },
-  { value: "NEGOCIACION", label: "Negociacion" },
+  { value: "NEGOCIACION", label: "Negociación" },
   { value: "GANADA", label: "Ganada" },
   { value: "PERDIDA", label: "Perdida" },
   { value: "ARCHIVADA", label: "Archivada" },
@@ -113,7 +113,7 @@ export function CotizacionTable({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Buscar por numero o cliente..."
+            placeholder="Buscar por número o cliente..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-4 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
@@ -160,7 +160,7 @@ export function CotizacionTable({
                 onClick={() => toggleSort("numero")}
               >
                 <span className="inline-flex items-center gap-1">
-                  Cotizacion <SortIcon column="numero" />
+                  Cotización <SortIcon column="numero" />
                 </span>
               </th>
               <th
@@ -249,7 +249,7 @@ export function CotizacionTable({
                   <EmptyState
                     variant="search"
                     title="Sin resultados"
-                    description="No se encontraron cotizaciones con ese criterio de busqueda."
+                    description="No se encontraron cotizaciones con ese criterio de búsqueda."
                   />
                 </td>
               </tr>

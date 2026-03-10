@@ -6,8 +6,8 @@ import { PlanSection } from "@/components/configuracion/plan-section";
 import { getSession } from "@/lib/auth";
 
 export const metadata: Metadata = {
-  title: "Configuracion",
-  description: "Configura los datos de tu empresa y plantillas de cotizacion.",
+  title: "Configuración",
+  description: "Configura los datos de tu empresa y plantillas de cotización.",
 };
 
 async function getEmpresa() {
@@ -39,8 +39,8 @@ export default async function ConfiguracionPage() {
   return (
     <div>
       <PageHeader
-        title="Configuracion"
-        description="Datos de tu empresa y plantillas de cotizacion"
+        title="Configuración"
+        description="Datos de tu empresa y plantillas de cotización"
       />
       <div className="p-6">
         {usuario && (

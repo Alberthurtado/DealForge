@@ -31,7 +31,7 @@ export function KpiCards({ kpis }: KpiCardsProps) {
       bg: "bg-blue-50",
     },
     {
-      title: "Tasa de Conversion",
+      title: "Tasa de Conversión",
       value: formatPercent(kpis.tasaConversion),
       icon: Target,
       color: "text-green-600",

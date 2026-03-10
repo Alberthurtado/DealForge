@@ -74,10 +74,10 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
         setShowNewCategoria(false);
       } else {
         const err = await res.json();
-        setCategoriaError(err.error || "Error al crear categoria");
+        setCategoriaError(err.error || "Error al crear categoría");
       }
     } catch {
-      setCategoriaError("Error de conexion");
+      setCategoriaError("Error de conexión");
     } finally {
       setCreatingCategoria(false);
     }
@@ -182,7 +182,7 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
 
         <div>
           <label className="block text-sm font-medium text-foreground mb-1">
-            Descripcion
+            Descripción
           </label>
           <textarea
             value={form.descripcion}
@@ -210,7 +210,7 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Categoria
+              Categoría
             </label>
             <div className="flex items-center gap-2">
               <select
@@ -220,7 +220,7 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
                 }
                 className={`${inputClass} flex-1`}
               >
-                <option value="">Sin categoria</option>
+                <option value="">Sin categoría</option>
                 {categorias.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.nombre}
@@ -231,7 +231,7 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
                 type="button"
                 onClick={() => setShowNewCategoria(!showNewCategoria)}
                 className="flex-shrink-0 p-2 text-primary border border-primary/30 rounded-lg hover:bg-primary/5 transition-colors"
-                title="Crear nueva categoria"
+                title="Crear nueva categoría"
               >
                 <FolderPlus className="w-4 h-4" />
               </button>
@@ -250,7 +250,7 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
                       }
                     }}
                     className={`${inputClass} flex-1`}
-                    placeholder="Nombre de la categoria"
+                    placeholder="Nombre de la categoría"
                     autoFocus
                   />
                   <button
@@ -317,7 +317,7 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
               <option value="unidad">Unidad</option>
               <option value="hora">Hora</option>
               <option value="mes">Mes</option>
-              <option value="licencia/ano">Licencia/Ano</option>
+              <option value="licencia/ano">Licencia/Año</option>
               <option value="kg">Kg</option>
               <option value="m2">m2</option>
             </select>
@@ -363,7 +363,7 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
 
         {variantes.length === 0 ? (
           <p className="text-sm text-muted-foreground">
-            Sin variantes. Agrega variantes si este producto tiene opciones como color, talla o configuracion.
+            Sin variantes. Agrega variantes si este producto tiene opciones como color, talla o configuración.
           </p>
         ) : (
           <div className="space-y-4">

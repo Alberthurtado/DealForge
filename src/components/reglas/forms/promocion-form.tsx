@@ -75,7 +75,7 @@ export function PromocionForm({ productos, initial, onSave, saving }: Props) {
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Productos en promocion
+          Productos en promoción
         </label>
         <div className="max-h-32 overflow-y-auto border border-border rounded-lg p-2 space-y-1">
           {productos.map((p) => (
@@ -95,7 +95,7 @@ export function PromocionForm({ productos, initial, onSave, saving }: Props) {
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Tipo de promocion
+            Tipo de promoción
           </label>
           <select value={tipoPromocion} onChange={(e) => setTipoPromocion(e.target.value)} className={inputClass}>
             <option value="descuento_porcentaje">Descuento %</option>

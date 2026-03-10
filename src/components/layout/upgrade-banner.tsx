@@ -19,11 +19,11 @@ export function UpgradeBanner({ resource, current, limit, plan }: UpgradeBannerP
         </div>
         <div className="min-w-0">
           <p className="text-sm font-semibold text-amber-900">
-            Has alcanzado el limite de {resource}
+            Has alcanzado el límite de {resource}
           </p>
           <p className="text-xs text-amber-700 mt-0.5">
             Tu plan {plan} permite hasta <strong>{limit} {resource}</strong> y ya tienes <strong>{current}</strong>.
-            Mejora tu plan para obtener mas capacidad.
+            Mejora tu plan para obtener más capacidad.
           </p>
         </div>
       </div>

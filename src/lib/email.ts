@@ -47,7 +47,7 @@ export async function sendEmail(options: {
 }) {
   const config = await getSmtpConfig();
   if (!config) {
-    throw new Error("SMTP no configurado. Ve a Configuracion para configurar el email.");
+    throw new Error("SMTP no configurado. Ve a Configuración para configurar el email.");
   }
 
   const transporter = createTransporter(config);
@@ -86,23 +86,23 @@ export async function sendPasswordResetEmail(
   await transporter.sendMail({
     from,
     to,
-    subject: "DealForge - Restablecer contrasena",
+    subject: "DealForge - Restablecer contraseña",
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 520px; margin: 0 auto; padding: 32px 20px;">
         <div style="text-align: center; margin-bottom: 32px;">
-          <h2 style="color: #1a1a1a; font-size: 22px; margin: 0;">Restablecer contrasena</h2>
+          <h2 style="color: #1a1a1a; font-size: 22px; margin: 0;">Restablecer contraseña</h2>
         </div>
         <p style="color: #4a4a4a; font-size: 15px; line-height: 1.6;">
           Hola <strong>${nombre}</strong>,
         </p>
         <p style="color: #4a4a4a; font-size: 15px; line-height: 1.6;">
-          Recibimos una solicitud para restablecer la contrasena de tu cuenta en DealForge.
-          Haz clic en el boton de abajo para crear una nueva contrasena:
+          Recibimos una solicitud para restablecer la contraseña de tu cuenta en DealForge.
+          Haz clic en el botón de abajo para crear una nueva contraseña:
         </p>
         <div style="text-align: center; margin: 32px 0;">
           <a href="${resetUrl}"
              style="display: inline-block; background: #3a9bb5; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 32px; border-radius: 10px;">
-            Restablecer contrasena
+            Restablecer contraseña
           </a>
         </div>
         <p style="color: #888; font-size: 13px; line-height: 1.6;">
@@ -134,8 +134,8 @@ export async function testSmtpConnection() {
     subject: "DealForge - Email de prueba",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #3a9bb5;">Configuracion correcta</h2>
-        <p>Tu configuracion SMTP funciona correctamente. Ya puedes enviar cotizaciones por email desde DealForge.</p>
+        <h2 style="color: #3a9bb5;">Configuración correcta</h2>
+        <p>Tu configuración SMTP funciona correctamente. Ya puedes enviar cotizaciones por email desde DealForge.</p>
         <p style="color: #888; font-size: 12px; margin-top: 20px;">— ${config.nombre}</p>
       </div>
     `,

@@ -37,11 +37,11 @@ function ResetPasswordForm() {
               <AlertTriangle className="w-6 h-6 text-red-500" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Enlace invalido
+              Enlace inválido
             </h1>
             <p className="text-sm text-gray-500 mb-6">
-              Este enlace no es valido. Solicita un nuevo enlace de
-              recuperacion.
+              Este enlace no es válido. Solicita un nuevo enlace de
+              recuperación.
             </p>
             <Link
               href="/recuperar"
@@ -64,17 +64,17 @@ function ResetPasswordForm() {
               <CheckCircle className="w-6 h-6 text-green-600" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Contrasena actualizada
+              Contraseña actualizada
             </h1>
             <p className="text-sm text-gray-500 mb-6">
-              Tu contrasena ha sido actualizada correctamente. Ya puedes iniciar
-              sesion con tu nueva contrasena.
+              Tu contraseña ha sido actualizada correctamente. Ya puedes iniciar
+              sesión con tu nueva contraseña.
             </p>
             <Link
               href="/login"
               className="inline-flex items-center justify-center gap-2 w-full py-3 bg-[#3a9bb5] hover:bg-[#2d7d94] text-white font-semibold rounded-xl transition-colors shadow-lg shadow-[#3a9bb5]/25"
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </Link>
           </div>
         </div>
@@ -87,12 +87,12 @@ function ResetPasswordForm() {
     setError("");
 
     if (!passwordValid) {
-      setError("La contrasena debe tener al menos 8 caracteres");
+      setError("La contraseña debe tener al menos 8 caracteres");
       return;
     }
 
     if (!passwordsMatch) {
-      setError("Las contrasenas no coinciden");
+      setError("Las contraseñas no coinciden");
       return;
     }
 
@@ -108,14 +108,14 @@ function ResetPasswordForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Error al restablecer la contrasena");
+        setError(data.error || "Error al restablecer la contraseña");
         setLoading(false);
         return;
       }
 
       setSuccess(true);
     } catch {
-      setError("Error de conexion. Intenta de nuevo.");
+      setError("Error de conexión. Intenta de nuevo.");
       setLoading(false);
     }
   }
@@ -129,10 +129,10 @@ function ResetPasswordForm() {
             <Flame className="w-6 h-6 text-[#3a9bb5]" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Nueva contrasena
+            Nueva contraseña
           </h1>
           <p className="text-sm text-gray-500 mt-1">
-            Introduce tu nueva contrasena
+            Introduce tu nueva contraseña
           </p>
         </div>
 
@@ -146,7 +146,7 @@ function ResetPasswordForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nueva contrasena
+              Nueva contraseña
             </label>
             <div className="relative">
               <input
@@ -156,7 +156,7 @@ function ResetPasswordForm() {
                 required
                 autoFocus
                 autoComplete="new-password"
-                placeholder="Minimo 8 caracteres"
+                placeholder="Mínimo 8 caracteres"
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all pr-10"
               />
               <button
@@ -187,7 +187,7 @@ function ResetPasswordForm() {
                     passwordValid ? "text-green-600" : "text-gray-400"
                   }`}
                 >
-                  Minimo 8 caracteres
+                  Mínimo 8 caracteres
                 </span>
               </div>
             )}
@@ -195,7 +195,7 @@ function ResetPasswordForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirmar contrasena
+              Confirmar contraseña
             </label>
             <input
               type={showPassword ? "text" : "password"}
@@ -203,12 +203,12 @@ function ResetPasswordForm() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
               autoComplete="new-password"
-              placeholder="Repite la contrasena"
+              placeholder="Repite la contraseña"
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all"
             />
             {confirmPassword.length > 0 && !passwordsMatch && (
               <p className="text-xs text-red-500 mt-1">
-                Las contrasenas no coinciden
+                Las contraseñas no coinciden
               </p>
             )}
           </div>
@@ -224,7 +224,7 @@ function ResetPasswordForm() {
                 Actualizando...
               </>
             ) : (
-              "Restablecer contrasena"
+              "Restablecer contraseña"
             )}
           </button>
         </form>

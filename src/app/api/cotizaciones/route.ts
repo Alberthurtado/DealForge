@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: "PLAN_LIMIT_REACHED",
-        message: `Has alcanzado el limite de ${limit.limit} ${limit.resource} de tu plan ${limit.planLabel}. Mejora tu plan para crear mas cotizaciones.`,
+        message: `Has alcanzado el límite de ${limit.limit} ${limit.resource} de tu plan ${limit.planLabel}. Mejora tu plan para crear más cotizaciones.`,
         current: limit.current,
         limit: limit.limit,
       },
@@ -116,7 +116,7 @@ export async function POST(request: NextRequest) {
       actividades: {
         create: {
           tipo: "CREADA",
-          descripcion: "Cotizacion creada",
+          descripcion: "Cotización creada",
         },
       },
     },
@@ -160,7 +160,7 @@ export async function POST(request: NextRequest) {
         data: {
           cotizacionId: cotizacion.id,
           tipo: "APROBACION_REQUERIDA",
-          descripcion: `Aprobacion requerida de: ${result.aprobacionesRequeridas.map((r) => r.aprobador.nombre).join(", ")}`,
+          descripcion: `Aprobación requerida de: ${result.aprobacionesRequeridas.map((r) => r.aprobador.nombre).join(", ")}`,
         },
       });
 
@@ -190,7 +190,7 @@ export async function POST(request: NextRequest) {
           });
           const emailResult = await sendSystemEmail({
             to: aprob.aprobadorEmail,
-            subject: `Aprobacion requerida: ${numero}`,
+            subject: `Aprobación requerida: ${numero}`,
             html,
           });
           if (emailResult.success) {

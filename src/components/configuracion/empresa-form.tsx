@@ -34,13 +34,13 @@ const PLANTILLAS = [
   },
   {
     id: "clasica",
-    nombre: "Clasica",
-    descripcion: "Formal con lineas, tabla con bordes, profesional",
+    nombre: "Clásica",
+    descripcion: "Formal con líneas, tabla con bordes, profesional",
   },
   {
     id: "minimalista",
     nombre: "Minimalista",
-    descripcion: "Sin color, lineas finas, mucho espacio blanco",
+    descripcion: "Sin color, líneas finas, mucho espacio blanco",
   },
 ];
 
@@ -69,12 +69,12 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
         body: JSON.stringify(form),
       });
       if (res.ok) {
-        success("Configuracion guardada correctamente");
+        success("Configuración guardada correctamente");
       } else {
-        showError("Error al guardar la configuracion");
+        showError("Error al guardar la configuración");
       }
     } catch {
-      showError("Error de conexion");
+      showError("Error de conexión");
     } finally {
       setSaving(false);
     }
@@ -155,7 +155,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Telefono
+              Teléfono
             </label>
             <input
               type="tel"
@@ -167,7 +167,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div className="md:col-span-2">
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Direccion
+              Dirección
             </label>
             <input
               type="text"
@@ -191,14 +191,14 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Pais
+              País
             </label>
             <input
               type="text"
               value={form.pais || ""}
               onChange={(e) => updateField("pais", e.target.value)}
               className={inputClass}
-              placeholder="Espana"
+              placeholder="España"
             />
           </div>
           <div className="md:col-span-2">
@@ -237,7 +237,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
 
           <div className="flex-1">
             <p className="text-sm text-muted-foreground mb-3">
-              Sube el logo de tu empresa. Se mostrara en las cotizaciones PDF.
+              Sube el logo de tu empresa. Se mostrará en las cotizaciones PDF.
               Formatos: PNG, JPG, SVG, WebP. Max 500KB.
             </p>
             <input
@@ -262,7 +262,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       {/* Section 3: PDF Template */}
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1">
-          Plantilla de Cotizacion
+          Plantilla de Cotización
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
           Selecciona el diseño para tus cotizaciones PDF
@@ -332,10 +332,10 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
           <Hash className="w-5 h-5 text-primary" />
-          Numeracion de Cotizaciones
+          Numeración de Cotizaciones
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Define el prefijo para tus cotizaciones. El formato final sera: PREFIJO-AÑO-0001
+          Define el prefijo para tus cotizaciones. El formato final será: PREFIJO-AÑO-0001
         </p>
         <div className="flex items-center gap-4">
           <div className="flex-1 max-w-xs">
@@ -374,12 +374,12 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           Vencimiento por Defecto
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Dias de validez que se asignan automaticamente a cada nueva cotizacion
+          Días de validez que se asignan automáticamente a cada nueva cotización
         </p>
         <div className="flex items-center gap-4">
           <div className="flex-1 max-w-xs">
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Dias de vencimiento
+              Días de vencimiento
             </label>
             <input
               type="number"
@@ -398,7 +398,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
               Vista previa
             </label>
             <div className="px-3 py-2 text-sm bg-gray-50 border border-border rounded-lg text-muted-foreground">
-              Cada cotizacion vencera <strong className="text-foreground">{form.diasVencimiento} dias</strong> despues de su creacion
+              Cada cotización vencerá <strong className="text-foreground">{form.diasVencimiento} días</strong> después de su creación
             </div>
           </div>
         </div>
@@ -408,10 +408,10 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
           <FileText className="w-5 h-5 text-primary" />
-          Terminos y Condiciones por Defecto
+          Términos y Condiciones por Defecto
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Estos terminos se aplicaran automaticamente a cada nueva cotizacion. Se pueden editar por cotizacion individual.
+          Estos términos se aplicarán automáticamente a cada nueva cotización. Se pueden editar por cotización individual.
         </p>
         <textarea
           value={form.condicionesDefecto || ""}
@@ -420,11 +420,11 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           }
           className={inputClass}
           rows={5}
-          placeholder="Ej: Pago a 30 dias. Precios no incluyen transporte. Validez segun fecha de vencimiento indicada. Los precios pueden variar sin previo aviso..."
+          placeholder="Ej: Pago a 30 días. Precios no incluyen transporte. Validez según fecha de vencimiento indicada. Los precios pueden variar sin previo aviso..."
         />
         <p className="text-xs text-amber-600 mt-2 flex items-center gap-1.5">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500" />
-          Las cotizaciones no se pueden enviar sin terminos y condiciones
+          Las cotizaciones no se pueden enviar sin términos y condiciones
         </p>
       </div>
 
@@ -432,7 +432,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
           <Mail className="w-5 h-5 text-primary" />
-          Configuracion de Email (SMTP)
+          Configuración de Email (SMTP)
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
           Configura tu servidor SMTP para enviar cotizaciones por email directamente desde la app
@@ -478,7 +478,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Contrasena SMTP
+              Contraseña SMTP
             </label>
             <div className="relative">
               <input
@@ -486,7 +486,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
                 value={form.smtpPass || ""}
                 onChange={(e) => updateField("smtpPass", e.target.value)}
                 className={inputClass + " pr-10"}
-                placeholder="Contrasena o App Password"
+                placeholder="Contraseña o App Password"
               />
               <button
                 type="button"
@@ -520,12 +520,12 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
               Servidor: <code className="bg-blue-100 px-1 rounded">smtp.gmail.com</code> &middot; Puerto: <code className="bg-blue-100 px-1 rounded">587</code> &middot; SSL/TLS: desactivado
             </p>
             <p className="text-xs text-blue-700 mt-1 leading-relaxed">
-              <strong>Requiere App Password</strong> (no funciona con tu contrasena normal si tienes 2FA activado):
+              <strong>Requiere App Password</strong> (no funciona con tu contraseña normal si tienes 2FA activado):
             </p>
             <ol className="text-xs text-blue-700 mt-1 ml-4 list-decimal space-y-0.5">
               <li>Ve a <span className="font-medium">myaccount.google.com/apppasswords</span></li>
               <li>Pon un nombre (ej: &quot;DealForge&quot;) y pulsa Crear</li>
-              <li>Copia la contrasena de 16 caracteres generada y pegala aqui</li>
+              <li>Copia la contraseña de 16 caracteres generada y pégala aquí</li>
             </ol>
           </div>
           <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-lg">
@@ -538,8 +538,8 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
             </p>
             <ol className="text-xs text-indigo-700 mt-1 ml-4 list-decimal space-y-0.5">
               <li>Ve a <span className="font-medium">account.microsoft.com/security</span></li>
-              <li>Opciones de seguridad avanzadas &rarr; Contrasenas de aplicaciones</li>
-              <li>Crea una nueva y pegala aqui</li>
+              <li>Opciones de seguridad avanzadas &rarr; Contraseñas de aplicaciones</li>
+              <li>Crea una nueva y pégala aquí</li>
             </ol>
             <p className="text-[10px] text-indigo-500 mt-1">
               Nota: Algunas cuentas de empresa con Microsoft 365 requieren que el administrador habilite SMTP AUTH.
@@ -554,7 +554,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           <div className="p-3 bg-green-50 border border-green-100 rounded-lg flex items-start gap-2">
             <svg className="w-4 h-4 text-green-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
             <p className="text-xs text-green-700">
-              <strong>Tus credenciales estan seguras.</strong> La contrasena se almacena cifrada en la base de datos local de DealForge y nunca se comparte con terceros. Solo se usa para enviar emails desde tu propio servidor SMTP.
+              <strong>Tus credenciales están seguras.</strong> La contraseña se almacena cifrada en la base de datos local de DealForge y nunca se comparte con terceros. Solo se usa para enviar emails desde tu propio servidor SMTP.
             </p>
           </div>
         </div>
@@ -579,7 +579,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
                     showError(data.error || "Error al enviar email de prueba");
                   }
                 } catch {
-                  showError("Error de conexion");
+                  showError("Error de conexión");
                 } finally {
                   setTestingEmail(false);
                 }
@@ -601,7 +601,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           disabled={saving}
           className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
         >
-          {saving ? "Guardando..." : "Guardar Configuracion"}
+          {saving ? "Guardando..." : "Guardar Configuración"}
         </button>
       </div>
     </div>
@@ -618,7 +618,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
           style={{ background: `linear-gradient(135deg, ${color}, ${color}dd)` }}
         >
           <div className="w-4 h-4 bg-white/30 rounded" />
-          <div className="text-white font-bold text-[7px]">COTIZACION</div>
+          <div className="text-white font-bold text-[7px]">COTIZACIÓN</div>
         </div>
         <div className="px-2 py-1.5 space-y-1">
           <div className="flex gap-2">
@@ -650,7 +650,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
         <div className="h-7 px-2 flex items-center justify-between border-b-2 border-gray-800">
           <div className="w-4 h-4 bg-gray-200 rounded-sm" />
           <div className="font-bold text-gray-800 text-[7px] tracking-wider">
-            COTIZACION
+            COTIZACIÓN
           </div>
         </div>
         <div className="px-2 py-1.5 space-y-1">
@@ -679,7 +679,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
       <div className="h-7 px-2 flex items-center justify-between">
         <div className="w-4 h-4 bg-gray-100 rounded-full" />
         <div className="text-gray-400 text-[7px] font-light tracking-widest">
-          COTIZACION
+          COTIZACIÓN
         </div>
       </div>
       <div className="px-2 py-1.5 space-y-1.5">

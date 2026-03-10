@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     const message =
       err instanceof Error ? err.message : "Error desconocido";
     return NextResponse.json(
-      { error: `Error al crear la sesion de pago: ${message}` },
+      { error: `Error al crear la sesión de pago: ${message}` },
       { status: 500 }
     );
   }

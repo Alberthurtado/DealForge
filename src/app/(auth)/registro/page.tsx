@@ -30,12 +30,12 @@ export default function RegistroPage() {
     setError("");
 
     if (!passwordValid) {
-      setError("La contrasena debe tener al menos 8 caracteres");
+      setError("La contraseña debe tener al menos 8 caracteres");
       return;
     }
 
     if (!passwordsMatch) {
-      setError("Las contrasenas no coinciden");
+      setError("Las contraseñas no coinciden");
       return;
     }
 
@@ -59,7 +59,7 @@ export default function RegistroPage() {
       // Success — redirect to dashboard
       router.push("/panel");
     } catch {
-      setError("Error de conexion. Intenta de nuevo.");
+      setError("Error de conexión. Intenta de nuevo.");
       setLoading(false);
     }
   }
@@ -119,7 +119,7 @@ export default function RegistroPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contrasena
+              Contraseña
             </label>
             <div className="relative">
               <input
@@ -128,7 +128,7 @@ export default function RegistroPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="new-password"
-                placeholder="Minimo 8 caracteres"
+                placeholder="Mínimo 8 caracteres"
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all pr-10"
               />
               <button
@@ -159,7 +159,7 @@ export default function RegistroPage() {
                     passwordValid ? "text-green-600" : "text-gray-400"
                   }`}
                 >
-                  Minimo 8 caracteres
+                  Mínimo 8 caracteres
                 </span>
               </div>
             )}
@@ -167,7 +167,7 @@ export default function RegistroPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirmar contrasena
+              Confirmar contraseña
             </label>
             <input
               type={showPassword ? "text" : "password"}
@@ -175,12 +175,12 @@ export default function RegistroPage() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
               autoComplete="new-password"
-              placeholder="Repite la contrasena"
+              placeholder="Repite la contraseña"
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all"
             />
             {confirmPassword.length > 0 && !passwordsMatch && (
               <p className="text-xs text-red-500 mt-1">
-                Las contrasenas no coinciden
+                Las contraseñas no coinciden
               </p>
             )}
           </div>
@@ -221,7 +221,7 @@ export default function RegistroPage() {
               href="/login"
               className="font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </Link>
           </p>
         </div>

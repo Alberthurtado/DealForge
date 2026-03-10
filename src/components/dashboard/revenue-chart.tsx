@@ -23,7 +23,7 @@ export function RevenueChart({ data }: { data: RevenueData[] }) {
         Ingresos Mensuales
       </h3>
       <p className="text-xs text-muted-foreground mb-4">
-        Cotizaciones ganadas - ultimos 6 meses
+        Cotizaciones ganadas - últimos 6 meses
       </p>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">

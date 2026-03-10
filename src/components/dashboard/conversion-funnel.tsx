@@ -17,7 +17,7 @@ export function ConversionFunnel({ data }: { data: FunnelStage[] }) {
   return (
     <div className="bg-white rounded-xl border border-border p-6">
       <h3 className="text-lg font-semibold text-foreground mb-1">
-        Embudo de Conversion
+        Embudo de Conversión
       </h3>
       <p className="text-xs text-muted-foreground mb-4">
         Flujo de cotizaciones por etapa

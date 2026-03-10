@@ -40,14 +40,14 @@ interface Props {
 const SECTIONS = [
   {
     tipo: "LIMITE_DESCUENTO",
-    titulo: "Limites de Descuento",
-    descripcion: "Descuento maximo permitido por linea o global",
+    titulo: "Límites de Descuento",
+    descripcion: "Descuento máximo permitido por línea o global",
     Icon: Percent,
   },
   {
     tipo: "PRODUCTO_OBLIGATORIO",
     titulo: "Productos Obligatorios",
-    descripcion: "Si se incluye un producto o categoria, debe incluirse otro obligatoriamente",
+    descripcion: "Si se incluye un producto o categoría, debe incluirse otro obligatoriamente",
     Icon: Link2,
   },
   {
@@ -59,7 +59,7 @@ const SECTIONS = [
   {
     tipo: "PROMOCION",
     titulo: "Promociones",
-    descripcion: "Descuentos temporales por fecha para productos especificos",
+    descripcion: "Descuentos temporales por fecha para productos específicos",
     Icon: Tag,
   },
 ];
@@ -112,7 +112,7 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
         }
       }
     } catch {
-      showError("Error de conexion");
+      showError("Error de conexión");
     } finally {
       setSaving(false);
       setModalOpen(null);
@@ -194,7 +194,7 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
     switch (regla.tipo) {
       case "LIMITE_DESCUENTO": {
         const parts: string[] = [];
-        if (config.maxDescuentoLinea !== undefined) parts.push(`Linea max: ${config.maxDescuentoLinea}%`);
+        if (config.maxDescuentoLinea !== undefined) parts.push(`Línea max: ${config.maxDescuentoLinea}%`);
         if (config.maxDescuentoGlobal !== undefined) parts.push(`Global max: ${config.maxDescuentoGlobal}%`);
         return parts.join(" | ") || "Sin configurar";
       }
@@ -208,7 +208,7 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
         const aprobador = config.aprobador as { nombre?: string } | undefined;
         const conds = (config.condiciones as Array<{ tipo: string; umbral: number }>) || [];
         const condText = conds.map((c) => {
-          const label = c.tipo === "descuento_linea" ? "Dto. linea" : c.tipo === "descuento_global" ? "Dto. global" : "Monto";
+          const label = c.tipo === "descuento_linea" ? "Dto. línea" : c.tipo === "descuento_global" ? "Dto. global" : "Monto";
           const unit = c.tipo === "monto_total" ? " EUR" : "%";
           return `${label} > ${c.umbral}${unit}`;
         }).join(", ");

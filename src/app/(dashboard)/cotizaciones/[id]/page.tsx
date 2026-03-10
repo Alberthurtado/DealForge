@@ -203,10 +203,10 @@ export default function CotizacionDetailPage() {
     });
     if (res.ok) {
       const newCot = await res.json();
-      success("Cotizacion duplicada correctamente");
+      success("Cotización duplicada correctamente");
       router.push(`/cotizaciones/${newCot.id}`);
     } else {
-      showError("Error al duplicar la cotizacion");
+      showError("Error al duplicar la cotización");
     }
   }
 
@@ -220,7 +220,7 @@ export default function CotizacionDetailPage() {
     if (res.ok) {
       const updated = await res.json();
       setCotizacion(updated);
-      success("Cotizacion archivada");
+      success("Cotización archivada");
     } else {
       const data = await res.json().catch(() => null);
       showError(data?.error || "Error al archivar");
@@ -242,7 +242,7 @@ export default function CotizacionDetailPage() {
     if (res.ok) {
       const updated = await res.json();
       setCotizacion(updated);
-      success(`Cotizacion restaurada a ${previousState}`);
+      success(`Cotización restaurada a ${previousState}`);
     } else {
       const data = await res.json().catch(() => null);
       showError(data?.error || "Error al desarchivar");
@@ -263,7 +263,7 @@ export default function CotizacionDetailPage() {
       const updated = await res.json();
       setCotizacion(updated);
       setEditingCondiciones(false);
-      success("Terminos y condiciones guardados");
+      success("Términos y condiciones guardados");
     } else {
       showError("Error al guardar");
     }
@@ -284,14 +284,14 @@ export default function CotizacionDetailPage() {
     const contactName = principal?.nombre || cotizacion.contactoNombre || cotizacion.cliente.nombre;
 
     setEmailTo(contactEmail);
-    setEmailSubject(`Cotizacion ${cotizacion.numero} - ${cotizacion.cliente.nombre}`);
+    setEmailSubject(`Cotización ${cotizacion.numero} - ${cotizacion.cliente.nombre}`);
     setEmailBody(
       `<p>Estimado/a ${contactName},</p>` +
-      `<p>Le adjuntamos la cotizacion <strong>${cotizacion.numero}</strong> por un total de <strong>${formatCurrency(cotizacion.total)}</strong>.</p>` +
+      `<p>Le adjuntamos la cotización <strong>${cotizacion.numero}</strong> por un total de <strong>${formatCurrency(cotizacion.total)}</strong>.</p>` +
       (cotizacion.fechaVencimiento
-        ? `<p>La cotizacion tiene validez hasta el ${formatDate(cotizacion.fechaVencimiento)}.</p>`
+        ? `<p>La cotización tiene validez hasta el ${formatDate(cotizacion.fechaVencimiento)}.</p>`
         : "") +
-      `<p>Quedamos a su disposicion para cualquier consulta.</p>` +
+      `<p>Quedamos a su disposición para cualquier consulta.</p>` +
       `<p>Saludos cordiales</p>`
     );
     setEmailDialogOpen(true);
@@ -321,7 +321,7 @@ export default function CotizacionDetailPage() {
         showError(data.error || "Error al enviar el email");
       }
     } catch {
-      showError("Error de conexion al enviar email");
+      showError("Error de conexión al enviar email");
     } finally {
       setSendingEmail(false);
     }
@@ -426,11 +426,11 @@ export default function CotizacionDetailPage() {
                   </button>
                   {blocked && (
                     <div className="absolute right-0 top-full mt-1 w-64 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                      {termsBlocked && "Faltan terminos y condiciones. "}
+                      {termsBlocked && "Faltan términos y condiciones. "}
                       {rejectedApprovals.length > 0
                         ? `Rechazada por: ${rejectedApprovals.map((a) => a.aprobadorNombre).join(", ")}`
                         : pendingApprovals.length > 0
-                        ? `Pendiente de aprobacion de: ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")}`
+                        ? `Pendiente de aprobación de: ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")}`
                         : ""}
                     </div>
                   )}
@@ -447,9 +447,9 @@ export default function CotizacionDetailPage() {
           <div className="flex items-center gap-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800">
             <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0" />
             <div>
-              <p className="text-sm font-medium">Cotizacion vencida</p>
+              <p className="text-sm font-medium">Cotización vencida</p>
               <p className="text-xs text-amber-600">
-                Esta cotizacion vencio el{" "}
+                Esta cotización venció el{" "}
                 {formatDate(cotizacion.fechaVencimiento!)}. Considera duplicarla
                 con nuevas fechas.
               </p>
@@ -463,12 +463,12 @@ export default function CotizacionDetailPage() {
             <ShieldAlert className={`w-5 h-5 flex-shrink-0 ${rejectedApprovals.length > 0 ? "text-red-500" : "text-amber-500"}`} />
             <div>
               <p className="text-sm font-medium">
-                {rejectedApprovals.length > 0 ? "Aprobacion rechazada" : "Pendiente de aprobacion"}
+                {rejectedApprovals.length > 0 ? "Aprobación rechazada" : "Pendiente de aprobación"}
               </p>
               <p className="text-xs mt-0.5">
                 {rejectedApprovals.length > 0
-                  ? `Rechazada por ${rejectedApprovals.map((a) => a.aprobadorNombre).join(", ")}. No se puede enviar esta cotizacion.`
-                  : `Esperando aprobacion de ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")} antes de enviar.`}
+                  ? `Rechazada por ${rejectedApprovals.map((a) => a.aprobadorNombre).join(", ")}. No se puede enviar esta cotización.`
+                  : `Esperando aprobación de ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")} antes de enviar.`}
               </p>
             </div>
           </div>
@@ -479,9 +479,9 @@ export default function CotizacionDetailPage() {
           <div className="flex items-center gap-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800">
             <FileText className="w-5 h-5 text-amber-500 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-sm font-medium">Faltan terminos y condiciones</p>
+              <p className="text-sm font-medium">Faltan términos y condiciones</p>
               <p className="text-xs text-amber-600">
-                Debes agregar terminos y condiciones antes de poder enviar esta cotizacion.
+                Debes agregar términos y condiciones antes de poder enviar esta cotización.
               </p>
             </div>
             <button
@@ -503,9 +503,9 @@ export default function CotizacionDetailPage() {
           <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700">
             <Archive className="w-5 h-5 text-slate-400 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-sm font-medium">Cotizacion archivada</p>
+              <p className="text-sm font-medium">Cotización archivada</p>
               <p className="text-xs text-slate-500">
-                Esta cotizacion ha sido archivada y no aparece en las metricas del negocio.
+                Esta cotización ha sido archivada y no aparece en las métricas del negocio.
               </p>
             </div>
             <button
@@ -545,7 +545,7 @@ export default function CotizacionDetailPage() {
             <p className="text-xl font-bold">{formatCurrency(cotizacion.total)}</p>
           </div>
           <div className="bg-white rounded-xl border border-border p-4">
-            <p className="text-xs text-muted-foreground mb-1">Fecha Emision</p>
+            <p className="text-xs text-muted-foreground mb-1">Fecha Emisión</p>
             <p className="text-sm font-medium">{formatDate(cotizacion.fechaEmision)}</p>
           </div>
           <div className="bg-white rounded-xl border border-border p-4">
@@ -590,7 +590,7 @@ export default function CotizacionDetailPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border text-muted-foreground">
-                    <th className="text-left py-2 font-medium">Descripcion</th>
+                    <th className="text-left py-2 font-medium">Descripción</th>
                     <th className="text-right py-2 font-medium">Cant.</th>
                     <th className="text-right py-2 font-medium">Precio</th>
                     <th className="text-right py-2 font-medium">Dto.</th>
@@ -694,7 +694,7 @@ export default function CotizacionDetailPage() {
               <div className="flex items-center justify-between mb-2">
                 <h4 className="text-sm font-semibold flex items-center gap-1.5">
                   <FileText className="w-4 h-4 text-primary" />
-                  Terminos y Condiciones
+                  Términos y Condiciones
                 </h4>
                 {["BORRADOR", "NEGOCIACION"].includes(cotizacion.estado) && !editingCondiciones && (
                   <button
@@ -741,7 +741,7 @@ export default function CotizacionDetailPage() {
                 </p>
               ) : (
                 <p className="text-sm text-amber-500 italic">
-                  Sin terminos y condiciones
+                  Sin términos y condiciones
                 </p>
               )}
             </div>
@@ -755,7 +755,7 @@ export default function CotizacionDetailPage() {
                 <Lock className="w-5 h-5 text-purple-500 mx-auto mb-2" />
                 <p className="text-xs font-semibold text-purple-800">Aprobaciones</p>
                 <p className="text-[11px] text-purple-600 mt-1 mb-3">
-                  Los flujos de aprobacion estan disponibles desde el plan Business.
+                  Los flujos de aprobación están disponibles desde el plan Business.
                 </p>
                 <Link
                   href="/configuracion"
@@ -782,7 +782,7 @@ export default function CotizacionDetailPage() {
             <div className="flex items-center justify-between px-6 py-4 border-b border-border">
               <h3 className="text-base font-semibold flex items-center gap-2">
                 <Mail className="w-5 h-5 text-primary" />
-                Enviar Cotizacion por Email
+                Enviar Cotización por Email
               </h3>
               <button
                 onClick={() => setEmailDialogOpen(false)}
@@ -837,7 +837,7 @@ export default function CotizacionDetailPage() {
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground bg-gray-50 rounded-lg px-3 py-2">
                 <FileText className="w-4 h-4 text-primary flex-shrink-0" />
-                Se adjuntara el PDF de la cotizacion {cotizacion.numero} automaticamente
+                Se adjuntará el PDF de la cotización {cotizacion.numero} automáticamente
               </div>
             </div>
             <div className="flex justify-end gap-2 px-6 py-4 border-t border-border">

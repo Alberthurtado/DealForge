@@ -42,13 +42,13 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
         }
       );
       if (res.ok) {
-        success(estado === "APROBADA" ? "Aprobacion registrada" : "Rechazo registrado");
+        success(estado === "APROBADA" ? "Aprobación registrada" : "Rechazo registrado");
         onUpdate();
       } else {
         showError("Error al responder");
       }
     } catch {
-      showError("Error de conexion");
+      showError("Error de conexión");
     } finally {
       setProcessing(null);
     }
@@ -62,14 +62,14 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
         { method: "POST" }
       );
       if (res.ok) {
-        success("Email de aprobacion reenviado");
+        success("Email de aprobación reenviado");
         onUpdate();
       } else {
         const data = await res.json().catch(() => null);
         showError(data?.error || "Error al reenviar email");
       }
     } catch {
-      showError("Error de conexion");
+      showError("Error de conexión");
     } finally {
       setResending(null);
     }
@@ -137,7 +137,7 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
                 onClick={() => handleResendEmail(a.id)}
                 disabled={resending === a.id}
                 className="inline-flex items-center gap-0.5 text-[10px] text-primary hover:text-primary/80 transition-colors disabled:opacity-50"
-                title="Reenviar email de aprobacion"
+                title="Reenviar email de aprobación"
               >
                 <RotateCw className={`w-3 h-3 ${resending === a.id ? "animate-spin" : ""}`} />
                 Reenviar
@@ -148,7 +148,7 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
                   <button
                     onClick={() => copyApprovalLink(a.token!)}
                     className="inline-flex items-center gap-0.5 text-[10px] text-primary hover:text-primary/80 transition-colors"
-                    title="Copiar enlace de aprobacion"
+                    title="Copiar enlace de aprobación"
                   >
                     <LinkIcon className="w-3 h-3" />
                     Copiar enlace

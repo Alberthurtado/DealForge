@@ -8,7 +8,7 @@ function getJwtSecret(): Uint8Array {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
     throw new Error(
-      "FATAL: JWT_SECRET no esta definido. Configura la variable de entorno JWT_SECRET."
+      "FATAL: JWT_SECRET no está definido. Configura la variable de entorno JWT_SECRET."
     );
   }
   return new TextEncoder().encode(secret);

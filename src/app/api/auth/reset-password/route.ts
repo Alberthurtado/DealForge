@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 
   if (!usuario) {
     return NextResponse.json(
-      { error: "El enlace no es valido o ya fue utilizado." },
+      { error: "El enlace no es válido o ya fue utilizado." },
       { status: 400 }
     );
   }
@@ -52,6 +52,6 @@ export async function POST(request: NextRequest) {
   });
 
   return NextResponse.json({
-    message: "Contrasena actualizada correctamente. Ya puedes iniciar sesion.",
+    message: "Contraseña actualizada correctamente. Ya puedes iniciar sesión.",
   });
 }

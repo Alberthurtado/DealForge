@@ -51,7 +51,7 @@ export function ClienteForm({
     telefono: initialData?.telefono || "",
     direccion: initialData?.direccion || "",
     ciudad: initialData?.ciudad || "",
-    pais: initialData?.pais || "Espana",
+    pais: initialData?.pais || "España",
     sector: initialData?.sector || "",
     notas: initialData?.notas || "",
     contactos: initialData?.contactos || [{ ...emptyContacto, principal: true }],
@@ -101,7 +101,7 @@ export function ClienteForm({
       {/* Company Info */}
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-4">
-          Informacion de la Empresa
+          Información de la Empresa
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
@@ -138,7 +138,7 @@ export function ClienteForm({
               value={form.sector}
               onChange={(e) => updateField("sector", e.target.value)}
               className={inputClass}
-              placeholder="Ej: Tecnologia, Distribucion..."
+              placeholder="Ej: Tecnología, Distribución..."
             />
           </div>
           <div>
@@ -155,7 +155,7 @@ export function ClienteForm({
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Telefono
+              Teléfono
             </label>
             <input
               type="tel"
@@ -167,14 +167,14 @@ export function ClienteForm({
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-foreground mb-1">
-              Direccion
+              Dirección
             </label>
             <input
               type="text"
               value={form.direccion}
               onChange={(e) => updateField("direccion", e.target.value)}
               className={inputClass}
-              placeholder="Calle, numero, piso"
+              placeholder="Calle, número, piso"
             />
           </div>
           <div>
@@ -191,14 +191,14 @@ export function ClienteForm({
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Pais
+              País
             </label>
             <input
               type="text"
               value={form.pais}
               onChange={(e) => updateField("pais", e.target.value)}
               className={inputClass}
-              placeholder="Espana"
+              placeholder="España"
             />
           </div>
           <div className="md:col-span-2">
@@ -278,7 +278,7 @@ export function ClienteForm({
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-muted-foreground mb-1">
-                    Telefono
+                    Teléfono
                   </label>
                   <input
                     type="tel"

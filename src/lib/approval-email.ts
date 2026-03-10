@@ -32,7 +32,7 @@ export function buildApprovalRequestEmail(data: ApprovalRequestData): string {
 
   const moreItems =
     data.lineItems.length > 5
-      ? `<tr><td colspan="3" style="padding:6px 8px;color:#888;font-style:italic;">...y ${data.lineItems.length - 5} items mas</td></tr>`
+      ? `<tr><td colspan="3" style="padding:6px 8px;color:#888;font-style:italic;">...y ${data.lineItems.length - 5} items más</td></tr>`
       : "";
 
   return `
@@ -43,15 +43,15 @@ export function buildApprovalRequestEmail(data: ApprovalRequestData): string {
   <div style="max-width:600px;margin:0 auto;padding:20px;">
     <div style="background:${c};padding:24px 30px;border-radius:12px 12px 0 0;">
       <h1 style="color:white;margin:0;font-size:18px;">${data.empresa.nombre}</h1>
-      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">Aprobacion requerida</p>
+      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">Aprobación requerida</p>
     </div>
     <div style="background:white;padding:30px;border-radius:0 0 12px 12px;border:1px solid #e5e5e5;border-top:none;">
       <p style="margin:0 0 16px;font-size:15px;color:#333;">Hola ${data.aprobadorNombre},</p>
-      <p style="margin:0 0 20px;font-size:14px;color:#555;">Se requiere tu aprobacion para la siguiente cotizacion:</p>
+      <p style="margin:0 0 20px;font-size:14px;color:#555;">Se requiere tu aprobación para la siguiente cotización:</p>
 
       <div style="background:#f8f9fa;border-radius:8px;padding:16px;margin:0 0 20px;">
         <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:4px 0;color:#888;font-size:12px;">Cotizacion</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:14px;">${data.cotizacion.numero}</td></tr>
+          <tr><td style="padding:4px 0;color:#888;font-size:12px;">Cotización</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:14px;">${data.cotizacion.numero}</td></tr>
           <tr><td style="padding:4px 0;color:#888;font-size:12px;">Cliente</td><td style="padding:4px 0;text-align:right;font-size:13px;">${data.cotizacion.cliente}</td></tr>
           <tr><td style="padding:4px 0;color:#888;font-size:12px;">Total</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:16px;color:${c};">${formatCurrency(data.cotizacion.total)}</td></tr>
           <tr><td style="padding:4px 0;color:#888;font-size:12px;">Fecha</td><td style="padding:4px 0;text-align:right;font-size:13px;">${formatDate(data.cotizacion.fechaEmision)}</td></tr>
@@ -65,7 +65,7 @@ export function buildApprovalRequestEmail(data: ApprovalRequestData): string {
       ${
         data.lineItems.length > 0
           ? `<table style="width:100%;border-collapse:collapse;font-size:13px;margin:0 0 24px;">
-        <thead><tr style="background:#f8f9fa;"><th style="padding:8px;text-align:left;font-size:11px;text-transform:uppercase;color:#888;">Descripcion</th><th style="padding:8px;text-align:right;font-size:11px;text-transform:uppercase;color:#888;">Cant.</th><th style="padding:8px;text-align:right;font-size:11px;text-transform:uppercase;color:#888;">Total</th></tr></thead>
+        <thead><tr style="background:#f8f9fa;"><th style="padding:8px;text-align:left;font-size:11px;text-transform:uppercase;color:#888;">Descripción</th><th style="padding:8px;text-align:right;font-size:11px;text-transform:uppercase;color:#888;">Cant.</th><th style="padding:8px;text-align:right;font-size:11px;text-transform:uppercase;color:#888;">Total</th></tr></thead>
         <tbody>${itemRows}${moreItems}</tbody>
       </table>`
           : ""
@@ -77,7 +77,7 @@ export function buildApprovalRequestEmail(data: ApprovalRequestData): string {
       </div>
 
       <p style="margin:20px 0 0;font-size:12px;color:#888;text-align:center;">
-        O revisa los detalles completos: <a href="${reviewUrl}" style="color:${c};">ver cotizacion</a>
+        O revisa los detalles completos: <a href="${reviewUrl}" style="color:${c};">ver cotización</a>
       </p>
     </div>
     <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${data.empresa.nombre} &bull; DealForge</p>
@@ -111,20 +111,20 @@ export function buildApprovalResolvedEmail(data: ApprovalResolvedData): string {
   <div style="max-width:600px;margin:0 auto;padding:20px;">
     <div style="background:${c};padding:24px 30px;border-radius:12px 12px 0 0;">
       <h1 style="color:white;margin:0;font-size:18px;">${data.empresa.nombre}</h1>
-      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">Aprobacion resuelta</p>
+      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">Aprobación resuelta</p>
     </div>
     <div style="background:white;padding:30px;border-radius:0 0 12px 12px;border:1px solid #e5e5e5;border-top:none;">
       <div style="text-align:center;margin:0 0 20px;">
         <div style="display:inline-block;background:${statusColor};color:white;padding:8px 24px;border-radius:20px;font-weight:bold;font-size:14px;">${statusLabel}</div>
       </div>
       <p style="margin:0 0 16px;font-size:14px;color:#555;text-align:center;">
-        La cotizacion <strong>${data.cotizacion.numero}</strong> para <strong>${data.cotizacion.cliente}</strong>
+        La cotización <strong>${data.cotizacion.numero}</strong> para <strong>${data.cotizacion.cliente}</strong>
         (${formatCurrency(data.cotizacion.total)}) ha sido <strong style="color:${statusColor};">${statusLabel.toLowerCase()}</strong>
         por <strong>${data.aprobadorNombre}</strong>.
       </p>
       ${data.comentario ? `<div style="background:#f8f9fa;border-radius:8px;padding:12px 16px;margin:0 0 20px;"><p style="margin:0;font-size:13px;color:#555;"><strong>Comentario:</strong> ${data.comentario}</p></div>` : ""}
       <div style="text-align:center;margin:20px 0 0;">
-        <a href="${detailUrl}" style="display:inline-block;padding:10px 28px;background:${c};color:white;text-decoration:none;border-radius:8px;font-size:13px;">Ver cotizacion</a>
+        <a href="${detailUrl}" style="display:inline-block;padding:10px 28px;background:${c};color:white;text-decoration:none;border-radius:8px;font-size:13px;">Ver cotización</a>
       </div>
     </div>
     <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${data.empresa.nombre} &bull; DealForge</p>
