@@ -1,7 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
-import path from "path";
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
@@ -20,24 +18,19 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Max 2MB
-  if (file.size > 2 * 1024 * 1024) {
+  // Max 500KB (plenty for a logo)
+  if (file.size > 500 * 1024) {
     return NextResponse.json(
-      { error: "El archivo es demasiado grande. Maximo 2MB." },
+      { error: "El archivo es demasiado grande. Maximo 500KB para logos." },
       { status: 400 }
     );
   }
 
+  // Convert to base64 data URL — works on Vercel (no filesystem needed)
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
-
-  const ext = file.name.split(".").pop() || "png";
-  const filename = `logo-${Date.now()}.${ext}`;
-  const uploadPath = path.join(process.cwd(), "public", "uploads", filename);
-
-  await writeFile(uploadPath, buffer);
-
-  const logoUrl = `/uploads/${filename}`;
+  const base64 = buffer.toString("base64");
+  const logoUrl = `data:${file.type};base64,${base64}`;
 
   await prisma.empresa.upsert({
     where: { id: "default" },

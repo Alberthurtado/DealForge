@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, Printer } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 
 interface Cotizacion {
   id: string;
@@ -149,7 +149,7 @@ export default function CotizacionPreviewPage() {
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   {empresa.logoUrl ? (
-                    <Image
+                    <img
                       src={empresa.logoUrl}
                       alt={empresa.nombre}
                       width={52}
@@ -195,7 +195,7 @@ export default function CotizacionPreviewPage() {
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   {empresa.logoUrl ? (
-                    <Image
+                    <img
                       src={empresa.logoUrl}
                       alt={empresa.nombre}
                       width={48}
@@ -250,7 +250,7 @@ export default function CotizacionPreviewPage() {
               <div className="flex items-start justify-between">
                 <div>
                   {empresa.logoUrl ? (
-                    <Image
+                    <img
                       src={empresa.logoUrl}
                       alt={empresa.nombre}
                       width={40}

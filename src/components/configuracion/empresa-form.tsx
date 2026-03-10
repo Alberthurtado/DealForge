@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import { Upload, Check, Building2, Hash, Mail, Eye, EyeOff, FileText } from "lucide-react";
 import { useToast } from "@/components/ui/toast";
-import Image from "next/image";
 
 interface EmpresaData {
   nombre: string;
@@ -226,11 +225,9 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           {/* Logo preview */}
           <div className="w-24 h-24 rounded-xl border-2 border-dashed border-border flex items-center justify-center bg-gray-50 overflow-hidden shrink-0">
             {form.logoUrl ? (
-              <Image
+              <img
                 src={form.logoUrl}
                 alt="Logo"
-                width={96}
-                height={96}
                 className="w-full h-full object-contain"
               />
             ) : (
@@ -241,7 +238,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           <div className="flex-1">
             <p className="text-sm text-muted-foreground mb-3">
               Sube el logo de tu empresa. Se mostrara en las cotizaciones PDF.
-              Formatos: PNG, JPG, SVG, WebP. Max 2MB.
+              Formatos: PNG, JPG, SVG, WebP. Max 500KB.
             </p>
             <input
               ref={fileInputRef}
