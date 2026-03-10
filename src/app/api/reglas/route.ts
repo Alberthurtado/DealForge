@@ -2,8 +2,16 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { reglaCreateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
+import { getSession } from "@/lib/auth";
+import { getPlanFeatures, planFeatureResponse } from "@/lib/plan-limits";
 
 export async function GET(request: NextRequest) {
+  // Plan check: reglas require at least Pro
+  const session = await getSession();
+  if (session && !getPlanFeatures(session.plan).reglasComerciales) {
+    return planFeatureResponse("reglasComerciales");
+  }
+
   const { searchParams } = new URL(request.url);
   const tipo = searchParams.get("tipo");
   const activa = searchParams.get("activa");
@@ -21,6 +29,12 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  // Plan check: reglas require at least Pro
+  const session = await getSession();
+  if (session && !getPlanFeatures(session.plan).reglasComerciales) {
+    return planFeatureResponse("reglasComerciales");
+  }
+
   const body = await request.json();
   const { data, error } = validateBody(reglaCreateSchema, body);
   if (error) return error;

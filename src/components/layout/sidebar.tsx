@@ -15,17 +15,29 @@ import {
   Plug,
   LogOut,
   User,
+  Lock,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import Image from "next/image";
+import type { PlanFeatures } from "@/lib/plan-limits";
 
-const navigation = [
+interface NavItem {
+  name: string;
+  href: string;
+  icon: typeof LayoutDashboard;
+  /** If set, the nav item is only available when this feature is enabled */
+  requiredFeature?: keyof PlanFeatures;
+  /** Plan badge to show when locked */
+  requiredPlanLabel?: string;
+}
+
+const navigation: NavItem[] = [
   { name: "Dashboard", href: "/panel", icon: LayoutDashboard },
   { name: "Clientes", href: "/clientes", icon: Users },
   { name: "Productos", href: "/productos", icon: Package },
   { name: "Cotizaciones", href: "/cotizaciones", icon: FileText },
-  { name: "Reglas", href: "/reglas", icon: ShieldCheck },
+  { name: "Reglas", href: "/reglas", icon: ShieldCheck, requiredFeature: "reglasComerciales", requiredPlanLabel: "Pro" },
   { name: "Reportes", href: "/reportes", icon: BarChart3 },
   { name: "Integraciones", href: "/integraciones", icon: Plug },
   { name: "Configuracion", href: "/configuracion", icon: Settings },
@@ -42,6 +54,7 @@ interface SidebarUser {
   nombre: string;
   email: string;
   plan: string;
+  features?: PlanFeatures;
 }
 
 export function Sidebar({ user }: { user: SidebarUser | null }) {
@@ -98,6 +111,33 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
             item.href === "/panel"
               ? pathname === "/panel"
               : pathname.startsWith(item.href);
+
+          // Check if this item is locked by plan
+          const isLocked = item.requiredFeature && user?.features
+            ? !user.features[item.requiredFeature]
+            : false;
+
+          if (isLocked) {
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-muted-foreground/50 cursor-pointer hover:bg-muted/50 transition-colors"
+              >
+                <item.icon className="w-5 h-5 shrink-0 opacity-40" />
+                {!collapsed && (
+                  <>
+                    <span className="flex-1 opacity-60">{item.name}</span>
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-bold rounded bg-purple-100 text-purple-700 uppercase tracking-wider">
+                      <Lock className="w-2.5 h-2.5" />
+                      {item.requiredPlanLabel}
+                    </span>
+                  </>
+                )}
+              </Link>
+            );
+          }
+
           return (
             <Link
               key={item.name}

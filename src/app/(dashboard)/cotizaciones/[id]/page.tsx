@@ -29,7 +29,8 @@ import { useToast } from "@/components/ui/toast";
 import { ReglasWarnings } from "@/components/reglas/reglas-warnings";
 import { AprobacionPanel } from "@/components/reglas/aprobacion-panel";
 import type { ValidationResult } from "@/lib/reglas-engine";
-import { ShieldAlert } from "lucide-react";
+import { ShieldAlert, Lock } from "lucide-react";
+import type { PlanFeatures } from "@/lib/plan-limits";
 
 interface Cotizacion {
   id: string;
@@ -101,6 +102,7 @@ export default function CotizacionDetailPage() {
     estado: string; comentario: string | null; respondidoAt: string | null; createdAt: string;
     token?: string | null; emailEnviadoAt?: string | null;
   }>>([]);
+  const [planFeatures, setPlanFeatures] = useState<PlanFeatures | null>(null);
 
   function loadAprobaciones() {
     fetch(`/api/cotizaciones/${params.id}/aprobaciones`)
@@ -108,6 +110,25 @@ export default function CotizacionDetailPage() {
       .then(setAprobaciones)
       .catch(() => {});
   }
+
+  // Load user plan features
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.user?.plan) {
+          // Import features dynamically based on plan
+          const features: Record<string, PlanFeatures> = {
+            starter: { emailEnvio: false, reglasComerciales: false, aprobaciones: false, reglasAvanzadas: false, pdfBranded: false },
+            pro: { emailEnvio: true, reglasComerciales: true, aprobaciones: false, reglasAvanzadas: false, pdfBranded: true },
+            business: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true },
+            enterprise: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true },
+          };
+          setPlanFeatures(features[data.user.plan] || features.starter);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     fetch(`/api/cotizaciones/${params.id}`)
@@ -348,13 +369,25 @@ export default function CotizacionDetailPage() {
               <Eye className="w-4 h-4" />
               Vista Previa
             </Link>
-            <button
-              onClick={openEmailDialog}
-              className="inline-flex items-center gap-2 px-3 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted transition-colors"
-            >
-              <Mail className="w-4 h-4" />
-              Enviar Email
-            </button>
+            {planFeatures?.emailEnvio === false ? (
+              <Link
+                href="/configuracion"
+                className="inline-flex items-center gap-2 px-3 py-2 border border-purple-200 bg-purple-50 rounded-lg text-sm font-medium text-purple-600 hover:bg-purple-100 transition-colors"
+                title="Disponible desde el plan Pro"
+              >
+                <Lock className="w-3.5 h-3.5" />
+                Enviar Email
+                <span className="text-[9px] font-bold bg-purple-200 text-purple-700 px-1.5 py-0.5 rounded uppercase">Pro</span>
+              </Link>
+            ) : (
+              <button
+                onClick={openEmailDialog}
+                className="inline-flex items-center gap-2 px-3 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted transition-colors"
+              >
+                <Mail className="w-4 h-4" />
+                Enviar Email
+              </button>
+            )}
             <button
               onClick={duplicateQuote}
               className="inline-flex items-center gap-2 px-3 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted transition-colors"
@@ -485,15 +518,15 @@ export default function CotizacionDetailPage() {
           </div>
         )}
 
-        {/* Rule warnings */}
-        {validation && !validation.valido && (
+        {/* Rule warnings — only shown for plans with reglas */}
+        {planFeatures?.reglasComerciales !== false && validation && !validation.valido && (
           <ReglasWarnings
             violaciones={validation.violaciones}
             aprobacionesRequeridas={validation.aprobacionesRequeridas}
             promocionesAplicables={validation.promocionesAplicables}
           />
         )}
-        {validation?.promocionesAplicables && validation.promocionesAplicables.length > 0 && validation.valido && (
+        {planFeatures?.reglasComerciales !== false && validation?.promocionesAplicables && validation.promocionesAplicables.length > 0 && validation.valido && (
           <ReglasWarnings
             violaciones={[]}
             aprobacionesRequeridas={[]}
@@ -717,11 +750,27 @@ export default function CotizacionDetailPage() {
           {/* Sidebar - Timeline + Approvals */}
           <div className="space-y-6">
             <CotizacionTimeline actividades={cotizacion.actividades} />
-            <AprobacionPanel
-              cotizacionId={cotizacion.id}
-              aprobaciones={aprobaciones}
-              onUpdate={loadAprobaciones}
-            />
+            {planFeatures?.aprobaciones === false ? (
+              <div className="rounded-xl border border-purple-200 bg-purple-50 p-4 text-center">
+                <Lock className="w-5 h-5 text-purple-500 mx-auto mb-2" />
+                <p className="text-xs font-semibold text-purple-800">Aprobaciones</p>
+                <p className="text-[11px] text-purple-600 mt-1 mb-3">
+                  Los flujos de aprobacion estan disponibles desde el plan Business.
+                </p>
+                <Link
+                  href="/configuracion"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-purple-600 text-white rounded-lg text-xs font-medium hover:bg-purple-700 transition-colors"
+                >
+                  Ver plan Business
+                </Link>
+              </div>
+            ) : (
+              <AprobacionPanel
+                cotizacionId={cotizacion.id}
+                aprobaciones={aprobaciones}
+                onUpdate={loadAprobaciones}
+              />
+            )}
           </div>
         </div>
       </div>

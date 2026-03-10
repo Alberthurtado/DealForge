@@ -7,6 +7,7 @@ import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit
 import { sendEmailSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { getPlanFeatures, planFeatureResponse } from "@/lib/plan-limits";
 
 function defaultEmailBody(numero: string) {
   return `<p>Adjuntamos la cotizacion ${numero}.</p>`;
@@ -19,6 +20,10 @@ export async function POST(
   // Rate limit: 5 emails per minute per user
   const session = await getSession();
   if (session) {
+    // Plan check: email sending requires at least Pro
+    if (!getPlanFeatures(session.plan).emailEnvio) {
+      return planFeatureResponse("emailEnvio");
+    }
     const limit = checkRateLimit(`email:${session.userId}`, RATE_LIMITS.email);
     if (!limit.allowed) return rateLimitResponse(limit.resetAt);
   }

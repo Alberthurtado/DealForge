@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { PageHeader } from "@/components/layout/page-header";
 import { ReglasManager } from "@/components/reglas/reglas-manager";
+import { FeatureGateBanner } from "@/components/layout/feature-gate-banner";
+import { getSession } from "@/lib/auth";
+import { getPlanFeatures } from "@/lib/plan-limits";
 
 export const metadata: Metadata = {
   title: "Reglas Comerciales",
@@ -25,6 +28,25 @@ async function getData() {
 }
 
 export default async function ReglasPage() {
+  const session = await getSession();
+  const features = getPlanFeatures(session?.plan || "starter");
+
+  if (!features.reglasComerciales) {
+    return (
+      <div>
+        <PageHeader
+          title="Reglas Comerciales"
+          description="Limites, productos obligatorios, aprobaciones y promociones"
+        />
+        <FeatureGateBanner
+          feature="Reglas Comerciales"
+          requiredPlan="Pro"
+          description="Crea reglas de descuento, productos obligatorios, aprobaciones y promociones para controlar tu proceso de ventas. Disponible desde el plan Pro."
+        />
+      </div>
+    );
+  }
+
   const data = await getData();
 
   return (

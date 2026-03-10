@@ -2,11 +2,18 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { reglaUpdateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
+import { getSession } from "@/lib/auth";
+import { getPlanFeatures, planFeatureResponse } from "@/lib/plan-limits";
 
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const session = await getSession();
+  if (session && !getPlanFeatures(session.plan).reglasComerciales) {
+    return planFeatureResponse("reglasComerciales");
+  }
+
   const { id } = await params;
   const regla = await prisma.reglaComercial.findUnique({ where: { id } });
   if (!regla) {
@@ -19,6 +26,11 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const session = await getSession();
+  if (session && !getPlanFeatures(session.plan).reglasComerciales) {
+    return planFeatureResponse("reglasComerciales");
+  }
+
   const { id } = await params;
   const body = await request.json();
   const { data, error } = validateBody(reglaUpdateSchema, body);
@@ -44,6 +56,11 @@ export async function DELETE(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const session = await getSession();
+  if (session && !getPlanFeatures(session.plan).reglasComerciales) {
+    return planFeatureResponse("reglasComerciales");
+  }
+
   const { id } = await params;
   await prisma.reglaComercial.delete({ where: { id } });
   return NextResponse.json({ ok: true });

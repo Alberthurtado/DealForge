@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
 
 // ─── Plan Limits Definition ──────────────────────
 export interface PlanLimits {
@@ -31,6 +32,65 @@ export const PLAN_LIMITS: Record<string, PlanLimits> = {
 
 export function getPlanLimits(plan: string): PlanLimits {
   return PLAN_LIMITS[plan] || PLAN_LIMITS.starter;
+}
+
+// ─── Feature Flags by Plan ──────────────────────
+export interface PlanFeatures {
+  emailEnvio: boolean;        // Send quotes by email
+  reglasComerciales: boolean; // Commercial rules engine
+  aprobaciones: boolean;      // Approval workflows
+  reglasAvanzadas: boolean;   // Advanced rule types
+  pdfBranded: boolean;        // Branded PDF templates
+}
+
+const PLAN_FEATURES: Record<string, PlanFeatures> = {
+  starter: {
+    emailEnvio: false,
+    reglasComerciales: false,
+    aprobaciones: false,
+    reglasAvanzadas: false,
+    pdfBranded: false,
+  },
+  pro: {
+    emailEnvio: true,
+    reglasComerciales: true,
+    aprobaciones: false,
+    reglasAvanzadas: false,
+    pdfBranded: true,
+  },
+  business: {
+    emailEnvio: true,
+    reglasComerciales: true,
+    aprobaciones: true,
+    reglasAvanzadas: true,
+    pdfBranded: true,
+  },
+  enterprise: {
+    emailEnvio: true,
+    reglasComerciales: true,
+    aprobaciones: true,
+    reglasAvanzadas: true,
+    pdfBranded: true,
+  },
+};
+
+export function getPlanFeatures(plan: string): PlanFeatures {
+  return PLAN_FEATURES[plan] || PLAN_FEATURES.starter;
+}
+
+/** Which plan is required for a feature */
+export function requiredPlanFor(feature: keyof PlanFeatures): string {
+  if (PLAN_FEATURES.pro[feature]) return "Pro";
+  return "Business";
+}
+
+/** Returns a 403 JSON response for plan-gated features */
+export function planFeatureResponse(feature: keyof PlanFeatures) {
+  const plan = requiredPlanFor(feature);
+  return NextResponse.json(
+    { error: "PLAN_FEATURE_RESTRICTED", message: `Esta funcion requiere el plan ${plan} o superior.`, requiredPlan: plan },
+    { status: 403 }
+  );
 }
 
 // ─── Usage Counts ────────────────────────────────

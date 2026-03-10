@@ -1,6 +1,7 @@
 import { Sidebar } from "@/components/layout/sidebar";
 import { AssistantPanel } from "@/components/assistant/assistant-panel";
 import { getSession } from "@/lib/auth";
+import { getPlanFeatures } from "@/lib/plan-limits";
 
 export default async function DashboardLayout({
   children,
@@ -8,6 +9,7 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
+  const features = session ? getPlanFeatures(session.plan) : undefined;
 
   return (
     <>
@@ -15,7 +17,7 @@ export default async function DashboardLayout({
         <Sidebar
           user={
             session
-              ? { nombre: session.nombre, email: session.email, plan: session.plan }
+              ? { nombre: session.nombre, email: session.email, plan: session.plan, features }
               : null
           }
         />
