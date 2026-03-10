@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { getSmtpConfig, sendEmail } from "@/lib/email";
+import { sendSystemEmail } from "@/lib/system-email";
 import { buildApprovalResolvedEmail } from "@/lib/approval-email";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
@@ -123,15 +123,14 @@ export async function PUT(
     },
   });
 
-  // Send notification email to empresa (non-blocking)
+  // Send notification email to empresa via Brevo (non-blocking)
   try {
-    const smtpConfig = await getSmtpConfig();
-    if (smtpConfig) {
-      const empresa = await prisma.empresa.findUnique({
-        where: { id: "default" },
-        select: { nombre: true, colorPrimario: true, email: true },
-      });
-      const toEmail = empresa?.email || smtpConfig.smtpUser;
+    const empresa = await prisma.empresa.findUnique({
+      where: { id: "default" },
+      select: { nombre: true, colorPrimario: true, email: true, smtpUser: true },
+    });
+    const toEmail = empresa?.email || empresa?.smtpUser;
+    if (toEmail) {
       const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
 
       const html = buildApprovalResolvedEmail({
@@ -151,7 +150,11 @@ export async function PUT(
         },
       });
 
-      await sendEmail({ to: toEmail, subject: `Cotizacion ${aprobacion.cotizacion.numero} ${statusLabel}`, html });
+      await sendSystemEmail({
+        to: toEmail,
+        subject: `Cotizacion ${aprobacion.cotizacion.numero} ${statusLabel}`,
+        html,
+      });
     }
   } catch {
     // Don't block response if email fails
