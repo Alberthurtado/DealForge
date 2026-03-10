@@ -49,7 +49,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     reglasComerciales: false,
     aprobaciones: false,
     reglasAvanzadas: false,
-    pdfBranded: false,
+    pdfBranded: true,
   },
   pro: {
     emailEnvio: true,
