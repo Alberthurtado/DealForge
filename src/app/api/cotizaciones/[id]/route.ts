@@ -2,6 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { cotizacionUpdateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
+import { validarCotizacion, type ProductoCategoriaMap } from "@/lib/reglas-engine";
+import { getSmtpConfig, sendEmail } from "@/lib/email";
+import { buildApprovalRequestEmail } from "@/lib/approval-email";
 
 export async function GET(
   request: NextRequest,
@@ -28,6 +31,153 @@ export async function GET(
   }
 
   return NextResponse.json(cotizacion);
+}
+
+/**
+ * Re-evaluate commercial rules against a quote and create any missing
+ * approval records. Returns the list of NEW blocking approvals (PENDIENTE).
+ */
+async function evaluateAndCreateApprovals(
+  cotizacionId: string,
+  request: NextRequest
+) {
+  const cotizacion = await prisma.cotizacion.findUnique({
+    where: { id: cotizacionId },
+    include: {
+      lineItems: true,
+      cliente: { select: { nombre: true } },
+    },
+  });
+  if (!cotizacion) return [];
+
+  const [reglas, allProducts] = await Promise.all([
+    prisma.reglaComercial.findMany({ where: { activa: true } }),
+    prisma.producto.findMany({ select: { id: true, categoriaId: true } }),
+  ]);
+  if (reglas.length === 0) return [];
+
+  const catMap: ProductoCategoriaMap = {};
+  for (const p of allProducts) catMap[p.id] = p.categoriaId;
+
+  const result = validarCotizacion(
+    reglas,
+    {
+      lineItems: cotizacion.lineItems.map((li) => ({
+        productoId: li.productoId,
+        descripcion: li.descripcion,
+        cantidad: li.cantidad,
+        precioUnitario: li.precioUnitario,
+        descuento: li.descuento,
+      })),
+      descuentoGlobal: cotizacion.descuentoGlobal,
+      subtotal: cotizacion.subtotal,
+      total: cotizacion.total,
+    },
+    catMap
+  );
+
+  if (result.aprobacionesRequeridas.length === 0) return [];
+
+  // Get existing approvals for this quote
+  const existingApprovals = await prisma.aprobacion.findMany({
+    where: { cotizacionId },
+    select: { reglaId: true, aprobadorEmail: true, estado: true },
+  });
+
+  // Only create approvals that don't already exist (or were previously approved
+  // but the quote data changed — reset those to PENDIENTE)
+  const newApprovals = [];
+  for (const req of result.aprobacionesRequeridas) {
+    const existing = existingApprovals.find(
+      (a) => a.reglaId === req.reglaId && a.aprobadorEmail === req.aprobador.email
+    );
+
+    if (!existing) {
+      // Create new approval record
+      const aprobacion = await prisma.aprobacion.create({
+        data: {
+          cotizacionId,
+          reglaId: req.reglaId,
+          aprobadorNombre: req.aprobador.nombre,
+          aprobadorEmail: req.aprobador.email,
+        },
+      });
+      newApprovals.push({ ...aprobacion, razon: req.razon });
+    } else if (existing.estado === "APROBADA") {
+      // Rule conditions changed — existing approval may no longer be valid.
+      // Reset to PENDIENTE so it requires re-approval.
+      await prisma.aprobacion.updateMany({
+        where: { cotizacionId, reglaId: req.reglaId, aprobadorEmail: req.aprobador.email },
+        data: { estado: "PENDIENTE", respondidoAt: null, comentario: null },
+      });
+    }
+    // If PENDIENTE or RECHAZADA, leave as-is
+  }
+
+  // Log activity if new approvals were created
+  if (newApprovals.length > 0) {
+    await prisma.actividad.create({
+      data: {
+        cotizacionId,
+        tipo: "APROBACION_REQUERIDA",
+        descripcion: `Aprobacion requerida de: ${newApprovals.map((a) => a.aprobadorNombre).join(", ")}`,
+      },
+    });
+
+    // Send email notifications (non-blocking)
+    try {
+      const smtpConfig = await getSmtpConfig();
+      if (smtpConfig) {
+        const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
+        const empresaData = await prisma.empresa.findUnique({
+          where: { id: "default" },
+          select: { nombre: true, colorPrimario: true },
+        });
+        for (const aprob of newApprovals) {
+          if (!aprob.token) continue;
+          try {
+            const html = buildApprovalRequestEmail({
+              baseUrl: origin,
+              token: aprob.token,
+              cotizacion: {
+                numero: cotizacion.numero,
+                total: cotizacion.total,
+                moneda: cotizacion.moneda,
+                fechaEmision: cotizacion.fechaEmision,
+                cliente: cotizacion.cliente.nombre,
+              },
+              aprobadorNombre: aprob.aprobadorNombre,
+              razon: aprob.razon,
+              empresa: {
+                nombre: empresaData?.nombre || "DealForge",
+                colorPrimario: empresaData?.colorPrimario || "#3a9bb5",
+              },
+              lineItems: cotizacion.lineItems.map((i) => ({
+                descripcion: i.descripcion,
+                cantidad: i.cantidad,
+                total: i.total,
+              })),
+            });
+            await sendEmail({
+              to: aprob.aprobadorEmail,
+              subject: `Aprobacion requerida: ${cotizacion.numero}`,
+              html,
+            });
+            await prisma.aprobacion.update({
+              where: { id: aprob.id },
+              data: { emailEnviadoAt: new Date() },
+            });
+          } catch {
+            // Email failure doesn't block the flow
+          }
+        }
+      }
+    } catch {
+      // Non-critical
+    }
+  }
+
+  return newApprovals;
 }
 
 export async function PUT(
@@ -57,8 +207,12 @@ export async function PUT(
       );
     }
 
-    // Block BORRADOR → ENVIADA if approvals are pending or rejected
+    // Block BORRADOR → ENVIADA: re-run rules engine against current data
     if (updateData.estado === "ENVIADA" && current?.estado === "BORRADOR") {
+      // Re-evaluate rules and create any missing approval records
+      await evaluateAndCreateApprovals(id, request);
+
+      // Now check if there are any blocking approvals
       const blockingApprovals = await prisma.aprobacion.findMany({
         where: { cotizacionId: id, estado: { in: ["PENDIENTE", "RECHAZADA"] } },
         select: { estado: true, aprobadorNombre: true },
@@ -137,6 +291,15 @@ export async function PUT(
       actividades: { orderBy: { createdAt: "desc" } },
     },
   });
+
+  // After updating line items, re-evaluate rules for BORRADOR quotes
+  if (data.lineItems && cotizacion.estado === "BORRADOR") {
+    try {
+      await evaluateAndCreateApprovals(id, request);
+    } catch {
+      // Non-critical
+    }
+  }
 
   return NextResponse.json(cotizacion);
 }

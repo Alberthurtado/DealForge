@@ -34,10 +34,24 @@ export async function POST(
   // Verify cotizacion exists
   const cotizacion = await prisma.cotizacion.findUnique({
     where: { id },
-    select: { numero: true },
+    select: { numero: true, estado: true },
   });
   if (!cotizacion) {
     return NextResponse.json({ error: "Cotizacion no encontrada" }, { status: 404 });
+  }
+
+  // Block email if quote is still BORRADOR with pending/rejected approvals
+  if (cotizacion.estado === "BORRADOR") {
+    const blockingApprovals = await prisma.aprobacion.findMany({
+      where: { cotizacionId: id, estado: { in: ["PENDIENTE", "RECHAZADA"] } },
+      select: { estado: true, aprobadorNombre: true },
+    });
+    if (blockingApprovals.length > 0) {
+      return NextResponse.json(
+        { error: "No se puede enviar por email una cotizacion con aprobaciones pendientes." },
+        { status: 400 }
+      );
+    }
   }
 
   try {
