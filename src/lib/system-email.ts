@@ -1,14 +1,15 @@
 /**
- * System email sender using Resend API.
+ * System email sender using Brevo (ex Sendinblue) API.
  * Used for approval notifications, password resets, and other system emails.
  * Independent from user's SMTP config (which is for sending quotes to clients).
  *
- * Requires RESEND_API_KEY env var.
+ * Requires BREVO_API_KEY env var.
  * Sends from soporte@dealforge.es
  */
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const FROM_ADDRESS = "DealForge <soporte@dealforge.es>";
+const BREVO_API_KEY = process.env.BREVO_API_KEY;
+const FROM_EMAIL = "soporte@dealforge.es";
+const FROM_NAME = "DealForge";
 
 interface SystemEmailOptions {
   to: string;
@@ -16,37 +17,32 @@ interface SystemEmailOptions {
   html: string;
 }
 
-interface ResendResponse {
-  id?: string;
-  message?: string;
-}
-
 export async function sendSystemEmail(options: SystemEmailOptions): Promise<{ success: boolean; error?: string }> {
-  if (!RESEND_API_KEY) {
-    console.warn("[system-email] RESEND_API_KEY not configured, skipping email to:", options.to);
-    return { success: false, error: "RESEND_API_KEY not configured" };
+  if (!BREVO_API_KEY) {
+    console.warn("[system-email] BREVO_API_KEY not configured, skipping email to:", options.to);
+    return { success: false, error: "BREVO_API_KEY not configured" };
   }
 
   try {
-    const res = await fetch("https://api.resend.com/emails", {
+    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "api-key": BREVO_API_KEY,
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
-        from: FROM_ADDRESS,
-        to: [options.to],
+        sender: { name: FROM_NAME, email: FROM_EMAIL },
+        to: [{ email: options.to }],
         subject: options.subject,
-        html: options.html,
+        htmlContent: options.html,
       }),
     });
 
-    const data: ResendResponse = await res.json();
-
     if (!res.ok) {
-      console.error("[system-email] Resend API error:", data);
-      return { success: false, error: data.message || "Error al enviar email" };
+      const data = await res.json().catch(() => ({}));
+      console.error("[system-email] Brevo API error:", res.status, data);
+      return { success: false, error: data?.message || `Brevo error ${res.status}` };
     }
 
     return { success: true };
@@ -57,5 +53,5 @@ export async function sendSystemEmail(options: SystemEmailOptions): Promise<{ su
 }
 
 export function isSystemEmailConfigured(): boolean {
-  return !!RESEND_API_KEY;
+  return !!BREVO_API_KEY;
 }
