@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { getSmtpConfig, sendEmail } from "@/lib/email";
 import { buildApprovalRequestEmail } from "@/lib/approval-email";
+import { sendSystemEmail, isSystemEmailConfigured } from "@/lib/system-email";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
@@ -33,9 +33,8 @@ export async function POST(
     return NextResponse.json({ error: "Esta aprobacion ya fue resuelta" }, { status: 400 });
   }
 
-  const smtpConfig = await getSmtpConfig();
-  if (!smtpConfig) {
-    return NextResponse.json({ error: "SMTP no configurado. Configura el email en Ajustes." }, { status: 400 });
+  if (!isSystemEmailConfigured()) {
+    return NextResponse.json({ error: "Servicio de email no configurado (RESEND_API_KEY)." }, { status: 400 });
   }
 
   // Get rule name
@@ -80,21 +79,20 @@ export async function POST(
     },
   });
 
-  try {
-    await sendEmail({
-      to: aprobacion.aprobadorEmail,
-      subject: `Aprobacion requerida: ${aprobacion.cotizacion.numero}`,
-      html,
-    });
+  const emailResult = await sendSystemEmail({
+    to: aprobacion.aprobadorEmail,
+    subject: `Aprobacion requerida: ${aprobacion.cotizacion.numero}`,
+    html,
+  });
 
-    await prisma.aprobacion.update({
-      where: { id: aprobacionId },
-      data: { emailEnviadoAt: new Date() },
-    });
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "Error al enviar email";
-    return NextResponse.json({ error: message }, { status: 500 });
+  if (!emailResult.success) {
+    return NextResponse.json({ error: emailResult.error || "Error al enviar email" }, { status: 500 });
   }
+
+  await prisma.aprobacion.update({
+    where: { id: aprobacionId },
+    data: { emailEnviadoAt: new Date() },
+  });
+
+  return NextResponse.json({ success: true });
 }

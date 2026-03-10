@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { cotizacionUpdateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 import { validarCotizacion, type ProductoCategoriaMap } from "@/lib/reglas-engine";
-import { getSmtpConfig, sendEmail } from "@/lib/email";
 import { buildApprovalRequestEmail } from "@/lib/approval-email";
+import { sendSystemEmail } from "@/lib/system-email";
 
 export async function GET(
   request: NextRequest,
@@ -124,52 +124,51 @@ async function evaluateAndCreateApprovals(
       },
     });
 
-    // Send email notifications (non-blocking)
+    // Send email notifications via Resend (non-blocking)
     try {
-      const smtpConfig = await getSmtpConfig();
-      if (smtpConfig) {
-        const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
-        const empresaData = await prisma.empresa.findUnique({
-          where: { id: "default" },
-          select: { nombre: true, colorPrimario: true },
-        });
-        for (const aprob of newApprovals) {
-          if (!aprob.token) continue;
-          try {
-            const html = buildApprovalRequestEmail({
-              baseUrl: origin,
-              token: aprob.token,
-              cotizacion: {
-                numero: cotizacion.numero,
-                total: cotizacion.total,
-                moneda: cotizacion.moneda,
-                fechaEmision: cotizacion.fechaEmision,
-                cliente: cotizacion.cliente.nombre,
-              },
-              aprobadorNombre: aprob.aprobadorNombre,
-              razon: aprob.razon,
-              empresa: {
-                nombre: empresaData?.nombre || "DealForge",
-                colorPrimario: empresaData?.colorPrimario || "#3a9bb5",
-              },
-              lineItems: cotizacion.lineItems.map((i) => ({
-                descripcion: i.descripcion,
-                cantidad: i.cantidad,
-                total: i.total,
-              })),
-            });
-            await sendEmail({
-              to: aprob.aprobadorEmail,
-              subject: `Aprobacion requerida: ${cotizacion.numero}`,
-              html,
-            });
+      const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
+      const empresaData = await prisma.empresa.findUnique({
+        where: { id: "default" },
+        select: { nombre: true, colorPrimario: true },
+      });
+      for (const aprob of newApprovals) {
+        if (!aprob.token) continue;
+        try {
+          const html = buildApprovalRequestEmail({
+            baseUrl: origin,
+            token: aprob.token,
+            cotizacion: {
+              numero: cotizacion.numero,
+              total: cotizacion.total,
+              moneda: cotizacion.moneda,
+              fechaEmision: cotizacion.fechaEmision,
+              cliente: cotizacion.cliente.nombre,
+            },
+            aprobadorNombre: aprob.aprobadorNombre,
+            razon: aprob.razon,
+            empresa: {
+              nombre: empresaData?.nombre || "DealForge",
+              colorPrimario: empresaData?.colorPrimario || "#3a9bb5",
+            },
+            lineItems: cotizacion.lineItems.map((i) => ({
+              descripcion: i.descripcion,
+              cantidad: i.cantidad,
+              total: i.total,
+            })),
+          });
+          const emailResult = await sendSystemEmail({
+            to: aprob.aprobadorEmail,
+            subject: `Aprobacion requerida: ${cotizacion.numero}`,
+            html,
+          });
+          if (emailResult.success) {
             await prisma.aprobacion.update({
               where: { id: aprob.id },
               data: { emailEnviadoAt: new Date() },
             });
-          } catch {
-            // Email failure doesn't block the flow
           }
+        } catch {
+          // Email failure doesn't block the flow
         }
       }
     } catch {

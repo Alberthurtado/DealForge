@@ -55,6 +55,7 @@ interface Cotizacion {
   lineItems: Array<{
     id: string;
     descripcion: string;
+    productoId: string | null;
     cantidad: number;
     precioUnitario: number;
     descuento: number;
@@ -121,7 +122,7 @@ export default function CotizacionDetailPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             lineItems: data.lineItems.map((li: Cotizacion["lineItems"][0]) => ({
-              productoId: li.producto ? undefined : null,
+              productoId: li.productoId || null,
               descripcion: li.descripcion,
               cantidad: li.cantidad,
               precioUnitario: li.precioUnitario,
@@ -153,6 +154,8 @@ export default function CotizacionDetailPage() {
       const data = await res.json().catch(() => null);
       showError(data?.error || "Error al cambiar el estado");
     }
+    // Always reload approvals — backend may have created new ones
+    loadAprobaciones();
   }
 
   async function duplicateQuote() {
@@ -169,7 +172,7 @@ export default function CotizacionDetailPage() {
         notas: `Duplicada de ${cotizacion.numero}`,
         condiciones: cotizacion.condiciones,
         lineItems: cotizacion.lineItems.map((li) => ({
-          productoId: li.producto ? undefined : null,
+          productoId: li.productoId || null,
           descripcion: li.descripcion,
           cantidad: li.cantidad,
           precioUnitario: li.precioUnitario,
