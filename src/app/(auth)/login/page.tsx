@@ -1,10 +1,10 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Flame, Eye, EyeOff, Loader2 } from "lucide-react";
-import { useRecaptcha } from "@/hooks/useRecaptcha";
+import { TurnstileWidget } from "@/components/ui/turnstile-widget";
 
 function LoginForm() {
   const router = useRouter();
@@ -16,7 +16,11 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { getToken } = useRecaptcha();
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const handleToken = useCallback((token: string | null) => {
+    setTurnstileToken(token);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,12 +28,14 @@ function LoginForm() {
     setLoading(true);
 
     try {
-      const recaptchaToken = await getToken("login");
-
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, recaptchaToken }),
+        body: JSON.stringify({
+          email,
+          password,
+          turnstileToken,
+        }),
       });
 
       const data = await res.json();
@@ -122,6 +128,8 @@ function LoginForm() {
               ¿Olvidaste tu contrasena?
             </Link>
           </div>
+
+          <TurnstileWidget action="login" onToken={handleToken} />
 
           <button
             type="submit"

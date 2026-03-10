@@ -40,7 +40,7 @@ const percentage = (field: string) =>
 export const loginSchema = z.object({
   email: emailField,
   password: z.string().min(1, "La contrasena es obligatoria"),
-  recaptchaToken: z.string().optional().nullable(),
+  turnstileToken: z.string().optional().nullable(),
 });
 
 export const registroSchema = z.object({
@@ -49,12 +49,12 @@ export const registroSchema = z.object({
   password: z
     .string()
     .min(8, "La contrasena debe tener al menos 8 caracteres"),
-  recaptchaToken: z.string().optional().nullable(),
+  turnstileToken: z.string().optional().nullable(),
 });
 
 export const recuperarSchema = z.object({
   email: emailField,
-  recaptchaToken: z.string().optional().nullable(),
+  turnstileToken: z.string().optional().nullable(),
 });
 
 export const resetPasswordSchema = z.object({

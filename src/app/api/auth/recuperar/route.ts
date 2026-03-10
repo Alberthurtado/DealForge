@@ -4,7 +4,7 @@ import { randomBytes } from "crypto";
 import { checkRateLimit, RATE_LIMITS, getClientIp, rateLimitResponse } from "@/lib/rate-limit";
 import { validateBody } from "@/lib/validate";
 import { recuperarSchema } from "@/lib/validations";
-import { verifyRecaptcha } from "@/lib/recaptcha";
+import { verifyTurnstile } from "@/lib/turnstile";
 import { sendPasswordResetEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
@@ -17,9 +17,9 @@ export async function POST(request: NextRequest) {
   const { data, error } = validateBody(recuperarSchema, body);
   if (error) return error;
 
-  // Verify reCAPTCHA
-  const recaptchaResult = await verifyRecaptcha(data.recaptchaToken ?? null, "recuperar");
-  if (!recaptchaResult.success) {
+  // Verify Turnstile
+  const turnstileResult = await verifyTurnstile(data.turnstileToken ?? null);
+  if (!turnstileResult.success) {
     return NextResponse.json(
       { error: "Verificacion de seguridad fallida. Recarga la pagina." },
       { status: 403 }

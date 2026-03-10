@@ -4,7 +4,7 @@ import { verifyPassword, createToken, getCookieName } from "@/lib/auth";
 import { checkRateLimit, RATE_LIMITS, getClientIp, rateLimitResponse } from "@/lib/rate-limit";
 import { loginSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
-import { verifyRecaptcha } from "@/lib/recaptcha";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 export async function POST(request: NextRequest) {
   // Rate limit: 5 attempts per 15 minutes per IP
@@ -16,8 +16,8 @@ export async function POST(request: NextRequest) {
   const { data, error } = validateBody(loginSchema, body);
   if (error) return error;
 
-  // Verify reCAPTCHA (if configured)
-  const captcha = await verifyRecaptcha(data.recaptchaToken, "login");
+  // Verify Turnstile (if configured)
+  const captcha = await verifyTurnstile(data.turnstileToken);
   if (!captcha.success) {
     return NextResponse.json(
       { error: "Verificacion de seguridad fallida. Intenta de nuevo." },

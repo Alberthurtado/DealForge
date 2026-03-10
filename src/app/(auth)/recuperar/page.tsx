@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import { Flame, Loader2, Mail, ArrowLeft, CheckCircle } from "lucide-react";
-import { useRecaptcha } from "@/hooks/useRecaptcha";
+import { TurnstileWidget } from "@/components/ui/turnstile-widget";
 
 export default function RecuperarPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
-  const { getToken } = useRecaptcha();
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const handleToken = useCallback((token: string | null) => {
+    setTurnstileToken(token);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -18,12 +22,10 @@ export default function RecuperarPage() {
     setLoading(true);
 
     try {
-      const recaptchaToken = await getToken("recuperar");
-
       const res = await fetch("/api/auth/recuperar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, recaptchaToken }),
+        body: JSON.stringify({ email, turnstileToken }),
       });
 
       const data = await res.json();
@@ -112,6 +114,8 @@ export default function RecuperarPage() {
               />
             </div>
           </div>
+
+          <TurnstileWidget action="recuperar" onToken={handleToken} />
 
           <button
             type="submit"
