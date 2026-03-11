@@ -112,3 +112,145 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* ===== Forge Fire Button ===== */
+@layer components {
+  .forge-fire-btn {
+    position: fixed;
+    overflow: visible;
+  }
+
+  .forge-fire-glow {
+    position: absolute;
+    inset: -3px;
+    border-radius: 9999px;
+    background: conic-gradient(
+      from 0deg,
+      #2dd4bf00,
+      #3a9bb5aa,
+      #60d5f8cc,
+      #2dd4bf00,
+      #3a9bb5aa,
+      #60d5f8cc,
+      #2dd4bf00
+    );
+    animation: forge-glow-spin 3s linear infinite;
+    opacity: 0.7;
+    z-index: 1;
+  }
+
+  .forge-fire-btn:hover .forge-fire-glow {
+    opacity: 1;
+    inset: -4px;
+  }
+
+  .forge-fire-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #60d5f8, #3a9bb5);
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+    filter: blur(0.5px);
+  }
+
+  .forge-fire-particle-1 {
+    animation: forge-ember 2.2s ease-out infinite;
+    animation-delay: 0s;
+    left: 50%;
+    --drift: 3px;
+  }
+  .forge-fire-particle-2 {
+    animation: forge-ember 2.5s ease-out infinite;
+    animation-delay: 0.4s;
+    left: 35%;
+    width: 4px;
+    height: 4px;
+    --drift: -6px;
+  }
+  .forge-fire-particle-3 {
+    animation: forge-ember 2s ease-out infinite;
+    animation-delay: 0.8s;
+    left: 65%;
+    width: 5px;
+    height: 5px;
+    --drift: 5px;
+  }
+  .forge-fire-particle-4 {
+    animation: forge-ember 2.8s ease-out infinite;
+    animation-delay: 1.2s;
+    left: 45%;
+    width: 3px;
+    height: 3px;
+    --drift: -3px;
+  }
+  .forge-fire-particle-5 {
+    animation: forge-ember 2.3s ease-out infinite;
+    animation-delay: 1.6s;
+    left: 55%;
+    width: 5px;
+    height: 5px;
+    --drift: 7px;
+  }
+  .forge-fire-particle-6 {
+    animation: forge-ember 2.6s ease-out infinite;
+    animation-delay: 0.2s;
+    left: 40%;
+    width: 4px;
+    height: 4px;
+    --drift: -5px;
+  }
+
+  .forge-fire-icon {
+    animation: forge-flame-pulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 4px rgba(96, 213, 248, 0.6));
+  }
+
+  .forge-fire-btn:hover .forge-fire-icon {
+    filter: drop-shadow(0 0 8px rgba(96, 213, 248, 0.9));
+  }
+}
+
+@keyframes forge-glow-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes forge-ember {
+  0% {
+    opacity: 0;
+    bottom: 30%;
+    transform: translateX(0) scale(1);
+  }
+  15% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    bottom: 120%;
+    transform: translateX(var(--drift, 4px)) scale(0.3);
+  }
+}
+
+@keyframes forge-flame-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(96, 213, 248, 0.6)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(96, 213, 248, 0.8)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-fire-particle,
+  .forge-fire-glow,
+  .forge-fire-icon {
+    animation: none !important;
+  }
+  .forge-fire-particle {
+    display: none;
+  }
+  .forge-fire-glow {
+    opacity: 0.4;
+  }
+}

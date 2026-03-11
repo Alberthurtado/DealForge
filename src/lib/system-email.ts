@@ -1,13 +1,13 @@
 /**
- * System email sender using Brevo (ex Sendinblue) API.
+ * System email sender using MailerSend API.
  * Used for approval notifications, password resets, and other system emails.
  * Independent from user's SMTP config (which is for sending quotes to clients).
  *
- * Requires BREVO_API_KEY env var.
+ * Requires MAILERSEND_API_KEY env var.
  * Sends from soporte@dealforge.es
  */
 
-const BREVO_API_KEY = process.env.BREVO_API_KEY;
+const MAILERSEND_API_KEY = process.env.MAILERSEND_API_KEY;
 const FROM_EMAIL = "soporte@dealforge.es";
 const FROM_NAME = "DealForge";
 
@@ -18,31 +18,30 @@ interface SystemEmailOptions {
 }
 
 export async function sendSystemEmail(options: SystemEmailOptions): Promise<{ success: boolean; error?: string }> {
-  if (!BREVO_API_KEY) {
-    console.warn("[system-email] BREVO_API_KEY not configured, skipping email to:", options.to);
-    return { success: false, error: "BREVO_API_KEY not configured" };
+  if (!MAILERSEND_API_KEY) {
+    console.warn("[system-email] MAILERSEND_API_KEY not configured, skipping email to:", options.to);
+    return { success: false, error: "MAILERSEND_API_KEY not configured" };
   }
 
   try {
-    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+    const res = await fetch("https://api.mailersend.com/v1/email", {
       method: "POST",
       headers: {
-        "api-key": BREVO_API_KEY,
+        Authorization: `Bearer ${MAILERSEND_API_KEY}`,
         "Content-Type": "application/json",
-        Accept: "application/json",
       },
       body: JSON.stringify({
-        sender: { name: FROM_NAME, email: FROM_EMAIL },
+        from: { email: FROM_EMAIL, name: FROM_NAME },
         to: [{ email: options.to }],
         subject: options.subject,
-        htmlContent: options.html,
+        html: options.html,
       }),
     });
 
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      console.error("[system-email] Brevo API error:", res.status, data);
-      return { success: false, error: data?.message || `Brevo error ${res.status}` };
+      console.error("[system-email] MailerSend API error:", res.status, data);
+      return { success: false, error: data?.message || `MailerSend error ${res.status}` };
     }
 
     return { success: true };
@@ -53,5 +52,5 @@ export async function sendSystemEmail(options: SystemEmailOptions): Promise<{ su
 }
 
 export function isSystemEmailConfigured(): boolean {
-  return !!BREVO_API_KEY;
+  return !!MAILERSEND_API_KEY;
 }
