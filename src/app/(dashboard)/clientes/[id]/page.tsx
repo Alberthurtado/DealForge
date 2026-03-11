@@ -1,13 +1,14 @@
 import { prisma } from "@/lib/prisma";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { Cliente360 } from "@/components/clientes/cliente-360";
+import { getSession } from "@/lib/auth";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 
-async function getCliente(id: string) {
-  const cliente = await prisma.cliente.findUnique({
-    where: { id },
+async function getCliente(id: string, userId: string) {
+  const cliente = await prisma.cliente.findFirst({
+    where: { id, usuarioId: userId },
     include: {
       contactos: true,
       cotizaciones: {
@@ -27,8 +28,10 @@ export default async function ClienteDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const session = await getSession();
+  if (!session) redirect("/login");
   const { id } = await params;
-  const cliente = await getCliente(id);
+  const cliente = await getCliente(id, session.userId);
 
   if (!cliente) {
     notFound();

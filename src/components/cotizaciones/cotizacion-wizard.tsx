@@ -87,6 +87,10 @@ export function CotizacionWizard({
     }>
   >([]);
   const [expandedVariantId, setExpandedVariantId] = useState<string | null>(null);
+  const [clienteContacts, setClienteContacts] = useState<
+    Array<{ id: string; nombre: string; cargo: string | null; email: string | null; telefono: string | null; principal: boolean }>
+  >([]);
+  const [loadingContacts, setLoadingContacts] = useState(false);
   const [clienteSearch, setClienteSearch] = useState("");
   const [productoSearch, setProductoSearch] = useState("");
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
@@ -113,6 +117,32 @@ export function CotizacionWizard({
       }
     }).catch(() => {});
   }, []);
+
+  // Fetch contacts when client changes
+  useEffect(() => {
+    if (!form.clienteId) {
+      setClienteContacts([]);
+      return;
+    }
+    setLoadingContacts(true);
+    fetch(`/api/clientes/${form.clienteId}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.contactos) {
+          setClienteContacts(data.contactos);
+          // Auto-select principal contact if no contact is set yet
+          if (!form.contactoNombre) {
+            const principal = data.contactos.find((c: { principal: boolean }) => c.principal);
+            if (principal) {
+              setForm((f) => ({ ...f, contactoNombre: principal.nombre }));
+            }
+          }
+        }
+      })
+      .catch(() => setClienteContacts([]))
+      .finally(() => setLoadingContacts(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.clienteId]);
 
   // Validate rules on step 3
   useEffect(() => {
@@ -307,10 +337,18 @@ export function CotizacionWizard({
                 <button
                   key={cliente.id}
                   onClick={() =>
-                    setForm((f) => ({ ...f, clienteId: cliente.id }))
+                    setForm((f) => ({
+                      ...f,
+                      clienteId: cliente.id,
+                      contactoNombre: f.clienteId !== cliente.id ? "" : f.contactoNombre,
+                    }))
                   }
                   onDoubleClick={() => {
-                    setForm((f) => ({ ...f, clienteId: cliente.id }));
+                    setForm((f) => ({
+                      ...f,
+                      clienteId: cliente.id,
+                      contactoNombre: f.clienteId !== cliente.id ? "" : f.contactoNombre,
+                    }));
                     setStep(1);
                   }}
                   className={cn(
@@ -331,15 +369,82 @@ export function CotizacionWizard({
               <label className="block text-sm font-medium text-foreground mb-1">
                 Contacto
               </label>
-              <input
-                type="text"
-                value={form.contactoNombre}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, contactoNombre: e.target.value }))
-                }
-                className={inputClass}
-                placeholder="Nombre del contacto"
-              />
+              {loadingContacts ? (
+                <div className="flex items-center gap-2 py-2 text-sm text-muted-foreground">
+                  <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                  Cargando contactos...
+                </div>
+              ) : clienteContacts.length > 0 ? (
+                <div className="space-y-2">
+                  <select
+                    value={
+                      clienteContacts.some((c) => c.nombre === form.contactoNombre)
+                        ? form.contactoNombre
+                        : form.contactoNombre
+                          ? "__custom__"
+                          : ""
+                    }
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val === "__custom__") {
+                        setForm((f) => ({ ...f, contactoNombre: "" }));
+                      } else {
+                        setForm((f) => ({ ...f, contactoNombre: val }));
+                      }
+                    }}
+                    className={inputClass}
+                  >
+                    <option value="">Seleccionar contacto...</option>
+                    {clienteContacts.map((c) => (
+                      <option key={c.id} value={c.nombre}>
+                        {c.nombre}
+                        {c.cargo ? ` — ${c.cargo}` : ""}
+                        {c.principal ? " (Principal)" : ""}
+                      </option>
+                    ))}
+                    <option value="__custom__">✏️ Escribir otro nombre...</option>
+                  </select>
+                  {/* Show contact details when one is selected */}
+                  {form.contactoNombre &&
+                    clienteContacts.some((c) => c.nombre === form.contactoNombre) && (
+                      <div className="text-xs text-muted-foreground bg-muted/50 rounded-lg px-3 py-2 space-y-0.5">
+                        {clienteContacts
+                          .filter((c) => c.nombre === form.contactoNombre)
+                          .map((c) => (
+                            <div key={c.id}>
+                              {c.cargo && <p>Cargo: {c.cargo}</p>}
+                              {c.email && <p>Email: {c.email}</p>}
+                              {c.telefono && <p>Teléfono: {c.telefono}</p>}
+                            </div>
+                          ))}
+                      </div>
+                    )}
+                  {/* Show text input for custom name */}
+                  {form.contactoNombre !== "" &&
+                    !clienteContacts.some((c) => c.nombre === form.contactoNombre) && (
+                      <input
+                        type="text"
+                        value={form.contactoNombre}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, contactoNombre: e.target.value }))
+                        }
+                        className={inputClass}
+                        placeholder="Nombre del contacto"
+                        autoFocus
+                      />
+                    )}
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  value={form.contactoNombre}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, contactoNombre: e.target.value }))
+                  }
+                  className={inputClass}
+                  placeholder="Nombre del contacto"
+                />
+              )}
             </div>
           )}
         </div>

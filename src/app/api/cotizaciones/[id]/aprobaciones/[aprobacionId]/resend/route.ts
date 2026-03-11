@@ -1,13 +1,28 @@
 import { prisma } from "@/lib/prisma";
 import { buildApprovalRequestEmail } from "@/lib/approval-email";
 import { sendSystemEmail, isSystemEmailConfigured } from "@/lib/system-email";
+import { getSession } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string; aprobacionId: string }> }
 ) {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  }
+
   const { id, aprobacionId } = await params;
+
+  // Verify the cotizacion belongs to this user
+  const cotizacionOwned = await prisma.cotizacion.findFirst({
+    where: { id, usuarioId: session.userId },
+    select: { id: true },
+  });
+  if (!cotizacionOwned) {
+    return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
+  }
 
   const aprobacion = await prisma.aprobacion.findUnique({
     where: { id: aprobacionId, cotizacionId: id },

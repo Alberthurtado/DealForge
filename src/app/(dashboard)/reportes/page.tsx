@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { PageHeader } from "@/components/layout/page-header";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Reportes",
@@ -8,8 +10,9 @@ export const metadata: Metadata = {
 };
 import { ReportesContent } from "@/components/reportes/reportes-content";
 
-async function getReportData() {
+async function getReportData(userId: string) {
   const cotizaciones = await prisma.cotizacion.findMany({
+    where: { usuarioId: userId },
     include: {
       cliente: { select: { nombre: true } },
       lineItems: true,
@@ -85,7 +88,9 @@ async function getReportData() {
 }
 
 export default async function ReportesPage() {
-  const data = await getReportData();
+  const session = await getSession();
+  if (!session) redirect("/login");
+  const data = await getReportData(session.userId);
 
   return (
     <div>

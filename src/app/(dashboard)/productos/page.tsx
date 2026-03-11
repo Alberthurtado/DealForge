@@ -13,9 +13,10 @@ import { ProductoTable } from "@/components/productos/producto-table";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
-async function getData() {
+async function getData(userId: string) {
   const [productos, categorias] = await Promise.all([
     prisma.producto.findMany({
+      where: { usuarioId: userId },
       include: {
         categoria: true,
         variantes: { where: { activo: true }, select: { id: true, nombre: true } },
@@ -28,10 +29,9 @@ async function getData() {
 }
 
 export default async function ProductosPage() {
-  const [{ productos, categorias }, session] = await Promise.all([
-    getData(),
-    getSession(),
-  ]);
+  const session = await getSession();
+  if (!session) return null;
+  const { productos, categorias } = await getData(session.userId);
   const plan = session?.plan || "starter";
   const limits = getPlanLimits(plan);
   const planLabel = plan.charAt(0).toUpperCase() + plan.slice(1);

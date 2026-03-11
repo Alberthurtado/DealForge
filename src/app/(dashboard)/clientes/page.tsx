@@ -13,8 +13,9 @@ import { ClienteTable } from "@/components/clientes/cliente-table";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
-async function getClientes() {
+async function getClientes(userId: string) {
   return prisma.cliente.findMany({
+    where: { usuarioId: userId },
     include: {
       contactos: { where: { principal: true }, take: 1 },
       _count: { select: { cotizaciones: true } },
@@ -27,7 +28,9 @@ async function getClientes() {
 }
 
 export default async function ClientesPage() {
-  const [clientes, session] = await Promise.all([getClientes(), getSession()]);
+  const session = await getSession();
+  if (!session) return null;
+  const clientes = await getClientes(session.userId);
   const plan = session?.plan || "starter";
   const limits = getPlanLimits(plan);
   const planLabel = plan.charAt(0).toUpperCase() + plan.slice(1);

@@ -13,8 +13,9 @@ import { CotizacionTable } from "@/components/cotizaciones/cotizacion-table";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
-async function getCotizaciones() {
+async function getCotizaciones(userId: string) {
   return prisma.cotizacion.findMany({
+    where: { usuarioId: userId },
     include: {
       cliente: { select: { id: true, nombre: true } },
       _count: { select: { lineItems: true } },
@@ -24,10 +25,9 @@ async function getCotizaciones() {
 }
 
 export default async function CotizacionesPage() {
-  const [cotizaciones, session] = await Promise.all([
-    getCotizaciones(),
-    getSession(),
-  ]);
+  const session = await getSession();
+  if (!session) return null;
+  const cotizaciones = await getCotizaciones(session.userId);
   const plan = session?.plan || "starter";
   const limits = getPlanLimits(plan);
   const planLabel = plan.charAt(0).toUpperCase() + plan.slice(1);

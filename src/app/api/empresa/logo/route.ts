@@ -1,7 +1,13 @@
 import { prisma } from "@/lib/prisma";
+import { getSession } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  }
+
   const formData = await request.formData();
   const file = formData.get("logo") as File | null;
 

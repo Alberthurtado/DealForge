@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { PageHeader } from "@/components/layout/page-header";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -14,13 +16,15 @@ import { RevenueChart } from "@/components/dashboard/revenue-chart";
 import { ConversionFunnel } from "@/components/dashboard/conversion-funnel";
 import { OnboardingChecklist } from "@/components/dashboard/onboarding-checklist";
 
-async function getDashboardData() {
+async function getDashboardData(userId: string) {
   const [cotizaciones, totalClientes, recentActivities, empresa, totalProductos] = await Promise.all([
     prisma.cotizacion.findMany({
+      where: { usuarioId: userId },
       select: { id: true, estado: true, total: true, fechaEmision: true },
     }),
-    prisma.cliente.count(),
+    prisma.cliente.count({ where: { usuarioId: userId } }),
     prisma.actividad.findMany({
+      where: { cotizacion: { usuarioId: userId } },
       take: 8,
       orderBy: { createdAt: "desc" },
       include: {
@@ -30,7 +34,7 @@ async function getDashboardData() {
       },
     }),
     prisma.empresa.findUnique({ where: { id: "default" }, select: { nombre: true, email: true } }),
-    prisma.producto.count(),
+    prisma.producto.count({ where: { usuarioId: userId } }),
   ]);
 
   const activas = cotizaciones.filter((c) => c.estado !== "ARCHIVADA");
@@ -118,7 +122,9 @@ async function getDashboardData() {
 }
 
 export default async function DashboardPage() {
-  const data = await getDashboardData();
+  const session = await getSession();
+  if (!session) redirect("/login");
+  const data = await getDashboardData(session.userId);
 
   return (
     <div>

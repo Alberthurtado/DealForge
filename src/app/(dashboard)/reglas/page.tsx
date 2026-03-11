@@ -12,14 +12,15 @@ export const metadata: Metadata = {
     "Gestiona límites de descuento, productos obligatorios, aprobaciones y promociones.",
 };
 
-async function getData() {
+async function getData(userId: string) {
   const [reglas, productos, categorias] = await Promise.all([
     prisma.reglaComercial.findMany({
+      where: { usuarioId: userId },
       orderBy: [{ prioridad: "desc" }, { createdAt: "desc" }],
     }),
     prisma.producto.findMany({
+      where: { activo: true, usuarioId: userId },
       include: { categoria: true },
-      where: { activo: true },
       orderBy: { nombre: "asc" },
     }),
     prisma.categoria.findMany({ orderBy: { nombre: "asc" } }),
@@ -29,7 +30,8 @@ async function getData() {
 
 export default async function ReglasPage() {
   const session = await getSession();
-  const features = getPlanFeatures(session?.plan || "starter");
+  if (!session) return null;
+  const features = getPlanFeatures(session.plan || "starter");
 
   if (!features.reglasComerciales) {
     return (
@@ -47,7 +49,7 @@ export default async function ReglasPage() {
     );
   }
 
-  const data = await getData();
+  const data = await getData(session.userId);
 
   return (
     <div>
