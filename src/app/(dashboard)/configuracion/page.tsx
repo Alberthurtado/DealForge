@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { PageHeader } from "@/components/layout/page-header";
 import { EmpresaForm } from "@/components/configuracion/empresa-form";
 import { PlanSection } from "@/components/configuracion/plan-section";
+import { ApiKeySection } from "@/components/configuracion/api-key-section";
 import { getSession } from "@/lib/auth";
 
 export const metadata: Metadata = {
@@ -55,6 +56,7 @@ export default async function ConfiguracionPage() {
             }}
           />
         )}
+        {usuario && <ApiKeySection plan={usuario.plan} />}
         <EmpresaForm initialData={JSON.parse(JSON.stringify(empresa))} />
       </div>
     </div>

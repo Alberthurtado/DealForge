@@ -119,10 +119,10 @@ export default function CotizacionDetailPage() {
         if (data.user?.plan) {
           // Import features dynamically based on plan
           const features: Record<string, PlanFeatures> = {
-            starter: { emailEnvio: false, reglasComerciales: false, aprobaciones: false, reglasAvanzadas: false, pdfBranded: false },
-            pro: { emailEnvio: true, reglasComerciales: true, aprobaciones: false, reglasAvanzadas: false, pdfBranded: true },
-            business: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true },
-            enterprise: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true },
+            starter: { emailEnvio: false, reglasComerciales: false, aprobaciones: false, reglasAvanzadas: false, pdfBranded: false, apiKeys: false },
+            pro: { emailEnvio: true, reglasComerciales: true, aprobaciones: false, reglasAvanzadas: false, pdfBranded: true, apiKeys: true },
+            business: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true },
+            enterprise: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true },
           };
           setPlanFeatures(features[data.user.plan] || features.starter);
         }

@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
-import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
+import { checkRateLimit, rateLimitResponse, RATE_LIMITS } from "@/lib/rate-limit";
+
+// Inlined from api-key.ts to avoid importing Node.js crypto in Edge middleware
+const API_KEY_PREFIX = "dfk_";
+const API_KEY_LENGTH = 44;
 
 const COOKIE_NAME = "dealforge_token";
 
@@ -74,7 +78,30 @@ export async function middleware(request: NextRequest) {
 
   if (!isProtectedPage && !isProtectedAPI) return NextResponse.next();
 
-  // Verify JWT token
+  // ─── API Key auth (Bearer token) — only for API routes ───
+  if (isProtectedAPI) {
+    const authHeader = request.headers.get("authorization");
+    if (authHeader?.startsWith("Bearer ")) {
+      const apiKey = authHeader.slice(7);
+
+      // Validate format (no DB call in middleware)
+      if (!apiKey.startsWith(API_KEY_PREFIX) || apiKey.length !== API_KEY_LENGTH) {
+        return NextResponse.json({ error: "API key inválida" }, { status: 401 });
+      }
+
+      // Rate limit API key requests (120/min keyed by first 16 chars of key)
+      const keyId = apiKey.substring(0, 16);
+      const limit = checkRateLimit(`api-key:${keyId}`, RATE_LIMITS.apiKeyAuth);
+      if (!limit.allowed) return rateLimitResponse(limit.resetAt);
+
+      // Forward raw key to route handler via header (resolved in getSession())
+      const requestHeaders = new Headers(request.headers);
+      requestHeaders.set("x-dealforge-api-key", apiKey);
+      return NextResponse.next({ request: { headers: requestHeaders } });
+    }
+  }
+
+  // ─── Cookie-based JWT auth ───
   const token = request.cookies.get(COOKIE_NAME)?.value;
 
   if (!token) {

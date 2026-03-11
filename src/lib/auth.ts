@@ -1,6 +1,8 @@
 import bcrypt from "bcryptjs";
 import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { hashApiKey, isValidApiKeyFormat } from "@/lib/api-key";
+import { prisma } from "@/lib/prisma";
 
 const COOKIE_NAME = "dealforge_token";
 
@@ -53,8 +55,26 @@ export async function verifyToken(token: string): Promise<JWTPayload | null> {
   }
 }
 
+// ─── API Key session resolution ─────────────────
+async function getSessionFromApiKey(rawKey: string): Promise<JWTPayload | null> {
+  if (!isValidApiKeyFormat(rawKey)) return null;
+  const hash = hashApiKey(rawKey);
+  const user = await prisma.usuario.findUnique({
+    where: { apiKeyHash: hash },
+    select: { id: true, email: true, plan: true, nombre: true, activo: true },
+  });
+  if (!user || !user.activo) return null;
+  return { userId: user.id, email: user.email, plan: user.plan, nombre: user.nombre };
+}
+
 // ─── Session helpers ────────────────────────────
 export async function getSession(): Promise<JWTPayload | null> {
+  // Check for API key forwarded by middleware
+  const headerStore = await headers();
+  const apiKey = headerStore.get("x-dealforge-api-key");
+  if (apiKey) return getSessionFromApiKey(apiKey);
+
+  // Fallback to cookie-based JWT
   const cookieStore = await cookies();
   const token = cookieStore.get(COOKIE_NAME)?.value;
   if (!token) return null;

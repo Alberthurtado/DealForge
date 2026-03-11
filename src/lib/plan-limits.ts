@@ -41,6 +41,7 @@ export interface PlanFeatures {
   aprobaciones: boolean;      // Approval workflows
   reglasAvanzadas: boolean;   // Advanced rule types
   pdfBranded: boolean;        // Branded PDF templates
+  apiKeys: boolean;           // API key for external integrations
 }
 
 const PLAN_FEATURES: Record<string, PlanFeatures> = {
@@ -50,6 +51,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     aprobaciones: false,
     reglasAvanzadas: false,
     pdfBranded: true,
+    apiKeys: false,
   },
   pro: {
     emailEnvio: true,
@@ -57,6 +59,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     aprobaciones: false,
     reglasAvanzadas: false,
     pdfBranded: true,
+    apiKeys: true,
   },
   business: {
     emailEnvio: true,
@@ -64,6 +67,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     aprobaciones: true,
     reglasAvanzadas: true,
     pdfBranded: true,
+    apiKeys: true,
   },
   enterprise: {
     emailEnvio: true,
@@ -71,6 +75,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     aprobaciones: true,
     reglasAvanzadas: true,
     pdfBranded: true,
+    apiKeys: true,
   },
 };
 

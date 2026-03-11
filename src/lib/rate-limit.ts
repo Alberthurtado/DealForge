@@ -73,6 +73,8 @@ export const RATE_LIMITS = {
   assistant: { maxRequests: 10, windowSeconds: 60 } as RateLimitConfig,
   email: { maxRequests: 5, windowSeconds: 60 } as RateLimitConfig,
   apiWrite: { maxRequests: 60, windowSeconds: 60 } as RateLimitConfig,
+  apiKeyAuth: { maxRequests: 120, windowSeconds: 60 } as RateLimitConfig,
+  apiKeyGenerate: { maxRequests: 5, windowSeconds: 3600 } as RateLimitConfig,
 } as const;
 
 // ─── Helpers ────────────────────────────────────
