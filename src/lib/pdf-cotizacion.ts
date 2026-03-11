@@ -1,12 +1,18 @@
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 
 export async function generateCotizacionPdf(
   baseUrl: string,
   cotizacionId: string
 ): Promise<Buffer> {
+  // @sparticuz/chromium bundles Chromium for serverless (Vercel, AWS Lambda)
+  const executablePath = await chromium.executablePath();
+
   const browser = await puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: { width: 1280, height: 720 },
+    executablePath,
     headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-gpu"],
   });
 
   try {
