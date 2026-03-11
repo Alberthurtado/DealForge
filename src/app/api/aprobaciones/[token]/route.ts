@@ -123,7 +123,7 @@ export async function PUT(
     },
   });
 
-  // Send notification email to empresa via Brevo (non-blocking)
+  // Send notification email to empresa via MailerSend (non-blocking)
   try {
     const empresa = await prisma.empresa.findUnique({
       where: { id: "default" },

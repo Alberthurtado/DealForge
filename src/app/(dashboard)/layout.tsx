@@ -25,7 +25,7 @@ export default async function DashboardLayout({
           {children}
         </main>
       </div>
-      <AssistantPanel />
+      <AssistantPanel userId={session?.userId} />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { getSession } from "@/lib/auth";
 import { aprobacionCreateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 
@@ -7,7 +8,15 @@ export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const session = await getSession();
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
   const { id } = await params;
+
+  // Verify cotizacion belongs to user
+  const owned = await prisma.cotizacion.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  if (!owned) return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
+
   const aprobaciones = await prisma.aprobacion.findMany({
     where: { cotizacionId: id },
     orderBy: { createdAt: "desc" },
@@ -19,13 +28,18 @@ export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params;
-  const bodyRaw = await request.json();
+  const session = await getSession();
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
-  // body can be a single approval or array
+  const { id } = await params;
+
+  // Verify cotizacion belongs to user
+  const owned = await prisma.cotizacion.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  if (!owned) return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
+
+  const bodyRaw = await request.json();
   const items = Array.isArray(bodyRaw) ? bodyRaw : [bodyRaw];
 
-  // Validate each item individually
   const validatedItems = [];
   for (const item of items) {
     const { data, error } = validateBody(aprobacionCreateSchema, item);

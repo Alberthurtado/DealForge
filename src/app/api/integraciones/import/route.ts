@@ -1,8 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { getSession } from "@/lib/auth";
 import Papa from "papaparse";
 
 export async function POST(request: NextRequest) {
+  const session = await getSession();
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
   const formData = await request.formData();
   const file = formData.get("file") as File;
   const tipo = formData.get("tipo") as string;
@@ -27,26 +31,17 @@ export async function POST(request: NextRequest) {
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
       const nombre = row.nombre?.trim();
-      if (!nombre) {
-        errors.push(`Fila ${i + 2}: campo 'nombre' es obligatorio`);
-        continue;
-      }
+      if (!nombre) { errors.push(`Fila ${i + 2}: campo 'nombre' es obligatorio`); continue; }
 
       const data = {
-        nombre,
-        email: row.email?.trim() || null,
-        telefono: row.telefono?.trim() || null,
-        direccion: row.direccion?.trim() || null,
-        ciudad: row.ciudad?.trim() || null,
-        pais: row.pais?.trim() || null,
-        sector: row.sector?.trim() || null,
-        ruc: row.cif?.trim() || null,
-        notas: row.notas?.trim() || null,
+        nombre, email: row.email?.trim() || null, telefono: row.telefono?.trim() || null,
+        direccion: row.direccion?.trim() || null, ciudad: row.ciudad?.trim() || null,
+        pais: row.pais?.trim() || null, sector: row.sector?.trim() || null,
+        ruc: row.cif?.trim() || null, notas: row.notas?.trim() || null,
       };
 
       try {
-        // Check for existing by name
-        const existing = await prisma.cliente.findFirst({ where: { nombre } });
+        const existing = await prisma.cliente.findFirst({ where: { nombre, usuarioId: session.userId } });
         if (existing) {
           await prisma.cliente.update({ where: { id: existing.id }, data });
           updated++;
@@ -55,17 +50,14 @@ export async function POST(request: NextRequest) {
           await prisma.cliente.create({
             data: {
               ...data,
-              contactos: contactoNombre
-                ? {
-                    create: {
-                      nombre: contactoNombre,
-                      email: row.contacto_principal_email?.trim() || null,
-                      cargo: row.contacto_principal_cargo?.trim() || null,
-                      telefono: row.contacto_principal_telefono?.trim() || null,
-                      principal: true,
-                    },
-                  }
-                : undefined,
+              usuarioId: session.userId,
+              contactos: contactoNombre ? {
+                create: {
+                  nombre: contactoNombre, email: row.contacto_principal_email?.trim() || null,
+                  cargo: row.contacto_principal_cargo?.trim() || null, telefono: row.contacto_principal_telefono?.trim() || null,
+                  principal: true,
+                },
+              } : undefined,
             },
           });
           created++;
@@ -76,52 +68,38 @@ export async function POST(request: NextRequest) {
       }
     }
   } else if (tipo === "productos") {
-    // Ensure categories exist
     const categoriaCache = new Map<string, string>();
 
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
       const nombre = row.nombre?.trim();
       const sku = row.sku?.trim();
-      if (!nombre || !sku) {
-        errors.push(`Fila ${i + 2}: campos 'nombre' y 'sku' son obligatorios`);
-        continue;
-      }
+      if (!nombre || !sku) { errors.push(`Fila ${i + 2}: campos 'nombre' y 'sku' son obligatorios`); continue; }
 
       try {
-        // Resolve category
         let categoriaId: string | null = null;
         const catName = row.categoria?.trim();
         if (catName) {
           if (categoriaCache.has(catName)) {
             categoriaId = categoriaCache.get(catName)!;
           } else {
-            const cat = await prisma.categoria.upsert({
-              where: { nombre: catName },
-              update: {},
-              create: { nombre: catName },
-            });
+            const cat = await prisma.categoria.upsert({ where: { nombre: catName }, update: {}, create: { nombre: catName } });
             categoriaId = cat.id;
             categoriaCache.set(catName, cat.id);
           }
         }
 
         const data = {
-          nombre,
-          descripcion: row.descripcion?.trim() || null,
-          precioBase: parseFloat(row.precio_base) || 0,
-          unidad: row.unidad?.trim() || "unidad",
-          categoriaId,
-          activo: row.activo?.toLowerCase() !== "no",
+          nombre, descripcion: row.descripcion?.trim() || null, precioBase: parseFloat(row.precio_base) || 0,
+          unidad: row.unidad?.trim() || "unidad", categoriaId, activo: row.activo?.toLowerCase() !== "no",
         };
 
-        // Check for existing by SKU
-        const existing = await prisma.producto.findFirst({ where: { sku } });
+        const existing = await prisma.producto.findFirst({ where: { sku, usuarioId: session.userId } });
         if (existing) {
           await prisma.producto.update({ where: { id: existing.id }, data });
           updated++;
         } else {
-          await prisma.producto.create({ data: { ...data, sku } });
+          await prisma.producto.create({ data: { ...data, sku, usuarioId: session.userId } });
           created++;
         }
       } catch (e) {

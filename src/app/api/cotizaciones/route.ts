@@ -9,11 +9,14 @@ import { cotizacionCreateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 
 export async function GET(request: NextRequest) {
+  const session = await getSession();
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
   const searchParams = request.nextUrl.searchParams;
   const estado = searchParams.get("estado") || "";
   const search = searchParams.get("search") || "";
 
-  const where: Record<string, unknown> = {};
+  const where: Record<string, unknown> = { usuarioId: session.userId };
   if (estado) where.estado = estado;
   if (search) {
     where.OR = [
@@ -35,15 +38,16 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  // ── Plan limit check ──
   const session = await getSession();
-  const plan = session?.plan || "starter";
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
+  // ── Plan limit check (per-user) ──
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const currentCotizacionesMes = await prisma.cotizacion.count({
-    where: { createdAt: { gte: startOfMonth } },
+    where: { usuarioId: session.userId, createdAt: { gte: startOfMonth } },
   });
-  const limit = checkLimit(plan, "cotizacionesMes", currentCotizacionesMes);
+  const limit = checkLimit(session.plan, "cotizacionesMes", currentCotizacionesMes);
 
   if (!limit.allowed) {
     return NextResponse.json(
@@ -62,11 +66,20 @@ export async function POST(request: NextRequest) {
   if (error) return error;
   const { lineItems, ...cotizacionData } = data;
 
+  // Verify the client belongs to this user
+  const clienteOwned = await prisma.cliente.findFirst({
+    where: { id: cotizacionData.clienteId, usuarioId: session.userId },
+    select: { id: true },
+  });
+  if (!clienteOwned) {
+    return NextResponse.json({ error: "Cliente no encontrado" }, { status: 404 });
+  }
+
   // Generate quote number with configurable prefix
   const empresa = await prisma.empresa.findUnique({ where: { id: "default" }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true } });
   const prefijo = empresa?.prefijoCotizacion || "COT";
   const diasVencimiento = empresa?.diasVencimiento ?? 30;
-  const count = await prisma.cotizacion.count();
+  const count = await prisma.cotizacion.count({ where: { usuarioId: session.userId } });
   const numero = `${prefijo}-${new Date().getFullYear()}-${(count + 1).toString().padStart(4, "0")}`;
 
   // Calculate totals
@@ -100,6 +113,7 @@ export async function POST(request: NextRequest) {
     data: {
       numero,
       clienteId: cotizacionData.clienteId,
+      usuarioId: session.userId,
       estado: "BORRADOR",
       contactoNombre: cotizacionData.contactoNombre || null,
       subtotal: Math.round(subtotal * 100) / 100,
@@ -129,8 +143,8 @@ export async function POST(request: NextRequest) {
   // Auto-create approval records if rules require them
   try {
     const [reglas, allProducts] = await Promise.all([
-      prisma.reglaComercial.findMany({ where: { activa: true } }),
-      prisma.producto.findMany({ select: { id: true, categoriaId: true } }),
+      prisma.reglaComercial.findMany({ where: { activa: true, usuarioId: session.userId } }),
+      prisma.producto.findMany({ where: { usuarioId: session.userId }, select: { id: true, categoriaId: true } }),
     ]);
     const catMap: ProductoCategoriaMap = {};
     for (const p of allProducts) catMap[p.id] = p.categoriaId;
@@ -143,7 +157,6 @@ export async function POST(request: NextRequest) {
     }, catMap);
 
     if (result.aprobacionesRequeridas.length > 0) {
-      // Create approval records individually to get tokens
       const createdAprobaciones = [];
       for (const req of result.aprobacionesRequeridas) {
         const aprobacion = await prisma.aprobacion.create({
@@ -164,7 +177,6 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      // Send email notifications via Resend (non-blocking)
       const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
       const empresaData = await prisma.empresa.findUnique({
         where: { id: "default" },
@@ -205,7 +217,7 @@ export async function POST(request: NextRequest) {
       }
     }
   } catch {
-    // Non-critical: don't block quote creation if rule evaluation fails
+    // Non-critical
   }
 
   return NextResponse.json(cotizacion, { status: 201 });

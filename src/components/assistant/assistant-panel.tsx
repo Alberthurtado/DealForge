@@ -13,14 +13,48 @@ interface Message {
   suggestedActions?: Array<{ label: string; href: string }>;
 }
 
-export function AssistantPanel() {
+function getChatStorageKey(userId?: string): string {
+  return userId ? `forge-chat-${userId}` : "forge-chat-history";
+}
+
+function loadStoredMessages(userId?: string): Message[] {
+  try {
+    const stored = localStorage.getItem(getChatStorageKey(userId));
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      // Keep last 40 messages max in storage
+      return Array.isArray(parsed) ? parsed.slice(-40) : [];
+    }
+  } catch { /* ignore */ }
+  return [];
+}
+
+function saveMessages(messages: Message[], userId?: string) {
+  try {
+    // Only store last 40 messages
+    localStorage.setItem(getChatStorageKey(userId), JSON.stringify(messages.slice(-40)));
+  } catch { /* ignore quota errors */ }
+}
+
+interface AssistantPanelProps {
+  userId?: string;
+}
+
+export function AssistantPanel({ userId }: AssistantPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() => loadStoredMessages(userId));
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+
+  // Persist messages to localStorage whenever they change
+  useEffect(() => {
+    if (messages.length > 0) {
+      saveMessages(messages, userId);
+    }
+  }, [messages, userId]);
 
   // Extract entityId from URL
   const getEntityId = useCallback(() => {
@@ -124,6 +158,7 @@ export function AssistantPanel() {
 
   const clearChat = () => {
     setMessages([]);
+    try { localStorage.removeItem(getChatStorageKey(userId)); } catch { /* ignore */ }
   };
 
   return (

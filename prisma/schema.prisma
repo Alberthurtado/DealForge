@@ -19,10 +19,14 @@ model Cliente {
   pais         String?
   sector       String?
   notas        String?
+  usuarioId    String
+  usuario      Usuario      @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   contactos    Contacto[]
   cotizaciones Cotizacion[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
+
+  @@index([usuarioId])
 }
 
 model Contacto {
@@ -47,16 +51,21 @@ model Producto {
   id          String              @id @default(cuid())
   nombre      String
   descripcion String?
-  sku         String              @unique
+  sku         String
   precioBase  Float
   unidad      String              @default("unidad")
   activo      Boolean             @default(true)
   categoriaId String?
   categoria   Categoria?          @relation(fields: [categoriaId], references: [id])
+  usuarioId   String
+  usuario     Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   variantes   VarianteProducto[]
   lineItems   LineItem[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
+
+  @@unique([sku, usuarioId])
+  @@index([usuarioId])
 }
 
 model VarianteProducto {
@@ -64,20 +73,24 @@ model VarianteProducto {
   productoId     String
   producto       Producto   @relation(fields: [productoId], references: [id], onDelete: Cascade)
   nombre         String
-  sku            String     @unique
+  sku            String
   precioOverride Float?
   atributos      String     @default("{}")
   activo         Boolean    @default(true)
   lineItems      LineItem[]
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
+
+  @@unique([sku, productoId])
 }
 
 model Cotizacion {
   id               String      @id @default(cuid())
-  numero           String      @unique
+  numero           String
   clienteId        String
   cliente          Cliente     @relation(fields: [clienteId], references: [id])
+  usuarioId        String
+  usuario          Usuario     @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   estado           String      @default("BORRADOR")
   fechaEmision     DateTime    @default(now())
   fechaVencimiento DateTime?
@@ -95,6 +108,9 @@ model Cotizacion {
   aprobaciones     Aprobacion[]
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
+
+  @@unique([numero, usuarioId])
+  @@index([usuarioId])
 }
 
 model LineItem {
@@ -132,8 +148,12 @@ model ReglaComercial {
   activa        Boolean  @default(true)
   prioridad     Int      @default(0)
   configuracion String   // JSON text
+  usuarioId     String
+  usuario       Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  @@index([usuarioId])
 }
 
 model Aprobacion {
@@ -196,8 +216,29 @@ model Usuario {
   stripePriceId        String?
   planStatus           String   @default("active") // active | past_due | canceled
   currentPeriodEnd     DateTime?
+  // API Key for external integrations
+  apiKeyHash           String?   @unique
+  apiKeyPrefix         String?
+  apiKeyCreatedAt      DateTime?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  // Relations to user-owned data
+  clientes       Cliente[]
+  productos      Producto[]
+  cotizaciones   Cotizacion[]
+  reglas         ReglaComercial[]
+  memorias       MemoriaForge[]
+}
+
+// Persistent memory for Forge AI assistant per user
+model MemoriaForge {
+  id        String   @id @default(cuid())
+  usuarioId String
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  contenido String   // Fact or preference to remember, e.g. "El email del usuario es x@y.com"
+  createdAt DateTime @default(now())
+
+  @@index([usuarioId])
 }
 
 model BlogPost {

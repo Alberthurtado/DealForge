@@ -34,7 +34,7 @@ export async function POST(
   }
 
   if (!isSystemEmailConfigured()) {
-    return NextResponse.json({ error: "Servicio de email no configurado (BREVO_API_KEY)." }, { status: 400 });
+    return NextResponse.json({ error: "Servicio de email no configurado (MAILERSEND_API_KEY)." }, { status: 400 });
   }
 
   // Get rule name

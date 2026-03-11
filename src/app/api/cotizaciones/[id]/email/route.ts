@@ -17,35 +17,32 @@ export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  // Rate limit: 5 emails per minute per user
   const session = await getSession();
-  if (session) {
-    // Plan check: email sending requires at least Pro
-    if (!getPlanFeatures(session.plan).emailEnvio) {
-      return planFeatureResponse("emailEnvio");
-    }
-    const limit = checkRateLimit(`email:${session.userId}`, RATE_LIMITS.email);
-    if (!limit.allowed) return rateLimitResponse(limit.resetAt);
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
+  if (!getPlanFeatures(session.plan).emailEnvio) {
+    return planFeatureResponse("emailEnvio");
   }
+
+  const limit = checkRateLimit(`email:${session.userId}`, RATE_LIMITS.email);
+  if (!limit.allowed) return rateLimitResponse(limit.resetAt);
 
   const { id } = await params;
   const body = await request.json();
   const { data, error } = validateBody(sendEmailSchema, body);
   if (error) return error;
 
-  // Sanitize HTML body if provided
   const safeHtmlBody = data.htmlBody ? sanitizeHtml(data.htmlBody) : undefined;
 
-  // Verify cotizacion exists
-  const cotizacion = await prisma.cotizacion.findUnique({
-    where: { id },
+  // Verify cotizacion exists AND belongs to user
+  const cotizacion = await prisma.cotizacion.findFirst({
+    where: { id, usuarioId: session.userId },
     select: { numero: true, estado: true },
   });
   if (!cotizacion) {
     return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
   }
 
-  // Block email if quote is still BORRADOR with pending/rejected approvals
   if (cotizacion.estado === "BORRADOR") {
     const blockingApprovals = await prisma.aprobacion.findMany({
       where: { cotizacionId: id, estado: { in: ["PENDIENTE", "RECHAZADA"] } },
@@ -60,31 +57,18 @@ export async function POST(
   }
 
   try {
-    // Generate PDF using the preview page
     const origin = new URL(request.url).origin;
     const pdfBuffer = await generateCotizacionPdf(origin, id);
 
-    // Send the email
     await sendEmail({
       to: data.to,
       subject: data.subject,
       html: safeHtmlBody || defaultEmailBody(cotizacion.numero),
-      attachments: [
-        {
-          filename: `${cotizacion.numero}.pdf`,
-          content: pdfBuffer,
-          contentType: "application/pdf",
-        },
-      ],
+      attachments: [{ filename: `${cotizacion.numero}.pdf`, content: pdfBuffer, contentType: "application/pdf" }],
     });
 
-    // Log activity
     await prisma.actividad.create({
-      data: {
-        cotizacionId: id,
-        tipo: "EMAIL_ENVIADO",
-        descripcion: `Cotización enviada por email a ${data.to}`,
-      },
+      data: { cotizacionId: id, tipo: "EMAIL_ENVIADO", descripcion: `Cotización enviada por email a ${data.to}` },
     });
 
     return NextResponse.json({ success: true });

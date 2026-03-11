@@ -6,11 +6,14 @@ import { clienteCreateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 
 export async function GET(request: NextRequest) {
+  const session = await getSession();
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
   const searchParams = request.nextUrl.searchParams;
   const search = searchParams.get("search") || "";
   const sector = searchParams.get("sector") || "";
 
-  const where: Record<string, unknown> = {};
+  const where: Record<string, unknown> = { usuarioId: session.userId };
   if (search) {
     where.OR = [
       { nombre: { contains: search } },
@@ -35,11 +38,12 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  // ── Plan limit check ──
   const session = await getSession();
-  const plan = session?.plan || "starter";
-  const currentClientes = await prisma.cliente.count();
-  const limit = checkLimit(plan, "clientes", currentClientes);
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
+  // ── Plan limit check (per-user) ──
+  const currentClientes = await prisma.cliente.count({ where: { usuarioId: session.userId } });
+  const limit = checkLimit(session.plan, "clientes", currentClientes);
 
   if (!limit.allowed) {
     return NextResponse.json(
@@ -61,6 +65,7 @@ export async function POST(request: NextRequest) {
   const cliente = await prisma.cliente.create({
     data: {
       ...clienteData,
+      usuarioId: session.userId,
       contactos: contactos?.length
         ? { create: contactos }
         : undefined,

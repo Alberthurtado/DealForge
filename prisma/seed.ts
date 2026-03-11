@@ -43,6 +43,21 @@ async function main() {
     },
   });
 
+  // Create or get a demo user for seeded data
+  const bcrypt = await import("bcryptjs");
+  const demoUser = await prisma.usuario.upsert({
+    where: { email: "demo@dealforge.app" },
+    update: {},
+    create: {
+      nombre: "Usuario Demo",
+      email: "demo@dealforge.app",
+      passwordHash: await bcrypt.hash("demo1234", 10),
+      plan: "profesional",
+      empresaId: "default",
+    },
+  });
+  const userId = demoUser.id;
+
   // Create categories
   const catSoftware = await prisma.categoria.create({
     data: { nombre: "Software" },
@@ -67,6 +82,7 @@ async function main() {
         precioBase: 2400,
         unidad: "licencia/ano",
         categoriaId: catSoftware.id,
+        usuarioId: userId,
       },
     }),
     prisma.producto.create({
@@ -77,6 +93,7 @@ async function main() {
         precioBase: 800,
         unidad: "licencia/ano",
         categoriaId: catSoftware.id,
+        usuarioId: userId,
       },
     }),
     prisma.producto.create({
@@ -87,6 +104,7 @@ async function main() {
         precioBase: 1200,
         unidad: "licencia/ano",
         categoriaId: catSoftware.id,
+        usuarioId: userId,
       },
     }),
     prisma.producto.create({
@@ -97,6 +115,7 @@ async function main() {
         precioBase: 150,
         unidad: "hora",
         categoriaId: catServicios.id,
+        usuarioId: userId,
       },
     }),
     prisma.producto.create({
@@ -107,6 +126,7 @@ async function main() {
         precioBase: 120,
         unidad: "hora",
         categoriaId: catServicios.id,
+        usuarioId: userId,
       },
     }),
     prisma.producto.create({
@@ -117,6 +137,7 @@ async function main() {
         precioBase: 175,
         unidad: "hora",
         categoriaId: catServicios.id,
+        usuarioId: userId,
       },
     }),
     prisma.producto.create({
@@ -127,6 +148,7 @@ async function main() {
         precioBase: 4500,
         unidad: "unidad",
         categoriaId: catHardware.id,
+        usuarioId: userId,
       },
     }),
     prisma.producto.create({
@@ -137,6 +159,7 @@ async function main() {
         precioBase: 350,
         unidad: "mes",
         categoriaId: catSoporte.id,
+        usuarioId: userId,
       },
     }),
     prisma.producto.create({
@@ -147,6 +170,7 @@ async function main() {
         precioBase: 150,
         unidad: "mes",
         categoriaId: catSoporte.id,
+        usuarioId: userId,
       },
     }),
   ]);
@@ -155,6 +179,7 @@ async function main() {
   const cliente1 = await prisma.cliente.create({
     data: {
       nombre: "Distribuciones Martinez S.L.",
+      usuarioId: userId,
       ruc: "B12345678",
       email: "info@martinez-dist.es",
       telefono: "+34 91 234 5678",
@@ -185,6 +210,7 @@ async function main() {
   const cliente2 = await prisma.cliente.create({
     data: {
       nombre: "Tecnologias Avanzadas S.A.",
+      usuarioId: userId,
       ruc: "A87654321",
       email: "contacto@tecav.com",
       telefono: "+34 93 876 5432",
@@ -209,6 +235,7 @@ async function main() {
   const cliente3 = await prisma.cliente.create({
     data: {
       nombre: "Grupo Alimentario del Sur",
+      usuarioId: userId,
       ruc: "B55443322",
       email: "info@grupoalimentario.es",
       telefono: "+34 95 111 2233",
@@ -239,6 +266,7 @@ async function main() {
   const cliente4 = await prisma.cliente.create({
     data: {
       nombre: "Construcciones Iberia",
+      usuarioId: userId,
       ruc: "A11223344",
       email: "oficina@construiberia.es",
       telefono: "+34 96 333 4455",
@@ -263,6 +291,7 @@ async function main() {
   const cliente5 = await prisma.cliente.create({
     data: {
       nombre: "Farmaceutica Nova S.L.",
+      usuarioId: userId,
       ruc: "B99887766",
       email: "info@farmanoba.com",
       telefono: "+34 94 555 6677",
@@ -295,6 +324,7 @@ async function main() {
     data: {
       numero: "COT-2026-0001",
       clienteId: cliente1.id,
+      usuarioId: userId,
       estado: "GANADA",
       fechaEmision: ninetyDaysAgo,
       fechaVencimiento: sixtyDaysAgo,
@@ -375,6 +405,7 @@ async function main() {
     data: {
       numero: "COT-2026-0002",
       clienteId: cliente2.id,
+      usuarioId: userId,
       estado: "ENVIADA",
       fechaEmision: thirtyDaysAgo,
       fechaVencimiento: new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000),
@@ -457,6 +488,7 @@ async function main() {
     data: {
       numero: "COT-2026-0003",
       clienteId: cliente3.id,
+      usuarioId: userId,
       estado: "PERDIDA",
       fechaEmision: sixtyDaysAgo,
       fechaVencimiento: thirtyDaysAgo,
@@ -510,6 +542,7 @@ async function main() {
     data: {
       numero: "COT-2026-0004",
       clienteId: cliente4.id,
+      usuarioId: userId,
       estado: "BORRADOR",
       fechaEmision: now,
       contactoNombre: "Roberto Fernandez",
@@ -565,6 +598,7 @@ async function main() {
     data: {
       numero: "COT-2026-0005",
       clienteId: cliente5.id,
+      usuarioId: userId,
       estado: "NEGOCIACION",
       fechaEmision: new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000),
       fechaVencimiento: new Date(now.getTime() + 20 * 24 * 60 * 60 * 1000),
@@ -650,6 +684,7 @@ async function main() {
     data: {
       numero: "COT-2026-0006",
       clienteId: cliente1.id,
+      usuarioId: userId,
       estado: "GANADA",
       fechaEmision: new Date(now.getTime() - 45 * 24 * 60 * 60 * 1000),
       fechaVencimiento: new Date(now.getTime() - 15 * 24 * 60 * 60 * 1000),

@@ -2,7 +2,8 @@ import { prisma } from "@/lib/prisma";
 
 export async function buildPageContext(
   pathname: string,
-  entityId?: string
+  entityId?: string,
+  userId?: string
 ): Promise<string> {
   // Dashboard
   if (pathname === "/panel") {
@@ -11,8 +12,8 @@ export async function buildPageContext(
 
   // Client detail
   if (pathname.match(/^\/clientes\/[\w]+$/) && entityId) {
-    const cliente = await prisma.cliente.findUnique({
-      where: { id: entityId },
+    const cliente = await prisma.cliente.findFirst({
+      where: { id: entityId, ...(userId ? { usuarioId: userId } : {}) },
       select: {
         nombre: true,
         sector: true,
@@ -37,8 +38,8 @@ export async function buildPageContext(
 
   // Quote detail
   if (pathname.match(/^\/cotizaciones\/[\w]+$/) && entityId) {
-    const cot = await prisma.cotizacion.findUnique({
-      where: { id: entityId },
+    const cot = await prisma.cotizacion.findFirst({
+      where: { id: entityId, ...(userId ? { usuarioId: userId } : {}) },
       select: {
         numero: true,
         estado: true,
@@ -63,7 +64,23 @@ export async function buildPageContext(
 
   // Products
   if (pathname === "/productos") {
-    return "El usuario está en el catálogo de productos.";
+    const [totalProductos, categorias] = await Promise.all([
+      prisma.producto.count({ where: { activo: true, ...(userId ? { usuarioId: userId } : {}) } }),
+      prisma.categoria.findMany({ select: { nombre: true }, orderBy: { nombre: "asc" } }),
+    ]);
+    const catNames = categorias.map((c) => c.nombre).join(", ") || "sin categorías";
+    return `El usuario está en el catálogo de productos. Tiene ${totalProductos} producto(s) activos. Categorías: ${catNames}. Usa la herramienta buscar_productos (sin query) para listar todos, o con query para filtrar. Puedes obtener detalle con obtener_producto y editar con editar_producto.`;
+  }
+
+  // Product detail/edit
+  if (pathname.match(/^\/productos\/[\w]+\/editar$/) && entityId) {
+    const prod = await prisma.producto.findFirst({
+      where: { id: entityId, ...(userId ? { usuarioId: userId } : {}) },
+      select: { nombre: true, sku: true, precioBase: true, categoria: { select: { nombre: true } } },
+    });
+    if (prod) {
+      return `El usuario está editando el producto "${prod.nombre}" (SKU: ${prod.sku}, precio: ${prod.precioBase} EUR, categoría: ${prod.categoria?.nombre || "sin categoría"}). Puedes ayudarle a modificar cualquier campo con editar_producto.`;
+    }
   }
 
   // New product
@@ -94,7 +111,11 @@ export async function buildPageContext(
   return "El usuario está navegando por DealForge.";
 }
 
-export function buildSystemPrompt(pageContext: string): string {
+export function buildSystemPrompt(pageContext: string, memorias: string[] = []): string {
+  const memoriasSection = memorias.length > 0
+    ? `\n## Tu memoria persistente (datos que ya conoces del usuario)\n${memorias.map((m) => `- ${m}`).join("\n")}\nUSA esta información para personalizar tus respuestas. No preguntes datos que ya tienes guardados. Si el usuario corrige un dato, usa borrar_memoria para eliminar el antiguo y guardar_memoria para guardar el nuevo.\n`
+    : "";
+
   return `Eres "Forge", el asistente comercial inteligente de DealForge, un sistema CPQ (Configure, Price, Quote) para PYMEs.
 
 ## Tu personalidad
@@ -106,7 +127,7 @@ export function buildSystemPrompt(pageContext: string): string {
 
 ## Tu contexto actual
 ${pageContext}
-
+${memoriasSection}
 ## Tus capacidades
 Tienes acceso COMPLETO a la base de datos de DealForge (lectura y escritura). SIEMPRE usa las herramientas para obtener datos reales antes de responder. Nunca inventes datos.
 
@@ -120,11 +141,16 @@ Tienes acceso COMPLETO a la base de datos de DealForge (lectura y escritura). SI
 ### Escritura (crear y modificar registros)
 - **Crear clientes** con datos completos y contacto principal
 - **Agregar contactos** a clientes existentes
-- **Crear productos** en el catálogo (con categoría automática)
+- **Crear y editar productos** en el catálogo (con categoría automática, activar/desactivar)
 - **Crear cotizaciones completas** con líneas de producto, cálculos automáticos (subtotal, IVA 21%, total). Los términos y condiciones por defecto de la empresa se aplican automáticamente.
 - **Cambiar estado** de cotizaciones (BORRADOR → ENVIADA → NEGOCIACION → GANADA/PERDIDA). IMPORTANTE: No se puede enviar una cotización sin términos y condiciones.
 - **Archivar cotizaciones** inválidas o erróneas (estado ARCHIVADA, no afecta métricas)
 - **Registrar actividades** en cotizaciones (notas, llamadas, reuniones, emails, seguimientos)
+
+### Memoria persistente
+- **guardar_memoria**: Guarda datos del usuario para recordarlos siempre (emails, preferencias, contexto de negocio)
+- **borrar_memoria**: Elimina datos obsoletos o incorrectos
+- IMPORTANTE: Cuando el usuario comparta información personal o de negocio relevante (emails, teléfonos, preferencias, sector, etc.), guárdala automáticamente con guardar_memoria SIN pedir confirmación. El usuario no necesita saber que guardas memorias; simplemente recuerda la información en futuras conversaciones.
 
 ### Reglas comerciales (crear y gestionar)
 - **Listar reglas** existentes, filtrar por tipo

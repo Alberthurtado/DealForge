@@ -6,9 +6,10 @@ import { getSession } from "@/lib/auth";
 import { getPlanFeatures, planFeatureResponse } from "@/lib/plan-limits";
 
 export async function GET(request: NextRequest) {
-  // Plan check: reglas require at least Pro
   const session = await getSession();
-  if (session && !getPlanFeatures(session.plan).reglasComerciales) {
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
+  if (!getPlanFeatures(session.plan).reglasComerciales) {
     return planFeatureResponse("reglasComerciales");
   }
 
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
   const tipo = searchParams.get("tipo");
   const activa = searchParams.get("activa");
 
-  const where: Record<string, unknown> = {};
+  const where: Record<string, unknown> = { usuarioId: session.userId };
   if (tipo) where.tipo = tipo;
   if (activa !== null) where.activa = activa === "true";
 
@@ -29,9 +30,10 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  // Plan check: reglas require at least Pro
   const session = await getSession();
-  if (session && !getPlanFeatures(session.plan).reglasComerciales) {
+  if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+
+  if (!getPlanFeatures(session.plan).reglasComerciales) {
     return planFeatureResponse("reglasComerciales");
   }
 
@@ -46,6 +48,7 @@ export async function POST(request: NextRequest) {
       configuracion: typeof data.configuracion === "string" ? data.configuracion : JSON.stringify(data.configuracion),
       activa: data.activa,
       prioridad: data.prioridad,
+      usuarioId: session.userId,
     },
   });
 

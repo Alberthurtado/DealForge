@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
-import { toolDefinitions, executeToolCall } from "@/lib/assistant-tools";
+import { toolDefinitions, executeToolCall, obtenerMemorias } from "@/lib/assistant-tools";
 import { buildPageContext, buildSystemPrompt } from "@/lib/assistant-context";
 import { routeMessage } from "@/lib/assistant-router";
 import { getSession } from "@/lib/auth";
@@ -59,27 +59,27 @@ export async function POST(request: NextRequest) {
 
   // Get user plan from DB (fresh, not from JWT which may be stale after upgrade)
   let userPlan = "starter";
-  if (session?.userId) {
+  const userId = session?.userId;
+  if (userId) {
     const dbUser = await prisma.usuario.findUnique({
-      where: { id: session.userId },
+      where: { id: userId },
       select: { plan: true },
     });
     userPlan = dbUser?.plan || "starter";
   }
   const model = getModelForPlan(userPlan);
 
-  // Build context
-  const pageContext = await buildPageContext(
-    data.context.pathname,
-    data.context.entityId
-  );
-  const systemPrompt = buildSystemPrompt(pageContext);
+  // Build context + load persistent memories
+  const [pageContext, memorias] = await Promise.all([
+    buildPageContext(data.context.pathname, data.context.entityId, userId),
+    userId ? obtenerMemorias(userId) : Promise.resolve([]),
+  ]);
+  const systemPrompt = buildSystemPrompt(pageContext, memorias);
 
-  // Build message history for Claude (limit to save tokens)
+  // Build message history for Claude (keep last 20 messages = 10 exchanges)
   const messages: Anthropic.MessageParam[] = [];
 
-  // Only keep last 6 messages (3 exchanges) to save tokens
-  for (const msg of data.history.slice(-6)) {
+  for (const msg of data.history.slice(-20)) {
     messages.push({
       role: msg.role,
       content: msg.content,
@@ -124,7 +124,8 @@ export async function POST(request: NextRequest) {
       for (const toolUse of toolUseBlocks) {
         const result = await executeToolCall(
           toolUse.name,
-          toolUse.input as Record<string, unknown>
+          toolUse.input as Record<string, unknown>,
+          userId
         );
         toolResults.push({
           type: "tool_result",
