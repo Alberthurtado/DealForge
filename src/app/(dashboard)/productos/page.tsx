@@ -21,7 +21,7 @@ async function getData(userId: string) {
         categoria: true,
         variantes: { where: { activo: true }, select: { id: true, nombre: true } },
       },
-      orderBy: { nombre: "asc" },
+      orderBy: { createdAt: "asc" },
     }),
     prisma.categoria.findMany({ orderBy: { nombre: "asc" } }),
   ]);
@@ -74,6 +74,7 @@ export default async function ProductosPage() {
         <ProductoTable
           productos={JSON.parse(JSON.stringify(productos))}
           categorias={JSON.parse(JSON.stringify(categorias))}
+          maxVisible={limits.productos > 0 ? limits.productos : undefined}
         />
       </div>
     </div>

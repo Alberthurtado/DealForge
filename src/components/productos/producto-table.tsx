@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Search, Package, Pencil } from "lucide-react";
+import { Search, Package, Pencil, Lock } from "lucide-react";
 import { EmptyState } from "@/components/ui/empty-state";
 import { formatCurrency } from "@/lib/utils";
 
@@ -26,9 +26,11 @@ interface Categoria {
 export function ProductoTable({
   productos,
   categorias,
+  maxVisible,
 }: {
   productos: Producto[];
   categorias: Categoria[];
+  maxVisible?: number;
 }) {
   const [search, setSearch] = useState("");
   const [categoriaFilter, setCategoriaFilter] = useState("");
@@ -97,70 +99,93 @@ export function ProductoTable({
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {filtered.map((producto) => (
-              <tr
-                key={producto.id}
-                className="hover:bg-gray-50/50 transition-colors"
-              >
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
-                      <Package className="w-4 h-4 text-indigo-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground">
-                        {producto.nombre}
-                        {producto.variantes && producto.variantes.length > 0 && (
-                          <span className="ml-2 text-[10px] font-normal px-1.5 py-0.5 bg-primary/10 text-primary rounded">
-                            {producto.variantes.length} var.
-                          </span>
+            {filtered.map((producto, index) => {
+              const isLocked = maxVisible !== undefined && maxVisible > 0 && index >= maxVisible;
+
+              return (
+                <tr
+                  key={producto.id}
+                  className={`transition-colors ${isLocked ? "opacity-40" : "hover:bg-gray-50/50"}`}
+                >
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${isLocked ? "bg-gray-100" : "bg-indigo-50"}`}>
+                        {isLocked ? (
+                          <Lock className="w-4 h-4 text-gray-400" />
+                        ) : (
+                          <Package className="w-4 h-4 text-indigo-600" />
                         )}
-                      </p>
-                      {producto.descripcion && (
-                        <p className="text-xs text-muted-foreground truncate max-w-[300px]">
-                          {producto.descripcion}
-                        </p>
-                      )}
+                      </div>
+                      <div>
+                        {isLocked ? (
+                          <span className="text-sm font-medium text-muted-foreground">
+                            {producto.nombre}
+                          </span>
+                        ) : (
+                          <Link
+                            href={`/productos/${producto.id}/editar`}
+                            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                          >
+                            {producto.nombre}
+                            {producto.variantes && producto.variantes.length > 0 && (
+                              <span className="ml-2 text-[10px] font-normal px-1.5 py-0.5 bg-primary/10 text-primary rounded">
+                                {producto.variantes.length} var.
+                              </span>
+                            )}
+                          </Link>
+                        )}
+                        {producto.descripcion && (
+                          <p className="text-xs text-muted-foreground truncate max-w-[300px]">
+                            {producto.descripcion}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td className="px-4 py-3 text-sm font-mono text-muted-foreground">
-                  {producto.sku}
-                </td>
-                <td className="px-4 py-3">
-                  {producto.categoria && (
-                    <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground">
-                      {producto.categoria.nombre}
+                  </td>
+                  <td className="px-4 py-3 text-sm font-mono text-muted-foreground">
+                    {producto.sku}
+                  </td>
+                  <td className="px-4 py-3">
+                    {producto.categoria && (
+                      <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground">
+                        {producto.categoria.nombre}
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-right text-sm font-medium text-foreground">
+                    {formatCurrency(producto.precioBase)}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-muted-foreground">
+                    {producto.unidad}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <span
+                      className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${
+                        producto.activo
+                          ? "bg-green-100 text-green-700"
+                          : "bg-gray-100 text-gray-500"
+                      }`}
+                    >
+                      {producto.activo ? "Activo" : "Inactivo"}
                     </span>
-                  )}
-                </td>
-                <td className="px-4 py-3 text-right text-sm font-medium text-foreground">
-                  {formatCurrency(producto.precioBase)}
-                </td>
-                <td className="px-4 py-3 text-sm text-muted-foreground">
-                  {producto.unidad}
-                </td>
-                <td className="px-4 py-3 text-center">
-                  <span
-                    className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${
-                      producto.activo
-                        ? "bg-green-100 text-green-700"
-                        : "bg-gray-100 text-gray-500"
-                    }`}
-                  >
-                    {producto.activo ? "Activo" : "Inactivo"}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-center">
-                  <Link
-                    href={`/productos/${producto.id}/editar`}
-                    className="inline-flex p-1.5 text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted transition-colors"
-                  >
-                    <Pencil className="w-4 h-4" />
-                  </Link>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    {isLocked ? (
+                      <span className="inline-flex p-1.5 text-gray-300">
+                        <Pencil className="w-4 h-4" />
+                      </span>
+                    ) : (
+                      <Link
+                        href={`/productos/${producto.id}/editar`}
+                        className="inline-flex p-1.5 text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted transition-colors"
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </Link>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={7}>
@@ -169,6 +194,21 @@ export function ProductoTable({
                     title="Sin resultados"
                     description="No se encontraron productos con ese criterio de búsqueda."
                   />
+                </td>
+              </tr>
+            )}
+            {maxVisible !== undefined && maxVisible > 0 && filtered.length > maxVisible && (
+              <tr>
+                <td colSpan={7}>
+                  <div className="px-4 py-3 text-center">
+                    <p className="text-xs text-muted-foreground">
+                      <Lock className="w-3 h-3 inline mr-1" />
+                      <a href="/configuracion" className="text-primary hover:underline font-medium">
+                        Mejora tu plan
+                      </a>{" "}
+                      para acceder a todos tus productos
+                    </p>
+                  </div>
                 </td>
               </tr>
             )}

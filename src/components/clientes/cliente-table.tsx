@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Search, Building2, ArrowUpDown } from "lucide-react";
+import { Search, Building2, ArrowUpDown, Lock } from "lucide-react";
 import { EmptyState } from "@/components/ui/empty-state";
 import { formatCurrency } from "@/lib/utils";
 
@@ -18,7 +18,13 @@ interface ClienteRow {
   totalIngresos: number;
 }
 
-export function ClienteTable({ clientes }: { clientes: ClienteRow[] }) {
+export function ClienteTable({
+  clientes,
+  maxVisible,
+}: {
+  clientes: ClienteRow[];
+  maxVisible?: number;
+}) {
   const [search, setSearch] = useState("");
   const [sectorFilter, setSectorFilter] = useState("");
 
@@ -90,52 +96,74 @@ export function ClienteTable({ clientes }: { clientes: ClienteRow[] }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {filtered.map((cliente) => (
-              <tr
-                key={cliente.id}
-                className="hover:bg-gray-50/50 transition-colors"
-              >
-                <td className="px-4 py-3">
-                  <Link
-                    href={`/clientes/${cliente.id}`}
-                    className="flex items-center gap-3 group"
-                  >
-                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Building2 className="w-4 h-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                        {cliente.nombre}
-                      </p>
-                      {cliente.email && (
-                        <p className="text-xs text-muted-foreground">
-                          {cliente.email}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                </td>
-                <td className="px-4 py-3 text-sm text-muted-foreground">
-                  {cliente.contactoPrincipal}
-                </td>
-                <td className="px-4 py-3">
-                  {cliente.sector && (
-                    <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground">
-                      {cliente.sector}
-                    </span>
-                  )}
-                </td>
-                <td className="px-4 py-3 text-sm text-muted-foreground">
-                  {cliente.ciudad || "-"}
-                </td>
-                <td className="px-4 py-3 text-center text-sm text-foreground">
-                  {cliente.totalCotizaciones}
-                </td>
-                <td className="px-4 py-3 text-right text-sm font-medium text-foreground">
-                  {formatCurrency(cliente.totalIngresos)}
-                </td>
-              </tr>
-            ))}
+            {filtered.map((cliente, index) => {
+              const isLocked = maxVisible !== undefined && maxVisible > 0 && index >= maxVisible;
+
+              return (
+                <tr
+                  key={cliente.id}
+                  className={`transition-colors ${isLocked ? "opacity-40" : "hover:bg-gray-50/50"}`}
+                >
+                  <td className="px-4 py-3">
+                    {isLocked ? (
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center shrink-0">
+                          <Lock className="w-4 h-4 text-gray-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-muted-foreground">
+                            {cliente.nombre}
+                          </p>
+                          {cliente.email && (
+                            <p className="text-xs text-muted-foreground">
+                              {cliente.email}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <Link
+                        href={`/clientes/${cliente.id}`}
+                        className="flex items-center gap-3 group"
+                      >
+                        <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                          <Building2 className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                            {cliente.nombre}
+                          </p>
+                          {cliente.email && (
+                            <p className="text-xs text-muted-foreground">
+                              {cliente.email}
+                            </p>
+                          )}
+                        </div>
+                      </Link>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-muted-foreground">
+                    {cliente.contactoPrincipal}
+                  </td>
+                  <td className="px-4 py-3">
+                    {cliente.sector && (
+                      <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground">
+                        {cliente.sector}
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-muted-foreground">
+                    {cliente.ciudad || "-"}
+                  </td>
+                  <td className="px-4 py-3 text-center text-sm text-foreground">
+                    {cliente.totalCotizaciones}
+                  </td>
+                  <td className="px-4 py-3 text-right text-sm font-medium text-foreground">
+                    {formatCurrency(cliente.totalIngresos)}
+                  </td>
+                </tr>
+              );
+            })}
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={6}>
@@ -144,6 +172,21 @@ export function ClienteTable({ clientes }: { clientes: ClienteRow[] }) {
                     title="Sin resultados"
                     description="No se encontraron clientes con ese criterio de búsqueda."
                   />
+                </td>
+              </tr>
+            )}
+            {maxVisible !== undefined && maxVisible > 0 && filtered.length > maxVisible && (
+              <tr>
+                <td colSpan={6}>
+                  <div className="px-4 py-3 text-center">
+                    <p className="text-xs text-muted-foreground">
+                      <Lock className="w-3 h-3 inline mr-1" />
+                      <a href="/configuracion" className="text-primary hover:underline font-medium">
+                        Mejora tu plan
+                      </a>{" "}
+                      para acceder a todos tus clientes
+                    </p>
+                  </div>
                 </td>
               </tr>
             )}

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 import {
   User,
   Crown,
@@ -12,6 +13,7 @@ import {
   CreditCard,
   Loader2,
   ArrowUpRight,
+  XCircle,
 } from "lucide-react";
 
 interface PlanUser {
@@ -259,6 +261,23 @@ export function PlanSection({ user }: { user: PlanUser }) {
             <p className="text-xs text-muted-foreground mt-1.5">
               Cambia de plan, actualiza tu tarjeta o consulta facturas
             </p>
+
+            {/* Cancel subscription */}
+            {user.planStatus === "canceling" ? (
+              <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                <p className="text-sm text-amber-800">
+                  Tu suscripción se cancelará{nextBilling ? ` el ${nextBilling}` : ""}. Después pasarás al plan Starter.
+                </p>
+              </div>
+            ) : (
+              <Link
+                href="/configuracion/cancelar"
+                className="inline-flex items-center gap-1.5 mt-3 text-xs text-red-500 hover:text-red-700 transition-colors"
+              >
+                <XCircle className="w-3.5 h-3.5" />
+                Cancelar suscripción
+              </Link>
+            )}
           </div>
         ) : (
           /* Upgrade CTAs for starter/free users */

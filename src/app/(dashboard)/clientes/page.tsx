@@ -23,7 +23,7 @@ async function getClientes(userId: string) {
         select: { estado: true, total: true },
       },
     },
-    orderBy: { createdAt: "desc" },
+    orderBy: { createdAt: "asc" },
   });
 }
 
@@ -86,7 +86,10 @@ export default async function ClientesPage() {
         />
       )}
       <div className="p-6">
-        <ClienteTable clientes={clientesWithStats} />
+        <ClienteTable
+          clientes={clientesWithStats}
+          maxVisible={limits.clientes > 0 ? limits.clientes : undefined}
+        />
       </div>
     </div>
   );
