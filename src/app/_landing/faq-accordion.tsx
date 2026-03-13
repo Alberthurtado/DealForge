@@ -44,6 +44,21 @@ const FAQS: FAQItem[] = [
     answer:
       "Sí. Configura tu logo, colores corporativos y datos de empresa. Las cotizaciones PDF se generan automáticamente con tu identidad visual. En los planes superiores tienes acceso a plantillas adicionales y personalización avanzada.",
   },
+  {
+    question: "¿Cómo funciona el envío de cotizaciones por email?",
+    answer:
+      "Desde el plan Pro, puedes enviar cotizaciones directamente por email desde DealForge. Configuras tu SMTP propio y envías con tu dominio. El destinatario recibe un email profesional con el PDF adjunto y puedes rastrear el estado de cada envío.",
+  },
+  {
+    question: "¿DealForge se integra con mi CRM o ERP?",
+    answer:
+      "Sí. En el plan Business tienes acceso a integraciones CRM. También puedes usar la API REST para conectar DealForge con cualquier herramienta (Zapier, Make, n8n). Además, la importación y exportación CSV funciona desde el plan Pro.",
+  },
+  {
+    question: "¿En qué se diferencia DealForge de hacer cotizaciones en Excel?",
+    answer:
+      "Excel requiere cálculos manuales, no tiene control de versiones, no genera PDFs automáticamente y no permite colaborar en tiempo real. DealForge automatiza todo: precios, descuentos, impuestos, generación de PDF, envío por email y seguimiento del estado de cada cotización.",
+  },
 ];
 
 export function FAQAccordion() {

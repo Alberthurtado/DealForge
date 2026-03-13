@@ -118,12 +118,12 @@ El diferenciador principal es **Forge**, un asistente de inteligencia artificial
 
 ## Planes y Precios (EUR, sin IVA)
 
-| Plan | Precio | Cotizaciones/mes | Clientes | Forge IA | Plantillas | Reglas | Aprobaciones |
-|------|--------|-----------------|----------|----------|-----------|--------|-------------|
-| Starter | Gratis | 10 | 5 | Sí | 1 | No | No |
-| Pro | 29€/mes | 100 | Ilimitados | Sí | 3 | Sí | No |
-| Business | 79€/mes | Ilimitadas | Ilimitados | Sí | 3 | Sí | Sí |
-| Enterprise | Personalizado | Ilimitadas | Ilimitados | Sí | Personalizadas | Sí | Sí |
+| Plan | Precio | Cotizaciones/mes | Clientes | Productos | Forge IA | Plantillas | Reglas | Aprobaciones |
+|------|--------|-----------------|----------|-----------|----------|-----------|--------|-------------|
+| Starter | Gratis | 10 | 5 | 10 | 5 consultas (Haiku) | 1 | No | No |
+| Pro | 29€/mes | 100 | 50 | 200 | Ilimitado (Sonnet) | 3 | Básicas | No |
+| Business | 79€/mes | Ilimitadas | Ilimitados | Ilimitados | Prioridad (Sonnet) | 3 | Avanzadas | Sí |
+| Enterprise | Personalizado | Ilimitadas | Ilimitados | Ilimitados | Personalizado (Sonnet) | Personalizadas | Avanzadas | Sí |
 
 ## Seguridad
 

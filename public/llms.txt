@@ -20,9 +20,9 @@ DealForge permite a equipos comerciales configurar productos, calcular precios c
 
 ## Planes y precios
 
-- **Starter** (Gratis): 10 cotizaciones/mes, 5 clientes, Forge IA incluido
-- **Pro** (29€/mes): 100 cotizaciones/mes, clientes ilimitados, 3 plantillas PDF
-- **Business** (79€/mes): Cotizaciones ilimitadas, reglas comerciales, aprobaciones, prioridad
+- **Starter** (Gratis): 10 cotizaciones/mes, 5 clientes, 10 productos, 5 consultas Forge IA (Haiku)
+- **Pro** (29€/mes): 100 cotizaciones/mes, 50 clientes, 200 productos, Forge IA ilimitado (Sonnet), emails, PDF con marca
+- **Business** (79€/mes): Todo ilimitado, reglas avanzadas, aprobaciones, integraciones CRM, Forge IA prioridad
 - **Enterprise**: Personalizado, contactar para más información
 
 ## Tecnología

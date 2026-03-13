@@ -353,7 +353,7 @@ function PricingSection() {
       features: [
         { text: "10 cotizaciones/mes", included: true },
         { text: "5 clientes", included: true },
-        { text: "20 productos", included: true },
+        { text: "10 productos", included: true },
         { text: "5 consultas Forge IA", included: true },
         { text: "Exportación CSV", included: true },
         { text: "Envío de emails", included: false },
@@ -595,27 +595,126 @@ function Footer() {
 
 /* ─── STRUCTURED DATA ─────────────────────────────────────────── */
 function StructuredData() {
-  const jsonLd = {
+  const softwareApp = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: "DealForge",
-    description: "Sistema CPQ inteligente con IA para PYMEs",
+    description:
+      "Sistema CPQ (Configure, Price, Quote) inteligente con inteligencia artificial para PYMEs. Automatiza cotizaciones comerciales, gestiona clientes y productos, y genera PDFs profesionales en minutos.",
     applicationCategory: "BusinessApplication",
+    applicationSubCategory: "CPQ Software",
     operatingSystem: "Web",
-    offers: {
-      "@type": "AggregateOffer",
-      lowPrice: "0",
-      highPrice: "79",
-      priceCurrency: "EUR",
-      offerCount: "4",
+    url: "https://dealforge.es",
+    downloadUrl: "https://dealforge.es/registro",
+    screenshot: "https://dealforge.es/opengraph-image",
+    softwareVersion: "1.0",
+    releaseNotes: "https://dealforge.es/changelog",
+    inLanguage: "es",
+    isAccessibleForFree: true,
+    creator: {
+      "@type": "Organization",
+      name: "DealForge",
+      url: "https://dealforge.es",
     },
+    featureList: [
+      "Gestion de clientes CRM",
+      "Catalogo de productos con variantes",
+      "Cotizaciones PDF profesionales",
+      "Asistente IA (Forge) para crear cotizaciones",
+      "Reglas comerciales y limites de descuento",
+      "Flujos de aprobacion automaticos",
+      "Envio de emails integrado",
+      "Reportes y metricas de ventas",
+      "Importacion y exportacion CSV",
+      "API REST para integraciones",
+    ],
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Starter",
+        price: "0",
+        priceCurrency: "EUR",
+        description: "10 cotizaciones/mes, 5 clientes, 10 productos, Forge IA basico",
+        url: "https://dealforge.es/registro",
+      },
+      {
+        "@type": "Offer",
+        name: "Pro",
+        price: "29",
+        priceCurrency: "EUR",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: "29",
+          priceCurrency: "EUR",
+          billingDuration: "P1M",
+        },
+        description: "100 cotizaciones/mes, 50 clientes, 200 productos, Forge IA ilimitado, emails",
+        url: "https://dealforge.es/registro",
+      },
+      {
+        "@type": "Offer",
+        name: "Business",
+        price: "79",
+        priceCurrency: "EUR",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: "79",
+          priceCurrency: "EUR",
+          billingDuration: "P1M",
+        },
+        description: "Todo ilimitado, reglas avanzadas, aprobaciones, integraciones CRM",
+        url: "https://dealforge.es/registro",
+      },
+    ],
+  };
+
+  const howTo = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Como crear una cotizacion profesional con DealForge",
+    description:
+      "Aprende a crear cotizaciones profesionales con IA en 3 sencillos pasos usando DealForge.",
+    totalTime: "PT5M",
+    tool: {
+      "@type": "HowToTool",
+      name: "DealForge CPQ",
+    },
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Configura",
+        text: "Carga tus productos, clientes y configura tus reglas comerciales. Importa desde CSV si ya tienes datos.",
+        url: "https://dealforge.es/#funcionalidades",
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Cotiza",
+        text: "Pide a Forge IA que cree la cotizacion o hazla tu mismo con el wizard. En minutos, no horas.",
+        url: "https://dealforge.es/#forge",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Cierra",
+        text: "Envia la cotizacion por email, rastrea su estado y cierra la venta. El pipeline te muestra donde esta cada oportunidad.",
+        url: "https://dealforge.es/#precios",
+      },
+    ],
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApp) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }}
+      />
+    </>
   );
 }
 
