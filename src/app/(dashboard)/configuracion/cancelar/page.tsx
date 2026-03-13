@@ -82,7 +82,7 @@ export default async function CancelarPage() {
                   <li className="flex items-start gap-2">
                     <span className="text-amber-500 mt-0.5">•</span>
                     <span>
-                      Solo los <strong>20 primeros productos</strong> que creaste
+                      Solo los <strong>10 primeros productos</strong> que creaste
                       serán accesibles
                     </span>
                   </li>

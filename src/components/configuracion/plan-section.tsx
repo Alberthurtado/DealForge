@@ -44,7 +44,7 @@ const PLANS: Record<
     features: [
       "10 cotizaciones/mes",
       "5 clientes",
-      "20 productos",
+      "10 productos",
       "5 consultas Forge IA (Haiku)",
       "Exportación CSV",
     ],
@@ -240,9 +240,8 @@ export function PlanSection({ user }: { user: PlanUser }) {
           </div>
         </div>
 
-        {/* Actions based on plan */}
-        {isPaid && user.hasSubscription ? (
-          /* Manage subscription button for paid users */
+        {/* Manage subscription for paid users */}
+        {isPaid && user.hasSubscription && (
           <div className="mt-4">
             <button
               onClick={handleManageSubscription}
@@ -261,38 +260,28 @@ export function PlanSection({ user }: { user: PlanUser }) {
             <p className="text-xs text-muted-foreground mt-1.5">
               Cambia de plan, actualiza tu tarjeta o consulta facturas
             </p>
+          </div>
+        )}
 
-            {/* Cancel subscription */}
-            {user.planStatus === "canceling" ? (
-              <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                <p className="text-sm text-amber-800">
-                  Tu suscripción se cancelará{nextBilling ? ` el ${nextBilling}` : ""}. Después pasarás al plan Starter.
+        {/* Plan cards */}
+        <div className="mt-4 space-y-3">
+          {/* Pro card */}
+          <div className={`p-4 rounded-xl border ${user.plan === "pro" ? "bg-blue-50/50 border-blue-200" : "bg-gradient-to-r from-blue-50 to-[#3a9bb5]/5 border-blue-100"}`}>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold text-foreground">
+                  Plan Pro — 29 EUR/mes
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Forge IA ilimitado con Sonnet, emails, PDF con marca
                 </p>
               </div>
-            ) : (
-              <Link
-                href="/configuracion/cancelar"
-                className="inline-flex items-center gap-1.5 mt-3 text-xs text-red-500 hover:text-red-700 transition-colors"
-              >
-                <XCircle className="w-3.5 h-3.5" />
-                Cancelar suscripción
-              </Link>
-            )}
-          </div>
-        ) : (
-          /* Upgrade CTAs for starter/free users */
-          <div className="mt-4 space-y-3">
-            {/* Upgrade to Pro */}
-            <div className="p-4 bg-gradient-to-r from-blue-50 to-[#3a9bb5]/5 rounded-xl border border-blue-100">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    Plan Pro — 29 EUR/mes
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    Forge IA ilimitado con Sonnet, emails, PDF con marca
-                  </p>
-                </div>
+              {user.plan === "pro" ? (
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-blue-700 bg-blue-100 rounded-lg">
+                  <Check className="w-4 h-4" />
+                  Plan Actual
+                </span>
+              ) : user.plan === "starter" ? (
                 <button
                   onClick={() => handleUpgrade("pro")}
                   disabled={upgrading !== null}
@@ -305,24 +294,33 @@ export function PlanSection({ user }: { user: PlanUser }) {
                   )}
                   {upgrading === "pro" ? "Redirigiendo..." : "Actualizar"}
                 </button>
-              </div>
+              ) : null}
             </div>
+          </div>
 
-            {/* Upgrade to Business */}
-            <div className="p-4 bg-gradient-to-r from-purple-50 to-[#3a9bb5]/5 rounded-xl border border-purple-100">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-foreground flex items-center gap-1.5">
-                    Plan Business — 79 EUR/mes
+          {/* Business card */}
+          <div className={`p-4 rounded-xl border ${user.plan === "business" ? "bg-purple-50/50 border-purple-200" : "bg-gradient-to-r from-purple-50 to-[#3a9bb5]/5 border-purple-100"}`}>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold text-foreground flex items-center gap-1.5">
+                  Plan Business — 79 EUR/mes
+                  {user.plan !== "business" && (
                     <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-bold bg-purple-100 text-purple-700 rounded-full">
                       <Sparkles className="w-2.5 h-2.5" />
                       Popular
                     </span>
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    Todo ilimitado, aprobaciones, reglas avanzadas, CRM
-                  </p>
-                </div>
+                  )}
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Todo ilimitado, aprobaciones, reglas avanzadas, CRM
+                </p>
+              </div>
+              {user.plan === "business" ? (
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-purple-700 bg-purple-100 rounded-lg">
+                  <Check className="w-4 h-4" />
+                  Plan Actual
+                </span>
+              ) : (
                 <button
                   onClick={() => handleUpgrade("business")}
                   disabled={upgrading !== null}
@@ -335,8 +333,29 @@ export function PlanSection({ user }: { user: PlanUser }) {
                   )}
                   {upgrading === "business" ? "Redirigiendo..." : "Actualizar"}
                 </button>
-              </div>
+              )}
             </div>
+          </div>
+        </div>
+
+        {/* Cancel subscription for paid users */}
+        {isPaid && (
+          <div className="mt-4 pt-4 border-t border-border">
+            {user.planStatus === "canceling" ? (
+              <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                <p className="text-sm text-amber-800">
+                  Tu suscripción se cancelará{nextBilling ? ` el ${nextBilling}` : ""}. Después pasarás al plan Starter.
+                </p>
+              </div>
+            ) : (
+              <Link
+                href="/configuracion/cancelar"
+                className="inline-flex items-center gap-1.5 text-xs text-red-500 hover:text-red-700 transition-colors"
+              >
+                <XCircle className="w-3.5 h-3.5" />
+                Cancelar suscripción
+              </Link>
+            )}
           </div>
         )}
       </div>

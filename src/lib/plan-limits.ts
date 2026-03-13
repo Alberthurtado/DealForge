@@ -13,7 +13,7 @@ export const PLAN_LIMITS: Record<string, PlanLimits> = {
   starter: {
     cotizacionesMes: 10,
     clientes: 5,
-    productos: 20,
+    productos: 10,
     consultasIA: 5,
   },
   pro: {
