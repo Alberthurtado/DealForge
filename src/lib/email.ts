@@ -28,14 +28,21 @@ export async function getSmtpConfig(): Promise<SmtpConfig | null> {
 }
 
 function createTransporter(config: SmtpConfig) {
+  const port = config.smtpPort;
+  // Port 465 = implicit TLS (secure: true)
+  // Port 587/2525/25 = STARTTLS upgrade (secure: false)
+  const secure = port === 465;
+
   return nodemailer.createTransport({
     host: config.smtpHost,
-    port: config.smtpPort,
-    secure: config.smtpSecure,
+    port,
+    secure,
     auth: {
       user: config.smtpUser,
       pass: config.smtpPass,
     },
+    // For port 587: force STARTTLS upgrade
+    ...(!secure && { requireTLS: true }),
   });
 }
 
