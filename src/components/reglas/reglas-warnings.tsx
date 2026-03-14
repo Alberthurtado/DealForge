@@ -11,10 +11,19 @@ interface ProductoInfo {
   precioBase: number;
 }
 
+interface AprobacionExistente {
+  id: string;
+  reglaId: string;
+  aprobadorNombre: string;
+  aprobadorEmail: string;
+  estado: string;
+}
+
 interface Props {
   violaciones: Violacion[];
   aprobacionesRequeridas: AprobacionRequerida[];
   promocionesAplicables: PromocionAplicable[];
+  aprobacionesExistentes?: AprobacionExistente[];
   productosDisponibles?: ProductoInfo[];
   onAddProducto?: (productoId: string, cantidad: number, precioUnitario: number) => void;
   onApplyPromocion?: (promocion: PromocionAplicable) => void;
@@ -72,6 +81,7 @@ export function ReglasWarnings({
   violaciones,
   aprobacionesRequeridas,
   promocionesAplicables,
+  aprobacionesExistentes = [],
   productosDisponibles = [],
   onAddProducto,
   onApplyPromocion,
@@ -81,6 +91,19 @@ export function ReglasWarnings({
   }
 
   const productoMap = new Map(productosDisponibles.map((p) => [p.id, p]));
+
+  // Cross-reference required approvals with existing ones
+  const allApproved = aprobacionesRequeridas.length > 0 &&
+    aprobacionesRequeridas.every((req) =>
+      aprobacionesExistentes.some(
+        (ex) => ex.reglaId === req.reglaId && ex.estado === "APROBADA"
+      )
+    );
+  const someRejected = aprobacionesExistentes.some((ex) => ex.estado === "RECHAZADA");
+  const allPending = aprobacionesRequeridas.length > 0 &&
+    !allApproved &&
+    !someRejected &&
+    aprobacionesExistentes.some((ex) => ex.estado === "PENDIENTE");
 
   return (
     <div className="space-y-3">
@@ -129,24 +152,94 @@ export function ReglasWarnings({
 
       {/* Approval requirements */}
       {aprobacionesRequeridas.length > 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <UserCheck className="w-4 h-4 text-blue-600" />
-            <span className="text-sm font-medium text-blue-800">
-              Aprobaciones requeridas ({aprobacionesRequeridas.length})
-            </span>
+        allApproved ? (
+          /* All approvals completed */
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div className="flex items-center gap-2">
+              <UserCheck className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-green-800">
+                Todas las aprobaciones completadas
+              </span>
+            </div>
+            <ul className="space-y-1 mt-2">
+              {aprobacionesRequeridas.map((a, i) => {
+                const existing = aprobacionesExistentes.find(
+                  (ex) => ex.reglaId === a.reglaId && ex.estado === "APROBADA"
+                );
+                return (
+                  <li key={i} className="text-xs text-green-700 flex items-start gap-1.5">
+                    <span className="text-green-500 mt-0.5">&#10003;</span>
+                    <span>
+                      <strong>{existing?.aprobadorNombre || a.aprobador.nombre}</strong> ha aprobado &mdash; {a.razon}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-          <ul className="space-y-1">
-            {aprobacionesRequeridas.map((a, i) => (
-              <li key={i} className="text-xs text-blue-700 flex items-start gap-1.5">
-                <span className="text-blue-400 mt-0.5">&#8226;</span>
-                <span>
-                  <strong>{a.aprobador.nombre}</strong> ({a.aprobador.email}) &mdash; {a.razon}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        ) : someRejected ? (
+          /* Some approvals rejected */
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <AlertTriangle className="w-4 h-4 text-red-600" />
+              <span className="text-sm font-medium text-red-800">
+                Aprobacion rechazada
+              </span>
+            </div>
+            <ul className="space-y-1">
+              {aprobacionesExistentes
+                .filter((ex) => ex.estado === "RECHAZADA")
+                .map((ex) => (
+                  <li key={ex.id} className="text-xs text-red-700 flex items-start gap-1.5">
+                    <span className="text-red-400 mt-0.5">&#10007;</span>
+                    <span>
+                      <strong>{ex.aprobadorNombre}</strong> ({ex.aprobadorEmail}) ha rechazado la cotizacion
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ) : allPending ? (
+          /* Approvals sent, waiting for response */
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <UserCheck className="w-4 h-4 text-amber-600" />
+              <span className="text-sm font-medium text-amber-800">
+                Pendiente de aprobacion ({aprobacionesRequeridas.length})
+              </span>
+            </div>
+            <ul className="space-y-1">
+              {aprobacionesRequeridas.map((a, i) => (
+                <li key={i} className="text-xs text-amber-700 flex items-start gap-1.5">
+                  <span className="text-amber-400 mt-0.5">&#8226;</span>
+                  <span>
+                    Esperando respuesta de <strong>{a.aprobador.nombre}</strong> ({a.aprobador.email})
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          /* No approvals created yet — show required */
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <UserCheck className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-medium text-blue-800">
+                Aprobaciones requeridas ({aprobacionesRequeridas.length})
+              </span>
+            </div>
+            <ul className="space-y-1">
+              {aprobacionesRequeridas.map((a, i) => (
+                <li key={i} className="text-xs text-blue-700 flex items-start gap-1.5">
+                  <span className="text-blue-400 mt-0.5">&#8226;</span>
+                  <span>
+                    <strong>{a.aprobador.nombre}</strong> ({a.aprobador.email}) &mdash; {a.razon}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
       )}
 
       {/* Available promotions */}

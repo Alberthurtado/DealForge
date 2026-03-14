@@ -524,6 +524,7 @@ export default function CotizacionDetailPage() {
             violaciones={validation.violaciones}
             aprobacionesRequeridas={validation.aprobacionesRequeridas}
             promocionesAplicables={validation.promocionesAplicables}
+            aprobacionesExistentes={aprobaciones}
           />
         )}
         {planFeatures?.reglasComerciales !== false && validation?.promocionesAplicables && validation.promocionesAplicables.length > 0 && validation.valido && (

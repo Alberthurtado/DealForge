@@ -123,38 +123,63 @@ export async function PUT(
     },
   });
 
-  // Send notification email to empresa via MailerSend (non-blocking)
+  // Check if ALL approvals for this cotizacion are now resolved
+  // Only send notification when fully approved or on rejection
   try {
-    const empresa = await prisma.empresa.findUnique({
-      where: { id: "default" },
-      select: { nombre: true, colorPrimario: true, email: true, smtpUser: true },
+    const allApprovals = await prisma.aprobacion.findMany({
+      where: { cotizacionId: aprobacion.cotizacionId },
+      select: { estado: true },
     });
-    const toEmail = empresa?.email || empresa?.smtpUser;
-    if (toEmail) {
-      const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
 
-      const html = buildApprovalResolvedEmail({
-        baseUrl: origin,
-        cotizacionId: aprobacion.cotizacionId,
-        cotizacion: {
-          numero: aprobacion.cotizacion.numero,
-          total: aprobacion.cotizacion.total,
-          cliente: aprobacion.cotizacion.cliente.nombre,
-        },
-        aprobadorNombre: aprobacion.aprobadorNombre,
-        estado: data.estado,
-        comentario: data.comentario || null,
-        empresa: {
-          nombre: empresa?.nombre || "DealForge",
-          colorPrimario: empresa?.colorPrimario || "#3a9bb5",
-        },
+    const allApproved = allApprovals.length > 0 && allApprovals.every((a) => a.estado === "APROBADA");
+    const isRejection = data.estado === "RECHAZADA";
+
+    // Only notify the quote creator when fully approved or on rejection
+    if (allApproved || isRejection) {
+      // Get the quote creator's email
+      const cotizacionWithUser = await prisma.cotizacion.findUnique({
+        where: { id: aprobacion.cotizacionId },
+        select: { usuarioId: true },
+      });
+      const creator = cotizacionWithUser
+        ? await prisma.usuario.findUnique({
+            where: { id: cotizacionWithUser.usuarioId },
+            select: { email: true, nombre: true },
+          })
+        : null;
+
+      const empresa = await prisma.empresa.findUnique({
+        where: { id: "default" },
+        select: { nombre: true, colorPrimario: true },
       });
 
-      await sendSystemEmail({
-        to: toEmail,
-        subject: `Cotización ${aprobacion.cotizacion.numero} ${statusLabel}`,
-        html,
-      });
+      const toEmail = creator?.email;
+      if (toEmail) {
+        const origin = request.headers.get("origin") || `https://${request.headers.get("host")}`;
+
+        const html = buildApprovalResolvedEmail({
+          baseUrl: origin,
+          cotizacionId: aprobacion.cotizacionId,
+          cotizacion: {
+            numero: aprobacion.cotizacion.numero,
+            total: aprobacion.cotizacion.total,
+            cliente: aprobacion.cotizacion.cliente.nombre,
+          },
+          aprobadorNombre: aprobacion.aprobadorNombre,
+          estado: data.estado,
+          comentario: data.comentario || null,
+          empresa: {
+            nombre: empresa?.nombre || "DealForge",
+            colorPrimario: empresa?.colorPrimario || "#3a9bb5",
+          },
+        });
+
+        const subject = allApproved
+          ? `Cotizacion ${aprobacion.cotizacion.numero} aprobada — lista para enviar`
+          : `Cotizacion ${aprobacion.cotizacion.numero} rechazada por ${aprobacion.aprobadorNombre}`;
+
+        await sendSystemEmail({ to: toEmail, subject, html });
+      }
     }
   } catch {
     // Don't block response if email fails
