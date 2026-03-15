@@ -29,8 +29,10 @@ import { useToast } from "@/components/ui/toast";
 import { ReglasWarnings } from "@/components/reglas/reglas-warnings";
 import { AprobacionPanel } from "@/components/reglas/aprobacion-panel";
 import { FirmaPanel } from "@/components/cotizaciones/firma-panel";
+import { LineItemsEditor } from "@/components/cotizaciones/line-items-editor";
+import type { LineItemInput } from "@/components/cotizaciones/line-items-editor";
 import type { ValidationResult } from "@/lib/reglas-engine";
-import { ShieldAlert, Lock, GitBranch } from "lucide-react";
+import { ShieldAlert, ShieldCheck, Lock, GitBranch } from "lucide-react";
 import type { PlanFeatures } from "@/lib/plan-limits";
 
 interface Cotizacion {
@@ -59,6 +61,7 @@ interface Cotizacion {
     id: string;
     descripcion: string;
     productoId: string | null;
+    varianteId: string | null;
     cantidad: number;
     precioUnitario: number;
     descuento: number;
@@ -77,9 +80,6 @@ interface Cotizacion {
 }
 
 const statusTransitions: Record<string, Array<{ estado: string; label: string; icon: typeof Send; color: string }>> = {
-  BORRADOR: [
-    { estado: "ENVIADA", label: "Enviar", icon: Send, color: "bg-blue-600 hover:bg-blue-700" },
-  ],
   ENVIADA: [
     { estado: "NEGOCIACION", label: "Negociando", icon: FileText, color: "bg-amber-600 hover:bg-amber-700" },
     { estado: "GANADA", label: "Ganada", icon: Trophy, color: "bg-green-600 hover:bg-green-700" },
@@ -114,6 +114,9 @@ export default function CotizacionDetailPage() {
     total: number; moneda: string; createdAt: string;
   }>>([]);
   const [creatingVersion, setCreatingVersion] = useState(false);
+  const [editingLineItems, setEditingLineItems] = useState(false);
+  const [savingLineItems, setSavingLineItems] = useState(false);
+  const [sendingToApprove, setSendingToApprove] = useState(false);
 
   function loadAprobaciones() {
     fetch(`/api/cotizaciones/${params.id}/aprobaciones`)
@@ -296,6 +299,92 @@ export default function CotizacionDetailPage() {
     }
   }
 
+  async function saveLineItems(items: LineItemInput[]) {
+    if (!cotizacion) return;
+    setSavingLineItems(true);
+    try {
+      const res = await fetch(`/api/cotizaciones/${params.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lineItems: items.map((item) => ({
+            productoId: item.productoId || null,
+            varianteId: item.varianteId || null,
+            descripcion: item.descripcion,
+            cantidad: item.cantidad,
+            precioUnitario: item.precioUnitario,
+            descuento: item.descuento,
+          })),
+          descuentoGlobal: cotizacion.descuentoGlobal,
+          impuesto: cotizacion.impuesto,
+        }),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setCotizacion(updated);
+        setEditingLineItems(false);
+        success("Items actualizados correctamente");
+        loadAprobaciones();
+        // Re-validate rules
+        fetch("/api/reglas/validar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            lineItems: items.map((item) => ({
+              productoId: item.productoId || null,
+              descripcion: item.descripcion,
+              cantidad: item.cantidad,
+              precioUnitario: item.precioUnitario,
+              descuento: item.descuento,
+            })),
+            descuentoGlobal: updated.descuentoGlobal,
+            subtotal: updated.subtotal,
+            total: updated.total,
+          }),
+        })
+          .then((r) => r.json())
+          .then(setValidation)
+          .catch(() => {});
+      } else {
+        const data = await res.json().catch(() => null);
+        showError(data?.error || "Error al guardar los items");
+      }
+    } catch {
+      showError("Error de conexión");
+    } finally {
+      setSavingLineItems(false);
+    }
+  }
+
+  async function sendToApprove() {
+    if (!cotizacion) return;
+    setSendingToApprove(true);
+    try {
+      const res = await fetch(`/api/cotizaciones/${params.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ estado: "ENVIADA" }),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setCotizacion(updated);
+        success("Cotización enviada");
+      } else {
+        const data = await res.json().catch(() => null);
+        if (data?.code === "APPROVAL_REQUIRED") {
+          success("Solicitud de aprobación enviada");
+        } else {
+          showError(data?.error || "Error al enviar");
+        }
+      }
+    } catch {
+      showError("Error de conexión");
+    } finally {
+      setSendingToApprove(false);
+      loadAprobaciones();
+    }
+  }
+
   // Inline condiciones editing
   const [editingCondiciones, setEditingCondiciones] = useState(false);
   const [condicionesEdit, setCondicionesEdit] = useState("");
@@ -469,31 +558,69 @@ export default function CotizacionDetailPage() {
                 Archivar
               </button>
             )}
-            {transitions.map((t) => {
-              const blocked = t.estado === "ENVIADA" && sendBlocked;
-              return (
-                <div key={t.estado} className="relative group">
+            {/* BORRADOR: approval flow buttons */}
+            {cotizacion.estado === "BORRADOR" && (() => {
+              const approvedAll = aprobaciones.length > 0 && aprobaciones.every((a) => a.estado === "APROBADA");
+              const noApprovals = aprobaciones.length === 0;
+              const canSendDirectly = approvedAll || (noApprovals && false); // Only after approval check
+
+              if (canSendDirectly) {
+                // All approvals resolved → can send
+                return (
                   <button
-                    onClick={() => changeStatus(t.estado)}
-                    disabled={blocked}
-                    className={`inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium transition-colors ${t.color} ${blocked ? "opacity-50 cursor-not-allowed" : ""}`}
+                    onClick={() => changeStatus("ENVIADA")}
+                    disabled={termsBlocked}
+                    className={`inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium transition-colors bg-blue-600 hover:bg-blue-700 ${termsBlocked ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
-                    {blocked ? <ShieldAlert className="w-4 h-4" /> : <t.icon className="w-4 h-4" />}
-                    {t.label}
+                    <Send className="w-4 h-4" />
+                    Enviar
                   </button>
-                  {blocked && (
+                );
+              }
+
+              if (hasBlockingApprovals) {
+                // Approvals pending/rejected → show disabled send
+                return (
+                  <div className="relative group">
+                    <button
+                      disabled
+                      className="inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium bg-blue-600 opacity-50 cursor-not-allowed"
+                    >
+                      <ShieldAlert className="w-4 h-4" />
+                      Enviar
+                    </button>
                     <div className="absolute right-0 top-full mt-1 w-64 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                      {termsBlocked && "Faltan términos y condiciones. "}
                       {rejectedApprovals.length > 0
                         ? `Rechazada por: ${rejectedApprovals.map((a) => a.aprobadorNombre).join(", ")}`
-                        : pendingApprovals.length > 0
-                        ? `Pendiente de aprobación de: ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")}`
-                        : ""}
+                        : `Pendiente de aprobación de: ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")}`}
                     </div>
-                  )}
-                </div>
+                  </div>
+                );
+              }
+
+              // No approvals yet → "Enviar a Aprobar" (evaluates rules)
+              return (
+                <button
+                  onClick={sendToApprove}
+                  disabled={sendingToApprove || termsBlocked}
+                  className={`inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium transition-colors bg-blue-600 hover:bg-blue-700 ${termsBlocked ? "opacity-50 cursor-not-allowed" : ""}`}
+                >
+                  {sendingToApprove ? <Loader2 className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
+                  {sendingToApprove ? "Enviando..." : "Enviar a Aprobar"}
+                </button>
               );
-            })}
+            })()}
+            {/* Non-BORRADOR transitions */}
+            {transitions.map((t) => (
+              <button
+                key={t.estado}
+                onClick={() => changeStatus(t.estado)}
+                className={`inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium transition-colors ${t.color}`}
+              >
+                <t.icon className="w-4 h-4" />
+                {t.label}
+              </button>
+            ))}
           </div>
         }
       />
@@ -644,7 +771,37 @@ export default function CotizacionDetailPage() {
 
             {/* Line items */}
             <div className="bg-white rounded-xl border border-border p-6">
-              <h3 className="text-base font-semibold mb-3">Detalle</h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-base font-semibold">Detalle</h3>
+                {cotizacion.estado === "BORRADOR" && !editingLineItems && (
+                  <button
+                    onClick={() => setEditingLineItems(true)}
+                    className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Pencil className="w-3 h-3" />
+                    Editar
+                  </button>
+                )}
+              </div>
+              {editingLineItems ? (
+                <LineItemsEditor
+                  initialItems={cotizacion.lineItems.map((li) => ({
+                    productoId: li.productoId || "",
+                    varianteId: li.varianteId || li.variante?.id || undefined,
+                    descripcion: li.descripcion,
+                    cantidad: li.cantidad,
+                    precioUnitario: li.precioUnitario,
+                    descuento: li.descuento,
+                  }))}
+                  descuentoGlobal={cotizacion.descuentoGlobal}
+                  impuesto={cotizacion.impuesto}
+                  moneda={cotizacion.moneda}
+                  onSave={saveLineItems}
+                  onCancel={() => setEditingLineItems(false)}
+                  saving={savingLineItems}
+                />
+              ) : (
+              <>
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border text-muted-foreground">
@@ -735,6 +892,8 @@ export default function CotizacionDetailPage() {
                   <span>{formatCurrency(cotizacion.total)}</span>
                 </div>
               </div>
+              </>
+              )}
             </div>
 
             {/* Notes */}

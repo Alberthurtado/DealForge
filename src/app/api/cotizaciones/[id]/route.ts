@@ -152,7 +152,7 @@ export async function PUT(
         let msg = "No se puede enviar la cotización.";
         if (rejected.length > 0) msg += ` Rechazada por: ${rejected.map((a) => a.aprobadorNombre).join(", ")}.`;
         if (pending.length > 0) msg += ` Pendiente de aprobación de: ${pending.map((a) => a.aprobadorNombre).join(", ")}.`;
-        return NextResponse.json({ error: msg }, { status: 400 });
+        return NextResponse.json({ error: msg, code: "APPROVAL_REQUIRED" }, { status: 400 });
       }
     }
     if (current && current.estado !== updateData.estado) {
