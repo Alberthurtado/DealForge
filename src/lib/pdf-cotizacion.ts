@@ -1,12 +1,15 @@
 import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
+import chromium from "@sparticuz/chromium-min";
+
+// Remote chromium binary for Vercel serverless (avoids 50MB bundle limit)
+const CHROMIUM_PACK_URL =
+  "https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.tar";
 
 export async function generateCotizacionPdf(
   baseUrl: string,
   cotizacionId: string
 ): Promise<Buffer> {
-  // @sparticuz/chromium bundles Chromium for serverless (Vercel, AWS Lambda)
-  const executablePath = await chromium.executablePath();
+  const executablePath = await chromium.executablePath(CHROMIUM_PACK_URL);
 
   const browser = await puppeteer.launch({
     args: chromium.args,
