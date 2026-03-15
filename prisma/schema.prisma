@@ -106,11 +106,17 @@ model Cotizacion {
   lineItems        LineItem[]
   actividades      Actividad[]
   aprobaciones     Aprobacion[]
+  recordatorios    Recordatorio[]
+  firmas           Firma[]
+  cotizacionOriginalId  String?
+  cotizacionOriginal    Cotizacion?  @relation("Versiones", fields: [cotizacionOriginalId], references: [id])
+  versiones             Cotizacion[] @relation("Versiones")
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
 
   @@unique([numero, usuarioId])
   @@index([usuarioId])
+  @@index([cotizacionOriginalId])
 }
 
 model LineItem {
@@ -192,6 +198,10 @@ model Empresa {
   smtpUser          String?
   smtpPass          String?
   smtpSecure        Boolean  @default(false)
+  // Reminder settings
+  recordatorioSeguimientoDias  Int      @default(3)
+  recordatorioVencimientoDias  Int      @default(3)
+  recordatoriosActivos         Boolean  @default(true)
   usuarios          Usuario[]
   createdAt         DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -239,6 +249,34 @@ model MemoriaForge {
   createdAt DateTime @default(now())
 
   @@index([usuarioId])
+}
+
+model Recordatorio {
+  id             String     @id @default(cuid())
+  cotizacionId   String
+  cotizacion     Cotizacion @relation(fields: [cotizacionId], references: [id], onDelete: Cascade)
+  tipo           String     // SEGUIMIENTO_VENDEDOR | VENCIMIENTO_CLIENTE
+  destinatario   String
+  enviadoAt      DateTime   @default(now())
+  createdAt      DateTime   @default(now())
+
+  @@index([cotizacionId])
+  @@index([tipo, cotizacionId])
+}
+
+model Firma {
+  id             String     @id @default(cuid())
+  cotizacionId   String
+  cotizacion     Cotizacion @relation(fields: [cotizacionId], references: [id], onDelete: Cascade)
+  token          String     @unique @default(cuid())
+  signerName     String
+  signerEmail    String
+  signedAt       DateTime?
+  signatureData  String?
+  ipAddress      String?
+  createdAt      DateTime   @default(now())
+
+  @@index([cotizacionId])
 }
 
 model BlogPost {

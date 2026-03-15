@@ -28,8 +28,9 @@ import Link from "next/link";
 import { useToast } from "@/components/ui/toast";
 import { ReglasWarnings } from "@/components/reglas/reglas-warnings";
 import { AprobacionPanel } from "@/components/reglas/aprobacion-panel";
+import { FirmaPanel } from "@/components/cotizaciones/firma-panel";
 import type { ValidationResult } from "@/lib/reglas-engine";
-import { ShieldAlert, Lock } from "lucide-react";
+import { ShieldAlert, Lock, GitBranch } from "lucide-react";
 import type { PlanFeatures } from "@/lib/plan-limits";
 
 interface Cotizacion {
@@ -47,6 +48,7 @@ interface Cotizacion {
   notas: string | null;
   condiciones: string | null;
   version: number;
+  cotizacionOriginalId: string | null;
   cliente: {
     id: string;
     nombre: string;
@@ -103,11 +105,34 @@ export default function CotizacionDetailPage() {
     token?: string | null; emailEnviadoAt?: string | null;
   }>>([]);
   const [planFeatures, setPlanFeatures] = useState<PlanFeatures | null>(null);
+  const [firmas, setFirmas] = useState<Array<{
+    id: string; signerName: string; signerEmail: string;
+    signedAt: string | null; token: string; createdAt: string;
+  }>>([]);
+  const [versions, setVersions] = useState<Array<{
+    id: string; numero: string; version: number; estado: string;
+    total: number; moneda: string; createdAt: string;
+  }>>([]);
+  const [creatingVersion, setCreatingVersion] = useState(false);
 
   function loadAprobaciones() {
     fetch(`/api/cotizaciones/${params.id}/aprobaciones`)
       .then((r) => r.json())
       .then(setAprobaciones)
+      .catch(() => {});
+  }
+
+  function loadFirmas() {
+    fetch(`/api/cotizaciones/${params.id}/firma`)
+      .then((r) => r.json())
+      .then(setFirmas)
+      .catch(() => {});
+  }
+
+  function loadVersions() {
+    fetch(`/api/cotizaciones/${params.id}/version`)
+      .then((r) => r.json())
+      .then((data) => { if (Array.isArray(data)) setVersions(data); })
       .catch(() => {});
   }
 
@@ -119,10 +144,10 @@ export default function CotizacionDetailPage() {
         if (data.user?.plan) {
           // Import features dynamically based on plan
           const features: Record<string, PlanFeatures> = {
-            starter: { emailEnvio: false, reglasComerciales: false, aprobaciones: false, reglasAvanzadas: false, pdfBranded: false, apiKeys: false },
-            pro: { emailEnvio: true, reglasComerciales: true, aprobaciones: false, reglasAvanzadas: false, pdfBranded: true, apiKeys: true },
-            business: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true },
-            enterprise: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true },
+            starter: { emailEnvio: false, reglasComerciales: false, aprobaciones: false, reglasAvanzadas: false, pdfBranded: false, apiKeys: false, recordatorios: false, firmaElectronica: false },
+            pro: { emailEnvio: true, reglasComerciales: true, aprobaciones: false, reglasAvanzadas: false, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true },
+            business: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true },
+            enterprise: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true },
           };
           setPlanFeatures(features[data.user.plan] || features.starter);
         }
@@ -159,6 +184,8 @@ export default function CotizacionDetailPage() {
           .catch(() => {});
       });
     loadAprobaciones();
+    loadFirmas();
+    loadVersions();
   }, [params.id]);
 
   async function changeStatus(newEstado: string) {
@@ -177,6 +204,26 @@ export default function CotizacionDetailPage() {
     }
     // Always reload approvals — backend may have created new ones
     loadAprobaciones();
+  }
+
+  async function createNewVersion() {
+    if (!cotizacion) return;
+    setCreatingVersion(true);
+    try {
+      const res = await fetch(`/api/cotizaciones/${params.id}/version`, { method: "POST" });
+      if (res.ok) {
+        const newCot = await res.json();
+        success(`Versión v${newCot.version} creada`);
+        router.push(`/cotizaciones/${newCot.id}`);
+      } else {
+        const data = await res.json().catch(() => null);
+        showError(data?.error || "Error al crear nueva versión");
+      }
+    } catch {
+      showError("Error de conexión");
+    } finally {
+      setCreatingVersion(false);
+    }
   }
 
   async function duplicateQuote() {
@@ -355,7 +402,7 @@ export default function CotizacionDetailPage() {
   return (
     <div>
       <PageHeader
-        title={cotizacion.numero}
+        title={`${cotizacion.numero}${cotizacion.version > 1 || cotizacion.cotizacionOriginalId ? ` v${cotizacion.version}` : ""}`}
         breadcrumbs={[
           { label: "Cotizaciones", href: "/cotizaciones" },
           { label: cotizacion.numero },
@@ -395,6 +442,16 @@ export default function CotizacionDetailPage() {
               <Copy className="w-4 h-4" />
               Duplicar
             </button>
+            {["ENVIADA", "NEGOCIACION", "PERDIDA"].includes(cotizacion.estado) && (
+              <button
+                onClick={createNewVersion}
+                disabled={creatingVersion}
+                className="inline-flex items-center gap-2 px-3 py-2 border border-violet-200 bg-violet-50 rounded-lg text-sm font-medium text-violet-700 hover:bg-violet-100 transition-colors disabled:opacity-50"
+              >
+                <GitBranch className="w-4 h-4" />
+                {creatingVersion ? "Creando..." : "Nueva Versión"}
+              </button>
+            )}
             {cotizacion.estado === "ARCHIVADA" ? (
               <button
                 onClick={unarchiveQuote}
@@ -771,6 +828,74 @@ export default function CotizacionDetailPage() {
                 aprobaciones={aprobaciones}
                 onUpdate={loadAprobaciones}
               />
+            )}
+            {/* Firma Electrónica */}
+            {planFeatures?.firmaElectronica === false ? (
+              <div className="rounded-xl border border-purple-200 bg-purple-50 p-4 text-center">
+                <Lock className="w-5 h-5 text-purple-500 mx-auto mb-2" />
+                <p className="text-xs font-semibold text-purple-800">Firma Electrónica</p>
+                <p className="text-[11px] text-purple-600 mt-1 mb-3">
+                  La firma electrónica está disponible desde el plan Pro.
+                </p>
+                <Link
+                  href="/configuracion"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-purple-600 text-white rounded-lg text-xs font-medium hover:bg-purple-700 transition-colors"
+                >
+                  Ver plan Pro
+                </Link>
+              </div>
+            ) : (
+              <FirmaPanel
+                cotizacionId={cotizacion.id}
+                firmas={firmas}
+                canRequest={["ENVIADA", "NEGOCIACION"].includes(cotizacion.estado)}
+                onUpdate={loadFirmas}
+              />
+            )}
+            {/* Version history */}
+            {versions.length > 1 && (
+              <div className="bg-white rounded-xl border border-border p-5">
+                <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+                  <GitBranch className="w-4 h-4 text-violet-500" />
+                  Historial de Versiones
+                </h3>
+                <div className="space-y-2">
+                  {versions.map((v) => {
+                    const isCurrent = v.id === cotizacion.id;
+                    return (
+                      <Link
+                        key={v.id}
+                        href={isCurrent ? "#" : `/cotizaciones/${v.id}`}
+                        className={`block p-2.5 rounded-lg border transition-colors ${
+                          isCurrent
+                            ? "border-violet-200 bg-violet-50"
+                            : "border-border hover:border-violet-200 hover:bg-violet-50/50"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                              isCurrent ? "bg-violet-200 text-violet-700" : "bg-gray-100 text-gray-600"
+                            }`}>
+                              v{v.version}
+                            </span>
+                            <span className="text-xs font-medium text-foreground truncate">{v.numero}</span>
+                          </div>
+                          <CotizacionStatusBadge estado={v.estado} />
+                        </div>
+                        <div className="flex items-center justify-between mt-1">
+                          <span className="text-[10px] text-muted-foreground">
+                            {formatDate(v.createdAt)}
+                          </span>
+                          <span className="text-[10px] font-medium text-foreground">
+                            {formatCurrency(v.total)}
+                          </span>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
             )}
           </div>
         </div>

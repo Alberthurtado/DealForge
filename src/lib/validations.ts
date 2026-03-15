@@ -219,6 +219,21 @@ export const empresaUpdateSchema = z.object({
   smtpUser: optionalString,
   smtpPass: optionalString,
   smtpSecure: z.boolean().optional(),
+  // Reminder settings
+  recordatorioSeguimientoDias: z.number().int().min(1).max(30).optional(),
+  recordatorioVencimientoDias: z.number().int().min(1).max(30).optional(),
+  recordatoriosActivos: z.boolean().optional(),
+});
+
+// ─── Firma Electrónica ──────────────────────────
+
+export const firmaRequestSchema = z.object({
+  signerName: requiredString("Nombre del firmante"),
+  signerEmail: emailField,
+});
+
+export const firmaSignSchema = z.object({
+  signatureData: z.string().min(1, "Firma es obligatoria"),
 });
 
 // ─── Email ───────────────────────────────────────

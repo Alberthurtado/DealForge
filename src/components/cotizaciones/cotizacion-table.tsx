@@ -12,6 +12,8 @@ interface CotizacionRow {
   numero: string;
   estado: string;
   total: number;
+  version: number;
+  cotizacionOriginalId: string | null;
   fechaEmision: string;
   fechaVencimiento: string | null;
   contactoNombre: string | null;
@@ -212,6 +214,11 @@ export function CotizacionTable({
                     <div>
                       <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                         {cot.numero}
+                        {(cot.version > 1 || cot.cotizacionOriginalId) && (
+                          <span className="ml-1.5 text-[9px] font-bold bg-violet-100 text-violet-700 px-1 py-0.5 rounded">
+                            v{cot.version}
+                          </span>
+                        )}
                       </p>
                       {cot.contactoNombre && (
                         <p className="text-xs text-muted-foreground">

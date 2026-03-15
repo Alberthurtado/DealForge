@@ -6,10 +6,11 @@ import {
   Send,
   ArrowRightLeft,
   MessageSquare,
-  Trophy,
-  XCircle,
   Mail,
   ShieldCheck,
+  Bell,
+  PenTool,
+  GitBranch,
 } from "lucide-react";
 
 interface Actividad {
@@ -28,6 +29,10 @@ const iconConfig: Record<string, { icon: typeof FileText; color: string }> = {
   NOTA: { icon: MessageSquare, color: "text-gray-500 bg-gray-50 border-gray-200" },
   EMAIL_ENVIADO: { icon: Mail, color: "text-green-500 bg-green-50 border-green-200" },
   APROBACION_RESUELTA: { icon: ShieldCheck, color: "text-purple-500 bg-purple-50 border-purple-200" },
+  RECORDATORIO_ENVIADO: { icon: Bell, color: "text-amber-500 bg-amber-50 border-amber-200" },
+  FIRMA_SOLICITADA: { icon: PenTool, color: "text-blue-500 bg-blue-50 border-blue-200" },
+  FIRMA_COMPLETADA: { icon: PenTool, color: "text-green-500 bg-green-50 border-green-200" },
+  VERSION_CREADA: { icon: GitBranch, color: "text-violet-500 bg-violet-50 border-violet-200" },
 };
 
 export function CotizacionTimeline({

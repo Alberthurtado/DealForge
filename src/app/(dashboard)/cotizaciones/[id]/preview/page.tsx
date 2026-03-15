@@ -70,14 +70,31 @@ export default function CotizacionPreviewPage() {
   const [cotizacion, setCotizacion] = useState<Cotizacion | null>(null);
   const [empresa, setEmpresa] = useState<EmpresaData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [signatureData, setSignatureData] = useState<{
+    signerName: string;
+    signedAt: string;
+    signatureImage: string;
+  } | null>(null);
 
   useEffect(() => {
     Promise.all([
       fetch(`/api/cotizaciones/${params.id}`).then((r) => r.json()),
       fetch("/api/empresa").then((r) => r.json()),
-    ]).then(([cotData, empData]) => {
+      fetch(`/api/cotizaciones/${params.id}/firma`).then((r) => r.json()).catch(() => []),
+    ]).then(([cotData, empData, firmasData]) => {
       setCotizacion(cotData);
       setEmpresa(empData);
+      // Find first completed signature
+      const signedFirma = Array.isArray(firmasData)
+        ? firmasData.find((f: { signedAt: string | null; signatureData: string | null }) => f.signedAt && f.signatureData)
+        : null;
+      if (signedFirma) {
+        setSignatureData({
+          signerName: signedFirma.signerName,
+          signedAt: signedFirma.signedAt,
+          signatureImage: signedFirma.signatureData,
+        });
+      }
       setLoading(false);
     });
   }, [params.id]);
@@ -578,6 +595,30 @@ export default function CotizacionPreviewPage() {
                   </p>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* ===== SIGNATURE ===== */}
+          {signatureData && (
+            <div className="px-10 pb-6">
+              <div className="h-px bg-gray-100 mb-4" />
+              <div className="flex items-end gap-6">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-2">
+                    Firma del Cliente
+                  </p>
+                  <img
+                    src={signatureData.signatureImage}
+                    alt="Firma"
+                    className="h-16 max-w-[200px] object-contain"
+                  />
+                  <div className="h-px bg-gray-300 mt-1 w-48" />
+                  <p className="text-xs text-gray-600 mt-1">{signatureData.signerName}</p>
+                  <p className="text-[10px] text-gray-400">
+                    Firmado el {formatDate(signatureData.signedAt)}
+                  </p>
+                </div>
+              </div>
             </div>
           )}
 

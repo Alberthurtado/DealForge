@@ -42,6 +42,8 @@ export interface PlanFeatures {
   reglasAvanzadas: boolean;   // Advanced rule types
   pdfBranded: boolean;        // Branded PDF templates
   apiKeys: boolean;           // API key for external integrations
+  recordatorios: boolean;     // Automated follow-up reminders
+  firmaElectronica: boolean;  // Electronic signature
 }
 
 const PLAN_FEATURES: Record<string, PlanFeatures> = {
@@ -52,6 +54,8 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     reglasAvanzadas: false,
     pdfBranded: true,
     apiKeys: false,
+    recordatorios: false,
+    firmaElectronica: false,
   },
   pro: {
     emailEnvio: true,
@@ -60,6 +64,8 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     reglasAvanzadas: false,
     pdfBranded: true,
     apiKeys: true,
+    recordatorios: true,
+    firmaElectronica: true,
   },
   business: {
     emailEnvio: true,
@@ -68,6 +74,8 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     reglasAvanzadas: true,
     pdfBranded: true,
     apiKeys: true,
+    recordatorios: true,
+    firmaElectronica: true,
   },
   enterprise: {
     emailEnvio: true,
@@ -76,6 +84,8 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     reglasAvanzadas: true,
     pdfBranded: true,
     apiKeys: true,
+    recordatorios: true,
+    firmaElectronica: true,
   },
 };
 

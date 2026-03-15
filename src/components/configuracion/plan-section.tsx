@@ -47,6 +47,7 @@ const PLANS: Record<
       "10 productos",
       "5 consultas Forge IA (Haiku)",
       "Exportación CSV",
+      "Versionado de cotizaciones",
     ],
     iaModel: "Claude Haiku",
   },
@@ -63,6 +64,9 @@ const PLANS: Record<
       "Import / Export CSV",
       "Envío de emails",
       "PDF con marca",
+      "Firma electrónica",
+      "Recordatorios automáticos",
+      "Versionado de cotizaciones",
       "Reglas básicas",
     ],
     iaModel: "Claude Sonnet",
@@ -80,6 +84,9 @@ const PLANS: Record<
       "Import / Export CSV",
       "Envío de emails",
       "Aprobaciones",
+      "Firma electrónica",
+      "Recordatorios automáticos",
+      "Versionado de cotizaciones",
       "Reglas avanzadas",
       "Integraciones CRM",
     ],
@@ -93,6 +100,9 @@ const PLANS: Record<
     features: [
       "Todo ilimitado",
       "Forge IA personalizado (Sonnet)",
+      "Firma electrónica",
+      "Recordatorios automáticos",
+      "Versionado de cotizaciones",
       "Multi-usuario",
       "API completa",
       "SSO / SAML",
@@ -273,7 +283,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
                   Plan Pro — 29 EUR/mes
                 </p>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  Forge IA ilimitado con Sonnet, emails, PDF con marca
+                  Forge IA ilimitado, emails, firma electrónica, recordatorios
                 </p>
               </div>
               {user.plan === "pro" ? (
@@ -312,7 +322,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
                   )}
                 </p>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  Todo ilimitado, aprobaciones, reglas avanzadas, CRM
+                  Todo ilimitado, aprobaciones, firma, recordatorios, CRM
                 </p>
               </div>
               {user.plan === "business" ? (

@@ -20,6 +20,9 @@ import {
   Check,
   Minus,
   Sparkles,
+  PenTool,
+  Bell,
+  GitBranch,
 } from "lucide-react";
 import { Navbar } from "./_landing/navbar";
 import { ForgeShowcase } from "./_landing/forge-showcase";
@@ -250,6 +253,9 @@ function FeaturesGrid() {
     { icon: Flame, title: "Forge IA Integrado", desc: "Asistente inteligente que crea cotizaciones, analiza datos y recomienda acciones." },
     { icon: Mail, title: "Envío de Emails", desc: "Envía cotizaciones directamente desde la plataforma con SMTP propio." },
     { icon: CheckCircle, title: "Aprobaciones", desc: "Flujos de aprobación con enlaces únicos. Aprueba o rechaza desde cualquier dispositivo." },
+    { icon: PenTool, title: "Firma Electrónica", desc: "Solicita firmas digitales con enlace único. El cliente firma desde cualquier dispositivo." },
+    { icon: Bell, title: "Recordatorios Automáticos", desc: "Seguimiento automático al vendedor y aviso de vencimiento al cliente por email." },
+    { icon: GitBranch, title: "Versionado", desc: "Crea nuevas versiones de cotizaciones. Historial completo con trazabilidad." },
     { icon: Plug, title: "Importar / Exportar", desc: "Importa clientes y productos desde CSV. Exporta datos cuando necesites." },
   ];
 
@@ -356,7 +362,10 @@ function PricingSection() {
         { text: "10 productos", included: true },
         { text: "5 consultas Forge IA", included: true },
         { text: "Exportación CSV", included: true },
+        { text: "Versionado de cotizaciones", included: true },
         { text: "Envío de emails", included: false },
+        { text: "Firma electrónica", included: false },
+        { text: "Recordatorios automáticos", included: false },
         { text: "Aprobaciones", included: false },
         { text: "Reglas comerciales", included: false },
         { text: "Integraciones CRM", included: false },
@@ -377,6 +386,9 @@ function PricingSection() {
         { text: "Import / Export CSV", included: true },
         { text: "Envío de emails", included: true },
         { text: "PDF con marca", included: true },
+        { text: "Firma electrónica", included: true },
+        { text: "Recordatorios automáticos", included: true },
+        { text: "Versionado de cotizaciones", included: true },
         { text: "Reglas básicas", included: true },
         { text: "Integraciones CRM", included: false },
       ],
@@ -396,6 +408,9 @@ function PricingSection() {
         { text: "Import / Export CSV", included: true },
         { text: "Envío de emails", included: true },
         { text: "Aprobaciones", included: true },
+        { text: "Firma electrónica", included: true },
+        { text: "Recordatorios automáticos", included: true },
+        { text: "Versionado de cotizaciones", included: true },
         { text: "Reglas avanzadas", included: true },
         { text: "Integraciones CRM", included: true },
       ],
@@ -410,6 +425,9 @@ function PricingSection() {
       features: [
         { text: "Todo ilimitado", included: true },
         { text: "Forge IA personalizado", included: true },
+        { text: "Firma electrónica", included: true },
+        { text: "Recordatorios automáticos", included: true },
+        { text: "Versionado de cotizaciones", included: true },
         { text: "Multi-usuario", included: true },
         { text: "API completa", included: true },
         { text: "SSO / SAML", included: true },

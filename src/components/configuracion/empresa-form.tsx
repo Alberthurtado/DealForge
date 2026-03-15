@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Upload, Check, Building2, Hash, Mail, Eye, EyeOff, FileText } from "lucide-react";
+import { Upload, Check, Building2, Hash, Mail, Eye, EyeOff, FileText, Bell } from "lucide-react";
 import { useToast } from "@/components/ui/toast";
 
 interface EmpresaData {
@@ -24,6 +24,9 @@ interface EmpresaData {
   smtpUser: string | null;
   smtpPass: string | null;
   smtpSecure: boolean;
+  recordatorioSeguimientoDias: number;
+  recordatorioVencimientoDias: number;
+  recordatoriosActivos: boolean;
 }
 
 const PLANTILLAS = [
@@ -592,6 +595,81 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
             </button>
           </div>
         )}
+      </div>
+
+      {/* Section 9: Recordatorios Automáticos */}
+      <div className="bg-white rounded-xl border border-border p-6">
+        <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
+          <Bell className="w-5 h-5 text-primary" />
+          Recordatorios Automáticos
+        </h3>
+        <p className="text-xs text-muted-foreground mb-4">
+          Envía recordatorios automáticos al vendedor y al cliente para mejorar el seguimiento
+        </p>
+
+        <div className="space-y-4">
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={form.recordatoriosActivos}
+              onChange={(e) =>
+                setForm((prev) => ({ ...prev, recordatoriosActivos: e.target.checked }))
+              }
+              className="rounded border-border w-4 h-4"
+            />
+            <div>
+              <span className="text-sm font-medium text-foreground">Activar recordatorios</span>
+              <p className="text-xs text-muted-foreground">Se envían automáticamente cada día a las 8:00 UTC</p>
+            </div>
+          </label>
+
+          {form.recordatoriosActivos && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 pl-7">
+              <div>
+                <label className="block text-xs font-medium text-muted-foreground mb-1">
+                  Días sin actividad para recordar al vendedor
+                </label>
+                <input
+                  type="number"
+                  min={1}
+                  max={30}
+                  value={form.recordatorioSeguimientoDias}
+                  onChange={(e) =>
+                    setForm((prev) => ({
+                      ...prev,
+                      recordatorioSeguimientoDias: Math.max(1, Math.min(30, parseInt(e.target.value) || 3)),
+                    }))
+                  }
+                  className={inputClass}
+                />
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Si una cotización enviada no tiene actividad en este número de días, se envía un recordatorio al vendedor.
+                </p>
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-muted-foreground mb-1">
+                  Días antes del vencimiento para avisar al cliente
+                </label>
+                <input
+                  type="number"
+                  min={1}
+                  max={30}
+                  value={form.recordatorioVencimientoDias}
+                  onChange={(e) =>
+                    setForm((prev) => ({
+                      ...prev,
+                      recordatorioVencimientoDias: Math.max(1, Math.min(30, parseInt(e.target.value) || 3)),
+                    }))
+                  }
+                  className={inputClass}
+                />
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Se envía un recordatorio al cliente cuando la cotización está a punto de vencer.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Save button */}
