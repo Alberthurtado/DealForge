@@ -504,131 +504,138 @@ export default function CotizacionDetailPage() {
           { label: cotizacion.numero },
         ]}
         actions={
-          <div className="flex items-center gap-2">
-            <Link
-              href={`/cotizaciones/${params.id}/preview`}
-              className="inline-flex items-center gap-2 px-3 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
-            >
-              <Eye className="w-4 h-4" />
-              Vista Previa
-            </Link>
-            {planFeatures?.emailEnvio === false ? (
+          <div className="space-y-3">
+            {/* Row 1: Document actions */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mr-1">Acciones</span>
               <Link
-                href="/configuracion"
-                className="inline-flex items-center gap-2 px-3 py-2 border border-purple-200 bg-purple-50 rounded-lg text-sm font-medium text-purple-600 hover:bg-purple-100 transition-colors"
-                title="Disponible desde el plan Pro"
+                href={`/cotizaciones/${params.id}/preview`}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-medium hover:bg-primary/90 transition-colors"
               >
-                <Lock className="w-3.5 h-3.5" />
-                Enviar Email
-                <span className="text-[9px] font-bold bg-purple-200 text-purple-700 px-1.5 py-0.5 rounded uppercase">Pro</span>
+                <Eye className="w-3.5 h-3.5" />
+                Vista Previa
               </Link>
-            ) : (
-              <button
-                onClick={openEmailDialog}
-                className="inline-flex items-center gap-2 px-3 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted transition-colors"
-              >
-                <Mail className="w-4 h-4" />
-                Enviar Email
-              </button>
-            )}
-            <button
-              onClick={duplicateQuote}
-              className="inline-flex items-center gap-2 px-3 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted transition-colors"
-            >
-              <Copy className="w-4 h-4" />
-              Duplicar
-            </button>
-            {["ENVIADA", "NEGOCIACION", "PERDIDA"].includes(cotizacion.estado) && (
-              <button
-                onClick={createNewVersion}
-                disabled={creatingVersion}
-                className="inline-flex items-center gap-2 px-3 py-2 border border-violet-200 bg-violet-50 rounded-lg text-sm font-medium text-violet-700 hover:bg-violet-100 transition-colors disabled:opacity-50"
-              >
-                <GitBranch className="w-4 h-4" />
-                {creatingVersion ? "Creando..." : "Nueva Versión"}
-              </button>
-            )}
-            {cotizacion.estado === "ARCHIVADA" ? (
-              <button
-                onClick={unarchiveQuote}
-                className="inline-flex items-center gap-2 px-3 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
-              >
-                <ArchiveRestore className="w-4 h-4" />
-                Desarchivar
-              </button>
-            ) : (
-              <button
-                onClick={archiveQuote}
-                className="inline-flex items-center gap-2 px-3 py-2 border border-slate-300 text-slate-600 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors"
-              >
-                <Archive className="w-4 h-4" />
-                Archivar
-              </button>
-            )}
-            {/* BORRADOR: approval flow buttons */}
-            {cotizacion.estado === "BORRADOR" && (() => {
-              const approvedAll = aprobaciones.length > 0 && aprobaciones.every((a) => a.estado === "APROBADA");
-              const noApprovals = aprobaciones.length === 0;
-              const needsApproval = validation?.aprobacionesRequeridas && validation.aprobacionesRequeridas.length > 0;
-              const canSendDirectly = approvedAll || (noApprovals && !needsApproval);
-
-              if (canSendDirectly) {
-                // All approvals resolved → can send
-                return (
-                  <button
-                    onClick={() => changeStatus("ENVIADA")}
-                    disabled={termsBlocked}
-                    className={`inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium transition-colors bg-blue-600 hover:bg-blue-700 ${termsBlocked ? "opacity-50 cursor-not-allowed" : ""}`}
-                  >
-                    <Send className="w-4 h-4" />
-                    Enviar
-                  </button>
-                );
-              }
-
-              if (hasBlockingApprovals) {
-                // Approvals pending/rejected → show disabled send
-                return (
-                  <div className="relative group">
-                    <button
-                      disabled
-                      className="inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium bg-blue-600 opacity-50 cursor-not-allowed"
-                    >
-                      <ShieldAlert className="w-4 h-4" />
-                      Enviar
-                    </button>
-                    <div className="absolute right-0 top-full mt-1 w-64 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                      {rejectedApprovals.length > 0
-                        ? `Rechazada por: ${rejectedApprovals.map((a) => a.aprobadorNombre).join(", ")}`
-                        : `Pendiente de aprobación de: ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")}`}
-                    </div>
-                  </div>
-                );
-              }
-
-              // No approvals yet → "Enviar a Aprobar" (evaluates rules)
-              return (
-                <button
-                  onClick={sendToApprove}
-                  disabled={sendingToApprove || termsBlocked}
-                  className={`inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium transition-colors bg-blue-600 hover:bg-blue-700 ${termsBlocked ? "opacity-50 cursor-not-allowed" : ""}`}
+              {planFeatures?.emailEnvio === false ? (
+                <Link
+                  href="/configuracion"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-purple-200 bg-purple-50 rounded-lg text-xs font-medium text-purple-600 hover:bg-purple-100 transition-colors"
+                  title="Disponible desde el plan Pro"
                 >
-                  {sendingToApprove ? <Loader2 className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
-                  {sendingToApprove ? "Enviando..." : "Enviar a Aprobar"}
+                  <Lock className="w-3 h-3" />
+                  Email
+                  <span className="text-[8px] font-bold bg-purple-200 text-purple-700 px-1 py-0.5 rounded uppercase">Pro</span>
+                </Link>
+              ) : (
+                <button
+                  onClick={openEmailDialog}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border rounded-lg text-xs font-medium hover:bg-muted transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  Email
                 </button>
-              );
-            })()}
-            {/* Non-BORRADOR transitions */}
-            {transitions.map((t) => (
+              )}
               <button
-                key={t.estado}
-                onClick={() => changeStatus(t.estado)}
-                className={`inline-flex items-center gap-2 px-3 py-2 text-white rounded-lg text-sm font-medium transition-colors ${t.color}`}
+                onClick={duplicateQuote}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border rounded-lg text-xs font-medium hover:bg-muted transition-colors"
               >
-                <t.icon className="w-4 h-4" />
-                {t.label}
+                <Copy className="w-3.5 h-3.5" />
+                Duplicar
               </button>
-            ))}
+              {["ENVIADA", "NEGOCIACION", "PERDIDA"].includes(cotizacion.estado) && (
+                <button
+                  onClick={createNewVersion}
+                  disabled={creatingVersion}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-violet-200 bg-violet-50 rounded-lg text-xs font-medium text-violet-700 hover:bg-violet-100 transition-colors disabled:opacity-50"
+                >
+                  <GitBranch className="w-3.5 h-3.5" />
+                  {creatingVersion ? "Creando..." : "Nueva Versión"}
+                </button>
+              )}
+              {cotizacion.estado === "ARCHIVADA" ? (
+                <button
+                  onClick={unarchiveQuote}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-medium hover:bg-primary/90 transition-colors"
+                >
+                  <ArchiveRestore className="w-3.5 h-3.5" />
+                  Desarchivar
+                </button>
+              ) : (
+                <button
+                  onClick={archiveQuote}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 text-slate-500 rounded-lg text-xs font-medium hover:bg-slate-50 transition-colors"
+                >
+                  <Archive className="w-3.5 h-3.5" />
+                  Archivar
+                </button>
+              )}
+            </div>
+            {/* Row 2: Status transitions */}
+            {(cotizacion.estado === "BORRADOR" || transitions.length > 0) && (
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mr-1">Estado</span>
+                {/* BORRADOR: approval flow buttons */}
+                {cotizacion.estado === "BORRADOR" && (() => {
+                  const approvedAll = aprobaciones.length > 0 && aprobaciones.every((a) => a.estado === "APROBADA");
+                  const noApprovals = aprobaciones.length === 0;
+                  const needsApproval = validation?.aprobacionesRequeridas && validation.aprobacionesRequeridas.length > 0;
+                  const canSendDirectly = approvedAll || (noApprovals && !needsApproval);
+
+                  if (canSendDirectly) {
+                    return (
+                      <button
+                        onClick={() => changeStatus("ENVIADA")}
+                        disabled={termsBlocked}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-white rounded-lg text-xs font-medium transition-colors bg-blue-600 hover:bg-blue-700 ${termsBlocked ? "opacity-50 cursor-not-allowed" : ""}`}
+                      >
+                        <Send className="w-3.5 h-3.5" />
+                        Enviar
+                      </button>
+                    );
+                  }
+
+                  if (hasBlockingApprovals) {
+                    return (
+                      <div className="relative group">
+                        <button
+                          disabled
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-white rounded-lg text-xs font-medium bg-blue-600 opacity-50 cursor-not-allowed"
+                        >
+                          <ShieldAlert className="w-3.5 h-3.5" />
+                          Enviar
+                        </button>
+                        <div className="absolute right-0 top-full mt-1 w-64 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
+                          {rejectedApprovals.length > 0
+                            ? `Rechazada por: ${rejectedApprovals.map((a) => a.aprobadorNombre).join(", ")}`
+                            : `Pendiente de aprobación de: ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")}`}
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <button
+                      onClick={sendToApprove}
+                      disabled={sendingToApprove || termsBlocked}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-white rounded-lg text-xs font-medium transition-colors bg-blue-600 hover:bg-blue-700 ${termsBlocked ? "opacity-50 cursor-not-allowed" : ""}`}
+                    >
+                      {sendingToApprove ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ShieldCheck className="w-3.5 h-3.5" />}
+                      {sendingToApprove ? "Enviando..." : "Enviar a Aprobar"}
+                    </button>
+                  );
+                })()}
+                {/* Non-BORRADOR transitions */}
+                {transitions.map((t) => (
+                  <button
+                    key={t.estado}
+                    onClick={() => changeStatus(t.estado)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-white rounded-lg text-xs font-medium transition-colors ${t.color}`}
+                  >
+                    <t.icon className="w-3.5 h-3.5" />
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         }
       />

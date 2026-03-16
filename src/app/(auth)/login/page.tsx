@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useCallback } from "react";
+import { Suspense, useState, useCallback, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Flame, Eye, EyeOff, Loader2 } from "lucide-react";
@@ -14,9 +14,19 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  // Load saved email on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("df_remember_email");
+    if (saved) {
+      setEmail(saved);
+      setRememberMe(true);
+    }
+  }, []);
 
   const handleToken = useCallback((token: string | null) => {
     setTurnstileToken(token);
@@ -44,6 +54,13 @@ function LoginForm() {
         setError(data.error || "Error al iniciar sesión");
         setLoading(false);
         return;
+      }
+
+      // Save or clear remembered email
+      if (rememberMe) {
+        localStorage.setItem("df_remember_email", email);
+      } else {
+        localStorage.removeItem("df_remember_email");
       }
 
       // Success — redirect
@@ -120,7 +137,16 @@ function LoginForm() {
             </div>
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex items-center justify-between">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="w-3.5 h-3.5 rounded border-gray-300 text-[#3a9bb5] focus:ring-[#3a9bb5]/50"
+              />
+              <span className="text-xs text-gray-500">Recordarme</span>
+            </label>
             <Link
               href="/recuperar"
               className="text-xs text-[#3a9bb5] hover:text-[#2d7d94] font-medium transition-colors"

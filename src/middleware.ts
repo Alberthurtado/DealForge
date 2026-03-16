@@ -56,6 +56,7 @@ const PUBLIC_PATHS = [
 const PUBLIC_PREFIXES = [
   "/api/auth/",
   "/api/stripe/webhook", // Stripe webhooks — no auth needed
+  "/api/pdf-preview/",   // PDF preview for Puppeteer — HMAC protected
   "/aprobar/",
   "/checkout/",          // Post-checkout pages
   "/_next/",
