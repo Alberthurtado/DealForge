@@ -3,8 +3,9 @@ import chromium from "@sparticuz/chromium-min";
 import { createHmac } from "crypto";
 
 // Remote chromium binary for Vercel serverless (avoids 50MB bundle limit)
+// Must include architecture suffix — Vercel uses x64
 const CHROMIUM_PACK_URL =
-  "https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.tar";
+  "https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.x64.tar";
 
 function generatePreviewSecret(id: string): string {
   const secret = process.env.JWT_SECRET;
