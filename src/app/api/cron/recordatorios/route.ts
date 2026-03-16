@@ -67,7 +67,7 @@ export async function GET(request: NextRequest) {
           },
         });
 
-        const origin = process.env.NEXT_PUBLIC_APP_URL || "https://app.dealforge.es";
+        const origin = process.env.NEXT_PUBLIC_APP_URL || "https://dealforge.es";
 
         for (const cot of quotesNeedingFollowUp) {
           const lastActivity = cot.actividades[0];
