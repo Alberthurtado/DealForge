@@ -72,14 +72,38 @@ El diferenciador principal es **Forge**, un asistente de inteligencia artificial
 - Comentarios del aprobador
 - Registro de fecha y hora de respuesta
 
-### 7. Plantillas PDF
+### 7. Firma Electrónica
+- Solicitud de firma digital con enlace único y seguro
+- Página pública de firma (sin login requerido)
+- Canvas HTML5 para dibujar firma (compatible móvil y escritorio)
+- Registro de IP, fecha y hora del firmante
+- Firma integrada automáticamente en el PDF de la cotización
+- Notificación al vendedor cuando el cliente firma
+- Validez legal según Reglamento eIDAS (UE 910/2014)
+
+### 8. Recordatorios Automáticos
+- Cron diario (8:00 AM) para envío automático
+- Recordatorio al vendedor: cotizaciones sin actividad en X días
+- Recordatorio al cliente: cotizaciones próximas a vencer
+- Días de seguimiento y vencimiento configurables por empresa
+- Activación/desactivación global
+- Prevención de duplicados automática
+
+### 9. Versionado de Cotizaciones
+- Crear nuevas versiones desde cotizaciones enviadas, en negociación o perdidas
+- Numeración automática (COT-2026-0001-v2, v3, etc.)
+- La versión anterior se archiva automáticamente
+- Historial completo de versiones con trazabilidad
+- Actividad registrada en ambas cotizaciones (original y nueva versión)
+
+### 10. Plantillas PDF
 - 3 plantillas: Moderna, Clásica, Minimalista
 - Personalización: logo, colores corporativos, datos de empresa
 - Generación con Puppeteer (headless Chrome)
 - Envío por email con archivo adjunto
 - Vista previa en navegador
 
-### 8. Reportes y Analytics
+### 11. Reportes y Analytics
 - Dashboard con 6 KPIs principales
 - Gráfico de cotizaciones por mes
 - Gráfico de distribución por estado
@@ -87,13 +111,13 @@ El diferenciador principal es **Forge**, un asistente de inteligencia artificial
 - Top 10 productos más cotizados
 - Filtros por rango de fechas
 
-### 9. Configuración
+### 12. Configuración
 - Datos de empresa (nombre, CIF, dirección, logo)
 - Configuración SMTP para envío de emails
 - Personalización de cotizaciones (prefijo, días de vencimiento, condiciones por defecto)
 - Plantilla PDF y color primario
 
-### 10. Integraciones
+### 13. Integraciones
 - Exportación CSV de datos
 - Importación CSV (clientes y productos)
 - API REST para integraciones externas
@@ -118,12 +142,12 @@ El diferenciador principal es **Forge**, un asistente de inteligencia artificial
 
 ## Planes y Precios (EUR, sin IVA)
 
-| Plan | Precio | Cotizaciones/mes | Clientes | Productos | Forge IA | Plantillas | Reglas | Aprobaciones |
-|------|--------|-----------------|----------|-----------|----------|-----------|--------|-------------|
-| Starter | Gratis | 10 | 5 | 10 | 5 consultas (Haiku) | 1 | No | No |
-| Pro | 29€/mes | 100 | 50 | 200 | Ilimitado (Sonnet) | 3 | Básicas | No |
-| Business | 79€/mes | Ilimitadas | Ilimitados | Ilimitados | Prioridad (Sonnet) | 3 | Avanzadas | Sí |
-| Enterprise | Personalizado | Ilimitadas | Ilimitados | Ilimitados | Personalizado (Sonnet) | Personalizadas | Avanzadas | Sí |
+| Plan | Precio | Cotizaciones/mes | Clientes | Productos | Forge IA | Firma Electrónica | Recordatorios | Versionado | Reglas | Aprobaciones |
+|------|--------|-----------------|----------|-----------|----------|-------------------|---------------|------------|--------|-------------|
+| Starter | Gratis | 10 | 5 | 10 | 5 consultas (Haiku) | No | No | Sí | No | No |
+| Pro | 29€/mes | 100 | 50 | 200 | Ilimitado (Sonnet) | Sí | Sí | Sí | Básicas | No |
+| Business | 79€/mes | Ilimitadas | Ilimitados | Ilimitados | Prioridad (Sonnet) | Sí | Sí | Sí | Avanzadas | Sí |
+| Enterprise | Personalizado | Ilimitadas | Ilimitados | Ilimitados | Personalizado (Sonnet) | Sí | Sí | Sí | Avanzadas | Sí |
 
 ## Seguridad
 

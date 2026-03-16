@@ -14,6 +14,9 @@ DealForge permite a equipos comerciales configurar productos, calcular precios c
 - **Forge IA**: Asistente de inteligencia artificial para crear cotizaciones desde texto natural
 - **Reglas comerciales**: Límites de descuento, productos obligatorios, aprobaciones automáticas y promociones
 - **Aprobaciones**: Flujo de aprobación por email con tokens seguros
+- **Firma electrónica**: Solicitud de firma digital con enlace único, validez legal eIDAS
+- **Recordatorios automáticos**: Seguimiento al vendedor y aviso de vencimiento al cliente
+- **Versionado de cotizaciones**: Historial completo de versiones con trazabilidad
 - **3 plantillas PDF**: Moderna, clásica y minimalista con personalización de marca
 - **Reportes**: Dashboard con KPIs, gráficos y análisis de ventas
 - **Integraciones**: Exportación CSV, importación de datos, API REST, Zapier
@@ -21,8 +24,8 @@ DealForge permite a equipos comerciales configurar productos, calcular precios c
 ## Planes y precios
 
 - **Starter** (Gratis): 10 cotizaciones/mes, 5 clientes, 10 productos, 5 consultas Forge IA (Haiku)
-- **Pro** (29€/mes): 100 cotizaciones/mes, 50 clientes, 200 productos, Forge IA ilimitado (Sonnet), emails, PDF con marca
-- **Business** (79€/mes): Todo ilimitado, reglas avanzadas, aprobaciones, integraciones CRM, Forge IA prioridad
+- **Pro** (29€/mes): 100 cotizaciones/mes, 50 clientes, 200 productos, Forge IA ilimitado (Sonnet), emails, PDF con marca, firma electrónica, recordatorios
+- **Business** (79€/mes): Todo ilimitado, reglas avanzadas, aprobaciones, firma electrónica, recordatorios, versionado, integraciones CRM, Forge IA prioridad
 - **Enterprise**: Personalizado, contactar para más información
 
 ## Tecnología

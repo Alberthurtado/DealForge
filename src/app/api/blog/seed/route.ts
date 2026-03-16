@@ -125,16 +125,152 @@ export async function POST() {
       "cómo hacer una cotización, crear presupuestos, software de cotizaciones, plantilla cotización, programa para presupuestos, cotización profesional, presupuesto online, CPQ, software presupuestos pymes",
   };
 
-  // Check if already exists
-  const existing = await prisma.blogPost.findUnique({
-    where: { slug: post.slug },
-  });
+  const post2 = {
+    slug: "firma-electronica-cotizaciones-como-cerrar-ventas-mas-rapido",
+    titulo: "Firma electrónica en cotizaciones: cómo cerrar ventas más rápido y con validez legal",
+    extracto: "Descubre cómo la firma electrónica en tus cotizaciones acelera el cierre de ventas, elimina el papel y tiene plena validez legal en la UE. Guía práctica para PYMEs con ejemplos reales.",
+    contenido: `<p>Imagina esta situación: has preparado la cotización perfecta, el cliente dice que sí, pero luego tarda una semana en imprimir, firmar, escanear y devolverte el documento. Para cuando llega, el presupuesto ha caducado o, peor aún, ha elegido a otro proveedor más ágil.</p>
 
-  if (existing) {
-    return NextResponse.json({ message: "Post already exists", slug: post.slug });
+<p>Este problema tiene nombre: <strong>fricción en el cierre de ventas</strong>. Y la solución es más sencilla de lo que piensas: la firma electrónica integrada en tus cotizaciones.</p>
+
+<h2>&iquest;Qué es la firma electrónica y por qué importa en ventas?</h2>
+
+<p>La firma electrónica es un mecanismo que permite a una persona expresar su conformidad con un documento de forma digital, sin necesidad de papel, impresora ni escáner. En el contexto de las cotizaciones, significa que tu cliente puede <strong>aprobar y firmar tu propuesta desde cualquier dispositivo</strong> en cuestión de segundos.</p>
+
+<p>Pero no se trata solo de comodidad. Según el Reglamento eIDAS de la Unión Europea, las firmas electrónicas tienen plena validez legal. Esto significa que una cotización firmada electrónicamente tiene el mismo peso jurídico que una firmada a mano.</p>
+
+<h2>Los 5 beneficios de firmar cotizaciones electrónicamente</h2>
+
+<h3>1. Cierras ventas en minutos, no en días</h3>
+<p>El principal beneficio es la velocidad. Cuando eliminas el proceso de imprimir-firmar-escanear-enviar, reduces el tiempo de cierre de días a minutos. Tu cliente recibe un enlace, firma con el dedo o el ratón, y listo. <strong>Sin fricciones, sin excusas, sin esperas.</strong></p>
+
+<h3>2. Reduces la tasa de abandono</h3>
+<p>Cada paso adicional en el proceso de aprobación es una oportunidad para que el cliente se distraiga, lo posponga o simplemente se olvide. La firma electrónica elimina todos esos pasos intermedios. El resultado: menos cotizaciones que se quedan en el limbo.</p>
+
+<h3>3. Validez legal completa en la UE</h3>
+<p>El Reglamento (UE) 910/2014 (eIDAS) establece tres niveles de firma electrónica: simple, avanzada y cualificada. Para cotizaciones comerciales entre empresas, la firma electrónica simple (como la que ofrecen la mayoría de plataformas CPQ) es perfectamente válida y admisible como prueba en caso de disputa.</p>
+
+<h3>4. Trazabilidad total</h3>
+<p>Cada firma queda registrada con la fecha, hora, dirección IP y los datos del firmante. Esto te da una <strong>trazabilidad completa</strong> que el papel nunca podrá ofrecer. &iquest;Cuántas veces has tenido que buscar un documento firmado en un cajón o en un email de hace meses?</p>
+
+<h3>5. Imagen profesional y moderna</h3>
+<p>Enviar un enlace para firmar electrónicamente transmite modernidad y profesionalidad. Tu cliente percibe que trabajas con herramientas actuales y que valoras su tiempo. En un mercado competitivo, estos detalles marcan la diferencia.</p>
+
+<h2>Cómo funciona la firma electrónica en una cotización</h2>
+
+<p>El proceso es más simple de lo que parece. Así funciona en una plataforma CPQ moderna:</p>
+
+<ol>
+<li><strong>Creas la cotización</strong> con todos los detalles: productos, precios, condiciones y términos.</li>
+<li><strong>Solicitas la firma</strong> introduciendo el nombre y email del firmante (puede ser el contacto principal del cliente o cualquier persona autorizada).</li>
+<li><strong>El cliente recibe un email</strong> con un enlace único y seguro para firmar.</li>
+<li><strong>El cliente revisa y firma</strong> directamente desde el navegador, dibujando su firma con el ratón o el dedo en móvil.</li>
+<li><strong>Ambas partes reciben confirmación</strong> y la firma queda integrada en el PDF de la cotización.</li>
+</ol>
+
+<p>Todo el proceso puede completarse en menos de 2 minutos desde que envías la solicitud.</p>
+
+<h2>Firma electrónica vs. aprobación: &iquest;cuál necesitas?</h2>
+
+<p>Es importante distinguir entre estos dos conceptos que a veces se confunden:</p>
+
+<p><strong>Aprobación interna:</strong> es el proceso donde alguien de tu propia empresa (un director comercial, un responsable financiero) debe aprobar la cotización antes de enviarla al cliente. Suele activarse por reglas automáticas, por ejemplo, cuando un descuento supera cierto porcentaje.</p>
+
+<p><strong>Firma electrónica:</strong> es la conformidad del cliente con la propuesta. Se solicita después de que la cotización ha sido enviada y el cliente está de acuerdo con los términos.</p>
+
+<p>En un flujo de trabajo completo, el orden sería: <strong>crear cotización → aprobación interna → enviar al cliente → firma electrónica del cliente</strong>. Ambos procesos se complementan y, juntos, garantizan que toda la cadena tiene validez.</p>
+
+<h2>Marco legal de la firma electrónica en España y la UE</h2>
+
+<p>Si te preocupa la validez legal, estos son los puntos clave:</p>
+
+<ul>
+<li><strong>Reglamento eIDAS (UE 910/2014):</strong> reconoce la firma electrónica en todos los estados miembros de la UE. No se puede rechazar como prueba en un tribunal solo por ser electrónica.</li>
+<li><strong>Ley 6/2020 (España):</strong> regula los servicios electrónicos de confianza y transpone el reglamento eIDAS al ordenamiento jurídico español.</li>
+<li><strong>Código Civil español:</strong> admite el consentimiento expresado por medios electrónicos como válido para la perfección de contratos.</li>
+</ul>
+
+<p>Para cotizaciones comerciales B2B, no necesitas una firma cualificada con certificado digital. La firma electrónica simple (dibujar la firma + registro de IP y fecha) es suficiente y legalmente válida.</p>
+
+<h2>Errores comunes al implementar firma electrónica</h2>
+
+<p>Aunque la tecnología es sencilla, hay errores que debes evitar:</p>
+
+<ol>
+<li><strong>No incluir los términos y condiciones.</strong> La firma solo tiene valor si el firmante ha podido leer claramente qué está aceptando. Asegúrate de que las condiciones comerciales estén visibles antes de la firma.</li>
+<li><strong>No guardar la evidencia.</strong> Almacena siempre la fecha, hora, IP y los datos del firmante junto con el documento firmado. Esta evidencia es crucial en caso de disputa.</li>
+<li><strong>Usar herramientas no seguras.</strong> Un email con un &ldquo;sí, acepto&rdquo; no es lo mismo que una firma electrónica con trazabilidad. Usa herramientas que generen un registro auditable.</li>
+<li><strong>Olvidar el seguimiento.</strong> Que hayas enviado la solicitud de firma no significa que el cliente la complete inmediatamente. Los recordatorios automáticos son esenciales.</li>
+</ol>
+
+<h2>Cómo DealForge integra la firma electrónica</h2>
+
+<p>En DealForge, la firma electrónica está integrada directamente en el flujo de cotizaciones. No necesitas herramientas externas ni integraciones complicadas:</p>
+
+<ul>
+<li><strong>Solicita la firma</strong> desde la propia página de la cotización con un solo clic.</li>
+<li><strong>El cliente firma desde cualquier dispositivo</strong> a través de un enlace seguro y único.</li>
+<li><strong>La firma aparece automáticamente en el PDF</strong> de la cotización, junto con el nombre del firmante y la fecha.</li>
+<li><strong>Recibes una notificación</strong> cuando el cliente firma, para que puedas avanzar con el siguiente paso.</li>
+<li><strong>Todo queda registrado</strong> en el historial de actividad de la cotización con total trazabilidad.</li>
+</ul>
+
+<p>Disponible a partir del plan Pro, junto con otras funcionalidades como recordatorios automáticos y versionado de cotizaciones.</p>
+
+<h2>Checklist para implementar firma electrónica en tu empresa</h2>
+
+<ul>
+<li>&iquest;Tus cotizaciones incluyen términos y condiciones claros?</li>
+<li>&iquest;Tu herramienta de cotizaciones soporta firma electrónica integrada?</li>
+<li>&iquest;Guardas registro de la fecha, hora e IP de cada firma?</li>
+<li>&iquest;Tienes configurados recordatorios automáticos para firmas pendientes?</li>
+<li>&iquest;La firma se integra en el PDF final de la cotización?</li>
+<li>&iquest;Has informado a tu equipo comercial sobre el nuevo flujo?</li>
+</ul>
+
+<p>Si has marcado todo, estás listo para cerrar ventas más rápido y con total seguridad jurídica.</p>
+
+<h2>Conclusión</h2>
+
+<p>La firma electrónica no es un lujo ni una moda tecnológica. Es una herramienta práctica que <strong>reduce tiempos de cierre, elimina fricción y tiene plena validez legal</strong>. Para las PYMEs que compiten en velocidad y profesionalidad, integrarla en el flujo de cotizaciones es una ventaja competitiva real.</p>
+
+<p>Porque al final del día, la cotización más bonita del mundo no sirve de nada si el cliente tarda una semana en firmarla. Haz que sea cuestión de un clic.</p>`,
+    autor: "DealForge",
+    categoria: "ventas",
+    tags: JSON.stringify([
+      "firma electrónica",
+      "cotizaciones",
+      "eIDAS",
+      "ventas",
+      "CPQ",
+      "pymes",
+      "firma digital",
+      "cerrar ventas",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Firma electrónica en cotizaciones: cierra ventas más rápido | DealForge",
+    metaDescripcion:
+      "Aprende cómo la firma electrónica en cotizaciones acelera el cierre de ventas con validez legal en la UE. Guía práctica para PYMEs con marco legal eIDAS y checklist.",
+    metaKeywords:
+      "firma electrónica cotizaciones, firma digital presupuestos, firmar cotización online, eIDAS firma electrónica, firma electrónica pymes, cerrar ventas rápido, software cotizaciones firma electrónica, validez legal firma electrónica España",
+  };
+
+  const posts = [post, post2];
+  const results = [];
+
+  for (const p of posts) {
+    const existing = await prisma.blogPost.findUnique({
+      where: { slug: p.slug },
+    });
+    if (existing) {
+      results.push({ slug: p.slug, status: "already_exists" });
+      continue;
+    }
+    const created = await prisma.blogPost.create({ data: p });
+    results.push({ slug: created.slug, id: created.id, status: "created" });
   }
 
-  const created = await prisma.blogPost.create({ data: post });
-
-  return NextResponse.json({ success: true, slug: created.slug, id: created.id }, { status: 201 });
+  return NextResponse.json({ success: true, results }, { status: 201 });
 }
