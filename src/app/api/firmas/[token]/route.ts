@@ -119,6 +119,21 @@ export async function PUT(
     },
   });
 
+  // Auto-mark quote as GANADA
+  if (["ENVIADA", "NEGOCIACION"].includes(firma.cotizacion.estado)) {
+    await prisma.cotizacion.update({
+      where: { id: firma.cotizacionId },
+      data: { estado: "GANADA" },
+    });
+    await prisma.actividad.create({
+      data: {
+        cotizacionId: firma.cotizacionId,
+        tipo: "CAMBIO_ESTADO",
+        descripcion: "Cotización marcada como Ganada automáticamente al recibir firma electrónica",
+      },
+    });
+  }
+
   // Notify seller
   try {
     const cotizacionWithUser = await prisma.cotizacion.findUnique({

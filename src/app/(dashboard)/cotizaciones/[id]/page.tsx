@@ -132,6 +132,13 @@ export default function CotizacionDetailPage() {
       .catch(() => {});
   }
 
+  function loadCotizacion() {
+    fetch(`/api/cotizaciones/${params.id}`)
+      .then((r) => r.json())
+      .then((data) => setCotizacion(data))
+      .catch(() => {});
+  }
+
   function loadVersions() {
     fetch(`/api/cotizaciones/${params.id}/version`)
       .then((r) => r.json())
@@ -562,7 +569,8 @@ export default function CotizacionDetailPage() {
             {cotizacion.estado === "BORRADOR" && (() => {
               const approvedAll = aprobaciones.length > 0 && aprobaciones.every((a) => a.estado === "APROBADA");
               const noApprovals = aprobaciones.length === 0;
-              const canSendDirectly = approvedAll || (noApprovals && false); // Only after approval check
+              const needsApproval = validation?.aprobacionesRequeridas && validation.aprobacionesRequeridas.length > 0;
+              const canSendDirectly = approvedAll || (noApprovals && !needsApproval);
 
               if (canSendDirectly) {
                 // All approvals resolved → can send
@@ -1008,7 +1016,14 @@ export default function CotizacionDetailPage() {
                 cotizacionId={cotizacion.id}
                 firmas={firmas}
                 canRequest={["ENVIADA", "NEGOCIACION"].includes(cotizacion.estado)}
-                onUpdate={loadFirmas}
+                onUpdate={() => { loadFirmas(); loadCotizacion(); }}
+                defaultContact={(() => {
+                  const principal = cotizacion.cliente.contactos?.find((c) => c.principal);
+                  return {
+                    nombre: principal?.nombre || cotizacion.contactoNombre || cotizacion.cliente.nombre,
+                    email: principal?.email || cotizacion.cliente.email || null,
+                  };
+                })()}
               />
             )}
             {/* Version history */}
