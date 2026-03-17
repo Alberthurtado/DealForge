@@ -21,7 +21,7 @@ export function LeadForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-  const [utm, setUtm] = useState<ReturnType<typeof getUtmParams>>({});
+  const [utm, setUtm] = useState<ReturnType<typeof getUtmParams>>({ utmSource: undefined, utmMedium: undefined, utmCampaign: undefined, utmContent: undefined });
 
   useEffect(() => {
     setUtm(getUtmParams(searchParams));

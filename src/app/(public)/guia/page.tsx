@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 import { LeadForm } from "./lead-form";
 
 export const metadata: Metadata = {
@@ -112,7 +113,9 @@ export default function GuiaPage() {
 
             {/* Right — Form */}
             <div className="lg:pl-8">
-              <LeadForm />
+              <Suspense fallback={<div className="animate-pulse h-64 bg-gray-100 rounded-xl" />}>
+                <LeadForm />
+              </Suspense>
             </div>
           </div>
         </div>
