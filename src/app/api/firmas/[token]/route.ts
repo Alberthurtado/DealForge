@@ -36,7 +36,7 @@ export async function GET(
 
   const empresa = await prisma.empresa.findUnique({
     where: { id: "default" },
-    select: { nombre: true, logoUrl: true, colorPrimario: true },
+    select: { nombre: true, logoUrl: true, colorPrimario: true, condicionesDefecto: true },
   });
 
   return NextResponse.json({
@@ -56,7 +56,8 @@ export async function GET(
       subtotal: firma.cotizacion.subtotal,
       descuentoGlobal: firma.cotizacion.descuentoGlobal,
       impuesto: firma.cotizacion.impuesto,
-      condiciones: firma.cotizacion.condiciones,
+      notas: firma.cotizacion.notas || null,
+      condiciones: firma.cotizacion.condiciones || empresa?.condicionesDefecto || null,
       cliente: firma.cotizacion.cliente.nombre,
       lineItems: firma.cotizacion.lineItems,
     },

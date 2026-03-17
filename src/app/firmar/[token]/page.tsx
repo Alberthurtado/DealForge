@@ -22,6 +22,7 @@ interface SignatureData {
     subtotal: number;
     descuentoGlobal: number;
     impuesto: number;
+    notas: string | null;
     condiciones: string | null;
     cliente: string;
     lineItems: Array<{
@@ -288,11 +289,22 @@ export default function SignaturePage() {
             </div>
           </div>
 
+          {/* Notes */}
+          {cotizacion.notas && (
+            <div className="px-6 py-4 border-t border-gray-100">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Notas</p>
+              <p className="text-sm text-gray-600 whitespace-pre-line leading-relaxed">{cotizacion.notas}</p>
+            </div>
+          )}
+
           {/* Terms & Conditions */}
           {cotizacion.condiciones && (
-            <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Términos y Condiciones</p>
-              <p className="text-xs text-gray-600 whitespace-pre-line">{cotizacion.condiciones}</p>
+            <div className="px-6 py-4 bg-amber-50/50 border-t border-amber-100">
+              <p className="text-xs font-semibold text-amber-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg>
+                Términos y Condiciones
+              </p>
+              <div className="text-xs text-gray-700 whitespace-pre-line leading-relaxed max-h-48 overflow-y-auto">{cotizacion.condiciones}</div>
             </div>
           )}
 
