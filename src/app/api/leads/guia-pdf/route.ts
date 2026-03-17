@@ -11,6 +11,46 @@ export async function GET() {
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', -apple-system, sans-serif; color: #1a1a1a; line-height: 1.7; }
 
+    .download-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .download-bar span {
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #3a9bb5;
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .download-btn:hover { background: #2d7d94; }
+    .download-btn svg { width: 16px; height: 16px; }
+
+    @media print {
+      .download-bar { display: none !important; }
+    }
+
     .cover {
       min-height: 100vh;
       display: flex;
@@ -181,6 +221,16 @@ export async function GET() {
   </style>
 </head>
 <body>
+
+<!-- DOWNLOAD BAR -->
+<div class="download-bar">
+  <span>DealForge — Guía Gratuita</span>
+  <button class="download-btn" onclick="window.print()">
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+    Descargar PDF
+  </button>
+</div>
+<div style="height: 56px;"></div>
 
 <!-- COVER -->
 <div class="cover">
