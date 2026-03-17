@@ -368,7 +368,6 @@ function PricingSection() {
         { text: "Recordatorios automáticos", included: false },
         { text: "Aprobaciones", included: false },
         { text: "Reglas comerciales", included: false },
-        { text: "Integraciones CRM", included: false },
       ],
     },
     {
@@ -390,7 +389,6 @@ function PricingSection() {
         { text: "Recordatorios automáticos", included: true },
         { text: "Versionado de cotizaciones", included: true },
         { text: "Reglas básicas", included: true },
-        { text: "Integraciones CRM", included: false },
       ],
     },
     {
@@ -412,7 +410,6 @@ function PricingSection() {
         { text: "Recordatorios automáticos", included: true },
         { text: "Versionado de cotizaciones", included: true },
         { text: "Reglas avanzadas", included: true },
-        { text: "Integraciones CRM", included: true },
       ],
     },
     {

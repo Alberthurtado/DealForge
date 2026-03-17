@@ -88,7 +88,6 @@ const PLANS: Record<
       "Recordatorios automáticos",
       "Versionado de cotizaciones",
       "Reglas avanzadas",
-      "Integraciones CRM",
     ],
     iaModel: "Claude Sonnet",
   },
