@@ -55,6 +55,10 @@ export async function GET(
   const primaryContact = cotizacion.cliente.contactos?.[0] || null;
   const firma = cotizacion.firmas?.[0] || null;
 
+  // Fallback to empresa defaults if cotización has no notes/conditions
+  const notas = cotizacion.notas || null;
+  const condiciones = cotizacion.condiciones || empresa.condicionesDefecto || null;
+
   const subtotal = cotizacion.subtotal;
   const discountAmount = subtotal * (cotizacion.descuentoGlobal / 100);
   const subtotalAfterDiscount = subtotal - discountAmount;
@@ -302,18 +306,18 @@ export async function GET(
     </div>
 
     <!-- Notes & Conditions -->
-    ${(cotizacion.notas || cotizacion.condiciones) ? `
+    ${(notas || condiciones) ? `
     <div style="padding:0 40px 32px;">
       <div style="height:1px;background:#f3f4f6;margin-bottom:16px;"></div>
-      ${cotizacion.notas ? `
+      ${notas ? `
       <div style="margin-bottom:16px;">
         <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:#9ca3af;margin-bottom:6px;">Notas</p>
-        <p style="font-size:12px;color:#4b5563;line-height:1.6;white-space:pre-line;">${cotizacion.notas}</p>
+        <p style="font-size:12px;color:#4b5563;line-height:1.6;white-space:pre-line;">${notas}</p>
       </div>` : ""}
-      ${cotizacion.condiciones ? `
+      ${condiciones ? `
       <div>
         <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:#9ca3af;margin-bottom:6px;">Términos y Condiciones</p>
-        <p style="font-size:12px;color:#4b5563;line-height:1.6;white-space:pre-line;">${cotizacion.condiciones}</p>
+        <p style="font-size:12px;color:#4b5563;line-height:1.6;white-space:pre-line;">${condiciones}</p>
       </div>` : ""}
     </div>` : ""}
 
