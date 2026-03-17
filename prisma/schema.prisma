@@ -280,18 +280,23 @@ model Firma {
 }
 
 model Lead {
-  id        String   @id @default(cuid())
-  nombre    String
-  email     String
-  empresa   String?
-  cargo     String?
-  origen    String   @default("guia") // guia, blog, landing, linkedin, etc.
-  recurso   String?  // which lead magnet or resource
-  ip        String?
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  nombre      String
+  email       String
+  empresa     String?
+  cargo       String?
+  origen      String   @default("guia") // guia, blog, landing, linkedin, etc.
+  recurso     String?  // which lead magnet or resource
+  utmSource   String?  // utm_source (linkedin, google, blog, etc.)
+  utmMedium   String?  // utm_medium (social, cpc, lead-magnet, etc.)
+  utmCampaign String?  // utm_campaign (5-errores, webinar-q1, etc.)
+  utmContent  String?  // utm_content (post-dolor, post-dato, etc.)
+  ip          String?
+  createdAt   DateTime @default(now())
 
   @@index([email])
   @@index([origen])
+  @@index([utmSource])
 }
 
 model BlogPost {

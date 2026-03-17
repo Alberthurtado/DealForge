@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { nombre, email, empresa, cargo, origen, recurso } = body;
+    const { nombre, email, empresa, cargo, origen, recurso, utmSource, utmMedium, utmCampaign, utmContent } = body;
 
     if (!nombre || !email) {
       return NextResponse.json(
@@ -48,6 +48,10 @@ export async function POST(request: NextRequest) {
         cargo: cargo || null,
         origen: origen || "guia",
         recurso: recurso || "guia-cotizaciones",
+        utmSource: utmSource || null,
+        utmMedium: utmMedium || null,
+        utmCampaign: utmCampaign || null,
+        utmContent: utmContent || null,
         ip,
       },
     });

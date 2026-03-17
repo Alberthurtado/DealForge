@@ -1,15 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Loader2, Download, CheckCircle } from "lucide-react";
 
+function getUtmParams(searchParams: URLSearchParams) {
+  return {
+    utmSource: searchParams.get("utm_source") || undefined,
+    utmMedium: searchParams.get("utm_medium") || undefined,
+    utmCampaign: searchParams.get("utm_campaign") || undefined,
+    utmContent: searchParams.get("utm_content") || undefined,
+  };
+}
+
 export function LeadForm() {
+  const searchParams = useSearchParams();
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [empresa, setEmpresa] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [utm, setUtm] = useState<ReturnType<typeof getUtmParams>>({});
+
+  useEffect(() => {
+    setUtm(getUtmParams(searchParams));
+  }, [searchParams]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,8 +40,9 @@ export function LeadForm() {
           nombre,
           email,
           empresa: empresa || undefined,
-          origen: "guia",
+          origen: utm.utmSource || "guia",
           recurso: "guia-5-errores-cotizaciones",
+          ...utm,
         }),
       });
 
