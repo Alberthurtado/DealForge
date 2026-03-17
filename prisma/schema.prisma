@@ -279,6 +279,21 @@ model Firma {
   @@index([cotizacionId])
 }
 
+model Lead {
+  id        String   @id @default(cuid())
+  nombre    String
+  email     String
+  empresa   String?
+  cargo     String?
+  origen    String   @default("guia") // guia, blog, landing, linkedin, etc.
+  recurso   String?  // which lead magnet or resource
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([origen])
+}
+
 model BlogPost {
   id          String    @id @default(cuid())
   slug        String    @unique
