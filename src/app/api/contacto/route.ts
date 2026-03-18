@@ -39,6 +39,9 @@ export async function POST(request: NextRequest) {
 
   const { nombre, email, asunto, mensaje } = parsed.data;
 
+  // Escape HTML to prevent XSS in email body
+  const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: #3a9bb5; padding: 24px 32px; border-radius: 12px 12px 0 0;">
@@ -48,19 +51,19 @@ export async function POST(request: NextRequest) {
         <table style="width: 100%; border-collapse: collapse;">
           <tr>
             <td style="padding: 8px 0; color: #6b7280; font-size: 14px; width: 100px;">Nombre:</td>
-            <td style="padding: 8px 0; color: #111827; font-size: 14px; font-weight: 600;">${nombre}</td>
+            <td style="padding: 8px 0; color: #111827; font-size: 14px; font-weight: 600;">${esc(nombre)}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Email:</td>
-            <td style="padding: 8px 0; color: #111827; font-size: 14px;"><a href="mailto:${email}" style="color: #3a9bb5;">${email}</a></td>
+            <td style="padding: 8px 0; color: #111827; font-size: 14px;"><a href="mailto:${esc(email)}" style="color: #3a9bb5;">${esc(email)}</a></td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Asunto:</td>
-            <td style="padding: 8px 0; color: #111827; font-size: 14px;">${ASUNTO_LABELS[asunto] || asunto}</td>
+            <td style="padding: 8px 0; color: #111827; font-size: 14px;">${ASUNTO_LABELS[asunto] || esc(asunto)}</td>
           </tr>
         </table>
         <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
-        <div style="font-size: 14px; color: #374151; line-height: 1.6; white-space: pre-line;">${mensaje}</div>
+        <div style="font-size: 14px; color: #374151; line-height: 1.6; white-space: pre-line;">${esc(mensaje)}</div>
         <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
         <p style="font-size: 12px; color: #9ca3af;">IP: ${ip} · ${new Date().toISOString()}</p>
       </div>
