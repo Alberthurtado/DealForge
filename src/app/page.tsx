@@ -683,51 +683,11 @@ function StructuredData() {
     ],
   };
 
-  const howTo = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "Como crear una cotizacion profesional con DealForge",
-    description:
-      "Aprende a crear cotizaciones profesionales con IA en 3 sencillos pasos usando DealForge.",
-    totalTime: "PT5M",
-    tool: {
-      "@type": "HowToTool",
-      name: "DealForge CPQ",
-    },
-    step: [
-      {
-        "@type": "HowToStep",
-        position: 1,
-        name: "Configura",
-        text: "Carga tus productos, clientes y configura tus reglas comerciales. Importa desde CSV si ya tienes datos.",
-        url: "https://dealforge.es/#funcionalidades",
-      },
-      {
-        "@type": "HowToStep",
-        position: 2,
-        name: "Cotiza",
-        text: "Pide a Forge IA que cree la cotizacion o hazla tu mismo con el wizard. En minutos, no horas.",
-        url: "https://dealforge.es/#forge",
-      },
-      {
-        "@type": "HowToStep",
-        position: 3,
-        name: "Cierra",
-        text: "Envia la cotizacion por email, rastrea su estado y cierra la venta. El pipeline te muestra donde esta cada oportunidad.",
-        url: "https://dealforge.es/#precios",
-      },
-    ],
-  };
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApp) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }}
       />
     </>
   );

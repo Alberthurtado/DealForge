@@ -49,12 +49,11 @@ const jsonLd = {
     url: "https://dealforge.es",
     logo: { "@type": "ImageObject", url: "https://dealforge.es/logo.svg" },
   },
-  mainEntity: {
-    "@type": "FAQPage",
-    mainEntity: [
-      { "@type": "Question", name: "¿Por qué pierdo ventas con mis cotizaciones?", acceptedAnswer: { "@type": "Answer", text: "Los 5 errores más comunes son: tardar demasiado en responder, no personalizar la propuesta, ocultar o complicar los precios, no incluir términos claros y no hacer seguimiento después de enviar." } },
-      { "@type": "Question", name: "¿Cómo puedo enviar cotizaciones más rápido?", acceptedAnswer: { "@type": "Answer", text: "Con un sistema CPQ como DealForge puedes crear cotizaciones profesionales en minutos usando plantillas, productos predefinidos e IA para generar propuestas personalizadas automáticamente." } },
-      { "@type": "Question", name: "¿Qué es un sistema CPQ?", acceptedAnswer: { "@type": "Answer", text: "CPQ significa Configure, Price, Quote. Es un software que automatiza la creación de cotizaciones comerciales, configurando productos, calculando precios con descuentos e impuestos, y generando propuestas profesionales listas para enviar." } },
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: "https://dealforge.es" },
+      { "@type": "ListItem", position: 2, name: "Guía Gratuita", item: "https://dealforge.es/guia" },
     ],
   },
 };
