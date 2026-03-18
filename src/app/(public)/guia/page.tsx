@@ -19,8 +19,44 @@ export const metadata: Metadata = {
     siteName: "DealForge",
     locale: "es_ES",
     type: "website",
+    images: [
+      {
+        url: "https://dealforge.es/og-guia.png",
+        width: 1200,
+        height: 630,
+        alt: "Guía: 5 Errores en tus Cotizaciones que te Hacen Perder Ventas",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "5 Errores en tus Cotizaciones que te Hacen Perder Ventas",
+    description: "Descarga gratis la guía y aprende cómo cerrar más ventas.",
+    images: ["https://dealforge.es/og-guia.png"],
   },
   alternates: { canonical: "https://dealforge.es/guia" },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Guía: 5 Errores en tus Cotizaciones que te Hacen Perder Ventas",
+  description: "Descarga gratis la guía con los 5 errores más comunes en cotizaciones comerciales y aprende cómo solucionarlos para cerrar más ventas.",
+  url: "https://dealforge.es/guia",
+  publisher: {
+    "@type": "Organization",
+    name: "DealForge",
+    url: "https://dealforge.es",
+    logo: { "@type": "ImageObject", url: "https://dealforge.es/logo.svg" },
+  },
+  mainEntity: {
+    "@type": "FAQPage",
+    mainEntity: [
+      { "@type": "Question", name: "¿Por qué pierdo ventas con mis cotizaciones?", acceptedAnswer: { "@type": "Answer", text: "Los 5 errores más comunes son: tardar demasiado en responder, no personalizar la propuesta, ocultar o complicar los precios, no incluir términos claros y no hacer seguimiento después de enviar." } },
+      { "@type": "Question", name: "¿Cómo puedo enviar cotizaciones más rápido?", acceptedAnswer: { "@type": "Answer", text: "Con un sistema CPQ como DealForge puedes crear cotizaciones profesionales en minutos usando plantillas, productos predefinidos e IA para generar propuestas personalizadas automáticamente." } },
+      { "@type": "Question", name: "¿Qué es un sistema CPQ?", acceptedAnswer: { "@type": "Answer", text: "CPQ significa Configure, Price, Quote. Es un software que automatiza la creación de cotizaciones comerciales, configurando productos, calculando precios con descuentos e impuestos, y generando propuestas profesionales listas para enviar." } },
+    ],
+  },
 };
 
 const ERRORES = [
@@ -62,6 +98,10 @@ const BENEFICIOS = [
 export default function GuiaPage() {
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header */}
       <header className="border-b border-gray-100 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
