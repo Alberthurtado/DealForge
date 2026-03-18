@@ -79,7 +79,7 @@ function LoginForm() {
           <div className="w-12 h-12 rounded-2xl bg-[#3a9bb5]/10 flex items-center justify-center mx-auto mb-4">
             <Flame className="w-6 h-6 text-[#3a9bb5]" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Bienvenido de vuelta</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Bienvenido</h1>
           <p className="text-sm text-gray-500 mt-1">
             Inicia sesión para acceder a tu cuenta
           </p>
