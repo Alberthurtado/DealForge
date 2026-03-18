@@ -15,6 +15,7 @@ interface SystemEmailOptions {
   to: string;
   subject: string;
   html: string;
+  replyTo?: string;
 }
 
 export async function sendSystemEmail(options: SystemEmailOptions): Promise<{ success: boolean; error?: string }> {
@@ -35,6 +36,7 @@ export async function sendSystemEmail(options: SystemEmailOptions): Promise<{ su
         to: [{ email: options.to }],
         subject: options.subject,
         html: options.html,
+        ...(options.replyTo ? { reply_to: { email: options.replyTo } } : {}),
       }),
     });
 

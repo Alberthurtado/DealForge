@@ -44,6 +44,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/rgpd`,
       lastModified: new Date("2026-03-09"),
     },
+    {
+      url: `${baseUrl}/contacto`,
+      lastModified: new Date("2026-03-18"),
+    },
   ];
 
   // Dynamic blog posts (lastModified from DB — correct)

@@ -52,9 +52,11 @@ export default function TerminosPage() {
         <section id="identificacion">
           <h2 className="text-xl font-bold text-gray-900 mb-4">1. Identificación del prestador</h2>
           <div className="bg-gray-50 rounded-xl p-5 text-sm space-y-1 border border-gray-100">
-            <p><strong className="text-gray-900">Prestador:</strong> DealForge</p>
+            <p><strong className="text-gray-900">Prestador:</strong> Albert Hurtado Sanz (autónomo)</p>
+            <p><strong className="text-gray-900">NIF:</strong> 38844142V</p>
+            <p><strong className="text-gray-900">Domicilio:</strong> Carrer Granollers 45, 08173 Sant Cugat del Vallès, Barcelona</p>
             <p><strong className="text-gray-900">Correo electrónico:</strong> <a href="mailto:info@dealforge.es" className="text-[#3a9bb5] hover:underline">info@dealforge.es</a></p>
-            <p><strong className="text-gray-900">Sitio web:</strong> <a href="https://deal-forge-omega.vercel.app" className="text-[#3a9bb5] hover:underline">deal-forge-omega.vercel.app</a></p>
+            <p><strong className="text-gray-900">Sitio web:</strong> <a href="https://dealforge.es" className="text-[#3a9bb5] hover:underline">dealforge.es</a></p>
           </div>
           <p className="mt-3 text-sm">En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE).</p>
         </section>
@@ -110,9 +112,9 @@ export default function TerminosPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr><td className="p-3 border border-gray-200 font-medium text-gray-800">Starter</td><td className="p-3 border border-gray-200">Gratuito</td><td className="p-3 border border-gray-200">Hasta 50 cotizaciones/mes, 25 productos, Forge IA básico</td></tr>
-                <tr className="bg-gray-50"><td className="p-3 border border-gray-200 font-medium text-gray-800">Pro</td><td className="p-3 border border-gray-200">29 EUR/mes</td><td className="p-3 border border-gray-200">Cotizaciones ilimitadas, 500 productos, Forge IA avanzado, aprobaciones, PDF personalizado</td></tr>
-                <tr><td className="p-3 border border-gray-200 font-medium text-gray-800">Business</td><td className="p-3 border border-gray-200">79 EUR/mes</td><td className="p-3 border border-gray-200">Todo de Pro + multi-usuario, reportes avanzados, reglas ilimitadas, soporte prioritario</td></tr>
+                <tr><td className="p-3 border border-gray-200 font-medium text-gray-800">Starter</td><td className="p-3 border border-gray-200">Gratuito</td><td className="p-3 border border-gray-200">Hasta 10 cotizaciones/mes, 5 clientes, 10 productos, Forge IA básico</td></tr>
+                <tr className="bg-gray-50"><td className="p-3 border border-gray-200 font-medium text-gray-800">Pro</td><td className="p-3 border border-gray-200">29 EUR/mes</td><td className="p-3 border border-gray-200">100 cotizaciones/mes, 50 clientes, 200 productos, Forge IA ilimitado, firma electrónica, PDF con marca</td></tr>
+                <tr><td className="p-3 border border-gray-200 font-medium text-gray-800">Business</td><td className="p-3 border border-gray-200">79 EUR/mes</td><td className="p-3 border border-gray-200">Cotizaciones, clientes y productos ilimitados, Forge IA prioridad, aprobaciones, reglas avanzadas</td></tr>
                 <tr className="bg-gray-50"><td className="p-3 border border-gray-200 font-medium text-gray-800">Enterprise</td><td className="p-3 border border-gray-200">Personalizado</td><td className="p-3 border border-gray-200">Solución a medida con integraciones, SLA dedicado y soporte premium</td></tr>
               </tbody>
             </table>

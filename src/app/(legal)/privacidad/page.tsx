@@ -45,9 +45,11 @@ export default function PrivacidadPage() {
         <section id="responsable">
           <h2 className="text-xl font-bold text-gray-900 mb-4">1. Responsable del tratamiento</h2>
           <div className="bg-gray-50 rounded-xl p-5 text-sm space-y-1 border border-gray-100">
-            <p><strong className="text-gray-900">Responsable:</strong> DealForge</p>
+            <p><strong className="text-gray-900">Responsable:</strong> Albert Hurtado Sanz</p>
+            <p><strong className="text-gray-900">NIF:</strong> 38844142V</p>
+            <p><strong className="text-gray-900">Domicilio:</strong> Carrer Granollers 45, 08173 Sant Cugat del Vallès, Barcelona</p>
             <p><strong className="text-gray-900">Correo electrónico:</strong> <a href="mailto:info@dealforge.es" className="text-[#3a9bb5] hover:underline">info@dealforge.es</a></p>
-            <p><strong className="text-gray-900">Sitio web:</strong> <a href="https://deal-forge-omega.vercel.app" className="text-[#3a9bb5] hover:underline">deal-forge-omega.vercel.app</a></p>
+            <p><strong className="text-gray-900">Sitio web:</strong> <a href="https://dealforge.es" className="text-[#3a9bb5] hover:underline">dealforge.es</a></p>
             <p><strong className="text-gray-900">Delegado de Protección de Datos (DPD):</strong> <a href="mailto:info@dealforge.es" className="text-[#3a9bb5] hover:underline">info@dealforge.es</a></p>
           </div>
         </section>

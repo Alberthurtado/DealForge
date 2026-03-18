@@ -58,6 +58,7 @@ const PUBLIC_PREFIXES = [
   "/api/stripe/webhook", // Stripe webhooks — no auth needed
   "/api/pdf-preview/",   // PDF preview for Puppeteer — HMAC protected
   "/api/leads",          // Lead capture — public
+  "/api/contacto",       // Contact form — public
   "/aprobar/",
   "/checkout/",          // Post-checkout pages
   "/_next/",

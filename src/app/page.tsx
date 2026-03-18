@@ -170,12 +170,12 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* Stats */}
+        {/* Value props */}
         <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mt-16">
           {[
-            { value: "500+", label: "Cotizaciones creadas" },
-            { value: "95%", label: "Menos tiempo" },
-            { value: "3x", label: "Más conversiones" },
+            { value: "Gratis", label: "Para empezar" },
+            { value: "IA", label: "Genera cotizaciones" },
+            { value: "PDF", label: "Firma electrónica" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="text-3xl font-bold text-[#3a9bb5]">{stat.value}</p>
@@ -498,7 +498,7 @@ function PricingSection() {
               </ul>
 
               <Link
-                href={plan.name === "Enterprise" ? "#" : "/registro"}
+                href={plan.name === "Enterprise" ? "/contacto" : "/registro"}
                 className={`block text-center py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
                   plan.popular
                     ? "bg-[#3a9bb5] text-white hover:bg-[#2d7d94] shadow-lg shadow-[#3a9bb5]/25"
@@ -595,7 +595,7 @@ function Footer() {
               <li><Link href="/privacidad" className="hover:text-white transition-colors">Política de privacidad</Link></li>
               <li><Link href="/terminos" className="hover:text-white transition-colors">Términos de servicio</Link></li>
               <li><Link href="/rgpd" className="hover:text-white transition-colors">RGPD</Link></li>
-              <li><a href="mailto:info@dealforge.es" className="hover:text-white transition-colors">Contacto</a></li>
+              <li><Link href="/contacto" className="hover:text-white transition-colors">Contacto</Link></li>
             </ul>
           </div>
         </div>
