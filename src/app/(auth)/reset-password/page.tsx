@@ -229,8 +229,14 @@ function ResetPasswordForm() {
           </button>
         </form>
 
+        {/* Privacy */}
+        <p className="mt-4 text-[11px] text-gray-400 text-center leading-relaxed">
+          Protegemos tus datos según nuestra{" "}
+          <Link href="/privacidad" className="underline hover:text-gray-600">Política de privacidad</Link>.
+        </p>
+
         {/* Footer */}
-        <div className="mt-6 text-center">
+        <div className="mt-4 text-center">
           <Link
             href="/login"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"

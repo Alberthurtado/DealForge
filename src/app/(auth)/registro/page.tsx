@@ -187,6 +187,12 @@ export default function RegistroPage() {
 
           <TurnstileWidget action="registro" onToken={handleToken} />
 
+          <p className="text-[11px] text-gray-400 text-center leading-relaxed">
+            Al crear tu cuenta aceptas nuestros{" "}
+            <Link href="/terminos" className="underline hover:text-gray-600">Términos de servicio</Link>{" "}
+            y <Link href="/privacidad" className="underline hover:text-gray-600">Política de privacidad</Link>.
+          </p>
+
           <button
             type="submit"
             disabled={loading || !passwordValid || !passwordsMatch}

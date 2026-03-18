@@ -173,8 +173,15 @@ function LoginForm() {
           </button>
         </form>
 
+        {/* Privacy */}
+        <p className="mt-4 text-[11px] text-gray-400 text-center leading-relaxed">
+          Al iniciar sesión aceptas nuestros{" "}
+          <Link href="/terminos" className="underline hover:text-gray-600">Términos de servicio</Link>{" "}
+          y <Link href="/privacidad" className="underline hover:text-gray-600">Política de privacidad</Link>.
+        </p>
+
         {/* Footer */}
-        <div className="mt-6 text-center">
+        <div className="mt-4 text-center">
           <p className="text-sm text-gray-500">
             ¿No tienes cuenta?{" "}
             <Link

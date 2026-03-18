@@ -283,6 +283,11 @@ export default function ApprovalPage() {
         <p className="text-center text-xs text-gray-400 mt-8">
           {empresa.nombre} &bull; DealForge
         </p>
+        <p className="text-center text-[11px] text-gray-300 mt-2">
+          <a href="https://dealforge.es/privacidad" className="underline hover:text-gray-500" target="_blank" rel="noopener noreferrer">Privacidad</a>
+          {" · "}
+          <a href="https://dealforge.es/terminos" className="underline hover:text-gray-500" target="_blank" rel="noopener noreferrer">Términos</a>
+        </p>
       </div>
     </div>
   );

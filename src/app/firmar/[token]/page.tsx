@@ -344,7 +344,11 @@ export default function SignaturePage() {
               </div>
 
               <p className="text-[11px] text-gray-400 mb-4">
-                Al firmar, acepto los términos de la cotización {cotizacion.numero} y confirmo que la información proporcionada es correcta.
+                Al firmar, acepto los términos y condiciones de la cotización {cotizacion.numero} y confirmo que la información es correcta.
+                Su firma electrónica tiene validez legal conforme al Reglamento eIDAS (UE 910/2014).
+                Consulte nuestra{" "}
+                <a href="https://dealforge.es/privacidad" className="underline hover:text-gray-600" target="_blank" rel="noopener noreferrer">Política de privacidad</a>{" "}
+                y <a href="https://dealforge.es/terminos" className="underline hover:text-gray-600" target="_blank" rel="noopener noreferrer">Términos de servicio</a>.
               </p>
 
               <button
@@ -367,6 +371,11 @@ export default function SignaturePage() {
         {/* Footer */}
         <p className="text-center text-xs text-gray-400 mt-8">
           {empresa.nombre} &bull; DealForge
+        </p>
+        <p className="text-center text-[11px] text-gray-300 mt-2">
+          <a href="https://dealforge.es/privacidad" className="underline hover:text-gray-500" target="_blank" rel="noopener noreferrer">Privacidad</a>
+          {" · "}
+          <a href="https://dealforge.es/terminos" className="underline hover:text-gray-500" target="_blank" rel="noopener noreferrer">Términos</a>
         </p>
       </div>
     </div>

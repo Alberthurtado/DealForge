@@ -166,9 +166,11 @@ export function LeadForm() {
         </button>
 
         <p className="text-[11px] text-gray-400 text-center leading-relaxed">
-          Al descargar aceptas recibir emails con consejos de ventas.
-          Puedes darte de baja en cualquier momento.{" "}
-          <a href="/privacidad" className="underline hover:text-gray-600">Política de privacidad</a>.
+          Al descargar, aceptas nuestros{" "}
+          <a href="/terminos" className="underline hover:text-gray-600">Términos de servicio</a>{" "}
+          y <a href="/privacidad" className="underline hover:text-gray-600">Política de privacidad</a>.
+          Recibirás emails con consejos de ventas. Puedes darte de baja en cualquier momento.
+          Tus datos están protegidos conforme al RGPD.
         </p>
       </form>
     </div>
