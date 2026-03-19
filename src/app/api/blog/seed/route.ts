@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { notifyIndexNow } from "@/lib/indexnow";
 
 // One-time seed endpoint for blog posts — requires authentication
 export async function POST() {
@@ -270,6 +271,14 @@ export async function POST() {
     }
     const created = await prisma.blogPost.create({ data: p });
     results.push({ slug: created.slug, id: created.id, status: "created" });
+  }
+
+  // Notify search engines about new posts
+  const newSlugs = results
+    .filter((r) => r.status === "created")
+    .map((r) => `/blog/${r.slug}`);
+  if (newSlugs.length > 0) {
+    notifyIndexNow(newSlugs).catch(() => {});
   }
 
   return NextResponse.json({ success: true, results }, { status: 201 });

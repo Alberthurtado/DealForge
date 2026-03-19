@@ -59,6 +59,7 @@ const PUBLIC_PREFIXES = [
   "/api/pdf-preview/",   // PDF preview for Puppeteer — HMAC protected
   "/api/leads",          // Lead capture — public
   "/api/contacto",       // Contact form — public
+  "/e3e045fe-",          // IndexNow key verification
   "/aprobar/",
   "/checkout/",          // Post-checkout pages
   "/_next/",
