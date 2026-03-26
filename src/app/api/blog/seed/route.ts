@@ -258,7 +258,121 @@ export async function POST() {
       "firma electrónica cotizaciones, firma digital presupuestos, firmar cotización online, eIDAS firma electrónica, firma electrónica pymes, cerrar ventas rápido, software cotizaciones firma electrónica, validez legal firma electrónica España",
   };
 
-  const posts = [post, post2];
+  const post3 = {
+    slug: "software-cotizaciones-pymes-guia-completa",
+    titulo: "Software de cotizaciones para PYMEs: qué es, cómo funciona y cómo elegir el mejor",
+    extracto: "Descubre qué es un software de cotizaciones (CPQ), cómo puede transformar tu proceso de ventas y qué criterios usar para elegir la herramienta adecuada para tu PYME.",
+    contenido: `<p>Si todavía haces cotizaciones en Excel o Word, estás perdiendo tiempo y ventas. Un <strong>software de cotizaciones</strong> automatiza la creación de presupuestos profesionales, elimina errores y te permite cerrar deals más rápido. En esta guía te explicamos todo lo que necesitas saber.</p>
+
+<h2>¿Qué es un software de cotizaciones?</h2>
+
+<p>Un software de cotizaciones, también conocido como <strong>CPQ (Configure, Price, Quote)</strong>, es una herramienta que automatiza el proceso de crear, enviar y gestionar presupuestos comerciales. En lugar de copiar y pegar en hojas de cálculo, el CPQ centraliza tus productos, precios, clientes y condiciones comerciales en un solo lugar.</p>
+
+<p>El resultado: cotizaciones profesionales en minutos, no en horas. Sin errores de cálculo, sin formatos inconsistentes y con seguimiento automático.</p>
+
+<h2>Señales de que necesitas un software de cotizaciones</h2>
+
+<p>Si te identificas con alguna de estas situaciones, es hora de dejar atrás el Excel:</p>
+
+<ul>
+<li><strong>Tardas más de 30 minutos</strong> en preparar cada cotización</li>
+<li>Has enviado presupuestos con <strong>errores de precio o cálculo</strong></li>
+<li>No sabes en qué estado está cada propuesta ni cuándo hacer seguimiento</li>
+<li>Cada vendedor usa un <strong>formato diferente</strong> para las cotizaciones</li>
+<li>Pierdes deals porque <strong>la competencia responde antes</strong></li>
+<li>No tienes visibilidad sobre tu <strong>pipeline de ventas</strong></li>
+</ul>
+
+<h2>Funcionalidades clave de un buen CPQ</h2>
+
+<h3>1. Catálogo de productos centralizado</h3>
+<p>Todos tus productos, servicios y precios en un solo lugar. Cuando cambias un precio, se actualiza automáticamente en todas las cotizaciones futuras. Adiós a las hojas de cálculo desactualizadas.</p>
+
+<h3>2. Generación automática de cotizaciones</h3>
+<p>Selecciona el cliente, añade los productos y el sistema calcula automáticamente subtotales, descuentos e impuestos. Algunos CPQ como DealForge incluyen <strong>inteligencia artificial</strong> que puede generar cotizaciones completas a partir de una descripción.</p>
+
+<h3>3. Plantillas profesionales en PDF</h3>
+<p>Una cotización bien diseñada transmite profesionalidad. El software genera PDFs con tu logo, colores corporativos y un diseño limpio que impresiona al cliente.</p>
+
+<h3>4. Firma electrónica integrada</h3>
+<p>Envía la cotización y el cliente la firma desde su móvil o ordenador. Sin imprimir, sin escanear. Con validez legal según el Reglamento eIDAS de la UE.</p>
+
+<h3>5. Seguimiento y notificaciones</h3>
+<p>Sabe cuándo el cliente abre tu cotización, recibe recordatorios automáticos y nunca pierdas un seguimiento. El pipeline visual te muestra todas tus oportunidades de un vistazo.</p>
+
+<h3>6. Reglas comerciales y aprobaciones</h3>
+<p>Define descuentos máximos, márgenes mínimos y flujos de aprobación. Si un vendedor aplica un descuento fuera de política, el sistema requiere aprobación del gerente antes de enviar.</p>
+
+<h2>CPQ vs. Excel vs. ERP: ¿cuál usar?</h2>
+
+<p>Cada herramienta tiene su lugar. La clave es entender cuándo cada una tiene sentido:</p>
+
+<p><strong>Excel/Google Sheets:</strong> Funciona cuando haces pocas cotizaciones al mes y trabajas solo. Pero a medida que creces, los errores se multiplican y la gestión se vuelve caótica.</p>
+
+<p><strong>ERP (SAP, Odoo, etc.):</strong> Potente pero complejo y costoso. Pensado para grandes empresas con equipos de implementación. Para una PYME, suele ser excesivo.</p>
+
+<p><strong>Software CPQ:</strong> El punto intermedio ideal. Especializado en el proceso de cotización, fácil de implementar y asequible. Perfecto para PYMEs que quieren profesionalizar sus ventas sin la complejidad de un ERP.</p>
+
+<h2>Cómo elegir el mejor software de cotizaciones</h2>
+
+<p>No todos los CPQ son iguales. Estos son los criterios que deberías evaluar:</p>
+
+<h3>Facilidad de uso</h3>
+<p>Si tu equipo necesita una semana de formación para usar el software, algo falla. La herramienta debe ser intuitiva desde el primer día. Busca interfaces limpias y flujos de trabajo simples.</p>
+
+<h3>Personalización</h3>
+<p>¿Puedes adaptar las plantillas a tu marca? ¿Soporta tus condiciones comerciales específicas? ¿Funciona con tu moneda y sistema fiscal?</p>
+
+<h3>Integraciones</h3>
+<p>Comprueba que se integra con las herramientas que ya usas: CRM, email, facturación. Una herramienta aislada genera más trabajo, no menos.</p>
+
+<h3>Precio justo</h3>
+<p>Muchos CPQ están diseñados para grandes empresas con precios que empiezan en cientos de euros al mes. Para una PYME, busca opciones con plan gratuito o de entrada asequible.</p>
+
+<h3>Soporte en tu idioma</h3>
+<p>Cuando tienes un problema, necesitas ayuda rápida y en tu idioma. Prioriza herramientas con soporte en español y documentación clara.</p>
+
+<h2>El impacto real en tu negocio</h2>
+
+<p>Implementar un software de cotizaciones no es solo una mejora operativa. Es una ventaja competitiva. Las empresas que responden rápido con propuestas profesionales ganan más deals. Así de simple.</p>
+
+<p>Piensa en esto: cuando un cliente potencial pide presupuesto a tres proveedores, el primero en responder con una cotización clara y profesional tiene una ventaja enorme. La velocidad y la profesionalidad generan confianza.</p>
+
+<h2>Primeros pasos</h2>
+
+<p>No necesitas migrar todo de golpe. Empieza poco a poco:</p>
+
+<ol>
+<li><strong>Carga tu catálogo de productos</strong> con precios actualizados</li>
+<li><strong>Importa tus clientes principales</strong> desde tu base de datos actual</li>
+<li><strong>Crea tu primera cotización</strong> con el nuevo sistema</li>
+<li><strong>Envíala con firma electrónica</strong> y mide el tiempo de respuesta</li>
+<li><strong>Revisa y ajusta</strong> según tu flujo de trabajo</li>
+</ol>
+
+<p>La curva de aprendizaje es mínima y los resultados son inmediatos. Tu equipo de ventas te lo agradecerá.</p>`,
+    autor: "DealForge",
+    categoria: "producto",
+    tags: JSON.stringify([
+      "software cotizaciones",
+      "CPQ",
+      "presupuestos",
+      "pymes",
+      "automatización ventas",
+      "herramientas ventas",
+      "productividad",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Software de Cotizaciones para PYMEs: Guía Completa 2026 — DealForge",
+    metaDescripcion:
+      "Qué es un software de cotizaciones (CPQ), cómo funciona y cómo elegir el mejor para tu PYME. Funcionalidades clave, comparativa con Excel y ERP, y criterios de selección.",
+    metaKeywords:
+      "software de cotizaciones, programa para hacer presupuestos, CPQ para pymes, herramienta cotizaciones, software presupuestos, automatizar cotizaciones, programa cotizaciones gratis, mejor CPQ español",
+  };
+
+  const posts = [post, post2, post3];
   const results = [];
 
   for (const p of posts) {
