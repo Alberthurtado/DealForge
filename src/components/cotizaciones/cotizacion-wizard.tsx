@@ -118,10 +118,6 @@ export function CotizacionWizard({
     fetch("/api/productos").then((r) => r.json()).then(setProductos);
     fetch("/api/empresa").then((r) => r.json()).then((empresa) => {
       empresaRef.current = empresa;
-      if (!empresa) return;
-      // Set initial T&C from general default
-      const defaultTc = empresa.condicionesDefecto || "";
-      setForm((f) => f.condiciones ? f : { ...f, condiciones: defaultTc });
     }).catch(() => {});
   }, []);
 
