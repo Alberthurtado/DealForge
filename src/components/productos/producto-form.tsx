@@ -18,6 +18,8 @@ interface ProductoFormData {
   sku: string;
   precioBase: number;
   unidad: string;
+  tipoFacturacion: string;
+  frecuencia: string | null;
   activo: boolean;
   categoriaId: string;
 }
@@ -89,6 +91,8 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
     sku: initialData?.sku || "",
     precioBase: initialData?.precioBase || 0,
     unidad: initialData?.unidad || "unidad",
+    tipoFacturacion: initialData?.tipoFacturacion || "UNICO",
+    frecuencia: initialData?.frecuencia || null,
     activo: initialData?.activo ?? true,
     categoriaId: initialData?.categoriaId || "",
   });
@@ -322,6 +326,48 @@ export function ProductoForm({ initialData, categorias, onCategoriasChange, onSu
               <option value="m2">m2</option>
             </select>
           </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-foreground mb-1">
+              Tipo de facturación
+            </label>
+            <select
+              value={form.tipoFacturacion}
+              onChange={(e) => {
+                const value = e.target.value;
+                setForm((f) => ({
+                  ...f,
+                  tipoFacturacion: value,
+                  frecuencia: value === "UNICO" ? null : f.frecuencia,
+                }));
+              }}
+              className={inputClass}
+            >
+              <option value="UNICO">Único</option>
+              <option value="RECURRENTE">Recurrente</option>
+            </select>
+          </div>
+          {form.tipoFacturacion === "RECURRENTE" && (
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1">
+                Frecuencia
+              </label>
+              <select
+                value={form.frecuencia || ""}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, frecuencia: e.target.value || null }))
+                }
+                className={inputClass}
+              >
+                <option value="">Seleccionar...</option>
+                <option value="MENSUAL">Mensual</option>
+                <option value="TRIMESTRAL">Trimestral</option>
+                <option value="ANUAL">Anual</option>
+              </select>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-2">

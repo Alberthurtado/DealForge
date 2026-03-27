@@ -26,6 +26,8 @@ interface Producto {
   sku: string;
   precioBase: number;
   unidad: string;
+  tipoFacturacion?: string;
+  frecuencia?: string | null;
   variantes?: VarianteInfo[];
 }
 
@@ -36,6 +38,7 @@ export interface LineItemInput {
   cantidad: number;
   precioUnitario: number;
   descuento: number;
+  frecuencia?: string | null;
 }
 
 interface Props {
@@ -89,7 +92,7 @@ export function LineItemsEditor({
   const subtotalConDescuento = subtotal * (1 - descuentoGlobal / 100);
   const totalConImpuesto = subtotalConDescuento * (1 + impuesto / 100);
 
-  function updateItem(index: number, field: keyof LineItemInput, value: string | number) {
+  function updateItem(index: number, field: keyof LineItemInput, value: string | number | null) {
     setItems((prev) => {
       const updated = [...prev];
       updated[index] = { ...updated[index], [field]: value };
@@ -121,6 +124,9 @@ export function LineItemsEditor({
         cantidad: 1,
         precioUnitario: producto.precioBase,
         descuento: 0,
+        ...(producto.tipoFacturacion === "RECURRENTE" && producto.frecuencia
+          ? { frecuencia: producto.frecuencia }
+          : {}),
       },
     ]);
   }
@@ -136,6 +142,9 @@ export function LineItemsEditor({
         cantidad: 1,
         precioUnitario: precio,
         descuento: 0,
+        ...(producto.tipoFacturacion === "RECURRENTE" && producto.frecuencia
+          ? { frecuencia: producto.frecuencia }
+          : {}),
       },
     ]);
     setExpandedVariantId(null);
@@ -150,6 +159,9 @@ export function LineItemsEditor({
         cantidad: 1,
         precioUnitario: producto.precioBase,
         descuento: 0,
+        ...(producto.tipoFacturacion === "RECURRENTE" && producto.frecuencia
+          ? { frecuencia: producto.frecuencia }
+          : {}),
       },
     ]);
     setExpandedVariantId(null);
@@ -160,6 +172,55 @@ export function LineItemsEditor({
       !productoSearch ||
       p.nombre.toLowerCase().includes(productoSearch.toLowerCase()) ||
       p.sku.toLowerCase().includes(productoSearch.toLowerCase())
+  );
+
+  // Frequency helpers
+  const frecuenciaLabel: Record<string, string> = {
+    MENSUAL: "/mes",
+    TRIMESTRAL: "/trim",
+    ANUAL: "/año",
+  };
+  const frecuenciaColor: Record<string, string> = {
+    MENSUAL: "bg-blue-100 text-blue-700",
+    TRIMESTRAL: "bg-purple-100 text-purple-700",
+    ANUAL: "bg-green-100 text-green-700",
+  };
+  const frecuenciaOptions = [
+    { value: "", label: "\u2014" },
+    { value: "MENSUAL", label: "Mensual" },
+    { value: "TRIMESTRAL", label: "Trimestral" },
+    { value: "ANUAL", label: "Anual" },
+  ];
+  const frecuenciaToMonthlyDivisor: Record<string, number> = {
+    MENSUAL: 1,
+    TRIMESTRAL: 3,
+    ANUAL: 12,
+  };
+
+  // Recurring vs one-time totals
+  const hasRecurring = items.some((item) => !!item.frecuencia);
+  const oneTimeTotal = useMemo(
+    () =>
+      items
+        .filter((item) => !item.frecuencia)
+        .reduce(
+          (sum, item) =>
+            sum + item.cantidad * item.precioUnitario * (1 - item.descuento / 100),
+          0
+        ),
+    [items]
+  );
+  const recurringMonthlyTotal = useMemo(
+    () =>
+      items
+        .filter((item) => !!item.frecuencia)
+        .reduce((sum, item) => {
+          const lineTotal =
+            item.cantidad * item.precioUnitario * (1 - item.descuento / 100);
+          const divisor = frecuenciaToMonthlyDivisor[item.frecuencia!] || 1;
+          return sum + lineTotal / divisor;
+        }, 0),
+    [items]
   );
 
   const currencySymbol = moneda === "USD" ? "$" : moneda === "GBP" ? "£" : "€";
@@ -176,13 +237,22 @@ export function LineItemsEditor({
           {items.map((item, i) => (
             <div key={i} className="p-3 border border-border rounded-lg space-y-2 bg-gray-50/50">
               <div className="flex items-start justify-between gap-2">
-                <input
-                  type="text"
-                  value={item.descripcion}
-                  onChange={(e) => updateItem(i, "descripcion", e.target.value)}
-                  className="text-sm font-medium bg-white border border-border rounded px-2 py-1 flex-1 focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="Descripción del item"
-                />
+                <div className="flex items-center gap-1.5 flex-1">
+                  <input
+                    type="text"
+                    value={item.descripcion}
+                    onChange={(e) => updateItem(i, "descripcion", e.target.value)}
+                    className="text-sm font-medium bg-white border border-border rounded px-2 py-1 flex-1 focus:outline-none focus:ring-2 focus:ring-ring"
+                    placeholder="Descripción del item"
+                  />
+                  {item.frecuencia && frecuenciaLabel[item.frecuencia] && (
+                    <span
+                      className={`inline-flex items-center text-[10px] font-semibold px-1.5 py-0.5 rounded-full whitespace-nowrap ${frecuenciaColor[item.frecuencia]}`}
+                    >
+                      {frecuenciaLabel[item.frecuencia]}
+                    </span>
+                  )}
+                </div>
                 <button
                   onClick={() => removeItem(i)}
                   className="p-1.5 text-destructive hover:bg-red-50 rounded transition-colors"
@@ -191,7 +261,7 @@ export function LineItemsEditor({
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
               </div>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-5 gap-2">
                 <div>
                   <label className="text-[10px] text-muted-foreground uppercase tracking-wider">
                     Cantidad
@@ -230,6 +300,24 @@ export function LineItemsEditor({
                     onChange={(e) => updateItem(i, "descuento", parseFloat(e.target.value) || 0)}
                     className="w-full px-2 py-1 text-sm border border-border rounded bg-white focus:outline-none focus:ring-2 focus:ring-ring"
                   />
+                </div>
+                <div>
+                  <label className="text-[10px] text-muted-foreground uppercase tracking-wider">
+                    Frecuencia
+                  </label>
+                  <select
+                    value={item.frecuencia || ""}
+                    onChange={(e) =>
+                      updateItem(i, "frecuencia", e.target.value || null)
+                    }
+                    className="w-full px-1.5 py-1 text-sm border border-border rounded bg-white focus:outline-none focus:ring-2 focus:ring-ring"
+                  >
+                    {frecuenciaOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label className="text-[10px] text-muted-foreground uppercase tracking-wider">
@@ -388,6 +476,27 @@ export function LineItemsEditor({
           <span>{formatCurrency(Math.round(totalConImpuesto * 100) / 100)}</span>
         </div>
       </div>
+
+      {/* Recurring summary */}
+      {hasRecurring && (
+        <div className="pt-3 border-t border-dashed border-border space-y-1.5">
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
+            Desglose por tipo
+          </p>
+          {oneTimeTotal > 0 && (
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Total único</span>
+              <span>{formatCurrency(Math.round(oneTimeTotal * 100) / 100)}</span>
+            </div>
+          )}
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Total recurrente</span>
+            <span className="font-medium text-blue-700">
+              {formatCurrency(Math.round(recurringMonthlyTotal * 100) / 100)}/mes
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Actions */}
       <div className="flex items-center justify-end gap-2 pt-2">
