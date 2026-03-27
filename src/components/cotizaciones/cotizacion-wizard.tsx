@@ -83,6 +83,8 @@ export function CotizacionWizard({
       sku: string;
       precioBase: number;
       unidad: string;
+      tipoFacturacion?: string;
+      frecuencia?: string | null;
       categoria: { nombre: string } | null;
       variantes?: VarianteInfo[];
     }>
@@ -124,12 +126,11 @@ export function CotizacionWizard({
   }, []);
 
   // Update T&C when entering Precios step based on line item types
+  const userEditedCondiciones = useRef(false);
   useEffect(() => {
-    if (step !== 2 || !empresaRef.current) return;
+    if (step !== 2 || !empresaRef.current || userEditedCondiciones.current) return;
     const empresa = empresaRef.current;
-    // Only auto-set if user hasn't manually edited
     setForm((f) => {
-      if (f.condiciones && f.condiciones !== empresa.condicionesDefecto) return f;
       const hasRecurring = f.lineItems.some((li) => li.frecuencia);
       const hasOneTime = f.lineItems.some((li) => !li.frecuencia);
       const parts: string[] = [];
@@ -206,6 +207,7 @@ export function CotizacionWizard({
           cantidad: 1,
           precioUnitario: producto.precioBase,
           descuento: 0,
+          frecuencia: producto.tipoFacturacion === "RECURRENTE" ? producto.frecuencia : null,
         },
       ],
     }));
@@ -227,6 +229,7 @@ export function CotizacionWizard({
           cantidad: 1,
           precioUnitario: precio,
           descuento: 0,
+          frecuencia: producto.tipoFacturacion === "RECURRENTE" ? producto.frecuencia : null,
         },
       ],
     }));
@@ -244,6 +247,7 @@ export function CotizacionWizard({
           cantidad: 1,
           precioUnitario: producto.precioBase,
           descuento: 0,
+          frecuencia: producto.tipoFacturacion === "RECURRENTE" ? producto.frecuencia : null,
         },
       ],
     }));
@@ -812,9 +816,10 @@ export function CotizacionWizard({
             </label>
             <textarea
               value={form.condiciones}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, condiciones: e.target.value }))
-              }
+              onChange={(e) => {
+                userEditedCondiciones.current = true;
+                setForm((f) => ({ ...f, condiciones: e.target.value }));
+              }}
               className={inputClass}
               rows={3}
               placeholder="Condiciones de pago, entrega, validez..."
