@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Users,
   Package,
@@ -33,6 +33,7 @@ interface LineItemInput {
   cantidad: number;
   precioUnitario: number;
   descuento: number;
+  frecuencia?: string | null;
 }
 
 interface WizardData {
@@ -95,6 +96,8 @@ export function CotizacionWizard({
   const [productoSearch, setProductoSearch] = useState("");
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const empresaRef = useRef<any>(null);
   const [form, setForm] = useState<WizardData>({
     clienteId: preselectedClienteId || "",
     contactoNombre: "",
@@ -112,11 +115,30 @@ export function CotizacionWizard({
     fetch("/api/clientes").then((r) => r.json()).then(setClientes);
     fetch("/api/productos").then((r) => r.json()).then(setProductos);
     fetch("/api/empresa").then((r) => r.json()).then((empresa) => {
-      if (empresa?.condicionesDefecto) {
-        setForm((f) => f.condiciones ? f : { ...f, condiciones: empresa.condicionesDefecto });
-      }
+      empresaRef.current = empresa;
+      if (!empresa) return;
+      // Set initial T&C from general default
+      const defaultTc = empresa.condicionesDefecto || "";
+      setForm((f) => f.condiciones ? f : { ...f, condiciones: defaultTc });
     }).catch(() => {});
   }, []);
+
+  // Update T&C when entering Precios step based on line item types
+  useEffect(() => {
+    if (step !== 2 || !empresaRef.current) return;
+    const empresa = empresaRef.current;
+    // Only auto-set if user hasn't manually edited
+    setForm((f) => {
+      if (f.condiciones && f.condiciones !== empresa.condicionesDefecto) return f;
+      const hasRecurring = f.lineItems.some((li) => li.frecuencia);
+      const hasOneTime = f.lineItems.some((li) => !li.frecuencia);
+      const parts: string[] = [];
+      if (hasOneTime && empresa.condicionesTransaccional) parts.push(empresa.condicionesTransaccional);
+      if (hasRecurring && empresa.condicionesContractual) parts.push(empresa.condicionesContractual);
+      if (parts.length > 0) return { ...f, condiciones: parts.join("\n\n---\n\n") };
+      return { ...f, condiciones: empresa.condicionesDefecto || "" };
+    });
+  }, [step]);
 
   // Fetch contacts when client changes
   useEffect(() => {
