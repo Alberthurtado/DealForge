@@ -568,13 +568,31 @@ export default function CotizacionDetailPage() {
                 Duplicar
               </button>
               {cotizacion.estado === "GANADA" && planFeatures?.contratos && (
-                <Link
-                  href={`/contratos?crear=${cotizacion.id}`}
+                <button
+                  onClick={async () => {
+                    const res = await fetch("/api/contratos", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        cotizacionId: cotizacion.id,
+                        fechaInicio: new Date().toISOString(),
+                        duracionMeses: 12,
+                      }),
+                    });
+                    if (res.ok) {
+                      const contrato = await res.json();
+                      success("Contrato creado correctamente");
+                      router.push(`/contratos/${contrato.id}`);
+                    } else {
+                      const err = await res.json();
+                      showError(err.error || "Error al crear contrato");
+                    }
+                  }}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded-lg text-xs font-medium hover:bg-green-700 transition-colors"
                 >
                   <ScrollText className="w-3.5 h-3.5" />
                   Crear Contrato
-                </Link>
+                </button>
               )}
               {cotizacion.estado === "GANADA" && !planFeatures?.contratos && (
                 <Link
