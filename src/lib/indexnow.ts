@@ -53,11 +53,15 @@ export async function notifyIndexNow(urls: string[]): Promise<{ success: boolean
  * Get all public URLs that should be indexed.
  */
 export function getAllPublicUrls(): string[] {
-  // Avoid importing industrias at module level to keep this lib lightweight
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { industrias } = require("@/data/industrias");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { features } = require("@/data/features");
   const industryUrls = (industrias as { slug: string }[]).map(
     (i) => `/plantilla-cotizacion/${i.slug}`
+  );
+  const featureUrls = (features as { slug: string }[]).map(
+    (f) => `/funcionalidades/${f.slug}`
   );
 
   return [
@@ -72,5 +76,7 @@ export function getAllPublicUrls(): string[] {
     "/rgpd",
     "/plantilla-cotizacion",
     ...industryUrls,
+    "/funcionalidades",
+    ...featureUrls,
   ];
 }

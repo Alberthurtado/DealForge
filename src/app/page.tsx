@@ -247,20 +247,20 @@ function ProblemSection() {
 /* ─── FEATURES GRID ───────────────────────────────────────────── */
 function FeaturesGrid() {
   const features = [
-    { icon: Users, title: "Gestión de Clientes", desc: "Base de datos completa con contactos, historial y segmentación por sector." },
-    { icon: Package, title: "Catálogo de Productos", desc: "Productos con variantes, categorías y precios configurables." },
-    { icon: FileText, title: "Cotizaciones PDF", desc: "Genera PDFs profesionales con tu marca. Envía por email y rastrea el estado." },
-    { icon: ShieldCheck, title: "Reglas Comerciales", desc: "Límites de descuento, productos obligatorios y aprobaciones automáticas." },
-    { icon: BarChart3, title: "Reportes y Métricas", desc: "Pipeline visual, ingresos por mes, conversión y más datos en tiempo real." },
-    { icon: Flame, title: "Forge IA Integrado", desc: "Asistente inteligente que crea cotizaciones, analiza datos y recomienda acciones." },
-    { icon: Mail, title: "Envío de Emails", desc: "Envía cotizaciones directamente desde la plataforma con SMTP propio." },
-    { icon: CheckCircle, title: "Aprobaciones", desc: "Flujos de aprobación con enlaces únicos. Aprueba o rechaza desde cualquier dispositivo." },
-    { icon: PenTool, title: "Firma Electrónica", desc: "Solicita firmas digitales con enlace único. El cliente firma desde cualquier dispositivo." },
-    { icon: Bell, title: "Recordatorios Automáticos", desc: "Seguimiento automático al vendedor y aviso de vencimiento al cliente por email." },
-    { icon: GitBranch, title: "Versionado", desc: "Crea nuevas versiones de cotizaciones. Historial completo con trazabilidad." },
-    { icon: Plug, title: "Importar / Exportar", desc: "Importa clientes y productos desde CSV. Exporta datos cuando necesites." },
-    { icon: ScrollText, title: "Gestión de Contratos", desc: "Crea contratos desde cotizaciones ganadas. Líneas recurrentes, condiciones y cláusulas." },
-    { icon: RefreshCw, title: "Renovaciones y Alertas", desc: "Renovación automática o manual. Avisos por email y alertas de vencimiento con semáforo visual." },
+    { icon: Users, title: "Gestión de Clientes", slug: "gestion-clientes", desc: "Base de datos completa con contactos, historial y segmentación por sector." },
+    { icon: Package, title: "Catálogo de Productos", slug: "catalogo-productos", desc: "Productos con variantes, categorías y precios configurables." },
+    { icon: FileText, title: "Cotizaciones PDF", slug: "cotizaciones-pdf", desc: "Genera PDFs profesionales con tu marca. Envía por email y rastrea el estado." },
+    { icon: ShieldCheck, title: "Reglas Comerciales", slug: "reglas-comerciales", desc: "Límites de descuento, productos obligatorios y aprobaciones automáticas." },
+    { icon: BarChart3, title: "Reportes y Métricas", slug: "reportes-metricas", desc: "Pipeline visual, ingresos por mes, conversión y más datos en tiempo real." },
+    { icon: Flame, title: "Forge IA Integrado", slug: "forge-ia", desc: "Asistente inteligente que crea cotizaciones, analiza datos y recomienda acciones." },
+    { icon: Mail, title: "Envío de Emails", slug: "envio-emails", desc: "Envía cotizaciones directamente desde la plataforma con SMTP propio." },
+    { icon: CheckCircle, title: "Aprobaciones", slug: "aprobaciones", desc: "Flujos de aprobación con enlaces únicos. Aprueba o rechaza desde cualquier dispositivo." },
+    { icon: PenTool, title: "Firma Electrónica", slug: "firma-electronica", desc: "Solicita firmas digitales con enlace único. El cliente firma desde cualquier dispositivo." },
+    { icon: Bell, title: "Recordatorios Automáticos", slug: "recordatorios", desc: "Seguimiento automático al vendedor y aviso de vencimiento al cliente por email." },
+    { icon: GitBranch, title: "Versionado", slug: "versionado", desc: "Crea nuevas versiones de cotizaciones. Historial completo con trazabilidad." },
+    { icon: Plug, title: "Importar / Exportar", slug: "importar-exportar", desc: "Importa clientes y productos desde CSV. Exporta datos cuando necesites." },
+    { icon: ScrollText, title: "Gestión de Contratos", slug: "gestion-contratos", desc: "Crea contratos desde cotizaciones ganadas. Líneas recurrentes, condiciones y cláusulas." },
+    { icon: RefreshCw, title: "Renovaciones y Alertas", slug: "renovaciones-alertas", desc: "Renovación automática o manual. Avisos por email y alertas de vencimiento con semáforo visual." },
   ];
 
   return (
@@ -277,7 +277,8 @@ function FeaturesGrid() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((f) => (
-            <div
+            <Link
+              href={`/funcionalidades/${f.slug}`}
               key={f.title}
               className="group bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg hover:border-[#3a9bb5]/20 transition-all"
             >
@@ -286,7 +287,10 @@ function FeaturesGrid() {
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-2">{f.title}</h3>
               <p className="text-sm text-gray-600 leading-relaxed">{f.desc}</p>
-            </div>
+              <span className="inline-flex items-center gap-1 mt-3 text-xs font-medium text-[#3a9bb5] group-hover:translate-x-1 transition-transform">
+                Más información <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
           ))}
         </div>
       </div>

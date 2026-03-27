@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { industrias } from "@/data/industrias";
+import { features } from "@/data/features";
 
 export const dynamic = "force-dynamic";
 
@@ -80,5 +81,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...blogPosts, ...industryPages];
+  // Feature landing pages
+  const featurePages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/funcionalidades`,
+      lastModified: new Date("2026-03-27"),
+    },
+    ...features.map((f) => ({
+      url: `${baseUrl}/funcionalidades/${f.slug}`,
+      lastModified: new Date("2026-03-27"),
+    })),
+  ];
+
+  return [...staticPages, ...blogPosts, ...industryPages, ...featurePages];
 }
