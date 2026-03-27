@@ -395,6 +395,14 @@ export default function CotizacionDetailPage() {
   // Inline condiciones editing
   const [editingCondiciones, setEditingCondiciones] = useState(false);
   const [condicionesEdit, setCondicionesEdit] = useState("");
+  const [condicionesDefecto, setCondicionesDefecto] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/empresa")
+      .then((r) => r.json())
+      .then((data) => setCondicionesDefecto(data.condicionesDefecto || null))
+      .catch(() => {});
+  }, []);
 
   async function saveCondiciones() {
     const res = await fetch(`/api/cotizaciones/${params.id}`, {
@@ -704,7 +712,7 @@ export default function CotizacionDetailPage() {
             </div>
             <button
               onClick={() => {
-                setCondicionesEdit(cotizacion.condiciones || "");
+                setCondicionesEdit(cotizacion.condiciones || condicionesDefecto || "");
                 setEditingCondiciones(true);
                 document.getElementById("condiciones-section")?.scrollIntoView({ behavior: "smooth" });
               }}
@@ -950,7 +958,7 @@ export default function CotizacionDetailPage() {
                 {["BORRADOR", "NEGOCIACION"].includes(cotizacion.estado) && !editingCondiciones && (
                   <button
                     onClick={() => {
-                      setCondicionesEdit(cotizacion.condiciones || "");
+                      setCondicionesEdit(cotizacion.condiciones || condicionesDefecto || "");
                       setEditingCondiciones(true);
                     }}
                     className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
@@ -991,9 +999,31 @@ export default function CotizacionDetailPage() {
                   {cotizacion.condiciones}
                 </p>
               ) : (
-                <p className="text-sm text-amber-500 italic">
-                  Sin términos y condiciones
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm text-amber-500 italic">
+                    Sin términos y condiciones
+                  </p>
+                  {condicionesDefecto && ["BORRADOR", "NEGOCIACION"].includes(cotizacion.estado) && (
+                    <button
+                      onClick={async () => {
+                        const res = await fetch(`/api/cotizaciones/${params.id}`, {
+                          method: "PUT",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ condiciones: condicionesDefecto }),
+                        });
+                        if (res.ok) {
+                          const updated = await res.json();
+                          setCotizacion(updated);
+                          success("Condiciones por defecto aplicadas");
+                        }
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
+                    >
+                      <FileText className="w-3.5 h-3.5" />
+                      Aplicar condiciones por defecto
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           </div>
