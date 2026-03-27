@@ -133,7 +133,13 @@ export async function PUT(
   const { data, error } = validateBody(cotizacionUpdateSchema, body);
   if (error) return error;
 
-  const updateData: Record<string, unknown> = { ...data };
+  // Only include fields that were explicitly sent — don't overwrite with null for missing fields
+  const updateData: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(data)) {
+    if (value !== undefined && key in body) {
+      updateData[key] = value;
+    }
+  }
 
   if (updateData.estado) {
     const current = await prisma.cotizacion.findUnique({ where: { id }, select: { estado: true, condiciones: true } });
