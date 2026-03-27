@@ -98,6 +98,7 @@ export async function POST(request: NextRequest) {
         cantidad,
         precioUnitario,
         descuento,
+        frecuencia: (item.frecuencia as string) || null,
         total: Math.round(itemTotal * 100) / 100,
         orden: index,
       };

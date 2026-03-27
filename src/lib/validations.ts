@@ -109,6 +109,8 @@ export const productoCreateSchema = z.object({
   precioBase: positiveNumber("Precio base"),
   unidad: z.string().default("unidad"),
   activo: z.boolean().default(true),
+  tipoFacturacion: z.enum(["UNICO", "RECURRENTE"]).default("UNICO"),
+  frecuencia: z.enum(["MENSUAL", "TRIMESTRAL", "ANUAL"]).nullable().optional().transform((v) => v || null),
   categoriaId: z.string().nullable().optional().transform((v) => v || null),
   variantes: z.array(varianteSchema).optional(),
 });
@@ -132,6 +134,7 @@ const lineItemSchema = z.object({
   cantidad: z.number().min(0.01, "Cantidad debe ser mayor a 0").default(1),
   precioUnitario: z.number().min(0, "Precio unitario inválido"),
   descuento: percentage("Descuento").default(0),
+  frecuencia: z.enum(["MENSUAL", "TRIMESTRAL", "ANUAL"]).nullable().optional().transform((v) => v || null),
 });
 
 // ─── Cotizacion ──────────────────────────────────

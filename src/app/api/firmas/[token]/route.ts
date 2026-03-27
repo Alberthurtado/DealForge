@@ -22,7 +22,7 @@ export async function GET(
         include: {
           cliente: { select: { nombre: true } },
           lineItems: {
-            select: { descripcion: true, cantidad: true, precioUnitario: true, descuento: true, total: true },
+            select: { descripcion: true, cantidad: true, precioUnitario: true, descuento: true, frecuencia: true, total: true },
             orderBy: { orden: "asc" },
           },
         },

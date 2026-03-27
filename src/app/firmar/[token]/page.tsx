@@ -30,6 +30,7 @@ interface SignatureData {
       cantidad: number;
       precioUnitario: number;
       descuento: number;
+      frecuencia: string | null;
       total: number;
     }>;
   };
@@ -251,7 +252,14 @@ export default function SignaturePage() {
               <tbody>
                 {cotizacion.lineItems.map((item, i) => (
                   <tr key={i} className="border-t border-gray-50">
-                    <td className="py-2 text-gray-700">{item.descripcion}</td>
+                    <td className="py-2 text-gray-700">
+                      {item.descripcion}
+                      {item.frecuencia && (
+                        <span className="ml-1.5 inline-block text-[10px] font-semibold text-[#3a9bb5] bg-[#3a9bb5]/10 px-1.5 py-0.5 rounded">
+                          /{item.frecuencia === "MENSUAL" ? "mes" : item.frecuencia === "TRIMESTRAL" ? "trim" : "año"}
+                        </span>
+                      )}
+                    </td>
                     <td className="py-2 text-right text-gray-600">{item.cantidad}</td>
                     <td className="py-2 text-right text-gray-600">{formatCurrency(item.precioUnitario)}</td>
                     <td className="py-2 text-right font-medium text-gray-900">{formatCurrency(item.total)}</td>

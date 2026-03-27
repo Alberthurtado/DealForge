@@ -91,7 +91,13 @@ export async function POST(request: NextRequest) {
   // Verify cotización belongs to user and is GANADA
   const cotizacion = await prisma.cotizacion.findFirst({
     where: { id: data.cotizacionId, usuarioId: session.userId },
-    select: { id: true, estado: true, clienteId: true, moneda: true },
+    select: {
+      id: true, estado: true, clienteId: true, moneda: true, condiciones: true,
+      lineItems: {
+        select: { descripcion: true, cantidad: true, precioUnitario: true, frecuencia: true, total: true, orden: true },
+        orderBy: { orden: "asc" },
+      },
+    },
   });
 
   if (!cotizacion) {
@@ -103,6 +109,22 @@ export async function POST(request: NextRequest) {
       { error: "Solo se pueden crear contratos a partir de cotizaciones con estado GANADA" },
       { status: 400 }
     );
+  }
+
+  // Auto-populate lineItems from quote if not provided
+  if (!data.lineItems || data.lineItems.length === 0) {
+    data.lineItems = cotizacion.lineItems.map((li) => ({
+      descripcion: li.descripcion,
+      cantidad: li.cantidad,
+      precioUnitario: li.precioUnitario,
+      frecuencia: (li.frecuencia as "MENSUAL" | "TRIMESTRAL" | "ANUAL" | "UNICO") || "UNICO",
+      total: li.total,
+    }));
+  }
+
+  // Auto-populate condiciones from quote if not provided
+  if (!data.condiciones && cotizacion.condiciones) {
+    data.condiciones = cotizacion.condiciones;
   }
 
   // Generate contract number: CTR-{YEAR}-{SEQUENCE}

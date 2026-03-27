@@ -55,8 +55,10 @@ model Producto {
   sku         String
   precioBase  Float
   unidad      String              @default("unidad")
-  activo      Boolean             @default(true)
-  categoriaId String?
+  activo          Boolean             @default(true)
+  tipoFacturacion String              @default("UNICO")  // UNICO | RECURRENTE
+  frecuencia      String?             // MENSUAL | TRIMESTRAL | ANUAL (null si UNICO)
+  categoriaId     String?
   categoria   Categoria?          @relation(fields: [categoriaId], references: [id])
   usuarioId   String
   usuario     Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
@@ -133,6 +135,7 @@ model LineItem {
   cantidad       Float             @default(1)
   precioUnitario Float
   descuento      Float             @default(0)
+  frecuencia     String?           // MENSUAL | TRIMESTRAL | ANUAL | null (hereda de producto)
   total          Float
   orden          Int               @default(0)
   createdAt      DateTime          @default(now())

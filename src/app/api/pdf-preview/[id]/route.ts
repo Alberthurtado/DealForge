@@ -74,7 +74,7 @@ export async function GET(
       return `<tr style="${rowBg}">
         <td style="padding:10px 12px;color:#9ca3af;font-size:12px;${borderStyle}">${i + 1}</td>
         <td style="padding:10px 12px;${borderStyle}">
-          <div style="font-weight:500;color:#1f2937;">${item.descripcion}</div>
+          <div style="font-weight:500;color:#1f2937;">${item.descripcion}${item.frecuencia ? ` <span style="display:inline-block;font-size:9px;font-weight:600;color:#3a9bb5;background:#e0f2f7;padding:1px 5px;border-radius:3px;margin-left:4px;">/${item.frecuencia === "MENSUAL" ? "mes" : item.frecuencia === "TRIMESTRAL" ? "trim" : "año"}</span>` : ""}</div>
           ${skuText ? `<div style="font-size:10px;color:#9ca3af;margin-top:2px;">SKU: ${skuText}</div>` : ""}
         </td>
         <td style="padding:10px 12px;text-align:right;color:#374151;${borderStyle}">${item.cantidad}</td>
