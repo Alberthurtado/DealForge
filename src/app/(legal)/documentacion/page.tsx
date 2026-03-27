@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Documentación — DealForge",
-  description: "Guía completa de DealForge CPQ. Aprende a gestionar productos, clientes, cotizaciones, reglas comerciales, aprobaciones, plantillas PDF y el asistente Forge IA.",
+  description: "Guía completa de DealForge CPQ. Aprende a gestionar productos, clientes, cotizaciones, reglas comerciales, aprobaciones, plantillas PDF, contratos, firma electrónica, recordatorios y el asistente Forge IA.",
 };
 
 /* ───────── helpers de estilo ───────── */
@@ -38,7 +38,7 @@ const Field = ({ name, desc, required }: { name: string; desc: string; required?
   </li>
 );
 
-const FECHA_ACTUALIZACION = "9 de marzo de 2026";
+const FECHA_ACTUALIZACION = "27 de marzo de 2026";
 
 /* ───────── Índice lateral ───────── */
 const TOC = [
@@ -54,6 +54,10 @@ const TOC = [
   { id: "reportes", label: "10. Reportes y analítica" },
   { id: "integraciones", label: "11. Integraciones" },
   { id: "forge", label: "12. Forge IA" },
+  { id: "firma-electronica", label: "13. Firma electrónica" },
+  { id: "recordatorios", label: "14. Recordatorios automáticos" },
+  { id: "contratos", label: "15. Gestión de contratos" },
+  { id: "renovaciones", label: "16. Renovaciones y alertas" },
 ];
 
 export default function DocumentacionPage() {
@@ -261,6 +265,8 @@ export default function DocumentacionPage() {
         <Field name="Precio base" desc="Precio unitario por defecto. Se puede modificar individualmente en cada cotización." required />
         <Field name="Unidad" desc="Tipo de unidad de venta. Opciones: unidad, hora, mes, licencia/año, kg, m2." />
         <Field name="Activo" desc="Desmarca si quieres ocultar el producto del catálogo temporalmente sin eliminarlo." />
+        <Field name="Tipo de facturación" desc="Único (pago una vez) o Recurrente (suscripción/servicio periódico). Por defecto: Único." />
+        <Field name="Frecuencia" desc="Solo para productos recurrentes. Opciones: Mensual, Trimestral, Anual. Define la periodicidad del cobro." />
       </ul>
 
       <H3 id="productos-variantes">4.2. Variantes de producto</H3>
@@ -590,6 +596,114 @@ export default function DocumentacionPage() {
         <li>El número de consultas puede estar limitado según tu plan.</li>
         <li>Forge no tiene acceso a internet ni a información externa — solo conoce tus datos dentro de DealForge.</li>
       </ul>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          13. FIRMA ELECTRÓNICA
+      ═══════════════════════════════════════════════════════════════ */}
+      <H2 id="firma-electronica">13. Firma electrónica</H2>
+      <P>DealForge incluye firma electrónica integrada para que tus clientes puedan firmar cotizaciones desde cualquier dispositivo.</P>
+
+      <H3 id="firma-solicitar">13.1. Solicitar una firma</H3>
+      <P>Desde la ficha de una cotización en estado <strong>Enviada</strong> o <strong>Negociación</strong>, ve a la sección <strong>Firma Electrónica</strong>:</P>
+      <Step n={1}>El sistema pre-rellena el nombre y email del contacto principal de la cotización.</Step>
+      <Step n={2}>Puedes cambiar el firmante si necesitas que firme otra persona.</Step>
+      <Step n={3}>Haz clic en <strong>&quot;Solicitar Firma&quot;</strong>. Se generará un enlace único y se enviará por email al firmante.</Step>
+      <Tip>Cuando el cliente firma, la cotización se marca automáticamente como <strong>Ganada</strong>.</Tip>
+
+      <H3 id="firma-proceso">13.2. Proceso de firma del cliente</H3>
+      <P>El cliente recibe un email con un enlace único que le lleva a una página donde puede:</P>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li>Ver el resumen completo de la cotización (líneas, totales, condiciones).</li>
+        <li>Leer los Términos y Condiciones antes de firmar.</li>
+        <li>Dibujar su firma con el dedo (móvil) o ratón (desktop).</li>
+        <li>Confirmar la firma con un solo clic.</li>
+      </ul>
+      <Warning>La firma electrónica de DealForge es una <strong>firma electrónica simple</strong> según el Reglamento eIDAS (UE 910/2014). Registra identidad, fecha, hora e IP del firmante. Para contratos que requieran firma avanzada o cualificada, consulta con un asesor legal.</Warning>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          14. RECORDATORIOS AUTOMÁTICOS
+      ═══════════════════════════════════════════════════════════════ */}
+      <H2 id="recordatorios">14. Recordatorios automáticos</H2>
+      <P>DealForge envía recordatorios por email automáticamente para que no pierdas seguimiento de ninguna oportunidad.</P>
+
+      <H3 id="recordatorios-tipos">14.1. Tipos de recordatorio</H3>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li><strong className="text-gray-800">Seguimiento al vendedor:</strong> Se envía al vendedor X días después de enviar la cotización si no hay respuesta.</li>
+        <li><strong className="text-gray-800">Aviso de vencimiento al cliente:</strong> Se envía al cliente X días antes de que la cotización expire.</li>
+      </ul>
+
+      <H3 id="recordatorios-config">14.2. Configuración</H3>
+      <P>Ve a <strong>Configuración → Recordatorios</strong> para ajustar:</P>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <Field name="Días seguimiento vendedor" desc="Número de días después del envío para recordar al vendedor. Por defecto: 3 días." />
+        <Field name="Días aviso vencimiento" desc="Número de días antes del vencimiento para avisar al cliente. Por defecto: 3 días." />
+        <Field name="Recordatorios activos" desc="Activa o desactiva todos los recordatorios con un solo toggle." />
+      </ul>
+      <Tip>Los recordatorios se procesan automáticamente una vez al día. Solo se envían para cotizaciones en estado Enviada o Negociación.</Tip>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          15. GESTIÓN DE CONTRATOS
+      ═══════════════════════════════════════════════════════════════ */}
+      <H2 id="contratos">15. Gestión de contratos</H2>
+      <P>La gestión de contratos permite convertir cotizaciones ganadas en contratos recurrentes con seguimiento de vigencia, renovaciones y enmiendas. <strong>Disponible en el plan Business y Enterprise.</strong></P>
+
+      <H3 id="contratos-crear">15.1. Crear un contrato</H3>
+      <P>Cuando una cotización pasa a estado <strong>Ganada</strong>, aparece el botón <strong>&quot;Crear Contrato&quot;</strong>:</P>
+      <Step n={1}>Haz clic en <strong>&quot;Crear Contrato&quot;</strong> desde la ficha de la cotización ganada.</Step>
+      <Step n={2}>El sistema crea automáticamente el contrato con las líneas de la cotización, incluyendo la frecuencia de facturación de cada línea.</Step>
+      <Step n={3}>El contrato se genera con número <strong>CTR-{"{AÑO}"}-{"{SECUENCIA}"}</strong>, fecha inicio hoy y duración de 12 meses por defecto.</Step>
+      <Tip>Las condiciones y cláusulas de la cotización se copian automáticamente al contrato.</Tip>
+
+      <H3 id="contratos-lineas">15.2. Líneas con frecuencia</H3>
+      <P>Cada línea del contrato tiene una frecuencia de facturación heredada del producto:</P>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li><strong className="text-gray-800">Mensual</strong> — el importe se cobra cada mes.</li>
+        <li><strong className="text-gray-800">Trimestral</strong> — cada 3 meses.</li>
+        <li><strong className="text-gray-800">Anual</strong> — una vez al año.</li>
+        <li><strong className="text-gray-800">Único</strong> — pago único (no recurrente).</li>
+      </ul>
+      <P>El sistema calcula automáticamente el <strong>valor mensual (MRR)</strong> normalizando todas las frecuencias a base mensual.</P>
+
+      <H3 id="contratos-estados">15.3. Estados del contrato</H3>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li><strong className="text-gray-800">Activo</strong> — contrato vigente dentro de sus fechas.</li>
+        <li><strong className="text-gray-800">Pendiente Renovación</strong> — próximo a vencer, pendiente de decisión.</li>
+        <li><strong className="text-gray-800">Renovado</strong> — contrato renovado para un nuevo período.</li>
+        <li><strong className="text-gray-800">Cancelado</strong> — contrato cancelado con motivo registrado.</li>
+        <li><strong className="text-gray-800">Expirado</strong> — contrato vencido sin renovación.</li>
+      </ul>
+
+      <H3 id="contratos-acciones">15.4. Acciones sobre contratos</H3>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li><strong className="text-gray-800">Renovar:</strong> Extiende el contrato por otro período (mismo número de meses).</li>
+        <li><strong className="text-gray-800">Cancelar:</strong> Cancela el contrato con motivo y fecha efectiva.</li>
+        <li><strong className="text-gray-800">Crear enmienda:</strong> Registra modificaciones (upsell, downsell, extensiones) con valor anterior y nuevo.</li>
+      </ul>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          16. RENOVACIONES Y ALERTAS
+      ═══════════════════════════════════════════════════════════════ */}
+      <H2 id="renovaciones">16. Renovaciones y alertas</H2>
+      <P>El sistema gestiona automáticamente las renovaciones de contratos y te alerta con antelación cuando se acercan las fechas de vencimiento.</P>
+
+      <H3 id="renovaciones-auto">16.1. Renovación automática</H3>
+      <P>Si un contrato tiene la opción <strong>renovación automática</strong> activada, al llegar la fecha de fin el sistema:</P>
+      <Step n={1}>Extiende automáticamente la fecha de fin por el mismo período de duración.</Step>
+      <Step n={2}>Recalcula el valor total del contrato.</Step>
+      <Step n={3}>Envía un email de confirmación al vendedor.</Step>
+      <Step n={4}>Registra la actividad en la línea de tiempo del contrato.</Step>
+
+      <H3 id="renovaciones-manual">16.2. Renovación manual</H3>
+      <P>Si la renovación automática está desactivada, el sistema cambia el estado a <strong>Pendiente Renovación</strong> cuando faltan los días configurados (por defecto 30 días) y envía un email al vendedor para que actúe.</P>
+
+      <H3 id="renovaciones-semaforo">16.3. Semáforo visual</H3>
+      <P>La tabla de contratos muestra una columna <strong>&quot;Días&quot;</strong> con código de colores:</P>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li><strong className="text-green-600">Verde (365-65 días)</strong> — contrato en buen estado, sin urgencia.</li>
+        <li><strong className="text-amber-600">Naranja (64-15 días)</strong> — atención, próximo a vencer. Aparece banner de aviso.</li>
+        <li><strong className="text-red-600">Rojo (14-0 días)</strong> — urgente, requiere acción inmediata. Banner de alerta crítica.</li>
+      </ul>
+      <Warning>Los contratos que no se renuevan ni se cancelan antes de la fecha de fin pasan automáticamente a estado <strong>Expirado</strong>.</Warning>
 
       {/* ═══════════════════════════════════════════════════════════════
           FOOTER
