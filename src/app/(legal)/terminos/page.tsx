@@ -114,7 +114,7 @@ export default function TerminosPage() {
               <tbody>
                 <tr><td className="p-3 border border-gray-200 font-medium text-gray-800">Starter</td><td className="p-3 border border-gray-200">Gratuito</td><td className="p-3 border border-gray-200">Hasta 10 cotizaciones/mes, 5 clientes, 10 productos, Forge IA básico</td></tr>
                 <tr className="bg-gray-50"><td className="p-3 border border-gray-200 font-medium text-gray-800">Pro</td><td className="p-3 border border-gray-200">29 EUR/mes</td><td className="p-3 border border-gray-200">100 cotizaciones/mes, 50 clientes, 200 productos, Forge IA ilimitado, firma electrónica, PDF con marca</td></tr>
-                <tr><td className="p-3 border border-gray-200 font-medium text-gray-800">Business</td><td className="p-3 border border-gray-200">79 EUR/mes</td><td className="p-3 border border-gray-200">Cotizaciones, clientes y productos ilimitados, Forge IA prioridad, aprobaciones, reglas avanzadas</td></tr>
+                <tr><td className="p-3 border border-gray-200 font-medium text-gray-800">Business</td><td className="p-3 border border-gray-200">79 EUR/mes</td><td className="p-3 border border-gray-200">Cotizaciones, clientes y productos ilimitados, Forge IA prioridad, aprobaciones, reglas avanzadas, gestión de contratos, renovaciones y alertas</td></tr>
                 <tr className="bg-gray-50"><td className="p-3 border border-gray-200 font-medium text-gray-800">Enterprise</td><td className="p-3 border border-gray-200">Personalizado</td><td className="p-3 border border-gray-200">Solución a medida con integraciones, SLA dedicado y soporte premium</td></tr>
               </tbody>
             </table>

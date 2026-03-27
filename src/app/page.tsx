@@ -23,6 +23,8 @@ import {
   PenTool,
   Bell,
   GitBranch,
+  ScrollText,
+  RefreshCw,
 } from "lucide-react";
 import { Navbar } from "./_landing/navbar";
 import { ForgeShowcase } from "./_landing/forge-showcase";
@@ -257,6 +259,8 @@ function FeaturesGrid() {
     { icon: Bell, title: "Recordatorios Automáticos", desc: "Seguimiento automático al vendedor y aviso de vencimiento al cliente por email." },
     { icon: GitBranch, title: "Versionado", desc: "Crea nuevas versiones de cotizaciones. Historial completo con trazabilidad." },
     { icon: Plug, title: "Importar / Exportar", desc: "Importa clientes y productos desde CSV. Exporta datos cuando necesites." },
+    { icon: ScrollText, title: "Gestión de Contratos", desc: "Crea contratos desde cotizaciones ganadas. Líneas recurrentes, condiciones y cláusulas." },
+    { icon: RefreshCw, title: "Renovaciones y Alertas", desc: "Renovación automática o manual. Avisos por email y alertas de vencimiento con semáforo visual." },
   ];
 
   return (
@@ -368,6 +372,7 @@ function PricingSection() {
         { text: "Recordatorios automáticos", included: false },
         { text: "Aprobaciones", included: false },
         { text: "Reglas comerciales", included: false },
+        { text: "Gestión de contratos", included: false },
       ],
     },
     {
@@ -389,6 +394,7 @@ function PricingSection() {
         { text: "Recordatorios automáticos", included: true },
         { text: "Versionado de cotizaciones", included: true },
         { text: "Reglas básicas", included: true },
+        { text: "Gestión de contratos", included: false },
       ],
     },
     {
@@ -410,6 +416,8 @@ function PricingSection() {
         { text: "Recordatorios automáticos", included: true },
         { text: "Versionado de cotizaciones", included: true },
         { text: "Reglas avanzadas", included: true },
+        { text: "Gestión de contratos", included: true },
+        { text: "Renovaciones y alertas", included: true },
       ],
     },
     {
