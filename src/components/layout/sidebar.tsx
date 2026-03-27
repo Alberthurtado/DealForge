@@ -16,6 +16,7 @@ import {
   LogOut,
   User,
   Lock,
+  ScrollText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -37,6 +38,7 @@ const navigation: NavItem[] = [
   { name: "Clientes", href: "/clientes", icon: Users },
   { name: "Productos", href: "/productos", icon: Package },
   { name: "Cotizaciones", href: "/cotizaciones", icon: FileText },
+  { name: "Contratos", href: "/contratos", icon: ScrollText, requiredFeature: "contratos", requiredPlanLabel: "Business" },
   { name: "Reglas", href: "/reglas", icon: ShieldCheck, requiredFeature: "reglasComerciales", requiredPlanLabel: "Pro" },
   { name: "Reportes", href: "/reportes", icon: BarChart3 },
   { name: "Integraciones", href: "/integraciones", icon: Plug },

@@ -28,6 +28,7 @@ const PROTECTED_PREFIXES = [
   "/reglas",
   "/integraciones",
   "/configuracion",
+  "/contratos",
 ];
 
 // API routes that require authentication (except auth endpoints)
@@ -44,6 +45,7 @@ const PROTECTED_API_PREFIXES = [
   "/api/stripe/checkout",
   "/api/stripe/portal",
   "/api/blog",
+  "/api/contratos",
 ];
 
 // Always public
@@ -59,6 +61,7 @@ const PUBLIC_PREFIXES = [
   "/api/pdf-preview/",   // PDF preview for Puppeteer — HMAC protected
   "/api/leads",          // Lead capture — public
   "/api/contacto",       // Contact form — public
+  "/api/cron/",          // Cron jobs — CRON_SECRET protected
   "/e3e045fe-",          // IndexNow key verification
   "/aprobar/",
   "/checkout/",          // Post-checkout pages

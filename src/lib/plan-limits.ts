@@ -44,6 +44,7 @@ export interface PlanFeatures {
   apiKeys: boolean;           // API key for external integrations
   recordatorios: boolean;     // Automated follow-up reminders
   firmaElectronica: boolean;  // Electronic signature
+  contratos: boolean;         // Contract management
 }
 
 const PLAN_FEATURES: Record<string, PlanFeatures> = {
@@ -56,6 +57,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     apiKeys: false,
     recordatorios: false,
     firmaElectronica: false,
+    contratos: false,
   },
   pro: {
     emailEnvio: true,
@@ -66,6 +68,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     apiKeys: true,
     recordatorios: true,
     firmaElectronica: true,
+    contratos: false,
   },
   business: {
     emailEnvio: true,
@@ -76,6 +79,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     apiKeys: true,
     recordatorios: true,
     firmaElectronica: true,
+    contratos: true,
   },
   enterprise: {
     emailEnvio: true,
@@ -86,6 +90,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     apiKeys: true,
     recordatorios: true,
     firmaElectronica: true,
+    contratos: true,
   },
 };
 

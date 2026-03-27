@@ -23,6 +23,7 @@ model Cliente {
   usuario      Usuario      @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   contactos    Contacto[]
   cotizaciones Cotizacion[]
+  contratos    Contrato[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 
@@ -108,6 +109,7 @@ model Cotizacion {
   aprobaciones     Aprobacion[]
   recordatorios    Recordatorio[]
   firmas           Firma[]
+  contratos        Contrato[]
   cotizacionOriginalId  String?
   cotizacionOriginal    Cotizacion?  @relation("Versiones", fields: [cotizacionOriginalId], references: [id])
   versiones             Cotizacion[] @relation("Versiones")
@@ -236,6 +238,7 @@ model Usuario {
   clientes       Cliente[]
   productos      Producto[]
   cotizaciones   Cotizacion[]
+  contratos      Contrato[]
   reglas         ReglaComercial[]
   memorias       MemoriaForge[]
 }
@@ -298,6 +301,107 @@ model Lead {
   @@index([origen])
   @@index([utmSource])
 }
+
+// ==========================================
+// CONTRACT MANAGEMENT
+// ==========================================
+
+model Contrato {
+  id                   String    @id @default(cuid())
+  numero               String
+  cotizacionId         String
+  cotizacion           Cotizacion @relation(fields: [cotizacionId], references: [id])
+  clienteId            String
+  cliente              Cliente   @relation(fields: [clienteId], references: [id])
+  usuarioId            String
+  usuario              Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  // State
+  estado               String    @default("ACTIVO") // ACTIVO, PENDIENTE_RENOVACION, RENOVADO, CANCELADO, EXPIRADO
+
+  // Duration
+  fechaInicio          DateTime
+  fechaFin             DateTime
+  duracionMeses        Int       @default(12)
+
+  // Renewal config
+  renovacionAutomatica Boolean   @default(false)
+  diasAvisoRenovacion  Int       @default(30)
+
+  // Value tracking (no billing, just tracking)
+  valorMensual         Float     @default(0)
+  valorTotal           Float     @default(0)
+  moneda               String    @default("EUR")
+
+  // Terms
+  condiciones          String?
+  clausulaCancelacion  String?
+  periodoPreaviso      Int       @default(30) // Days notice to cancel
+
+  // Cancellation
+  canceladoAt          DateTime?
+  motivoCancelacion    String?
+
+  // Relations
+  lineItems            ContratoLineItem[]
+  enmiendas            Enmienda[]
+  actividades          ContratoActividad[]
+
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@unique([numero, usuarioId])
+  @@index([clienteId])
+  @@index([usuarioId])
+  @@index([estado])
+  @@index([fechaFin])
+}
+
+model ContratoLineItem {
+  id             String   @id @default(cuid())
+  contratoId     String
+  contrato       Contrato @relation(fields: [contratoId], references: [id], onDelete: Cascade)
+  descripcion    String
+  cantidad       Float    @default(1)
+  precioUnitario Float
+  frecuencia     String   @default("MENSUAL") // MENSUAL, TRIMESTRAL, ANUAL, UNICO
+  total          Float
+  orden          Int      @default(0)
+
+  @@index([contratoId])
+}
+
+model Enmienda {
+  id            String    @id @default(cuid())
+  contratoId    String
+  contrato      Contrato  @relation(fields: [contratoId], references: [id], onDelete: Cascade)
+  tipo          String    // MODIFICACION, UPSELL, DOWNSELL, EXTENSION, CANCELACION
+  descripcion   String
+  cambios       String    // JSON: what changed
+  valorAnterior Float
+  valorNuevo    Float
+  estado        String    @default("PENDIENTE") // PENDIENTE, ACEPTADA, RECHAZADA
+  token         String?   @unique @default(cuid())
+  firmadoAt     DateTime?
+  createdAt     DateTime  @default(now())
+
+  @@index([contratoId])
+}
+
+model ContratoActividad {
+  id          String   @id @default(cuid())
+  contratoId  String
+  contrato    Contrato @relation(fields: [contratoId], references: [id], onDelete: Cascade)
+  tipo        String   // CREADO, RENOVADO, ENMIENDA, CANCELADO, NOTIFICACION, ESTADO_CAMBIADO
+  descripcion String
+  createdAt   DateTime @default(now())
+
+  @@index([contratoId])
+}
+
+// ==========================================
+// BLOG & MARKETING
+// ==========================================
 
 model BlogPost {
   id          String    @id @default(cuid())
