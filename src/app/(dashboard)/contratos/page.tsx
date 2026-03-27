@@ -33,6 +33,13 @@ function diasRestantes(fechaFin: string): number {
   return Math.ceil(diff / (1000 * 60 * 60 * 24));
 }
 
+function diasColor(dias: number): { bg: string; text: string; label: string } {
+  if (dias <= 0) return { bg: "bg-gray-100", text: "text-gray-500", label: "Expirado" };
+  if (dias <= 14) return { bg: "bg-red-100", text: "text-red-700", label: `${dias}d` };
+  if (dias <= 64) return { bg: "bg-amber-100", text: "text-amber-700", label: `${dias}d` };
+  return { bg: "bg-green-100", text: "text-green-700", label: `${dias}d` };
+}
+
 export default function ContratosPage() {
   const [contratos, setContratos] = useState<Contrato[]>([]);
   const [loading, setLoading] = useState(true);
@@ -87,6 +94,39 @@ export default function ContratosPage() {
           ))}
         </div>
 
+        {/* Urgency alerts */}
+        {(() => {
+          const activos_ = contratos.filter((c) => ["ACTIVO", "PENDIENTE_RENOVACION"].includes(c.estado));
+          const critical = activos_.filter((c) => { const d = diasRestantes(c.fechaFin); return d >= 0 && d <= 14; });
+          const warning = activos_.filter((c) => { const d = diasRestantes(c.fechaFin); return d >= 15 && d <= 64; });
+          return (
+            <>
+              {critical.length > 0 && (
+                <div className="flex items-start gap-3 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-red-800 mb-4">
+                  <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold">Contratos críticos ({critical.length})</p>
+                    <p className="text-xs text-red-600 mt-0.5">
+                      {critical.map((c) => `${c.numero} (${c.cliente.nombre}) — ${diasRestantes(c.fechaFin)}d`).join(" · ")}
+                    </p>
+                  </div>
+                </div>
+              )}
+              {warning.length > 0 && (
+                <div className="flex items-start gap-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 mb-4">
+                  <Clock className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold">Próximos a vencer ({warning.length})</p>
+                    <p className="text-xs text-amber-600 mt-0.5">
+                      {warning.map((c) => `${c.numero} (${c.cliente.nombre}) — ${diasRestantes(c.fechaFin)}d`).join(" · ")}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </>
+          );
+        })()}
+
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-3 mb-4">
           <div className="relative flex-1 min-w-[200px] max-w-xs">
@@ -130,6 +170,7 @@ export default function ContratosPage() {
                     <th className="text-left px-4 py-3 font-semibold">Contrato</th>
                     <th className="text-left px-4 py-3 font-semibold">Cliente</th>
                     <th className="text-left px-4 py-3 font-semibold">Estado</th>
+                    <th className="text-center px-4 py-3 font-semibold">Días</th>
                     <th className="text-right px-4 py-3 font-semibold">Valor/mes</th>
                     <th className="text-left px-4 py-3 font-semibold">Vencimiento</th>
                     <th className="text-left px-4 py-3 font-semibold">Renovación</th>
@@ -153,17 +194,24 @@ export default function ContratosPage() {
                             {cfg.label}
                           </span>
                         </td>
+                        <td className="px-4 py-3 text-center">
+                          {["ACTIVO", "PENDIENTE_RENOVACION"].includes(c.estado) ? (() => {
+                            const dc = diasColor(dias);
+                            return (
+                              <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${dc.bg} ${dc.text}`}>
+                                {dias <= 14 && dias > 0 && <AlertTriangle className="w-3 h-3" />}
+                                {dc.label}
+                              </span>
+                            );
+                          })() : (
+                            <span className="text-xs text-gray-400">—</span>
+                          )}
+                        </td>
                         <td className="px-4 py-3 text-right font-medium text-gray-900">
                           {formatCurrency(c.valorMensual)}
                         </td>
                         <td className="px-4 py-3">
                           <span className="text-gray-600">{formatDate(c.fechaFin)}</span>
-                          {dias <= 30 && dias > 0 && c.estado === "ACTIVO" && (
-                            <span className="ml-2 text-xs text-amber-600 font-medium">({dias}d)</span>
-                          )}
-                          {dias <= 0 && c.estado !== "CANCELADO" && (
-                            <span className="ml-2 text-xs text-red-500 font-medium">Vencido</span>
-                          )}
                         </td>
                         <td className="px-4 py-3">
                           <span className={`text-xs ${c.renovacionAutomatica ? "text-green-600" : "text-gray-500"}`}>
