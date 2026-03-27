@@ -409,7 +409,7 @@ export const features: Feature[] = [
         },
         {
           titulo: "Reportes exportables",
-          desc: "Descarga reportes en Excel o PDF para juntas directivas, revisiones trimestrales o análisis detallado. Programa envío automático de reportes semanales al email que necesites.",
+          desc: "Descarga reportes en CSV para juntas directivas, revisiones trimestrales o análisis detallado. Exportación manual disponible para todos los datos desde cualquier vista del dashboard.",
         },
       ],
     },
@@ -427,7 +427,7 @@ export const features: Feature[] = [
       {
         num: "3",
         titulo: "Exporta o comparte",
-        desc: "Descarga el reporte en el formato que prefieras o programa envíos automáticos. Los datos siempre están disponibles para análisis externo.",
+        desc: "Descarga el reporte en CSV cuando lo necesites. Los datos siempre están disponibles para análisis externo.",
       },
     ],
     faqs: [
@@ -554,16 +554,16 @@ export const features: Feature[] = [
     titulo:
       "Envío de Cotizaciones por Email | Seguimiento integrado — DealForge",
     descripcion:
-      "Envía cotizaciones por email desde DealForge con seguimiento de apertura y clics. Sabe cuándo tu cliente lee la propuesta y da seguimiento en el momento justo.",
+      "Envía cotizaciones por email desde DealForge con confirmación de envío y registro de actividad. Cada email queda registrado en la línea de tiempo de la cotización.",
     icono: "Mail",
     color: "#06b6d4",
     heroSubtitle:
-      "Envía cotizaciones directamente desde DealForge y sabe exactamente cuándo tu cliente abre el email, descarga el PDF y revisa los precios. Da seguimiento en el momento perfecto.",
+      "Envía cotizaciones directamente desde DealForge con tu dominio empresarial. Cada envío queda registrado en la línea de tiempo de la cotización con fecha y destinatario.",
     problema: {
       titulo: "¿Por qué necesitas envío de emails integrado?",
       puntos: [
-        "Envías la cotización por Gmail o Outlook y pierdes la trazabilidad. No sabes si el cliente la abrió, la leyó o la mandó a la papelera.",
-        "El seguimiento depende de que el vendedor recuerde hacerlo. Sin datos de apertura, llamas demasiado pronto (molestando al cliente) o demasiado tarde (cuando ya eligió competencia).",
+        "Envías la cotización por Gmail o Outlook y pierdes la trazabilidad. No queda registro centralizado de qué se envió, a quién ni cuándo.",
+        "El seguimiento depende de que el vendedor recuerde hacerlo. Sin un registro claro de envíos, no sabes si la cotización ya se mandó o si falta dar seguimiento.",
         "Adjuntar el PDF correcto, escribir el email y copiar al gerente consume tiempo que se multiplica con cada cotización enviada.",
       ],
     },
@@ -575,8 +575,8 @@ export const features: Feature[] = [
           desc: "Desde la cotización, presiona enviar. El email sale con tu dominio configurado, el PDF adjunto y el texto que definiste en la plantilla. Sin abrir otra herramienta ni adjuntar archivos manualmente.",
         },
         {
-          titulo: "Seguimiento de apertura y descarga",
-          desc: "Recibe notificaciones cuando el cliente abre el email y cuando descarga el PDF. La línea de tiempo de la cotización se actualiza automáticamente con cada interacción.",
+          titulo: "Confirmación de envío y registro de actividad",
+          desc: "Cada email enviado queda registrado en la línea de tiempo de la cotización con fecha y destinatario. Tu equipo siempre sabe qué se envió, a quién y cuándo sin revisar bandejas de correo individuales.",
         },
         {
           titulo: "Plantillas de email personalizables",
@@ -597,8 +597,8 @@ export const features: Feature[] = [
       },
       {
         num: "3",
-        titulo: "Envía y monitorea",
-        desc: "Envía la cotización desde DealForge y monitorea aperturas, clics y descargas en tiempo real. Recibe alertas para dar seguimiento en el momento óptimo.",
+        titulo: "Envía y confirma",
+        desc: "Envía la cotización desde DealForge y confirma el envío exitoso. Cada envío queda registrado automáticamente en la línea de tiempo de la cotización.",
       },
     ],
     faqs: [
@@ -608,9 +608,9 @@ export const features: Feature[] = [
           "Salen desde tu propio dominio. Configuras registros DNS (SPF, DKIM) para que DealForge envíe en tu nombre. El cliente ve tu dirección de correo, no la de DealForge. Esto mejora la entregabilidad y la confianza.",
       },
       {
-        pregunta: "¿El seguimiento de apertura es confiable?",
+        pregunta: "¿Puedo saber si el cliente abrió el email?",
         respuesta:
-          "Usamos pixel tracking estándar de la industria. Funciona en la mayoría de clientes de correo, aunque algunos (como Apple Mail con protección de privacidad activada) pueden generar falsos positivos. La descarga del PDF es un indicador más confiable de interés real.",
+          "Actualmente registramos el envío y la fecha. El seguimiento de aperturas está en nuestro roadmap.",
       },
       {
         pregunta: "¿Puedo enviar cotizaciones a múltiples contactos?",
@@ -620,11 +620,11 @@ export const features: Feature[] = [
     ],
     keywords: [
       "envío cotizaciones email",
-      "seguimiento email ventas",
-      "email tracking cotización",
+      "enviar cotización por correo",
       "plantillas email comercial",
       "enviar propuesta por correo",
-      "notificación apertura email",
+      "registro envío cotización",
+      "email desde CPQ",
       "seguimiento propuestas ventas",
     ],
     plan: "Pro",
@@ -660,8 +660,8 @@ export const features: Feature[] = [
           desc: "El aprobador recibe la solicitud por email con un resumen de la cotización, margen resultante e historial del cliente. Puede aprobar o rechazar con un clic desde el email o desde la app.",
         },
         {
-          titulo: "Aprobación en cadena",
-          desc: "Configura flujos de múltiples niveles: primero el gerente regional, luego el director comercial. Si el primer nivel aprueba, pasa automáticamente al siguiente. Si rechaza, regresa al vendedor con comentarios.",
+          titulo: "Flujo de aprobación configurable",
+          desc: "Define quién debe aprobar según las condiciones de la cotización. Si el aprobador rechaza, la cotización regresa al vendedor con comentarios para que ajuste y reenvíe.",
         },
         {
           titulo: "Auditoría completa",
@@ -677,8 +677,8 @@ export const features: Feature[] = [
       },
       {
         num: "2",
-        titulo: "Asigna aprobadores por nivel",
-        desc: "Designa quién aprueba en cada nivel y define tiempos máximos de respuesta. Si un aprobador no responde en el plazo, la solicitud escala al siguiente nivel.",
+        titulo: "Asigna aprobadores",
+        desc: "Designa quién aprueba según las condiciones configuradas. El aprobador recibe la solicitud por email y puede aprobar o rechazar desde ahí.",
       },
       {
         num: "3",
@@ -701,7 +701,7 @@ export const features: Feature[] = [
         pregunta:
           "¿Qué pasa si un aprobador se va de vacaciones?",
         respuesta:
-          "Puedes configurar aprobadores suplentes que reciben las solicitudes cuando el titular no está disponible. También puedes definir un tiempo límite tras el cual la solicitud escala automáticamente al nivel superior.",
+          "Puedes reasignar manualmente la aprobación a otro responsable desde el panel de la cotización. También puedes cancelar la solicitud y crear una nueva con otro aprobador.",
       },
     ],
     keywords: [
@@ -742,8 +742,8 @@ export const features: Feature[] = [
           desc: "El cliente recibe un enlace seguro donde ve la cotización, revisa los términos y firma con un clic o dibujando su firma. No necesita crear cuenta ni descargar software.",
         },
         {
-          titulo: "Certificado de firma con validez legal",
-          desc: "Cada firma genera un certificado que incluye timestamp, IP del firmante, email verificado y hash del documento. Cumple con los requisitos de la Ley de Firma Electrónica Avanzada en México.",
+          titulo: "Certificado de firma electrónica simple",
+          desc: "Cada firma genera un certificado que incluye timestamp, IP del firmante, email verificado y hash del documento. La firma electrónica de DealForge es una firma electrónica simple según el Reglamento eIDAS (UE 910/2014). Registra la identidad del firmante, fecha, hora e IP. Para contratos que requieran firma electrónica avanzada o cualificada, recomendamos consultar con un asesor legal.",
         },
         {
           titulo: "Notificación instantánea de aceptación",
@@ -772,7 +772,7 @@ export const features: Feature[] = [
       {
         pregunta: "¿La firma electrónica tiene validez legal en México?",
         respuesta:
-          "Sí. La firma electrónica simple es reconocida por el Código de Comercio de México y la Ley de Firma Electrónica Avanzada. El certificado que genera DealForge incluye los elementos necesarios para su validez: integridad del documento, identificación del firmante y no repudio.",
+          "DealForge ofrece firma electrónica simple, reconocida por el Código de Comercio de México. El certificado incluye integridad del documento, identificación del firmante y registro de fecha e IP. Para contratos que requieran firma electrónica avanzada o cualificada, recomendamos consultar con un asesor legal sobre los requisitos específicos de tu caso.",
       },
       {
         pregunta: "¿Necesito el e.firma del SAT para firmar?",
@@ -889,11 +889,11 @@ export const features: Feature[] = [
     titulo:
       "Versionado de Cotizaciones | Control de cambios en propuestas — DealForge",
     descripcion:
-      "Mantén un historial completo de cada versión de tus cotizaciones. Compara cambios, restaura versiones anteriores y negocia con total transparencia.",
+      "Mantén un historial completo de cada versión de tus cotizaciones. Consulta versiones anteriores, restaura propuestas y negocia con total transparencia.",
     icono: "GitBranch",
     color: "#a855f7",
     heroSubtitle:
-      "Cada cambio en una cotización genera una nueva versión. Compara precios entre versiones, restaura propuestas anteriores y mantén un registro claro de toda la negociación.",
+      "Cada cambio en una cotización genera una nueva versión. Consulta el historial completo de versiones, restaura propuestas anteriores y mantén un registro claro de toda la negociación.",
     problema: {
       titulo: "¿Por qué necesitas versionado en tus cotizaciones?",
       puntos: [
@@ -910,8 +910,8 @@ export const features: Feature[] = [
           desc: "Cada vez que se modifica y guarda una cotización, se crea una nueva versión con número secuencial (v1, v2, v3). La versión anterior queda inmutable y accesible en cualquier momento.",
         },
         {
-          titulo: "Comparación lado a lado",
-          desc: "Selecciona dos versiones y ve exactamente qué cambió: productos agregados o eliminados, precios modificados, descuentos ajustados y condiciones editadas. Los cambios se resaltan visualmente.",
+          titulo: "Historial de cambios en línea de tiempo",
+          desc: "Puedes ver todas las versiones anteriores en la ficha de la cotización y consultar los cambios en la línea de tiempo. Cada versión registra fecha, autor y un resumen de las modificaciones realizadas.",
         },
         {
           titulo: "Restauración con un clic",
@@ -932,8 +932,8 @@ export const features: Feature[] = [
       },
       {
         num: "3",
-        titulo: "Compara o restaura según necesites",
-        desc: "Usa la comparación para entender la evolución de la negociación o restaura una versión si el cliente prefiere condiciones anteriores.",
+        titulo: "Consulta o restaura según necesites",
+        desc: "Revisa versiones anteriores para entender la evolución de la negociación o restaura una versión si el cliente prefiere condiciones anteriores.",
       },
     ],
     faqs: [
@@ -948,16 +948,16 @@ export const features: Feature[] = [
           "No. Puedes tener tantas versiones como sean necesarias. Hemos visto negociaciones complejas con más de 15 versiones y el sistema las maneja sin problema.",
       },
       {
-        pregunta: "¿La comparación muestra cambios en precios unitarios?",
+        pregunta: "¿Puedo ver qué cambió entre versiones?",
         respuesta:
-          "Sí. La comparación detalla cambios en cada línea: precio unitario, cantidad, descuento, subtotal e impuestos. Si se agregaron o eliminaron productos, también se muestra. Es como un diff de código pero para cotizaciones.",
+          "Sí. Cada versión incluye un registro en la línea de tiempo con los cambios realizados. Puedes abrir cualquier versión anterior para revisar los productos, precios y condiciones que tenía en ese momento.",
       },
     ],
     keywords: [
       "versionado cotizaciones",
       "historial versiones propuesta",
       "control cambios cotización",
-      "comparar versiones cotización",
+      "consultar versiones cotización",
       "restaurar cotización anterior",
       "trazabilidad negociaciones",
       "versiones propuesta comercial",
@@ -999,8 +999,8 @@ export const features: Feature[] = [
           desc: "Exporta clientes, productos, cotizaciones o cualquier combinación a Excel o CSV. Aplica filtros antes de exportar para obtener solo los datos que necesitas. La exportación incluye todos los campos, incluyendo personalizados.",
         },
         {
-          titulo: "Exportación programada",
-          desc: "En el plan Pro, configura exportaciones automáticas semanales o mensuales que se envían por email. Ideal para alimentar reportes de contabilidad o BI sin intervención manual.",
+          titulo: "Exportación bajo demanda",
+          desc: "Exporta los datos que necesites en cualquier momento con filtros aplicados. Ideal para alimentar reportes de contabilidad o BI cuando lo necesites.",
         },
       ],
     },
@@ -1217,7 +1217,7 @@ export const features: Feature[] = [
       {
         pregunta: "¿El sistema detecta clientes en riesgo de no renovar?",
         respuesta:
-          "En el plan Business, DealForge identifica señales de riesgo basándose en el comportamiento del cliente: si no abrió las últimas comunicaciones, si tuvo quejas recientes o si la cotización de renovación lleva mucho tiempo sin respuesta. Estos clientes se marcan como 'en riesgo' en el dashboard.",
+          "El sistema te alerta automáticamente cuando un contrato entra en zona naranja (64-15 días) o roja (menos de 14 días). Estas alertas visuales en el dashboard te permiten priorizar qué cuentas necesitan atención urgente antes de su vencimiento.",
       },
     ],
     keywords: [
