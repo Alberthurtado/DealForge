@@ -32,7 +32,7 @@ import { FirmaPanel } from "@/components/cotizaciones/firma-panel";
 import { LineItemsEditor } from "@/components/cotizaciones/line-items-editor";
 import type { LineItemInput } from "@/components/cotizaciones/line-items-editor";
 import type { ValidationResult } from "@/lib/reglas-engine";
-import { ShieldAlert, ShieldCheck, Lock, GitBranch } from "lucide-react";
+import { ShieldAlert, ShieldCheck, Lock, GitBranch, ScrollText } from "lucide-react";
 import type { PlanFeatures } from "@/lib/plan-limits";
 
 interface Cotizacion {
@@ -541,6 +541,25 @@ export default function CotizacionDetailPage() {
                 <Copy className="w-3.5 h-3.5" />
                 Duplicar
               </button>
+              {cotizacion.estado === "GANADA" && planFeatures?.contratos && (
+                <Link
+                  href={`/contratos?crear=${cotizacion.id}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded-lg text-xs font-medium hover:bg-green-700 transition-colors"
+                >
+                  <ScrollText className="w-3.5 h-3.5" />
+                  Crear Contrato
+                </Link>
+              )}
+              {cotizacion.estado === "GANADA" && !planFeatures?.contratos && (
+                <Link
+                  href="/configuracion"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-green-200 bg-green-50 text-green-700 rounded-lg text-xs font-medium hover:bg-green-100 transition-colors"
+                >
+                  <ScrollText className="w-3.5 h-3.5" />
+                  Contrato
+                  <span className="text-[8px] font-bold bg-purple-200 text-purple-700 px-1 py-0.5 rounded uppercase">Business</span>
+                </Link>
+              )}
               {["ENVIADA", "NEGOCIACION", "PERDIDA"].includes(cotizacion.estado) && (
                 <button
                   onClick={createNewVersion}
