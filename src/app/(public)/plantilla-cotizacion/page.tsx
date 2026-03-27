@@ -72,14 +72,16 @@ export default function PlantillasIndexPage() {
             <Link
               key={ind.slug}
               href={`/plantilla-cotizacion/${ind.slug}`}
-              className="group bg-white rounded-xl border border-gray-200 p-5 hover:border-[#3a9bb5] hover:shadow-md transition-all"
+              className="group bg-white rounded-xl border-l-4 border border-gray-200 p-5 hover:shadow-md transition-all"
+              style={{ borderLeftColor: ind.color }}
             >
               <div className="flex items-start gap-3">
                 <span className="text-2xl">{ind.emoji}</span>
                 <div className="flex-1 min-w-0">
-                  <h2 className="font-semibold text-gray-900 group-hover:text-[#3a9bb5] transition-colors">
+                  <h2 className="font-semibold text-gray-900 transition-colors" style={{ ["--c" as string]: ind.color }}>
                     {ind.nombre}
                   </h2>
+                  <p className="text-xs text-gray-400 mt-0.5">Para {ind.icp.cargo.toLowerCase()}</p>
                   <p className="text-xs text-gray-500 mt-1 line-clamp-2">
                     {ind.descripcion}
                   </p>
