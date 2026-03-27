@@ -53,6 +53,13 @@ export async function notifyIndexNow(urls: string[]): Promise<{ success: boolean
  * Get all public URLs that should be indexed.
  */
 export function getAllPublicUrls(): string[] {
+  // Avoid importing industrias at module level to keep this lib lightweight
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { industrias } = require("@/data/industrias");
+  const industryUrls = (industrias as { slug: string }[]).map(
+    (i) => `/plantilla-cotizacion/${i.slug}`
+  );
+
   return [
     "/",
     "/guia",
@@ -63,5 +70,7 @@ export function getAllPublicUrls(): string[] {
     "/privacidad",
     "/terminos",
     "/rgpd",
+    "/plantilla-cotizacion",
+    ...industryUrls,
   ];
 }

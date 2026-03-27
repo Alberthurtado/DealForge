@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
+import { industrias } from "@/data/industrias";
 
 export const dynamic = "force-dynamic";
 
@@ -67,5 +68,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // BlogPost model may not exist yet — skip
   }
 
-  return [...staticPages, ...blogPosts];
+  // Programmatic SEO pages — industry templates
+  const industryPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/plantilla-cotizacion`,
+      lastModified: new Date("2026-03-27"),
+    },
+    ...industrias.map((ind) => ({
+      url: `${baseUrl}/plantilla-cotizacion/${ind.slug}`,
+      lastModified: new Date("2026-03-27"),
+    })),
+  ];
+
+  return [...staticPages, ...blogPosts, ...industryPages];
 }
