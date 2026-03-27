@@ -197,7 +197,9 @@ model Empresa {
   colorPrimario     String   @default("#3a9bb5")
   prefijoCotizacion String   @default("COT")
   diasVencimiento   Int      @default(30)
-  condicionesDefecto String?
+  condicionesDefecto    String?  // Legacy — kept for backward compat
+  condicionesTransaccional String? // T&C for one-time/transactional items
+  condicionesContractual   String? // T&C for recurring/contract items
   smtpHost          String?
   smtpPort          Int?     @default(587)
   smtpUser          String?

@@ -217,6 +217,8 @@ export const empresaUpdateSchema = z.object({
   prefijoCotizacion: z.string().max(10).optional(),
   diasVencimiento: z.number().int().min(1).max(365).optional(),
   condicionesDefecto: optionalString,
+  condicionesTransaccional: optionalString,
+  condicionesContractual: optionalString,
   smtpHost: optionalString,
   smtpPort: z.number().int().min(1).max(65535).optional().nullable(),
   smtpUser: optionalString,

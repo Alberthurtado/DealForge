@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Generate quote number with configurable prefix
-  const empresa = await prisma.empresa.findUnique({ where: { id: "default" }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true } });
+  const empresa = await prisma.empresa.findUnique({ where: { id: "default" }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true, condicionesTransaccional: true, condicionesContractual: true } });
   const prefijo = empresa?.prefijoCotizacion || "COT";
   const diasVencimiento = empresa?.diasVencimiento ?? 30;
   const count = await prisma.cotizacion.count({ where: { usuarioId: session.userId } });
@@ -123,7 +123,16 @@ export async function POST(request: NextRequest) {
       total: Math.round(total * 100) / 100,
       moneda: cotizacionData.moneda || "EUR",
       notas: cotizacionData.notas || null,
-      condiciones: cotizacionData.condiciones || empresa?.condicionesDefecto || null,
+      condiciones: cotizacionData.condiciones || (() => {
+        // Auto-build T&C based on line item types
+        const hasRecurring = processedItems.some((li) => li.frecuencia);
+        const hasOneTime = processedItems.some((li) => !li.frecuencia);
+        const parts: string[] = [];
+        if (hasOneTime && empresa?.condicionesTransaccional) parts.push(empresa.condicionesTransaccional);
+        if (hasRecurring && empresa?.condicionesContractual) parts.push(empresa.condicionesContractual);
+        if (parts.length > 0) return parts.join("\n\n---\n\n");
+        return empresa?.condicionesDefecto || null;
+      })(),
       fechaVencimiento: cotizacionData.fechaVencimiento
         ? new Date(cotizacionData.fechaVencimiento)
         : new Date(Date.now() + diasVencimiento * 24 * 60 * 60 * 1000),

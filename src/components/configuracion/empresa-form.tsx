@@ -19,6 +19,8 @@ interface EmpresaData {
   prefijoCotizacion: string;
   diasVencimiento: number;
   condicionesDefecto: string | null;
+  condicionesTransaccional: string | null;
+  condicionesContractual: string | null;
   smtpHost: string | null;
   smtpPort: number | null;
   smtpUser: string | null;
@@ -407,25 +409,64 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
         </div>
       </div>
 
-      {/* Section 7: Default Terms & Conditions */}
-      <div className="bg-white rounded-xl border border-border p-6">
-        <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
-          <FileText className="w-5 h-5 text-primary" />
-          Términos y Condiciones por Defecto
-        </h3>
-        <p className="text-xs text-muted-foreground mb-4">
-          Estos términos se aplicarán automáticamente a cada nueva cotización. Se pueden editar por cotización individual.
-        </p>
-        <textarea
-          value={form.condicionesDefecto || ""}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, condicionesDefecto: e.target.value || null }))
-          }
-          className={inputClass}
-          rows={5}
-          placeholder="Ej: Pago a 30 días. Precios no incluyen transporte. Validez según fecha de vencimiento indicada. Los precios pueden variar sin previo aviso..."
-        />
-        <p className="text-xs text-amber-600 mt-2 flex items-center gap-1.5">
+      {/* Section 7: Terms & Conditions */}
+      <div className="bg-white rounded-xl border border-border p-6 space-y-6">
+        <div>
+          <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
+            <FileText className="w-5 h-5 text-primary" />
+            Términos y Condiciones
+          </h3>
+          <p className="text-xs text-muted-foreground mb-4">
+            Se aplican automáticamente según el tipo de líneas en la cotización. Si la cotización tiene ambos tipos, se combinan.
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-foreground mb-1">
+            T&C Transaccionales <span className="text-xs text-muted-foreground font-normal">(productos/servicios de pago único)</span>
+          </label>
+          <textarea
+            value={form.condicionesTransaccional || ""}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, condicionesTransaccional: e.target.value || null }))
+            }
+            className={inputClass}
+            rows={4}
+            placeholder="Ej: Pago a 30 días. Precios no incluyen transporte. Garantía de 12 meses..."
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-foreground mb-1">
+            T&C Contractuales <span className="text-xs text-muted-foreground font-normal">(servicios recurrentes / suscripciones)</span>
+          </label>
+          <textarea
+            value={form.condicionesContractual || ""}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, condicionesContractual: e.target.value || null }))
+            }
+            className={inputClass}
+            rows={4}
+            placeholder="Ej: Duración mínima 12 meses. Renovación automática salvo preaviso de 30 días. Cancelación con 30 días de antelación..."
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-foreground mb-1">
+            T&C Generales <span className="text-xs text-muted-foreground font-normal">(fallback si no hay específicos)</span>
+          </label>
+          <textarea
+            value={form.condicionesDefecto || ""}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, condicionesDefecto: e.target.value || null }))
+            }
+            className={inputClass}
+            rows={3}
+            placeholder="Condiciones generales que aplican a todas las cotizaciones..."
+          />
+        </div>
+
+        <p className="text-xs text-amber-600 flex items-center gap-1.5">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500" />
           Las cotizaciones no se pueden enviar sin términos y condiciones
         </p>

@@ -400,9 +400,27 @@ export default function CotizacionDetailPage() {
   useEffect(() => {
     fetch("/api/empresa")
       .then((r) => r.json())
-      .then((data) => setCondicionesDefecto(data.condicionesDefecto || null))
+      .then((data) => {
+        // Build default T&C based on line item types
+        if (cotizacion) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const hasRecurring = cotizacion.lineItems?.some((li: any) => li.frecuencia);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const hasOneTime = cotizacion.lineItems?.some((li: any) => !li.frecuencia);
+          const parts: string[] = [];
+          if (hasOneTime && data.condicionesTransaccional) parts.push(data.condicionesTransaccional);
+          if (hasRecurring && data.condicionesContractual) parts.push(data.condicionesContractual);
+          if (parts.length > 0) {
+            setCondicionesDefecto(parts.join("\n\n---\n\n"));
+          } else {
+            setCondicionesDefecto(data.condicionesDefecto || null);
+          }
+        } else {
+          setCondicionesDefecto(data.condicionesDefecto || null);
+        }
+      })
       .catch(() => {});
-  }, []);
+  }, [cotizacion]);
 
   async function saveCondiciones() {
     const res = await fetch(`/api/cotizaciones/${params.id}`, {
