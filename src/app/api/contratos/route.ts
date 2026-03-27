@@ -26,7 +26,8 @@ const contratoCreateSchema = z.object({
         total: z.number().min(0),
       })
     )
-    .min(1, "Se requiere al menos un ítem"),
+    .optional()
+    .default([]),
 });
 
 export async function GET(request: NextRequest) {
