@@ -78,15 +78,8 @@ export default async function FeaturePage({
         ],
       },
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: feat.faqs.map((f) => ({
-        "@type": "Question",
-        name: f.pregunta,
-        acceptedAnswer: { "@type": "Answer", text: f.respuesta },
-      })),
-    },
+    // FAQPage schema removed — Google restricted FAQ rich results
+    // to government/healthcare sites since August 2023
   ];
 
   return (

@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Changelog — DealForge",
   description:
     "Historial de cambios y actualizaciones de DealForge. Consulta las nuevas funcionalidades, mejoras y correcciones de cada versión.",
+  alternates: { canonical: "https://dealforge.es/changelog" },
 };
 
 /* ── tipos ── */

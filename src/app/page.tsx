@@ -150,7 +150,7 @@ function HeroSection() {
                     >
                       <div
                         className="w-full bg-[#3a9bb5] rounded-t-md"
-                        style={{ height: `${60 + Math.random() * 40}%` }}
+                        style={{ height: `${[85, 70, 92, 65, 78, 88, 72][i]}%` }}
                       />
                     </div>
                   ))}

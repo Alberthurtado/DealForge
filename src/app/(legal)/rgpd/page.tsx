@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Cumplimiento RGPD — DealForge",
   description: "Compromiso de DealForge con el Reglamento General de Protección de Datos (RGPD/GDPR). Medidas de seguridad, derechos del interesado y subencargados del tratamiento.",
+  alternates: { canonical: "https://dealforge.es/rgpd" },
 };
 
 const FECHA_ACTUALIZACION = "9 de marzo de 2026";

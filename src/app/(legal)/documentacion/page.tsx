@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Documentación — DealForge",
   description: "Guía completa de DealForge CPQ. Aprende a gestionar productos, clientes, cotizaciones, reglas comerciales, aprobaciones, plantillas PDF, contratos, firma electrónica, recordatorios y el asistente Forge IA.",
+  alternates: { canonical: "https://dealforge.es/documentacion" },
 };
 
 /* ───────── helpers de estilo ───────── */

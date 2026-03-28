@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Política de Privacidad — DealForge",
   description: "Política de privacidad de DealForge. Información sobre cómo recopilamos, usamos y protegemos tus datos personales conforme al RGPD y la LOPD-GDD.",
+  alternates: { canonical: "https://dealforge.es/privacidad" },
 };
 
 const FECHA_ACTUALIZACION = "9 de marzo de 2026";

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/toast";
+import { CookieBanner } from "@/components/cookie-banner";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 const GA_ID = "G-97QZPF80KT";
 
@@ -70,12 +74,20 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "DealForge",
   url: "https://dealforge.es",
-  logo: "https://dealforge.es/logo.svg",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://dealforge.es/icon-512.png",
+    width: 512,
+    height: 512,
+  },
   description:
     "Sistema CPQ inteligente con IA para PYMEs. Automatiza cotizaciones comerciales.",
   email: "info@dealforge.es",
-  sameAs: [],
-  foundingDate: "2026",
+  sameAs: [
+    "https://www.linkedin.com/company/dealforge",
+    "https://x.com/dealforge_es",
+  ],
+  foundingDate: "2026-01-01",
   knowsAbout: [
     "CPQ", "Configure Price Quote", "Sales Automation",
     "Artificial Intelligence", "Small Business Software",
@@ -129,14 +141,20 @@ export default function RootLayout({
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              analytics_storage: localStorage.getItem('dealforge_cookie_consent') === 'all' ? 'granted' : 'denied',
+              ad_storage: 'denied',
+              wait_for_update: 500,
+            });
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
           `}
         </Script>
       </head>
-      <body className="antialiased">
+      <body className={`${inter.className} antialiased`}>
         <ToastProvider>
           {children}
+          <CookieBanner />
         </ToastProvider>
       </body>
     </html>

@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Términos de Servicio — DealForge",
   description: "Términos y condiciones de uso de la plataforma DealForge CPQ. Condiciones de contratación, planes, pagos y responsabilidades.",
+  alternates: { canonical: "https://dealforge.es/terminos" },
 };
 
 const FECHA_ACTUALIZACION = "9 de marzo de 2026";

@@ -72,15 +72,8 @@ export default async function PlantillaIndustriaPage({
         ],
       },
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: ind.faqs.map((f) => ({
-        "@type": "Question",
-        name: f.pregunta,
-        acceptedAnswer: { "@type": "Answer", text: f.respuesta },
-      })),
-    },
+    // FAQPage schema removed — Google restricted FAQ rich results
+    // to government/healthcare sites since August 2023
   ];
 
   return (
