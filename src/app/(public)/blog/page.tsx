@@ -99,6 +99,20 @@ export default async function BlogPage() {
           }),
         }}
       />
+      {/* BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Inicio", item: "https://dealforge.es" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://dealforge.es/blog" },
+            ],
+          }),
+        }}
+      />
 
       <div className="min-h-screen bg-gradient-to-b from-[#f0f9ff] via-white to-white">
         {/* Header */}

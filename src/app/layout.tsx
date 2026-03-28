@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -8,6 +8,12 @@ import { CookieBanner } from "@/components/cookie-banner";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 const GA_ID = "G-97QZPF80KT";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#3a9bb5",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -125,6 +131,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
+        {/* DNS prefetch for third-party origins */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         {/* Organization + WebSite structured data */}
         <script
           type="application/ld+json"

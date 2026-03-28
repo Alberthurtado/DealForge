@@ -51,6 +51,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/contacto`,
       lastModified: new Date("2026-03-18"),
     },
+    {
+      url: `${baseUrl}/precios`,
+      lastModified: new Date("2026-03-28"),
+    },
+    {
+      url: `${baseUrl}/que-es-cpq`,
+      lastModified: new Date("2026-03-28"),
+    },
+    {
+      url: `${baseUrl}/glosario`,
+      lastModified: new Date("2026-03-28"),
+    },
+    {
+      url: `${baseUrl}/calculadora-roi`,
+      lastModified: new Date("2026-03-28"),
+    },
   ];
 
   // Dynamic blog posts (lastModified from DB — correct)
