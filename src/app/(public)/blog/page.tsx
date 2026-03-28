@@ -9,14 +9,14 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Blog — DealForge",
   description:
-    "Articulos sobre ventas, CPQ, automatizacion comercial e inteligencia artificial para PYMEs. Aprende a optimizar tu proceso de cotizaciones.",
+    "Artículos sobre ventas, CPQ, automatización comercial e inteligencia artificial para PYMEs. Aprende a optimizar tu proceso de cotizaciones.",
   keywords: [
-    "blog ventas", "CPQ", "cotizaciones", "automatizacion comercial",
+    "blog ventas", "CPQ", "cotizaciones", "automatización comercial",
     "inteligencia artificial ventas", "PYMEs", "DealForge blog",
   ],
   openGraph: {
     title: "Blog — DealForge",
-    description: "Articulos sobre ventas, CPQ e inteligencia artificial para PYMEs.",
+    description: "Artículos sobre ventas, CPQ e inteligencia artificial para PYMEs.",
     url: "https://dealforge.es/blog",
     siteName: "DealForge",
     locale: "es_ES",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Blog — DealForge",
-    description: "Articulos sobre ventas, CPQ e inteligencia artificial para PYMEs.",
+    description: "Artículos sobre ventas, CPQ e inteligencia artificial para PYMEs.",
   },
   alternates: {
     canonical: "https://dealforge.es/blog",
@@ -70,7 +70,7 @@ export default async function BlogPage() {
             "@context": "https://schema.org",
             "@type": "Blog",
             name: "Blog DealForge",
-            description: "Articulos sobre ventas, CPQ e inteligencia artificial para PYMEs",
+            description: "Artículos sobre ventas, CPQ e inteligencia artificial para PYMEs",
             url: "https://dealforge.es/blog",
             publisher: {
               "@type": "Organization",
@@ -125,10 +125,10 @@ export default async function BlogPage() {
               Blog
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              Articulos y recursos
+              Artículos y recursos
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Consejos sobre ventas, automatizacion comercial e inteligencia artificial para hacer crecer tu negocio.
+              Consejos sobre ventas, automatización comercial e inteligencia artificial para hacer crecer tu negocio.
             </p>
           </div>
 
@@ -139,10 +139,10 @@ export default async function BlogPage() {
                 <Flame className="w-8 h-8 text-gray-300" />
               </div>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                Proximamente
+                Próximamente
               </h2>
               <p className="text-gray-500 max-w-md mx-auto">
-                Estamos preparando articulos increibles sobre ventas, CPQ e inteligencia artificial. Vuelve pronto.
+                Estamos preparando artículos increíbles sobre ventas, CPQ e inteligencia artificial. Vuelve pronto.
               </p>
               <Link
                 href="/"

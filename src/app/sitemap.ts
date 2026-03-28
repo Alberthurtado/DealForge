@@ -3,7 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { industrias } from "@/data/industrias";
 import { features } from "@/data/features";
 
-export const dynamic = "force-dynamic";
+// Rebuild sitemap every hour instead of every request
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://dealforge.es";

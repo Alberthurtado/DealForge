@@ -104,7 +104,7 @@ export const features: Feature[] = [
     keywords: [
       "gestión de clientes PYMEs",
       "CRM para cotizaciones",
-      "base de datos clientes México",
+      "base de datos clientes España",
       "ficha de cliente CPQ",
       "historial cotizaciones cliente",
       "importar clientes CSV",
@@ -277,7 +277,7 @@ export const features: Feature[] = [
       "generar cotizaciones automáticas",
       "plantilla cotización empresa",
       "propuesta comercial PDF",
-      "cotizaciones con IVA México",
+      "cotizaciones con IVA España",
       "software cotizaciones PYMEs",
       "crear cotización rápida",
     ],
@@ -770,14 +770,14 @@ export const features: Feature[] = [
     ],
     faqs: [
       {
-        pregunta: "¿La firma electrónica tiene validez legal en México?",
+        pregunta: "¿La firma electrónica tiene validez legal en España?",
         respuesta:
-          "DealForge ofrece firma electrónica simple, reconocida por el Código de Comercio de México. El certificado incluye integridad del documento, identificación del firmante y registro de fecha e IP. Para contratos que requieran firma electrónica avanzada o cualificada, recomendamos consultar con un asesor legal sobre los requisitos específicos de tu caso.",
+          "DealForge ofrece firma electrónica simple, reconocida por el Reglamento eIDAS de la Unión Europea y la Ley 6/2020 de servicios electrónicos de confianza en España. El certificado incluye integridad del documento, identificación del firmante y registro de fecha e IP. Para contratos que requieran firma electrónica avanzada o cualificada, recomendamos consultar con un asesor legal sobre los requisitos específicos de tu caso.",
       },
       {
-        pregunta: "¿Necesito el e.firma del SAT para firmar?",
+        pregunta: "¿Necesito un certificado digital para firmar?",
         respuesta:
-          "No. DealForge usa firma electrónica simple, no firma electrónica avanzada del SAT (FIEL). Para cotizaciones y acuerdos comerciales, la firma simple es suficiente y legalmente válida. La FIEL es requerida solo para trámites fiscales y gubernamentales.",
+          "No. DealForge usa firma electrónica simple, que no requiere certificado digital cualificado. Para cotizaciones y acuerdos comerciales, la firma simple es suficiente y legalmente válida según el Reglamento eIDAS. Los certificados cualificados son requeridos solo para trámites con la administración pública.",
       },
       {
         pregunta: "¿Pueden firmar varias personas el mismo documento?",
@@ -794,7 +794,7 @@ export const features: Feature[] = [
       "firma electrónica cotización",
       "firma digital propuesta comercial",
       "aceptar cotización online",
-      "firma electrónica México legal",
+      "firma electrónica España legal",
       "firma propuestas PYMEs",
       "documento firmado digitalmente",
       "cerrar ventas firma electrónica",

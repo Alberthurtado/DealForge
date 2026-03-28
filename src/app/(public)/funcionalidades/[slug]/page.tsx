@@ -265,6 +265,47 @@ export default async function FeaturePage({
         </section>
       </main>
 
+      {/* Related features */}
+      {(() => {
+        const currentIndex = features.findIndex((f) => f.slug === feat.slug);
+        const related = features
+          .filter((_, i) => i !== currentIndex)
+          .sort(() => 0.5 - ((currentIndex * 7 + features.length) % 3) / 3)
+          .slice(0, 3);
+        return (
+          <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+              También te puede interesar
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {related.map((r) => {
+                const RIcon = getIcon(r.icono);
+                return (
+                  <Link
+                    key={r.slug}
+                    href={`/funcionalidades/${r.slug}`}
+                    className="group p-6 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all"
+                  >
+                    <div
+                      className="w-10 h-10 rounded-lg flex items-center justify-center mb-3"
+                      style={{ backgroundColor: `${r.color}15` }}
+                    >
+                      <RIcon className="w-5 h-5" style={{ color: r.color }} />
+                    </div>
+                    <h3 className="font-semibold text-gray-900 group-hover:text-[#3a9bb5] transition-colors mb-1">
+                      {r.nombre}
+                    </h3>
+                    <p className="text-sm text-gray-500 line-clamp-2">
+                      {r.descripcion}
+                    </p>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })()}
+
       {/* Footer */}
       <footer className="border-t border-gray-100 py-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">

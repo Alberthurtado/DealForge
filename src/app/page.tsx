@@ -27,8 +27,16 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Navbar } from "./_landing/navbar";
-import { ForgeShowcase } from "./_landing/forge-showcase";
-import { FAQAccordion } from "./_landing/faq-accordion";
+import dynamic from "next/dynamic";
+
+const ForgeShowcase = dynamic(
+  () => import("./_landing/forge-showcase").then((m) => ({ default: m.ForgeShowcase })),
+  { ssr: true }
+);
+const FAQAccordion = dynamic(
+  () => import("./_landing/faq-accordion").then((m) => ({ default: m.FAQAccordion })),
+  { ssr: true }
+);
 
 export const metadata: Metadata = {
   title: "DealForge - CPQ Inteligente con IA para PYMEs | Cotizaciones en Minutos",
