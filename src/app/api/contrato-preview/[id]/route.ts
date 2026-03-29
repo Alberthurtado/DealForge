@@ -5,6 +5,7 @@ import {
   buildTemplateData,
   fillTemplate,
   DEFAULT_CONTRACT_TEMPLATE,
+  buildEnmiendasAnexo,
 } from "@/lib/contract-template";
 
 function generateSecret(id: string): string {
@@ -42,6 +43,10 @@ export async function GET(
         select: { numero: true, total: true, moneda: true },
       },
       lineItems: { orderBy: { orden: "asc" } },
+      enmiendas: {
+        where: { estado: "ACEPTADA" },
+        orderBy: { createdAt: "asc" },
+      },
       firmas: {
         where: { signedAt: { not: null } },
         orderBy: { signedAt: "desc" },
@@ -137,6 +142,9 @@ export async function GET(
     documentoHtml = fillTemplate(templateContent, templateData);
   }
 
+  // Amendments annex (accepted only)
+  const enmiendasAnexo = buildEnmiendasAnexo(contrato.enmiendas ?? []);
+
   // Signature section
   const firma = contrato.firmas?.[0] ?? null;
   const signatureHtml = firma?.signatureData
@@ -168,6 +176,7 @@ export async function GET(
 <body>
   <div id="pdf-root" style="max-width: 800px; margin: 32px auto; background: white; border-radius: 8px; overflow: hidden;">
     ${documentoHtml}
+    ${enmiendasAnexo}
     ${signatureHtml}
   </div>
 </body>

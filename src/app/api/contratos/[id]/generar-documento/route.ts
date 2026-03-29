@@ -5,6 +5,7 @@ import {
   buildTemplateData,
   fillTemplate,
   DEFAULT_CONTRACT_TEMPLATE,
+  buildEnmiendasAnexo,
 } from "@/lib/contract-template";
 
 export async function POST(
@@ -51,6 +52,10 @@ export async function POST(
       },
       lineItems: {
         orderBy: { orden: "asc" },
+      },
+      enmiendas: {
+        where: { estado: "ACEPTADA" },
+        orderBy: { createdAt: "asc" },
       },
     },
   });
@@ -139,7 +144,9 @@ export async function POST(
     },
   });
 
-  const documentoHtml = fillTemplate(templateContent, templateData);
+  const mainHtml = fillTemplate(templateContent, templateData);
+  const enmiendasAnexo = buildEnmiendasAnexo(contrato.enmiendas ?? []);
+  const documentoHtml = enmiendasAnexo ? `${mainHtml}${enmiendasAnexo}` : mainHtml;
 
   // Save to contrato
   await prisma.contrato.update({

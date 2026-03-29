@@ -324,3 +324,62 @@ export function buildTemplateData(params: {
     items: buildItemsTable(contrato.lineItems),
   };
 }
+
+// ─── Amendments annex ─────────────────────────────────────────────────────────
+
+const TIPO_ENMIENDA_LABELS: Record<string, string> = {
+  MODIFICACION: "Modificación de condiciones",
+  UPSELL: "Ampliación de servicios (Upsell)",
+  DOWNSELL: "Reducción de servicios (Downsell)",
+  EXTENSION: "Extensión de plazo",
+  CANCELACION: "Cancelación anticipada",
+};
+
+export function buildEnmiendasAnexo(enmiendas: Array<{
+  tipo: string;
+  descripcion: string;
+  valorAnterior: number;
+  valorNuevo: number;
+  createdAt: Date | string;
+}>): string {
+  if (!enmiendas.length) return "";
+
+  const rows = enmiendas.map((e, i) => {
+    const fecha = new Date(e.createdAt).toLocaleDateString("es-ES", {
+      day: "numeric", month: "long", year: "numeric",
+    });
+    const tipoLabel = TIPO_ENMIENDA_LABELS[e.tipo] || e.tipo;
+    const valorAnterior = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(e.valorAnterior);
+    const valorNuevo = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(e.valorNuevo);
+    const mismoValor = e.valorAnterior === e.valorNuevo;
+
+    return `
+      <div style="margin-bottom:16px;padding:16px;background:#f8faff;border-left:3px solid #6366f1;border-radius:4px;page-break-inside:avoid;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px;">
+          <div>
+            <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#6366f1;">Enmienda ${i + 1} — ${tipoLabel}</span>
+            <span style="margin-left:12px;font-size:10px;color:#9ca3af;">${fecha}</span>
+          </div>
+          <span style="font-size:10px;font-weight:600;color:#059669;background:#ecfdf5;padding:2px 8px;border-radius:999px;white-space:nowrap;">Aceptada</span>
+        </div>
+        <p style="font-size:12px;color:#374151;margin:0 0 10px;line-height:1.5;">${e.descripcion}</p>
+        ${mismoValor ? "" : `
+        <div style="display:flex;gap:24px;font-size:11px;color:#6b7280;border-top:1px solid #e5e7eb;padding-top:8px;">
+          <span>Valor anterior: <strong style="color:#374151;text-decoration:line-through;">${valorAnterior}/mes</strong></span>
+          <span>Nuevo valor: <strong style="color:#059669;">${valorNuevo}/mes</strong></span>
+        </div>`}
+      </div>`;
+  }).join("");
+
+  return `
+    <div class="enmiendas-anexo" style="margin-top:48px;padding:32px 40px;border-top:2px solid #e5e7eb;page-break-before:auto;">
+      <h2 style="font-size:15px;font-weight:700;color:#111827;margin:0 0 4px;">Anexo A — Enmiendas al Contrato</h2>
+      <p style="font-size:11px;color:#6b7280;margin:0 0 24px;">
+        Las siguientes modificaciones han sido formalmente aceptadas y forman parte integrante del presente contrato.
+      </p>
+      ${rows}
+      <p style="font-size:10px;color:#9ca3af;margin-top:16px;font-style:italic;">
+        Este anexo fue generado automáticamente e incluye todas las enmiendas aceptadas a la fecha de emisión del documento.
+      </p>
+    </div>`;
+}
