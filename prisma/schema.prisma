@@ -238,6 +238,7 @@ model Empresa {
   cotizaciones      Cotizacion[]     @relation("CotizacionEquipo")
   contratos         Contrato[]       @relation("ContratoEquipo")
   reglas            ReglaComercial[] @relation("ReglaEquipo")
+  plantillasContrato PlantillaContrato[] @relation("PlantillaContratoEmpresa")
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
@@ -345,8 +346,11 @@ model Firma {
   signatureData  String?
   ipAddress      String?
   createdAt      DateTime   @default(now())
+  contratoId     String?
+  contrato       Contrato?  @relation("FirmaContrato", fields: [contratoId], references: [id], onDelete: Cascade)
 
   @@index([cotizacionId])
+  @@index([contratoId])
 }
 
 model Lead {
@@ -411,10 +415,16 @@ model Contrato {
   canceladoAt          DateTime?
   motivoCancelacion    String?
 
+  // Generated document
+  documentoHtml        String?
+  documentoGeneradoAt  DateTime?
+  plantillaId          String?
+
   // Relations
   lineItems            ContratoLineItem[]
   enmiendas            Enmienda[]
   actividades          ContratoActividad[]
+  firmas               Firma[]   @relation("FirmaContrato")
 
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
@@ -467,6 +477,20 @@ model ContratoActividad {
   createdAt   DateTime @default(now())
 
   @@index([contratoId])
+}
+
+model PlantillaContrato {
+  id          String   @id @default(cuid())
+  empresaId   String
+  empresa     Empresa  @relation("PlantillaContratoEmpresa", fields: [empresaId], references: [id], onDelete: Cascade)
+  nombre      String
+  descripcion String?
+  contenido   String
+  esDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([empresaId])
 }
 
 // ==========================================

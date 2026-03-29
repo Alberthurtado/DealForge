@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { formatCurrency, formatDate } from "@/lib/utils";
+import { DocumentoPanel } from "@/components/contratos/documento-panel";
 import {
   CheckCircle, Clock, XCircle, AlertTriangle, TrendingUp,
   RefreshCw, Ban, FileEdit, ScrollText, Loader2, ChevronDown,
@@ -32,6 +33,8 @@ interface ContratoDetail {
   lineItems: { id: string; descripcion: string; cantidad: number; precioUnitario: number; frecuencia: string; total: number; orden: number }[];
   enmiendas: { id: string; tipo: string; descripcion: string; valorAnterior: number; valorNuevo: number; estado: string; createdAt: string }[];
   actividades: { id: string; tipo: string; descripcion: string; createdAt: string }[];
+  documentoHtml: string | null;
+  documentoGeneradoAt: string | null;
 }
 
 const ESTADO_CONFIG: Record<string, { label: string; color: string; bgColor: string; icon: typeof CheckCircle }> = {
@@ -219,6 +222,15 @@ export default function ContratoDetailPage() {
             </tbody>
           </table>
         </div>
+
+        {/* Document Panel */}
+        <DocumentoPanel
+          contratoId={contrato.id}
+          contratoNumero={contrato.numero}
+          documentoHtml={contrato.documentoHtml}
+          documentoGeneradoAt={contrato.documentoGeneradoAt}
+          onRefresh={loadContrato}
+        />
 
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Conditions */}
