@@ -17,8 +17,6 @@ import {
   Settings,
   Trophy,
   ArrowRight,
-  Check,
-  Minus,
   Sparkles,
   PenTool,
   Bell,
@@ -27,6 +25,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Navbar } from "./_landing/navbar";
+import { PricingSection } from "@/components/home/pricing-section";
 import dynamic from "next/dynamic";
 
 const ForgeShowcase = dynamic(
@@ -364,177 +363,7 @@ function HowItWorks() {
 }
 
 /* ─── PRICING ─────────────────────────────────────────────────── */
-function PricingSection() {
-  const plans = [
-    {
-      name: "Starter",
-      price: "0",
-      period: "gratis",
-      desc: "Para probar DealForge",
-      popular: false,
-      cta: "Empezar Gratis",
-      features: [
-        { text: "10 cotizaciones/mes", included: true },
-        { text: "5 clientes", included: true },
-        { text: "10 productos", included: true },
-        { text: "5 consultas Forge IA", included: true },
-        { text: "Exportación CSV", included: true },
-        { text: "Versionado de cotizaciones", included: true },
-        { text: "Envío de emails", included: false },
-        { text: "Firma electrónica", included: false },
-        { text: "Recordatorios automáticos", included: false },
-        { text: "Aprobaciones", included: false },
-        { text: "Reglas comerciales", included: false },
-        { text: "Gestión de contratos", included: false },
-      ],
-    },
-    {
-      name: "Pro",
-      price: "29",
-      period: "/mes",
-      desc: "Para equipos en crecimiento",
-      popular: false,
-      cta: "Empezar Prueba",
-      features: [
-        { text: "100 cotizaciones/mes", included: true },
-        { text: "50 clientes", included: true },
-        { text: "200 productos", included: true },
-        { text: "Forge IA ilimitado", included: true },
-        { text: "Import / Export CSV", included: true },
-        { text: "Envío de emails", included: true },
-        { text: "PDF con marca", included: true },
-        { text: "Firma electrónica", included: true },
-        { text: "Recordatorios automáticos", included: true },
-        { text: "Versionado de cotizaciones", included: true },
-        { text: "Reglas básicas", included: true },
-        { text: "Gestión de contratos", included: false },
-      ],
-    },
-    {
-      name: "Business",
-      price: "79",
-      period: "/mes",
-      desc: "Para empresas que necesitan todo",
-      popular: true,
-      cta: "Empezar Prueba",
-      features: [
-        { text: "Cotizaciones ilimitadas", included: true },
-        { text: "Clientes ilimitados", included: true },
-        { text: "Productos ilimitados", included: true },
-        { text: "Forge IA prioridad", included: true },
-        { text: "Import / Export CSV", included: true },
-        { text: "Envío de emails", included: true },
-        { text: "Aprobaciones", included: true },
-        { text: "Firma electrónica", included: true },
-        { text: "Recordatorios automáticos", included: true },
-        { text: "Versionado de cotizaciones", included: true },
-        { text: "Reglas avanzadas", included: true },
-        { text: "Gestión de contratos", included: true },
-        { text: "Renovaciones y alertas", included: true },
-      ],
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      period: "",
-      desc: "Para grandes organizaciones",
-      popular: false,
-      cta: "Contactar",
-      features: [
-        { text: "Todo ilimitado", included: true },
-        { text: "Forge IA personalizado", included: true },
-        { text: "Firma electrónica", included: true },
-        { text: "Recordatorios automáticos", included: true },
-        { text: "Versionado de cotizaciones", included: true },
-        { text: "Multi-usuario", included: true },
-        { text: "API completa", included: true },
-        { text: "SSO / SAML", included: true },
-        { text: "Plantillas custom", included: true },
-        { text: "SLA garantizado", included: true },
-        { text: "Soporte dedicado", included: true },
-        { text: "Onboarding personalizado", included: true },
-      ],
-    },
-  ];
-
-  return (
-    <section id="precios" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Planes pensados para PYMEs
-          </h2>
-          <p className="text-lg text-gray-600">
-            Empieza gratis. Escala cuando crezcas.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative rounded-2xl border-2 p-6 flex flex-col ${
-                plan.popular
-                  ? "border-[#3a9bb5] shadow-xl shadow-[#3a9bb5]/10 scale-[1.02]"
-                  : "border-gray-100"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#3a9bb5] text-white text-xs font-bold rounded-full">
-                    <Sparkles className="w-3 h-3" />
-                    Más popular
-                  </span>
-                </div>
-              )}
-
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-gray-900">{plan.name}</h3>
-                <p className="text-sm text-gray-500 mt-1">{plan.desc}</p>
-                <div className="mt-4 flex items-baseline gap-1">
-                  {plan.price === "Custom" ? (
-                    <span className="text-3xl font-bold text-gray-900">A medida</span>
-                  ) : (
-                    <>
-                      <span className="text-4xl font-bold text-gray-900">{plan.price}€</span>
-                      <span className="text-gray-500 text-sm">{plan.period}</span>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              <ul className="space-y-3 flex-1 mb-6">
-                {plan.features.map((f) => (
-                  <li key={f.text} className="flex items-center gap-2.5">
-                    {f.included ? (
-                      <Check className="w-4 h-4 text-[#3a9bb5] shrink-0" />
-                    ) : (
-                      <Minus className="w-4 h-4 text-gray-300 shrink-0" />
-                    )}
-                    <span className={`text-sm ${f.included ? "text-gray-700" : "text-gray-400"}`}>
-                      {f.text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href={plan.name === "Enterprise" ? "/contacto" : "/registro"}
-                className={`block text-center py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
-                  plan.popular
-                    ? "bg-[#3a9bb5] text-white hover:bg-[#2d7d94] shadow-lg shadow-[#3a9bb5]/25"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {plan.cta}
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+// PricingSection is now a client component imported from @/components/home/pricing-section
 
 /* ─── CTA FINAL ───────────────────────────────────────────────── */
 function CTASection() {
