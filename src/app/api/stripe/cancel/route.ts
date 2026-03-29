@@ -48,13 +48,6 @@ export async function POST(req: NextRequest) {
     isEmpresaLevel = false;
   }
 
-  if (!stripeSubscriptionId) {
-    return NextResponse.json(
-      { error: "No tienes una suscripción activa" },
-      { status: 400 }
-    );
-  }
-
   if (currentPlan === "starter") {
     return NextResponse.json(
       { error: "Ya estás en el plan Starter" },
@@ -70,50 +63,54 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    if (targetPlan === "starter") {
-      // Cancel at end of billing period → plan goes to Starter when it expires
-      await stripe.subscriptions.update(stripeSubscriptionId, {
-        cancel_at_period_end: true,
-      });
+    // If there's an active Stripe subscription, update it via API
+    // Otherwise, just update the DB directly (manual/test plans)
+    if (stripeSubscriptionId) {
+      if (targetPlan === "starter") {
+        await stripe.subscriptions.update(stripeSubscriptionId, {
+          cancel_at_period_end: true,
+        });
+      } else if (targetPlan === "pro") {
+        const subscription = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+        const currentItemId = subscription.items.data[0]?.id;
 
+        if (!currentItemId) {
+          return NextResponse.json(
+            { error: "No se encontró el item de suscripción en Stripe" },
+            { status: 500 }
+          );
+        }
+
+        const currentPriceId = subscription.items.data[0]?.price?.id;
+        const currentPrice = await stripe.prices.retrieve(currentPriceId);
+        const interval =
+          currentPrice.recurring?.interval === "year" ? "annual" : "monthly";
+
+        const newPriceId = getPriceId("pro", interval);
+
+        await stripe.subscriptions.update(stripeSubscriptionId, {
+          items: [{ id: currentItemId, price: newPriceId }],
+          proration_behavior: "none",
+          cancel_at_period_end: false,
+        });
+      }
+    }
+
+    // Update DB — always, whether or not Stripe was involved
+    if (targetPlan === "starter") {
+      const starterData = {
+        plan: "starter",
+        planStatus: "canceled",
+        stripeSubscriptionId: null as string | null,
+        stripePriceId: null as string | null,
+        currentPeriodEnd: null as Date | null,
+      };
       if (isEmpresaLevel && session.empresaId) {
-        await prisma.empresa.update({
-          where: { id: session.empresaId },
-          data: { planStatus: "canceling" },
-        });
+        await prisma.empresa.update({ where: { id: session.empresaId }, data: starterData });
       } else {
-        await prisma.usuario.update({
-          where: { id: session.userId },
-          data: { planStatus: "canceling" },
-        });
+        await prisma.usuario.update({ where: { id: session.userId }, data: starterData });
       }
     } else if (targetPlan === "pro") {
-      // Downgrade to Pro: swap price with no proration (takes effect next cycle)
-      const subscription = await stripe.subscriptions.retrieve(stripeSubscriptionId);
-      const currentItemId = subscription.items.data[0]?.id;
-
-      if (!currentItemId) {
-        return NextResponse.json(
-          { error: "No se encontró el item de suscripción" },
-          { status: 500 }
-        );
-      }
-
-      // Detect current billing interval (monthly vs annual)
-      const currentPriceId = subscription.items.data[0]?.price?.id;
-      const currentPrice = await stripe.prices.retrieve(currentPriceId);
-      const interval =
-        currentPrice.recurring?.interval === "year" ? "annual" : "monthly";
-
-      const newPriceId = getPriceId("pro", interval);
-
-      await stripe.subscriptions.update(stripeSubscriptionId, {
-        items: [{ id: currentItemId, price: newPriceId }],
-        proration_behavior: "none",
-        cancel_at_period_end: false,
-      });
-
-      // Update plan in DB immediately (they'll be billed at Pro rate next cycle)
       if (isEmpresaLevel && session.empresaId) {
         await prisma.empresa.update({
           where: { id: session.empresaId },

@@ -53,8 +53,8 @@ export default async function CancelarPage() {
     hasSubscription = !!usuario?.stripeSubscriptionId;
   }
 
-  // Nothing to cancel
-  if (plan === "starter" || !hasSubscription) {
+  // Nothing to cancel if already on free plan
+  if (plan === "starter") {
     redirect("/configuracion");
   }
 
