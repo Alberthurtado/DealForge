@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Check, X } from "lucide-react";
+import { PricingCards } from "@/components/precios/pricing-cards";
 
 export const metadata: Metadata = {
   title: "Precios — DealForge | Planes CPQ desde Gratis",
@@ -138,107 +139,6 @@ const jsonLd = [
           description: "Precio personalizado — contactar ventas",
         },
       },
-    ],
-  },
-];
-
-/* ── Plan data ── */
-
-interface Plan {
-  nombre: string;
-  precio: string;
-  precioAnual?: string;
-  periodo: string;
-  descripcion: string;
-  popular?: boolean;
-  cta: string;
-  ctaHref: string;
-  ctaStyle: "primary" | "secondary" | "outline";
-  caracteristicas: string[];
-}
-
-const PLANES: Plan[] = [
-  {
-    nombre: "Starter",
-    precio: "Gratis",
-    periodo: "para siempre",
-    descripcion: "Perfecto para freelancers y autónomos que empiezan.",
-    cta: "Empieza gratis",
-    ctaHref: "/registro",
-    ctaStyle: "outline",
-    caracteristicas: [
-      "10 cotizaciones/mes",
-      "5 clientes",
-      "10 productos",
-      "5 consultas Forge IA",
-      "1 usuario",
-    ],
-  },
-  {
-    nombre: "Pro",
-    precio: "29",
-    precioAnual: "23",
-    periodo: "/mes",
-    descripcion:
-      "Para equipos comerciales que necesitan velocidad y profesionalidad.",
-    popular: true,
-    cta: "Probar Pro gratis",
-    ctaHref: "/registro?plan=pro",
-    ctaStyle: "primary",
-    caracteristicas: [
-      "100 cotizaciones/mes",
-      "50 clientes",
-      "200 productos",
-      "Forge IA ilimitado",
-      "Firma electrónica",
-      "Envío de emails",
-      "Recordatorios automáticos",
-      "Versionado de cotizaciones",
-      "Importar / Exportar",
-      "API access",
-      "Hasta 5 usuarios",
-    ],
-  },
-  {
-    nombre: "Business",
-    precio: "79",
-    precioAnual: "63",
-    periodo: "/mes",
-    descripcion:
-      "Para empresas que necesitan control total sobre su proceso de ventas.",
-    cta: "Probar Business gratis",
-    ctaHref: "/registro?plan=business",
-    ctaStyle: "secondary",
-    caracteristicas: [
-      "Cotizaciones ilimitadas",
-      "Clientes ilimitados",
-      "Productos ilimitados",
-      "Forge IA ilimitado",
-      "Reglas comerciales avanzadas",
-      "Flujos de aprobación",
-      "Gestión de contratos",
-      "Renovaciones y alertas",
-      "Reportes avanzados",
-      "API access",
-      "Soporte prioritario",
-      "Hasta 20 usuarios",
-    ],
-  },
-  {
-    nombre: "Enterprise",
-    precio: "Contactar",
-    periodo: "",
-    descripcion:
-      "Para grandes organizaciones con necesidades personalizadas.",
-    cta: "Contactar ventas",
-    ctaHref: "/contacto",
-    ctaStyle: "outline",
-    caracteristicas: [
-      "Todo de Business",
-      "SSO / SAML",
-      "SLA dedicado",
-      "Usuarios ilimitados",
-      "Personalización a medida",
     ],
   },
 ];
@@ -464,19 +364,6 @@ function CellValue({ value }: { value: boolean | string }) {
   );
 }
 
-function ctaClasses(style: Plan["ctaStyle"]) {
-  const base =
-    "block w-full text-center py-3 px-6 rounded-lg font-semibold text-sm transition-all duration-200";
-  switch (style) {
-    case "primary":
-      return `${base} bg-[#3a9bb5] text-white hover:bg-[#2d7d94] shadow-lg shadow-[#3a9bb5]/25`;
-    case "secondary":
-      return `${base} bg-[#3a9bb5]/10 text-[#3a9bb5] hover:bg-[#3a9bb5]/20`;
-    case "outline":
-      return `${base} border-2 border-gray-200 text-gray-700 hover:border-[#3a9bb5] hover:text-[#3a9bb5]`;
-  }
-}
-
 /* ── Page ── */
 
 export default function PreciosPage() {
@@ -533,93 +420,9 @@ export default function PreciosPage() {
         </div>
       </section>
 
-      {/* Pricing Toggle Note */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-center gap-3 mb-12">
-          <span className="text-sm font-medium text-gray-900">Mensual</span>
-          <span className="text-gray-300">/</span>
-          <span className="text-sm font-medium text-gray-500">
-            Anual{" "}
-            <span className="inline-flex items-center bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full ml-1">
-              -20%
-            </span>
-          </span>
-        </div>
-      </section>
-
-      {/* Pricing Cards */}
+      {/* Pricing Cards — interactive toggle (client component) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
-          {PLANES.map((plan) => (
-            <div
-              key={plan.nombre}
-              className={`relative rounded-2xl border p-6 flex flex-col ${
-                plan.popular
-                  ? "border-[#3a9bb5] shadow-xl shadow-[#3a9bb5]/10 ring-2 ring-[#3a9bb5]"
-                  : "border-gray-200"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span className="bg-[#3a9bb5] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">
-                    Mas popular
-                  </span>
-                </div>
-              )}
-
-              <div className="mb-6">
-                <h2 className="text-lg font-bold text-gray-900 mb-1">
-                  {plan.nombre}
-                </h2>
-                <p className="text-sm text-gray-500 mb-4 min-h-[40px]">
-                  {plan.descripcion}
-                </p>
-                <div className="flex items-baseline gap-1">
-                  {plan.precio === "Gratis" || plan.precio === "Contactar" ? (
-                    <span className="text-3xl font-bold text-gray-900">
-                      {plan.precio}
-                    </span>
-                  ) : (
-                    <>
-                      <span className="text-3xl font-bold text-gray-900">
-                        {plan.precio}&euro;
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {plan.periodo}
-                      </span>
-                    </>
-                  )}
-                </div>
-                {plan.precioAnual && (
-                  <p className="text-xs text-green-600 mt-1">
-                    o {plan.precioAnual}&euro;/mes con plan anual (ahorra 20%)
-                  </p>
-                )}
-                {plan.precio === "Gratis" && (
-                  <p className="text-xs text-gray-400 mt-1">
-                    {plan.periodo}
-                  </p>
-                )}
-              </div>
-
-              <Link href={plan.ctaHref} className={ctaClasses(plan.ctaStyle)}>
-                {plan.cta}
-              </Link>
-
-              <ul className="mt-6 space-y-3 flex-1">
-                {plan.caracteristicas.map((feat) => (
-                  <li
-                    key={feat}
-                    className="flex items-start gap-2.5 text-sm text-gray-600"
-                  >
-                    <Check className="w-4 h-4 text-[#3a9bb5] mt-0.5 flex-shrink-0" />
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <PricingCards />
       </section>
 
       {/* Feature Comparison Table */}

@@ -37,7 +37,7 @@ const plans = [
     period: "/mes",
     desc: "Para equipos en crecimiento",
     popular: false,
-    cta: "Empezar Prueba",
+    cta: "Empezar con Pro",
     href: "/registro?plan=pro",
     features: [
       { text: "100 cotizaciones/mes", included: true },
@@ -62,7 +62,7 @@ const plans = [
     period: "/mes",
     desc: "Para empresas que necesitan todo",
     popular: true,
-    cta: "Empezar Prueba",
+    cta: "Empezar con Business",
     href: "/registro?plan=business",
     features: [
       { text: "Cotizaciones ilimitadas", included: true },
