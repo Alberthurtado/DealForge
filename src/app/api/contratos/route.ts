@@ -135,9 +135,19 @@ export async function POST(request: NextRequest) {
     }));
   }
 
-  // Auto-populate condiciones from quote if not provided
-  if (!data.condiciones && cotizacion.condiciones) {
-    data.condiciones = cotizacion.condiciones;
+  // Auto-populate condiciones: quote → empresa.condicionesContractual → empty
+  if (!data.condiciones) {
+    if (cotizacion.condiciones) {
+      data.condiciones = cotizacion.condiciones;
+    } else if (session.empresaId) {
+      const empresa = await prisma.empresa.findUnique({
+        where: { id: session.empresaId },
+        select: { condicionesContractual: true },
+      });
+      if (empresa?.condicionesContractual) {
+        data.condiciones = empresa.condicionesContractual;
+      }
+    }
   }
 
   // Generate contract number: CTR-{YEAR}-{SEQUENCE}

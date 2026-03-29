@@ -11,6 +11,8 @@ import {
   Clock,
   Loader2,
   X,
+  Pencil,
+  Save,
 } from "lucide-react";
 
 interface Firma {
@@ -47,6 +49,8 @@ export function DocumentoPanel({
   const [showPreview, setShowPreview] = useState(false);
   const [showFirmaModal, setShowFirmaModal] = useState(false);
   const [showGenerarModal, setShowGenerarModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editedHtml, setEditedHtml] = useState(documentoHtml || "");
   const [firmas, setFirmas] = useState<Firma[]>([]);
   const [plantillas, setPlantillas] = useState<PlantillaOption[]>([]);
   const [selectedPlantillaId, setSelectedPlantillaId] = useState("");
@@ -114,6 +118,23 @@ export function DocumentoPanel({
         a.download = `contrato-${contratoNumero}.pdf`;
         a.click();
         URL.revokeObjectURL(url);
+      }
+    } finally {
+      setLoading("");
+    }
+  }
+
+  async function handleGuardarEdicion() {
+    setLoading("edit");
+    try {
+      const res = await fetch(`/api/contratos/${contratoId}/documento`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ documentoHtml: editedHtml }),
+      });
+      if (res.ok) {
+        setShowEditModal(false);
+        onRefresh();
       }
     } finally {
       setLoading("");
@@ -200,6 +221,12 @@ export function DocumentoPanel({
                   <Download className="w-3.5 h-3.5" />
                 )}
                 Descargar PDF
+              </button>
+              <button
+                onClick={() => { setEditedHtml(documentoHtml || ""); setShowEditModal(true); }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-gray-600"
+              >
+                <Pencil className="w-3.5 h-3.5" /> Editar documento
               </button>
               <button
                 onClick={() => setShowGenerarModal(true)}
@@ -324,6 +351,62 @@ export function DocumentoPanel({
               >
                 {loading === "generar" && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                 Generar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit document modal */}
+      {showEditModal && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowEditModal(false)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Editar documento</h3>
+                <p className="text-xs text-gray-500 mt-0.5">Edita el HTML del documento antes de enviarlo a firmar. Los cambios solo afectan a este contrato.</p>
+              </div>
+              <button onClick={() => setShowEditModal(false)} className="text-gray-400 hover:text-gray-600">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="flex flex-1 overflow-hidden gap-0 min-h-0">
+              {/* Editor */}
+              <div className="flex-1 flex flex-col p-4 border-r border-gray-100">
+                <p className="text-xs font-medium text-gray-500 mb-2">HTML del documento</p>
+                <textarea
+                  value={editedHtml}
+                  onChange={(e) => setEditedHtml(e.target.value)}
+                  className="flex-1 w-full font-mono text-xs border border-gray-200 rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                  spellCheck={false}
+                />
+              </div>
+              {/* Preview */}
+              <div className="flex-1 flex flex-col p-4 overflow-hidden">
+                <p className="text-xs font-medium text-gray-500 mb-2">Vista previa</p>
+                <div
+                  className="flex-1 border border-gray-200 rounded-lg p-4 overflow-y-auto bg-white text-sm"
+                  dangerouslySetInnerHTML={{ __html: editedHtml }}
+                />
+              </div>
+            </div>
+            <div className="flex justify-end gap-2 px-6 py-4 border-t border-gray-100">
+              <button onClick={() => setShowEditModal(false)} className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">
+                Cancelar
+              </button>
+              <button
+                onClick={handleGuardarEdicion}
+                disabled={loading === "edit"}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 disabled:opacity-50"
+              >
+                {loading === "edit" ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                Guardar cambios
               </button>
             </div>
           </div>

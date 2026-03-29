@@ -8,6 +8,7 @@ import { DocumentoPanel } from "@/components/contratos/documento-panel";
 import {
   CheckCircle, Clock, XCircle, AlertTriangle, TrendingUp,
   RefreshCw, Ban, FileEdit, ScrollText, Loader2, ChevronDown,
+  Pencil, Save, X as XIcon,
 } from "lucide-react";
 
 interface ContratoDetail {
@@ -82,6 +83,11 @@ export default function ContratoDetailPage() {
   const [showEnmiendaModal, setShowEnmiendaModal] = useState(false);
   const [enmienda, setEnmienda] = useState({ tipo: "UPSELL", descripcion: "", valorNuevo: 0 });
 
+  // Inline conditions edit
+  const [editingCondiciones, setEditingCondiciones] = useState(false);
+  const [condicionesForm, setCondicionesForm] = useState({ condiciones: "", clausulaCancelacion: "", periodoPreaviso: 30 });
+  const [savingCondiciones, setSavingCondiciones] = useState(false);
+
   const loadContrato = useCallback(() => {
     fetch(`/api/contratos/${params.id}`)
       .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
@@ -117,6 +123,22 @@ export default function ContratoDetailPage() {
       });
       if (res.ok) { setShowEnmiendaModal(false); setEnmienda({ tipo: "UPSELL", descripcion: "", valorNuevo: 0 }); loadContrato(); }
     } finally { setActionLoading(""); }
+  }
+
+  async function handleGuardarCondiciones() {
+    setSavingCondiciones(true);
+    try {
+      const res = await fetch(`/api/contratos/${params.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          condiciones: condicionesForm.condiciones || null,
+          clausulaCancelacion: condicionesForm.clausulaCancelacion || null,
+          periodoPreaviso: condicionesForm.periodoPreaviso,
+        }),
+      });
+      if (res.ok) { setEditingCondiciones(false); loadContrato(); }
+    } finally { setSavingCondiciones(false); }
   }
 
   if (loading || !contrato) {
@@ -235,23 +257,102 @@ export default function ContratoDetailPage() {
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Conditions */}
           <div className="bg-white rounded-xl border border-gray-200 p-5 space-y-4">
-            <h3 className="font-semibold text-gray-900 text-sm">Condiciones del Contrato</h3>
-            {contrato.condiciones ? (
-              <p className="text-sm text-gray-600 whitespace-pre-line">{contrato.condiciones}</p>
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-gray-900 text-sm">Condiciones del Contrato</h3>
+              {isActive && !editingCondiciones && (
+                <button
+                  onClick={() => {
+                    setCondicionesForm({
+                      condiciones: contrato.condiciones || "",
+                      clausulaCancelacion: contrato.clausulaCancelacion || "",
+                      periodoPreaviso: contrato.periodoPreaviso,
+                    });
+                    setEditingCondiciones(true);
+                  }}
+                  className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-primary transition-colors"
+                >
+                  <Pencil className="w-3.5 h-3.5" /> Editar
+                </button>
+              )}
+            </div>
+
+            {editingCondiciones ? (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Condiciones Generales</label>
+                  <textarea
+                    value={condicionesForm.condiciones}
+                    onChange={(e) => setCondicionesForm({ ...condicionesForm, condiciones: e.target.value })}
+                    rows={6}
+                    placeholder="Escribe las condiciones generales del contrato..."
+                    className="w-full text-sm border border-gray-200 rounded-lg p-3 resize-y focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Cláusula de Cancelación</label>
+                  <textarea
+                    value={condicionesForm.clausulaCancelacion}
+                    onChange={(e) => setCondicionesForm({ ...condicionesForm, clausulaCancelacion: e.target.value })}
+                    rows={4}
+                    placeholder="Condiciones de cancelación anticipada, penalizaciones, etc."
+                    className="w-full text-sm border border-gray-200 rounded-lg p-3 resize-y focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Preaviso de cancelación (días)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    max={365}
+                    value={condicionesForm.periodoPreaviso}
+                    onChange={(e) => setCondicionesForm({ ...condicionesForm, periodoPreaviso: Number(e.target.value) })}
+                    className="w-32 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                  />
+                </div>
+                <div className="flex items-center gap-2 pt-1">
+                  <button
+                    onClick={handleGuardarCondiciones}
+                    disabled={savingCondiciones}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 disabled:opacity-50"
+                  >
+                    {savingCondiciones ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                    Guardar
+                  </button>
+                  <button
+                    onClick={() => setEditingCondiciones(false)}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 text-sm border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50"
+                  >
+                    <XIcon className="w-3.5 h-3.5" /> Cancelar
+                  </button>
+                </div>
+                <p className="text-xs text-amber-600 bg-amber-50 border border-amber-100 rounded-lg p-2">
+                  Tras guardar, vuelve a generar el documento para que los cambios se reflejen en el PDF.
+                </p>
+              </div>
             ) : (
-              <p className="text-sm text-gray-400 italic">Sin condiciones especificadas</p>
-            )}
-            {contrato.clausulaCancelacion && (
               <>
-                <h4 className="font-medium text-gray-700 text-xs uppercase tracking-wider">Cláusula de Cancelación</h4>
-                <p className="text-sm text-gray-600 whitespace-pre-line">{contrato.clausulaCancelacion}</p>
+                <div>
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Condiciones Generales</p>
+                  {contrato.condiciones ? (
+                    <p className="text-sm text-gray-600 whitespace-pre-line">{contrato.condiciones}</p>
+                  ) : (
+                    <p className="text-sm text-gray-400 italic">Sin condiciones especificadas. Pulsa Editar para añadirlas.</p>
+                  )}
+                </div>
+                {contrato.clausulaCancelacion && (
+                  <div>
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Cláusula de Cancelación</p>
+                    <p className="text-sm text-gray-600 whitespace-pre-line">{contrato.clausulaCancelacion}</p>
+                  </div>
+                )}
+                <div className="flex items-center gap-4 text-xs text-gray-400">
+                  <span>Preaviso: {contrato.periodoPreaviso} días</span>
+                  <span>Duración: {contrato.duracionMeses} meses</span>
+                  <span>Desde: {formatDate(contrato.fechaInicio)}</span>
+                </div>
               </>
             )}
-            <div className="flex items-center gap-4 text-xs text-gray-400">
-              <span>Preaviso: {contrato.periodoPreaviso} días</span>
-              <span>Duración: {contrato.duracionMeses} meses</span>
-              <span>Desde: {formatDate(contrato.fechaInicio)}</span>
-            </div>
+
             {contrato.motivoCancelacion && (
               <div className="bg-red-50 rounded-lg p-3 border border-red-100">
                 <p className="text-xs font-medium text-red-700 mb-1">Motivo de cancelación</p>
