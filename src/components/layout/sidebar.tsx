@@ -17,6 +17,7 @@ import {
   User,
   Lock,
   ScrollText,
+  HelpCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -43,6 +44,7 @@ const navigation: NavItem[] = [
   { name: "Reportes", href: "/reportes", icon: BarChart3 },
   { name: "Integraciones", href: "/integraciones", icon: Plug },
   { name: "Configuración", href: "/configuracion", icon: Settings },
+  { name: "Soporte", href: "/soporte", icon: HelpCircle },
 ];
 
 const PLAN_LABELS: Record<string, { label: string; color: string }> = {
