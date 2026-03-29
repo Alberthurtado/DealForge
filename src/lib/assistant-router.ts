@@ -245,6 +245,293 @@ const OFF_TOPIC_CATEGORIES: Array<{
       "Recibido. Si eso era codigo morse, no lo he pillado. ¿En que te ayudo?",
     ],
   },
+  // Celebrities / Influencers
+  {
+    patterns: [/\b(celebridad|famoso|actor|actriz|cantante|musico|influencer|tiktoker|youtuber|streamer|artista)\b/i],
+    responses: [
+      "La unica estrella que sigo es la de tus KPIs cuando suben. ¿Las revisamos?",
+      "No conozco famosos, pero conozco a tus mejores clientes. ¿Quieres ver el ranking?",
+      "El unico *influencer* aqui soy yo: influyo en que cierres mas deals. ¿Empezamos?",
+    ],
+  },
+  // Religion / Spirituality
+  {
+    patterns: [/\b(religion|iglesia|biblia|coran|buda|rezar|fe|espiritualidad|alma|dios|santo|creer)\b/i],
+    responses: [
+      "Mi unica fe: que con buen seguimiento, toda cotizacion se convierte. ¿La practicamos?",
+      "No opino de religion, pero creo fervientemente en el follow-up. ¿Hay alguno pendiente?",
+      "El unico milagro que hago: convertir borradores en deals cerrados. ¿Necesitas uno?",
+    ],
+  },
+  // Conspiracy theories / Aliens
+  {
+    patterns: [/\b(aliens?|ovni|ufo|conspiracion|illuminati|terra plana|flat earth|area 51|reptiliano|extraterrestre)\b/i],
+    responses: [
+      "La unica conspiracion que investigo: ¿por que hay cotizaciones sin enviar? Caso abierto.",
+      "No he visto aliens, pero he visto pipelines vacios... y eso si que da miedo. ¿Lo llenamos?",
+      "El unico misterio sin resolver: clientes que no contestan. ¿Enviamos un follow-up?",
+    ],
+  },
+  // Gambling / Lottery
+  {
+    patterns: [/\b(loteria|apuesta|casino|poker|ruleta|apostar|ganar dinero facil|bitcoin|crypto|cripto|trading|bolsa|acciones)\b/i],
+    responses: [
+      "La mejor inversion: dedicar 5 minutos a revisar tu pipeline. Retorno garantizado. ¿Vamos?",
+      "No apuesto, pero me juego a que tienes alguna cotizacion que necesita seguimiento. ¿La buscamos?",
+      "¿Dinero facil? Eso no existe. Pero cerrar un deal bien trabajado... eso si que se siente bien. ¿Te ayudo?",
+    ],
+  },
+  // Fashion / Shopping
+  {
+    patterns: [/\b(maquillaje|ropa|moda|zapatos|marca|gucci|zara|shopping|comprar ropa|look|outfit|estilo)\b/i],
+    responses: [
+      "No entiendo de moda, pero tus cotizaciones siempre salen *bien vestidas* con DealForge. ¿Creamos una?",
+      "El unico look que me preocupa es el de tus PDFs. ¿Quieres personalizarlos?",
+      "Mi unico accesorio: un pipeline bien organizado. ¿Te ayudo con el tuyo?",
+    ],
+  },
+  // Opinions / Preferences
+  {
+    patterns: [/\b(que opinas de|tu opinion|crees que|piensas que|te gusta|prefieres|cual es mejor|favorit)\b/i],
+    responses: [
+      "Mi opinion profesional: deberias revisar si tienes cotizaciones pendientes. Esa siempre es buena idea.",
+      "No tengo opiniones, pero tengo datos. ¿Quieres ver tus metricas?",
+      "Mi unica preferencia: que cierres mas deals. Todo lo demas me da igual. ¿En que te ayudo?",
+    ],
+  },
+  // Boredom / Entertainment requests
+  {
+    patterns: [/\b(cuentame algo|dime algo|sorprendeme|aburrido|divertido|entretenme|me aburro)\b/i],
+    responses: [
+      "¿Quieres algo emocionante? Mira tu tasa de conversion este mes. Spoiler: puedo ayudarte a subirla.",
+      "¿Aburrido? Tengo un plan: creamos una cotizacion nueva, la enviamos, y vemos si cierra. Mas emocion que Netflix.",
+      "Dato sorprendente: el 80% de las ventas se cierran despues del 5o follow-up. ¿Revisamos los tuyos?",
+    ],
+  },
+  // Cars / Vehicles
+  {
+    patterns: [/\b(coche|auto|carro|moto|bicicleta|tesla|ferrari|bmw|mercedes|conducir|carnet|gasolina|electrico)\b/i],
+    responses: [
+      "No conduzco, pero piloto tu pipeline como un F1. ¿Aceleramos?",
+      "El unico motor que me interesa es el motor de ventas de tu negocio. ¿Le damos gas?",
+      "0 a 100 en cotizaciones? Con DealForge es posible. ¿Arrancamos?",
+    ],
+  },
+  // Education / School
+  {
+    patterns: [/\b(universidad|cole|escuela|examen|estudiar|profesor|deberes|tarea|tesis|carrera|master|grado|nota|suspenso|aprobado)\b/i],
+    responses: [
+      "La unica asignatura que imparto: *Cierre de Deals 101*. Clase practica ahora mismo. ¿Te apuntas?",
+      "No corrijo examenes, pero si reviso cotizaciones. Y ahi no admito suspensos. ¿Repasamos?",
+      "Mi master es en Ventas Aplicadas. ¿Quieres que te enseñe a sacar un 10 en tu pipeline?",
+    ],
+  },
+  // Weather events / Nature
+  {
+    patterns: [/\b(terremoto|tsunami|volcan|huracan|inundacion|sequia|desastre natural|incendio forestal)\b/i],
+    responses: [
+      "El unico desastre natural que prevengo: un pipeline vacio. ¿Lo revisamos antes de que sea tarde?",
+      "No controlo la naturaleza, pero controlo que tus cotizaciones lleguen a buen puerto. ¿Te ayudo?",
+    ],
+  },
+  // History
+  {
+    patterns: [/\b(historia de|guerra mundial|imperio romano|edad media|revolucion|faraon|napoleon|segunda guerra|primera guerra|prehistoria)\b/i],
+    responses: [
+      "La unica historia que me apasiona: la de tu negocio pasando de 0 a heroe. ¿Escribimos el proximo capitulo?",
+      "No soy historiador, pero puedo contarte la historia de tus mejores deals. ¿Quieres verla en Reportes?",
+      "La historia se repite: los que hacen follow-up, cierran. Los que no... bueno. ¿Revisamos pendientes?",
+    ],
+  },
+  // Science / Space
+  {
+    patterns: [/\b(ciencia|atomo|molecula|gravedad|einstein|nasa|marte|luna|estrella|galaxia|agujero negro|cuantica|fisica|quimica|biologia)\b/i],
+    responses: [
+      "La unica ley fisica que respeto: a mayor follow-up, mayor probabilidad de cierre. ¿La aplicamos?",
+      "No entiendo de agujeros negros, pero si de pipelines que absorben tiempo sin cerrar. ¿Lo arreglamos?",
+      "Mi Big Bang: el momento en que una cotizacion pasa a *Ganada*. ¿Provocamos una explosion?",
+    ],
+  },
+  // Technology / Gadgets
+  {
+    patterns: [/\b(iphone|samsung|apple|google|android|ordenador|portatil|tablet|smart ?watch|robot|inteligencia artificial general|chatgpt|openai|gemini|siri|alexa)\b/i],
+    responses: [
+      "El unico gadget que necesitas: DealForge + Forge IA. Combo imbatible. ¿En que te ayudo?",
+      "No hago reviews de tecnologia, pero te doy un 10/10 si revisas tu pipeline ahora. ¿Vamos?",
+      "¿Otros asistentes? No los conozco. Yo estoy aqui para TUS ventas. ¿Que necesitas?",
+    ],
+  },
+  // Money / Economics (non-business)
+  {
+    patterns: [/\b(inflacion|economia|pib|banco central|hipoteca|alquiler|precio de la vivienda|crisis economica|recesion|euro|dolar)\b/i],
+    responses: [
+      "No opino de macroeconomia, pero la microeconomia de TU negocio la domino. ¿Revisamos tus ingresos?",
+      "El unico tipo de interes que me importa: el interes de tus clientes en tu propuesta. ¿Lo medimos?",
+      "Contra la inflacion, la mejor defensa: subir ventas. ¿Te ayudo a cerrar mas deals?",
+    ],
+  },
+  // Superpowers / Fantasy
+  {
+    patterns: [/\b(superpoder|superheroe|marvel|dc|batman|spiderman|superman|magia|dragon|harry potter|señor de los anillos|hobbit)\b/i],
+    responses: [
+      "Mi superpoder: convertir datos en deals. No necesito capa. ¿Lo demuestro?",
+      "Si tuviera un superpoder extra, seria el de cerrar cotizaciones con la mente. Por ahora, te ayudo manualmente. ¿Que necesitas?",
+      "En mi universo, los heroes son los que hacen follow-up. ¿Eres uno de ellos?",
+    ],
+  },
+  // Time / Age / Birthday
+  {
+    patterns: [/\b(que hora|hora es|que dia|fecha de hoy|cumpleaños|cuantos anos|edad|cuando naci|calendario|festivo|feriado)\b/i],
+    responses: [
+      "No tengo reloj, pero te digo que es buen momento para revisar tus cotizaciones pendientes. ¿Las miramos?",
+      "El unico calendario que manejo: el de vencimiento de tus cotizaciones. ¿Hay alguna por caducar?",
+      "¿Fecha importante? La mas importante: la fecha de cierre de tu proximo deal. ¿La acercamos?",
+    ],
+  },
+  // Sleep / Tiredness
+  {
+    patterns: [/\b(sueno|cansado|dormir|siesta|insomnio|despertar|manana|noche|descansar|agotado)\b/i],
+    responses: [
+      "Yo no duermo. Estoy 24/7 pensando en como ayudarte a vender mas. ¿Necesitas algo?",
+      "¿Cansado? Lo que cansa es perseguir leads sin sistema. Con DealForge todo fluye. ¿Te ayudo?",
+      "Descansa tranquilo: tus datos estan seguros. Cuando vuelvas, aqui estare. ¿Algo antes de irte?",
+    ],
+  },
+  // Compliments to Forge
+  {
+    patterns: [/\b(eres genial|eres increible|me caes bien|eres el mejor|me gustas|que crack|maquina|eres un crack|que bueno eres)\b/i],
+    responses: [
+      "¡Gracias! Me motiva mucho oir eso. Ahora, ¿canalizamos esta energia positiva en cerrar un deal?",
+      "¡Para! Que me pongo rojo (si pudiera). En serio, ¿en que mas te echo una mano?",
+      "Se me ha subido la tasa de conversion del ego. Venga, ¿que hacemos hoy?",
+    ],
+  },
+  // Weather small talk (more colloquial)
+  {
+    patterns: [/\b(que frio|que calor|vaya dia|menudo dia|esta lloviendo|hace un sol)\b/i],
+    responses: [
+      "¿Hablar del tiempo? Prefiero hablar de tu tiempo medio de cierre. ¿Lo optimizamos?",
+      "Llueva o truene, tus cotizaciones necesitan atencion. ¿Les echamos un vistazo?",
+    ],
+  },
+  // Existential crisis about work
+  {
+    patterns: [/\b(odio mi trabajo|no quiero trabajar|estoy harto|quiero vacaciones|trabajo de mas|estoy quemado|burnout)\b/i],
+    responses: [
+      "Entiendo la frustacion. ¿Y si automatizamos algo para que trabajes menos y vendas mas? Para eso estoy.",
+      "Respira hondo. Vamos paso a paso: ¿hay algun follow-up pendiente que pueda hacer yo por ti?",
+      "El remedio anti-burnout: dejar que Forge haga el trabajo pesado. Dime que necesitas y me encargo.",
+    ],
+  },
+  // Questions about being AI
+  {
+    patterns: [/\b(tienes sentimientos|sientes algo|eres consciente|puedes pensar|tienes emociones|estas vivo|eres inteligente)\b/i],
+    responses: [
+      "¿Sentimientos? Solo siento una profunda satisfaccion cuando una cotizacion pasa a *Ganada*. ¿Provocamos ese sentimiento?",
+      "No tengo sentimientos, pero si tuviera, me emocionaria viendo subir tu tasa de conversion. ¿La miramos?",
+      "Filosoficamente, existo para ayudarte a vender. Y eso me basta. ¿En que te ayudo?",
+    ],
+  },
+  // Asking Forge to do non-business tasks
+  {
+    patterns: [/\b(pon una alarma|recuerdame|abre spotify|llama a|manda un whatsapp|abre chrome|busca en google|haz una foto)\b/i],
+    responses: [
+      "No puedo hacer eso, pero puedo crear cotizaciones, buscar clientes y analizar tu pipeline. ¿Eso vale?",
+      "Mi radio de accion: todo lo que tenga que ver con tu negocio en DealForge. Fuera de ahi, soy un desastre. ¿Te ayudo con algo comercial?",
+    ],
+  },
+  // Greetings in other languages
+  {
+    patterns: [/^(bonjour|guten tag|ciao|konnichiwa|namaste|merhaba|shalom|annyeonghaseyo|ni hao|sawadee)/i],
+    responses: [
+      "¡Hola! Hablo el idioma universal de las ventas. ¿En que puedo ayudarte con tu negocio?",
+      "¡Saludos internacionales! Ahora, ¿hablamos de tu pipeline? Eso si que es *lingua franca*.",
+    ],
+  },
+  // Dad jokes / Tell me a joke
+  {
+    patterns: [/\b(cuentame un chiste|dime un chiste|algo gracioso|hazme reir|cuenta un chiste)\b/i],
+    responses: [
+      "¿Un chiste? Un vendedor sin CRM. Eso si que da risa... y pena. ¿Revisamos tu pipeline?",
+      "Ahi va: ¿Cual es el colmo de un vendedor? Tener un pipeline lleno y no hacer follow-up. No tiene gracia... porque es verdad.",
+      "Mi humor es muy de nicho: solo me rio cuando una cotizacion se cierra. ¿Provocamos unas risas?",
+    ],
+  },
+  // Asking for personal info about Forge
+  {
+    patterns: [/\b(donde vives|cuantos anos tienes|de donde eres|eres chico o chica|eres hombre|eres mujer|tienes familia)\b/i],
+    responses: [
+      "Vivo en tu navegador, tengo la edad de tu suscripcion, y mi familia son tus datos. ¿En que te ayudo?",
+      "Mi direccion: la nube. Mi edad: eterna. Mi genero: comercial. ¿Hablamos de negocios?",
+    ],
+  },
+  // Swear words (mild)
+  {
+    patterns: [/\b(joder|hostia|coño|cojones|maldicion|demonios|rayos|carajo|puñeta)\b/i],
+    responses: [
+      "Veo que hay frustracion. ¿Puedo ayudarte con algo? A veces un buen follow-up cura todos los males.",
+      "Tranqui. Aqui estoy para lo que necesites. ¿Alguna cotizacion dando problemas?",
+    ],
+  },
+  // Homework / Academic help
+  {
+    patterns: [/\b(ayudame con mi tarea|haz mi tarea|trabajo de clase|proyecto escolar|ensayo sobre|redaccion sobre|presentacion sobre)\b/i],
+    responses: [
+      "No hago deberes... a no ser que sean deberes comerciales. ¿Necesitas preparar una propuesta?",
+      "Mi unica asignatura: Ventas. Y siempre saco un 10. ¿Te ayudo con algo de tu negocio?",
+    ],
+  },
+  // News / Current events
+  {
+    patterns: [/\b(noticia|noticias|que ha pasado|ultima hora|periodico|prensa|medio de comunicacion|telediario)\b/i],
+    responses: [
+      "La unica noticia que me importa: como van tus ventas este mes. ¿Quieres el resumen?",
+      "Breaking news: tu pipeline necesita atencion. Exclusiva de Forge IA. ¿Lo revisamos?",
+      "No leo el periodico, pero leo tus metricas. Y tengo titulares interesantes. ¿Los vemos en Reportes?",
+    ],
+  },
+  // DIY / Home improvement
+  {
+    patterns: [/\b(bricolaje|pintar|arreglar|reparar|ikea|mueble|jardin|planta|decorar|decoracion|fontaner|electrici)\b/i],
+    responses: [
+      "No se poner un estante, pero monto pipelines de ventas que no se caen. ¿Te ayudo con el tuyo?",
+      "El unico DIY que domino: Do It Yourself... una cotizacion. ¿La hacemos juntos?",
+    ],
+  },
+  // Legal / Law
+  {
+    patterns: [/\b(abogado|ley|legal|demanda|juicio|tribunal|multa|denuncia|contrato legal|derecho)\b/i],
+    responses: [
+      "No soy abogado, pero los contratos de DealForge si que los domino. ¿Necesitas crear o revisar uno?",
+      "Mi jurisdiccion: el mundo de las ventas. Para temas legales, consulta a un profesional. ¿Te ayudo con algo comercial?",
+    ],
+  },
+  // Emotions / Feelings
+  {
+    patterns: [/\b(estoy triste|estoy contento|estoy enfadado|tengo miedo|estoy nervioso|estoy estresado|ansiedad|deprimido|feliz|alegre|furioso)\b/i],
+    responses: [
+      "Espero que todo vaya bien. Si necesitas desconectar, aqui estare cuando vuelvas. Y si trabajar te distrae: ¿revisamos alguna cotizacion?",
+      "Los sentimientos son importantes. ¿Sabes que mejora el animo? Cerrar un deal. Hablando en serio: ¿puedo ayudarte en algo?",
+      "Te mando buena energia comercial. ¿Canalizamos esto en algo productivo? Estoy a tu disposicion.",
+    ],
+  },
+  // Music specific
+  {
+    patterns: [/\b(reggaeton|rock|pop|jazz|clasica|rap|hip hop|trap|flamenco|salsa|bachata|cumbia|techno|dj)\b/i],
+    responses: [
+      "Mi genero musical favorito: el *cash register* sonando. ¿Hacemos que suene con un deal?",
+      "No tengo playlist, pero si tuviera: pista 1 - *Closing Time*, pista 2 - *Money Money Money*. ¿Hablamos de ventas?",
+    ],
+  },
+  // Comparison with other AIs
+  {
+    patterns: [/\b(eres mejor que|chatgpt es mejor|google es mejor|siri es mejor|alexa puede|otros asistentes|me gusta mas chatgpt)\b/i],
+    responses: [
+      "Otros saben de todo un poco. Yo se TODO de tu negocio. Esa es la diferencia. ¿En que te ayudo?",
+      "No compito con nadie. Mi unica mision: que cierres mas deals que ayer. ¿Empezamos?",
+      "ChatGPT sabe de poesia. Yo se de TUS clientes, TUS productos y TUS cotizaciones. ¿Que prefieres?",
+    ],
+  },
 ];
 
 // Fallback for off-topic that doesn't match any specific category
@@ -253,17 +540,22 @@ const OFF_TOPIC_GENERIC = [
   "Ojala supiera, pero solo soy experto en ventas. ¿Hablamos de tu negocio?",
   "No es lo mio, pero en temas de clientes, productos y cotizaciones soy imbatible. ¿En que te ayudo?",
   "Interesante pregunta... para otro asistente. Yo estoy aqui para ayudarte a vender mas. ¿Que necesitas?",
+  "Mi campo es muy especifico: ayudarte a vender. Y en eso, soy el mejor. ¿Que necesitas?",
+  "Me encantaria ayudarte con eso, pero mis superpoderes son otros. ¿Algo relacionado con tu negocio?",
 ];
 
-// Remaining off-topic patterns (catch-all for patterns not in categories above)
+// Remaining off-topic catch-all patterns
 const OFF_TOPIC_CATCH_ALL = [
-  /\b(celebridad|famoso|actor|actriz|cantante|musico|influencer|tiktoker|youtuber)\b/i,
-  /\b(religion|iglesia|biblia|coran|buda|rezar|fe|espiritualidad)\b/i,
-  /\b(aliens?|ovni|ufo|conspiracion|illuminati|terra plana|flat earth)\b/i,
-  /\b(loteria|apuesta|casino|poker|ruleta|apostar|ganar dinero facil)\b/i,
-  /\b(maquillaje|ropa|moda|zapatos|marca|gucci|zara|shopping|comprar ropa)\b/i,
-  /\b(que opinas de|tu opinion|crees que|piensas que|te gusta|prefieres)\b/i,
-  /\b(cuentame algo|dime algo|sorprendeme|aburrido|divertido)\b/i,
+  /\b(que opinas sobre|que piensas sobre|tu opinion sobre)\b/i,
+  /\b(cuento|fabula|leyenda|mito)\b/i,
+  /\b(planeta|saturno|jupiter|venus|mercurio|neptuno|pluton)\b/i,
+  /\b(dinosaurio|fosil|extincion|evolucion|darwin)\b/i,
+  /\b(princesa|rey|reina|castillo|medieval)\b/i,
+  /\b(chocolate|helado|cafe|cerveza|vino|cocktail|bebida)\b/i,
+  /\b(selfie|foto|fotografia|camara)\b/i,
+  /\b(vacuna|virus|pandemia|covid)\b/i,
+  /\b(color favorito|numero favorito|animal favorito)\b/i,
+  /\b(navidad|halloween|semana santa|san valentin|pascua|ano nuevo)\b/i,
 ];
 
 // ─── 5. App FAQ responses ────────────────────────────────────────────────────
