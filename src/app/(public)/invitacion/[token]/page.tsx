@@ -70,7 +70,7 @@ export default function InvitacionPage() {
         setSubmitting(false);
       } else {
         setSuccess(true);
-        setTimeout(() => router.push("/dashboard"), 2000);
+        setTimeout(() => router.push("/panel"), 2000);
       }
     } catch {
       setFormError("Error de conexión");
@@ -94,7 +94,7 @@ export default function InvitacionPage() {
         setSubmitting(false);
       } else {
         setSuccess(true);
-        setTimeout(() => router.push("/dashboard"), 2000);
+        setTimeout(() => router.push("/panel"), 2000);
       }
     } catch {
       setFormError("Error de conexión");
