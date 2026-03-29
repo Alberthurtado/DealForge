@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { industrias } from "@/data/industrias";
 import { features } from "@/data/features";
+import { comparaciones } from "@/data/comparaciones";
 
 // Rebuild sitemap every hour instead of every request
 export const revalidate = 3600;
@@ -110,5 +111,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...blogPosts, ...industryPages, ...featurePages];
+  // Comparison pages
+  const comparisonPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/comparar`,
+      lastModified: new Date("2026-03-28"),
+    },
+    ...comparaciones.map((c) => ({
+      url: `${baseUrl}/comparar/${c.slug}`,
+      lastModified: new Date("2026-03-28"),
+    })),
+  ];
+
+  return [...staticPages, ...blogPosts, ...industryPages, ...featurePages, ...comparisonPages];
 }

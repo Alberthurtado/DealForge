@@ -590,9 +590,10 @@ function Footer() {
           <div>
             <h4 className="font-semibold text-white text-sm mb-4">Producto</h4>
             <ul className="space-y-2.5 text-sm">
-              <li><a href="#funcionalidades" className="hover:text-white transition-colors">Funcionalidades</a></li>
-              <li><a href="#forge" className="hover:text-white transition-colors">Forge IA</a></li>
-              <li><a href="#precios" className="hover:text-white transition-colors">Precios</a></li>
+              <li><Link href="/funcionalidades" className="hover:text-white transition-colors">Funcionalidades</Link></li>
+              <li><Link href="/precios" className="hover:text-white transition-colors">Precios</Link></li>
+              <li><Link href="/comparar" className="hover:text-white transition-colors">Comparativas</Link></li>
+              <li><Link href="/calculadora-roi" className="hover:text-white transition-colors">Calculadora ROI</Link></li>
               <li><Link href="/login" className="hover:text-white transition-colors">Acceder</Link></li>
             </ul>
           </div>
@@ -601,8 +602,10 @@ function Footer() {
           <div>
             <h4 className="font-semibold text-white text-sm mb-4">Recursos</h4>
             <ul className="space-y-2.5 text-sm">
-              <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
               <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link href="/que-es-cpq" className="hover:text-white transition-colors">¿Qué es CPQ?</Link></li>
+              <li><Link href="/glosario" className="hover:text-white transition-colors">Glosario</Link></li>
+              <li><Link href="/guia" className="hover:text-white transition-colors">Guía gratuita</Link></li>
               <li><Link href="/documentacion" className="hover:text-white transition-colors">Documentación</Link></li>
               <li><Link href="/changelog" className="hover:text-white transition-colors">Changelog</Link></li>
             </ul>
