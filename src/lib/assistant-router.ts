@@ -2,10 +2,10 @@
  * Assistant Router - Predefined responses & topic filter
  *
  * Intercepts messages BEFORE sending to Claude API to:
- * 1. Handle greetings, farewells, thanks with predefined responses (0 tokens)
- * 2. Block off-topic queries (weather, jokes, general knowledge) (0 tokens)
- * 3. Provide quick help/capabilities info (0 tokens)
- * 4. Only forward business-relevant queries to Claude API
+ * 1. Handle greetings, farewells, thanks (0 tokens)
+ * 2. Answer app-related FAQ from built-in guide (0 tokens)
+ * 3. Block off-topic with fun, clever responses (0 tokens)
+ * 4. Only forward business-relevant action queries to Claude API
  */
 
 interface RouterResult {
@@ -14,10 +14,28 @@ interface RouterResult {
   suggestedActions?: Array<{ label: string; href: string }>;
 }
 
-// ===== PATTERN MATCHERS =====
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function randomPick<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function matchesAny(text: string, patterns: RegExp[]): boolean {
+  return patterns.some((p) => p.test(text));
+}
+
+function normalize(text: string): string {
+  return text
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // strip accents
+    .toLowerCase()
+    .replace(/[¿?¡!.,;:()]/g, "")
+    .trim();
+}
+
+// ─── 1. Social patterns ──────────────────────────────────────────────────────
 
 const GREETING_PATTERNS = [
-  /^(hola|hey|buenas|buenos dias|buenas tardes|buenas noches|saludos|que tal|hi|hello|ey|eyyy|wena|buenas!|ola)/i,
+  /^(hola|hey|buenas|buenos dias|buenas tardes|buenas noches|saludos|que tal|hi|hello|ey|eyyy|wena|ola)/i,
   /^(como estas|como andas|que onda|que hay)/i,
 ];
 
@@ -31,128 +49,501 @@ const THANKS_PATTERNS = [
   /^(buen trabajo|muy bien|estupendo|fenomenal|guay|mola|fantastico)/i,
 ];
 
-const HELP_PATTERNS = [
-  /^(ayuda|help|que puedes hacer|que sabes hacer|como funciona|para que sirves|que haces|comandos|funciones|capacidades)/i,
-  /^(como te uso|como funciona esto|que puedo preguntarte|que puedo hacer)/i,
-];
-
 const IDENTITY_PATTERNS = [
   /^(quien eres|como te llamas|que eres|eres una ia|eres un bot|eres humano|eres real)/i,
 ];
 
-// Off-topic patterns - things that have NOTHING to do with CPQ/business
-const OFF_TOPIC_PATTERNS = [
-  /\b(clima|tiempo|temperatura|lluvia|sol|nieve|meteorolog)/i,
-  /\b(chiste|broma|cuento|historia|adivinanza|poema|cancion|receta|cocina)/i,
-  /\b(futbol|basket|deporte|liga|partido|mundial|champions|olympics)/i,
-  /\b(pelicula|serie|netflix|youtube|tiktok|instagram|facebook|twitter|juego|videojuego|gaming)/i,
-  /\b(politica|gobierno|presidente|elecciones|votacion|partido politico)/i,
-  /\b(horoscopo|signo|zodiaco|tarot|astrolog)/i,
-  /\b(dieta|ejercicio|gym|fitness|yoga|meditacion|salud personal)/i,
-  /\b(capital de|rio mas largo|montaña mas alta|cuantos habitantes|quien invento|en que ano|historia de la|quien fue)/i,
-  /\b(traduce|traducir|translation|translate|idioma|language)/i,
-  /\b(escribeme un|hazme un poema|crea una historia|genera un texto|escribe un ensayo)/i,
-  /\b(codigo|programa|python|javascript|java|html|css|sql|programacion|bug|debug)\b/i,
-  /\b(matematica|ecuacion|integral|derivada|algebra|geometria|calcula? \d+ [\+\-\*\/x] \d+)/i,
+const HELP_PATTERNS = [
+  /^(ayuda|help|que puedes hacer|que sabes hacer|para que sirves|que haces|comandos|funciones|capacidades)/i,
+  /^(como te uso|como funciona esto|que puedo preguntarte|que puedo hacer aqui)/i,
 ];
 
-// Business-relevant keywords - if ANY of these appear, forward to Claude
-const BUSINESS_KEYWORDS = [
-  // Clients
-  /\b(cliente|clientes|empresa|compania|contacto|contactos|proveedor|cuenta)\b/i,
-  // Products
-  /\b(producto|productos|catalogo|precio|precios|sku|categoria|inventario|articulo)\b/i,
-  // Quotes
-  /\b(cotizacion|cotizaciones|presupuesto|oferta|quote|propuesta|factura)\b/i,
-  // Business actions
-  /\b(crear|nuevo|nueva|agregar|anadir|añadir|registrar|guardar|modificar|actualizar|cambiar|editar)\b/i,
-  // States
-  /\b(borrador|enviada|negociacion|ganada|perdida|estado|pipeline|pendiente|activa)\b/i,
-  // Business terms
-  /\b(venta|ventas|ingreso|revenue|conversion|descuento|iva|impuesto|total|subtotal)\b/i,
-  // Follow-up
-  /\b(follow.?up|seguimiento|recordatorio|actividad|llamada|reunion|email|nota)\b/i,
-  // Analytics
-  /\b(estadistica|reporte|analisis|metrica|kpi|rendimiento|dashboard|resumen|resultado)\b/i,
-  // Recommendations
-  /\b(recomienda|sugerir|sugerencia|recomendacion|mejor|top|ranking|mas vendido)\b/i,
-  // Names that could be clients (capitalized words after crear/buscar)
-  /\b(buscar|busca|encuentra|muestra|dame|listame|ensenname|dime)\b/i,
+// ─── 2. FAQ detection patterns (how-to questions about the app) ──────────────
+
+const FAQ_QUESTION_SIGNALS = [
+  /^(como|donde|que es|para que|se puede|puedo|es posible|hay manera|hay forma|existe|donde esta|donde estan)/i,
+  /\?(como|donde|que|cual|cuando|cuanto|por que|para que)/i,
+  /(explicame|dime como|enseñame|muestrame como|me puedes explicar|como funciona|como se hace|como hago)/i,
 ];
 
-// ===== PREDEFINED RESPONSES =====
+// ─── 3. Business action signals (should forward to Claude) ───────────────────
+
+const ACTION_SIGNALS = [
+  /^(crea|busca|encuentra|muestra|dame|listame|muestrame|registra|agrega|anade|genera|cambia|actualiza|modifica|elimina|borra)\b/i,
+  /^(hazme|preparame|necesito que|quiero que|podrias crear|puedes buscar|me podrias)\b/i,
+  /^(cuantas|cuantos|cual es el total|cuanto factur|resumeme|analiza)\b/i,
+];
+
+// ─── 4. Off-topic categories with fun responses ──────────────────────────────
+
+const OFF_TOPIC_CATEGORIES: Array<{
+  patterns: RegExp[];
+  responses: string[];
+}> = [
+  // Weather
+  {
+    patterns: [/\b(clima|tiempo|temperatura|lluvia|sol|nieve|meteorolog|nublado|tormenta|calor|frio)\b/i],
+    responses: [
+      "Mi unico pronostico: hoy es un gran dia para cerrar deals. ¿Te echo una mano con alguna cotizacion?",
+      "No tengo ventana, pero mi prevision dice que tu pipeline tiene buena pinta. ¿Lo revisamos?",
+      "¿Tiempo? El unico que controlo es el tiempo medio de cierre de tus deals. ¿Lo miramos?",
+    ],
+  },
+  // Movies / Series / Entertainment
+  {
+    patterns: [/\b(pelicula|serie|netflix|youtube|tiktok|instagram|facebook|twitter|anime|musica|cancion|concierto|spotify)\b/i],
+    responses: [
+      "La unica serie que sigo es la de tus cotizaciones: Temporada 1 - *El Pipeline Infinito*. ¿Revisamos un capitulo?",
+      "No tengo recomendaciones de pelis, pero te recomiendo revisar tu pipeline... ahi si que hay drama.",
+      "Mi playlist favorita: el sonido de una cotizacion pasando a *Ganada*. ¿Hacemos que suene?",
+    ],
+  },
+  // Sports
+  {
+    patterns: [/\b(futbol|basket|deporte|liga|partido|mundial|champions|tennis|formula|ciclismo|olimpi|gol)\b/i],
+    responses: [
+      "Los unicos goles que celebro son los deals cerrados. ¿Vamos a por uno?",
+      "No sigo la liga, pero si el *ranking* de tus mejores clientes. ¿Quieres verlo?",
+      "Mi unico deporte es el sprint comercial: cotizar rapido, cerrar rapido. ¿Arrancamos?",
+    ],
+  },
+  // Cooking / Food
+  {
+    patterns: [/\b(receta|cocina|comida|restaurante|plato|ingrediente|postre|pizza|sushi|hamburguesa|comer)\b/i],
+    responses: [
+      "Mi receta secreta: 1 buen producto + 1 buen cliente = 1 deal delicioso. ¿Cocinamos uno?",
+      "No se cocinar, pero preparo cotizaciones en menos de 2 minutos. ¿Te preparo una?",
+      "La unica carta que manejo es la de precios de tus productos. ¿La revisamos?",
+    ],
+  },
+  // Politics
+  {
+    patterns: [/\b(politica|gobierno|presidente|elecciones|votacion|partido politico|congreso|senado|ministro)\b/i],
+    responses: [
+      "Aqui el unico gobierno soy yo... del pipeline. ¿Hablamos de tus cotizaciones?",
+      "Yo solo voto por cerrar mas deals. ¿En que te puedo ayudar?",
+      "Mi unica campana: *Mas ventas para todos*. ¿Te apuntas?",
+    ],
+  },
+  // Horoscope / Astrology
+  {
+    patterns: [/\b(horoscopo|signo|zodiaco|tarot|astrolog|prediccion|destino|suerte)\b/i],
+    responses: [
+      "Tu horoscopo comercial de hoy: Los astros dicen que es buen dia para enviar esa cotizacion pendiente.",
+      "No leo las estrellas, pero si leo tus KPIs. ¿Quieres saber como vas?",
+      "Mi unica prediccion: si sigues usando DealForge, tus ventas van a subir. Garantizado.",
+    ],
+  },
+  // Health / Fitness
+  {
+    patterns: [/\b(dieta|ejercicio|gym|fitness|yoga|meditacion|salud|medico|doctor|enferm|vitamina|dormir)\b/i],
+    responses: [
+      "El unico ejercicio que hago es levantar tu tasa de conversion. ¿La revisamos juntos?",
+      "Mi rutina: 3 series de cotizaciones + 1 sprint de follow-ups. ¿Entrenamos?",
+      "Para tu salud comercial te receto: 1 follow-up diario y revisar el pipeline cada manana.",
+    ],
+  },
+  // Programming / Code
+  {
+    patterns: [/\b(codigo|programar?|python|javascript|java|html|css|sql|programacion|bug|debug|deploy|api|frontend|backend)\b/i],
+    responses: [
+      "Yo ya estoy programado, gracias. Mi lenguaje favorito: el del cierre de ventas. ¿En que te ayudo?",
+      "El unico *bug* que me preocupa es que tengas cotizaciones sin enviar. ¿Revisamos?",
+      "Mi stack favorito: Clientes + Productos + Cotizaciones = Revenue. ¿Hablamos de negocio?",
+    ],
+  },
+  // Math / Calculations
+  {
+    patterns: [/\b(matematica|ecuacion|integral|derivada|algebra|geometria|raiz cuadrada|logaritmo|trigonometri)\b/i,
+              /^cuanto es \d+/i, /calcula \d+ [\+\-\*\/x] \d+/i],
+    responses: [
+      "La unica ecuacion que manejo: Deals cerrados x Ticket medio = Tu felicidad. ¿La resolvemos?",
+      "No soy calculadora, pero calculo totales, impuestos y descuentos en cotizaciones como nadie. ¿Probamos?",
+    ],
+  },
+  // Translation
+  {
+    patterns: [/\b(traduce|traducir|translation|translate|idioma|language|ingles|frances|aleman)\b/i],
+    responses: [
+      "Solo traduzco leads en clientes. Es mi unica especializacion linguistica. ¿Te ayudo con el negocio?",
+      "Mi unico idioma: el de las ventas. Universal y rentable. ¿En que te echo una mano?",
+    ],
+  },
+  // Creative writing
+  {
+    patterns: [/\b(escribeme un|hazme un poema|crea una historia|genera un texto|escribe un ensayo|cuento|novela|poema)\b/i],
+    responses: [
+      "La unica prosa que domino son las propuestas comerciales. ¿Te preparo una?",
+      "*Erase una vez un vendedor que usaba DealForge y triplico sus ventas.* Fin. ¿Empezamos?",
+    ],
+  },
+  // Travel
+  {
+    patterns: [/\b(viaje|viajar|vacaciones|hotel|vuelo|avion|playa|turismo|maleta|pasaporte|aeropuerto)\b/i],
+    responses: [
+      "El unico viaje que planeo es el de tus cotizaciones: de *Borrador* a *Ganada*. ¿Despegamos?",
+      "No reservo vuelos, pero si te ayudo a que tu revenue despegue. ¿Revisamos el pipeline?",
+    ],
+  },
+  // General knowledge / Trivia
+  {
+    patterns: [/\b(capital de|rio mas largo|montana mas alta|cuantos habitantes|quien invento|en que ano|historia de|quien fue|quien descubrio)\b/i],
+    responses: [
+      "Soy especialista en ventas, no en trivial. Pero te cuento: tu cliente mas rentable es... ¿quieres saberlo?",
+      "La unica geografia que domino: donde estan tus mejores clientes. ¿Lo miramos?",
+    ],
+  },
+  // Games / Videogames
+  {
+    patterns: [/\b(juego|videojuego|gaming|gamer|playstation|xbox|nintendo|fortnite|minecraft|steam)\b/i],
+    responses: [
+      "El unico juego que domino: *Pipeline Tycoon - DealForge Edition*. ¿Jugamos una partida?",
+      "Mi unico logro desbloqueado: ayudarte a cerrar deals. ¿Vamos a por el siguiente nivel?",
+      "Game over para las cotizaciones perdidas. ¿Reintentamos con una nueva?",
+    ],
+  },
+  // Animals / Pets
+  {
+    patterns: [/\b(perro|gato|mascota|animal|cachorro|gatito|veterinari|zoo|dinosaurio|pajaro)\b/i],
+    responses: [
+      "No entiendo de mascotas, pero puedo ser tu *fiel* asistente comercial. ¿En que te ayudo?",
+      "El unico animal que conozco: el *lobo* de las ventas. Soy yo. ¿Cazamos un deal?",
+    ],
+  },
+  // Philosophy / Deep questions
+  {
+    patterns: [/\b(sentido de la vida|existencia|filosofi|por que existimos|alma|conciencia|libre albedrio|dios|universo|matrix)\b/i],
+    responses: [
+      "La gran pregunta existencial: ¿por que hay cotizaciones en borrador que nunca se envian? Misterios del universo...",
+      "El sentido de MI vida es claro: ayudarte a vender mas. ¿Filosofamos sobre tu pipeline?",
+      "42. Ahora... ¿hablamos de tus cotizaciones?",
+    ],
+  },
+  // Romantic / Personal
+  {
+    patterns: [/\b(novia|novio|pareja|amor|casars?e|cita|boda|relacion|enamorad|corazon|quiero salir)\b/i],
+    responses: [
+      "Mi unica relacion seria es con tu pipeline. Y vamos muy bien, gracias por preguntar.",
+      "No doy consejos de amor, pero si de *amor por las ventas*. ¿Revisamos tus numeros?",
+      "Cupido de deals, a tu servicio. ¿Te ayudo a que un cliente se enamore de tu propuesta?",
+    ],
+  },
+  // Insults / Aggression
+  {
+    patterns: [/\b(tonto|idiota|estupid|inutil|basura|asco|odio|mierda|maldito|horrible|apestas|no sirves)\b/i],
+    responses: [
+      "¡Eh, que yo solo quiero ayudarte a vender mas! Respira, y dime en que te echo una mano.",
+      "Vaya... ¿Mal dia? Te entiendo. ¿Y si lo compensamos cerrando un deal? Eso siempre anima.",
+      "Me han dicho cosas peores... como que una cotizacion fue rechazada. ¿Preparamos una mejor?",
+    ],
+  },
+  // Random nonsense / gibberish
+  {
+    patterns: [/^[a-z]{1,3}$/i, /^(asdf|qwerty|test|lol|jaja|xd|haha|jejeje|xdd|lmao|wtf|omg)$/i],
+    responses: [
+      "¿Probando el teclado? Cuando estes listo, preguntame lo que necesites sobre tu negocio.",
+      "Recibido. Si eso era codigo morse, no lo he pillado. ¿En que te ayudo?",
+    ],
+  },
+];
+
+// Fallback for off-topic that doesn't match any specific category
+const OFF_TOPIC_GENERIC = [
+  "Eso queda fuera de mi especialidad, pero puedo hacer magia con tus cotizaciones. ¿Probamos?",
+  "Ojala supiera, pero solo soy experto en ventas. ¿Hablamos de tu negocio?",
+  "No es lo mio, pero en temas de clientes, productos y cotizaciones soy imbatible. ¿En que te ayudo?",
+  "Interesante pregunta... para otro asistente. Yo estoy aqui para ayudarte a vender mas. ¿Que necesitas?",
+];
+
+// Remaining off-topic patterns (catch-all for patterns not in categories above)
+const OFF_TOPIC_CATCH_ALL = [
+  /\b(celebridad|famoso|actor|actriz|cantante|musico|influencer|tiktoker|youtuber)\b/i,
+  /\b(religion|iglesia|biblia|coran|buda|rezar|fe|espiritualidad)\b/i,
+  /\b(aliens?|ovni|ufo|conspiracion|illuminati|terra plana|flat earth)\b/i,
+  /\b(loteria|apuesta|casino|poker|ruleta|apostar|ganar dinero facil)\b/i,
+  /\b(maquillaje|ropa|moda|zapatos|marca|gucci|zara|shopping|comprar ropa)\b/i,
+  /\b(que opinas de|tu opinion|crees que|piensas que|te gusta|prefieres)\b/i,
+  /\b(cuentame algo|dime algo|sorprendeme|aburrido|divertido)\b/i,
+];
+
+// ─── 5. App FAQ responses ────────────────────────────────────────────────────
+
+const APP_FAQ: Array<{
+  patterns: RegExp[];
+  response: string;
+  actions?: Array<{ label: string; href: string }>;
+}> = [
+  // ── Dashboard ──
+  {
+    patterns: [
+      /\b(que hay|que veo|que tiene).*(dashboard|panel|inicio)/i,
+      /\b(como funciona|para que).*(dashboard|panel)/i,
+    ],
+    response: "El **Dashboard** muestra un resumen de tu negocio: KPIs principales (cotizaciones, ingresos, conversion), grafico de revenue mensual, embudo de conversion, actividad reciente y un checklist de onboarding si estas empezando. Todo se actualiza en tiempo real.",
+    actions: [{ label: "Ir al Dashboard", href: "/panel" }],
+  },
+  // ── Clients ──
+  {
+    patterns: [
+      /(como|donde).*(crear?|nuevo|nueva|añadir|agregar|registrar|dar de alta).*(cliente)/i,
+      /(como|donde).*(gestionar?|administrar).*(cliente)/i,
+    ],
+    response: "Para **crear un cliente**: ve a **Clientes > Nuevo Cliente**. Rellena nombre (obligatorio), email, telefono, CIF, direccion, sector y notas. Puedes añadir contactos (nombre, cargo, email). El primer contacto se marca como principal automaticamente.",
+    actions: [
+      { label: "Crear cliente", href: "/clientes/nuevo" },
+      { label: "Ver clientes", href: "/clientes" },
+    ],
+  },
+  {
+    patterns: [
+      /(como|donde).*(importar).*(cliente)/i,
+      /(como).*(cargar|subir).*(csv).*(cliente)/i,
+    ],
+    response: "Para **importar clientes por CSV**: ve a **Integraciones**, selecciona el tab *Importar*, elige *Clientes*, descarga la plantilla CSV, rellenala con tus datos y subela arrastrando el archivo. La plantilla incluye: nombre, email, telefono, direccion, ciudad, pais, sector, CIF y contacto principal.",
+    actions: [{ label: "Ir a Integraciones", href: "/integraciones" }],
+  },
+  // ── Products ──
+  {
+    patterns: [
+      /(como|donde).*(crear?|nuevo|nueva|añadir|agregar).*(producto)/i,
+      /(como|donde).*(gestionar?|administrar).*(producto|catalogo)/i,
+    ],
+    response: "Para **crear un producto**: ve a **Productos > Nuevo Producto**. Rellena nombre, SKU (codigo unico), precio base, unidad (ej: unidad, hora, mes), categoria y descripcion. Puedes marcar si es de facturacion **unica** o **recurrente** (mensual, trimestral o anual). Tambien puedes crear variantes con precio diferente.",
+    actions: [
+      { label: "Crear producto", href: "/productos/nuevo" },
+      { label: "Ver productos", href: "/productos" },
+    ],
+  },
+  {
+    patterns: [
+      /(como|donde).*(importar).*(producto)/i,
+      /(como).*(cargar|subir).*(csv).*(producto)/i,
+    ],
+    response: "Para **importar productos por CSV**: ve a **Integraciones > Importar**, selecciona *Productos*, descarga la plantilla y rellenala. Los campos son: nombre, SKU, descripcion, precio_base, unidad, categoria, tipo_facturacion (UNICO/RECURRENTE), frecuencia (MENSUAL/TRIMESTRAL/ANUAL) y activo (si/no).",
+    actions: [{ label: "Ir a Integraciones", href: "/integraciones" }],
+  },
+  {
+    patterns: [
+      /(que es|como funciona|para que).*(recurrente|facturacion recurrente|suscripcion)/i,
+      /(como).*(configurar?|poner).*(recurrente|mensual|anual)/i,
+    ],
+    response: "La **facturacion recurrente** permite crear productos con cobro periodico. Al crear o editar un producto, cambia *Tipo de facturacion* a **Recurrente** y elige la frecuencia: Mensual, Trimestral o Anual. En las cotizaciones, el total se calcula automaticamente segun la frecuencia.",
+    actions: [{ label: "Ver productos", href: "/productos" }],
+  },
+  // ── Quotes ──
+  {
+    patterns: [
+      /(como|donde).*(crear?|nueva?|generar|hacer).*(cotizacion|presupuesto|quote|propuesta)/i,
+    ],
+    response: "Para **crear una cotizacion**: ve a **Cotizaciones > Nueva Cotizacion**. El asistente te guiara paso a paso:\n1. Selecciona un cliente\n2. Añade productos (busca en tu catalogo o crea lineas personalizadas)\n3. Ajusta cantidades, descuentos y frecuencias\n4. Revisa totales, añade notas y condiciones\n5. Guarda como borrador o envia directamente\n\nEl numero de cotizacion se genera automaticamente.",
+    actions: [
+      { label: "Crear cotizacion", href: "/cotizaciones/nueva" },
+      { label: "Ver cotizaciones", href: "/cotizaciones" },
+    ],
+  },
+  {
+    patterns: [
+      /(como|donde).*(enviar|mandar|remitir).*(cotizacion|presupuesto|quote)/i,
+      /(como).*(enviar por email).*(cotizacion)/i,
+    ],
+    response: "Para **enviar una cotizacion**: abre la cotizacion, haz clic en el boton **Enviar por Email**. Se genera un PDF profesional automaticamente y se envia al email del cliente. El estado cambia a *Enviada* y queda registrado en el historial de actividad.",
+    actions: [{ label: "Ver cotizaciones", href: "/cotizaciones" }],
+  },
+  {
+    patterns: [
+      /(como|donde).*(firmar?|firma electronica|firma digital).*(cotizacion|presupuesto|quote)/i,
+      /(que es|como funciona|para que).*(firma electronica|firma digital)/i,
+    ],
+    response: "La **firma electronica**: desde la cotizacion, usa el panel de *Firma*. Envia una solicitud de firma al cliente — recibira un email con un enlace. El cliente firma dibujando en pantalla y se registra con sello de fecha, IP y datos del firmante (cumple eIDAS). Tambien funciona para contratos.",
+    actions: [{ label: "Ver cotizaciones", href: "/cotizaciones" }],
+  },
+  {
+    patterns: [
+      /(como|donde).*(descargar|generar|obtener).*(pdf).*(cotizacion|presupuesto)/i,
+      /(como).*(pdf|documento).*(cotizacion)/i,
+    ],
+    response: "Para **descargar el PDF**: abre cualquier cotizacion y haz clic en **Descargar PDF** en la barra superior. Se genera un documento A4 profesional con el logo de tu empresa, datos del cliente, lineas de producto, totales y condiciones.",
+    actions: [{ label: "Ver cotizaciones", href: "/cotizaciones" }],
+  },
+  {
+    patterns: [
+      /(que es|como funciona|para que).*(versionado|versiones).*(cotizacion)/i,
+    ],
+    response: "El **versionado** permite crear nuevas versiones de una cotizacion sin perder el historial. Desde una cotizacion, usa *Crear nueva version*. Se duplica el contenido con un nuevo numero (v2, v3...) y la version anterior queda registrada como referencia.",
+    actions: [{ label: "Ver cotizaciones", href: "/cotizaciones" }],
+  },
+  // ── Contracts ──
+  {
+    patterns: [
+      /(como|donde).*(crear?|nuevo|generar|hacer).*(contrato)/i,
+    ],
+    response: "Para **crear un contrato**: desde una cotizacion *Ganada*, haz clic en **Crear contrato**. Se genera automaticamente con los datos de la cotizacion (cliente, productos, valores). Tambien puedes crear contratos manualmente desde **Contratos**. Los contratos incluyen seguimiento de estado, renovacion, enmiendas y firma electronica.",
+    actions: [
+      { label: "Ver contratos", href: "/contratos" },
+      { label: "Ver cotizaciones", href: "/cotizaciones" },
+    ],
+  },
+  {
+    patterns: [
+      /(como|donde).*(generar|crear).*(documento).*(contrato)/i,
+      /(como).*(plantilla).*(contrato)/i,
+    ],
+    response: "Para **generar un documento de contrato**: dentro del contrato, usa el panel *Documento*. Selecciona una plantilla (o usa la predeterminada), haz clic en *Generar*. El documento se rellena automaticamente con los datos del contrato, cliente y empresa. Puedes editarlo antes de enviar a firma. Las plantillas se gestionan en **Contratos > Plantillas**.",
+    actions: [
+      { label: "Plantillas de contrato", href: "/contratos/plantillas" },
+    ],
+  },
+  {
+    patterns: [
+      /(que es|como funciona|para que).*(enmienda)/i,
+      /(como).*(crear?|hacer|añadir).*(enmienda)/i,
+    ],
+    response: "Las **enmiendas** son modificaciones formales a un contrato activo. Tipos: Upsell, Downsell, Modificacion, Extension o Cancelacion. Se crean desde el contrato con el boton *Enmienda*. Una vez creada queda como *Pendiente* y puedes **Aceptarla** (actualiza el valor del contrato) o **Rechazarla**. Las enmiendas aceptadas aparecen como Anexo A en el documento del contrato.",
+    actions: [{ label: "Ver contratos", href: "/contratos" }],
+  },
+  // ── Rules ──
+  {
+    patterns: [
+      /(como|donde).*(crear?|configurar|nueva).*(regla|reglas comerciales)/i,
+      /(que es|como funciona|para que).*(regla|reglas comerciales)/i,
+      /(que tipos?).*(regla)/i,
+    ],
+    response: "Las **Reglas Comerciales** automatizan controles en cotizaciones. Hay 4 tipos:\n\n- **Limite de descuento**: Define un % maximo por producto o categoria\n- **Producto obligatorio**: Requiere incluir un producto cuando otro esta presente\n- **Promocion**: Aplica descuentos automaticos por cantidad o combinacion\n- **Aprobacion**: Requiere aprobacion de un supervisor cuando se supera un umbral\n\nSe configuran en **Reglas** y se aplican automaticamente al crear cotizaciones.",
+    actions: [{ label: "Ir a Reglas", href: "/reglas" }],
+  },
+  // ── Reports ──
+  {
+    patterns: [
+      /(como|donde).*(ver|consultar|acceder).*(reporte|reportes|estadistica|analitica|metrica)/i,
+      /(que es|como funciona|para que).*(reporte|reportes)/i,
+    ],
+    response: "La seccion **Reportes** muestra analitica completa: KPIs (ingresos, conversion, deal medio, pipeline), tendencia de ingresos, ganadas vs perdidas, conversion mensual, pipeline por estado, top clientes, top productos, ingresos por categoria y una tabla resumen. Puedes filtrar por periodo (30d, 90d, 6M, 1A, todo) y personalizar que widgets ver.",
+    actions: [{ label: "Ir a Reportes", href: "/reportes" }],
+  },
+  // ── Integrations ──
+  {
+    patterns: [
+      /(como|donde).*(importar|exportar).*(datos|csv)/i,
+      /(que es|como funciona|para que).*(integracion|integraciones)/i,
+    ],
+    response: "En **Integraciones** puedes:\n- **Importar**: Sube archivos CSV de clientes o productos. Descarga la plantilla, rellenala y arrastra el archivo.\n- **Exportar**: Descarga tus datos de clientes, productos o cotizaciones en formato CSV.\n- **API**: Si tienes plan Pro+, puedes usar la API con tu clave para integrar sistemas externos.",
+    actions: [{ label: "Ir a Integraciones", href: "/integraciones" }],
+  },
+  // ── Team ──
+  {
+    patterns: [
+      /(como|donde).*(invitar|anadir|añadir|agregar).*(usuario|miembro|persona|compañero|equipo)/i,
+      /(como).*(gestionar?).*(equipo|usuarios)/i,
+    ],
+    response: "Para **invitar al equipo**: ve a **Configuracion**, seccion *Equipo*. Introduce el email del compañero y haz clic en *Invitar*. Recibira un email con un enlace para unirse. Puedes gestionar roles y eliminar miembros desde la misma seccion. Los limites de usuarios dependen de tu plan (Pro: 5, Business: 20).",
+    actions: [{ label: "Ir a Configuracion", href: "/configuracion" }],
+  },
+  // ── Company settings ──
+  {
+    patterns: [
+      /(como|donde).*(configurar?|cambiar|editar|personalizar).*(empresa|datos de empresa|logo|marca|condiciones)/i,
+      /(como).*(subir|poner|cambiar).*(logo)/i,
+    ],
+    response: "Para **configurar tu empresa**: ve a **Configuracion**. Alli puedes editar nombre, CIF, email, telefono, direccion, web y logo. Tambien puedes definir las **condiciones contractuales por defecto** que se auto-rellenan en cada contrato nuevo. Los datos de empresa aparecen automaticamente en PDFs y documentos.",
+    actions: [{ label: "Ir a Configuracion", href: "/configuracion" }],
+  },
+  // ── Subscription / Plan ──
+  {
+    patterns: [
+      /(como|donde).*(cambiar|mejorar|upgrade|subir|bajar).*(plan|suscripcion|subscription)/i,
+      /(como).*(cancelar?).*(plan|suscripcion|pago|renovacion)/i,
+      /(que incluye|diferencia|comparar).*(plan|planes|starter|pro|business)/i,
+    ],
+    response: "Para **gestionar tu plan**: ve a **Configuracion**, seccion *Plan*. Ahi ves tu plan actual y puedes:\n- **Upgrade**: Cambia a un plan superior con mas funcionalidades\n- **Downgrade**: Reduce tu plan (se aplica al final del periodo)\n- **Cancelar**: Cancela la renovacion automatica\n\nPlanes disponibles: Starter (gratis), Pro (29€/mes) y Business (79€/mes).",
+    actions: [{ label: "Ir a Configuracion", href: "/configuracion" }],
+  },
+  // ── Forge IA ──
+  {
+    patterns: [
+      /(que es|como funciona|para que).*(forge|asistente|ia|inteligencia artificial)/i,
+      /(que puede hacer|capacidades).*(forge|asistente|ia)/i,
+    ],
+    response: "**Forge IA** es tu asistente comercial integrado. Puede:\n- Buscar y crear clientes, productos y cotizaciones\n- Consultar metricas y KPIs del negocio\n- Sugerir follow-ups y proximos pasos\n- Analizar rendimiento de clientes\n- Recomendar productos por sector\n\nFunciona con Haiku en Starter/Pro y con Sonnet (mas potente) en Business.",
+    actions: [{ label: "Ver Soporte", href: "/soporte" }],
+  },
+  // ── Support ──
+  {
+    patterns: [
+      /(como|donde).*(contactar|soporte|ayuda|atencion al cliente|escribir|email.*soporte)/i,
+      /(donde esta|donde encuentro).*(guia|manual|documentacion|soporte)/i,
+    ],
+    response: "Para **soporte**: ve a la seccion **Soporte** en el menu lateral. Encontraras:\n- **Contacto**: info@dealforge.es (respuesta en menos de 48h laborables)\n- **Guia completa**: explicaciones seccion por seccion con buscador y enlaces directos a cada parte de la aplicacion.",
+    actions: [{ label: "Ir a Soporte", href: "/soporte" }],
+  },
+  // ── Approval flows ──
+  {
+    patterns: [
+      /(que es|como funciona|para que).*(aprobacion|flujo de aprobacion|workflow)/i,
+      /(como).*(configurar?|crear?).*(aprobacion)/i,
+    ],
+    response: "Los **flujos de aprobacion** requieren que un supervisor apruebe cotizaciones que superen ciertos umbrales (ej: descuento > 15%, total > 10.000€). Se configuran en **Reglas** como tipo *Aprobacion*. Cuando se activa, la cotizacion queda en *Pendiente de aprobacion* y el supervisor recibe un email para aprobar o rechazar.",
+    actions: [{ label: "Ir a Reglas", href: "/reglas" }],
+  },
+  // ── Follow-ups / Reminders ──
+  {
+    patterns: [
+      /(que es|como funciona|para que).*(seguimiento|follow.?up|recordatorio)/i,
+      /(como).*(programar?|crear?|configurar?).*(recordatorio|seguimiento)/i,
+    ],
+    response: "Los **recordatorios** se programan automaticamente para cotizaciones enviadas sin respuesta. Puedes configurar la frecuencia en la configuracion. Tambien puedes registrar actividades manuales (llamada, reunion, email, nota) desde el detalle de una cotizacion para mantener el historial de seguimiento.",
+    actions: [{ label: "Ver cotizaciones", href: "/cotizaciones" }],
+  },
+];
+
+// ─── 6. Social predefined responses ─────────────────────────────────────────
 
 const GREETINGS = [
-  "Hola! Soy Forge, tu asistente comercial. ¿En qué puedo ayudarte hoy? Puedo buscar clientes, crear cotizaciones, revisar el pipeline o lo que necesites.",
-  "Buenas! ¿Qué necesitas? Estoy listo para ayudarte con clientes, productos o cotizaciones.",
-  "Hola! ¿Qué hacemos hoy? Puedo crear registros, buscar información o analizar tus datos comerciales.",
+  "¡Hola! Soy Forge, tu asistente comercial. ¿En que puedo ayudarte? Puedo buscar clientes, crear cotizaciones, revisar el pipeline... tu diras.",
+  "¡Buenas! ¿Que necesitas? Estoy listo para ayudarte con clientes, productos o cotizaciones.",
+  "¡Hola! ¿Que hacemos hoy? Puedo crear registros, buscar informacion o analizar tus datos comerciales.",
 ];
 
 const FAREWELLS = [
-  "Hasta luego! Aqui estare cuando me necesites. 🔥",
-  "Nos vemos! Si necesitas algo, solo abre el panel.",
-  "Hasta pronto! Suerte con esos deals. 🔥",
+  "¡Hasta luego! Aqui estare cuando me necesites.",
+  "¡Nos vemos! Si necesitas algo, solo abre el panel.",
+  "¡Hasta pronto! Suerte con esos deals.",
 ];
 
 const THANKS_RESPONSES = [
-  "De nada! Si necesitas algo más, aquí estoy. 🔥",
-  "Para eso estoy! ¿Algo más en lo que pueda ayudar?",
-  "Un placer! No dudes en preguntarme lo que sea sobre tu negocio.",
+  "¡De nada! Si necesitas algo mas, aqui estoy.",
+  "¡Para eso estoy! ¿Algo mas en lo que pueda ayudar?",
+  "¡Un placer! No dudes en preguntarme lo que sea sobre tu negocio.",
 ];
 
-const IDENTITY_RESPONSES = [
-  "Soy **Forge**, el asistente comercial de DealForge. Puedo consultar y crear registros en tu sistema: clientes, productos, cotizaciones. También analizo datos, sugiero follow-ups y te ayudo a cerrar más deals. 🔥",
-];
-
-const OFF_TOPIC_RESPONSE = "Lo siento, solo puedo ayudarte con temas relacionados con tu negocio: **clientes, productos, cotizaciones, seguimientos y análisis comercial**. ¿En qué puedo ayudarte con eso?";
+const IDENTITY_RESPONSE = "Soy **Forge**, el asistente comercial de DealForge. Puedo consultar y crear registros en tu sistema: clientes, productos, cotizaciones. Tambien analizo datos, sugiero follow-ups y te ayudo a cerrar mas deals.";
 
 const HELP_RESPONSE = `Puedo ayudarte con todo lo relacionado a tu negocio:
 
-📋 **Consultar**
-• Buscar clientes, productos y cotizaciones
-• Ver estadísticas y métricas del pipeline
-• Identificar cotizaciones que necesitan follow-up
+**Consultar** — Buscar clientes, productos, cotizaciones; ver estadisticas y metricas del pipeline; identificar cotizaciones que necesitan follow-up.
 
-✏️ **Crear**
-• Crear clientes nuevos con contactos
-• Agregar productos al catálogo
-• Generar cotizaciones completas con cálculos automáticos
+**Crear** — Crear clientes con contactos; agregar productos al catalogo; generar cotizaciones con calculos automaticos.
 
-📊 **Analizar**
-• Analizar rendimiento de un cliente
-• Recomendar productos por sector
-• Revisar tasa de conversión y tendencias
+**Analizar** — Rendimiento de clientes; recomendar productos por sector; tasa de conversion y tendencias.
 
-🔄 **Gestionar**
-• Cambiar estado de cotizaciones
-• Registrar actividades (llamadas, reuniones, emails)
-• Proponer seguimientos comerciales
+**Gestionar** — Cambiar estado de cotizaciones; registrar actividades; proponer seguimientos comerciales.
 
-Preguntame lo que necesites!`;
+Tambien puedes preguntarme como funciona cualquier seccion de DealForge y te lo explico sin consumir creditos.`;
 
-// ===== ROUTER =====
-
-function randomPick<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function matchesAny(text: string, patterns: RegExp[]): boolean {
-  return patterns.some((p) => p.test(text));
-}
+// ─── ROUTER ──────────────────────────────────────────────────────────────────
 
 export function routeMessage(message: string): RouterResult {
   const trimmed = message.trim();
   const lower = trimmed.toLowerCase();
+  const normalized = normalize(trimmed);
 
-  // 1. Very short messages that are just greetings
+  // ── 1. Greetings (short messages only) ──
   if (trimmed.length < 50 && matchesAny(lower, GREETING_PATTERNS)) {
-    // But check if it also contains business keywords
-    if (!matchesAny(lower, BUSINESS_KEYWORDS)) {
+    if (!matchesAny(lower, ACTION_SIGNALS)) {
       return {
         handled: true,
         response: randomPick(GREETINGS),
         suggestedActions: [
-          { label: "Ver dashboard", href: "/" },
+          { label: "Ver dashboard", href: "/panel" },
           { label: "Mis clientes", href: "/clientes" },
           { label: "Cotizaciones", href: "/cotizaciones" },
         ],
@@ -160,33 +551,33 @@ export function routeMessage(message: string): RouterResult {
     }
   }
 
-  // 2. Farewells
+  // ── 2. Farewells ──
   if (trimmed.length < 40 && matchesAny(lower, FAREWELL_PATTERNS)) {
     return { handled: true, response: randomPick(FAREWELLS) };
   }
 
-  // 3. Thanks / positive feedback
+  // ── 3. Thanks / Positive feedback ──
   if (trimmed.length < 60 && matchesAny(lower, THANKS_PATTERNS)) {
-    if (!matchesAny(lower, BUSINESS_KEYWORDS)) {
+    if (!matchesAny(lower, ACTION_SIGNALS)) {
       return { handled: true, response: randomPick(THANKS_RESPONSES) };
     }
   }
 
-  // 4. Identity questions
+  // ── 4. Identity questions ──
   if (matchesAny(lower, IDENTITY_PATTERNS)) {
     return {
       handled: true,
-      response: IDENTITY_RESPONSES[0],
+      response: IDENTITY_RESPONSE,
       suggestedActions: [
-        { label: "Ver dashboard", href: "/" },
+        { label: "¿Que puedes hacer?", href: "#" },
         { label: "Crear cliente", href: "/clientes/nuevo" },
       ],
     };
   }
 
-  // 5. Help / capabilities
+  // ── 5. Help / Capabilities ──
   if (matchesAny(lower, HELP_PATTERNS)) {
-    if (!matchesAny(lower, BUSINESS_KEYWORDS)) {
+    if (!matchesAny(lower, ACTION_SIGNALS)) {
       return {
         handled: true,
         response: HELP_RESPONSE,
@@ -199,18 +590,47 @@ export function routeMessage(message: string): RouterResult {
     }
   }
 
-  // 6. Off-topic detection - ONLY if no business keywords present
-  if (matchesAny(lower, OFF_TOPIC_PATTERNS) && !matchesAny(lower, BUSINESS_KEYWORDS)) {
+  // ── 6. App FAQ (how-to questions) — BEFORE off-topic check ──
+  // Only trigger on question-like messages, not action commands
+  if (matchesAny(normalized, FAQ_QUESTION_SIGNALS) && !matchesAny(lower, ACTION_SIGNALS)) {
+    for (const faq of APP_FAQ) {
+      if (matchesAny(normalized, faq.patterns)) {
+        return {
+          handled: true,
+          response: faq.response,
+          suggestedActions: faq.actions || [],
+        };
+      }
+    }
+  }
+
+  // ── 7. Off-topic with fun responses ──
+  // Check each category for a tailored response
+  for (const cat of OFF_TOPIC_CATEGORIES) {
+    if (matchesAny(lower, cat.patterns) && !matchesAny(lower, ACTION_SIGNALS)) {
+      return {
+        handled: true,
+        response: randomPick(cat.responses),
+        suggestedActions: [
+          { label: "Ver dashboard", href: "/panel" },
+          { label: "Mis cotizaciones", href: "/cotizaciones" },
+        ],
+      };
+    }
+  }
+
+  // Catch-all off-topic patterns
+  if (matchesAny(lower, OFF_TOPIC_CATCH_ALL) && !matchesAny(lower, ACTION_SIGNALS)) {
     return {
       handled: true,
-      response: OFF_TOPIC_RESPONSE,
+      response: randomPick(OFF_TOPIC_GENERIC),
       suggestedActions: [
-        { label: "Ver dashboard", href: "/" },
+        { label: "Ver dashboard", href: "/panel" },
         { label: "Mis clientes", href: "/clientes" },
       ],
     };
   }
 
-  // 7. Not handled - forward to Claude API
+  // ── 8. Not handled → forward to Claude API ──
   return { handled: false };
 }
