@@ -404,7 +404,7 @@ export default function SoportePage() {
             </div>
             <div>
               <h2 className="text-base font-bold text-gray-900">¿Necesitas ayuda personalizada?</h2>
-              <p className="text-sm text-gray-600 mt-0.5">Nuestro equipo responde en menos de 24 horas en días laborables.</p>
+              <p className="text-sm text-gray-600 mt-0.5">Nuestro equipo responde en menos de 48 horas en días laborables.</p>
               <a
                 href="mailto:info@dealforge.es"
                 className="inline-flex items-center gap-1.5 mt-2 text-sm font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
