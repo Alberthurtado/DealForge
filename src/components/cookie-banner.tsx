@@ -14,16 +14,15 @@ const COOKIE_KEY = "dealforge_cookie_consent";
 type ConsentLevel = "all" | "essential" | null;
 
 export function CookieBanner() {
-  const [consent, setConsent] = useState<ConsentLevel | "dismissed">("dismissed");
+  const [mounted, setMounted] = useState(false);
+  const [consent, setConsent] = useState<ConsentLevel>(null);
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const stored = localStorage.getItem(COOKIE_KEY);
-    if (!stored) {
-      setConsent(null); // No consent yet — show banner
-    } else {
-      setConsent("dismissed");
-      // Re-enable GA if user accepted all
+    if (stored) {
+      setConsent(stored as ConsentLevel);
       if (stored === "all") enableAnalytics();
     }
   }, []);
@@ -40,13 +39,13 @@ export function CookieBanner() {
 
   function handleAcceptAll() {
     localStorage.setItem(COOKIE_KEY, "all");
-    setConsent("dismissed");
+    setConsent("all");
     enableAnalytics();
   }
 
   function handleEssentialOnly() {
     localStorage.setItem(COOKIE_KEY, "essential");
-    setConsent("dismissed");
+    setConsent("essential");
     // Disable GA tracking
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("consent", "update", {
@@ -55,8 +54,9 @@ export function CookieBanner() {
     }
   }
 
+  // Don't render until mounted (avoids SSR mismatch)
   // Don't render if consent already given
-  if (consent === "dismissed") return null;
+  if (!mounted || consent !== null) return null;
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-50 p-4 sm:p-6">
