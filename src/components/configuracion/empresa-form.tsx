@@ -410,7 +410,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       </div>
 
       {/* Section 7: Terms & Conditions */}
-      <div className="bg-white rounded-xl border border-border p-6 space-y-6">
+      <div id="condiciones" className="bg-white rounded-xl border border-border p-6 space-y-6">
         <div>
           <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
             <FileText className="w-5 h-5 text-primary" />
@@ -438,7 +438,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
 
         <div>
           <label className="block text-sm font-medium text-foreground mb-1">
-            T&C Contractuales <span className="text-xs text-muted-foreground font-normal">(servicios recurrentes / suscripciones)</span>
+            Condiciones por defecto para Contratos <span className="text-xs text-muted-foreground font-normal">(se rellenan automáticamente en cada nuevo contrato)</span>
           </label>
           <textarea
             value={form.condicionesContractual || ""}

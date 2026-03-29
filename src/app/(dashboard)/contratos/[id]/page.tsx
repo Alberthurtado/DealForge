@@ -336,7 +336,15 @@ export default function ContratoDetailPage() {
                   {contrato.condiciones ? (
                     <p className="text-sm text-gray-600 whitespace-pre-line">{contrato.condiciones}</p>
                   ) : (
-                    <p className="text-sm text-gray-400 italic">Sin condiciones especificadas. Pulsa Editar para añadirlas.</p>
+                    <div className="flex items-start gap-2 bg-amber-50 border border-amber-100 rounded-lg p-3">
+                      <span className="text-amber-500 mt-0.5 text-base leading-none">⚠</span>
+                      <div className="text-xs text-amber-700">
+                        Sin condiciones especificadas. Pulsa <strong>Editar</strong> para añadirlas aquí, o configura unas por defecto para todos los contratos en{" "}
+                        <a href="/configuracion#condiciones" className="underline font-medium hover:text-amber-900">
+                          Configuración → Condiciones por defecto
+                        </a>.
+                      </div>
+                    </div>
                   )}
                 </div>
                 {contrato.clausulaCancelacion && (
