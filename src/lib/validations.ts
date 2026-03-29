@@ -266,6 +266,7 @@ export const aprobacionResolveSchema = z.object({
 
 export const stripeCheckoutSchema = z.object({
   plan: z.enum(["pro", "business"], { message: "Plan inválido" }),
+  interval: z.enum(["monthly", "annual"]).default("monthly"),
 });
 
 // ─── Blog ───────────────────────────────────────

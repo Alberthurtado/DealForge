@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import {
   stripe,
-  PLAN_PRICE_MAP,
+  getPriceId,
   getOrCreateStripeCustomer,
   getAppUrl,
 } from "@/lib/stripe";
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
   const { data, error } = validateBody(stripeCheckoutSchema, body);
   if (error) return error;
 
-  const priceId = PLAN_PRICE_MAP[data.plan];
+  const priceId = getPriceId(data.plan, data.interval);
 
   try {
     // Get or create Stripe customer
@@ -41,11 +41,13 @@ export async function POST(request: NextRequest) {
       metadata: {
         dealforge_userId: session.userId,
         dealforge_plan: data.plan,
+        dealforge_interval: data.interval,
       },
       subscription_data: {
         metadata: {
           dealforge_userId: session.userId,
           dealforge_plan: data.plan,
+          dealforge_interval: data.interval,
         },
       },
       allow_promotion_codes: true,

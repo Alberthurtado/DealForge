@@ -117,6 +117,8 @@ export function PlanSection({ user }: { user: PlanUser }) {
   const [upgrading, setUpgrading] = useState<string | null>(null);
   const [managingPortal, setManagingPortal] = useState(false);
 
+  const [billingInterval, setBillingInterval] = useState<"monthly" | "annual">("monthly");
+
   const plan = PLANS[user.plan] || PLANS.starter;
   const PlanIcon = plan.icon;
   const isPaid = user.plan !== "starter";
@@ -138,7 +140,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: targetPlan }),
+        body: JSON.stringify({ plan: targetPlan, interval: billingInterval }),
       });
       const data = await res.json();
       if (data.url) {
@@ -272,6 +274,35 @@ export function PlanSection({ user }: { user: PlanUser }) {
           </div>
         )}
 
+        {/* Billing interval toggle */}
+        {!isPaid && (
+          <div className="mt-4 flex items-center justify-center gap-2 p-1 bg-gray-100 rounded-lg w-fit mx-auto">
+            <button
+              onClick={() => setBillingInterval("monthly")}
+              className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                billingInterval === "monthly"
+                  ? "bg-white text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Mensual
+            </button>
+            <button
+              onClick={() => setBillingInterval("annual")}
+              className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors flex items-center gap-1.5 ${
+                billingInterval === "annual"
+                  ? "bg-white text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Anual
+              <span className="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full">
+                -20%
+              </span>
+            </button>
+          </div>
+        )}
+
         {/* Plan cards */}
         <div className="mt-4 space-y-3">
           {/* Pro card */}
@@ -279,7 +310,10 @@ export function PlanSection({ user }: { user: PlanUser }) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-foreground">
-                  Plan Pro — 29 EUR/mes
+                  Plan Pro — {billingInterval === "annual" ? "23" : "29"} EUR/mes
+                  {billingInterval === "annual" && (
+                    <span className="ml-1.5 text-xs font-normal text-green-600">(276 EUR/año)</span>
+                  )}
                 </p>
                 <p className="text-xs text-muted-foreground mt-0.5">
                   Forge IA ilimitado, emails, firma electrónica, recordatorios
@@ -312,7 +346,10 @@ export function PlanSection({ user }: { user: PlanUser }) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-foreground flex items-center gap-1.5">
-                  Plan Business — 79 EUR/mes
+                  Plan Business — {billingInterval === "annual" ? "63" : "79"} EUR/mes
+                  {billingInterval === "annual" && (
+                    <span className="text-xs font-normal text-green-600">(756 EUR/año)</span>
+                  )}
                   {user.plan !== "business" && (
                     <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-bold bg-purple-100 text-purple-700 rounded-full">
                       <Sparkles className="w-2.5 h-2.5" />
