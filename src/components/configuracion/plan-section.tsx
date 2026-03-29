@@ -60,7 +60,7 @@ const PLANS: Record<
       "100 cotizaciones/mes",
       "50 clientes",
       "200 productos",
-      "Forge IA ilimitado (Sonnet)",
+      "Forge IA ilimitado (Haiku)",
       "Hasta 5 usuarios",
       "Import / Export CSV",
       "Envío de emails",
@@ -70,7 +70,7 @@ const PLANS: Record<
       "Versionado de cotizaciones",
       "Reglas básicas",
     ],
-    iaModel: "Claude Sonnet",
+    iaModel: "Claude Haiku",
   },
   business: {
     label: "Business",

@@ -13,13 +13,12 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || "",
 });
 
-// Modelo por plan: Sonnet para pago, Haiku para gratis
-const MODEL_FREE = "claude-haiku-4-5-20251001";
-const MODEL_PAID = "claude-sonnet-4-20250514";
+// Modelo por plan: Haiku para Starter y Pro, Sonnet para Business+
+const MODEL_HAIKU = "claude-haiku-4-5-20251001";
+const MODEL_SONNET = "claude-sonnet-4-20250514";
 
 function getModelForPlan(plan: string): string {
-  // Starter = free = Haiku. Cualquier plan de pago = Sonnet.
-  return plan === "starter" ? MODEL_FREE : MODEL_PAID;
+  return plan === "business" || plan === "enterprise" ? MODEL_SONNET : MODEL_HAIKU;
 }
 
 interface ChatMessage {
