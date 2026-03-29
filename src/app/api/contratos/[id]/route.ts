@@ -23,7 +23,13 @@ export async function GET(
   const { id } = await params;
 
   const contrato = await prisma.contrato.findFirst({
-    where: { id, usuarioId: session.userId },
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
     include: {
       cliente: { select: { id: true, nombre: true, email: true } },
       cotizacion: { select: { id: true, numero: true, total: true, moneda: true } },
@@ -53,7 +59,13 @@ export async function PUT(
   const { id } = await params;
 
   const contrato = await prisma.contrato.findFirst({
-    where: { id, usuarioId: session.userId },
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
     select: { id: true, estado: true },
   });
 

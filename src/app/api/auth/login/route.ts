@@ -25,9 +25,17 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Find user
+  // Find user with empresa and membership
   const usuario = await prisma.usuario.findUnique({
     where: { email: data.email },
+    include: {
+      empresa: { select: { id: true, plan: true, planStatus: true } },
+      miembros: {
+        select: { rol: true, empresaId: true },
+        take: 1,
+        orderBy: { createdAt: "asc" },
+      },
+    },
   });
 
   if (!usuario || !usuario.activo) {
@@ -46,18 +54,41 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Determine empresa context
+  const membresia = usuario.miembros[0];
+  const empresaId = membresia?.empresaId || usuario.empresaId;
+  const rol = membresia?.rol || "ADMIN";
+
+  // Plan comes from empresa (team plan)
+  const empresa = await prisma.empresa.findUnique({
+    where: { id: empresaId },
+    select: { plan: true },
+  });
+  const plan = empresa?.plan || usuario.plan;
+
+  // If user has no EquipoMembro record, create one (legacy users)
+  if (!membresia) {
+    await prisma.equipoMembro.upsert({
+      where: { empresaId_usuarioId: { empresaId: usuario.empresaId, usuarioId: usuario.id } },
+      update: {},
+      create: { empresaId: usuario.empresaId, usuarioId: usuario.id, rol: "ADMIN" },
+    });
+  }
+
   // Create JWT token
   const token = await createToken({
     userId: usuario.id,
     email: usuario.email,
-    plan: usuario.plan,
+    plan,
     nombre: usuario.nombre,
+    empresaId,
+    rol,
   });
 
   // Set cookie
   const response = NextResponse.json({
     success: true,
-    user: { id: usuario.id, nombre: usuario.nombre, email: usuario.email, plan: usuario.plan },
+    user: { id: usuario.id, nombre: usuario.nombre, email: usuario.email, plan },
   });
 
   response.cookies.set(getCookieName(), token, {

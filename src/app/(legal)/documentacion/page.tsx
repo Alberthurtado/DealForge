@@ -59,6 +59,7 @@ const TOC = [
   { id: "recordatorios", label: "14. Recordatorios automáticos" },
   { id: "contratos", label: "15. Gestión de contratos" },
   { id: "renovaciones", label: "16. Renovaciones y alertas" },
+  { id: "equipo", label: "17. Equipo y usuarios" },
 ];
 
 export default function DocumentacionPage() {
@@ -705,6 +706,57 @@ export default function DocumentacionPage() {
         <li><strong className="text-red-600">Rojo (14-0 días)</strong> — urgente, requiere acción inmediata. Banner de alerta crítica.</li>
       </ul>
       <Warning>Los contratos que no se renuevan ni se cancelan antes de la fecha de fin pasan automáticamente a estado <strong>Expirado</strong>.</Warning>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          17. EQUIPO Y USUARIOS
+      ═══════════════════════════════════════════════════════════════ */}
+      <H2 id="equipo">17. Equipo y usuarios</H2>
+      <P>DealForge soporta múltiples usuarios dentro de la misma empresa. Todos los miembros comparten los mismos clientes, productos, cotizaciones y contratos, con roles que controlan qué puede hacer cada uno.</P>
+
+      <Warning>La función multi-usuario está disponible a partir del plan <strong>Pro</strong> (hasta 5 usuarios) y <strong>Business</strong> (hasta 20 usuarios).</Warning>
+
+      <H3 id="equipo-roles">17.1. Roles disponibles</H3>
+      <P>Cada miembro del equipo tiene uno de estos tres roles:</P>
+      <ul className="list-disc pl-6 space-y-2 mb-4 text-sm text-gray-600">
+        <li><strong className="text-amber-700">Administrador</strong> — Acceso completo: configuración, facturación, gestión de usuarios, todas las funciones.</li>
+        <li><strong className="text-blue-700">Vendedor</strong> — Puede crear y editar cotizaciones, clientes y productos. No tiene acceso a configuración de empresa ni facturación.</li>
+        <li><strong className="text-gray-700">Observador</strong> — Solo lectura. Puede ver cotizaciones, clientes, productos y reportes, pero no puede crear ni modificar nada.</li>
+      </ul>
+
+      <H3 id="equipo-invitar">17.2. Invitar a un usuario</H3>
+      <Step n={1}>Ve a <strong>Configuración → Equipo</strong>.</Step>
+      <Step n={2}>Escribe el email de la persona a invitar y selecciona su rol.</Step>
+      <Step n={3}>Haz clic en <strong>Invitar</strong>. Se enviará un email con un enlace de activación válido 7 días.</Step>
+      <Step n={4}>La persona recibirá el email y podrá crear su cuenta o iniciar sesión con una cuenta existente.</Step>
+      <Tip>Si el invitado ya tiene una cuenta de DealForge, se unirá automáticamente a tu equipo al hacer clic en el enlace.</Tip>
+
+      <H3 id="equipo-gestionar">17.3. Gestionar miembros</H3>
+      <P>Desde <strong>Configuración → Equipo</strong> el administrador puede:</P>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li>Ver todos los miembros activos y sus roles.</li>
+        <li>Cambiar el rol de cualquier miembro (excepto el suyo propio).</li>
+        <li>Eliminar a un miembro del equipo. Los datos que creó (cotizaciones, clientes) se conservan.</li>
+        <li>Ver invitaciones pendientes y su fecha de expiración.</li>
+      </ul>
+
+      <H3 id="equipo-limites">17.4. Límites por plan</H3>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li><strong>Starter</strong> — 1 usuario (sin multi-usuario).</li>
+        <li><strong>Pro</strong> — Hasta 5 usuarios simultáneos.</li>
+        <li><strong>Business</strong> — Hasta 20 usuarios simultáneos.</li>
+        <li><strong>Enterprise</strong> — Usuarios ilimitados.</li>
+      </ul>
+
+      <H3 id="equipo-datos">17.5. Datos compartidos</H3>
+      <P>Todos los miembros del equipo comparten:</P>
+      <ul className="list-disc pl-6 space-y-1 mb-4 text-sm text-gray-600">
+        <li>Base de datos de clientes y contactos.</li>
+        <li>Catálogo de productos y variantes.</li>
+        <li>Todas las cotizaciones (independientemente de quién las creó).</li>
+        <li>Contratos, reglas comerciales y configuración de empresa.</li>
+        <li>Reportes y métricas de todo el equipo.</li>
+      </ul>
+      <P>Cada cotización y actividad registra qué usuario la creó, para tener trazabilidad completa.</P>
 
       {/* ═══════════════════════════════════════════════════════════════
           FOOTER

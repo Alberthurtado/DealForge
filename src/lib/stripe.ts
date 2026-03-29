@@ -41,7 +41,7 @@ export const PRICE_PLAN_MAP: Record<string, string> = Object.fromEntries(
 // ─── Helpers ────────────────────────────────────
 
 /**
- * Get or create a Stripe customer for a user.
+ * Get or create a Stripe customer for a user (legacy — stored on Usuario).
  * Stores the stripeCustomerId in the DB.
  */
 export async function getOrCreateStripeCustomer(
@@ -69,6 +69,40 @@ export async function getOrCreateStripeCustomer(
   // Save to DB
   await prisma.usuario.update({
     where: { id: userId },
+    data: { stripeCustomerId: customer.id },
+  });
+
+  return customer.id;
+}
+
+/**
+ * Get or create a Stripe customer for a team (empresa).
+ * Stores the stripeCustomerId on the Empresa record.
+ */
+export async function getOrCreateStripeCustomerForEmpresa(
+  empresaId: string,
+  email: string,
+  nombre: string
+): Promise<string> {
+  const empresa = await prisma.empresa.findUnique({
+    where: { id: empresaId },
+    select: { stripeCustomerId: true, nombre: true },
+  });
+
+  if (empresa?.stripeCustomerId) {
+    return empresa.stripeCustomerId;
+  }
+
+  // Create new Stripe customer
+  const customer = await stripe.customers.create({
+    email,
+    name: empresa?.nombre || nombre,
+    metadata: { dealforge_empresaId: empresaId },
+  });
+
+  // Save to Empresa
+  await prisma.empresa.update({
+    where: { id: empresaId },
     data: { stripeCustomerId: customer.id },
   });
 

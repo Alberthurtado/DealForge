@@ -7,6 +7,7 @@ export interface PlanLimits {
   clientes: number;        // 0 = unlimited
   productos: number;       // 0 = unlimited
   consultasIA: number;     // 0 = unlimited
+  miembrosEquipo: number;  // 0 = unlimited — team members
 }
 
 export const PLAN_LIMITS: Record<string, PlanLimits> = {
@@ -15,18 +16,28 @@ export const PLAN_LIMITS: Record<string, PlanLimits> = {
     clientes: 5,
     productos: 10,
     consultasIA: 5,
+    miembrosEquipo: 1,
   },
   pro: {
     cotizacionesMes: 100,
     clientes: 50,
     productos: 200,
     consultasIA: 0, // unlimited
+    miembrosEquipo: 5,
   },
   business: {
     cotizacionesMes: 0, // unlimited
     clientes: 0,
     productos: 0,
     consultasIA: 0,
+    miembrosEquipo: 20,
+  },
+  enterprise: {
+    cotizacionesMes: 0,
+    clientes: 0,
+    productos: 0,
+    consultasIA: 0,
+    miembrosEquipo: 0, // unlimited
   },
 };
 
@@ -46,6 +57,7 @@ export interface PlanFeatures {
   firmaElectronica: boolean;    // Electronic signature
   contratos: boolean;           // Contract management
   soportePrioritario: boolean;  // Priority support
+  multiUsuario: boolean;        // Multi-user team support
 }
 
 const PLAN_FEATURES: Record<string, PlanFeatures> = {
@@ -60,6 +72,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     firmaElectronica: false,
     contratos: false,
     soportePrioritario: false,
+    multiUsuario: false,
   },
   pro: {
     emailEnvio: true,
@@ -72,6 +85,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     firmaElectronica: true,
     contratos: false,
     soportePrioritario: false,
+    multiUsuario: true,
   },
   business: {
     emailEnvio: true,
@@ -84,6 +98,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     firmaElectronica: true,
     contratos: true,
     soportePrioritario: true,
+    multiUsuario: true,
   },
   enterprise: {
     emailEnvio: true,
@@ -96,6 +111,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     firmaElectronica: true,
     contratos: true,
     soportePrioritario: true,
+    multiUsuario: true,
   },
 };
 
@@ -125,16 +141,25 @@ export interface UsageCounts {
   productos: number;
 }
 
-export async function getUsageCounts(): Promise<UsageCounts> {
+// Helper to build a team-aware OR filter
+function teamFilter(equipoId?: string, userId?: string) {
+  if (equipoId) {
+    return { OR: [{ equipoId }, { usuarioId: userId, equipoId: null }] };
+  }
+  return { usuarioId: userId };
+}
+
+export async function getUsageCounts(equipoId?: string, userId?: string): Promise<UsageCounts> {
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const filter = teamFilter(equipoId, userId);
 
   const [cotizacionesMes, clientes, productos] = await Promise.all([
     prisma.cotizacion.count({
-      where: { createdAt: { gte: startOfMonth } },
+      where: { ...filter, createdAt: { gte: startOfMonth } },
     }),
-    prisma.cliente.count(),
-    prisma.producto.count(),
+    prisma.cliente.count({ where: filter }),
+    prisma.producto.count({ where: filter }),
   ]);
 
   return { cotizacionesMes, clientes, productos };
@@ -188,9 +213,9 @@ export interface PlanUsageInfo {
   productosAllowed: boolean;
 }
 
-export async function getPlanUsageInfo(plan: string): Promise<PlanUsageInfo> {
+export async function getPlanUsageInfo(plan: string, equipoId?: string, userId?: string): Promise<PlanUsageInfo> {
   const limits = getPlanLimits(plan);
-  const usage = await getUsageCounts();
+  const usage = await getUsageCounts(equipoId, userId);
   const planLabel = plan.charAt(0).toUpperCase() + plan.slice(1);
 
   return {

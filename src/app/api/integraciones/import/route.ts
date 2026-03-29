@@ -41,7 +41,15 @@ export async function POST(request: NextRequest) {
       };
 
       try {
-        const existing = await prisma.cliente.findFirst({ where: { nombre, usuarioId: session.userId } });
+        const existing = await prisma.cliente.findFirst({
+          where: {
+            nombre,
+            OR: [
+              { equipoId: session.empresaId },
+              { usuarioId: session.userId, equipoId: null },
+            ],
+          },
+        });
         if (existing) {
           await prisma.cliente.update({ where: { id: existing.id }, data });
           updated++;
@@ -51,6 +59,7 @@ export async function POST(request: NextRequest) {
             data: {
               ...data,
               usuarioId: session.userId,
+              equipoId: session.empresaId || undefined,
               contactos: contactoNombre ? {
                 create: {
                   nombre: contactoNombre, email: row.contacto_principal_email?.trim() || null,
@@ -94,12 +103,22 @@ export async function POST(request: NextRequest) {
           unidad: row.unidad?.trim() || "unidad", categoriaId, activo: row.activo?.toLowerCase() !== "no",
         };
 
-        const existing = await prisma.producto.findFirst({ where: { sku, usuarioId: session.userId } });
+        const existing = await prisma.producto.findFirst({
+          where: {
+            sku,
+            OR: [
+              { equipoId: session.empresaId },
+              { usuarioId: session.userId, equipoId: null },
+            ],
+          },
+        });
         if (existing) {
           await prisma.producto.update({ where: { id: existing.id }, data });
           updated++;
         } else {
-          await prisma.producto.create({ data: { ...data, sku, usuarioId: session.userId } });
+          await prisma.producto.create({
+            data: { ...data, sku, usuarioId: session.userId, equipoId: session.empresaId || undefined },
+          });
           created++;
         }
       } catch (e) {

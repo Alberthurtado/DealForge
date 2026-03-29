@@ -84,11 +84,12 @@ export async function POST(request: NextRequest) {
 // ─── Handlers ──────────────────────────────────────
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+  const empresaId = session.metadata?.dealforge_empresaId;
   const userId = session.metadata?.dealforge_userId;
   const plan = session.metadata?.dealforge_plan;
 
-  if (!userId || !plan) {
-    console.error("Checkout completed but missing metadata:", session.id);
+  if (!plan) {
+    console.error("Checkout completed but missing plan metadata:", session.id);
     return;
   }
 
@@ -115,65 +116,110 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     priceId = subscription.items.data[0]?.price.id || null;
   }
 
-  await prisma.usuario.update({
-    where: { id: userId },
-    data: {
-      plan,
-      planStatus: "active",
-      stripeCustomerId: customerId || undefined,
-      stripeSubscriptionId: subscriptionId || undefined,
-      stripePriceId: priceId,
-      currentPeriodEnd,
-    },
-  });
+  // Update empresa-level billing (preferred)
+  if (empresaId) {
+    await prisma.empresa.update({
+      where: { id: empresaId },
+      data: {
+        plan,
+        planStatus: "active",
+        stripeCustomerId: customerId || undefined,
+        stripeSubscriptionId: subscriptionId || undefined,
+        stripePriceId: priceId,
+        currentPeriodEnd,
+      },
+    });
+    console.log(`Empresa ${empresaId} upgraded to ${plan}`);
+  }
 
-  console.log(`User ${userId} upgraded to ${plan}`);
+  // Also update user-level for legacy compatibility
+  if (userId) {
+    await prisma.usuario.update({
+      where: { id: userId },
+      data: {
+        plan,
+        planStatus: "active",
+        stripeCustomerId: customerId || undefined,
+        stripeSubscriptionId: subscriptionId || undefined,
+        stripePriceId: priceId,
+        currentPeriodEnd,
+      },
+    });
+    console.log(`User ${userId} upgraded to ${plan}`);
+  }
 }
 
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
+  const empresaId = subscription.metadata?.dealforge_empresaId;
   const userId = subscription.metadata?.dealforge_userId;
-  if (!userId) return;
 
   const priceId = subscription.items.data[0]?.price.id;
   const plan = priceId ? PRICE_PLAN_MAP[priceId] : null;
   const status = subscription.status; // active, past_due, canceled, etc.
 
-  const updateData: Record<string, unknown> = {
-    planStatus: status === "active" ? "active" : status === "past_due" ? "past_due" : "canceled",
-    currentPeriodEnd: new Date((subscription.items?.data?.[0]?.current_period_end || 0) * 1000),
-    stripePriceId: priceId || undefined,
-    stripeSubscriptionId: subscription.id,
-  };
+  const planStatus = status === "active" ? "active" : status === "past_due" ? "past_due" : "canceled";
+  const currentPeriodEnd = new Date((subscription.items?.data?.[0]?.current_period_end || 0) * 1000);
 
-  // Update plan if price changed (upgrade/downgrade)
-  if (plan) {
-    updateData.plan = plan;
+  // Update empresa-level billing (preferred)
+  if (empresaId) {
+    const updateData: Record<string, unknown> = {
+      planStatus,
+      currentPeriodEnd,
+      stripePriceId: priceId || undefined,
+      stripeSubscriptionId: subscription.id,
+    };
+    if (plan) updateData.plan = plan;
+
+    await prisma.empresa.update({ where: { id: empresaId }, data: updateData });
+    console.log(`Empresa ${empresaId} subscription updated: ${status}`);
   }
 
-  await prisma.usuario.update({
-    where: { id: userId },
-    data: updateData,
-  });
+  // Also update user-level for legacy compatibility
+  if (userId) {
+    const updateData: Record<string, unknown> = {
+      planStatus,
+      currentPeriodEnd,
+      stripePriceId: priceId || undefined,
+      stripeSubscriptionId: subscription.id,
+    };
+    if (plan) updateData.plan = plan;
 
-  console.log(`Subscription updated for user ${userId}: ${status}`);
+    await prisma.usuario.update({ where: { id: userId }, data: updateData });
+    console.log(`User ${userId} subscription updated: ${status}`);
+  }
 }
 
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
+  const empresaId = subscription.metadata?.dealforge_empresaId;
   const userId = subscription.metadata?.dealforge_userId;
-  if (!userId) return;
 
-  await prisma.usuario.update({
-    where: { id: userId },
-    data: {
-      plan: "starter",
-      planStatus: "canceled",
-      stripeSubscriptionId: null,
-      stripePriceId: null,
-      currentPeriodEnd: null,
-    },
-  });
+  if (empresaId) {
+    await prisma.empresa.update({
+      where: { id: empresaId },
+      data: {
+        plan: "starter",
+        planStatus: "canceled",
+        stripeSubscriptionId: null,
+        stripePriceId: null,
+        currentPeriodEnd: null,
+      },
+    });
+    console.log(`Empresa ${empresaId} subscription deleted — reverted to starter`);
+  }
 
-  console.log(`Subscription deleted for user ${userId} — reverted to starter`);
+  if (userId) {
+    await prisma.usuario.update({
+      where: { id: userId },
+      data: {
+        plan: "starter",
+        planStatus: "canceled",
+        stripeSubscriptionId: null,
+        stripePriceId: null,
+        currentPeriodEnd: null,
+      },
+    });
+    console.log(`User ${userId} subscription deleted — reverted to starter`);
+  }
 }
 
 async function handlePaymentFailed(invoice: Stripe.Invoice) {
@@ -184,10 +230,23 @@ async function handlePaymentFailed(invoice: Stripe.Invoice) {
 
   if (!customerId) return;
 
+  // Try empresa-level first
+  const empresa = await prisma.empresa.findFirst({
+    where: { stripeCustomerId: customerId },
+  });
+  if (empresa) {
+    await prisma.empresa.update({
+      where: { id: empresa.id },
+      data: { planStatus: "past_due" },
+    });
+    console.log(`Payment failed for empresa ${empresa.id} — marked as past_due`);
+    return;
+  }
+
+  // Fall back to user-level
   const user = await prisma.usuario.findFirst({
     where: { stripeCustomerId: customerId },
   });
-
   if (user) {
     await prisma.usuario.update({
       where: { id: user.id },

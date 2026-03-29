@@ -23,6 +23,8 @@ export interface JWTPayload {
   email: string;
   plan: string;
   nombre: string;
+  empresaId: string;
+  rol: string;  // ADMIN | SALES | VIEWER
 }
 
 // ─── Password hashing ───────────────────────────
@@ -61,10 +63,25 @@ async function getSessionFromApiKey(rawKey: string): Promise<JWTPayload | null> 
   const hash = hashApiKey(rawKey);
   const user = await prisma.usuario.findUnique({
     where: { apiKeyHash: hash },
-    select: { id: true, email: true, plan: true, nombre: true, activo: true },
+    select: {
+      id: true,
+      email: true,
+      plan: true,
+      nombre: true,
+      activo: true,
+      empresaId: true,
+      miembros: { select: { rol: true, empresaId: true }, take: 1 },
+      empresa: { select: { plan: true } },
+    },
   });
   if (!user || !user.activo) return null;
-  return { userId: user.id, email: user.email, plan: user.plan, nombre: user.nombre };
+
+  const membresia = user.miembros[0];
+  const empresaId = membresia?.empresaId || user.empresaId;
+  const rol = membresia?.rol || "ADMIN";
+  const plan = user.empresa?.plan || user.plan;
+
+  return { userId: user.id, email: user.email, plan, nombre: user.nombre, empresaId, rol };
 }
 
 // ─── Session helpers ────────────────────────────
@@ -78,7 +95,27 @@ export async function getSession(): Promise<JWTPayload | null> {
   const cookieStore = await cookies();
   const token = cookieStore.get(COOKIE_NAME)?.value;
   if (!token) return null;
-  return verifyToken(token);
+  const session = await verifyToken(token);
+
+  // Backfill empresaId/rol for old tokens that don't have them
+  if (session && !session.empresaId) {
+    const user = await prisma.usuario.findUnique({
+      where: { id: session.userId },
+      select: {
+        empresaId: true,
+        miembros: { select: { rol: true, empresaId: true }, take: 1 },
+        empresa: { select: { plan: true } },
+      },
+    });
+    if (user) {
+      const membresia = user.miembros[0];
+      session.empresaId = membresia?.empresaId || user.empresaId;
+      session.rol = membresia?.rol || "ADMIN";
+      session.plan = user.empresa?.plan || session.plan;
+    }
+  }
+
+  return session;
 }
 
 export function getCookieName(): string {

@@ -16,7 +16,13 @@ export async function GET(
 
   const { id } = await params;
   const cotizacion = await prisma.cotizacion.findFirst({
-    where: { id, usuarioId: session.userId },
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
     include: {
       cliente: { include: { contactos: true } },
       lineItems: {
@@ -40,17 +46,28 @@ export async function GET(
 async function evaluateAndCreateApprovals(
   cotizacionId: string,
   userId: string,
+  empresaId: string | undefined,
   request: NextRequest
 ) {
+  const ownerFilter = empresaId
+    ? { OR: [{ equipoId: empresaId }, { usuarioId: userId, equipoId: null }] }
+    : { usuarioId: userId };
+
   const cotizacion = await prisma.cotizacion.findFirst({
-    where: { id: cotizacionId, usuarioId: userId },
+    where: {
+      id: cotizacionId,
+      OR: [
+        { equipoId: empresaId },
+        { usuarioId: userId, equipoId: null },
+      ],
+    },
     include: { lineItems: true, cliente: { select: { nombre: true } } },
   });
   if (!cotizacion) return [];
 
   const [reglas, allProducts] = await Promise.all([
-    prisma.reglaComercial.findMany({ where: { activa: true, usuarioId: userId } }),
-    prisma.producto.findMany({ where: { usuarioId: userId }, select: { id: true, categoriaId: true } }),
+    prisma.reglaComercial.findMany({ where: { activa: true, ...ownerFilter } }),
+    prisma.producto.findMany({ where: ownerFilter, select: { id: true, categoriaId: true } }),
   ]);
   if (reglas.length === 0) return [];
 
@@ -126,7 +143,16 @@ export async function PUT(
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const { id } = await params;
-  const owned = await prisma.cotizacion.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  const owned = await prisma.cotizacion.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+    select: { id: true },
+  });
   if (!owned) return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
 
   const body = await request.json();
@@ -147,7 +173,7 @@ export async function PUT(
       return NextResponse.json({ error: "No se puede enviar la cotización sin términos y condiciones." }, { status: 400 });
     }
     if (updateData.estado === "ENVIADA" && current?.estado === "BORRADOR") {
-      await evaluateAndCreateApprovals(id, session.userId, request);
+      await evaluateAndCreateApprovals(id, session.userId, session.empresaId, request);
       const blockingApprovals = await prisma.aprobacion.findMany({
         where: { cotizacionId: id, estado: { in: ["PENDIENTE", "RECHAZADA"] } },
         select: { estado: true, aprobadorNombre: true },
@@ -197,7 +223,7 @@ export async function PUT(
   });
 
   if (data.lineItems && cotizacion.estado === "BORRADOR") {
-    try { await evaluateAndCreateApprovals(id, session.userId, request); } catch { /* Non-critical */ }
+    try { await evaluateAndCreateApprovals(id, session.userId, session.empresaId, request); } catch { /* Non-critical */ }
   }
 
   return NextResponse.json(cotizacion);
@@ -210,7 +236,16 @@ export async function DELETE(
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
   const { id } = await params;
-  const owned = await prisma.cotizacion.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  const owned = await prisma.cotizacion.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+    select: { id: true },
+  });
   if (!owned) return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
   await prisma.cotizacion.delete({ where: { id } });
   return NextResponse.json({ success: true });

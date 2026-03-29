@@ -269,6 +269,7 @@ function FeaturesGrid() {
     { icon: Plug, title: "Importar / Exportar", slug: "importar-exportar", desc: "Importa clientes y productos desde CSV. Exporta datos cuando necesites." },
     { icon: ScrollText, title: "Gestión de Contratos", slug: "gestion-contratos", desc: "Crea contratos desde cotizaciones ganadas. Líneas recurrentes, condiciones y cláusulas." },
     { icon: RefreshCw, title: "Renovaciones y Alertas", slug: "renovaciones-alertas", desc: "Renovación automática o manual. Avisos por email y alertas de vencimiento con semáforo visual." },
+    { icon: Users, title: "Multi-usuario y Equipos", slug: "gestion-clientes", desc: "Hasta 20 usuarios por empresa. Roles Admin, Vendedor y Observador. Invita a tu equipo en segundos." },
   ];
 
   return (

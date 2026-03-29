@@ -16,17 +16,25 @@ export async function GET(request: NextRequest) {
   const estado = searchParams.get("estado") || "";
   const search = searchParams.get("search") || "";
 
-  const where: Record<string, unknown> = { usuarioId: session.userId };
-  if (estado) where.estado = estado;
+  const ownerFilter = session.empresaId
+    ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+    : { usuarioId: session.userId };
+
+  const andClauses: Record<string, unknown>[] = [ownerFilter as Record<string, unknown>];
+  if (estado) andClauses.push({ estado });
   if (search) {
-    where.OR = [
-      { numero: { contains: search } },
-      { cliente: { nombre: { contains: search } } },
-    ];
+    andClauses.push({
+      OR: [
+        { numero: { contains: search } },
+        { cliente: { nombre: { contains: search } } },
+      ],
+    });
   }
+  const where = andClauses.length === 1 ? andClauses[0] : { AND: andClauses };
 
   const cotizaciones = await prisma.cotizacion.findMany({
-    where,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    where: where as any,
     include: {
       cliente: { select: { id: true, nombre: true } },
       _count: { select: { lineItems: true } },
@@ -41,11 +49,13 @@ export async function POST(request: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
-  // ── Plan limit check (per-user) ──
+  // ── Plan limit check (team-aware) ──
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const currentCotizacionesMes = await prisma.cotizacion.count({
-    where: { usuarioId: session.userId, createdAt: { gte: startOfMonth } },
+    where: session.empresaId
+      ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }], createdAt: { gte: startOfMonth } }
+      : { usuarioId: session.userId, createdAt: { gte: startOfMonth } },
   });
   const limit = checkLimit(session.plan, "cotizacionesMes", currentCotizacionesMes);
 
@@ -66,9 +76,15 @@ export async function POST(request: NextRequest) {
   if (error) return error;
   const { lineItems, ...cotizacionData } = data;
 
-  // Verify the client belongs to this user
+  // Verify the client belongs to this user/team
   const clienteOwned = await prisma.cliente.findFirst({
-    where: { id: cotizacionData.clienteId, usuarioId: session.userId },
+    where: {
+      id: cotizacionData.clienteId,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
     select: { id: true },
   });
   if (!clienteOwned) {
@@ -79,7 +95,11 @@ export async function POST(request: NextRequest) {
   const empresa = await prisma.empresa.findUnique({ where: { id: "default" }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true, condicionesTransaccional: true, condicionesContractual: true } });
   const prefijo = empresa?.prefijoCotizacion || "COT";
   const diasVencimiento = empresa?.diasVencimiento ?? 30;
-  const count = await prisma.cotizacion.count({ where: { usuarioId: session.userId } });
+  const count = await prisma.cotizacion.count({
+    where: session.empresaId
+      ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+      : { usuarioId: session.userId },
+  });
   const numero = `${prefijo}-${new Date().getFullYear()}-${(count + 1).toString().padStart(4, "0")}`;
 
   // Calculate totals
@@ -115,6 +135,7 @@ export async function POST(request: NextRequest) {
       numero,
       clienteId: cotizacionData.clienteId,
       usuarioId: session.userId,
+      equipoId: session.empresaId || undefined,
       estado: "BORRADOR",
       contactoNombre: cotizacionData.contactoNombre || null,
       subtotal: Math.round(subtotal * 100) / 100,
@@ -152,9 +173,12 @@ export async function POST(request: NextRequest) {
 
   // Auto-create approval records if rules require them
   try {
+    const teamOwnerFilter = session.empresaId
+      ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+      : { usuarioId: session.userId };
     const [reglas, allProducts] = await Promise.all([
-      prisma.reglaComercial.findMany({ where: { activa: true, usuarioId: session.userId } }),
-      prisma.producto.findMany({ where: { usuarioId: session.userId }, select: { id: true, categoriaId: true } }),
+      prisma.reglaComercial.findMany({ where: { activa: true, ...teamOwnerFilter } }),
+      prisma.producto.findMany({ where: teamOwnerFilter, select: { id: true, categoriaId: true } }),
     ]);
     const catMap: ProductoCategoriaMap = {};
     for (const p of allProducts) catMap[p.id] = p.categoriaId;

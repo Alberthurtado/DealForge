@@ -13,20 +13,28 @@ export async function GET(request: NextRequest) {
   const search = searchParams.get("search") || "";
   const categoriaId = searchParams.get("categoriaId") || "";
 
-  const where: Record<string, unknown> = { usuarioId: session.userId };
+  const ownerFilter = session.empresaId
+    ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+    : { usuarioId: session.userId };
+
+  const andClauses: Record<string, unknown>[] = [ownerFilter as Record<string, unknown>];
   if (search) {
-    where.OR = [
-      { nombre: { contains: search } },
-      { sku: { contains: search } },
-      { descripcion: { contains: search } },
-    ];
+    andClauses.push({
+      OR: [
+        { nombre: { contains: search } },
+        { sku: { contains: search } },
+        { descripcion: { contains: search } },
+      ],
+    });
   }
   if (categoriaId) {
-    where.categoriaId = categoriaId;
+    andClauses.push({ categoriaId });
   }
+  const where = andClauses.length === 1 ? andClauses[0] : { AND: andClauses };
 
   const productos = await prisma.producto.findMany({
-    where,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    where: where as any,
     include: {
       categoria: true,
       variantes: { where: { activo: true }, orderBy: { nombre: "asc" } },
@@ -41,8 +49,12 @@ export async function POST(request: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
-  // ── Plan limit check (per-user) ──
-  const currentProductos = await prisma.producto.count({ where: { usuarioId: session.userId } });
+  // ── Plan limit check (team-aware) ──
+  const currentProductos = await prisma.producto.count({
+    where: session.empresaId
+      ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+      : { usuarioId: session.userId },
+  });
   const limit = checkLimit(session.plan, "productos", currentProductos);
 
   if (!limit.allowed) {
@@ -66,6 +78,7 @@ export async function POST(request: NextRequest) {
     data: {
       ...productoData,
       usuarioId: session.userId,
+      equipoId: session.empresaId || undefined,
       variantes: variantes?.length
         ? { create: variantes }
         : undefined,

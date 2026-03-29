@@ -21,6 +21,8 @@ model Cliente {
   notas        String?
   usuarioId    String
   usuario      Usuario      @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  equipoId     String?
+  equipo       Empresa?     @relation("ClienteEquipo", fields: [equipoId], references: [id])
   contactos    Contacto[]
   cotizaciones Cotizacion[]
   contratos    Contrato[]
@@ -28,6 +30,7 @@ model Cliente {
   updatedAt    DateTime     @updatedAt
 
   @@index([usuarioId])
+  @@index([equipoId])
 }
 
 model Contacto {
@@ -62,6 +65,8 @@ model Producto {
   categoria   Categoria?          @relation(fields: [categoriaId], references: [id])
   usuarioId   String
   usuario     Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  equipoId    String?
+  equipo      Empresa?            @relation("ProductoEquipo", fields: [equipoId], references: [id])
   variantes   VarianteProducto[]
   lineItems   LineItem[]
   createdAt   DateTime            @default(now())
@@ -69,6 +74,7 @@ model Producto {
 
   @@unique([sku, usuarioId])
   @@index([usuarioId])
+  @@index([equipoId])
 }
 
 model VarianteProducto {
@@ -94,6 +100,8 @@ model Cotizacion {
   cliente          Cliente     @relation(fields: [clienteId], references: [id])
   usuarioId        String
   usuario          Usuario     @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  equipoId         String?
+  equipo           Empresa?    @relation("CotizacionEquipo", fields: [equipoId], references: [id])
   estado           String      @default("BORRADOR")
   fechaEmision     DateTime    @default(now())
   fechaVencimiento DateTime?
@@ -120,6 +128,7 @@ model Cotizacion {
 
   @@unique([numero, usuarioId])
   @@index([usuarioId])
+  @@index([equipoId])
   @@index([cotizacionOriginalId])
 }
 
@@ -161,10 +170,13 @@ model ReglaComercial {
   configuracion String   // JSON text
   usuarioId     String
   usuario       Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  equipoId      String?
+  equipo        Empresa? @relation("ReglaEquipo", fields: [equipoId], references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   @@index([usuarioId])
+  @@index([equipoId])
 }
 
 model Aprobacion {
@@ -183,7 +195,7 @@ model Aprobacion {
 }
 
 model Empresa {
-  id            String   @id @default("default")
+  id            String   @id @default(cuid())
   nombre        String   @default("Mi Empresa")
   cif           String?
   email         String?
@@ -209,9 +221,58 @@ model Empresa {
   recordatorioSeguimientoDias  Int      @default(3)
   recordatorioVencimientoDias  Int      @default(3)
   recordatoriosActivos         Boolean  @default(true)
+  // Plan & billing (team-level)
+  plan                 String   @default("starter")
+  planStatus           String   @default("active")  // active | past_due | canceled | canceling
+  stripeCustomerId     String?  @unique
+  stripeSubscriptionId String?
+  stripePriceId        String?
+  currentPeriodEnd     DateTime?
+  // Relations
   usuarios          Usuario[]
+  miembros          EquipoMembro[]
+  invitaciones      Invitacion[]
+  // Business data relations (via equipoId)
+  clientes          Cliente[]        @relation("ClienteEquipo")
+  productos         Producto[]       @relation("ProductoEquipo")
+  cotizaciones      Cotizacion[]     @relation("CotizacionEquipo")
+  contratos         Contrato[]       @relation("ContratoEquipo")
+  reglas            ReglaComercial[] @relation("ReglaEquipo")
   createdAt         DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  updatedAt         DateTime @updatedAt
+}
+
+// ─── Multi-user team membership ─────────────────────────────
+model EquipoMembro {
+  id          String   @id @default(cuid())
+  empresaId   String
+  empresa     Empresa  @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  usuarioId   String
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  rol         String   @default("SALES")  // ADMIN | SALES | VIEWER
+  createdAt   DateTime @default(now())
+
+  @@unique([empresaId, usuarioId])
+  @@index([empresaId])
+  @@index([usuarioId])
+}
+
+// ─── Email invitations ──────────────────────────────────────
+model Invitacion {
+  id            String    @id @default(cuid())
+  empresaId     String
+  empresa       Empresa   @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  email         String
+  rol           String    @default("SALES")
+  token         String    @unique @default(cuid())
+  expiresAt     DateTime
+  usadaAt       DateTime?
+  invitadoPorId String    // userId of who sent the invite
+  createdAt     DateTime  @default(now())
+
+  @@index([empresaId])
+  @@index([email])
+  @@index([token])
 }
 
 model Usuario {
@@ -219,15 +280,15 @@ model Usuario {
   nombre       String
   email        String   @unique
   passwordHash String
-  plan         String   @default("starter")
+  plan         String   @default("starter")   // Legacy — kept for backward compat; use empresa.plan for team plan
   rol          String   @default("admin")
-  empresaId    String   @default("default")
+  empresaId    String
   empresa      Empresa  @relation(fields: [empresaId], references: [id])
   activo       Boolean  @default(true)
   // Password reset
   resetToken       String?   @unique
   resetTokenExpiry DateTime?
-  // Stripe subscription fields
+  // Stripe subscription fields (kept for legacy; new billing via empresa)
   stripeCustomerId     String?  @unique
   stripeSubscriptionId String?
   stripePriceId        String?
@@ -246,6 +307,7 @@ model Usuario {
   contratos      Contrato[]
   reglas         ReglaComercial[]
   memorias       MemoriaForge[]
+  miembros       EquipoMembro[]
 }
 
 // Persistent memory for Forge AI assistant per user
@@ -320,6 +382,8 @@ model Contrato {
   cliente              Cliente   @relation(fields: [clienteId], references: [id])
   usuarioId            String
   usuario              Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  equipoId             String?
+  equipo               Empresa?  @relation("ContratoEquipo", fields: [equipoId], references: [id])
 
   // State
   estado               String    @default("ACTIVO") // ACTIVO, PENDIENTE_RENOVACION, RENOVADO, CANCELADO, EXPIRADO
@@ -358,6 +422,7 @@ model Contrato {
   @@unique([numero, usuarioId])
   @@index([clienteId])
   @@index([usuarioId])
+  @@index([equipoId])
   @@index([estado])
   @@index([fechaFin])
 }

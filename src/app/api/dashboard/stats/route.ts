@@ -6,12 +6,16 @@ export async function GET() {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
+  const ownerFilter = session.empresaId
+    ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+    : { usuarioId: session.userId };
+
   const [cotizaciones, clientes] = await Promise.all([
     prisma.cotizacion.findMany({
-      where: { usuarioId: session.userId },
+      where: ownerFilter,
       select: { id: true, estado: true, total: true, fechaEmision: true, cliente: { select: { nombre: true } } },
     }),
-    prisma.cliente.count({ where: { usuarioId: session.userId } }),
+    prisma.cliente.count({ where: ownerFilter }),
   ]);
 
   const activas = cotizaciones.filter((c) => c.estado !== "ARCHIVADA");
@@ -34,7 +38,11 @@ export async function GET() {
   activas.forEach((c) => { const idx = statusMap[c.estado]; if (idx !== undefined) { pipelineByStatus[idx].valor += c.total; pipelineByStatus[idx].cantidad += 1; } });
 
   const recentActivity = await prisma.actividad.findMany({
-    where: { cotizacion: { usuarioId: session.userId } },
+    where: {
+      cotizacion: session.empresaId
+        ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+        : { usuarioId: session.userId },
+    },
     take: 8,
     orderBy: { createdAt: "desc" },
     include: { cotizacion: { select: { numero: true, cliente: { select: { nombre: true } } } } },

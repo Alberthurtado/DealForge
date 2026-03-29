@@ -13,7 +13,13 @@ export async function GET(
 
   const { id } = await params;
   const cliente = await prisma.cliente.findFirst({
-    where: { id, usuarioId: session.userId },
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
     include: {
       contactos: true,
       cotizaciones: {
@@ -40,7 +46,16 @@ export async function PUT(
   const { id } = await params;
 
   // Verify ownership
-  const existing = await prisma.cliente.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  const existing = await prisma.cliente.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+    select: { id: true },
+  });
   if (!existing) return NextResponse.json({ error: "Cliente no encontrado" }, { status: 404 });
 
   const body = await request.json();
@@ -67,7 +82,16 @@ export async function DELETE(
   const { id } = await params;
 
   // Verify ownership
-  const existing = await prisma.cliente.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  const existing = await prisma.cliente.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+    select: { id: true },
+  });
   if (!existing) return NextResponse.json({ error: "Cliente no encontrado" }, { status: 404 });
 
   await prisma.cliente.delete({ where: { id } });

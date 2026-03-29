@@ -14,7 +14,15 @@ export async function GET(
   if (!getPlanFeatures(session.plan).reglasComerciales) return planFeatureResponse("reglasComerciales");
 
   const { id } = await params;
-  const regla = await prisma.reglaComercial.findFirst({ where: { id, usuarioId: session.userId } });
+  const regla = await prisma.reglaComercial.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+  });
   if (!regla) return NextResponse.json({ error: "Regla no encontrada" }, { status: 404 });
   return NextResponse.json(regla);
 }
@@ -28,7 +36,16 @@ export async function PUT(
   if (!getPlanFeatures(session.plan).reglasComerciales) return planFeatureResponse("reglasComerciales");
 
   const { id } = await params;
-  const existing = await prisma.reglaComercial.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  const existing = await prisma.reglaComercial.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+    select: { id: true },
+  });
   if (!existing) return NextResponse.json({ error: "Regla no encontrada" }, { status: 404 });
 
   const body = await request.json();
@@ -57,7 +74,16 @@ export async function DELETE(
   if (!getPlanFeatures(session.plan).reglasComerciales) return planFeatureResponse("reglasComerciales");
 
   const { id } = await params;
-  const existing = await prisma.reglaComercial.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  const existing = await prisma.reglaComercial.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+    select: { id: true },
+  });
   if (!existing) return NextResponse.json({ error: "Regla no encontrada" }, { status: 404 });
 
   await prisma.reglaComercial.delete({ where: { id } });

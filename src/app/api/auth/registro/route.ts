@@ -34,14 +34,16 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Ensure default empresa exists
-  await prisma.empresa.upsert({
-    where: { id: "default" },
-    update: {},
-    create: { id: "default", nombre: "Mi Empresa" },
+  // Create empresa (unique per team/company)
+  const empresa = await prisma.empresa.create({
+    data: {
+      nombre: "Mi Empresa",
+      plan: "starter",
+      planStatus: "active",
+    },
   });
 
-  // Create user
+  // Create user linked to the new empresa
   const passwordHash = await hashPassword(data.password);
   const usuario = await prisma.usuario.create({
     data: {
@@ -49,7 +51,16 @@ export async function POST(request: NextRequest) {
       email: data.email,
       passwordHash,
       plan: "starter",
-      empresaId: "default",
+      empresaId: empresa.id,
+    },
+  });
+
+  // Create EquipoMembro record (user is ADMIN of their own empresa)
+  await prisma.equipoMembro.create({
+    data: {
+      empresaId: empresa.id,
+      usuarioId: usuario.id,
+      rol: "ADMIN",
     },
   });
 
@@ -57,14 +68,16 @@ export async function POST(request: NextRequest) {
   const token = await createToken({
     userId: usuario.id,
     email: usuario.email,
-    plan: usuario.plan,
+    plan: "starter",
     nombre: usuario.nombre,
+    empresaId: empresa.id,
+    rol: "ADMIN",
   });
 
   // Set cookie
   const response = NextResponse.json({
     success: true,
-    user: { id: usuario.id, nombre: usuario.nombre, email: usuario.email, plan: usuario.plan },
+    user: { id: usuario.id, nombre: usuario.nombre, email: usuario.email, plan: "starter" },
   });
 
   response.cookies.set(getCookieName(), token, {

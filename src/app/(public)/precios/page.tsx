@@ -196,7 +196,7 @@ const PLANES: Plan[] = [
       "Versionado de cotizaciones",
       "Importar / Exportar",
       "API access",
-      "3 usuarios",
+      "Hasta 5 usuarios",
     ],
   },
   {
@@ -221,7 +221,7 @@ const PLANES: Plan[] = [
       "Reportes avanzados",
       "API access",
       "Soporte prioritario",
-      "10 usuarios",
+      "Hasta 20 usuarios",
     ],
   },
   {
@@ -385,8 +385,8 @@ const COMPARACION: { categoria: string; features: FeatureRow[] }[] = [
       {
         nombre: "Usuarios",
         starter: "1",
-        pro: "3",
-        business: "10",
+        pro: "Hasta 5",
+        business: "Hasta 20",
         enterprise: "Ilimitados",
       },
       {

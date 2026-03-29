@@ -14,11 +14,15 @@ export async function GET(request: NextRequest) {
     return new Response(JSON.stringify({ error: "Tipo inválido" }), { status: 400, headers: { "Content-Type": "application/json" } });
   }
 
+  const ownerFilter = session.empresaId
+    ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+    : { usuarioId: session.userId };
+
   let data: Record<string, unknown>[] = [];
 
   if (tipo === "clientes") {
     const clientes = await prisma.cliente.findMany({
-      where: { usuarioId: session.userId },
+      where: ownerFilter,
       include: { contactos: { where: { principal: true }, take: 1 } },
       orderBy: { nombre: "asc" },
     });
@@ -30,7 +34,7 @@ export async function GET(request: NextRequest) {
     }));
   } else if (tipo === "productos") {
     const productos = await prisma.producto.findMany({
-      where: { usuarioId: session.userId },
+      where: ownerFilter,
       include: { categoria: true },
       orderBy: { nombre: "asc" },
     });
@@ -40,7 +44,7 @@ export async function GET(request: NextRequest) {
     }));
   } else if (tipo === "cotizaciones") {
     const cotizaciones = await prisma.cotizacion.findMany({
-      where: { usuarioId: session.userId },
+      where: ownerFilter,
       include: { cliente: { select: { nombre: true, email: true } }, _count: { select: { lineItems: true } } },
       orderBy: { createdAt: "desc" },
     });

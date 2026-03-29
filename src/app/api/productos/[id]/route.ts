@@ -13,7 +13,13 @@ export async function GET(
 
   const { id } = await params;
   const producto = await prisma.producto.findFirst({
-    where: { id, usuarioId: session.userId },
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
     include: {
       categoria: true,
       variantes: { orderBy: { nombre: "asc" } },
@@ -37,7 +43,16 @@ export async function PUT(
   const { id } = await params;
 
   // Verify ownership
-  const existing = await prisma.producto.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  const existing = await prisma.producto.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+    select: { id: true },
+  });
   if (!existing) return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
 
   const body = await request.json();
@@ -112,7 +127,16 @@ export async function DELETE(
   const { id } = await params;
 
   // Verify ownership
-  const existing = await prisma.producto.findFirst({ where: { id, usuarioId: session.userId }, select: { id: true } });
+  const existing = await prisma.producto.findFirst({
+    where: {
+      id,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
+    select: { id: true },
+  });
   if (!existing) return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
 
   await prisma.producto.delete({ where: { id } });

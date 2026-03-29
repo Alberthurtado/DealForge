@@ -9,13 +9,30 @@ export async function POST() {
     return NextResponse.json({ error: "No autenticado" }, { status: 401 });
   }
 
-  // Get user's Stripe customer ID
-  const user = await prisma.usuario.findUnique({
-    where: { id: session.userId },
-    select: { stripeCustomerId: true },
-  });
+  if (session.rol !== "ADMIN") {
+    return NextResponse.json({ error: "Solo el administrador puede gestionar la suscripción" }, { status: 403 });
+  }
 
-  if (!user?.stripeCustomerId) {
+  // Try empresa-level customer first, then fall back to user-level (legacy)
+  let stripeCustomerId: string | null | undefined;
+
+  if (session.empresaId) {
+    const empresa = await prisma.empresa.findUnique({
+      where: { id: session.empresaId },
+      select: { stripeCustomerId: true },
+    });
+    stripeCustomerId = empresa?.stripeCustomerId;
+  }
+
+  if (!stripeCustomerId) {
+    const user = await prisma.usuario.findUnique({
+      where: { id: session.userId },
+      select: { stripeCustomerId: true },
+    });
+    stripeCustomerId = user?.stripeCustomerId;
+  }
+
+  if (!stripeCustomerId) {
     return NextResponse.json(
       { error: "No tienes una suscripción activa" },
       { status: 400 }
@@ -26,7 +43,7 @@ export async function POST() {
     const appUrl = getAppUrl();
 
     const portalSession = await stripe.billingPortal.sessions.create({
-      customer: user.stripeCustomerId,
+      customer: stripeCustomerId,
       return_url: `${appUrl}/configuracion`,
     });
 

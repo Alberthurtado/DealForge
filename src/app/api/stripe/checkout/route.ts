@@ -3,6 +3,7 @@ import { getSession } from "@/lib/auth";
 import {
   stripe,
   getPriceId,
+  getOrCreateStripeCustomerForEmpresa,
   getOrCreateStripeCustomer,
   getAppUrl,
 } from "@/lib/stripe";
@@ -15,6 +16,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "No autenticado" }, { status: 401 });
   }
 
+  // Only ADMIN can manage billing
+  if (session.rol !== "ADMIN") {
+    return NextResponse.json({ error: "Solo el administrador del equipo puede gestionar la suscripción" }, { status: 403 });
+  }
+
   const body = await request.json();
   const { data, error } = validateBody(stripeCheckoutSchema, body);
   if (error) return error;
@@ -22,12 +28,22 @@ export async function POST(request: NextRequest) {
   const priceId = getPriceId(data.plan, data.interval);
 
   try {
-    // Get or create Stripe customer
-    const customerId = await getOrCreateStripeCustomer(
-      session.userId,
-      session.email,
-      session.nombre
-    );
+    // Get or create Stripe customer at the empresa level
+    let customerId: string;
+    if (session.empresaId) {
+      customerId = await getOrCreateStripeCustomerForEmpresa(
+        session.empresaId,
+        session.email,
+        session.nombre
+      );
+    } else {
+      // Fallback for legacy users without empresaId
+      customerId = await getOrCreateStripeCustomer(
+        session.userId,
+        session.email,
+        session.nombre
+      );
+    }
 
     const appUrl = getAppUrl();
 
@@ -40,12 +56,14 @@ export async function POST(request: NextRequest) {
       cancel_url: `${appUrl}/checkout/cancelado`,
       metadata: {
         dealforge_userId: session.userId,
+        dealforge_empresaId: session.empresaId || "",
         dealforge_plan: data.plan,
         dealforge_interval: data.interval,
       },
       subscription_data: {
         metadata: {
           dealforge_userId: session.userId,
+          dealforge_empresaId: session.empresaId || "",
           dealforge_plan: data.plan,
           dealforge_interval: data.interval,
         },

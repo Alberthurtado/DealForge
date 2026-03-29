@@ -237,16 +237,16 @@ export default function GuiaPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-3 gap-8 text-center">
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-[#3a9bb5]">80%</p>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">menos tiempo creando cotizaciones</p>
+              <p className="text-2xl sm:text-3xl font-bold text-[#3a9bb5]">Minutos</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">en vez de horas cotizando</p>
             </div>
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-[#3a9bb5]">3x</p>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">más deals cerrados con seguimiento</p>
+              <p className="text-2xl sm:text-3xl font-bold text-[#3a9bb5]">IA</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">genera propuestas automáticamente</p>
             </div>
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-[#3a9bb5]">100%</p>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">gratis para empezar</p>
+              <p className="text-2xl sm:text-3xl font-bold text-[#3a9bb5]">Gratis</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">para empezar sin compromiso</p>
             </div>
           </div>
         </div>

@@ -39,22 +39,28 @@ export async function GET(request: NextRequest) {
   const clienteId = searchParams.get("clienteId") || "";
   const proximoVencimiento = searchParams.get("proximoVencimiento") || "";
 
-  const where: Record<string, unknown> = { usuarioId: session.userId };
+  const ownerFilter = session.empresaId
+    ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+    : { usuarioId: session.userId };
 
-  if (estado) where.estado = estado;
-  if (clienteId) where.clienteId = clienteId;
+  const andClauses: Record<string, unknown>[] = [ownerFilter as Record<string, unknown>];
+  if (estado) andClauses.push({ estado });
+  if (clienteId) andClauses.push({ clienteId });
 
   if (proximoVencimiento) {
     const dias = parseInt(proximoVencimiento, 10);
     if (!isNaN(dias) && dias > 0) {
       const now = new Date();
       const futureDate = new Date(now.getTime() + dias * 24 * 60 * 60 * 1000);
-      where.fechaFin = { gte: now, lte: futureDate };
+      andClauses.push({ fechaFin: { gte: now, lte: futureDate } });
     }
   }
 
+  const where = andClauses.length === 1 ? andClauses[0] : { AND: andClauses };
+
   const contratos = await prisma.contrato.findMany({
-    where,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    where: where as any,
     include: {
       cliente: { select: { id: true, nombre: true } },
       _count: { select: { lineItems: true } },
@@ -89,9 +95,15 @@ export async function POST(request: NextRequest) {
   const { data, error } = validateBody(contratoCreateSchema, body);
   if (error) return error;
 
-  // Verify cotización belongs to user and is GANADA
+  // Verify cotización belongs to user/team and is GANADA
   const cotizacion = await prisma.cotizacion.findFirst({
-    where: { id: data.cotizacionId, usuarioId: session.userId },
+    where: {
+      id: data.cotizacionId,
+      OR: [
+        { equipoId: session.empresaId },
+        { usuarioId: session.userId, equipoId: null },
+      ],
+    },
     select: {
       id: true, estado: true, clienteId: true, moneda: true, condiciones: true,
       lineItems: {
@@ -129,7 +141,11 @@ export async function POST(request: NextRequest) {
   }
 
   // Generate contract number: CTR-{YEAR}-{SEQUENCE}
-  const count = await prisma.contrato.count({ where: { usuarioId: session.userId } });
+  const count = await prisma.contrato.count({
+    where: session.empresaId
+      ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+      : { usuarioId: session.userId },
+  });
   const numero = `CTR-${new Date().getFullYear()}-${(count + 1).toString().padStart(4, "0")}`;
 
   // Calculate values from line items
@@ -182,6 +198,7 @@ export async function POST(request: NextRequest) {
       cotizacionId: data.cotizacionId,
       clienteId: cotizacion.clienteId,
       usuarioId: session.userId,
+      equipoId: session.empresaId || undefined,
       estado: "ACTIVO",
       fechaInicio,
       fechaFin,

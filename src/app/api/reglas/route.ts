@@ -17,12 +17,18 @@ export async function GET(request: NextRequest) {
   const tipo = searchParams.get("tipo");
   const activa = searchParams.get("activa");
 
-  const where: Record<string, unknown> = { usuarioId: session.userId };
-  if (tipo) where.tipo = tipo;
-  if (activa !== null) where.activa = activa === "true";
+  const ownerFilter = session.empresaId
+    ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+    : { usuarioId: session.userId };
+
+  const andClauses: Record<string, unknown>[] = [ownerFilter as Record<string, unknown>];
+  if (tipo) andClauses.push({ tipo });
+  if (activa !== null) andClauses.push({ activa: activa === "true" });
+  const where = andClauses.length === 1 ? andClauses[0] : { AND: andClauses };
 
   const reglas = await prisma.reglaComercial.findMany({
-    where,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    where: where as any,
     orderBy: [{ prioridad: "desc" }, { createdAt: "desc" }],
   });
 
@@ -49,6 +55,7 @@ export async function POST(request: NextRequest) {
       activa: data.activa,
       prioridad: data.prioridad,
       usuarioId: session.userId,
+      equipoId: session.empresaId || undefined,
     },
   });
 

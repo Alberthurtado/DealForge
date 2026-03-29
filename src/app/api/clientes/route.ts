@@ -13,20 +13,29 @@ export async function GET(request: NextRequest) {
   const search = searchParams.get("search") || "";
   const sector = searchParams.get("sector") || "";
 
-  const where: Record<string, unknown> = { usuarioId: session.userId };
+  const ownerFilter = session.empresaId
+    ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+    : { usuarioId: session.userId };
+
+  // Build AND clauses to combine ownership, search, and sector filters
+  const andClauses: Record<string, unknown>[] = [ownerFilter as Record<string, unknown>];
   if (search) {
-    where.OR = [
-      { nombre: { contains: search } },
-      { email: { contains: search } },
-      { ciudad: { contains: search } },
-    ];
+    andClauses.push({
+      OR: [
+        { nombre: { contains: search } },
+        { email: { contains: search } },
+        { ciudad: { contains: search } },
+      ],
+    });
   }
   if (sector) {
-    where.sector = sector;
+    andClauses.push({ sector });
   }
+  const where = andClauses.length === 1 ? andClauses[0] : { AND: andClauses };
 
   const clientes = await prisma.cliente.findMany({
-    where,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    where: where as any,
     include: {
       contactos: { where: { principal: true }, take: 1 },
       _count: { select: { cotizaciones: true } },
@@ -41,8 +50,12 @@ export async function POST(request: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
-  // ── Plan limit check (per-user) ──
-  const currentClientes = await prisma.cliente.count({ where: { usuarioId: session.userId } });
+  // ── Plan limit check (team-aware) ──
+  const currentClientes = await prisma.cliente.count({
+    where: session.empresaId
+      ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+      : { usuarioId: session.userId },
+  });
   const limit = checkLimit(session.plan, "clientes", currentClientes);
 
   if (!limit.allowed) {
@@ -66,6 +79,7 @@ export async function POST(request: NextRequest) {
     data: {
       ...clienteData,
       usuarioId: session.userId,
+      equipoId: session.empresaId || undefined,
       contactos: contactos?.length
         ? { create: contactos }
         : undefined,
