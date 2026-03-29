@@ -8,7 +8,7 @@ import { DocumentoPanel } from "@/components/contratos/documento-panel";
 import {
   CheckCircle, Clock, XCircle, AlertTriangle, TrendingUp,
   RefreshCw, Ban, FileEdit, ScrollText, Loader2, ChevronDown,
-  Pencil, Save, X as XIcon,
+  Pencil, Save, X as XIcon, ThumbsUp, ThumbsDown,
 } from "lucide-react";
 
 interface ContratoDetail {
@@ -65,6 +65,7 @@ const ACTIVIDAD_ICONS: Record<string, { icon: typeof CheckCircle; color: string 
   CREADO: { icon: ScrollText, color: "text-blue-500" },
   RENOVADO: { icon: RefreshCw, color: "text-green-500" },
   ENMIENDA: { icon: FileEdit, color: "text-purple-500" },
+  ACTUALIZACION: { icon: CheckCircle, color: "text-indigo-500" },
   CANCELADO: { icon: XCircle, color: "text-red-500" },
   NOTIFICACION: { icon: Clock, color: "text-amber-500" },
   ESTADO_CAMBIADO: { icon: TrendingUp, color: "text-gray-500" },
@@ -122,6 +123,18 @@ export default function ContratoDetailPage() {
         body: JSON.stringify({ ...enmienda, cambios: JSON.stringify({ descripcion: enmienda.descripcion }) }),
       });
       if (res.ok) { setShowEnmiendaModal(false); setEnmienda({ tipo: "UPSELL", descripcion: "", valorNuevo: 0 }); loadContrato(); }
+    } finally { setActionLoading(""); }
+  }
+
+  async function handleEnmiendaEstado(enmiendaId: string, estado: "ACEPTADA" | "RECHAZADA") {
+    setActionLoading(`enmienda-${enmiendaId}`);
+    try {
+      const res = await fetch(`/api/contratos/${params.id}/enmienda/${enmiendaId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ estado }),
+      });
+      if (res.ok) loadContrato();
     } finally { setActionLoading(""); }
   }
 
@@ -402,24 +415,54 @@ export default function ContratoDetailPage() {
             </div>
             <div className="divide-y divide-gray-50">
               {contrato.enmiendas.map((e) => (
-                <div key={e.id} className="px-5 py-3 flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
+                <div key={e.id} className="px-5 py-4 flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-purple-100 text-purple-700">
                         {TIPO_ENMIENDA_LABELS[e.tipo] || e.tipo}
                       </span>
                       <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                         e.estado === "ACEPTADA" ? "bg-green-100 text-green-700" :
                         e.estado === "RECHAZADA" ? "bg-red-100 text-red-700" :
-                        "bg-gray-100 text-gray-600"
-                      }`}>{e.estado}</span>
+                        "bg-amber-100 text-amber-700"
+                      }`}>
+                        {e.estado === "PENDIENTE" ? "Pendiente" : e.estado === "ACEPTADA" ? "Aceptada" : "Rechazada"}
+                      </span>
                     </div>
-                    <p className="text-sm text-gray-700 mt-1">{e.descripcion}</p>
+                    <p className="text-sm text-gray-700 mt-1.5">{e.descripcion}</p>
                     <p className="text-xs text-gray-400 mt-0.5">{formatDate(e.createdAt)}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-xs text-gray-400 line-through">{formatCurrency(e.valorAnterior)}</p>
-                    <p className="text-sm font-medium text-gray-900">{formatCurrency(e.valorNuevo)}</p>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <div className="text-right">
+                      <p className="text-xs text-gray-400 line-through">{formatCurrency(e.valorAnterior)}</p>
+                      <p className="text-sm font-semibold text-gray-900">{formatCurrency(e.valorNuevo)}</p>
+                    </div>
+                    {e.estado === "PENDIENTE" && (
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={() => handleEnmiendaEstado(e.id, "ACEPTADA")}
+                          disabled={actionLoading === `enmienda-${e.id}`}
+                          title="Aceptar enmienda"
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
+                        >
+                          {actionLoading === `enmienda-${e.id}` ? (
+                            <Loader2 className="w-3 h-3 animate-spin" />
+                          ) : (
+                            <ThumbsUp className="w-3 h-3" />
+                          )}
+                          Aceptar
+                        </button>
+                        <button
+                          onClick={() => handleEnmiendaEstado(e.id, "RECHAZADA")}
+                          disabled={actionLoading === `enmienda-${e.id}`}
+                          title="Rechazar enmienda"
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium border border-red-200 text-red-600 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
+                        >
+                          <ThumbsDown className="w-3 h-3" />
+                          Rechazar
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
