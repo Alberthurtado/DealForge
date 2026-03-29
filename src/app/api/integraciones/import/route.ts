@@ -98,9 +98,19 @@ export async function POST(request: NextRequest) {
           }
         }
 
+        const rawTipo = row.tipo_facturacion?.trim().toUpperCase();
+        const tipoFacturacion = rawTipo === "RECURRENTE" ? "RECURRENTE" : "UNICO";
+        const rawFrecuencia = row.frecuencia?.trim().toUpperCase();
+        const frecuencia = ["MENSUAL", "TRIMESTRAL", "ANUAL"].includes(rawFrecuencia)
+          ? rawFrecuencia
+          : tipoFacturacion === "RECURRENTE" ? "MENSUAL" : null;
+
         const data = {
           nombre, descripcion: row.descripcion?.trim() || null, precioBase: parseFloat(row.precio_base) || 0,
-          unidad: row.unidad?.trim() || "unidad", categoriaId, activo: row.activo?.toLowerCase() !== "no",
+          unidad: row.unidad?.trim() || "unidad", categoriaId,
+          activo: row.activo?.toLowerCase() !== "no",
+          tipoFacturacion,
+          frecuencia,
         };
 
         const existing = await prisma.producto.findFirst({

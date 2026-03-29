@@ -12,8 +12,8 @@ const TEMPLATES: Record<ImportType, { headers: string[]; example: string[][] }> 
     example: [["Acme Corp", "info@acme.com", "+34 600 123 456", "Calle Mayor 1", "Madrid", "España", "Tecnología", "B12345678", "Juan Pérez", "juan@acme.com", "Director Comercial"]],
   },
   productos: {
-    headers: ["nombre", "sku", "descripcion", "precio_base", "unidad", "categoria"],
-    example: [["Widget Pro", "WDG-001", "Widget profesional de alta calidad", "99.90", "unidad", "Widgets"]],
+    headers: ["nombre", "sku", "descripcion", "precio_base", "unidad", "categoria", "tipo_facturacion", "frecuencia", "activo"],
+    example: [["Widget Pro", "WDG-001", "Widget profesional de alta calidad", "99.90", "unidad", "Widgets", "UNICO", "", "si"]],
   },
 };
 
