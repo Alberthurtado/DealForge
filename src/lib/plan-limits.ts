@@ -36,15 +36,16 @@ export function getPlanLimits(plan: string): PlanLimits {
 
 // ─── Feature Flags by Plan ──────────────────────
 export interface PlanFeatures {
-  emailEnvio: boolean;        // Send quotes by email
-  reglasComerciales: boolean; // Commercial rules engine
-  aprobaciones: boolean;      // Approval workflows
-  reglasAvanzadas: boolean;   // Advanced rule types
-  pdfBranded: boolean;        // Branded PDF templates
-  apiKeys: boolean;           // API key for external integrations
-  recordatorios: boolean;     // Automated follow-up reminders
-  firmaElectronica: boolean;  // Electronic signature
-  contratos: boolean;         // Contract management
+  emailEnvio: boolean;          // Send quotes by email
+  reglasComerciales: boolean;   // Commercial rules engine
+  aprobaciones: boolean;        // Approval workflows
+  reglasAvanzadas: boolean;     // Advanced rule types
+  pdfBranded: boolean;          // Branded PDF templates
+  apiKeys: boolean;             // API key for external integrations
+  recordatorios: boolean;       // Automated follow-up reminders
+  firmaElectronica: boolean;    // Electronic signature
+  contratos: boolean;           // Contract management
+  soportePrioritario: boolean;  // Priority support
 }
 
 const PLAN_FEATURES: Record<string, PlanFeatures> = {
@@ -58,6 +59,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     recordatorios: false,
     firmaElectronica: false,
     contratos: false,
+    soportePrioritario: false,
   },
   pro: {
     emailEnvio: true,
@@ -69,6 +71,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     recordatorios: true,
     firmaElectronica: true,
     contratos: false,
+    soportePrioritario: false,
   },
   business: {
     emailEnvio: true,
@@ -80,6 +83,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     recordatorios: true,
     firmaElectronica: true,
     contratos: true,
+    soportePrioritario: true,
   },
   enterprise: {
     emailEnvio: true,
@@ -91,6 +95,7 @@ const PLAN_FEATURES: Record<string, PlanFeatures> = {
     recordatorios: true,
     firmaElectronica: true,
     contratos: true,
+    soportePrioritario: true,
   },
 };
 

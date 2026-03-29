@@ -154,10 +154,10 @@ export default function CotizacionDetailPage() {
         if (data.user?.plan) {
           // Import features dynamically based on plan
           const features: Record<string, PlanFeatures> = {
-            starter: { emailEnvio: false, reglasComerciales: false, aprobaciones: false, reglasAvanzadas: false, pdfBranded: false, apiKeys: false, recordatorios: false, firmaElectronica: false, contratos: false },
-            pro: { emailEnvio: true, reglasComerciales: true, aprobaciones: false, reglasAvanzadas: false, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true, contratos: false },
-            business: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true, contratos: true },
-            enterprise: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true, contratos: true },
+            starter: { emailEnvio: false, reglasComerciales: false, aprobaciones: false, reglasAvanzadas: false, pdfBranded: false, apiKeys: false, recordatorios: false, firmaElectronica: false, contratos: false, soportePrioritario: false },
+            pro: { emailEnvio: true, reglasComerciales: true, aprobaciones: false, reglasAvanzadas: false, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true, contratos: false, soportePrioritario: false },
+            business: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true, contratos: true, soportePrioritario: true },
+            enterprise: { emailEnvio: true, reglasComerciales: true, aprobaciones: true, reglasAvanzadas: true, pdfBranded: true, apiKeys: true, recordatorios: true, firmaElectronica: true, contratos: true, soportePrioritario: true },
           };
           setPlanFeatures(features[data.user.plan] || features.starter);
         }
