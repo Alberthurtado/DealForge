@@ -9,10 +9,10 @@ import Image from "next/image";
 /* ------------------------------------------------------------------ */
 function recommendedPlan(quotesPerMonth: number) {
   if (quotesPerMonth <= 30)
-    return { name: "Starter", price: 29, href: "/registro?plan=starter" };
-  if (quotesPerMonth <= 150)
-    return { name: "Professional", price: 79, href: "/registro?plan=professional" };
-  return { name: "Enterprise", price: 199, href: "/registro?plan=enterprise" };
+    return { name: "Starter", price: 0, href: "/registro?plan=starter" };
+  if (quotesPerMonth <= 100)
+    return { name: "Pro", price: 29, href: "/registro?plan=pro" };
+  return { name: "Business", price: 79, href: "/registro?plan=business" };
 }
 
 /* ------------------------------------------------------------------ */
@@ -78,10 +78,10 @@ function ResultCard({
   sub?: string;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 text-center">
-      <p className="text-sm text-gray-500 mb-1">{label}</p>
-      <p className="text-3xl sm:text-4xl font-extrabold text-[#3a9bb5]">{value}</p>
-      {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
+    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-5 text-center">
+      <p className="text-xs text-gray-500 mb-1">{label}</p>
+      <p className="text-xl sm:text-2xl font-extrabold text-[#3a9bb5] leading-tight">{value}</p>
+      {sub && <p className="text-[11px] text-gray-400 mt-1">{sub}</p>}
     </div>
   );
 }
@@ -263,7 +263,7 @@ export default function CalculadoraRoiPage() {
             <ResultCard
               label="Plan recomendado"
               value={plan.name}
-              sub={`${fmtEur(plan.price)}/mes`}
+              sub={plan.price === 0 ? "Gratis" : `${fmtEur(plan.price)}/mes`}
             />
           </div>
 
