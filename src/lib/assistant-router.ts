@@ -8,6 +8,8 @@
  * 4. Only forward business-relevant action queries to Claude API
  */
 
+import { TERMINOS } from "@/data/glosario";
+
 interface RouterResult {
   handled: boolean;
   response?: string;
@@ -823,6 +825,67 @@ Tambien puedes preguntarme como funciona cualquier seccion de DealForge y te lo 
 
 // ─── ROUTER ──────────────────────────────────────────────────────────────────
 
+// ─── Glossary lookup ──────────────────────────────────────────────────────────
+
+const GLOSSARY_PATTERNS = [
+  /(?:que es|que significa|que quiere decir|definicion de|define|significado de|a que se refiere)\s+(.+)/i,
+  /(?:que son|que significan)\s+(.+)/i,
+  /^(.+?)(?:\?| que es| que significa| significado| definicion)$/i,
+];
+
+// Pre-build normalized term index for fast lookup
+const glossaryIndex = TERMINOS.map(t => ({
+  term: t,
+  normalized: normalize(t.nombre),
+  // Also index acronym (e.g. "cpq", "crm", "roi", "mrr", "erp", "saas", "sla", "sql", "nda", "b2b", "iva")
+  acronym: t.nombre.match(/^[A-Z]+/) ? t.nombre.match(/^[A-Z]+/)?.[0]?.toLowerCase() ?? "" : "",
+  // Also index the part before parenthesis (e.g. "cross-selling" from "Cross-selling (venta cruzada)")
+  shortName: normalize(t.nombre.split("(")[0].trim()),
+}));
+
+function matchGlossaryTerm(normalizedMsg: string): RouterResult | null {
+  // Try to extract the term being asked about
+  let searchTerm = normalizedMsg;
+
+  for (const pattern of GLOSSARY_PATTERNS) {
+    const match = normalizedMsg.match(pattern);
+    if (match?.[1]) {
+      searchTerm = match[1].trim().replace(/[?¿!¡.]/g, "").trim();
+      break;
+    }
+  }
+
+  if (!searchTerm || searchTerm.length < 2) return null;
+
+  const normalizedSearch = normalize(searchTerm);
+
+  // Exact match or close match against glossary
+  const found = glossaryIndex.find(g =>
+    g.normalized === normalizedSearch ||
+    g.acronym === normalizedSearch ||
+    g.shortName === normalizedSearch ||
+    // Partial match: search term is contained in term name or vice versa
+    (normalizedSearch.length >= 3 && g.normalized.includes(normalizedSearch)) ||
+    (normalizedSearch.length >= 3 && normalizedSearch.includes(g.normalized))
+  );
+
+  if (!found) return null;
+
+  const t = found.term;
+  const response = `**${t.nombre}**: ${t.definicion}${t.link ? `\n\n[${t.link.label}](${t.link.href})` : ""}\n\n_Puedes consultar todos los terminos en el [Glosario](/glosario)._`;
+
+  return {
+    handled: true,
+    response,
+    suggestedActions: [
+      { label: "Ver glosario completo", href: "/glosario" },
+      ...(t.link ? [{ label: t.link.label, href: t.link.href }] : []),
+    ],
+  };
+}
+
+// ─── ROUTER ──────────────────────────────────────────────────────────────────
+
 export function routeMessage(message: string): RouterResult {
   const trimmed = message.trim();
   const lower = trimmed.toLowerCase();
@@ -895,6 +958,10 @@ export function routeMessage(message: string): RouterResult {
       }
     }
   }
+
+  // ── 6b. Glossary term lookup (0 tokens) ──
+  const glossaryMatch = matchGlossaryTerm(normalized);
+  if (glossaryMatch) return glossaryMatch;
 
   // ── 7. Off-topic with fun responses ──
   // Check each category for a tailored response
