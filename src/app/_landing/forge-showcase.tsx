@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MessageSquare, BarChart3, Lightbulb, Package, Flame, ArrowRight } from "lucide-react";
 
 interface ChatMessage {
@@ -68,24 +68,31 @@ function formatMessage(text: string) {
 
 export function ForgeShowcase() {
   const [activeTab, setActiveTab] = useState(0);
-  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const active = CAPABILITIES[activeTab];
 
-  // Animate messages appearing one by one
-  useEffect(() => {
+  // Track which tab the user is seeing — start null so first render shows all
+  const [animatingTab, setAnimatingTab] = useState<number | null>(null);
+  const [visibleMessages, setVisibleMessages] = useState<number[]>(
+    CAPABILITIES[0].messages.map((_, i) => i)
+  );
+
+  function handleTabChange(newTab: number) {
+    if (newTab === activeTab) return;
+    setActiveTab(newTab);
+    setAnimatingTab(newTab);
     setVisibleMessages([]);
 
+    const msgs = CAPABILITIES[newTab].messages;
     const timers: ReturnType<typeof setTimeout>[] = [];
-    active.messages.forEach((_, i) => {
+    msgs.forEach((_, i) => {
       timers.push(
         setTimeout(() => {
           setVisibleMessages((prev) => [...prev, i]);
         }, i * 300 + 100)
       );
     });
-
-    return () => timers.forEach(clearTimeout);
-  }, [activeTab, active.messages]);
+    // no cleanup needed — timers are short-lived
+  }
 
   return (
     <section id="forge" className="py-24 relative overflow-hidden">
@@ -116,7 +123,7 @@ export function ForgeShowcase() {
             {CAPABILITIES.map((cap, i) => (
               <button
                 key={cap.id}
-                onClick={() => setActiveTab(i)}
+                onClick={() => handleTabChange(i)}
                 className={`w-full text-left p-4 rounded-2xl border-2 transition-all duration-300 ${
                   activeTab === i
                     ? "border-[#3a9bb5] bg-white shadow-lg shadow-[#3a9bb5]/10"
