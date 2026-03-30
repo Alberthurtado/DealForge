@@ -23,6 +23,10 @@ export interface Industria {
   faqs: { pregunta: string; respuesta: string }[];
   featuresEspecificos: { icono: string; titulo: string; desc: string }[];
   stats: { valor: string; label: string }[];
+  /** Unique long-form guide content (HTML) for SEO differentiation */
+  guia?: string;
+  /** How-to steps for HowTo schema markup */
+  howToSteps?: string[];
 }
 
 export const industrias: Industria[] = [
@@ -89,6 +93,16 @@ export const industrias: Industria[] = [
       { valor: "100%", label: "desglose profesional" },
       { valor: "24h", label: "respuesta al cliente" },
     ],
+    guia: `<p>Elaborar un presupuesto de construcción exige desglosar cada partida con precisión: demoliciones, cimentaciones, estructura, albañilería, instalaciones y acabados deben figurar por separado para que el cliente comprenda a dónde va cada euro. Un error habitual es entregar un precio cerrado sin detallar materiales, mano de obra y maquinaria, lo que genera desconfianza y dificulta la comparación con otros contratistas.</p>
+<p>En el sector de reformas y obra nueva, los sobrecostes surgen cuando el alcance inicial no queda documentado. Por eso conviene especificar unidades de medición (m², m³, unidades, partidas alzadas), precios unitarios y condiciones de revisión ante imprevistos como cambios de proyecto o hallazgos ocultos en la demolición. Incluir plazos de ejecución por capítulo y un calendario de pagos vinculado a hitos de obra transmite seriedad y protege a ambas partes.</p>
+<p>Con DealForge puedes crear presupuestos de obra en minutos, organizados por capítulos, con cálculo automático de totales e IVA, y enviarlos como PDF profesional con tu marca. El cliente firma electrónicamente y tú recibes notificación instantánea para arrancar la obra sin demoras administrativas.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Construcción y completa los datos del cliente y la dirección de la obra.",
+      "Añade las partidas organizadas por capítulos: demolición, estructura, instalaciones, acabados, etc.",
+      "Indica cantidades, unidades de medida y precios unitarios para que el sistema calcule los totales automáticamente.",
+      "Incluye condiciones de pago, plazos de ejecución y garantías en las notas del presupuesto.",
+      "Envía el presupuesto al cliente por enlace o PDF y recibe su aprobación con firma electrónica.",
+    ],
   },
   {
     slug: "consultoria",
@@ -152,6 +166,16 @@ export const industrias: Industria[] = [
       { valor: "10 min", label: "por propuesta profesional" },
       { valor: "Fases", label: "con entregables claros" },
       { valor: "Firma", label: "electrónica incluida" },
+    ],
+    guia: `<p>Una propuesta de consultoría efectiva va mucho más allá de listar honorarios: debe comunicar metodología, definir entregables tangibles y establecer un marco temporal que genere confianza. El error más frecuente en el sector es presentar documentos genéricos que no conectan el diagnóstico del problema con la solución propuesta, lo que dificulta que el cliente perciba el retorno de la inversión.</p>
+<p>Estructurar la cotización por fases —descubrimiento, análisis, diseño de solución, implementación y seguimiento— permite al cliente visualizar el proceso y entender por qué cada etapa tiene un coste asociado. Detallar los perfiles del equipo asignado, las horas estimadas y los entregables concretos de cada fase elimina la ambigüedad que suele retrasar la aprobación de proyectos de consultoría.</p>
+<p>DealForge te permite montar propuestas de consultoría con secciones modulares, reutilizar bloques de servicios entre proyectos y activar el seguimiento automático para saber exactamente cuándo el decisor revisa tu propuesta. Así puedes hacer follow-up en el momento justo y cerrar más proyectos sin perseguir clientes.</p>`,
+    howToSteps: [
+      "Elige la plantilla de Consultoría e introduce los datos del cliente y el contexto del proyecto.",
+      "Define las fases del proyecto (diagnóstico, análisis, implementación, seguimiento) con sus entregables.",
+      "Asigna honorarios por fase o por hora, indicando los perfiles profesionales involucrados.",
+      "Personaliza las condiciones de pago, confidencialidad y alcance en las notas del documento.",
+      "Envía la propuesta con seguimiento activo y firma electrónica para aceptación inmediata.",
     ],
   },
   {
@@ -217,6 +241,16 @@ export const industrias: Industria[] = [
       { valor: "Packs", label: "mensuales reutilizables" },
       { valor: "PDF", label: "profesional con tu marca" },
     ],
+    guia: `<p>Cotizar servicios de marketing digital presenta un reto particular: el cliente necesita entender qué incluye cada servicio —SEO, SEM, gestión de redes sociales, email marketing— sin perderse en tecnicismos. La clave está en separar claramente los honorarios de gestión del presupuesto destinado a inversión publicitaria, evitando la confusión habitual entre lo que cobra la agencia y lo que se invierte en plataformas como Google Ads o Meta Ads.</p>
+<p>Las agencias que estructuran sus propuestas en packs mensuales recurrentes —básico, profesional y premium— consiguen que el cliente compare opciones de valor en lugar de regatear precios. Cada pack debe detallar los entregables mensuales: número de publicaciones, informes de rendimiento, campañas activas y horas de dedicación. Esto transforma una negociación de precio en una conversación sobre alcance y resultados esperados.</p>
+<p>Con DealForge puedes crear propuestas modulares donde el cliente activa o desactiva servicios individuales, ver en tiempo real cuándo abre tu propuesta y cerrar la venta con firma electrónica sin intercambiar decenas de emails. Ideal para agencias que gestionan múltiples cuentas y necesitan enviar cotizaciones de forma ágil.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Marketing Digital y rellena los datos de la empresa cliente.",
+      "Configura los packs de servicios mensuales o añade servicios individuales según las necesidades del cliente.",
+      "Separa los honorarios de gestión del presupuesto publicitario para total transparencia.",
+      "Añade condiciones de permanencia, métricas de seguimiento y periodicidad de informes.",
+      "Envía la propuesta al cliente con opciones seleccionables y recoge su firma electrónica.",
+    ],
   },
   {
     slug: "diseno-grafico",
@@ -280,6 +314,16 @@ export const industrias: Industria[] = [
       { valor: "8 min", label: "por presupuesto creativo" },
       { valor: "Revisiones", label: "claramente definidas" },
       { valor: "PDF", label: "con tu identidad de marca" },
+    ],
+    guia: `<p>El presupuesto de un proyecto de diseño gráfico debe reflejar el valor del proceso creativo, no solo el entregable final. Muchos diseñadores cometen el error de enviar un precio global sin detallar las fases de trabajo: briefing, investigación, conceptualización, desarrollo de propuestas, rondas de revisión y entrega de archivos finales. Sin ese desglose, el cliente percibe el diseño como un commodity y negocia exclusivamente por precio.</p>
+<p>Especificar el número de propuestas iniciales, las rondas de correcciones incluidas y el coste de revisiones adicionales protege al diseñador del temido "scope creep". Igualmente importante es definir los formatos de entrega (AI, PSD, PNG, SVG), las condiciones de cesión de derechos de uso y si el precio incluye adaptaciones a distintos soportes o tamaños.</p>
+<p>DealForge permite a estudios de diseño y freelances crear presupuestos que educan al cliente sobre el proceso creativo, con líneas claras por cada fase y entregable. El documento PDF lleva tu identidad visual, reforzando la coherencia de marca desde el primer contacto comercial. Además, el versionado facilita gestionar cambios de alcance sin perder el historial de lo aprobado.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Diseño Gráfico e introduce los datos del cliente y el tipo de proyecto.",
+      "Desglosa el presupuesto por fases creativas: briefing, conceptualización, diseño y entrega final.",
+      "Especifica el número de propuestas iniciales, rondas de revisión incluidas y formatos de entrega.",
+      "Añade condiciones sobre derechos de uso, propiedad intelectual y revisiones extra.",
+      "Genera el PDF con tu marca y envíalo para aprobación con firma electrónica.",
     ],
   },
   {
@@ -345,6 +389,16 @@ export const industrias: Industria[] = [
       { valor: "Fases", label: "con milestones claros" },
       { valor: "Alcance", label: "controlado y definido" },
     ],
+    guia: `<p>Presupuestar un proyecto de desarrollo web requiere traducir la complejidad técnica en un documento que el cliente —generalmente no técnico— pueda evaluar con confianza. La cotización debe estructurarse por fases: diseño UX/UI, desarrollo frontend, desarrollo backend, integraciones, testing y despliegue. Cada fase necesita hitos de entrega claros que permitan validar avances antes de continuar.</p>
+<p>Un punto crítico es definir qué tecnologías se utilizarán, cuántas revisiones de diseño se incluyen, el número de plantillas o pantallas, y si el hosting, dominio o mantenimiento posterior forman parte del presupuesto. Los cambios de requisitos durante el desarrollo son inevitables, por lo que conviene establecer un mecanismo de gestión de cambios con tarifas por hora adicional claramente indicadas.</p>
+<p>DealForge te ayuda a generar propuestas de desarrollo web con bloques reutilizables para cada tipo de proyecto —web corporativa, e-commerce, app móvil, SaaS— calculando automáticamente los totales. El cliente puede aprobar la propuesta con firma electrónica, y tú mantienes un registro claro del alcance acordado para evitar disputas sobre funcionalidades no contempladas.</p>`,
+    howToSteps: [
+      "Elige la plantilla de Desarrollo Web e identifica el tipo de proyecto: web, app o e-commerce.",
+      "Estructura el presupuesto por fases técnicas: UX/UI, frontend, backend, testing y despliegue.",
+      "Detalla las tecnologías, número de pantallas, integraciones y revisiones incluidas en cada fase.",
+      "Establece hitos de entrega, condiciones de cambio de alcance y plazos estimados.",
+      "Envía la propuesta técnica al cliente y obtén su aprobación con firma electrónica.",
+    ],
   },
   {
     slug: "fotografia",
@@ -408,6 +462,16 @@ export const industrias: Industria[] = [
       { valor: "5 min", label: "por presupuesto fotográfico" },
       { valor: "Packs", label: "personalizados por servicio" },
       { valor: "Firma", label: "digital de aceptación" },
+    ],
+    guia: `<p>Cotizar servicios fotográficos implica mucho más que poner precio a una sesión de fotos. El presupuesto debe especificar la duración de la sesión, el número de fotografías editadas que se entregarán, el nivel de retoque (básico, medio o artístico), los derechos de uso de las imágenes y si incluye desplazamiento al lugar del evento o reportaje. Sin esta información, el cliente compara únicamente por precio y no por el valor real del servicio.</p>
+<p>Para bodas, eventos corporativos o sesiones de producto, es fundamental definir si el fotógrafo trabaja solo o con asistente, si se incluyen álbumes impresos, archivos en alta resolución o licencias para uso comercial. Los packs fotográficos —por ejemplo, sesión básica, reportaje completo y cobertura premium— ayudan al cliente a elegir según sus necesidades y presupuesto sin sentirse presionado.</p>
+<p>DealForge permite crear presupuestos fotográficos con packs predefinidos, detallando entregables, plazos de edición y condiciones de cancelación. El cliente puede aceptar el presupuesto con firma electrónica desde su móvil, confirmando la reserva de fecha al instante sin necesidad de intercambiar correos.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Fotografía e introduce los datos del cliente y el tipo de sesión.",
+      "Configura un pack fotográfico indicando horas de sesión, fotos entregadas y nivel de edición.",
+      "Especifica los derechos de uso de las imágenes y si incluye desplazamiento o asistente.",
+      "Añade condiciones de reserva, cancelación y plazos de entrega de las fotografías editadas.",
+      "Envía el presupuesto y recibe la confirmación del cliente con firma electrónica.",
     ],
   },
   {
@@ -473,6 +537,16 @@ export const industrias: Industria[] = [
       { valor: "Fases", label: "según normativa LOE" },
       { valor: "Firma", label: "electrónica de aprobación" },
     ],
+    guia: `<p>La propuesta de honorarios de un estudio de arquitectura debe transmitir rigor técnico y profesionalidad desde la primera página. A diferencia de otros sectores, los honorarios del arquitecto se estructuran conforme a las fases del proyecto establecidas por la Ley de Ordenación de la Edificación (LOE): estudios previos, anteproyecto, proyecto básico, proyecto de ejecución y dirección de obra. Cada fase tiene entregables y responsabilidades diferentes que el cliente necesita comprender.</p>
+<p>Es habitual cotizar los honorarios como porcentaje del Presupuesto de Ejecución Material (PEM) o como precio fijo por fase. En cualquier caso, conviene detallar qué incluye cada etapa: planos, memorias técnicas, gestiones con el Colegio de Arquitectos, coordinación con ingenieros y dirección facultativa. Los gastos de visado, tasas municipales y honorarios de otros técnicos deben indicarse por separado para evitar malentendidos.</p>
+<p>Con DealForge puedes crear propuestas de honorarios profesionales con la estructura por fases que exige la normativa, cálculo automático de totales y envío con firma electrónica. El cliente aprueba el encargo de forma digital, agilizando el inicio del proyecto sin burocracia innecesaria.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Arquitectura y registra los datos del cliente y la ubicación del proyecto.",
+      "Estructura los honorarios por fases LOE: estudios previos, anteproyecto, básico, ejecución y dirección.",
+      "Indica el método de cálculo (porcentaje sobre PEM o tarifa fija) y los entregables de cada fase.",
+      "Separa los gastos de visado, tasas y honorarios de otros técnicos del coste del estudio.",
+      "Envía la propuesta de honorarios con firma electrónica para formalizar el encargo profesional.",
+    ],
   },
   {
     slug: "limpieza",
@@ -536,6 +610,16 @@ export const industrias: Industria[] = [
       { valor: "5 min", label: "por cotización de limpieza" },
       { valor: "Mensual", label: "cálculo automático" },
       { valor: "Contratos", label: "con renovación digital" },
+    ],
+    guia: `<p>Las empresas de limpieza profesional necesitan presupuestos que detallen con exactitud las superficies a limpiar, la frecuencia del servicio, los productos y equipos utilizados y el número de operarios asignados. Un presupuesto vago genera desconfianza en el cliente y abre la puerta a reclamaciones futuras sobre lo que estaba o no incluido en el contrato.</p>
+<p>Para servicios recurrentes —oficinas, comunidades de vecinos, locales comerciales— la cotización debe calcular el coste mensual desglosando metros cuadrados, frecuencia semanal y tipo de limpieza (mantenimiento, cristales, desinfección, tratamiento de suelos). Los servicios puntuales como limpiezas de fin de obra o limpiezas profundas requieren una valoración específica por horas y complejidad del trabajo.</p>
+<p>DealForge permite generar cotizaciones de limpieza con cálculo automático de tarifas mensuales, anuales y por servicio puntual. Puedes enviar el presupuesto al administrador de fincas o al responsable de la empresa con firma electrónica, formalizando el contrato de servicio sin papeleos y con renovación digital cuando llegue el momento.</p>`,
+    howToSteps: [
+      "Elige la plantilla de Limpieza y completa los datos del cliente y la dirección del inmueble.",
+      "Indica las superficies en metros cuadrados, tipo de limpieza y frecuencia del servicio.",
+      "Calcula el coste mensual o por servicio puntual, incluyendo productos y número de operarios.",
+      "Añade condiciones contractuales: duración, renovación, penalizaciones y preaviso de cancelación.",
+      "Envía el presupuesto con firma electrónica para formalizar el contrato de limpieza.",
     ],
   },
   {
@@ -601,6 +685,16 @@ export const industrias: Industria[] = [
       { valor: "Versiones", label: "para cada cambio" },
       { valor: "Categorías", label: "organizadas por servicio" },
     ],
+    guia: `<p>Presupuestar un evento requiere coordinar múltiples proveedores y servicios en un solo documento coherente: catering, audiovisual, decoración, fotografía, entretenimiento, personal de sala y logística. El reto está en presentar todo de forma clara para que el cliente pueda aprobar, modificar o descartar servicios sin perder la visión global del coste total del evento.</p>
+<p>Cada tipo de evento —boda, congreso, lanzamiento de producto, cena de gala— tiene partidas específicas. Para bodas, por ejemplo, es clave desglosar el precio por comensal separando aperitivo, banquete, barra libre y tarta. En eventos corporativos, el cliente necesita ver el coste del espacio, la producción técnica, el catering y la señalización como partidas independientes que puede escalar según el número de asistentes.</p>
+<p>DealForge te permite organizar el presupuesto por categorías de servicio, crear versiones para distintas opciones (menú A vs. menú B, 100 vs. 200 invitados) y enviar todo en un documento profesional que el cliente aprueba con firma electrónica. Cada modificación genera una nueva versión, manteniendo el historial completo de lo acordado.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Eventos e introduce los datos del cliente y la fecha del evento.",
+      "Organiza el presupuesto por categorías: catering, audiovisual, decoración, entretenimiento, logística.",
+      "Crea opciones o versiones para distintos menús, configuraciones o número de invitados.",
+      "Incluye condiciones de reserva, cancelación y calendario de pagos vinculado a hitos.",
+      "Envía el presupuesto completo y obtén la aprobación del cliente con firma electrónica.",
+    ],
   },
   {
     slug: "electricidad",
@@ -664,6 +758,16 @@ export const industrias: Industria[] = [
       { valor: "5 min", label: "por presupuesto eléctrico" },
       { valor: "0 errores", label: "de cálculo en materiales" },
       { valor: "PDF", label: "profesional con normativa" },
+    ],
+    guia: `<p>Un presupuesto eléctrico profesional debe separar claramente los materiales (cableado, mecanismos, cuadros eléctricos, luminarias) de la mano de obra y los costes de certificación. El instalador electricista que detalla cada partida —puntos de luz, tomas de corriente, circuitos especiales para aire acondicionado o cocina de inducción— genera confianza y reduce las discusiones posteriores sobre qué estaba incluido.</p>
+<p>La normativa del Reglamento Electrotécnico de Baja Tensión (REBT) exige que las instalaciones cumplan requisitos técnicos específicos. Reflejar en el presupuesto que la instalación incluye boletín eléctrico, certificado de instalación y tramitación ante la comunidad autónoma correspondiente añade valor percibido y diferencia al profesional serio del electricista que trabaja sin documentación.</p>
+<p>Con DealForge puedes crear presupuestos eléctricos con líneas predefinidas para cada tipo de instalación, cálculo automático del total de materiales más mano de obra e IVA, y generar un PDF profesional que incluya las referencias normativas pertinentes. El cliente aprueba desde su móvil y tú puedes empezar la instalación con el respaldo de un documento firmado.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Electricidad e introduce los datos del cliente y la dirección de la instalación.",
+      "Desglosa los materiales (cables, mecanismos, cuadros) y la mano de obra por cada circuito o zona.",
+      "Añade partidas de certificación: boletín eléctrico, proyecto técnico si aplica, y tramitaciones.",
+      "Indica plazos de ejecución, garantías y referencias normativas REBT aplicables.",
+      "Envía el presupuesto profesional y recibe la aceptación firmada electrónicamente.",
     ],
   },
   {
@@ -729,6 +833,16 @@ export const industrias: Industria[] = [
       { valor: "Marca", label: "y modelo especificados" },
       { valor: "Garantía", label: "por escrito incluida" },
     ],
+    guia: `<p>El fontanero que entrega un presupuesto detallado marca la diferencia frente a quien da un precio "a ojo" por teléfono. Una cotización profesional de fontanería debe indicar la marca y modelo de los materiales (grifería, sanitarios, calentadores, tuberías), diferenciar entre suministro e instalación, y especificar si incluye la retirada del material antiguo y los trabajos de albañilería menor necesarios.</p>
+<p>En reparaciones de urgencia, el cliente agradece un presupuesto rápido pero transparente que distinga el coste del desplazamiento, la mano de obra por hora y los materiales empleados. Para instalaciones nuevas o reformas de baños y cocinas, conviene estructurar el presupuesto por zonas y detallar cada punto de agua, desagüe y conexión de electrodomésticos para que no haya sorpresas al finalizar la obra.</p>
+<p>DealForge permite al fontanero crear presupuestos desde el móvil durante la visita, con líneas predefinidas para los trabajos más habituales y cálculo automático del total. El documento incluye la garantía por escrito sobre materiales e instalación, y el cliente puede aceptarlo firmando desde su teléfono en el acto, sin esperas ni papeleo.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Fontanería y registra los datos del cliente y la dirección del trabajo.",
+      "Detalla cada trabajo: reparación, sustitución o nueva instalación, indicando marca y modelo de materiales.",
+      "Separa el coste de materiales, mano de obra, desplazamiento y retirada de elementos antiguos.",
+      "Incluye la garantía de instalación y materiales con su duración en las condiciones.",
+      "Envía el presupuesto al instante desde el móvil y recoge la firma digital del cliente.",
+    ],
   },
   {
     slug: "jardineria",
@@ -792,6 +906,16 @@ export const industrias: Industria[] = [
       { valor: "5 min", label: "por presupuesto de jardinería" },
       { valor: "Anual", label: "cálculo de mantenimiento" },
       { valor: "Contrato", label: "formal con firma digital" },
+    ],
+    guia: `<p>Las empresas de jardinería y paisajismo deben cotizar de forma diferente según se trate de un proyecto de diseño de jardín, una instalación de riego o un contrato de mantenimiento periódico. En proyectos de creación, el presupuesto necesita detallar las especies vegetales con nombre común y científico, el sustrato, los sistemas de riego, la iluminación exterior y los elementos de hardscape como caminos, pérgolas o muros de contención.</p>
+<p>Para contratos de mantenimiento recurrente —comunidades de propietarios, empresas, jardines privados— la clave está en especificar qué incluye cada visita: siega, poda, desbroce, tratamientos fitosanitarios, abonado y limpieza de zonas comunes. El precio mensual debe reflejar la estacionalidad, ya que las tareas y la frecuencia varían considerablemente entre primavera-verano y otoño-invierno.</p>
+<p>DealForge facilita la creación de presupuestos de jardinería con cálculo automático de tarifas mensuales y anuales. Puedes enviar contratos de mantenimiento con renovación digital, o presupuestos de proyecto con desglose de materiales vegetales, mano de obra y maquinaria. El cliente firma electrónicamente y ambas partes conservan un registro claro de lo acordado.</p>`,
+    howToSteps: [
+      "Elige la plantilla de Jardinería e introduce los datos del cliente y la ubicación del jardín.",
+      "Para mantenimiento: indica frecuencia, tareas incluidas por visita y superficie a mantener.",
+      "Para proyectos: desglosa especies vegetales, materiales de hardscape, riego e iluminación.",
+      "Calcula la tarifa mensual o el precio del proyecto e incluye condiciones de temporalidad.",
+      "Envía el presupuesto o contrato de mantenimiento con firma electrónica para su aceptación.",
     ],
   },
   {
@@ -857,6 +981,16 @@ export const industrias: Industria[] = [
       { valor: "Rutas", label: "con desglose completo" },
       { valor: "Seguro", label: "incluido y documentado" },
     ],
+    guia: `<p>Las cotizaciones de transporte y logística deben contemplar variables que otras industrias no manejan: distancia, peso y volumen de la mercancía, tipo de vehículo requerido, seguros de carga, peajes y tiempos de espera en carga y descarga. El cliente necesita saber exactamente qué cubre el precio ofertado y qué conceptos pueden generar recargos, como entregas en horario nocturno, accesos difíciles o mercancía que requiere temperatura controlada.</p>
+<p>Para servicios recurrentes de distribución, la cotización debe establecer tarifas por ruta, por kilómetro o por palé, con escalas de descuento por volumen. En mudanzas y transportes puntuales, conviene detallar el embalaje incluido, el número de porteadores, la disponibilidad de montacargas y la cobertura del seguro de contenido. La transparencia en estos conceptos evita reclamaciones y genera relaciones comerciales duraderas.</p>
+<p>DealForge te permite configurar cotizaciones de transporte con rutas predefinidas, tarifas por tramo y cálculo automático de costes. El documento incluye las condiciones del seguro de mercancía y se envía con firma electrónica, formalizando el servicio antes de cargar el primer bulto.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Transporte y completa los datos del cliente y los puntos de origen y destino.",
+      "Indica el tipo de carga, peso, volumen y vehículo necesario para el servicio.",
+      "Desglosa el coste por conceptos: transporte, seguro, embalaje, peajes y tiempos de espera.",
+      "Establece condiciones de responsabilidad, plazos de entrega y cobertura del seguro.",
+      "Envía la cotización de transporte y recibe la confirmación firmada electrónicamente.",
+    ],
   },
   {
     slug: "formacion",
@@ -920,6 +1054,16 @@ export const industrias: Industria[] = [
       { valor: "8 min", label: "por propuesta formativa" },
       { valor: "Programa", label: "detallado con objetivos" },
       { valor: "Por alumno", label: "o tarifa plana" },
+    ],
+    guia: `<p>Las propuestas de formación y capacitación profesional deben ir más allá de un listado de cursos con precios. El cliente —ya sea un departamento de recursos humanos, un centro educativo o un profesional independiente— necesita ver los objetivos de aprendizaje, el temario detallado, la metodología pedagógica, la duración de cada módulo y las competencias que adquirirán los participantes al finalizar la formación.</p>
+<p>La forma de cotizar varía según el formato: formaciones in-company se presupuestan habitualmente por jornada o por programa completo, mientras que los cursos abiertos al público suelen cotizarse por alumno con descuentos por grupo. Incluir en la propuesta los materiales didácticos, las herramientas digitales, los certificados de aprovechamiento y el soporte post-formación eleva el valor percibido y justifica tarifas superiores a la competencia.</p>
+<p>DealForge permite estructurar propuestas formativas con módulos, objetivos y precios por alumno o tarifa plana. Puedes enviar la propuesta al responsable de formación con seguimiento automático para saber cuándo la revisa, y cerrar el acuerdo con firma electrónica sin dilaciones burocráticas.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Formación e introduce los datos del cliente o empresa solicitante.",
+      "Estructura la propuesta por módulos con objetivos de aprendizaje, duración y metodología.",
+      "Define el modelo de tarifa: precio por alumno, por jornada o por programa completo.",
+      "Incluye materiales, certificación, soporte post-formación y condiciones de cancelación.",
+      "Envía la propuesta formativa con firma electrónica para formalizar el acuerdo.",
     ],
   },
   {
@@ -985,6 +1129,16 @@ export const industrias: Industria[] = [
       { valor: "3 gamas", label: "en un mismo documento" },
       { valor: "Contrato", label: "de mantenimiento incluido" },
     ],
+    guia: `<p>El presupuesto de un sistema de seguridad —alarmas, videovigilancia, control de accesos o vigilancia física— debe adaptarse a las necesidades específicas de cada instalación. No es lo mismo proteger un domicilio particular que un almacén logístico o un local comercial con horario de atención al público. La propuesta debe incluir un estudio de seguridad previo que identifique los puntos vulnerables y justifique la solución propuesta.</p>
+<p>Es fundamental desglosar el coste del equipamiento (cámaras, sensores, central de alarmas, cerraduras inteligentes), la instalación, la puesta en marcha y la cuota mensual de conexión a Central Receptora de Alarmas (CRA). Ofrecer distintas gamas —básica, avanzada y premium— en un mismo presupuesto facilita la decisión del cliente y aumenta el ticket medio al mostrar las ventajas de cada nivel de protección.</p>
+<p>DealForge permite a las empresas de seguridad crear presupuestos con opciones comparables, separando equipamiento de cuotas recurrentes y contratos de mantenimiento. El cliente puede aprobar la instalación con firma electrónica, y tú formalizas tanto el contrato de instalación como el de servicio mensual en un solo flujo digital.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Seguridad e introduce los datos del cliente y la dirección de la instalación.",
+      "Selecciona los equipos necesarios: cámaras, sensores, central de alarmas y control de accesos.",
+      "Presenta varias gamas (básica, avanzada, premium) para que el cliente compare opciones.",
+      "Separa el coste de instalación de las cuotas mensuales de CRA y mantenimiento.",
+      "Envía el presupuesto con firma electrónica para formalizar instalación y contrato de servicio.",
+    ],
   },
   {
     slug: "clinica-dental",
@@ -1048,6 +1202,16 @@ export const industrias: Industria[] = [
       { valor: "3 min", label: "por presupuesto dental" },
       { valor: "Digital", label: "aceptación desde el móvil" },
       { valor: "Seguimiento", label: "automático de pacientes" },
+    ],
+    guia: `<p>El presupuesto odontológico tiene particularidades que lo distinguen de cualquier otra cotización de servicios: se elabora tras un diagnóstico clínico, puede abarcar múltiples tratamientos en distintas piezas dentales y debe ser comprensible para un paciente sin formación sanitaria. Detallar cada tratamiento —empaste, endodoncia, corona, implante, ortodoncia— con la pieza dental afectada, el número de sesiones y el coste individual ayuda al paciente a priorizar y planificar su inversión.</p>
+<p>Muchas clínicas pierden pacientes porque el presupuesto se entrega en papel durante la consulta y el paciente no lo revisa hasta días después, cuando ya ha consultado con otra clínica. Ofrecer opciones de financiación, distinguir entre tratamientos urgentes y estéticos, e incluir un plan de tratamiento por fases facilita la aceptación incluso de presupuestos elevados.</p>
+<p>DealForge permite a clínicas dentales generar presupuestos digitales por paciente con líneas por tratamiento y pieza, enviarlos al móvil del paciente para su revisión tranquila en casa y recibir la aceptación con firma electrónica. El seguimiento automático te avisa si el paciente no ha respondido para que puedas reactivar la conversación en el momento oportuno.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Clínica Dental e introduce los datos del paciente.",
+      "Añade cada tratamiento indicando la pieza dental, procedimiento, sesiones y coste.",
+      "Organiza los tratamientos por prioridad: urgente, necesario y estético-opcional.",
+      "Incluye opciones de financiación y condiciones de pago por fases si aplica.",
+      "Envía el presupuesto al móvil del paciente para su aceptación con firma electrónica.",
     ],
   },
   {
@@ -1113,6 +1277,16 @@ export const industrias: Industria[] = [
       { valor: "Fases", label: "de diseño y ejecución" },
       { valor: "Versiones", label: "para cada cambio" },
     ],
+    guia: `<p>Un proyecto de interiorismo se cotiza de forma muy diferente según su alcance: no es lo mismo un asesoramiento decorativo de unas horas que un proyecto integral que incluye diseño de espacios, selección de mobiliario, dirección de obra y coordinación de gremios. La propuesta debe dejar claro qué fases comprende —concepto, proyecto técnico, shopping list, supervisión de ejecución— y qué entregables recibirá el cliente en cada una.</p>
+<p>El interiorista que desglosa su presupuesto en honorarios de diseño y coste estimado de ejecución (mobiliario, textiles, iluminación, reforma) ofrece transparencia total. Es recomendable separar lo que es fee profesional de lo que es inversión en materiales y mano de obra de terceros, indicando si se gestionan las compras por cuenta del cliente o si el estudio aplica un margen de gestión sobre los proveedores.</p>
+<p>DealForge permite a estudios de interiorismo crear propuestas por fases con versionado automático, ideal para un sector donde los cambios de concepto y selección de materiales son constantes. El cliente aprueba cada fase con firma electrónica, y tú mantienes un registro claro de las decisiones tomadas durante todo el proceso de diseño.</p>`,
+    howToSteps: [
+      "Elige la plantilla de Interiorismo y registra los datos del cliente y la ubicación del proyecto.",
+      "Estructura la propuesta por fases: concepto, proyecto técnico, selección de materiales y supervisión.",
+      "Separa los honorarios de diseño del presupuesto estimado de ejecución y mobiliario.",
+      "Detalla los entregables de cada fase: planos, renders, moodboards, shopping list.",
+      "Envía la propuesta por fases con firma electrónica para aprobar el inicio del proyecto.",
+    ],
   },
   {
     slug: "contabilidad",
@@ -1176,6 +1350,16 @@ export const industrias: Industria[] = [
       { valor: "5 min", label: "por propuesta de asesoría" },
       { valor: "Mensual", label: "con límites definidos" },
       { valor: "Renovación", label: "anual digitalizada" },
+    ],
+    guia: `<p>Las asesorías y despachos de contabilidad operan mayoritariamente con cuotas mensuales que cubren un paquete de servicios recurrentes: contabilidad, declaraciones fiscales trimestrales, confección de cuentas anuales, gestión de nóminas y asesoramiento laboral. La propuesta de servicios debe especificar con precisión qué incluye la cuota mensual y qué servicios se facturan aparte, como constitución de sociedades, inspecciones tributarias o informes periciales.</p>
+<p>Un error frecuente es ofrecer una cuota genérica sin definir límites: número de asientos contables, empleados en nómina, declaraciones incluidas o consultas mensuales. Cuando estos límites no están claros, surgen fricciones al cobrar servicios adicionales que el cliente creía cubiertos. Detallar los servicios bonificados con un IRPF, IVA, Impuesto de Sociedades y Modelo 347 da claridad al autónomo o PYME que evalúa tu oferta.</p>
+<p>Con DealForge puedes crear propuestas de asesoría fiscal y contable con servicios mensuales desglosados, cálculo automático de la cuota anual y renovación digital del contrato. El cliente firma electrónicamente el acuerdo de servicios, y tú tienes un registro documental de lo pactado que protege a ambas partes ante cualquier discrepancia futura.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Contabilidad e introduce los datos del cliente (autónomo o sociedad).",
+      "Define los servicios incluidos en la cuota mensual: contabilidad, fiscalidad, nóminas, laboral.",
+      "Establece los límites del servicio: asientos, empleados, declaraciones y consultas incluidas.",
+      "Indica los servicios adicionales con precio por unidad fuera de la cuota mensual.",
+      "Envía la propuesta de asesoría con firma electrónica para formalizar el contrato anual.",
     ],
   },
   {
@@ -1241,6 +1425,16 @@ export const industrias: Industria[] = [
       { valor: "Opciones", label: "de tratamiento claras" },
       { valor: "Firma", label: "de autorización digital" },
     ],
+    guia: `<p>El presupuesto veterinario tiene una dimensión emocional que lo diferencia de otros sectores: el propietario de la mascota necesita entender qué procedimientos se realizarán, por qué son necesarios y cuánto costará cada uno, todo en un momento de preocupación por la salud de su animal. Un presupuesto claro que distinga entre diagnóstico (consulta, analítica, radiografía, ecografía), tratamiento (cirugía, medicación, hospitalización) y seguimiento reduce la ansiedad del cliente y facilita la toma de decisiones.</p>
+<p>Para intervenciones quirúrgicas, conviene detallar preanestesia, anestesia, material quirúrgico, hospitalización y revisiones postoperatorias como líneas independientes. Si existen alternativas terapéuticas —tratamiento conservador vs. quirúrgico, por ejemplo— presentarlas en el mismo presupuesto con sus pros y costes respectivos empodera al propietario para elegir con información completa.</p>
+<p>DealForge permite a clínicas veterinarias generar presupuestos por paciente animal, enviados al móvil del propietario para que los revise con calma. La firma electrónica sirve como consentimiento informado, y el seguimiento automático te notifica si el propietario no ha respondido para poder contactarle y resolver sus dudas.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Veterinaria e introduce los datos del propietario y del animal.",
+      "Desglosa el presupuesto por fases: diagnóstico, tratamiento, hospitalización y seguimiento.",
+      "Si hay alternativas terapéuticas, preséntalas como opciones comparables en el mismo documento.",
+      "Incluye el consentimiento informado y las condiciones de pago en las notas.",
+      "Envía el presupuesto al propietario y recoge su autorización con firma electrónica.",
+    ],
   },
   {
     slug: "automocion",
@@ -1295,6 +1489,16 @@ export const industrias: Industria[] = [
       { valor: "5 min", label: "por presupuesto de reparación" },
       { valor: "Piezas", label: "con precios actualizados" },
       { valor: "Garantía", label: "incluida en el PDF" },
+    ],
+    guia: `<p>En el sector de automoción —talleres mecánicos, carrocerías, centros de ITV y concesionarios— el presupuesto de reparación debe especificar cada pieza con su referencia y precio, las horas de mano de obra estimadas según baremos del fabricante y los trabajos auxiliares como diagnóstico electrónico, alineado o equilibrado. El cliente valora enormemente saber si las piezas son originales, equivalentes o reconstruidas, ya que esto afecta tanto al precio como a la garantía.</p>
+<p>Para reparaciones complejas tras un siniestro, el presupuesto debe estar estructurado de forma que la compañía aseguradora pueda validarlo: separando chapa, pintura, mecánica, neumáticos y cristales. Los talleres que presentan presupuestos digitales profesionales cierran más reparaciones porque transmiten confianza al conductor, que a menudo desconoce los precios de mercado y teme que le cobren de más.</p>
+<p>DealForge permite a talleres de automoción crear presupuestos de reparación con referencias de piezas, tiempos de mano de obra y garantías por escrito. El cliente recibe el presupuesto en su móvil, lo compara cómodamente y autoriza la reparación con firma electrónica antes de que el taller empiece a trabajar.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Automoción e introduce los datos del cliente y del vehículo (marca, modelo, matrícula).",
+      "Detalla las piezas necesarias con referencia, tipo (original/equivalente) y precio unitario.",
+      "Indica las horas de mano de obra por operación según los baremos del fabricante.",
+      "Incluye la garantía de reparación y piezas, y las condiciones de almacenaje si aplica.",
+      "Envía el presupuesto al cliente y recibe su autorización de reparación con firma electrónica.",
     ],
   },
   {
@@ -1351,6 +1555,16 @@ export const industrias: Industria[] = [
       { valor: "Mandato", label: "firmado digitalmente" },
       { valor: "Plan", label: "de marketing incluido" },
     ],
+    guia: `<p>La propuesta de servicios inmobiliarios —ya sea para la venta, alquiler o gestión de propiedades— debe diferenciarse de la competencia en un mercado donde muchos agentes ofrecen lo mismo. El mandato de venta o exclusiva necesita detallar los servicios que incluye: valoración profesional, sesión fotográfica, vídeo o tour virtual, publicación en portales, gestión de visitas, negociación y acompañamiento hasta la firma en notaría.</p>
+<p>Para el propietario que evalúa entre varios agentes, ver un desglose claro del plan de comercialización con los portales donde se publicará, el tipo de material visual que se producirá y la estrategia de precios resulta mucho más convincente que una simple hoja con la comisión. Incluir un análisis comparativo de mercado (ACM) con propiedades similares vendidas recientemente refuerza la credibilidad de la valoración propuesta.</p>
+<p>DealForge permite a agencias inmobiliarias crear propuestas de servicio profesionales con el plan de marketing incluido, honorarios transparentes y mandato de venta con firma electrónica. El propietario aprueba el encargo desde su dispositivo, y la agencia puede empezar a comercializar el inmueble de inmediato con respaldo documental.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla Inmobiliaria e introduce los datos del propietario y del inmueble.",
+      "Detalla los servicios incluidos: valoración, fotografía, publicación en portales, visitas y negociación.",
+      "Establece las condiciones del mandato: tipo de exclusiva, duración, comisión y forma de pago.",
+      "Adjunta un resumen del plan de comercialización y el análisis comparativo de mercado.",
+      "Envía la propuesta con mandato de venta integrado para firma electrónica del propietario.",
+    ],
   },
   {
     slug: "restauracion",
@@ -1405,6 +1619,16 @@ export const industrias: Industria[] = [
       { valor: "Menús", label: "con precio por comensal" },
       { valor: "Versiones", label: "ilimitadas por evento" },
       { valor: "Firma", label: "del cliente antes del evento" },
+    ],
+    guia: `<p>Los negocios de restauración y catering afrontan un reto particular al presupuestar: cada evento es diferente en número de comensales, tipo de menú, restricciones alimentarias, montaje de sala y servicios complementarios como barra libre, cocktail de bienvenida o show cooking. La cotización debe presentar el precio por comensal desglosando cada concepto para que el cliente pueda ajustar su evento a su presupuesto real.</p>
+<p>En catering para bodas, comuniones o eventos corporativos, es habitual ofrecer varias opciones de menú con distintos niveles de precio. Cada opción debe detallar los platos, las bebidas incluidas, el servicio de camareros, la vajilla y mantelería, y los extras opcionales. Indicar claramente los mínimos de comensales, los recargos por menús especiales (celiacos, veganos) y las condiciones de confirmación de asistentes evita malentendidos de última hora.</p>
+<p>DealForge permite a restaurantes y empresas de catering montar presupuestos por evento con distintas opciones de menú, cálculo automático según número de comensales y versionado para cada modificación que pida el cliente. La firma electrónica formaliza el encargo y el calendario de pagos queda documentado para ambas partes.</p>`,
+    howToSteps: [
+      "Elige la plantilla de Restauración e introduce los datos del cliente y la fecha del evento.",
+      "Configura las opciones de menú con precio por comensal, detallando platos y bebidas.",
+      "Añade servicios complementarios: cocktail, barra libre, montaje de sala, decoración.",
+      "Indica el mínimo de comensales, recargos por menús especiales y fecha límite de confirmación.",
+      "Envía las opciones de menú al cliente y recoge su elección con firma electrónica.",
     ],
   },
   {
@@ -1461,6 +1685,16 @@ export const industrias: Industria[] = [
       { valor: "Honorarios", label: "desglosados con claridad" },
       { valor: "Firma", label: "electrónica con validez legal" },
     ],
+    guia: `<p>La hoja de encargo profesional de un despacho de abogados cumple una doble función: formaliza la relación abogado-cliente y detalla los honorarios de forma transparente. La normativa del Estatuto General de la Abogacía exige que el letrado informe previamente al cliente sobre los honorarios, y un documento bien estructurado protege a ambas partes ante posibles discrepancias futuras sobre el alcance de la representación o el coste del servicio.</p>
+<p>Los honorarios pueden pactarse de distintas formas: precio fijo por asunto, tarifa horaria con estimación de horas, provisión de fondos con liquidación posterior o cuota litis en determinados casos. La hoja de encargo debe especificar qué actuaciones cubre (demanda, contestación, recursos, vistas), qué gastos van aparte (procurador, tasas judiciales, peritos) y en qué momentos se realizarán los pagos. Para servicios de asesoría continuada, la cuota mensual debe delimitar el número de consultas y el tipo de materias cubiertas.</p>
+<p>DealForge permite a abogados y despachos jurídicos crear hojas de encargo profesionales con honorarios estructurados, enviarlas al cliente con firma electrónica de plena validez legal y mantener un registro digital del consentimiento informado que exige la normativa deontológica.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Abogados e introduce los datos del cliente y el asunto jurídico.",
+      "Detalla las actuaciones incluidas en el encargo: asesoramiento, redacción, representación procesal.",
+      "Establece la modalidad de honorarios: precio fijo, tarifa horaria, provisión de fondos o cuota litis.",
+      "Separa los gastos de terceros (procurador, tasas, peritos) de los honorarios del despacho.",
+      "Envía la hoja de encargo profesional con firma electrónica para formalizar la relación.",
+    ],
   },
   {
     slug: "nutricion",
@@ -1515,6 +1749,16 @@ export const industrias: Industria[] = [
       { valor: "Packs", label: "con servicios detallados" },
       { valor: "3 meses", label: "de seguimiento incluido" },
       { valor: "Firma", label: "de compromiso del paciente" },
+    ],
+    guia: `<p>Los profesionales de la nutrición y la dietética —nutricionistas, dietistas y coaches de alimentación— trabajan con programas de acompañamiento que combinan consultas, planes alimentarios personalizados, seguimiento semanal y educación nutricional. El presupuesto debe reflejar esta estructura por programas en lugar de limitarse a un precio por consulta suelta, ya que los resultados sostenibles requieren compromiso temporal por parte del paciente.</p>
+<p>Ofrecer packs de diferente duración —programa de 4, 8 o 12 semanas— con distintos niveles de acompañamiento permite al paciente elegir según su objetivo y su capacidad económica. Cada pack debe especificar el número de consultas presenciales u online, los planes de alimentación que se entregarán, si incluye análisis de composición corporal (bioimpedancia), lista de la compra personalizada y disponibilidad para resolver dudas entre sesiones vía mensajería.</p>
+<p>DealForge facilita a nutricionistas la creación de propuestas con packs de servicios claros, cálculo de precios con descuento por programa frente a sesión individual y envío digital al paciente. La firma electrónica actúa como compromiso formal del paciente con el programa, lo que mejora la adherencia y reduce las cancelaciones de última hora.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Nutrición e introduce los datos del paciente.",
+      "Configura los packs de acompañamiento nutricional con duración, consultas y servicios incluidos.",
+      "Indica si incluye análisis corporal, planes alimentarios, lista de la compra y soporte entre sesiones.",
+      "Ofrece varias opciones de programa para que el paciente elija según su objetivo y presupuesto.",
+      "Envía la propuesta y formaliza el compromiso del paciente con firma electrónica.",
     ],
   },
   {
@@ -1571,6 +1815,16 @@ export const industrias: Industria[] = [
       { valor: "Costes", label: "iniciales vs. recurrentes" },
       { valor: "Plataformas", label: "comparadas en la propuesta" },
     ],
+    guia: `<p>Cotizar un proyecto de e-commerce implica distinguir entre los costes de puesta en marcha y los costes recurrentes de operación. El cliente necesita entender cuánto cuesta montar la tienda online —diseño, desarrollo, catálogo, pasarela de pago, configuración logística— y cuánto le costará mantenerla mensualmente: hosting, mantenimiento, actualizaciones de seguridad, soporte técnico y posibles comisiones por transacción de la plataforma elegida.</p>
+<p>La elección de plataforma (Shopify, WooCommerce, PrestaShop, Magento) condiciona tanto el presupuesto inicial como los costes operativos. Una propuesta profesional debería comparar las opciones viables para el negocio del cliente, indicando las ventajas y limitaciones de cada una en función del volumen de productos, mercados objetivo y capacidad técnica del equipo. Detallar las integraciones necesarias —ERP, CRM, marketplaces, email marketing— evita sorpresas presupuestarias durante el desarrollo.</p>
+<p>DealForge permite a agencias y freelances de e-commerce crear propuestas con fases de proyecto (diseño, desarrollo, carga de catálogo, testing, lanzamiento), hitos de entrega y separación clara de costes iniciales vs. recurrentes. El cliente aprueba la propuesta con firma electrónica y ambos tienen un documento de referencia con el alcance exacto del proyecto.</p>`,
+    howToSteps: [
+      "Elige la plantilla de E-commerce y registra los datos del cliente y el tipo de tienda online.",
+      "Estructura el presupuesto por fases: diseño, desarrollo, catálogo, integraciones, testing y lanzamiento.",
+      "Separa los costes de puesta en marcha de los costes recurrentes mensuales (hosting, mantenimiento).",
+      "Detalla las integraciones necesarias y la plataforma recomendada con su justificación.",
+      "Envía la propuesta con hitos de entrega y recibe la aprobación con firma electrónica.",
+    ],
   },
   {
     slug: "psicologia",
@@ -1625,6 +1879,16 @@ export const industrias: Industria[] = [
       { valor: "Programas", label: "con objetivos definidos" },
       { valor: "Bonos", label: "de sesiones con ahorro" },
       { valor: "B2B", label: "propuestas para empresas" },
+    ],
+    guia: `<p>Los psicólogos y centros de psicología necesitan presupuestos que equilibren la sensibilidad del servicio con la transparencia económica. A diferencia de una compra convencional, el paciente que busca terapia está en un momento de vulnerabilidad y necesita información clara sin sentirse presionado. La propuesta debe presentar las modalidades de servicio —terapia individual, de pareja, familiar, infantil o grupal— con la frecuencia recomendada y las tarifas por sesión o por programa.</p>
+<p>Los bonos de sesiones con descuento fomentan el compromiso terapéutico y reducen el abandono prematuro. Para el segmento B2B —programas de bienestar emocional para empresas, talleres de gestión del estrés, evaluaciones psicotécnicas para selección de personal— la propuesta debe adaptarse al lenguaje corporativo, con objetivos medibles, número de empleados cubiertos y reporting de utilización del servicio sin comprometer la confidencialidad de los participantes.</p>
+<p>DealForge permite a psicólogos crear presupuestos tanto para pacientes individuales como para programas corporativos, con bonos de sesiones, tarifas diferenciadas y envío digital discreto. La firma electrónica formaliza el acuerdo terapéutico o el contrato empresarial, y el seguimiento automático facilita la gestión de pacientes pendientes de respuesta.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Psicología e introduce los datos del paciente o la empresa.",
+      "Define la modalidad terapéutica y la frecuencia recomendada de sesiones.",
+      "Ofrece opciones de pago: sesión individual, bono de sesiones con descuento o programa cerrado.",
+      "Para empresas: detalla objetivos del programa, número de empleados y condiciones de confidencialidad.",
+      "Envía la propuesta de forma discreta y recoge la aceptación con firma electrónica.",
     ],
   },
   {
@@ -1681,6 +1945,16 @@ export const industrias: Industria[] = [
       { valor: "Seguro", label: "de contenido incluido" },
       { valor: "Reserva", label: "confirmada con firma" },
     ],
+    guia: `<p>El presupuesto de una mudanza debe anticipar todas las variables que pueden encarecer el servicio para evitar sorpresas el día del traslado. El volumen de la carga (medido en metros cúbicos), la distancia entre origen y destino, el número de porteadores, la disponibilidad de ascensor o montamuebles, el piso de origen y destino, y las dificultades de acceso (calles peatonales, restricciones de circulación) son factores determinantes que deben figurar en la cotización.</p>
+<p>El cliente de mudanzas teme dos cosas: que le cobren más de lo presupuestado y que sus pertenencias sufran daños. Por eso, el presupuesto debe indicar con claridad si incluye embalaje de objetos frágiles, desmontaje y montaje de muebles, materiales de protección y, sobre todo, la cobertura del seguro de contenido con los límites de indemnización por pieza y por siniestro. Ofrecer servicios opcionales como guardamuebles o limpieza del piso de origen añade valor y aumenta el ticket medio.</p>
+<p>DealForge permite a empresas de mudanzas generar presupuestos detallados con todos los conceptos desglosados, seguro de contenido documentado y reserva de fecha confirmada con firma electrónica. El cliente sabe exactamente lo que paga y la empresa tiene un compromiso firmado que evita cancelaciones de última hora.</p>`,
+    howToSteps: [
+      "Abre la plantilla de Mudanzas e introduce los datos del cliente, origen y destino del traslado.",
+      "Estima el volumen de carga e indica número de porteadores, tipo de vehículo y dificultades de acceso.",
+      "Desglosa los servicios: embalaje, desmontaje/montaje, materiales de protección y guardamuebles.",
+      "Incluye la cobertura del seguro de contenido con sus límites y condiciones.",
+      "Envía el presupuesto y confirma la reserva de fecha con firma electrónica del cliente.",
+    ],
   },
   {
     slug: "energia-solar",
@@ -1736,6 +2010,16 @@ export const industrias: Industria[] = [
       { valor: "Trámites", label: "y legalización incluidos" },
       { valor: "Garantías", label: "de cada componente" },
     ],
+    guia: `<p>La cotización de una instalación de energía solar fotovoltaica es una de las más técnicas del mercado y, al mismo tiempo, la que más necesita traducir datos de ingeniería en beneficios económicos comprensibles para el propietario. El presupuesto debe incluir el dimensionamiento de la instalación (kWp), el número y modelo de paneles, el tipo de inversor, la estructura de montaje, el cableado y las protecciones eléctricas, todo con las fichas técnicas de referencia.</p>
+<p>Lo que realmente convence al cliente es la simulación de ahorro: producción anual estimada en kWh, porcentaje de autoconsumo, ahorro en la factura eléctrica, periodo de amortización y rentabilidad a 25 años. Incluir el desglose de trámites administrativos —licencia de obra, boletín eléctrico, inscripción en el registro de autoconsumo y solicitud de compensación de excedentes— demuestra que la empresa gestiona el proyecto de principio a fin.</p>
+<p>DealForge permite a instaladoras de energía solar crear presupuestos completos con equipamiento detallado, simulación de ahorro energético, trámites incluidos y garantías de cada componente (paneles, inversor, instalación). El cliente aprueba la instalación con firma electrónica y ambas partes tienen un documento profesional que respalda la inversión.</p>`,
+    howToSteps: [
+      "Selecciona la plantilla de Energía Solar e introduce los datos del cliente y la ubicación de la instalación.",
+      "Dimensiona la instalación: número de paneles, potencia pico, inversor y estructura de montaje.",
+      "Incluye la simulación de ahorro: producción estimada, autoconsumo, amortización y rentabilidad.",
+      "Detalla los trámites administrativos y las garantías de cada componente del sistema.",
+      "Envía el presupuesto con toda la documentación técnica y recoge la firma electrónica del cliente.",
+    ],
   },
   {
     slug: "fitness",
@@ -1790,6 +2074,16 @@ export const industrias: Industria[] = [
       { valor: "Programas", label: "con objetivos medibles" },
       { valor: "Bonos", label: "que fidelizan clientes" },
       { valor: "B2B", label: "fitness para empresas" },
+    ],
+    guia: `<p>El sector del fitness y el entrenamiento personal ha evolucionado enormemente en sus modelos de negocio: entrenamiento individual, grupos reducidos, programas online, preparación física para deportes específicos y bienestar corporativo conviven en la oferta de muchos profesionales. La cotización debe reflejar esta diversidad presentando programas con objetivos claros y medibles —pérdida de grasa, ganancia muscular, rehabilitación, rendimiento deportivo— en lugar de vender sesiones sueltas sin contexto.</p>
+<p>Los bonos de sesiones son la herramienta de fidelización por excelencia en este sector: un bono de 10 o 20 sesiones con descuento progresivo incentiva la constancia del cliente y estabiliza los ingresos del entrenador. Para propuestas B2B —programas de fitness para empleados, clases colectivas en oficinas o centros deportivos corporativos— el presupuesto debe incluir frecuencia semanal, aforo máximo, material necesario y métricas de seguimiento del programa.</p>
+<p>DealForge permite a entrenadores personales y centros fitness crear presupuestos con programas de entrenamiento, bonos con descuento y propuestas corporativas, todo en un documento profesional que se envía digitalmente. El cliente firma su compromiso con el programa y tú gestionas las renovaciones de bonos sin papeleo.</p>`,
+    howToSteps: [
+      "Elige la plantilla de Fitness e introduce los datos del cliente o empresa.",
+      "Define el programa de entrenamiento con objetivos, frecuencia semanal y duración total.",
+      "Ofrece opciones: sesión individual, bono de sesiones con descuento o programa completo.",
+      "Para empresas: detalla aforo, material necesario, horarios y métricas de seguimiento.",
+      "Envía la propuesta y formaliza el compromiso del cliente con firma electrónica.",
     ],
   },
 ];

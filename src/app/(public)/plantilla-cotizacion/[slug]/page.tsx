@@ -72,8 +72,20 @@ export default async function PlantillaIndustriaPage({
         ],
       },
     },
-    // FAQPage schema removed — Google restricted FAQ rich results
-    // to government/healthcare sites since August 2023
+    // HowTo schema for rich results
+    ...(ind.howToSteps?.length ? [{
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      name: `Cómo crear una cotización para ${ind.nombre.toLowerCase()}`,
+      description: `Guía paso a paso para crear una cotización profesional en el sector de ${ind.nombre.toLowerCase()} con DealForge.`,
+      step: ind.howToSteps.map((text, i) => ({
+        "@type": "HowToStep",
+        position: i + 1,
+        name: text.split(":")[0] || text.slice(0, 50),
+        text,
+      })),
+      tool: { "@type": "SoftwareApplication", name: "DealForge", url: "https://dealforge.es" },
+    }] : []),
   ];
 
   return (
@@ -313,7 +325,20 @@ export default async function PlantillaIndustriaPage({
           </div>
         </section>
 
-        {/* ===== 8. CTA ===== */}
+        {/* ===== 8. GUÍA ÚNICA POR INDUSTRIA (SEO) ===== */}
+        {ind.guia && (
+          <section className="mb-16">
+            <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">
+              Guía para cotizar en {ind.nombre.toLowerCase()}
+            </h2>
+            <article
+              className="max-w-3xl mx-auto prose prose-gray prose-sm prose-p:text-gray-600 prose-p:leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: ind.guia }}
+            />
+          </section>
+        )}
+
+        {/* ===== 9. CTA ===== */}
         <section className="rounded-2xl p-8 sm:p-12 text-center text-white" style={{ background: `linear-gradient(135deg, ${color}, ${color}dd)` }}>
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">
             Empieza a cotizar en {ind.nombre.toLowerCase()} hoy
@@ -330,7 +355,7 @@ export default async function PlantillaIndustriaPage({
           </Link>
         </section>
 
-        {/* ===== 9. OTHER INDUSTRIES ===== */}
+        {/* ===== 10. OTHER INDUSTRIES ===== */}
         <section className="mt-16">
           <h2 className="text-lg font-bold text-gray-900 mb-6 text-center">
             Plantillas para otros sectores

@@ -433,6 +433,7 @@ function Footer() {
             <h4 className="font-semibold text-white text-sm mb-4">Recursos</h4>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link href="/plantilla-cotizacion" className="hover:text-white transition-colors">Plantillas por sector</Link></li>
               <li><Link href="/que-es-cpq" className="hover:text-white transition-colors">¿Qué es CPQ?</Link></li>
               <li><Link href="/glosario" className="hover:text-white transition-colors">Glosario</Link></li>
               <li><Link href="/guia" className="hover:text-white transition-colors">Guía gratuita</Link></li>
