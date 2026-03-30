@@ -68,11 +68,17 @@ function formatMessage(text: string) {
 
 export function ForgeShowcase() {
   const [activeTab, setActiveTab] = useState(0);
-  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
+  // Start with all messages of tab 0 visible (avoids blank on SSR hydration)
+  const [visibleMessages, setVisibleMessages] = useState<number[]>(
+    () => CAPABILITIES[0].messages.map((_, i) => i)
+  );
+  const [hasChangedTab, setHasChangedTab] = useState(false);
   const active = CAPABILITIES[activeTab];
 
-  // Animate messages appearing one by one when tab changes
+  // Only animate on tab CHANGE (not initial mount)
   useEffect(() => {
+    if (!hasChangedTab) return;
+
     setVisibleMessages([]);
 
     const timers: ReturnType<typeof setTimeout>[] = [];
@@ -85,7 +91,13 @@ export function ForgeShowcase() {
     });
 
     return () => timers.forEach(clearTimeout);
-  }, [activeTab, active.messages]);
+  }, [activeTab, active.messages, hasChangedTab]);
+
+  function handleTabChange(i: number) {
+    if (i === activeTab) return;
+    setHasChangedTab(true);
+    setActiveTab(i);
+  }
 
   return (
     <section id="forge" className="py-24 relative overflow-hidden">
@@ -116,7 +128,7 @@ export function ForgeShowcase() {
             {CAPABILITIES.map((cap, i) => (
               <button
                 key={cap.id}
-                onClick={() => setActiveTab(i)}
+                onClick={() => handleTabChange(i)}
                 className={`w-full text-left p-4 rounded-2xl border-2 transition-all duration-300 ${
                   activeTab === i
                     ? "border-[#3a9bb5] bg-white shadow-lg shadow-[#3a9bb5]/10"
