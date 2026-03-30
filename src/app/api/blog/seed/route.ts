@@ -372,7 +372,196 @@ export async function POST() {
       "software de cotizaciones, programa para hacer presupuestos, CPQ para pymes, herramienta cotizaciones, software presupuestos, automatizar cotizaciones, programa cotizaciones gratis, mejor CPQ español",
   };
 
-  const posts = [post, post2, post3];
+  const post4 = {
+    slug: "iva-en-cotizaciones-guia-practica-autonomos-pymes",
+    titulo: "IVA en cotizaciones: guía práctica para autónomos y PYMEs",
+    extracto: "Descubre cómo aplicar el IVA correctamente en tus cotizaciones y presupuestos. Tipos de IVA, operaciones intracomunitarias, exenciones y errores comunes que cuestan dinero. Guía práctica para autónomos y PYMEs.",
+    contenido: `<p>El IVA es uno de esos temas que todo autónomo y empresario conoce... hasta que tiene que aplicarlo en una cotización real. &iquest;Cuándo se incluye? &iquest;Cuándo se exime? &iquest;Qué pasa si tu cliente es de otro país de la UE? Las dudas son legítimas y las consecuencias de equivocarse pueden ser costosas.</p>
+
+<p>Esta guía resuelve las preguntas más frecuentes sobre el IVA en cotizaciones y presupuestos, con ejemplos concretos y sin tecnicismos innecesarios. Si eres autónomo o tienes una PYME, esto es lo que necesitas saber.</p>
+
+<h2>Qué es el IVA y qué papel juega en tus cotizaciones</h2>
+
+<p>El Impuesto sobre el Valor Añadido (IVA) es un tributo indirecto que grava el consumo de bienes y servicios. Como empresa o autónomo, actúas como recaudador: cobras el IVA a tu cliente en nombre de Hacienda y luego lo ingresas en tu declaración trimestral (modelo 303).</p>
+
+<p>En la práctica, esto significa que en tu cotización debes <strong>mostrar claramente</strong>:</p>
+<ul>
+<li>El importe neto (base imponible)</li>
+<li>El tipo de IVA aplicado (%)</li>
+<li>El importe del IVA en euros</li>
+<li>El total con IVA incluido</li>
+</ul>
+
+<p>Un error muy común: cotizar solo el precio neto sin especificar si incluye IVA o no. Esto genera malentendidos, disputas con clientes y dolores de cabeza innecesarios. La claridad desde el primer presupuesto evita conversaciones incómodas cuando llega la factura.</p>
+
+<h2>Los tipos de IVA vigentes en España</h2>
+
+<p>En España existen cuatro tipos de IVA. Conocerlos es fundamental para cotizar correctamente:</p>
+
+<h3>IVA general: 21%</h3>
+<p>Es el tipo que aplica por defecto a la mayoría de bienes y servicios. Si no hay una razón específica para usar otro tipo, aplicas el 21%. Servicios de consultoría, software, publicidad, reparaciones, diseño gráfico, asesoría jurídica, desarrollo web... todo esto va al 21%.</p>
+
+<h3>IVA reducido: 10%</h3>
+<p>Se aplica a una lista específica de bienes y servicios. Los más relevantes para quienes hacen cotizaciones: obras de renovación y reparación de viviendas (cumpliendo ciertos requisitos), hostelería y restauración, transporte de viajeros, espectáculos en vivo y actividades culturales. Si cotizas reformas de viviendas para particulares, probablemente apliques el 10% en lugar del 21%.</p>
+
+<h3>IVA superreducido: 4%</h3>
+<p>Reservado para bienes de primera necesidad: pan, leche, huevos, frutas y verduras básicas, medicamentos, libros y periódicos en papel, prótesis. Muy poco habitual en cotizaciones B2B ordinarias.</p>
+
+<h3>IVA exento: 0%</h3>
+<p>Hay actividades completamente exentas de IVA: servicios médicos y sanitarios, educación reglada, servicios financieros y de seguros, arrendamiento de viviendas habituales. Si tu actividad está exenta, no repercutes IVA en tus cotizaciones, pero tampoco puedes deducirte el IVA de tus gastos profesionales (con algunas excepciones de prorrata).</p>
+
+<h2>&iquest;Cuándo se aplica IVA en una cotización?</h2>
+
+<p>La regla general: si eres autónomo o empresa dado de alta en actividad económica en España y realizas entregas de bienes o prestaciones de servicios <strong>sujetas y no exentas</strong> a clientes en el territorio de aplicación del IVA (España peninsular y Baleares), aplicas IVA.</p>
+
+<p>Hay tres territorios en España con regímenes especiales que conviene tener muy presentes:</p>
+
+<ul>
+<li><strong>Canarias:</strong> No aplica IVA español. Se aplica el IGIC (Impuesto General Indirecto Canario), con un tipo general del 7%. Si cotizas a un cliente en Canarias, tu presupuesto debe indicar que la operación no está sujeta a IVA español.</li>
+<li><strong>Ceuta:</strong> No aplica IVA. Se aplica el IPSI con tipos distintos.</li>
+<li><strong>Melilla:</strong> Igual que Ceuta, aplica el IPSI.</li>
+</ul>
+
+<p>Enviar una cotización con IVA al 21% a un cliente en Las Palmas de Gran Canaria es un error clásico que genera confusión y retrasos en el cierre.</p>
+
+<h2>IVA en operaciones B2B dentro de la UE</h2>
+
+<p>Este es uno de los puntos que más confusión genera entre autónomos y PYMEs que empiezan a vender fuera de España. Si tienes un cliente empresa en otro país de la Unión Europea —una empresa francesa, un proveedor alemán, un cliente portugués— la operación puede quedar <strong>exenta de IVA mediante la inversión del sujeto pasivo</strong>.</p>
+
+<p>Para que aplique la exención, deben cumplirse dos condiciones:</p>
+<ol>
+<li>Tu cliente tiene un <strong>NIF intracomunitario válido</strong> (puedes verificarlo en el sistema VIES de la Comisión Europea).</li>
+<li>El servicio se presta efectivamente en el territorio de ese país o las condiciones de localización así lo determinan.</li>
+</ol>
+
+<p>En tu cotización (y posterior factura) debes indicar:</p>
+<ul>
+<li>El NIF intracomunitario de tu cliente (formato: código de país + número, por ejemplo FR12345678901)</li>
+<li>Que la operación está exenta de IVA</li>
+<li>La referencia legal aplicable (&ldquo;Exento IVA &ndash; Art. 25 LIVA&rdquo; para entregas de bienes o &ldquo;Inversión del sujeto pasivo &ndash; Art. 84.Uno.2&ordm; LIVA&rdquo; para servicios, según el caso)</li>
+</ul>
+
+<p>El cliente será quien declare el IVA en su país con el tipo correspondiente. Tú no ingresas nada en España por ese concepto, pero sí debes declarar la operación en el <strong>modelo 349</strong> (declaración recapitulativa de operaciones intracomunitarias) de forma trimestral o mensual, según el volumen.</p>
+
+<h2>Exportaciones fuera de la UE</h2>
+
+<p>Si exportas bienes o prestas servicios a clientes fuera de la Unión Europea, la operación está <strong>exenta de IVA por regla general</strong>. Tu cotización no debe incluir IVA español, y debes conservar prueba documental de que la operación se ha realizado fuera del territorio comunitario (documentos aduaneros, contratos, justificantes de pago desde el extranjero).</p>
+
+<p>En el caso de servicios digitales o prestados a distancia a particulares (B2C) fuera de la UE, el tratamiento puede variar según el país de destino. Algunos países tienen sus propios impuestos sobre servicios digitales que pueden recaer sobre ti como proveedor. Si operas con volumen en mercados no comunitarios, la asesoría fiscal es imprescindible.</p>
+
+<h2>El recargo de equivalencia: qué es y cuándo te afecta</h2>
+
+<p>Si vendes bienes a comerciantes minoristas acogidos al régimen especial de recargo de equivalencia, debes aplicar un recargo adicional sobre el IVA en tus facturas. Este régimen aplica principalmente a minoristas que no transforman los productos que venden (tiendas de ropa, ferreterías, papelerías, etc.).</p>
+
+<p>Los recargos vigentes son:</p>
+<ul>
+<li>5,2% sobre artículos al 21% de IVA</li>
+<li>1,4% sobre artículos al 10% de IVA</li>
+<li>0,5% sobre artículos al 4% de IVA</li>
+</ul>
+
+<p>Ejemplo: si vendes mercancía por 1.000 EUR a un comerciante en recargo de equivalencia, la cotización mostraría: Base 1.000 EUR + IVA 21% (210 EUR) + Recargo de equivalencia 5,2% (52 EUR) = Total 1.262 EUR.</p>
+
+<p>Si cotizas habitualmente a este tipo de clientes, asegúrate de que tu software de cotizaciones permite configurar este recargo de forma automática. Los cálculos manuales son fuente de errores.</p>
+
+<h2>IVA y autónomos: situaciones específicas</h2>
+
+<p>Los autónomos tienen algunas particularidades que conviene conocer bien:</p>
+
+<h3>Actividades exentas de IVA</h3>
+<p>Si tu actividad está exenta (médicos, psicólogos, profesores de clases particulares en materias regladas, ciertas actividades de seguro), no debes repercutir IVA en tus cotizaciones ni facturas. Pero tampoco puedes deducirte el IVA soportado en tus gastos. Es un régimen todo o nada, salvo que apliques la regla de prorrata por tener actividades mixtas.</p>
+
+<h3>Autónomos en módulos (estimación objetiva)</h3>
+<p>Si estás en el régimen de módulos, las reglas del IVA siguen siendo las mismas: repercutes y deduces IVA con normalidad. Lo que varía es el IRPF, no el IVA. Un error frecuente es confundir ambos impuestos.</p>
+
+<h3>El criterio de caja</h3>
+<p>Los autónomos y PYMEs con facturación inferior a 2 millones de euros anuales pueden acogerse al <strong>régimen especial del criterio de caja</strong>. En lugar de declarar el IVA cuando emites la factura, lo declaras cuando cobras efectivamente. Esto mejora el flujo de caja cuando tienes clientes que pagan tarde, aunque implica mayor carga administrativa.</p>
+
+<p>Si estás acogido al criterio de caja, debes indicarlo expresamente en tus facturas. En las cotizaciones previas también es buena práctica mencionarlo si puede afectar al cliente (que no podrá deducirse el IVA hasta que te pague).</p>
+
+<h2>Cómo mostrar el IVA correctamente en una cotización</h2>
+
+<p>No existe un formato legal obligatorio para las cotizaciones, a diferencia de las facturas. Pero sí es buena práctica incluir toda la información fiscal desde el inicio para evitar sorpresas al facturar. Esto es lo que debería incluir la sección de totales de tu cotización:</p>
+
+<ul>
+<li><strong>Base imponible desglosada por tipo de IVA:</strong> Si tienes líneas con diferentes tipos (por ejemplo, 21% para servicios y 10% para obras), separa los subtotales por tipo.</li>
+<li><strong>Importe del IVA por tipo:</strong> Muestra el euro exacto que corresponde a cada tramo.</li>
+<li><strong>Total con IVA:</strong> La cifra final que pagará el cliente, sin ninguna ambigüedad.</li>
+<li><strong>Indicación en precios unitarios:</strong> Cuando muestres precios de línea, marca claramente &ldquo;precio sin IVA&rdquo; o &ldquo;precio neto&rdquo;.</li>
+</ul>
+
+<p>Un caso práctico: si cotizas una reforma de oficina con materiales y mano de obra, los materiales de construcción van al 21%, pero la mano de obra de reforma puede ir al 10% si se cumplen los requisitos del artículo 91.Uno.2.10.&ordm; de la LIVA (básicamente que sea una vivienda, que el destinatario sea persona física y que el coste de los materiales no supere el 40% de la base imponible). Tu cotización debería mostrar dos bloques de IVA separados con sus respectivos cálculos.</p>
+
+<h2>Errores de IVA que cuestan dinero real</h2>
+
+<p>Estos son los errores más frecuentes que cometen autónomos y PYMEs al gestionar el IVA en sus cotizaciones:</p>
+
+<ol>
+<li><strong>No especificar si el precio incluye o excluye IVA.</strong> El cliente asume que el precio es final y luego hay una discusión desagradable cuando llega la factura con IVA añadido. En mercados B2B, los precios suelen ser sin IVA. En B2C, es recomendable mostrar el precio final.</li>
+<li><strong>Aplicar el tipo incorrecto.</strong> Por ejemplo, cobrar el 21% en una actividad que debería ir al 10%, o no aplicar la exención que corresponde. Esto puede generar problemas en la declaración trimestral y tensiones con los clientes.</li>
+<li><strong>Ignorar las reglas para clientes extranjeros.</strong> Aplicar IVA español a una empresa de la UE con NIF intracomunitario válido es un error que complica las cosas para ambas partes.</li>
+<li><strong>No conservar documentación de exenciones.</strong> Si emites cotizaciones sin IVA (operaciones intracomunitarias, exportaciones), guarda toda la evidencia que justifique la exención. Hacienda puede pedir esa documentación en una inspección.</li>
+<li><strong>Mezclar precios con y sin IVA en la misma cotización.</strong> Elige un criterio coherente y mantenlo a lo largo de toda la propuesta. La mezcla genera confusión y hace que los totales no cuadren visualmente.</li>
+<li><strong>Redondear mal los decimales.</strong> En cotizaciones con muchas líneas, los errores de redondeo se acumulan. Tu herramienta de cotizaciones debe usar la misma lógica de redondeo que usarás al facturar.</li>
+</ol>
+
+<h2>Herramientas que simplifican la gestión del IVA</h2>
+
+<p>Llevar el IVA manualmente en Excel tiene un problema claro: los errores de cálculo son fáciles de cometer, especialmente cuando mezclas líneas con diferentes tipos, aplicas descuentos sobre algunas partidas, o tienes clientes con tratamientos fiscales distintos.</p>
+
+<p>Un <strong>software de cotizaciones</strong> dedicado resuelve esto de forma automática. Con DealForge, por ejemplo, puedes:</p>
+<ul>
+<li><strong>Configurar el tipo de IVA por defecto</strong> para cada producto o servicio en tu catálogo, de forma que se aplique automáticamente al añadirlo a una cotización.</li>
+<li><strong>Desglosar automáticamente</strong> bases imponibles y cuotas de IVA por tipo en la sección de totales.</li>
+<li><strong>Marcar clientes como exentos</strong> (intracomunitarios, exportación) para que el sistema gestione automáticamente las indicaciones legales en la cotización.</li>
+<li><strong>Configurar el recargo de equivalencia</strong> para los clientes que lo requieran.</li>
+<li><strong>Generar PDFs profesionales</strong> donde el IVA aparece claramente desglosado, sin ambigüedad.</li>
+</ul>
+
+<p>La ventaja real es que eliminas la posibilidad de error humano en los cálculos y ahorras el tiempo de revisar cada cotización línea por línea antes de enviarla.</p>
+
+<h2>Resumen práctico: IVA por tipo de cliente y operación</h2>
+
+<p>Para cerrar, aquí tienes una referencia rápida que puedes guardar:</p>
+
+<ul>
+<li><strong>Cliente en España (B2B y B2C):</strong> Aplica el tipo de IVA correspondiente a tu actividad (21%, 10%, 4% o exento).</li>
+<li><strong>Cliente en Canarias:</strong> Sin IVA español. Aplica IGIC o indica no sujeción según corresponda.</li>
+<li><strong>Cliente en Ceuta o Melilla:</strong> Sin IVA ni IGIC. Aplica IPSI local o indica no sujeción.</li>
+<li><strong>Empresa en la UE con NIF intracomunitario válido:</strong> Exento de IVA por inversión del sujeto pasivo. Declarar en modelo 349.</li>
+<li><strong>Empresa o particular fuera de la UE:</strong> Exento de IVA (exportación). Conservar prueba documental.</li>
+<li><strong>Actividad exenta:</strong> Sin IVA repercutido. Sin deducción del IVA soportado.</li>
+<li><strong>Minorista en recargo de equivalencia:</strong> IVA normal más el recargo correspondiente.</li>
+</ul>
+
+<h2>Conclusión</h2>
+
+<p>El IVA no tiene que ser una fuente de estrés. Con el conocimiento adecuado y las herramientas correctas, puedes gestionar el IVA en tus cotizaciones con seguridad y sin errores. La clave está en tres cosas: entender qué tipo aplica a tu actividad, conocer cómo varían las reglas según el país del cliente, y tener un proceso claro para desglosar y mostrar el IVA en cada propuesta.</p>
+
+<p>Si tienes dudas sobre tu situación fiscal concreta, consulta siempre con tu asesor o gestor. Pero para los aspectos operativos del día a día &mdash;calcular, desglosar y mostrar el IVA correctamente en tus cotizaciones&mdash; la automatización es tu mejor aliada. Una cotización con el IVA bien aplicado desde el principio evita discusiones al final.</p>`,
+    autor: "DealForge",
+    categoria: "fiscal",
+    tags: JSON.stringify([
+      "IVA",
+      "cotizaciones",
+      "presupuestos",
+      "autónomos",
+      "pymes",
+      "fiscal",
+      "impuestos",
+      "facturación",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "IVA en Cotizaciones: Guía Práctica para Autónomos y PYMEs 2026 — DealForge",
+    metaDescripcion:
+      "Aprende a aplicar el IVA correctamente en tus cotizaciones. Tipos de IVA en España, operaciones intracomunitarias, exenciones y errores comunes. Guía práctica para autónomos y PYMEs.",
+    metaKeywords:
+      "IVA en cotizaciones, IVA presupuestos autónomos, tipos IVA España, IVA operaciones intracomunitarias, IVA pymes, cómo poner IVA en presupuesto, exención IVA cotizaciones, recargo equivalencia presupuesto",
+  };
+
+  const posts = [post, post2, post3, post4];
   const results = [];
 
   for (const p of posts) {
