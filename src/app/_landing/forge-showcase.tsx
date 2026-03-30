@@ -70,38 +70,12 @@ export function ForgeShowcase() {
   const [activeTab, setActiveTab] = useState(0);
   const active = CAPABILITIES[activeTab];
 
-  // Track which tab the user is seeing — start null so first render shows all
-  const [animatingTab, setAnimatingTab] = useState<number | null>(null);
-  const [visibleMessages, setVisibleMessages] = useState<number[]>(
-    CAPABILITIES[0].messages.map((_, i) => i)
-  );
-
-  function handleTabChange(newTab: number) {
-    if (newTab === activeTab) return;
-    setActiveTab(newTab);
-    setAnimatingTab(newTab);
-    setVisibleMessages([]);
-
-    const msgs = CAPABILITIES[newTab].messages;
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    msgs.forEach((_, i) => {
-      timers.push(
-        setTimeout(() => {
-          setVisibleMessages((prev) => [...prev, i]);
-        }, i * 300 + 100)
-      );
-    });
-    // no cleanup needed — timers are short-lived
-  }
-
   return (
     <section id="forge" className="py-24 relative overflow-hidden">
-      {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#f0f9ff] via-white to-white" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#3a9bb5]/5 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#3a9bb5]/10 text-[#3a9bb5] text-sm font-semibold rounded-full mb-4">
             <Flame className="w-4 h-4" />
@@ -116,14 +90,13 @@ export function ForgeShowcase() {
           </p>
         </div>
 
-        {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-          {/* Tabs - left */}
+          {/* Tabs */}
           <div className="lg:col-span-2 space-y-3">
             {CAPABILITIES.map((cap, i) => (
               <button
                 key={cap.id}
-                onClick={() => handleTabChange(i)}
+                onClick={() => setActiveTab(i)}
                 className={`w-full text-left p-4 rounded-2xl border-2 transition-all duration-300 ${
                   activeTab === i
                     ? "border-[#3a9bb5] bg-white shadow-lg shadow-[#3a9bb5]/10"
@@ -151,10 +124,10 @@ export function ForgeShowcase() {
             ))}
           </div>
 
-          {/* Chat mockup - right */}
+          {/* Chat mockup */}
           <div className="lg:col-span-3">
             <div className="bg-white rounded-3xl shadow-2xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
-              {/* Chat header */}
+              {/* Header */}
               <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-100 bg-gray-50/50">
                 <div className="w-9 h-9 rounded-xl bg-[#3a9bb5] flex items-center justify-center">
                   <Flame className="w-5 h-5 text-white" />
@@ -169,42 +142,35 @@ export function ForgeShowcase() {
                 </div>
               </div>
 
-              {/* Messages — state-driven animation */}
+              {/* Messages — plain render, no opacity tricks */}
               <div className="p-6 space-y-4 min-h-[380px]">
-                {active.messages.map((msg, i) => {
-                  const isVisible = visibleMessages.includes(i);
-                  return (
-                    <div
-                      key={`${activeTab}-${i}`}
-                      className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} transition-all duration-300`}
-                      style={{
-                        opacity: isVisible ? 1 : 0,
-                        transform: isVisible ? "translateY(0)" : "translateY(12px)",
-                      }}
-                    >
-                      {msg.role === "forge" && (
-                        <div className="w-7 h-7 rounded-lg bg-[#3a9bb5] flex items-center justify-center mr-2 mt-1 shrink-0">
-                          <Flame className="w-3.5 h-3.5 text-white" />
-                        </div>
-                      )}
-                      <div
-                        className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
-                          msg.role === "user"
-                            ? "bg-[#3a9bb5] text-white rounded-br-md"
-                            : "bg-gray-50 text-gray-800 border border-gray-100 rounded-bl-md"
-                        }`}
-                      >
-                        <div dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }} />
-                        {msg.action && (
-                          <button className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#3a9bb5] bg-white px-3 py-1.5 rounded-lg border border-[#3a9bb5]/20 hover:bg-[#3a9bb5]/5 transition-colors">
-                            {msg.action}
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
-                        )}
+                {active.messages.map((msg, i) => (
+                  <div
+                    key={`${activeTab}-${i}`}
+                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    {msg.role === "forge" && (
+                      <div className="w-7 h-7 rounded-lg bg-[#3a9bb5] flex items-center justify-center mr-2 mt-1 shrink-0">
+                        <Flame className="w-3.5 h-3.5 text-white" />
                       </div>
+                    )}
+                    <div
+                      className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+                        msg.role === "user"
+                          ? "bg-[#3a9bb5] text-white rounded-br-md"
+                          : "bg-gray-50 text-gray-800 border border-gray-100 rounded-bl-md"
+                      }`}
+                    >
+                      <div dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }} />
+                      {msg.action && (
+                        <button className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#3a9bb5] bg-white px-3 py-1.5 rounded-lg border border-[#3a9bb5]/20 hover:bg-[#3a9bb5]/5 transition-colors">
+                          {msg.action}
+                          <ArrowRight className="w-3 h-3" />
+                        </button>
+                      )}
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
 
               {/* Input mockup */}
