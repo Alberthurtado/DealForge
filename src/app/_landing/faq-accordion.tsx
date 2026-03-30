@@ -1,14 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-const FAQS: FAQItem[] = [
+const FAQS = [
   {
     question: "¿Qué es un CPQ y por qué lo necesito?",
     answer:
@@ -61,9 +53,8 @@ const FAQS: FAQItem[] = [
   },
 ];
 
+// Server component — uses native <details>/<summary> (works without JS)
 export function FAQAccordion() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
     <section id="faq" className="py-24 bg-gray-50/50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,38 +69,26 @@ export function FAQAccordion() {
 
         <div className="space-y-3">
           {FAQS.map((faq, i) => (
-            <div
+            <details
               key={i}
-              className="bg-white rounded-2xl border border-gray-100 overflow-hidden transition-shadow hover:shadow-sm"
+              className="group bg-white rounded-2xl border border-gray-100 overflow-hidden transition-shadow hover:shadow-sm"
+              open={i === 0}
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between px-6 py-5 text-left"
-              >
+              <summary className="flex items-center justify-between px-6 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                 <span className="text-sm font-semibold text-gray-900 pr-4">
                   {faq.question}
                 </span>
-                <ChevronDown
-                  className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 ${
-                    openIndex === i ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === i ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
-                <p className="px-6 pb-5 text-sm text-gray-600 leading-relaxed">
+                <ChevronDown className="w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 group-open:rotate-180" />
+              </summary>
+              <div className="px-6 pb-5">
+                <p className="text-sm text-gray-600 leading-relaxed">
                   {faq.answer}
                 </p>
               </div>
-            </div>
+            </details>
           ))}
         </div>
       </div>
-
-      {/* FAQPage rich results removed — Google restricted to gov/health since Aug 2023 */}
     </section>
   );
 }
