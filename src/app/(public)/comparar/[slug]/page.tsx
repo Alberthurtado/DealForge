@@ -325,7 +325,7 @@ export default async function ComparacionPage({
               className="flex items-center gap-2 bg-white rounded-xl border border-gray-200 px-4 py-3 text-sm font-medium text-gray-700 hover:border-[#3a9bb5]/30 hover:text-[#3a9bb5] transition-colors"
             >
               <ArrowRight className="w-4 h-4" />
-              Probar gratis 14 d&iacute;as
+              Empezar gratis
             </Link>
           </div>
         </section>
@@ -361,7 +361,7 @@ export default async function ComparacionPage({
               Prueba DealForge gratis
             </h2>
             <p className="text-white/80 mb-8 max-w-xl mx-auto">
-              14 d&iacute;as para comparar por ti mismo. Sin tarjeta de cr&eacute;dito, sin
+              Plan Starter gratuito para siempre. Sin tarjeta de cr&eacute;dito, sin
               compromiso.
             </p>
             <Link

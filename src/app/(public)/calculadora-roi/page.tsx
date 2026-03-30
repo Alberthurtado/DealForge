@@ -308,7 +308,7 @@ export default function CalculadoraRoiPage() {
             Empieza con el plan {plan.name} &rarr;
           </Link>
           <p className="text-xs text-gray-400 mt-3">
-            14 días gratis en todos los planes.
+            Plan Starter gratuito para siempre. Sin tarjeta de cr&eacute;dito.
           </p>
         </section>
 

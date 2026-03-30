@@ -214,7 +214,7 @@ export default function CompararIndexPage() {
               Compru&eacute;balo t&uacute; mismo
             </h2>
             <p className="text-white/80 mb-8 max-w-xl mx-auto">
-              Prueba DealForge gratis durante 14 d&iacute;as y compara la experiencia con
+              Empieza con el plan Starter gratuito para siempre y compara la experiencia con
               tu herramienta actual. Sin tarjeta de cr&eacute;dito.
             </p>
             <Link

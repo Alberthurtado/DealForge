@@ -147,7 +147,7 @@ export default function FuncionalidadesIndexPage() {
               Transforma tu proceso de ventas hoy
             </h2>
             <p className="text-white/80 mb-8 max-w-xl mx-auto">
-              Prueba todas las funcionalidades gratis durante 14 días. Sin tarjeta de crédito, sin compromiso.
+              Empieza con el plan Starter gratuito para siempre. Sin tarjeta de cr&eacute;dito, sin compromiso.
             </p>
             <Link
               href="/registro"
