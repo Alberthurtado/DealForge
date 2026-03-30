@@ -53,8 +53,7 @@ export default function FuncionalidadesIndexPage() {
 
   const planColors: Record<string, string> = {
     Starter: "#6B7280",
-    Professional: "#3a9bb5",
-    "Business+": "#7C3AED",
+    Pro: "#2563EB",
     Business: "#7C3AED",
     Enterprise: "#DC2626",
   };
