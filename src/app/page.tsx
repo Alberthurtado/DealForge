@@ -28,10 +28,7 @@ import { Navbar } from "./_landing/navbar";
 import { PricingSection } from "@/components/home/pricing-section";
 import dynamic from "next/dynamic";
 
-const ForgeShowcase = dynamic(
-  () => import("./_landing/forge-showcase").then((m) => ({ default: m.ForgeShowcase })),
-  { ssr: true }
-);
+import { ForgeShowcase } from "./_landing/forge-showcase";
 const FAQAccordion = dynamic(
   () => import("./_landing/faq-accordion").then((m) => ({ default: m.FAQAccordion })),
   { ssr: true }
