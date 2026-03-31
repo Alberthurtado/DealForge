@@ -56,8 +56,8 @@ export default function RegistroPage() {
         return;
       }
 
-      // Success — redirect to dashboard
-      router.push("/panel");
+      // Success — redirect to "check your email" page
+      router.push(`/verificar-email?email=${encodeURIComponent(email)}`);
     } catch {
       setError("Error de conexión. Intenta de nuevo.");
       setLoading(false);

@@ -54,6 +54,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Check email verification (new users must verify; legacy users without the field are considered verified)
+  if (usuario.emailVerified === false && usuario.verifyToken) {
+    return NextResponse.json(
+      { error: "Tu email aun no ha sido verificado. Revisa tu bandeja de entrada.", needsVerification: true, email: usuario.email },
+      { status: 403 }
+    );
+  }
+
   // Determine empresa context
   const membresia = usuario.miembros[0];
   const empresaId = membresia?.empresaId || usuario.empresaId;

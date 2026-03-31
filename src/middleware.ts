@@ -57,6 +57,9 @@ const PUBLIC_PATHS = [
 
 const PUBLIC_PREFIXES = [
   "/api/auth/",
+  "/verificar/",           // Email verification redirect
+  "/verificar-email",      // "Check your email" page
+  "/verificar-error",      // Verification error page
   "/api/stripe/webhook", // Stripe webhooks — no auth needed
   "/api/pdf-preview/",   // PDF preview for Puppeteer — HMAC protected
   "/api/leads",          // Lead capture — public

@@ -286,6 +286,9 @@ model Usuario {
   empresaId    String
   empresa      Empresa  @relation(fields: [empresaId], references: [id])
   activo       Boolean  @default(true)
+  // Email verification
+  emailVerified    Boolean   @default(false)
+  verifyToken      String?   @unique @default(cuid())
   // Password reset
   resetToken       String?   @unique
   resetTokenExpiry DateTime?

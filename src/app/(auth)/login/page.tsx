@@ -51,6 +51,11 @@ function LoginForm() {
       const data = await res.json();
 
       if (!res.ok) {
+        // If email not verified, redirect to verification page
+        if (data.needsVerification) {
+          router.push(`/verificar-email?email=${encodeURIComponent(data.email || email)}`);
+          return;
+        }
         setError(data.error || "Error al iniciar sesión");
         setLoading(false);
         return;
