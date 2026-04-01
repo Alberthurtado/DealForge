@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { email, rol } = body as { email?: string; rol?: string };
+  const { email, rol, compartirDatos } = body as { email?: string; rol?: string; compartirDatos?: string[] };
 
   if (!email || !email.includes("@")) {
     return NextResponse.json({ error: "Email inválido" }, { status: 400 });
@@ -66,6 +66,12 @@ export async function POST(request: NextRequest) {
   const expiresAt = new Date();
   expiresAt.setDate(expiresAt.getDate() + 7); // 7 days
 
+  // Validate compartirDatos
+  const VALID_COMPARTIR = ["clientes", "productos", "cotizaciones", "contratos"];
+  const compartirValidado = Array.isArray(compartirDatos)
+    ? compartirDatos.filter(k => VALID_COMPARTIR.includes(k))
+    : [];
+
   const invitacion = await prisma.invitacion.create({
     data: {
       empresaId: session.empresaId,
@@ -73,6 +79,7 @@ export async function POST(request: NextRequest) {
       rol: rolValido,
       expiresAt,
       invitadoPorId: session.userId,
+      compartirDatos: compartirValidado.length > 0 ? JSON.stringify(compartirValidado) : null,
     },
   });
 

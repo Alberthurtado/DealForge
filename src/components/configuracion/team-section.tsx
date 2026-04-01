@@ -92,6 +92,7 @@ export function TeamSection({ currentUserRol }: { currentUserRol: string }) {
   const [inviting, setInviting] = useState(false);
   const [inviteSuccess, setInviteSuccess] = useState(false);
   const [inviteError, setInviteError] = useState("");
+  const [compartirDatos, setCompartirDatos] = useState<string[]>([]);
   const [removingId, setRemovingId] = useState<string | null>(null);
   const [updatingRol, setUpdatingRol] = useState<string | null>(null);
   const [showRolMenu, setShowRolMenu] = useState<string | null>(null);
@@ -120,7 +121,7 @@ export function TeamSection({ currentUserRol }: { currentUserRol: string }) {
       const res = await fetch("/api/equipo/invitar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: inviteEmail, rol: inviteRol }),
+        body: JSON.stringify({ email: inviteEmail, rol: inviteRol, compartirDatos: compartirDatos.length > 0 ? compartirDatos : undefined }),
       });
       const json = await res.json();
 
@@ -129,6 +130,7 @@ export function TeamSection({ currentUserRol }: { currentUserRol: string }) {
       } else {
         setInviteSuccess(true);
         setInviteEmail("");
+        setCompartirDatos([]);
         await loadTeam();
       }
     } catch {
@@ -139,7 +141,7 @@ export function TeamSection({ currentUserRol }: { currentUserRol: string }) {
   }
 
   async function handleRemoveMember(userId: string) {
-    if (!confirm("¿Eliminar a este miembro del equipo?")) return;
+    if (!confirm("¿Eliminar a este miembro del equipo?\n\nLos datos que este usuario creo (clientes, cotizaciones, etc.) seguiran siendo visibles para el equipo. Solo se eliminara su acceso.")) return;
     setRemovingId(userId);
     try {
       await fetch(`/api/equipo/${userId}`, { method: "DELETE" });
@@ -367,6 +369,34 @@ export function TeamSection({ currentUserRol }: { currentUserRol: string }) {
                     {inviting ? "Enviando..." : "Invitar"}
                   </button>
                 </form>
+
+                {/* Data sharing checkboxes */}
+                <div className="mt-3 p-3 bg-muted/50 rounded-xl border border-border">
+                  <p className="text-xs font-semibold text-foreground mb-1">Compartir datos existentes</p>
+                  <p className="text-[11px] text-muted-foreground mb-3">Al aceptar la invitacion, estos datos pasaran a ser visibles para todo el equipo.</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { key: "clientes", label: "Clientes" },
+                      { key: "productos", label: "Productos" },
+                      { key: "cotizaciones", label: "Cotizaciones" },
+                      { key: "contratos", label: "Contratos" },
+                    ].map(({ key, label }) => (
+                      <label key={key} className="flex items-center gap-2 cursor-pointer text-sm text-foreground">
+                        <input
+                          type="checkbox"
+                          checked={compartirDatos.includes(key)}
+                          onChange={() =>
+                            setCompartirDatos(prev =>
+                              prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]
+                            )
+                          }
+                          className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/20"
+                        />
+                        {label}
+                      </label>
+                    ))}
+                  </div>
+                </div>
 
                 {inviteSuccess && (
                   <p className="mt-2 text-sm text-green-600 flex items-center gap-1">

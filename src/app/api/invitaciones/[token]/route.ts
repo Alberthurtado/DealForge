@@ -108,6 +108,8 @@ export async function POST(
         passwordHash,
         plan: invitacion.empresa.plan,
         empresaId: invitacion.empresaId,
+        emailVerified: true, // Verified via invitation email
+        verifyToken: null,
       },
     });
     userId = newUser.id;
@@ -139,6 +141,26 @@ export async function POST(
     where: { token },
     data: { usadaAt: new Date() },
   });
+
+  // Bulk transfer data from inviter to team (non-blocking)
+  try {
+    if (invitacion.compartirDatos) {
+      const categorias: string[] = JSON.parse(invitacion.compartirDatos);
+      const transferWhere = { usuarioId: invitacion.invitadoPorId, equipoId: null };
+      const transferData = { equipoId: invitacion.empresaId };
+
+      const ops: Promise<unknown>[] = [];
+      if (categorias.includes("clientes")) ops.push(prisma.cliente.updateMany({ where: transferWhere, data: transferData }));
+      if (categorias.includes("productos")) ops.push(prisma.producto.updateMany({ where: transferWhere, data: transferData }));
+      if (categorias.includes("cotizaciones")) ops.push(prisma.cotizacion.updateMany({ where: transferWhere, data: transferData }));
+      if (categorias.includes("contratos")) ops.push(prisma.contrato.updateMany({ where: transferWhere, data: transferData }));
+
+      await Promise.all(ops);
+    }
+  } catch (transferErr) {
+    console.error("[invitacion] Error transferring data:", transferErr);
+    // Non-blocking — invitation acceptance succeeds even if transfer fails
+  }
 
   // Create new JWT for the user with the team context
   const jwtToken = await createToken({

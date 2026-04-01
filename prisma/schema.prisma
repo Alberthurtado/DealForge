@@ -267,9 +267,10 @@ model Invitacion {
   rol           String    @default("SALES")
   token         String    @unique @default(cuid())
   expiresAt     DateTime
-  usadaAt       DateTime?
-  invitadoPorId String    // userId of who sent the invite
-  createdAt     DateTime  @default(now())
+  usadaAt        DateTime?
+  invitadoPorId  String    // userId of who sent the invite
+  compartirDatos String?   // JSON array: ["clientes","productos","cotizaciones","contratos"]
+  createdAt      DateTime  @default(now())
 
   @@index([empresaId])
   @@index([email])
