@@ -561,7 +561,190 @@ export async function POST() {
       "IVA en cotizaciones, IVA presupuestos autónomos, tipos IVA España, IVA operaciones intracomunitarias, IVA pymes, cómo poner IVA en presupuesto, exención IVA cotizaciones, recargo equivalencia presupuesto",
   };
 
-  const posts = [post, post2, post3, post4];
+  const post5 = {
+    slug: "excel-vs-software-cotizaciones-cuando-hacer-el-cambio",
+    titulo: "Excel vs software de cotizaciones: cuándo hacer el cambio",
+    extracto:
+      "Excel es el punto de partida de casi todo comercial. Pero llega un momento en que te frena más de lo que te ayuda. Aquí está la señal exacta para saber cuándo cambiar a un software especializado.",
+    contenido: `<p>Casi todos los negocios empiezan igual: una plantilla de Excel, algo de color corporativo, y a cotizar. Y funciona. Al principio funciona bien.</p>
+
+<p>Pero llega un momento —y casi todos los comerciales lo recuerdan— en que algo falla. Una cotización enviada con el precio del año pasado. Un descuento aplicado a la fila equivocada. Un cliente preguntando por una propuesta que no encuentras entre los veinte archivos con nombres como <code>cotizacion_final_DEFINITIVO_v3.xlsx</code>.</p>
+
+<p>Este artículo no es un ataque a Excel. Es una herramienta brillante para lo que fue diseñada. Pero cotizar no es analizar datos: es vender. Y para eso, Excel tiene límites muy concretos que conviene conocer antes de que te cuesten un deal.</p>
+
+<h2>Por qué todo el mundo empieza con Excel (y tiene lógica)</h2>
+
+<p>Excel es gratuito (o casi), todo el mundo lo conoce, y en los primeros meses de un negocio la prioridad es salir a vender, no montar infraestructura. Con una plantilla decente puedes generar una cotización presentable en veinte minutos.</p>
+
+<p>Además, Excel te da control total. Puedes añadir cualquier columna, cambiar cualquier fórmula, estructurar los descuentos exactamente como quieres. Esa flexibilidad es seductora, especialmente si eres el único que toca el fichero.</p>
+
+<p>El problema es que esa flexibilidad tiene un precio que no ves hasta que el negocio crece. Y para entonces, ya estás enterrado en deuda operativa.</p>
+
+<h2>Las cinco señales de que Excel ya no te sirve</h2>
+
+<h3>1. Pierdes tiempo buscando la última versión</h3>
+
+<p>¿Cuántas veces has buscado una cotización enviada hace tres semanas? ¿Cuántos minutos has gastado abriendo ficheros para encontrar el que tiene los precios correctos?</p>
+
+<p>Con Excel, cada cotización es un fichero independiente. Se guarda en una carpeta, se envía por email, se modifica localmente. El resultado es un sistema de archivos caótico donde la "verdad" sobre el estado de una propuesta está dispersa entre tu disco local, el email del cliente y quizás una carpeta compartida de Google Drive con cinco versiones distintas.</p>
+
+<p>Esto no es un problema de organización personal: es un problema estructural del formato. Excel no fue diseñado para gestionar el ciclo de vida de documentos comerciales.</p>
+
+<h3>2. Los errores de cálculo te cuestan dinero real</h3>
+
+<p>Una fórmula que no se actualiza al añadir una línea nueva. Un precio unitario modificado manualmente que no refleja el catálogo actualizado. Un descuento de cliente VIP aplicado al 15% cuando debería ser el 10%.</p>
+
+<p>En Excel, todos estos errores son posibles —y frecuentes. Un estudio de EuSpRIG (European Spreadsheet Risks Interest Group) estima que más del 90% de las hojas de cálculo corporativas contienen errores. La mayoría son silenciosos: el total parece razonable, nadie lo cuestiona, y la propuesta sale con un margen incorrecto.</p>
+
+<p>En algunos casos el error va en tu contra (cotizas más barato de lo que deberías). En otros va contra el cliente, lo que genera tensión cuando llega la factura. En cualquier caso, el daño ya está hecho.</p>
+
+<h3>3. No sabes en qué estado están tus cotizaciones</h3>
+
+<p>Pregunta rápida: ahora mismo, ¿cuántas cotizaciones tienes enviadas y pendientes de respuesta? ¿Cuántas llevan más de dos semanas sin respuesta? ¿Cuál fue la última vez que hiciste seguimiento con cada cliente?</p>
+
+<p>Si no puedes responder eso en menos de treinta segundos, tienes un problema de visibilidad comercial. Y Excel no puede dártela porque es un documento, no un sistema.</p>
+
+<p>La consecuencia directa: cotizaciones que mueren por falta de seguimiento. El cliente no dijo no, simplemente no respondió. Y tú, con la cabeza en lo siguiente, no volviste a llamar. Ese deal no lo perdiste ante la competencia: lo perdiste ante el silencio.</p>
+
+<h3>4. Tu imagen profesional sufre (aunque no te lo digan)</h3>
+
+<p>La cotización es, en muchos casos, el primer documento formal que el cliente recibe de ti. Es el momento en que deja de hablar con una persona y empieza a evaluar una empresa.</p>
+
+<p>Una plantilla de Excel con la tipografía por defecto, sin tu logo bien colocado, sin numeración de propuesta, sin condiciones de pago claramente formateadas... no transmite la misma confianza que un PDF limpio, con cabecera profesional y firma digital.</p>
+
+<p>Los clientes no te dirán "tu cotización parece amateur". Simplemente irán con quien les generó más confianza desde el primer contacto.</p>
+
+<h3>5. No puedes escalar el equipo sin caos</h3>
+
+<p>Mientras eres solo tú, el sistema Excel puede funcionar a trancas y barrancas. Pero en el momento en que hay dos personas cotizando —un comercial junior, un socio, alguien que cubre las vacaciones— el sistema colapsa.</p>
+
+<p>¿Quién tiene el catálogo actualizado? ¿Qué plantilla se usa? ¿Cómo sé que las condiciones de pago que puso mi compañero son las correctas para ese cliente? ¿Dónde están las cotizaciones que envió mientras yo estaba de viaje?</p>
+
+<p>El caos no llega de golpe. Llega gradualmente, un fichero confuso a la vez, hasta que un día alguien envía una propuesta con precios de hace un año y nadie sabe exactamente cómo pasó.</p>
+
+<h2>Qué ganas realmente al pasarte a un software especializado</h2>
+
+<p>La respuesta fácil es "velocidad". Y es verdad: generar una cotización con un software CPQ es entre tres y cinco veces más rápido que con Excel una vez que tienes el catálogo configurado. Pero la velocidad es solo el beneficio más visible. Los más importantes son otros.</p>
+
+<h3>Control del pipeline: saber qué pasa con cada propuesta</h3>
+
+<p>Un software de cotizaciones te dice, de un vistazo, cuántas propuestas tienes en cada estado: borrador, enviada, vista por el cliente, aceptada, rechazada, vencida. Puedes ver cuánto valor hay en cada etapa del embudo y priorizar el seguimiento donde más impacto tiene.</p>
+
+<p>Eso es lo que diferencia a un comercial reactivo (que responde cuando el cliente llama) de uno proactivo (que contacta en el momento justo, cuando la propuesta lleva X días sin respuesta).</p>
+
+<h3>Precios correctos, siempre</h3>
+
+<p>Con un catálogo de productos centralizado, el precio unitario se actualiza una vez y se refleja en todas las cotizaciones nuevas automáticamente. Los descuentos por cliente, por volumen o por tipo de producto se configuran una vez y se aplican sin intervención manual.</p>
+
+<p>El resultado: cero errores de precio. Y cuando hay que subir tarifas —algo que en el contexto inflacionario actual ocurre con frecuencia— lo haces en un solo lugar, no buscando en veinte ficheros cuál es "el bueno".</p>
+
+<h3>Aspecto profesional sin dedicarle tiempo al diseño</h3>
+
+<p>Los mejores softwares de cotizaciones generan PDFs con aspecto profesional de forma automática: cabecera con tu logo, líneas de producto bien estructuradas, desglose de IVA correcto, condiciones de pago, pie con datos legales. Tú rellenas el contenido; el sistema se ocupa del formato.</p>
+
+<p>El tiempo que antes dedicabas a ajustar columnas y márgenes en Excel lo dedicarás a entender las necesidades del cliente antes de enviar la propuesta.</p>
+
+<h3>Colaboración sin fricción</h3>
+
+<p>Todo el equipo trabaja sobre el mismo sistema. El responsable comercial puede ver las cotizaciones de cada vendedor. Un nuevo empleado puede empezar a cotizar correctamente desde el primer día porque el catálogo, las plantillas y las condiciones ya están configuradas. Nadie depende de preguntarle al compañero "¿me pasas tu plantilla de cotizaciones?".</p>
+
+<h3>Datos para tomar mejores decisiones</h3>
+
+<p>¿Qué productos aparecen más en tus cotizaciones ganadas? ¿En qué rango de precios tienes más tasa de cierre? ¿Qué tipo de descuento acelera la decisión del cliente? Con Excel nunca tendrás esas respuestas porque los datos están fragmentados en cientos de ficheros. Con un software dedicado, esa información está ahí, esperando a que la uses para ajustar tu estrategia de precios.</p>
+
+<h2>El argumento del "Excel personalizado"</h2>
+
+<p>Hay un perfil de usuario que siempre aparece en esta conversación: el que tiene "un Excel muy avanzado". Macros, tablas dinámicas, validaciones de datos, listas desplegables con los productos del catálogo. A veces es impresionante.</p>
+
+<p>El problema no es la complejidad técnica del fichero. El problema es que ese Excel avanzado lo construyó una persona, lo entiende esa persona, y si esa persona se va o se pone enferma, el sistema deja de funcionar. Además, sigue siendo un fichero: no tiene estado, no tiene historial de cambios trazable, no envía recordatorios de seguimiento, y no genera métricas de pipeline.</p>
+
+<p>El Excel avanzado es una señal de que el negocio necesita un sistema real. El esfuerzo invertido en construirlo habría dado más retorno configurando una herramienta diseñada para eso.</p>
+
+<h2>Cuándo NO tiene sentido cambiar</h2>
+
+<p>En honestidad: hay situaciones donde Excel es perfectamente adecuado.</p>
+
+<ul>
+<li><strong>Si cotizas menos de dos o tres veces al mes.</strong> El volumen no justifica el coste de adoptar y aprender una nueva herramienta. Una buena plantilla de Excel o Google Sheets es suficiente.</li>
+<li><strong>Si todas tus cotizaciones son altamente personalizadas y únicas.</strong> Negocios donde cada propuesta es un proyecto irrepetible (una obra de arquitectura singular, un proyecto de consultoría estratégica muy específico) a veces encajan mejor en documentos libres que en formularios estructurados. Aunque incluso aquí, los buenos softwares permiten suficiente flexibilidad.</li>
+<li><strong>Si acabas de empezar y todavía estás validando tu modelo de precios.</strong> No construyas sistemas sobre precios que cambiarán cada semana. Primero valida, luego sistematiza.</li>
+</ul>
+
+<p>El cambio tiene sentido cuando el dolor de seguir con Excel supera la fricción de aprender algo nuevo. Y ese punto llega antes de lo que parece.</p>
+
+<h2>El momento ideal para hacer el cambio</h2>
+
+<p>No es cuando ya estás en crisis. No es cuando has perdido el tercer deal por un error de precio. El momento ideal es cuando empiezas a sentir la fricción, antes de que se convierta en problema sistémico.</p>
+
+<p>Algunos indicadores concretos de que ese momento ha llegado:</p>
+
+<ul>
+<li>Envías más de diez cotizaciones al mes</li>
+<li>Tienes más de una persona involucrada en el proceso comercial</li>
+<li>Has tenido al menos un incidente de precio incorrecto en los últimos seis meses</li>
+<li>No puedes decir de memoria cuántas propuestas tienes abiertas ahora mismo</li>
+<li>El tiempo entre la solicitud del cliente y el envío de la cotización supera las 24 horas</li>
+</ul>
+
+<p>Si se cumplen dos o más de estos criterios, el cambio te pagará el tiempo invertido en el primer mes.</p>
+
+<h2>Cómo hacer la transición sin que sea un drama</h2>
+
+<p>El mayor freno para cambiar de herramienta no es el coste: es el miedo a la disrupción. "Ahora mismo no puedo parar a aprender un sistema nuevo." Es comprensible, pero la lógica falla: cuanto más esperas, más cotizaciones tienes en Excel, más historial hay que migrar, y más profundo es el hábito.</p>
+
+<p>La transición es más sencilla de lo que parece si la haces en orden:</p>
+
+<ol>
+<li><strong>Exporta tu catálogo de productos a una hoja de cálculo limpia.</strong> Nombre, descripción, precio unitario, tipo de IVA. Eso es todo lo que necesitas para empezar.</li>
+<li><strong>Configura una plantilla base</strong> con tu logo, tus condiciones de pago habituales y tu pie de página legal. Treinta minutos de trabajo que no volverás a repetir.</li>
+<li><strong>Crea las primeras cinco cotizaciones en el nuevo sistema</strong> en paralelo a como lo harías en Excel. Esto te da confianza sin riesgo.</li>
+<li><strong>A partir de la semana dos, solo usas el nuevo sistema.</strong> No "para cotizaciones importantes". Para todas. La consistencia es lo que construye el hábito.</li>
+</ol>
+
+<p>Con DealForge, por ejemplo, el proceso de onboarding está diseñado para que en menos de una hora tengas tu catálogo cargado y tu primera cotización lista para enviar. No necesitas formación técnica ni consultor de implementación. Si sabes usar una hoja de cálculo, sabes usar DealForge.</p>
+
+<h2>La pregunta que realmente importa</h2>
+
+<p>Hay una forma muy simple de saber si necesitas un cambio: calcula cuánto tiempo dedicas cada semana a tareas relacionadas con cotizaciones —crear, corregir, buscar, hacer seguimiento, reenviar— y multiplícalo por tu coste por hora.</p>
+
+<p>Para la mayoría de PYMEs, ese número está entre 3 y 8 horas semanales. A un coste de oportunidad de 40 euros/hora, son entre 120 y 320 euros semanales en tiempo comercial que no se está dedicando a generar nuevos leads o a cerrar deals existentes.</p>
+
+<p>Un software de cotizaciones cuesta entre 30 y 100 euros al mes según las funcionalidades. La aritmética no deja mucho espacio a la duda.</p>
+
+<p>El argumento no es tecnológico. Es económico: ¿cuánto vale tu tiempo comercial, y qué es lo mejor que puedes hacer con él?</p>
+
+<h2>Conclusión</h2>
+
+<p>Excel no es el problema. El problema es seguir usando Excel cuando ya has superado el umbral para el que tiene sentido. Y ese umbral llega más rápido de lo que anticipas.</p>
+
+<p>La transición a un software especializado no es un lujo de empresas grandes. Es la decisión operativa correcta en el momento correcto: cuando el proceso comercial empieza a ser un freno en lugar de un motor.</p>
+
+<p>Si reconoces alguna de las señales de este artículo en tu día a día, el mejor momento para hacer el cambio era hace seis meses. El segundo mejor momento es hoy.</p>
+
+<p><strong>&iquest;Quieres ver cómo funciona en la práctica?</strong> <a href="https://dealforge.es">DealForge</a> tiene una prueba gratuita sin tarjeta de crédito. En menos de una hora puedes tener tu catálogo cargado y tu primera cotización enviada.</p>`,
+    autor: "DealForge",
+    categoria: "herramientas",
+    tags: JSON.stringify([
+      "Excel",
+      "cotizaciones",
+      "presupuestos",
+      "software cotizaciones",
+      "CPQ",
+      "productividad",
+      "herramientas ventas",
+      "pymes",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Excel vs Software de Cotizaciones: Cuándo Hacer el Cambio — DealForge",
+    metaDescripcion:
+      "¿Sigues usando Excel para cotizar? Descubre las señales exactas que indican que es hora de cambiar a un software especializado, y cómo hacer la transición sin disrupción.",
+    metaKeywords:
+      "excel vs software cotizaciones, dejar excel para cotizaciones, programa cotizaciones pymes, cuando cambiar excel cotizaciones, software presupuestos españa, herramienta cotizaciones profesional, CPQ pymes, automatizar cotizaciones excel",
+  };
+
+  const posts = [post, post2, post3, post4, post5];
   const results = [];
 
   for (const p of posts) {
