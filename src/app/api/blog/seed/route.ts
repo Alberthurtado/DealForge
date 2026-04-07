@@ -744,7 +744,207 @@ export async function POST() {
       "excel vs software cotizaciones, dejar excel para cotizaciones, programa cotizaciones pymes, cuando cambiar excel cotizaciones, software presupuestos españa, herramienta cotizaciones profesional, CPQ pymes, automatizar cotizaciones excel",
   };
 
-  const posts = [post, post2, post3, post4, post5];
+  const post6 = {
+    slug: "como-hacer-seguimiento-cotizaciones-sin-ser-pesado",
+    titulo: "Cómo hacer seguimiento de cotizaciones sin parecer desesperado",
+    extracto:
+      "El seguimiento de cotizaciones es donde se gana o se pierde la venta. Aprende cuándo llamar, qué decir y cómo usar la automatización para hacer follow-up sin agobiar al cliente.",
+    contenido: `<p>Has enviado la cotización. El cliente dijo que le parecía bien. Han pasado cinco días y no hay noticias. ¿Llamas? ¿Esperas? ¿Mandas un email? ¿Cuántas veces?</p>
+
+<p>Este momento —el silencio post-cotización— es donde se pierden más ventas en PYMEs españolas. No porque el precio fuera malo. No porque el cliente no estuviera interesado. Sino porque el seguimiento se hace mal: demasiado pronto, demasiado tarde, con el mensaje equivocado, o directamente no se hace.</p>
+
+<p>Vamos a resolver esto de una vez.</p>
+
+<h2>Por qué el seguimiento importa más de lo que crees</h2>
+
+<p>Hay un dato que circula mucho en ventas B2B y que, aunque varía según el sector, refleja una realidad que cualquier comercial reconoce: <strong>la mayoría de las ventas se cierran después del quinto contacto</strong>, pero la mayoría de los vendedores se rinden después del segundo.</p>
+
+<p>No se trata de ser insistente. Se trata de estar presente en el momento en que el cliente toma la decisión. Y ese momento rara vez es el día que recibe la cotización.</p>
+
+<p>La realidad del cliente al otro lado es esta: recibió tu cotización, le interesa, pero tiene diez urgencias encima de la mesa. Tu propuesta está en su bandeja de entrada, marcada como "pendiente de revisar", compitiendo con todo lo demás. Si no vuelves a aparecer, simplemente se olvidará. Sin mala intención.</p>
+
+<h2>El error más común: el seguimiento reactivo</h2>
+
+<p>La mayoría de las PYMEs hacen seguimiento reactivo: esperan a que el cliente dé señales de vida y, si no las hay, o no hacen nada o llaman en el peor momento posible —cuando están ellos ansiosos, no cuando el cliente está preparado para decidir.</p>
+
+<p>El seguimiento efectivo es <strong>proactivo y estructurado</strong>. Tienes un plan antes de enviar la cotización, no después de llevar tres días sin noticias.</p>
+
+<h2>El protocolo de seguimiento que funciona</h2>
+
+<p>Aquí va un esquema que funciona para la mayoría de ciclos de venta en PYMEs, con servicios de ticket medio (entre 1.000 y 20.000 euros). Ajústalo a tu sector, pero úsalo como punto de partida:</p>
+
+<h3>Día 0: la cotización y el cierre del primer contacto</h3>
+
+<p>El error empieza aquí. Muchas empresas envían la cotización por email y esperan. <strong>No hagas eso.</strong></p>
+
+<p>Cuando envíes la cotización, cierra ese mismo momento con una pregunta de confirmación:</p>
+
+<ul>
+<li>"¿Tienes todo lo que necesitas para tomar la decisión, o hay algo que quieras que aclaremos?"</li>
+<li>"¿Cuándo crees que podrías tener una respuesta?"</li>
+</ul>
+
+<p>Esa segunda pregunta es la más importante. Si el cliente te dice "a finales de la semana que viene", acabas de eliminar toda la incertidumbre. Sabes exactamente cuándo hacer el siguiente contacto y tienes su permiso implícito para hacerlo.</p>
+
+<h3>Día 1-2: confirmación de recepción</h3>
+
+<p>Si el envío fue por email y no hubo llamada previa, manda un email corto al día siguiente. No para presionar, sino para confirmar que llegó bien:</p>
+
+<blockquote>
+<p>"Hola [nombre], te escribo para confirmar que la propuesta llegó correctamente. Quedo a tu disposición si tienes cualquier pregunta. Un saludo."</p>
+</blockquote>
+
+<p>Dos líneas. Sin presión. Esto también te da información: si no responde ni a esto, el lead es más frío de lo que parecía.</p>
+
+<h3>Día 3-5: el primer seguimiento real</h3>
+
+<p>Este es el contacto más importante. No mandes otro email genérico. <strong>Llama.</strong></p>
+
+<p>El objetivo de esta llamada no es preguntar "¿qué tal la propuesta?". El objetivo es aportarle algo de valor o resolver una duda que probablemente tenga. Ejemplos:</p>
+
+<ul>
+<li>"Llamaba porque hemos tenido un par de clientes del sector [X] con la misma casuística que tú, y quería comentarte cómo lo resolvieron, por si te era útil antes de tomar la decisión."</li>
+<li>"Recordaba que me comentaste que el plazo de entrega era un factor importante para vosotros. Quería confirmar que, con vuestra timeline, podemos garantizarlo sin problema."</li>
+</ul>
+
+<p>Estás aportando valor, no pidiendo un sí. Eso cambia completamente el tono de la conversación.</p>
+
+<h3>Día 7-10: segundo seguimiento</h3>
+
+<p>Si después de la llamada sigue sin haber respuesta, un email con una pregunta directa pero sin presión:</p>
+
+<blockquote>
+<p>"Hola [nombre], sé que estás con muchas cosas encima. Solo quería saber si seguís adelante con el proyecto o si las prioridades han cambiado. No hay ningún problema si es así, solo para tener claro en qué punto estamos. Un saludo."</p>
+</blockquote>
+
+<p>Este email tiene un truco: le das permiso para decirte que no. Eso elimina la presión percibida y, paradójicamente, aumenta las probabilidades de que responda. Además, si el proyecto realmente se ha cancelado, es mejor saberlo ya que seguir invirtiendo tiempo en un lead muerto.</p>
+
+<h3>Día 14-21: el seguimiento de largo plazo</h3>
+
+<p>Si a estas alturas no hay respuesta, la venta no está cerrada pero tampoco perdida. Pasa al <strong>modo mantenimiento</strong>: un contacto mensual con contenido útil, sin presión de cierre.</p>
+
+<ul>
+<li>Un artículo relevante para su sector</li>
+<li>Una novedad de tu empresa que pueda interesarle</li>
+<li>Un caso de éxito de un cliente similar</li>
+</ul>
+
+<p>El objetivo aquí es seguir siendo relevante hasta que el momento de compra llegue. Y llegará.</p>
+
+<h2>Qué decir (y qué no decir) en el seguimiento</h2>
+
+<p>Hay frases que matan una venta en el seguimiento. Estas son las peores:</p>
+
+<ul>
+<li><strong>"Llamaba para ver si habías tomado una decisión."</strong> Suena a presión. El cliente siente que le estás persiguiendo.</li>
+<li><strong>"¿Qué tal mi propuesta?"</strong> Pones el foco en ti, no en él.</li>
+<li><strong>"Solo quería recordarte que la oferta expira el viernes."</strong> Si es una excusa artificial, el cliente lo nota y pierde confianza.</li>
+</ul>
+
+<p>Las frases que funcionan siempre tienen algo en común: <strong>aportan valor o muestran interés genuino por la situación del cliente</strong>, no por tu venta.</p>
+
+<ul>
+<li>"Hablando con otro cliente del sector, me acordé de tu caso y quería comentarte algo."</li>
+<li>"¿Ha habido algún cambio en el proyecto desde que hablamos?"</li>
+<li>"¿Hay algo de la propuesta que no quedó del todo claro o que te genere dudas?"</li>
+</ul>
+
+<h2>El canal importa: email vs. llamada vs. WhatsApp</h2>
+
+<p>No hay un canal universalmente mejor, pero sí hay patrones que funcionan:</p>
+
+<h3>Email</h3>
+<p>Ideal para el primer envío de la cotización y los seguimientos escritos donde quieres dejar constancia. Malo para hacer seguimiento urgente o cuando el lead lleva días sin responder: los emails se pierden fácilmente.</p>
+
+<h3>Llamada telefónica</h3>
+<p>El canal más efectivo para el seguimiento directo. Es más personal, permite detectar objeciones en tiempo real y muestra un nivel de compromiso que el email no transmite. El problema es que muchas personas no cogen el teléfono a números desconocidos. Solución: avisa por email que vas a llamar.</p>
+
+<h3>WhatsApp</h3>
+<p>En el contexto español, WhatsApp se ha convertido en un canal de seguimiento perfectamente válido, especialmente en relaciones comerciales donde ya hay confianza previa. Es más informal, pero también más directo. Úsalo cuando el cliente ya lo ha usado contigo o cuando el perfil del cliente lo sugiere.</p>
+
+<p>La regla general: <strong>usa el canal que el cliente ya usa contigo</strong>. Si todas las conversaciones han sido por email, no le mandes un WhatsApp sin avisar. Si ya habéis hablado por teléfono varias veces, la llamada es natural.</p>
+
+<h2>Cómo saber cuándo parar</h2>
+
+<p>Una de las preguntas más frecuentes: ¿cuántos seguimientos son demasiados?</p>
+
+<p>La respuesta honesta: depende del ticket y del ciclo de venta. Para una venta de 2.000 euros con decisión rápida, tres contactos en dos semanas es suficiente. Para una venta de 50.000 euros con múltiples stakeholders, puedes estar seis meses en seguimiento activo sin que sea excesivo.</p>
+
+<p>La señal de parada no es el tiempo, sino la respuesta del cliente. Si te pide explícitamente que pares, paras. Si te dice que el proyecto se ha cancelado, agradeces y cierras. Si simplemente no responde después de cinco o seis intentos bien distribuidos, lo mueves a seguimiento pasivo (un email al mes) y dedicas tu energía a leads más calientes.</p>
+
+<p><strong>No confundas persistencia con acoso.</strong> La persistencia respeta los tiempos del cliente. El acoso los ignora.</p>
+
+<h2>El problema estructural: hacer esto a mano no escala</h2>
+
+<p>Aquí está el problema real de la mayoría de PYMEs: el seguimiento manual no escala.</p>
+
+<p>Cuando tienes cinco cotizaciones abiertas, puedes llevar el seguimiento en tu cabeza. Cuando tienes veinte, necesitas un sistema. Cuando tienes cincuenta, sin sistema pierdes ventas sí o sí.</p>
+
+<p>El caos del seguimiento manual tiene un coste directo: leads que caducan porque nadie los siguió a tiempo, cotizaciones que nunca se cerraron porque el comercial se olvidó de llamar el martes, oportunidades perdidas por no tener visibilidad del estado de cada deal.</p>
+
+<p>La solución no es trabajar más horas. Es tener un sistema que te recuerde cuándo hacer qué, con qué cliente y por qué canal.</p>
+
+<h2>Automatizar el seguimiento sin perder el toque humano</h2>
+
+<p>Automatizar el seguimiento no significa mandar emails robóticos en masa. Significa tener un sistema que:</p>
+
+<ul>
+<li>Te avise cuando una cotización lleva X días sin respuesta</li>
+<li>Te muestre el historial completo de cada cliente antes de llamar</li>
+<li>Registre automáticamente cada contacto para que no pierdas el hilo</li>
+<li>Te permita configurar recordatorios de seguimiento personalizados por deal</li>
+</ul>
+
+<p>Con DealForge, por ejemplo, cuando envías una cotización puedes configurar recordatorios automáticos: "si no hay respuesta en 3 días, avísame". El sistema te lo recuerda, tú decides qué hacer. La automatización gestiona la logística; tú gestionas la relación.</p>
+
+<p>Además, con el seguimiento de apertura de emails —saber si el cliente abrió o no la cotización—, tienes información que cambia completamente tu estrategia. Si el cliente abrió la propuesta cuatro veces en dos días y no ha respondido, es muy diferente a que no la haya abierto nunca. En el primer caso, hay interés pero hay una duda o un freno. En el segundo, quizás ni llegó a su bandeja de entrada.</p>
+
+<h2>Un ejemplo práctico: empresa de reformas en Madrid</h2>
+
+<p>Imagina una empresa de reformas que envía entre 15 y 25 cotizaciones al mes. El ticket medio es 8.000 euros. Con una tasa de cierre del 20%, cierran 3-5 proyectos mensuales.</p>
+
+<p>El problema: muchas cotizaciones quedan sin seguimiento sistemático porque el gerente lleva también la parte técnica. Resultado: leads que se enfrían, clientes que acaban contratando a la competencia no porque fueran más baratos, sino porque fueron más constantes en el contacto.</p>
+
+<p>Con un protocolo estructurado y recordatorios automáticos, esa misma empresa puede subir su tasa de cierre al 28-30% sin aumentar el número de cotizaciones enviadas. En términos económicos: 1-2 proyectos adicionales al mes, 8.000-16.000 euros más de facturación con el mismo esfuerzo comercial.</p>
+
+<p>El seguimiento no es un extra. Es parte del proceso de venta.</p>
+
+<h2>Resumen: el protocolo en cinco puntos</h2>
+
+<ol>
+<li><strong>Cierra el primer contacto con una pregunta de timing</strong>: "¿Cuándo crees que tendrás una respuesta?" Así sabes cuándo hacer el siguiente contacto y tienes permiso implícito para hacerlo.</li>
+<li><strong>Confirma la recepción al día siguiente</strong> si el envío fue por email. Dos líneas, sin presión.</li>
+<li><strong>El primer seguimiento real, a los 3-5 días, por teléfono y aportando valor</strong>. No preguntes por la decisión: resuelve una duda o comparte algo útil.</li>
+<li><strong>El segundo seguimiento, a los 7-10 días, dándole permiso para decir que no</strong>. Esto reduce la presión percibida y aumenta las respuestas.</li>
+<li><strong>A partir de las dos semanas sin respuesta, modo mantenimiento</strong>: un contacto al mes con contenido relevante hasta que el momento llegue.</li>
+</ol>
+
+<p>El seguimiento de cotizaciones no es una tarea incómoda que hay que hacer a regañadientes. Es una habilidad comercial que, bien ejecutada, puede doblar tu tasa de cierre sin añadir un solo euro al presupuesto de marketing.</p>
+
+<p><strong>Si quieres dejar de hacer seguimiento a mano y tener visibilidad total de tus cotizaciones abiertas</strong>, <a href="https://dealforge.es">DealForge</a> incluye recordatorios automáticos, seguimiento de aperturas y gestión de pipeline desde el primer día. Pruébalo gratis, sin tarjeta de crédito.`,
+    autor: "DealForge",
+    categoria: "ventas",
+    tags: JSON.stringify([
+      "seguimiento cotizaciones",
+      "follow-up ventas",
+      "cerrar ventas",
+      "cotizaciones",
+      "presupuestos",
+      "ventas B2B",
+      "pymes",
+      "proceso comercial",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Cómo Hacer Seguimiento de Cotizaciones Sin Parecer Pesado — DealForge",
+    metaDescripcion:
+      "Protocolo paso a paso para hacer follow-up de cotizaciones: cuándo llamar, qué decir y cómo automatizar el seguimiento sin agobiar al cliente ni perder ventas.",
+    metaKeywords:
+      "seguimiento cotizaciones, follow-up presupuestos, hacer seguimiento ventas, cómo hacer follow-up cotización, seguimiento comercial pymes, automatizar seguimiento cotizaciones, cerrar más ventas, proceso comercial pymes españa",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6];
   const results = [];
 
   for (const p of posts) {
