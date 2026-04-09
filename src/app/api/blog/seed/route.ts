@@ -944,7 +944,242 @@ export async function POST() {
       "seguimiento cotizaciones, follow-up presupuestos, hacer seguimiento ventas, cómo hacer follow-up cotización, seguimiento comercial pymes, automatizar seguimiento cotizaciones, cerrar más ventas, proceso comercial pymes españa",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6];
+  const post7 = {
+    slug: "los-7-datos-que-toda-cotizacion-profesional-debe-incluir",
+    titulo:
+      "Los 7 datos que toda cotización profesional debe incluir (y los 3 que arruinan tu cierre)",
+    extracto:
+      "Una cotización mal estructurada es dinero que se escapa. Repasamos los 7 elementos imprescindibles que deben aparecer en cualquier presupuesto profesional, por qué cada uno importa, y los errores más comunes que hacen que el cliente no firme.",
+    contenido: `<p>Llevas horas preparando una propuesta. Calculas precios, ajustas márgenes, redactas el email con cuidado. La envías. Y no pasa nada.</p>
+
+<p>En muchos casos el problema no es el precio. Es que la cotización en sí no transmite profesionalidad, no resuelve dudas del cliente antes de que las tenga, o directamente le falta información que necesita para tomar una decisión.</p>
+
+<p>Una cotización no es solo un documento con números. Es una herramienta de venta. Y como toda herramienta, funciona mal si le faltan piezas.</p>
+
+<p>Aquí van los 7 datos que no pueden faltar en ninguna cotización profesional, explicados desde la perspectiva de lo que el cliente necesita ver para decir que sí.</p>
+
+<h2>1. Identificación completa de ambas partes</h2>
+
+<p>Parece obvio, pero el número de cotizaciones que llegan sin membrete, sin CIF, sin dirección o sin nombre del interlocutor es sorprendentemente alto.</p>
+
+<p>Lo mínimo que debe aparecer:</p>
+
+<ul>
+<li>Nombre o razón social de tu empresa</li>
+<li>CIF/NIF</li>
+<li>Dirección fiscal</li>
+<li>Teléfono y email de contacto</li>
+<li>Nombre completo del cliente o empresa destinataria</li>
+<li>CIF del cliente (si es empresa)</li>
+</ul>
+
+<p>¿Por qué importa? Porque una cotización sin estos datos no tiene validez legal en caso de disputa. Pero más allá de lo jurídico: un cliente que recibe un documento sin membrete percibe que está tratando con alguien poco organizado. Ese sesgo afecta a la decisión de compra, aunque sea de forma inconsciente.</p>
+
+<p>Si tu empresa es pequeña o eres autónomo, esto importa el doble. La presentación profesional compensa la falta de tamaño.</p>
+
+<h2>2. Número de cotización y fecha de emisión</h2>
+
+<p>Cada cotización debe tener un número único y una fecha. Sin eso, no puedes hacer seguimiento interno, no puedes referenciar la propuesta en conversaciones posteriores y, si el cliente acepta semanas después, no queda claro qué versión aprobó.</p>
+
+<p>El número de cotización cumple varias funciones:</p>
+
+<ul>
+<li>Identificación inequívoca del documento</li>
+<li>Referencia para el seguimiento comercial</li>
+<li>Trazabilidad si hay revisiones o versiones posteriores</li>
+<li>Base para la numeración de la factura correspondiente</li>
+</ul>
+
+<p>La fecha de emisión, además, está directamente ligada al siguiente punto.</p>
+
+<h2>3. Fecha de validez de la oferta</h2>
+
+<p>Una cotización sin fecha de caducidad es una promesa indefinida que te puede costar cara.</p>
+
+<p>Los costes cambian. Los proveedores actualizan tarifas. Tu capacidad de carga varía. Si enviaste una cotización hace seis meses con precios de entonces y el cliente aparece ahora queriendo aceptarla, tienes un problema.</p>
+
+<p>Lo habitual es incluir una validez de 15 a 30 días. En sectores con materiales volátiles (construcción, tecnología, energía), puede ser incluso menos. En servicios estables, puedes estirarlo hasta 60 días.</p>
+
+<p>La validez también crea urgencia legítima. No es presión artificial: es gestión real de tu negocio. Y el cliente lo entiende perfectamente cuando está bien explicado: <em>"Esta propuesta es válida hasta el 30 de abril, pasada esa fecha revisaremos precios según disponibilidad."</em></p>
+
+<h2>4. Descripción detallada del trabajo o producto</h2>
+
+<p>Este es el punto donde más cotizaciones fallan, y el que más influye en el cierre.</p>
+
+<p>Una cotización vaga genera desconfianza. Si el cliente no sabe exactamente qué está contratando, la comparación con la competencia se hace solo por precio. Y ahí siempre hay alguien más barato que tú.</p>
+
+<p>Una buena descripción debe incluir:</p>
+
+<ul>
+<li><strong>Qué se hace</strong>: el alcance exacto del trabajo o los productos incluidos</li>
+<li><strong>Qué no se hace</strong>: los exclusiones, igual de importante que lo anterior</li>
+<li><strong>Cómo se hace</strong>: metodología o proceso si es relevante</li>
+<li><strong>Con qué materiales o herramientas</strong>: si aplica al sector</li>
+<li><strong>Cuántas revisiones o iteraciones</strong>: clave en servicios creativos o de consultoría</li>
+</ul>
+
+<p>La regla práctica: si el cliente puede malinterpretar algo, escríbelo explícitamente. Las disputas post-proyecto casi siempre tienen su origen en una cotización ambigua.</p>
+
+<p>Ejemplo de descripción débil: <em>"Diseño de página web: 1.200 €"</em></p>
+
+<p>Ejemplo de descripción sólida: <em>"Diseño y desarrollo de web corporativa en WordPress: hasta 5 páginas (Home, Servicios, Sobre nosotros, Blog, Contacto), formulario de contacto, adaptación móvil, integración con Google Analytics, 2 rondas de revisión de diseño. No incluye copywriting, fotografía ni alojamiento web."</em>
+
+<p>La segunda versión justifica el precio. La primera invita a negociarlo.</p>
+
+<h2>5. Precio desglosado con IVA separado</h2>
+
+<p>El precio debe aparecer de forma clara, desglosada y con el IVA siempre visible y separado de la base imponible.</p>
+
+<p>La estructura recomendada:</p>
+
+<ul>
+<li>Precio unitario por ítem o servicio</li>
+<li>Cantidad</li>
+<li>Subtotal por línea</li>
+<li>Base imponible total</li>
+<li>Tipo de IVA aplicable (21%, 10%, 4%, o exento con justificación)</li>
+<li>Importe de IVA</li>
+<li>Total a pagar</li>
+</ul>
+
+<p>¿Por qué desglosar en lugar de poner solo el total? Por dos razones:</p>
+
+<p>Primera: el cliente empresarial necesita ver la base imponible por separado para su contabilidad. Si solo ves un total de 1.452 € sin desglose, tienes que ponerte a calcular. Eso genera fricción.</p>
+
+<p>Segunda: el desglose hace que el precio parezca más razonable. Tres líneas de 300, 400 y 500 euros se perciben de forma distinta que un único bloque de 1.200 €, aunque sean lo mismo.</p>
+
+<p>Si tienes descuentos aplicados, muéstralos también explícitamente. Un descuento visible tiene valor comercial. Un precio ajustado en silencio no lo tiene.</p>
+
+<h2>6. Condiciones de pago</h2>
+
+<p>Nada de esto: <em>"Pago a acordar."</em></p>
+
+<p>Las condiciones de pago deben estar escritas en la cotización. No dejes este punto para después porque después siempre es más incómodo.</p>
+
+<p>Lo que debe quedar claro:</p>
+
+<ul>
+<li><strong>Forma de pago</strong>: transferencia, domiciliación, tarjeta...</li>
+<li><strong>Plazos</strong>: 50% al inicio, 50% a la entrega; pago único a 30 días; pago mensual...</li>
+<li><strong>Datos bancarios o instrucciones de pago</strong>: IBAN si es por transferencia</li>
+<li><strong>Condiciones de mora</strong> (opcional pero recomendable en proyectos grandes): intereses o penalizaciones por retraso</li>
+</ul>
+
+<p>Incluir esto desde el principio filtra clientes problemáticos antes de que firmen, y evita conversaciones incómodas al final del proyecto cuando el trabajo ya está hecho.</p>
+
+<p>Un cliente serio no tiene problema con condiciones de pago claras. Al revés: las valora porque indica que estás gestionando tu negocio de forma profesional.</p>
+
+<h2>7. Plazo de entrega o ejecución</h2>
+
+<p>Cuándo empieza y cuándo termina. En servicios, cuántos días de trabajo implica. En productos, cuándo se entrega.</p>
+
+<p>Este dato es crítico para el cliente porque afecta a su propia planificación. Si necesita el trabajo terminado antes de una fecha concreta, la cotización debe dejar claro si eso es posible o no.</p>
+
+<p>Detalla también las condiciones que afectan al plazo:</p>
+
+<ul>
+<li><em>"El plazo empieza a contar desde la recepción del pago inicial y los materiales necesarios."</em></li>
+<li><em>"Los plazos pueden verse afectados si las revisiones del cliente superan los 48 horas de respuesta."</em></li>
+<li><em>"Entrega estimada: 3 semanas desde la firma del contrato."</em></li>
+</ul>
+
+<p>Esto no solo gestiona expectativas. También te protege a ti si el proyecto se alarga por causas ajenas a ti.</p>
+
+<h2>Bonus: los 3 elementos que arruinan tu cierre aunque el resto esté perfecto</h2>
+
+<p>Una cotización puede tener los 7 puntos anteriores y aun así fallar si comete alguno de estos errores.</p>
+
+<h3>Error 1: El formato es un caos</h3>
+
+<p>Un documento de Word mal maquetado, un PDF con fuentes inconsistentes, o peor, un email con los precios en el cuerpo del texto sin estructura. El formato comunica antes que el contenido. Si la presentación es descuidada, el cliente asume que el trabajo también lo será.</p>
+
+<p>No hace falta ser diseñador. Hace falta consistencia: una tipografía, colores de marca, márgenes uniformes, logo en el encabezado.</p>
+
+<h3>Error 2: Lenguaje técnico sin traducción</h3>
+
+<p>Si tu cliente no es del sector, cada término técnico que uses sin explicar es una barrera. Las barreras generan dudas. Las dudas generan silencio.</p>
+
+<p>Escribe para el interlocutor que va a leer el documento, no para un colega del sector. Si el decisor final es el gerente general y no el técnico, el lenguaje tiene que ser ejecutivo.</p>
+
+<h3>Error 3: No hay siguiente paso claro</h3>
+
+<p>Muchas cotizaciones terminan y el cliente no sabe qué tiene que hacer para aceptar. ¿Responder al email? ¿Firmar algo? ¿Hacer una transferencia? ¿Llamar?</p>
+
+<p>El documento debe terminar con una instrucción clara: <em>"Para aceptar esta propuesta, responde a este email con tu confirmación o firma el documento adjunto y envíanoslo de vuelta."</em></p>
+
+<p>La fricción en el proceso de aceptación mata ventas que ya estaban ganadas.</p>
+
+<h2>La cotización como herramienta de venta, no solo de información</h2>
+
+<p>La diferencia entre una cotización que cierra y una que se queda en el limbo no siempre es el precio. Muchas veces es la estructura, la claridad y la sensación que transmite el documento.</p>
+
+<p>Un cliente que lee una cotización bien construida piensa: <em>"Esta empresa sabe lo que hace."</em> Un cliente que lee una cotización ambigua o descuidada piensa: <em>"Mejor pido otra opinión."</em></p>
+
+<p>Los 7 puntos de esta guía no son burocracia. Son las respuestas a las preguntas que el cliente se hace mientras lee tu propuesta:</p>
+
+<ul>
+<li><em>¿Con quién estoy tratando?</em> → Identificación</li>
+<li><em>¿De qué propuesta estamos hablando?</em> → Número y fecha</li>
+<li><em>¿Cuánto tiempo tengo para decidir?</em> → Validez</li>
+<li><em>¿Qué estoy comprando exactamente?</em> → Descripción detallada</li>
+<li><em>¿Cuánto me va a costar realmente?</em> → Precio desglosado con IVA</li>
+<li><em>¿Cómo y cuándo tengo que pagar?</em> → Condiciones de pago</li>
+<li><em>¿Cuándo lo tendré listo?</em> → Plazo de entrega</li>
+</ul>
+
+<p>Si tu cotización responde a todas estas preguntas antes de que el cliente las formule, reduces la fricción al mínimo y aumentas las probabilidades de cierre.</p>
+
+<h2>Cómo simplificar todo esto en la práctica</h2>
+
+<p>Mantener estos 7 elementos consistentes en cada cotización es fácil si tienes una plantilla o un sistema. Difícil si cada presupuesto lo construyes desde cero en Word o Excel.</p>
+
+<p>En <a href="https://dealforge.es">DealForge</a> cada cotización incluye automáticamente todos estos elementos: número correlativo, fechas, validez configurable, desglose de IVA, condiciones de pago y un botón de aceptación digital para que el cliente firme en un clic. No tienes que recordar qué poner: la estructura ya está ahí.</p>
+
+<p>El resultado es que cada cotización que envías sale con el mismo nivel de profesionalidad, independientemente de si la preparaste en diez minutos o en una hora.</p>
+
+<h2>Checklist rápido antes de enviar cualquier cotización</h2>
+
+<p>Antes de darle al botón de enviar, repasa esta lista:</p>
+
+<ol>
+<li>¿Aparece el nombre, CIF y datos de contacto de tu empresa?</li>
+<li>¿Aparecen los datos del cliente?</li>
+<li>¿Tiene número de cotización y fecha de emisión?</li>
+<li>¿Indica hasta cuándo es válida la oferta?</li>
+<li>¿La descripción del trabajo es suficientemente específica? ¿Incluye qué NO está incluido?</li>
+<li>¿El precio está desglosado con base imponible e IVA separados?</li>
+<li>¿Están claras las condiciones y plazos de pago?</li>
+<li>¿Aparece el plazo de entrega o ejecución?</li>
+<li>¿El formato es limpio y coherente con tu imagen de marca?</li>
+<li>¿Hay un siguiente paso claro para que el cliente acepte?</li>
+</ol>
+
+<p>Si puedes marcar todos los puntos, estás enviando una cotización que trabaja por ti.</p>
+
+<p><strong>¿Quieres que tus cotizaciones tengan siempre esta estructura sin tener que pensarlo?</strong> <a href="https://dealforge.es">DealForge</a> genera presupuestos profesionales en minutos, con todos los campos obligatorios, IVA automático y firma digital incluida. Pruébalo gratis, sin tarjeta de crédito.`,
+    autor: "DealForge",
+    categoria: "cotizaciones",
+    tags: JSON.stringify([
+      "cotizaciones profesionales",
+      "presupuestos",
+      "cómo hacer una cotización",
+      "estructura cotización",
+      "ventas B2B",
+      "pymes",
+      "autónomos",
+      "cerrar ventas",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Los 7 Datos que Toda Cotización Profesional Debe Incluir — DealForge",
+    metaDescripcion:
+      "Guía práctica con los 7 elementos imprescindibles en cualquier cotización profesional: identificación, precios con IVA, condiciones de pago, plazos y más. Checklist incluido.",
+    metaKeywords:
+      "datos cotización profesional, qué debe incluir una cotización, estructura presupuesto profesional, cómo hacer cotización, elementos cotización, cotización perfecta, presupuesto profesional pymes, checklist cotización",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7];
   const results = [];
 
   for (const p of posts) {
