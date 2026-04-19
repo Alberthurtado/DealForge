@@ -1,4 +1,10 @@
 import { NextResponse } from "next/server";
+import { RECURSOS } from "@/data/recursos";
+
+const recursosList = RECURSOS.map((r) => {
+  const title = `${r.titulo}${r.tituloResaltado ? " " + r.tituloResaltado : ""}`;
+  return `- [${title}](https://dealforge.es/recursos/${r.slug}): ${r.descripcion}`;
+}).join("\n");
 
 const LLMS_TXT = `# DealForge
 
@@ -29,6 +35,10 @@ const LLMS_TXT = `# DealForge
 - [Blog](https://dealforge.es/blog): Articulos sobre ventas, CPQ y gestion comercial
 - [Glosario](https://dealforge.es/glosario): Mas de 40 terminos de CPQ y ventas explicados en espanol
 - [Guia Gratuita](https://dealforge.es/guia): Guia descargable sobre como implementar un CPQ
+- [Biblioteca de Recursos](https://dealforge.es/recursos): 20+ guias, plantillas, checklists y kits gratuitos sobre cotizaciones y ventas B2B
+
+## Recursos Descargables Gratuitos
+${recursosList}
 - [Plantillas por Sector](https://dealforge.es/plantilla-cotizacion): Plantillas de cotizacion para 29 industrias diferentes
 - [Documentacion](https://dealforge.es/documentacion): Documentacion tecnica de la plataforma
 - [Changelog](https://dealforge.es/changelog): Historial de cambios y nuevas funcionalidades

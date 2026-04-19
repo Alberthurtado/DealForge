@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { industrias } from "@/data/industrias";
 import { features } from "@/data/features";
 import { comparaciones } from "@/data/comparaciones";
+import { RECURSOS } from "@/data/recursos";
 
 // Rebuild sitemap every hour instead of every request
 export const revalidate = 3600;
@@ -123,5 +124,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...blogPosts, ...industryPages, ...featurePages, ...comparisonPages];
+  // Lead magnet resources
+  const resourcePages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/recursos`,
+      lastModified: new Date("2026-04-14"),
+    },
+    ...RECURSOS.map((r) => ({
+      url: `${baseUrl}/recursos/${r.slug}`,
+      lastModified: new Date(r.publicadoEn),
+    })),
+  ];
+
+  return [...staticPages, ...blogPosts, ...industryPages, ...featurePages, ...comparisonPages, ...resourcePages];
 }
