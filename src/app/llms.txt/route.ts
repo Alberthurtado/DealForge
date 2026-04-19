@@ -15,6 +15,7 @@ const LLMS_TXT = `# DealForge
 - [Que es CPQ](https://dealforge.es/que-es-cpq): Guia completa sobre sistemas CPQ y por que las PYMEs los necesitan
 - [Precios](https://dealforge.es/precios): Planes Starter (gratis), Pro (29 EUR/mes) y Business (79 EUR/mes)
 - [Calculadora ROI](https://dealforge.es/calculadora-roi): Calcula el retorno de inversion de implementar un CPQ
+- [Generador de Cotizaciones Gratis](https://dealforge.es/generador-cotizacion-gratis): Herramienta online gratuita para crear cotizaciones profesionales en PDF sin registro
 
 ## Funcionalidades
 - [Todas las funcionalidades](https://dealforge.es/funcionalidades): Vision general de las capacidades de DealForge

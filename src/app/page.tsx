@@ -430,6 +430,7 @@ function Footer() {
               <li><Link href="/glosario" className="hover:text-white transition-colors">Glosario</Link></li>
               <li><Link href="/guia" className="hover:text-white transition-colors">Guía gratuita</Link></li>
               <li><Link href="/recursos" className="hover:text-white transition-colors">Recursos gratis</Link></li>
+              <li><Link href="/generador-cotizacion-gratis" className="hover:text-white transition-colors">Generador gratis</Link></li>
               <li><Link href="/documentacion" className="hover:text-white transition-colors">Documentación</Link></li>
               <li><Link href="/changelog" className="hover:text-white transition-colors">Changelog</Link></li>
             </ul>

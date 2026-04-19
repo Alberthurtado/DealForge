@@ -69,6 +69,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/calculadora-roi`,
       lastModified: new Date("2026-03-28"),
     },
+    {
+      url: `${baseUrl}/generador-cotizacion-gratis`,
+      lastModified: new Date("2026-04-14"),
+    },
   ];
 
   // Dynamic blog posts (lastModified from DB — correct)
