@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { ToastProvider } from "@/components/ui/toast";
 import { CookieBanner } from "@/components/cookie-banner";
 
@@ -166,6 +167,7 @@ export default function RootLayout({
           {children}
           <CookieBanner />
           <SpeedInsights />
+          <Analytics />
         </ToastProvider>
       </body>
     </html>
