@@ -30,6 +30,7 @@ import { ReglasWarnings } from "@/components/reglas/reglas-warnings";
 import { AprobacionPanel } from "@/components/reglas/aprobacion-panel";
 import { FirmaPanel } from "@/components/cotizaciones/firma-panel";
 import { LineItemsEditor } from "@/components/cotizaciones/line-items-editor";
+import { EmailTemplatesModal } from "@/components/cotizaciones/email-templates-modal";
 import type { LineItemInput } from "@/components/cotizaciones/line-items-editor";
 import type { ValidationResult } from "@/lib/reglas-engine";
 import { ShieldAlert, ShieldCheck, Lock, GitBranch, ScrollText } from "lucide-react";
@@ -396,11 +397,13 @@ export default function CotizacionDetailPage() {
   const [editingCondiciones, setEditingCondiciones] = useState(false);
   const [condicionesEdit, setCondicionesEdit] = useState("");
   const [condicionesDefecto, setCondicionesDefecto] = useState<string | null>(null);
+  const [empresaNombre, setEmpresaNombre] = useState<string>("");
 
   useEffect(() => {
     fetch("/api/empresa")
       .then((r) => r.json())
       .then((data) => {
+        if (data?.nombre) setEmpresaNombre(data.nombre);
         // Build default T&C based on line item types
         if (cotizacion) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -567,6 +570,30 @@ export default function CotizacionDetailPage() {
                 <Copy className="w-3.5 h-3.5" />
                 Duplicar
               </button>
+              <EmailTemplatesModal
+                variables={{
+                  cliente: cotizacion.cliente.nombre,
+                  numero: cotizacion.numero,
+                  total: formatCurrency(cotizacion.total),
+                  empresa: empresaNombre,
+                  validez: cotizacion.fechaVencimiento
+                    ? String(
+                        Math.max(
+                          0,
+                          Math.ceil(
+                            (new Date(cotizacion.fechaVencimiento).getTime() - Date.now()) /
+                              (1000 * 60 * 60 * 24)
+                          )
+                        )
+                      )
+                    : "30",
+                }}
+                clienteEmail={
+                  cotizacion.cliente.contactos?.find((c) => c.principal)?.email ||
+                  cotizacion.cliente.email ||
+                  null
+                }
+              />
               {cotizacion.estado === "GANADA" && planFeatures?.contratos && (
                 <button
                   onClick={async () => {

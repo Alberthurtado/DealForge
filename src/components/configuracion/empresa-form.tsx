@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { Upload, Check, Building2, Hash, Mail, Eye, EyeOff, FileText, Bell } from "lucide-react";
 import { useToast } from "@/components/ui/toast";
+import { TCTemplatesModal } from "./tc-templates-modal";
 
 interface EmpresaData {
   nombre: string;
@@ -422,9 +423,17 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">
-            T&C Transaccionales <span className="text-xs text-muted-foreground font-normal">(productos/servicios de pago único)</span>
-          </label>
+          <div className="flex items-center justify-between mb-1">
+            <label className="block text-sm font-medium text-foreground">
+              T&C Transaccionales <span className="text-xs text-muted-foreground font-normal">(productos/servicios de pago único)</span>
+            </label>
+            <TCTemplatesModal
+              tipo="transaccional"
+              onApply={(contenido) =>
+                setForm((prev) => ({ ...prev, condicionesTransaccional: contenido }))
+              }
+            />
+          </div>
           <textarea
             value={form.condicionesTransaccional || ""}
             onChange={(e) =>
@@ -437,9 +446,17 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">
-            Condiciones por defecto para Contratos <span className="text-xs text-muted-foreground font-normal">(se rellenan automáticamente en cada nuevo contrato)</span>
-          </label>
+          <div className="flex items-center justify-between mb-1">
+            <label className="block text-sm font-medium text-foreground">
+              Condiciones por defecto para Contratos <span className="text-xs text-muted-foreground font-normal">(se rellenan automáticamente en cada nuevo contrato)</span>
+            </label>
+            <TCTemplatesModal
+              tipo="contractual"
+              onApply={(contenido) =>
+                setForm((prev) => ({ ...prev, condicionesContractual: contenido }))
+              }
+            />
+          </div>
           <textarea
             value={form.condicionesContractual || ""}
             onChange={(e) =>
