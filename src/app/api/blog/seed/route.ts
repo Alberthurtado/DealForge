@@ -1613,7 +1613,254 @@ export async function POST() {
       "errores cotizaciones email, enviar presupuesto por email, cómo enviar cotización, email cotización profesional, seguimiento cotizaciones, presupuesto PDF email, plantilla email presupuesto, cotizaciones pymes",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9];
+  const post10 = {
+    slug: "cotizaciones-construccion-reformas-guia-completa",
+    titulo: "Cómo hacer cotizaciones de construcción y reformas que ganen obras",
+    extracto: "Aprende a crear presupuestos de construcción y reformas profesionales: partidas, materiales, mano de obra, IVA reducido y cómo evitar los errores que hacen perder obras.",
+    contenido: `<p>En el sector de la construcción y las reformas, <strong>el presupuesto es la venta</strong>. Antes de levantar ni un ladrillo, antes de hablar de plazos o de materiales, el cliente ya ha tomado su decisión leyendo tu cotización. Y si esa cotización parece confusa, incompleta o poco profesional, se va con el siguiente.</p>
+
+<p>Este artículo está escrito para empresas de construcción, reformistas, instaladores y autónomos del sector que quieren presupuestar mejor, ganar más obras y tener menos problemas con los clientes durante la ejecución.</p>
+
+<h2>Por qué las cotizaciones de construcción son diferentes</h2>
+
+<p>Una cotización de consultoría o marketing es, en comparación, sencilla: describes el servicio, pones el precio y listo. Las cotizaciones de construcción y reformas son un animal completamente distinto por tres razones:</p>
+
+<ul>
+<li><strong>La complejidad técnica es alta.</strong> Un proyecto de reforma integral de una vivienda puede involucrar obra civil, fontanería, electricidad, carpintería, pintura y hasta arquitectura. Cada partida tiene su lógica de precios.</li>
+<li><strong>Los imprevistos son parte del negocio.</strong> Abrir una pared y encontrar instalaciones fuera de norma, o descubrir humedades ocultas, son situaciones que el presupuesto debe contemplar (o al menos, no ignorar).</li>
+<li><strong>El cliente no es un experto.</strong> Tu cliente no sabe la diferencia entre un revestimiento de porcelánico de primera y uno de segunda. Si no explicas lo que incluyes y lo que no, los malentendidos están garantizados.</li>
+</ul>
+
+<p>Un presupuesto bien hecho en construcción no es solo una lista de precios. Es un documento que gestiona expectativas, protege tu margen y reduce drásticamente los conflictos durante la obra.</p>
+
+<h2>La estructura de un presupuesto de construcción profesional</h2>
+
+<p>El estándar del sector organiza los presupuestos por <strong>capítulos y partidas</strong>. Así funciona:</p>
+
+<h3>Capítulos</h3>
+<p>Agrupan las partidas por tipo de trabajo. Por ejemplo:</p>
+<ul>
+<li>Capítulo 01 — Demolición y obra gruesa</li>
+<li>Capítulo 02 — Instalación eléctrica</li>
+<li>Capítulo 03 — Fontanería y saneamiento</li>
+<li>Capítulo 04 — Revestimientos y acabados</li>
+<li>Capítulo 05 — Carpintería interior</li>
+<li>Capítulo 06 — Pintura</li>
+</ul>
+
+<p>Esta estructura permite al cliente ver de un vistazo dónde va el dinero, y a ti controlar la rentabilidad de cada fase del proyecto.</p>
+
+<h3>Partidas</h3>
+<p>Cada partida describe una unidad de trabajo concreta. Una partida bien redactada incluye:</p>
+
+<ul>
+<li><strong>Descripción técnica:</strong> qué se hace exactamente (p. ej., "Alicatado de baño con porcelánico rectificado 60x60 cm, incluyendo adhesivo, nivelación y sellado de juntas")</li>
+<li><strong>Unidad de medida:</strong> m², ml, ud., h., etc.</li>
+<li><strong>Cantidad:</strong> las mediciones reales del proyecto</li>
+<li><strong>Precio unitario:</strong> por esa unidad de medida</li>
+<li><strong>Total de partida:</strong> cantidad × precio unitario</li>
+</ul>
+
+<p>El nivel de detalle en las partidas es lo que diferencia a un presupuestador profesional de uno amateur. Ser vago cuesta caro: si pones "reforma baño completo — 3.500 €" sin desglosar, el cliente asumirá que eso incluye todo, incluido lo que tú no ibas a hacer.</p>
+
+<h2>Los 8 elementos que no pueden faltar en tu cotización de reformas</h2>
+
+<h3>1. Datos completos de ambas partes</h3>
+<p>Tu empresa con CIF, la empresa o persona del cliente con NIF, la dirección de la obra y los datos de contacto de ambos. Suena básico, pero muchos presupuestos de reformas ni siquiera incluyen la dirección donde se va a ejecutar el trabajo.</p>
+
+<h3>2. Fecha y número de presupuesto</h3>
+<p>Necesitas referenciar cada presupuesto de forma única. Cuando habléis por teléfono tres semanas después, ambos necesitáis saber de qué documento estáis hablando. Usa un sistema como PRE-2026-0042.</p>
+
+<h3>3. Descripción del alcance de los trabajos</h3>
+<p>Antes de entrar en el desglose por capítulos, incluye un párrafo introductorio explicando qué abarca el presupuesto. Por ejemplo: "El presente presupuesto comprende la reforma integral del baño principal en la vivienda situada en [dirección], incluyendo demolición, instalación, revestimientos y acabados según las especificaciones acordadas en visita del [fecha]."</p>
+
+<h3>4. Desglose por capítulos y partidas</h3>
+<p>El núcleo del presupuesto. Cuanto más detallado, mejor protegido estás. Si un trabajo no aparece en el presupuesto y el cliente lo reclama, tienes un problema. Si aparece y puedes señalarlo con el dedo, no.</p>
+
+<h3>5. Materiales incluidos (y excluidos)</h3>
+<p>Especifica siempre si los materiales están incluidos o son por cuenta del cliente. Si están incluidos, indica la calidad o referencia (p. ej., "baldosa de gres porcelánico mate de primera calidad, precio ≤ 35 €/m²"). Si el cliente quiere cambiarlo por algo más caro, es un extra.</p>
+
+<h3>6. Lo que NO está incluido</h3>
+<p>Una sección de exclusiones es oro puro. Incluye expresamente qué queda fuera del alcance: movilización de muebles, gestión de residuos si no está contemplada, trabajos que dependen de terceros, licencias de obra si aplica. Así evitas el clásico "¿pero eso no estaba en el presupuesto?"</p>
+
+<h3>7. Condiciones económicas y forma de pago</h3>
+<p>El esquema de pagos es crítico en construcción. Lo habitual es:</p>
+<ul>
+<li>30-40% al firmar el presupuesto o al inicio de obra</li>
+<li>30-40% en una certificación intermedia (cuando se alcanza cierto avance)</li>
+<li>El resto a la finalización y entrega</li>
+</ul>
+<p>Nunca empieces una obra sin al menos el primer pago cobrado. Y ponlo en el contrato, no solo en el presupuesto.</p>
+
+<h3>8. Plazo de ejecución y validez del presupuesto</h3>
+<p>Indica el plazo estimado en días hábiles (no naturales, a menos que trabajes sin parar) y la fecha de validez del presupuesto. Los precios de materiales en construcción fluctúan. Un presupuesto sin fecha de caducidad puede volverse un problema si el cliente lo acepta 6 meses después con precios de materiales distintos.</p>
+
+<h2>IVA en reformas: el detalle que muchos olvidan</h2>
+
+<p>En España, las obras de construcción y reforma no siempre tributan al 21% de IVA. Este es uno de los puntos más importantes y más frecuentemente mal aplicados:</p>
+
+<ul>
+<li><strong>IVA reducido del 10%:</strong> Se aplica a las obras de renovación y reparación realizadas en <strong>viviendas de uso particular</strong> que lleven más de dos años construidas. La clave es que los materiales no superen el 40% del coste total del proyecto (si lo superan, toda la base tributa al 21%).</li>
+<li><strong>IVA general del 21%:</strong> Aplica en obras de nueva construcción, en locales comerciales, y cuando los materiales superan el 40% del total.</li>
+<li><strong>IVA superreducido del 4%:</strong> Casos muy específicos, como obras de accesibilidad para personas con discapacidad.</li>
+</ul>
+
+<p>Antes de preparar tu cotización, confirma el tipo de IVA aplicable. Aplicar un 21% donde corresponde un 10% puede hacerte perder la obra por precio. Y aplicar un 10% donde toca el 21% puede meterte en problemas con Hacienda.</p>
+
+<p><em>Consejo práctico:</em> Pide al cliente que firme una declaración responsable indicando que la vivienda lleva más de dos años construida y que es su residencia habitual. Esto te cubre ante una posible inspección.</p>
+
+<h2>Cómo calcular el precio de una partida de reforma</h2>
+
+<p>El error más común de los reformistas noveles es calcular el precio como "materiales + mano de obra + un poco más". Eso no es un margen, eso es esperar que salga bien. La fórmula correcta es:</p>
+
+<h3>Coste directo</h3>
+<ul>
+<li>Materiales (precio de compra + transporte + merma estimada del 5-10%)</li>
+<li>Mano de obra (horas × coste real del operario, incluyendo Seguridad Social)</li>
+<li>Subcontratistas (si externalizas parte del trabajo)</li>
+<li>Medios auxiliares (andamios, herramientas específicas, contenedores de escombros)</li>
+</ul>
+
+<h3>Costes indirectos</h3>
+<p>Los costes que no son de una obra específica pero que existen: seguro de responsabilidad civil, vehículo, gestoría, amortización de maquinaria, coste de tu tiempo presupuestando. En reformas, suele estimarse como un 15-20% sobre los costes directos.</p>
+
+<h3>Margen comercial</h3>
+<p>El beneficio real que quieres sacar de la obra. Recuerda que el margen se calcula sobre el precio de venta, no sobre el coste. Si quieres un margen del 20%, el multiplicador sobre el coste es 1,25 (no 1,20).</p>
+
+<p>Fórmula: <strong>Precio de venta = Coste total / (1 - Margen deseado)</strong></p>
+
+<p>Ejemplo: Si el coste total de una partida es 800 € y quieres un 25% de margen, el precio de venta es 800 / 0,75 = 1.067 €.</p>
+
+<h2>Los errores más caros al presupuestar reformas</h2>
+
+<h3>Error 1: Medir mal o no medir</h3>
+<p>No presupuestes de cabeza ni "a ojo". Visita la obra, mide personalmente o con un aparato laser. Una diferencia del 10% en metros cuadrados de alicatado puede representar cientos de euros de diferencia entre el coste real y lo que presupuestaste.</p>
+
+<h3>Error 2: No contemplar imprevistos</h3>
+<p>En obras antiguas, especialmente en edificios con más de 30 años, los imprevistos son la norma. Incluye una partida de "imprevistos" de entre el 5% y el 10% del total, bien explicada al cliente. Es mejor justificarla antes que pelearse por ella durante la obra.</p>
+
+<h3>Error 3: No especificar las calidades</h3>
+<p>"Ventana de aluminio con doble acristalamiento" puede ser desde 150 € hasta 800 € la unidad. Si no especificas la calidad y el cliente espera la más cara, tienes un problema. Pon referencia de producto o precio máximo de material.</p>
+
+<h3>Error 4: Aceptar cambios verbales sin coste adicional</h3>
+<p>El cliente pide cambios durante la obra. Es inevitable. Pero cada cambio que no se documenta y no genera un presupuesto adicional firmado es trabajo que harás gratis. Establece en tu presupuesto un protocolo claro: cualquier modificación del alcance se gestiona mediante un presupuesto adicional antes de ejecutarse.</p>
+
+<h3>Error 5: Presupuestar demasiado tarde</h3>
+<p>En el sector de reformas, la velocidad importa. Si un cliente pide tres presupuestos y tú tardas diez días cuando los otros responden en 48 horas, ya has perdido, independientemente del precio. La velocidad de respuesta transmite capacidad operativa.</p>
+
+<h2>Plantilla de estructura para un presupuesto de reforma</h2>
+
+<p>Aquí tienes un ejemplo de estructura para una reforma de baño que puedes adaptar:</p>
+
+<p><strong>CAPÍTULO 01 — DEMOLICIÓN</strong></p>
+<ul>
+<li>01.01 Demolición de alicatado existente (m²)</li>
+<li>01.02 Demolición de pavimento existente (m²)</li>
+<li>01.03 Retirada y transporte de escombros (ud.)</li>
+</ul>
+
+<p><strong>CAPÍTULO 02 — INSTALACIONES</strong></p>
+<ul>
+<li>02.01 Instalación de fontanería (tuberías PEX, conexiones) (ud.)</li>
+<li>02.02 Sustitución de radiador por toallero eléctrico (ud.)</li>
+<li>02.03 Actualización cuadro eléctrico baño (ud.)</li>
+</ul>
+
+<p><strong>CAPÍTULO 03 — REVESTIMIENTOS</strong></p>
+<ul>
+<li>03.01 Alicatado de paredes con porcelánico rectificado 60x120 (m²)</li>
+<li>03.02 Solado con gres antideslizante 60x60 (m²)</li>
+</ul>
+
+<p><strong>CAPÍTULO 04 — SANITARIOS Y ACCESORIOS</strong></p>
+<ul>
+<li>04.01 Suministro e instalación de inodoro suspendido (ud.)</li>
+<li>04.02 Suministro e instalación de lavabo doble (ud.)</li>
+<li>04.03 Suministro e instalación de ducha de obra (ud.)</li>
+</ul>
+
+<p><strong>CAPÍTULO 05 — CARPINTERÍA</strong></p>
+<ul>
+<li>05.01 Suministro e instalación de puerta lacada en blanco (ud.)</li>
+</ul>
+
+<p><strong>RESUMEN DE CAPÍTULOS</strong></p>
+<ul>
+<li>01 Demolición: XX €</li>
+<li>02 Instalaciones: XX €</li>
+<li>03 Revestimientos: XX €</li>
+<li>04 Sanitarios: XX €</li>
+<li>05 Carpintería: XX €</li>
+<li>SUBTOTAL: XX €</li>
+<li>IVA 10%: XX €</li>
+<li><strong>TOTAL: XX €</strong></li>
+</ul>
+
+<h2>Cómo gestionar los cambios durante la obra</h2>
+
+<p>Los "adicionales" de obra son la principal fuente de conflictos en el sector. El cliente pide algo que no estaba en el presupuesto, tú lo haces asumiendo que lo pagará, y al final del proyecto hay una discusión. Esto se evita con un proceso claro:</p>
+
+<ol>
+<li><strong>No ejecutes ningún cambio sin documento firmado.</strong> Por pequeño que sea el trabajo adicional, genera un presupuesto adicional numerado y pide firma antes de empezar.</li>
+<li><strong>Registra las variaciones de medición.</strong> Si durante la ejecución descubres que hay más superficie de la prevista, comunícalo por escrito de inmediato, no al final de la obra.</li>
+<li><strong>Documenta los imprevistos con fotos.</strong> Cuando aparece una sorpresa detrás de una pared, saca fotos antes de actuar. Esa evidencia es lo que justificará el coste adicional ante el cliente.</li>
+</ol>
+
+<h2>Herramientas para presupuestar más rápido</h2>
+
+<p>La mayoría de reformistas siguen usando Excel o plantillas de Word para sus presupuestos. Funciona, pero tiene límites claros:</p>
+
+<ul>
+<li>Copiar y pegar entre proyectos introduce errores</li>
+<li>Mantener una base de datos de precios actualizada es tedioso</li>
+<li>Generar el PDF final y enviarlo por email son pasos manuales adicionales</li>
+<li>No hay forma de saber si el cliente abrió el presupuesto</li>
+</ul>
+
+<p>Un <strong>software de cotizaciones como DealForge</strong> permite tener tu catálogo de partidas con precios actualizados, armar presupuestos arrastrando partidas y generando el PDF con tu logo en minutos. Puedes ver en tiempo real si el cliente ha abierto la cotización, y gestionar todo el proceso comercial desde una sola plataforma.</p>
+
+<p>Para empresas que hacen más de 10-15 presupuestos al mes, el tiempo que se recupera con una buena herramienta paga la suscripción con creces en la primera semana.</p>
+
+<h2>Consejos finales para ganar más obras con tus presupuestos</h2>
+
+<p><strong>Presenta el presupuesto en persona siempre que puedas.</strong> Un presupuesto que llega por email frío tiene una tasa de conversión mucho menor que uno que presentas explicando las decisiones técnicas que tomaste. El cliente paga por tu criterio, no solo por tu mano de obra.</p>
+
+<p><strong>Acompaña el presupuesto con referencias de trabajos similares.</strong> Incluye un link a tu web o dos o tres fotos de reformas parecidas que hayas hecho. La incertidumbre es el mayor enemigo de la decisión de compra.</p>
+
+<p><strong>No siempre gana el más barato.</strong> En reformas, muchos clientes han aprendido por las malas que el presupuesto más bajo suele ser el más caro al final. Si tu precio es más alto, justifícalo con calidad de materiales, garantías, plazo de ejecución realista y profesionalidad del equipo.</p>
+
+<p><strong>Haz seguimiento a los 3 y 7 días.</strong> La mayoría de obras se deciden en la primera semana. Una llamada o un mensaje de seguimiento tranquilo ("¿Has tenido oportunidad de revisar el presupuesto?") puede hacer la diferencia entre ganar o perder la obra a un competidor.</p>
+
+<h2>Conclusión</h2>
+
+<p>Un presupuesto de construcción o reforma bien hecho es mucho más que una lista de precios. Es la herramienta con la que gestionas las expectativas del cliente, proteges tu margen, reduces los conflictos durante la ejecución y transmites la profesionalidad que justifica tu precio.</p>
+
+<p>Aplica la estructura de capítulos y partidas, especifica siempre las calidades y las exclusiones, aplica el IVA correcto y establece un proceso claro para gestionar los cambios de alcance. Con esos principios bien integrados, ganarás más obras y tendrás muchos menos dolores de cabeza en las que ejecutes.</p>
+
+<p><strong>¿Quieres crear presupuestos de reforma en minutos, con el desglose por partidas y PDF profesional incluido?</strong> Prueba <a href="https://dealforge.es">DealForge</a> gratis y empieza a presupuestar como una empresa grande, aunque seas autónomo o una PYME.</p>`,
+    autor: "DealForge",
+    categoria: "sectores",
+    tags: JSON.stringify([
+      "cotizaciones construcción",
+      "presupuestos reformas",
+      "presupuesto obra",
+      "reformas",
+      "construcción",
+      "pymes",
+      "partidas presupuesto",
+      "IVA reformas",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Cómo hacer cotizaciones de construcción y reformas | Guía 2026 — DealForge",
+    metaDescripcion:
+      "Guía completa para presupuestar obras y reformas: estructura por capítulos, IVA reducido, cálculo de márgenes y errores que hacen perder obras. Para autónomos y PYMEs del sector.",
+    metaKeywords:
+      "cotizaciones construcción, presupuesto reformas, presupuesto obra, cómo presupuestar reformas, IVA reformas vivienda, partidas presupuesto construcción, software presupuestos reformas, plantilla presupuesto obra",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10];
   const results = [];
 
   for (const p of posts) {
