@@ -122,6 +122,11 @@ export async function GET(request: NextRequest) {
         const vencimientoDias = empresa.recordatorioVencimientoDias;
         const expiryWindowEnd = new Date(now.getTime() + vencimientoDias * 24 * 60 * 60 * 1000);
 
+        // Guard against email flooding: if the seller manually emailed the
+        // client in the last 3 days, skip the automatic expiry reminder to
+        // avoid the client receiving two similar messages.
+        const recentSellerEmailWindow = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000);
+
         const quotesAboutToExpire = await prisma.cotizacion.findMany({
           where: {
             usuarioId: usuario.id,
@@ -131,12 +136,24 @@ export async function GET(request: NextRequest) {
               lte: expiryWindowEnd,
             },
             NOT: {
-              recordatorios: {
-                some: {
-                  tipo: "VENCIMIENTO_CLIENTE",
-                  enviadoAt: { gt: cutoffDate },
+              OR: [
+                {
+                  recordatorios: {
+                    some: {
+                      tipo: "VENCIMIENTO_CLIENTE",
+                      enviadoAt: { gt: cutoffDate },
+                    },
+                  },
                 },
-              },
+                {
+                  actividades: {
+                    some: {
+                      tipo: "EMAIL_ENVIADO",
+                      createdAt: { gt: recentSellerEmailWindow },
+                    },
+                  },
+                },
+              ],
             },
           },
           include: {

@@ -5,7 +5,7 @@ import { checkRateLimit, RATE_LIMITS, getClientIp, rateLimitResponse } from "@/l
 import { validateBody } from "@/lib/validate";
 import { recuperarSchema } from "@/lib/validations";
 import { verifyTurnstile } from "@/lib/turnstile";
-import { sendPasswordResetEmail } from "@/lib/email";
+import { sendSystemEmail } from "@/lib/system-email";
 
 export async function POST(request: NextRequest) {
   // Rate limit: 3 per hour per IP
@@ -53,8 +53,33 @@ export async function POST(request: NextRequest) {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://dealforge.es";
     const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`;
 
-    // Send email
-    await sendPasswordResetEmail(usuario.email, usuario.nombre, resetUrl);
+    // Send email via system email service (MailerSend) so the flow works
+    // even when the user's company SMTP is not configured.
+    await sendSystemEmail({
+      to: usuario.email,
+      subject: "Restablecer contraseña — DealForge",
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 520px; margin: 0 auto; padding: 32px 20px;">
+          <div style="text-align: center; margin-bottom: 32px;">
+            <img src="https://dealforge.es/logo.svg" alt="DealForge" width="48" height="48" style="border-radius: 12px;" />
+          </div>
+          <h1 style="font-size: 22px; font-weight: 700; color: #111827; text-align: center; margin: 0 0 8px;">
+            Restablecer contraseña
+          </h1>
+          <p style="color: #4a4a4a; font-size: 14px; line-height: 1.6; text-align: center; margin: 0 0 24px;">
+            Hola <strong>${usuario.nombre}</strong>, haz clic en el botón para crear una nueva contraseña.
+          </p>
+          <div style="text-align: center; margin: 32px 0;">
+            <a href="${resetUrl}" style="display: inline-block; background: #3a9bb5; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 32px; border-radius: 10px;">
+              Restablecer contraseña
+            </a>
+          </div>
+          <p style="color: #888; font-size: 12px; text-align: center; line-height: 1.6;">
+            Este enlace expira en 1 hora. Si no solicitaste este cambio, puedes ignorar este email.
+          </p>
+        </div>
+      `,
+    });
   } catch (err) {
     console.error("Error in password reset request:", err);
     // Don't expose errors to the user

@@ -1,8 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getSmtpConfig } from "@/lib/email";
-import nodemailer from "nodemailer";
+import { getSmtpConfig, sendEmail } from "@/lib/email";
 
 // POST /api/equipo/invitar — send invitation to a new team member
 export async function POST(request: NextRequest) {
@@ -88,42 +87,37 @@ export async function POST(request: NextRequest) {
   const inviteUrl = `${appUrl}/invitacion/${invitacion.token}`;
   const empresaNombre = empresa?.nombre || "un equipo";
 
+  const rolLabel = rolValido === "ADMIN" ? "Administrador" : rolValido === "SALES" ? "Vendedor" : "Observador";
+  const invitationHtml = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #3a9bb5;">Te han invitado a unirte a DealForge</h2>
+      <p>Has sido invitado a unirte al equipo <strong>${empresaNombre}</strong> en DealForge como <strong>${rolLabel}</strong>.</p>
+      <p>DealForge es una plataforma de cotizaciones y CPQ para equipos de ventas.</p>
+      <div style="margin: 30px 0;">
+        <a href="${inviteUrl}" style="background-color: #3a9bb5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">
+          Aceptar invitación
+        </a>
+      </div>
+      <p style="color: #999; font-size: 13px;">O copia este enlace: ${inviteUrl}</p>
+      <p style="color: #666; font-size: 14px;">Este enlace expira en 7 días.</p>
+      <p style="color: #666; font-size: 14px;">Si no esperabas esta invitación, puedes ignorar este email.</p>
+    </div>
+  `;
+  const invitationSubject = `Invitación para unirte a ${empresaNombre} en DealForge`;
+
+  // Prefer company SMTP (so invite comes from the admin's brand); fallback to
+  // system email (MailerSend) to guarantee delivery when SMTP isn't configured.
   const smtpConfig = await getSmtpConfig();
-  if (smtpConfig) {
-    try {
-      const transporter = nodemailer.createTransport({
-        host: smtpConfig.smtpHost,
-        port: smtpConfig.smtpPort,
-        secure: smtpConfig.smtpPort === 465,
-        auth: { user: smtpConfig.smtpUser, pass: smtpConfig.smtpPass },
-      });
-
-      const rolLabel = rolValido === "ADMIN" ? "Administrador" : rolValido === "SALES" ? "Vendedor" : "Observador";
-
-      await transporter.sendMail({
-        from: `"${smtpConfig.nombre}" <${smtpConfig.smtpUser}>`,
-        to: email,
-        subject: `Invitación para unirte a ${empresaNombre} en DealForge`,
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #3a9bb5;">Te han invitado a unirte a DealForge</h2>
-            <p>Has sido invitado a unirte al equipo <strong>${empresaNombre}</strong> en DealForge como <strong>${rolLabel}</strong>.</p>
-            <p>DealForge es una plataforma de cotizaciones y CPQ para equipos de ventas.</p>
-            <div style="margin: 30px 0;">
-              <a href="${inviteUrl}" style="background-color: #3a9bb5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">
-                Aceptar invitación
-              </a>
-            </div>
-            <p style="color: #999; font-size: 13px;">O copia este enlace: ${inviteUrl}</p>
-            <p style="color: #666; font-size: 14px;">Este enlace expira en 7 días.</p>
-            <p style="color: #666; font-size: 14px;">Si no esperabas esta invitación, puedes ignorar este email.</p>
-          </div>
-        `,
-      });
-    } catch (err) {
-      console.error("Failed to send invitation email:", err);
-      // Don't fail the request if email fails
+  try {
+    if (smtpConfig) {
+      await sendEmail({ to: email, subject: invitationSubject, html: invitationHtml });
+    } else {
+      const { sendSystemEmail } = await import("@/lib/system-email");
+      await sendSystemEmail({ to: email, subject: invitationSubject, html: invitationHtml });
     }
+  } catch (err) {
+    console.error("Failed to send invitation email:", err);
+    // Don't fail the request if email fails — invitation is still created
   }
 
   return NextResponse.json({
