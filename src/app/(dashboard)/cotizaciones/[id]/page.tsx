@@ -31,6 +31,7 @@ import { AprobacionPanel } from "@/components/reglas/aprobacion-panel";
 import { FirmaPanel } from "@/components/cotizaciones/firma-panel";
 import { LineItemsEditor } from "@/components/cotizaciones/line-items-editor";
 import { EmailTemplatesModal } from "@/components/cotizaciones/email-templates-modal";
+import { CotizacionScorecardModal } from "@/components/cotizaciones/cotizacion-scorecard-modal";
 import type { LineItemInput } from "@/components/cotizaciones/line-items-editor";
 import type { ValidationResult } from "@/lib/reglas-engine";
 import { ShieldAlert, ShieldCheck, Lock, GitBranch, ScrollText } from "lucide-react";
@@ -570,6 +571,30 @@ export default function CotizacionDetailPage() {
                 <Copy className="w-3.5 h-3.5" />
                 Duplicar
               </button>
+              <CotizacionScorecardModal
+                cotizacion={{
+                  estado: cotizacion.estado,
+                  total: cotizacion.total,
+                  descuentoGlobal: cotizacion.descuentoGlobal,
+                  impuesto: cotizacion.impuesto,
+                  fechaVencimiento: cotizacion.fechaVencimiento,
+                  fechaEmision: cotizacion.fechaEmision,
+                  notas: cotizacion.notas,
+                  condiciones: cotizacion.condiciones,
+                  contactoNombre: cotizacion.contactoNombre,
+                  cliente: {
+                    nombre: cotizacion.cliente.nombre,
+                    email: cotizacion.cliente.email,
+                    contactos: cotizacion.cliente.contactos,
+                  },
+                  lineItems: cotizacion.lineItems.map((li) => ({
+                    descripcion: li.descripcion,
+                    cantidad: li.cantidad,
+                    precioUnitario: li.precioUnitario,
+                    descuento: li.descuento,
+                  })),
+                }}
+              />
               <EmailTemplatesModal
                 variables={{
                   cliente: cotizacion.cliente.nombre,

@@ -17,6 +17,8 @@ import { formatCurrency } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { ReglasWarnings } from "@/components/reglas/reglas-warnings";
 import type { ValidationResult } from "@/lib/reglas-engine";
+import { CotizacionTemplatePicker } from "@/components/cotizaciones/cotizacion-template-picker";
+import type { CotizacionTemplate } from "@/data/cotizacion-templates";
 
 interface VarianteInfo {
   id: string;
@@ -285,6 +287,23 @@ export function CotizacionWizard({
     }));
   }
 
+  function applyTemplate(template: CotizacionTemplate) {
+    userEditedCondiciones.current = true;
+    setForm((f) => ({
+      ...f,
+      lineItems: template.lineItems.map((li) => ({
+        productoId: "",
+        descripcion: li.descripcion,
+        cantidad: li.cantidad,
+        precioUnitario: li.precioUnitario,
+        descuento: li.descuento || 0,
+        frecuencia: li.frecuencia || null,
+      })),
+      notas: template.notas,
+      condiciones: template.condiciones,
+    }));
+  }
+
   // Calculations
   const subtotal = form.lineItems.reduce((sum, item) => {
     return sum + item.cantidad * item.precioUnitario * (1 - item.descuento / 100);
@@ -474,7 +493,21 @@ export function CotizacionWizard({
 
       {/* Step 1: Add Products */}
       {step === 1 && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          {/* Template picker banner */}
+          <div className="flex items-center justify-between gap-3 bg-gradient-to-r from-[#3a9bb5]/5 to-[#3a9bb5]/10 border border-[#3a9bb5]/20 rounded-xl px-4 py-3">
+            <div>
+              <p className="text-sm font-semibold text-gray-900">
+                ¿Prefieres empezar desde una plantilla?
+              </p>
+              <p className="text-xs text-gray-600 mt-0.5">
+                5 plantillas por sector con líneas, notas y T&amp;C prellenadas — personalizables.
+              </p>
+            </div>
+            <CotizacionTemplatePicker onApply={applyTemplate} />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Product catalog */}
           <div className="bg-white rounded-xl border border-border p-6">
             <h3 className="text-base font-semibold text-foreground mb-3">
@@ -680,6 +713,7 @@ export function CotizacionWizard({
                 ))}
               </div>
             )}
+          </div>
           </div>
         </div>
       )}
