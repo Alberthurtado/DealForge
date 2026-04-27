@@ -6,6 +6,12 @@ import { NextRequest, NextResponse } from "next/server";
 const ELIGIBLE_PLANS = ["pro", "business", "enterprise"];
 const ELIGIBLE_ESTADOS = ["ENVIADA", "NEGOCIACION"];
 
+// Hard cap on automatic reminders per cotización to avoid spamming the seller
+// (or the client) indefinitely. After this limit, the seller has to take
+// manual action — change status, send an email, or close the quote.
+const MAX_SELLER_REMINDERS = 2;
+const MAX_CLIENT_REMINDERS = 2;
+
 export async function GET(request: NextRequest) {
   // Verify cron secret (Vercel sends this automatically)
   const authHeader = request.headers.get("authorization");
@@ -64,12 +70,20 @@ export async function GET(request: NextRequest) {
           include: {
             cliente: { select: { nombre: true } },
             actividades: { orderBy: { createdAt: "desc" }, take: 1 },
+            _count: {
+              select: {
+                recordatorios: { where: { tipo: "SEGUIMIENTO_VENDEDOR" } },
+              },
+            },
           },
         });
 
         const origin = process.env.NEXT_PUBLIC_APP_URL || "https://dealforge.es";
 
         for (const cot of quotesNeedingFollowUp) {
+          // Skip if we've already hit the max reminders cap for this quote.
+          if (cot._count.recordatorios >= MAX_SELLER_REMINDERS) continue;
+
           const lastActivity = cot.actividades[0];
           const diasSinActividad = lastActivity
             ? Math.floor((now.getTime() - new Date(lastActivity.createdAt).getTime()) / (24 * 60 * 60 * 1000))
@@ -168,10 +182,18 @@ export async function GET(request: NextRequest) {
                 },
               },
             },
+            _count: {
+              select: {
+                recordatorios: { where: { tipo: "VENCIMIENTO_CLIENTE" } },
+              },
+            },
           },
         });
 
         for (const cot of quotesAboutToExpire) {
+          // Cap total reminders per quote to avoid harassing the client.
+          if (cot._count.recordatorios >= MAX_CLIENT_REMINDERS) continue;
+
           const contacto = cot.cliente.contactos[0];
           const recipientEmail = contacto?.email || cot.cliente.email;
           const recipientName = contacto?.nombre || cot.contactoNombre || cot.cliente.nombre;
