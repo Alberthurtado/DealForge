@@ -171,6 +171,7 @@ export const cotizacionUpdateSchema = z.object({
   condiciones: optionalString,
   fechaVencimiento: z.string().optional().nullable(),
   lineItems: z.array(lineItemSchema).optional(),
+  recordatoriosSilenciados: z.boolean().optional(),
 });
 
 // ─── Regla Comercial ─────────────────────────────

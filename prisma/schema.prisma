@@ -113,6 +113,7 @@ model Cotizacion {
   moneda           String      @default("EUR")
   notas            String?
   condiciones      String?
+  recordatoriosSilenciados Boolean @default(false)
   version          Int         @default(1)
   lineItems        LineItem[]
   actividades      Actividad[]

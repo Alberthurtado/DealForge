@@ -53,6 +53,7 @@ export async function GET(request: NextRequest) {
           where: {
             usuarioId: usuario.id,
             estado: { in: ELIGIBLE_ESTADOS },
+            recordatoriosSilenciados: false,
             // Last activity older than cutoff
             actividades: {
               every: { createdAt: { lt: cutoffDate } },
@@ -145,6 +146,7 @@ export async function GET(request: NextRequest) {
           where: {
             usuarioId: usuario.id,
             estado: { in: ELIGIBLE_ESTADOS },
+            recordatoriosSilenciados: false,
             fechaVencimiento: {
               gte: now,
               lte: expiryWindowEnd,

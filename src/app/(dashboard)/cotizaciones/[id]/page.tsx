@@ -23,6 +23,8 @@ import {
   ArchiveRestore,
   Save,
   Pencil,
+  BellOff,
+  Bell,
 } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/components/ui/toast";
@@ -51,6 +53,7 @@ interface Cotizacion {
   moneda: string;
   notas: string | null;
   condiciones: string | null;
+  recordatoriosSilenciados: boolean;
   version: number;
   cotizacionOriginalId: string | null;
   cliente: {
@@ -305,6 +308,28 @@ export default function CotizacionDetailPage() {
     } else {
       const data = await res.json().catch(() => null);
       showError(data?.error || "Error al desarchivar");
+    }
+  }
+
+  async function toggleSilenciarRecordatorios() {
+    if (!cotizacion) return;
+    const next = !cotizacion.recordatoriosSilenciados;
+    const res = await fetch(`/api/cotizaciones/${params.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ recordatoriosSilenciados: next }),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setCotizacion(updated);
+      success(
+        next
+          ? "Recordatorios silenciados para esta cotización"
+          : "Recordatorios reactivados"
+      );
+    } else {
+      const data = await res.json().catch(() => null);
+      showError(data?.error || "Error al actualizar recordatorios");
     }
   }
 
@@ -570,6 +595,31 @@ export default function CotizacionDetailPage() {
               >
                 <Copy className="w-3.5 h-3.5" />
                 Duplicar
+              </button>
+              <button
+                onClick={toggleSilenciarRecordatorios}
+                title={
+                  cotizacion.recordatoriosSilenciados
+                    ? "Recordatorios silenciados — haz clic para reactivar"
+                    : "Silenciar los recordatorios automáticos para esta cotización"
+                }
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 border rounded-lg text-xs font-medium transition-colors ${
+                  cotizacion.recordatoriosSilenciados
+                    ? "border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100"
+                    : "border-border hover:bg-muted"
+                }`}
+              >
+                {cotizacion.recordatoriosSilenciados ? (
+                  <>
+                    <BellOff className="w-3.5 h-3.5" />
+                    Silenciada
+                  </>
+                ) : (
+                  <>
+                    <Bell className="w-3.5 h-3.5" />
+                    Recordatorios
+                  </>
+                )}
               </button>
               <CotizacionScorecardModal
                 cotizacion={{
