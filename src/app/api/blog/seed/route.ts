@@ -1860,7 +1860,267 @@ export async function POST() {
       "cotizaciones construcción, presupuesto reformas, presupuesto obra, cómo presupuestar reformas, IVA reformas vivienda, partidas presupuesto construcción, software presupuestos reformas, plantilla presupuesto obra",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10];
+  const post11 = {
+    slug: "cotizaciones-agencias-marketing-guia-practica",
+    titulo: "Cotizaciones para agencias de marketing: guía práctica para cobrar lo que vales",
+    extracto: "Aprende a estructurar y presentar cotizaciones en tu agencia de marketing que justifiquen tu precio, reduzcan el regateo y cierren más contratos. Con ejemplos reales y plantilla práctica.",
+    contenido: `<p>Si llevas una agencia de marketing —o trabajas como freelance en este sector— sabes perfectamente que <strong>cotizar es una de las partes más incómodas del negocio</strong>. Los servicios son intangibles, el alcance puede ser borroso, y el cliente siempre tiene un primo que lo hace más barato. El resultado: muchas agencias terminan cobrando menos de lo que deberían, o pierden tiempo en propuestas que nunca se cierran.</p>
+
+<p>Esta guía es para eso. Vamos a ver cómo estructurar cotizaciones que comuniquen valor, protejan tu margen y aceleren la decisión del cliente. Sin rodeos.</p>
+
+<h2>Por qué cotizar servicios de marketing es distinto a otros sectores</h2>
+
+<p>En construcción, cotizas metros cuadrados y materiales. En logística, cotizas toneladas y kilómetros. En marketing, cotizas <strong>resultados que no puedes garantizar al 100%</strong>, ejecutados por personas cuyo tiempo es difícil de medir, con herramientas que cambian cada seis meses.</p>
+
+<p>Esa combinación hace que las cotizaciones de marketing sean especialmente difíciles de defender ante un cliente escéptico. Los problemas más habituales:</p>
+
+<ul>
+<li>"Mi cliente no entiende por qué le cobro tanto si 'solo' es un post al día"</li>
+<li>"Pierdo el contrato porque otro lo hace más barato, aunque yo sé que va a fallar"</li>
+<li>"El cliente pide cambios constantemente y yo había presupuestado algo concreto"</li>
+<li>"No sé si cobrar por horas, por resultados o por retainer mensual"</li>
+</ul>
+
+<p>Todos estos problemas tienen su raíz en el mismo sitio: <strong>una cotización que no comunica bien el trabajo, el proceso ni el valor</strong>. Vamos a arreglarlo.</p>
+
+<h2>Los tres modelos de cotización para agencias de marketing</h2>
+
+<p>Antes de hablar de estructura, tienes que decidir cómo cobras. En marketing existen básicamente tres modelos, y cada uno tiene su contexto ideal.</p>
+
+<h3>1. Tarifa plana mensual (retainer)</h3>
+
+<p>Es el modelo preferido por la mayoría de agencias consolidadas. El cliente paga una cuota fija mensual a cambio de un conjunto de servicios definidos: gestión de redes sociales, una newsletter semanal, reportes mensuales y X horas de consultoría.</p>
+
+<p><strong>Ventajas:</strong> ingresos predecibles, relación continua con el cliente, posibilidad de especializarte en su sector con el tiempo.</p>
+
+<p><strong>Inconveniente:</strong> si no defines bien el alcance, el cliente empuja para meter más y más trabajo dentro del retainer. La clave está en un contrato con scope muy preciso.</p>
+
+<p><strong>Cuándo usarlo:</strong> cuando el cliente necesita presencia continua (redes, contenido, SEO, email marketing). Funciona especialmente bien cuando la relación es de largo plazo y hay confianza establecida.</p>
+
+<h3>2. Por proyecto</h3>
+
+<p>Un precio cerrado para un entregable concreto: un lanzamiento de campaña, un rebranding, una web nueva, una estrategia de contenidos para seis meses.</p>
+
+<p><strong>Ventajas:</strong> fácil de entender para el cliente, sin compromiso de continuidad, permite proyectos grandes con presupuestos altos.</p>
+
+<p><strong>Inconveniente:</strong> el scope creep (cuando el proyecto crece sin control) puede comerte el margen si no tienes bien definido qué incluye y qué no.</p>
+
+<p><strong>Cuándo usarlo:</strong> para clientes nuevos que quieren "probar" antes de comprometerse, o para proyectos acotados como un lanzamiento, una campaña de temporada o una auditoría.</p>
+
+<h3>3. Por horas o días</h3>
+
+<p>El modelo más flexible pero el que peor escala. Cobras un precio por hora de trabajo. Algunos consultores senior trabajan así para proyectos estratégicos puntuales.</p>
+
+<p><strong>Ventajas:</strong> protege tu tiempo, transparente para el cliente, fácil de ajustar.</p>
+
+<p><strong>Inconveniente:</strong> penaliza la eficiencia (cuanto mejor seas, menos cobras), difícil de vender a clientes no acostumbrados, genera fricción en cada factura.</p>
+
+<p><strong>Cuándo usarlo:</strong> para consultorías puntuales, formaciones, auditorías o cuando hay mucha incertidumbre sobre el alcance real del trabajo.</p>
+
+<h2>Cómo estructurar una cotización de agencia de marketing que convierte</h2>
+
+<p>Sea cual sea el modelo que elijas, la estructura de la cotización importa mucho. Aquí va la que mejor funciona para agencias de marketing en España:</p>
+
+<h3>1. Resumen ejecutivo (la parte que más se lee)</h3>
+
+<p>En una o dos páginas, explica qué problema tiene el cliente y cómo vas a resolverlo. Antes de hablar de precios. Esto posiciona la conversación en el terreno correcto: no "&iquest;cuánto cuesta?" sino "&iquest;qué resultado voy a conseguir?".</p>
+
+<p>Incluye: situación actual del cliente (según lo que has entendido en la reunión), objetivo principal, tu enfoque general y por qué tu agencia es la adecuada para esto.</p>
+
+<h3>2. Desglose de servicios</h3>
+
+<p>Aquí es donde la mayoría de agencias se quedan cortas. En lugar de escribir "gestión de redes sociales: 1.200 &euro;/mes", detalla:</p>
+
+<ul>
+<li>Qué redes (Instagram, LinkedIn, TikTok…)</li>
+<li>Cuántas publicaciones por semana y de qué tipo (carrusel, vídeo corto, story, reels…)</li>
+<li>Quién hace la creatividad (tú, el cliente, un diseñador externo)</li>
+<li>Si incluye community management (responder comentarios, DMs…)</li>
+<li>Con qué frecuencia y en qué formato recibirá reportes</li>
+</ul>
+
+<p>Este nivel de detalle elimina ambigüedad, justifica el precio y reduce drásticamente las discusiones posteriores sobre "pero yo pensaba que esto incluía...".</p>
+
+<h3>3. Lo que NO incluye la propuesta</h3>
+
+<p>Esta sección es oro puro y casi ninguna agencia la incluye. Escribe explícitamente qué está fuera del alcance: inversión en publicidad pagada (si cobras solo por la gestión), fotografía de producto, diseño web, traducciones, viajes, etc.</p>
+
+<p>Por ejemplo: <em>"Esta propuesta no incluye la inversión en Meta Ads o Google Ads. El presupuesto de medios lo gestiona el cliente directamente o puede cotizarse por separado."</em></p>
+
+<p>Esto protege a ambas partes y evita que el cliente asuma que todo está cubierto.</p>
+
+<h3>4. Entregables y plazos</h3>
+
+<p>&iquest;Qué recibirá el cliente exactamente y cuándo? Un calendario de entregables, aunque sea aproximado, da mucha seguridad. Para campañas de lanzamiento es especialmente importante: semana 1 estrategia, semana 2-3 producción de creatividades, semana 4 activación y primeros resultados.</p>
+
+<h3>5. Precio y condiciones</h3>
+
+<p>Presenta el precio con claridad. Si hay opciones (por ejemplo, tres paquetes), que sean fáciles de comparar. Incluye siempre:</p>
+
+<ul>
+<li>Precio mensual o total del proyecto (con IVA desglosado)</li>
+<li>Forma de pago (50% al inicio, 50% a la entrega es habitual en proyectos; mensual anticipado en retainers)</li>
+<li>Duración mínima del contrato (en retainers, lo habitual son 3 o 6 meses)</li>
+<li>Política de cancelación (qué pasa si el cliente cancela antes del plazo)</li>
+<li>Validez de la cotización (15-30 días)</li>
+</ul>
+
+<h3>6. Próximos pasos</h3>
+
+<p>No termines la cotización con "quedo a tu disposición para cualquier duda". Cierra con un paso de acción concreto: <em>"Para confirmar el inicio, necesitamos la firma del contrato y el primer pago antes del [fecha]. Si tienes preguntas, podemos hacer una llamada de 20 minutos esta semana."</em></p>
+
+<p>Un CTA claro reduce la parálisis del cliente.</p>
+
+<h2>Cómo calcular tus tarifas sin dejar dinero encima de la mesa</h2>
+
+<p>El error más caro que cometen las agencias pequeñas es calcular el precio basándose únicamente en las horas de trabajo directo. Olvidan factores que erosionan el margen real:</p>
+
+<ul>
+<li><strong>Tiempo de comunicación con el cliente:</strong> reuniones, emails, revisiones, briefings. En muchos proyectos esto suma un 20-30% del tiempo total.</li>
+<li><strong>Tiempo de gestión interna:</strong> coordinación de equipo, formación, herramientas.</li>
+<li><strong>Revisiones y cambios:</strong> si no se limitan en el contrato, pueden multiplicar el tiempo invertido.</li>
+<li><strong>Costes de herramientas:</strong> licencias de diseño, plataformas de scheduling, herramientas de analytics, stock de imágenes.</li>
+<li><strong>Margen de error:</strong> siempre hay imprevistos. Un 10-15% de colchón es sano.</li>
+</ul>
+
+<p>Una fórmula básica para calcular el precio de un retainer:</p>
+
+<p><strong>Horas estimadas &times; tarifa horaria real &times; 1,25 (overhead) = precio base</strong></p>
+
+<p>&iquest;Cuál es tu tarifa horaria real? Coge el sueldo anual que quieres ganarte (o el coste de tu equipo), añade impuestos, herramientas y margen, y divídelo entre las horas facturables al año (normalmente 1.200-1.400 horas para una persona a tiempo completo). Ese número suele sorprender a las agencias que llevan años cobrando "a ojo".</p>
+
+<h2>El problema del regateo: cómo responder sin bajar el precio</h2>
+
+<p>El cliente te dice "es demasiado caro". Respuesta típica de la agencia: bajar el precio. Respuesta correcta: <strong>reducir el alcance, no el precio</strong>.</p>
+
+<p>Cuando bajas el precio sin cambiar el alcance, estás diciendo implícitamente que antes te estabas aprovechando. En cambio, si dices "puedo ajustar la propuesta a ese presupuesto, pero entonces haríamos X en lugar de X+Y+Z", el mensaje es diferente: tus precios son justos, y el cliente decide qué nivel de servicio quiere.</p>
+
+<p>Prepara de antemano dos o tres versiones de la propuesta: una completa, una media y una básica. Así, cuando el cliente pida descuento, la conversación pasa de "&iquest;cuánto me rebaja?" a "&iquest;qué paquete se ajusta mejor a tu presupuesto ahora mismo?".</p>
+
+<h2>Cuándo y cómo hacer seguimiento de una cotización de marketing</h2>
+
+<p>La mayoría de agencias envían la cotización por email y esperan. Error costoso.</p>
+
+<p>Lo que funciona:</p>
+
+<ol>
+<li><strong>Envía la cotización y llama o escribe al día siguiente</strong> para confirmar que ha llegado bien y si tiene alguna duda inicial. No para presionar, sino para abrir conversación.</li>
+<li><strong>A los 3-4 días,</strong> un seguimiento concreto: "&iquest;Has tenido oportunidad de revisarla? Si quieres, hacemos una llamada de 15 minutos para resolver dudas."</li>
+<li><strong>A los 7-10 días,</strong> si no hay respuesta: "La propuesta vence el [fecha]. &iquest;Quieres que la ampliemos o hay algo que podamos ajustar?"</li>
+</ol>
+
+<p>Tres contactos son suficientes para la mayoría de decisiones en servicios de marketing. Si después de eso no hay respuesta, es una decisión del cliente, no una falta de insistencia tuya.</p>
+
+<p>Gestionar estos seguimientos de forma manual con una hoja de cálculo es agotador cuando tienes varias propuestas abiertas a la vez. Con una herramienta como <strong>DealForge</strong> puedes ver de un vistazo en qué estado está cada cotización —enviada, vista, pendiente de respuesta— y programar recordatorios sin depender de la memoria.</p>
+
+<h2>Errores típicos en cotizaciones de agencias de marketing</h2>
+
+<h3>Mezclar precio y justificación</h3>
+<p>Presentar el precio antes de explicar el valor es el error más caro. El cliente ve el número antes de entender qué hay detrás, y el anclaje mental es "caro". Primero el problema, luego la solución, luego el precio.</p>
+
+<h3>Usar jerga del sector sin explicarla</h3>
+<p>"Haremos una estrategia de inbound con nurturing de leads en el TOFU y MOFU." Puede que el cliente asiente educadamente y no tenga ni idea de lo que significa. Habla el idioma del cliente: más ventas, más visibilidad, más clientes recurrentes.</p>
+
+<h3>No incluir casos de éxito o referencias en la propuesta</h3>
+<p>En marketing, tu trabajo previo es tu mejor argumento comercial. Un caso de éxito concreto ("ayudamos a una empresa de software B2B a triplicar sus leads orgánicos en 9 meses con esta metodología") hace más que tres páginas de descripción de servicios.</p>
+
+<h3>Propuestas demasiado largas</h3>
+<p>Más no es más. Una propuesta de 40 páginas para un retainer de 2.000 &euro;/mes asusta más que convence. El cliente no tiene tiempo de leerla. Mantén el núcleo en 5-8 páginas bien estructuradas, con los detalles técnicos en anexos opcionales.</p>
+
+<h3>No guardar versiones anteriores</h3>
+<p>Cuando un cliente vuelve seis meses después y dice "qué decía aquella propuesta que me mandaste", no puedes tener las cotizaciones perdidas entre emails. Mantén un registro ordenado de todas tus propuestas, con las versiones y los estados. Esto también te da datos para analizar qué tipos de propuestas tienen mejor tasa de cierre.</p>
+
+<h2>IVA y aspectos fiscales en cotizaciones de marketing</h2>
+
+<p>Para la mayoría de servicios de marketing en España, el IVA aplicable es el general del <strong>21%</strong>. No hay tipos reducidos específicos para este sector, salvo que la actividad esté exenta (formaciones regladas, ciertos servicios culturales…), que no suele ser el caso en agencias comerciales.</p>
+
+<p>Si trabajas con clientes en otros países de la UE con NIF intracomunitario, aplica la inversión del sujeto pasivo: emites la factura sin IVA y el cliente lo declara en su país. Si el cliente es de fuera de la UE, tampoco hay IVA.</p>
+
+<p>Para clientes particulares (B2C), recuerda que el precio que muestras en la cotización debe incluir el IVA desglosado. Para empresas (B2B), el estándar es mostrar precio base + IVA por separado.</p>
+
+<h2>Cómo escalar el proceso de cotizaciones en tu agencia</h2>
+
+<p>Cuando empiezas, cada propuesta es artesanal. Cuando tienes 10 o 20 clientes potenciales al mes, necesitas un proceso.</p>
+
+<p>Lo que hacen las agencias que escalan bien:</p>
+
+<ul>
+<li><strong>Tienen plantillas base por tipo de servicio</strong> (retainer de redes, proyecto de lanzamiento, auditoría SEO…) que personalizan, no que crean desde cero cada vez.</li>
+<li><strong>Tienen su catálogo de servicios con precios actualizado</strong>, de modo que calcular una propuesta es combinar módulos, no hacer aritmética mental.</li>
+<li><strong>Tienen un proceso de aprobación interna</strong> para descuentos: si alguien del equipo quiere ofrecer un precio especial, necesita aprobación. Esto evita que los comerciales más "blandos" erosionen el margen de toda la agencia.</li>
+<li><strong>Miden la tasa de cierre por tipo de propuesta</strong> para saber qué servicios se venden mejor y dónde están perdiendo tiempo en propuestas que nunca se cierran.</li>
+</ul>
+
+<p>Una plataforma como <strong>DealForge</strong> está diseñada precisamente para esto: mantener un catálogo de servicios con precios, armar propuestas rápidamente combinando módulos, aplicar reglas de descuento automáticas y hacer seguimiento del pipeline. Para una agencia que maneja más de 15-20 propuestas al mes, el tiempo recuperado es significativo.</p>
+
+<h2>Ejemplo de cotización para una agencia de marketing</h2>
+
+<p>Para que esto sea concreto, aquí va un ejemplo simplificado de cómo presentar un retainer de redes sociales + newsletter:</p>
+
+<hr/>
+
+<p><strong>PROPUESTA DE SERVICIOS DIGITALES &mdash; [NOMBRE AGENCIA]</strong><br/>
+Cliente: Empresa XYZ S.L. | Fecha: abril 2026 | Ref: COT-2026-0047 | Válida hasta: 15/05/2026</p>
+
+<p><strong>Situación actual:</strong> XYZ tiene presencia en Instagram y LinkedIn pero publica de forma irregular, sin estrategia de contenidos ni seguimiento de métricas. El objetivo declarado es aumentar la visibilidad de marca para apoyar al equipo comercial.</p>
+
+<p><strong>Nuestra propuesta: Retainer mensual de gestión digital</strong></p>
+
+<table>
+<thead><tr><th>Servicio</th><th>Detalle</th><th>Precio/mes</th></tr></thead>
+<tbody>
+<tr><td>Gestión Instagram + LinkedIn</td><td>4 publicaciones/semana (mix carrusel, estático, reels cortos). Calendario editorial mensual. Community management L-V (respuesta en menos de 24h).</td><td>1.200 &euro;</td></tr>
+<tr><td>Newsletter mensual</td><td>1 email mensual a la base de datos del cliente. Redacción, diseño y envío con Mailchimp. Informe de apertura y clicks.</td><td>400 &euro;</td></tr>
+<tr><td>Reporting mensual</td><td>Dashboard con KPIs clave: alcance, engagement, crecimiento de seguidores, apertura email.</td><td>Incluido</td></tr>
+</tbody>
+<tfoot>
+<tr><td colspan="2"><strong>Subtotal mensual</strong></td><td><strong>1.600 &euro;</strong></td></tr>
+<tr><td colspan="2">IVA (21%)</td><td>336 &euro;</td></tr>
+<tr><td colspan="2"><strong>Total mensual</strong></td><td><strong>1.936 &euro;</strong></td></tr>
+</tfoot>
+</table>
+
+<p><strong>No incluye:</strong> inversión en publicidad pagada (Meta Ads, LinkedIn Ads), fotografía/vídeo de producto, diseño de landing pages, traducciones.</p>
+
+<p><strong>Condiciones:</strong> duración mínima 3 meses, pago mensual anticipado, cancelación con 30 días de preaviso.</p>
+
+<p><strong>Próximos pasos:</strong> Para confirmar el inicio en mayo, necesitamos la firma del contrato y el primer pago antes del 5 de mayo. &iquest;Hacemos una llamada esta semana para resolver dudas?</p>
+
+<hr/>
+
+<p>&iquest;Ves la diferencia con un simple "gestión redes: 1.200 &euro;/mes"? El nivel de detalle justifica el precio, reduce las dudas y protege a ambas partes.</p>
+
+<h2>Conclusión: tu cotización es tu primer entregable</h2>
+
+<p>En el sector del marketing, donde todo el mundo promete resultados increíbles, <strong>una cotización clara, detallada y profesional ya te diferencia antes de hacer ningún trabajo</strong>. Es la primera muestra de cómo trabajas.</p>
+
+<p>Si tu propuesta llega rápido, está bien estructurada, habla el idioma del cliente y tiene un precio justificado, ya has ganado la mitad de la batalla. La otra mitad es ejecutar lo que prometiste.</p>
+
+<p>Aplica la estructura de esta guía, define bien tu modelo de negocio (retainer, proyecto u horas) y establece un proceso para no crear cada cotización desde cero. Tu tiempo es el recurso más escaso de la agencia &mdash; no lo gastes en propuestas ad hoc cuando hay una forma más eficiente de hacerlo.</p>
+
+<p><strong>&iquest;Quieres crear cotizaciones de marketing en minutos, con tu catálogo de servicios y PDF profesional incluido?</strong> Prueba <a href="https://dealforge.es">DealForge</a> gratis y empieza a cerrar más contratos con menos tiempo dedicado a la burocracia comercial.</p>`,
+    autor: "DealForge",
+    categoria: "sectores",
+    tags: JSON.stringify([
+      "cotizaciones marketing",
+      "agencias de marketing",
+      "presupuestos servicios",
+      "retainer agencia",
+      "ventas servicios digitales",
+      "pymes",
+      "freelance marketing",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Cotizaciones para agencias de marketing: guía práctica 2026 — DealForge",
+    metaDescripcion:
+      "Cómo estructurar y presentar cotizaciones en tu agencia de marketing: modelos de precio, desglose de servicios, cómo evitar el regateo y plantilla de ejemplo.",
+    metaKeywords:
+      "cotización agencia de marketing, presupuesto servicios marketing, cotizar servicios digitales, retainer agencia marketing, cómo cobrar servicios de marketing, plantilla cotización marketing, software cotizaciones agencia",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11];
   const results = [];
 
   for (const p of posts) {
