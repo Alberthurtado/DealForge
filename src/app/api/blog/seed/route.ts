@@ -2120,7 +2120,250 @@ Cliente: Empresa XYZ S.L. | Fecha: abril 2026 | Ref: COT-2026-0047 | Válida has
       "cotización agencia de marketing, presupuesto servicios marketing, cotizar servicios digitales, retainer agencia marketing, cómo cobrar servicios de marketing, plantilla cotización marketing, software cotizaciones agencia",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11];
+  const post12 = {
+    slug: "presupuestos-diseno-grafico-como-cobrar-lo-que-vales",
+    titulo: "Presupuestos de diseño gráfico: cómo cobrar lo que vales (y que te digan que sí)",
+    extracto: "La mayoría de diseñadores gráficos cobran menos de lo que deberían. Esta guía práctica te enseña a estructurar presupuestos de diseño que justifican tu precio, reducen el regateo y protegen tu margen.",
+    contenido: `<p>Hay una escena que se repite constantemente en el sector del diseño gráfico. El cliente pide presupuesto. Tú tardas dos días en calcular horas, materiales y margen. Envías una cifra que te parece justa. El cliente responde: <em>&ldquo;Es mucho, &iquest;no puedes hacerlo por la mitad?&rdquo;</em>. Y tú, por miedo a perder el proyecto, aceptas.</p>
+
+<p>Si esto te suena familiar, el problema no es tu precio. Es cómo lo estás presentando y justificando. Un <strong>presupuesto de diseño gráfico bien estructurado</strong> no solo informa de un coste &mdash;vende el valor de lo que ofreces antes de que el cliente vea ningún trabajo.</p>
+
+<p>En esta guía vamos a ver exactamente cómo hacerlo.</p>
+
+<h2>&iquest;Por qué los diseñadores cobran menos de lo que deberían?</h2>
+
+<p>No es falta de talento ni de experiencia. Es psicología de precios mezclada con miedo al rechazo. Los motivos más comunes:</p>
+
+<ul>
+<li><strong>Calculan mal sus costes reales.</strong> Muchos diseñadores solo cuentan las horas de trabajo visible (diseñar la pieza), ignorando el tiempo de briefing, revisiones, reuniones, exportación de archivos y gestión del cliente. Si trabajas 8 horas en un proyecto pero le dedicas 12 en total, estás regalando el 33% de tu tiempo.</li>
+<li><strong>Tienen miedo de perder al cliente.</strong> La mentalidad de escasez lleva a aceptar cualquier precio por miedo a que el cliente se vaya con otra persona más barata. El resultado: acabas trabajando para clientes que no valoran tu trabajo y que siempre pedirán más por menos.</li>
+<li><strong>No saben cómo presentar el precio.</strong> Enviar un número sin contexto es la forma más fácil de invitar al regateo. Un precio sin justificación es solo un número que el cliente intentará reducir.</li>
+</ul>
+
+<p>La solución a los tres problemas es la misma: un <strong>presupuesto profesional bien estructurado</strong>.</p>
+
+<h2>Los 4 modelos de precio en diseño gráfico</h2>
+
+<p>Antes de hablar de cómo estructurar el presupuesto, necesitas tener claro con qué modelo de precio trabajas. No todos funcionan igual en todas las situaciones.</p>
+
+<h3>1. Precio por hora</h3>
+
+<p>El más tradicional y el que más problemas genera. Cobras una tarifa horaria (por ejemplo, 60 &euro;/hora) y facturas según el tiempo invertido. El problema: cuanto más rápido y eficiente eres, menos cobras. Castigas tu propia productividad.</p>
+
+<p><strong>Cuándo tiene sentido:</strong> en proyectos de alcance muy incierto, consultoría de marca, auditorías o trabajos de mantenimiento donde es imposible estimar el tiempo de antemano.</p>
+
+<h3>2. Precio fijo por proyecto</h3>
+
+<p>Defines un precio cerrado para un entregable concreto. Por ejemplo: &ldquo;Diseño de logotipo con 3 propuestas y 2 rondas de revisión: 800 &euro;&rdquo;. El cliente sabe exactamente lo que paga. Tú sabes exactamente qué entregas.</p>
+
+<p><strong>Cuándo tiene sentido:</strong> en la mayoría de proyectos de diseño con alcance definido (logotipos, branding, materiales de marketing, packaging, etc.). Es el modelo que más recomiendo para diseñadores que empiezan a profesionalizar su proceso.</p>
+
+<h3>3. Retainer mensual</h3>
+
+<p>El cliente paga una cantidad fija al mes a cambio de un número de horas o entregables garantizados. Por ejemplo: &ldquo;10 piezas de diseño mensuales para redes sociales: 600 &euro;/mes&rdquo;.</p>
+
+<p><strong>Cuándo tiene sentido:</strong> con clientes recurrentes que tienen necesidades continuas de diseño. Es el modelo más predecible e ideal para la estabilidad financiera de tu estudio o freelance.</p>
+
+<h3>4. Precio basado en valor</h3>
+
+<p>El más avanzado y el que más dinero genera. En lugar de calcular cuánto tiempo tardas, calculas cuánto vale el resultado para el cliente. Si rediseñas el packaging de un producto que vende 500.000 &euro; al año y el nuevo diseño mejora las ventas un 10%, tu trabajo vale mucho más que 50 horas a 60 &euro;/hora.</p>
+
+<p><strong>Cuándo tiene sentido:</strong> cuando tienes experiencia demostrable, puedes medir el impacto de tu trabajo y trabajas con empresas que entienden el ROI del diseño. No intentes aplicarlo desde el primer día &mdash;requiere credibilidad y casos de éxito.</p>
+
+<h2>Cómo calcular tu tarifa base (sin quedarte corto)</h2>
+
+<p>Si usas precio por hora o proyecto, necesitas una tarifa base que cubra todos tus costes y te deje margen real. Aquí el cálculo honesto que muchos evitan hacer:</p>
+
+<ol>
+<li><strong>Costes fijos mensuales:</strong> alquiler (o parte proporcional si trabajas en casa), software (Adobe CC, Figma, etc.), hardware amortizado, seguros, gestoría, marketing y formación. Suma todo.</li>
+<li><strong>Horas facturables reales:</strong> de las 8 horas que trabajas al día, &iquest;cuántas son realmente facturables? Descuenta reuniones, tareas administrativas, formación, marketing propio y tiempo no productivo. La realidad para la mayoría de freelances es entre 4 y 6 horas facturables diarias.</li>
+<li><strong>Beneficio deseado:</strong> &iquest;cuánto quieres ganar al mes neto, después de pagar todos tus costes e impuestos? Sé realista y ambicioso a la vez.</li>
+</ol>
+
+<p>Con esos tres números puedes calcular tu tarifa horaria mínima. Si tus costes fijos son 1.500 &euro;/mes, quieres ganar 3.000 &euro;/mes y tienes 100 horas facturables al mes, tu tarifa mínima es 45 &euro;/hora. Y eso es el <em>mínimo</em>, no el precio que deberías cobrar.</p>
+
+<h2>Qué debe incluir un presupuesto de diseño gráfico profesional</h2>
+
+<p>Un presupuesto de diseño bien hecho tiene varias capas. Cada una cumple una función concreta:</p>
+
+<h3>Datos de identificación</h3>
+<p>Tu nombre o razón social, CIF/NIF, datos de contacto, logo de tu estudio. Y los datos completos del cliente. Parece básico, pero hay diseñadores que envían presupuestos como si fueran emails informales. Un presupuesto es un documento legal &mdash;trátalo como tal.</p>
+
+<h3>Número de referencia y fecha</h3>
+<p>Un sistema de numeración consecutiva (DG-2026-047) y la fecha de emisión. Esto facilita el seguimiento y te posiciona como alguien organizado. La fecha de vencimiento es igual de importante &mdash;un presupuesto sin caducidad es una invitación a que el cliente te llame seis meses después esperando el mismo precio.</p>
+
+<h3>Descripción del proyecto (el brief resumido)</h3>
+<p>Antes de los precios, incluye un párrafo resumiendo tu comprensión del proyecto. &ldquo;Diseño de identidad visual completa para startup de alimentación ecológica, incluyendo logotipo, paleta de color, tipografías, manual de marca y aplicaciones sobre tarjetas y papelería corporativa.&rdquo;</p>
+
+<p>Este apartado tiene dos funciones: confirma que has entendido lo que el cliente necesita y establece el alcance. Todo lo que no está aquí, no está incluido en el precio.</p>
+
+<h3>Desglose de entregables con precio por línea</h3>
+<p>Este es el corazón del presupuesto. No pongas un precio global. Desglosa cada entregable con su descripción y precio individual:</p>
+
+<ul>
+<li>Diseño de logotipo (3 propuestas conceptuales + 2 rondas de revisión)</li>
+<li>Sistema de color y tipografías corporativas</li>
+<li>Manual de identidad visual (PDF, 20 páginas)</li>
+<li>Aplicación sobre tarjetas de visita (diseño, no impresión)</li>
+<li>Plantillas de firma de email</li>
+</ul>
+
+<p>El desglose cumple varias funciones clave. Primero, justifica el precio total &mdash;cuando el cliente ve 8 líneas de entregables, el número final parece razonable. Segundo, protege tu alcance: si el cliente quiere añadir algo que no está en la lista, tienes base contractual para cobrar aparte. Tercero, si el cliente tiene presupuesto limitado, puede priorizar qué entregables necesita primero.</p>
+
+<h3>Revisiones incluidas y política de cambios adicionales</h3>
+<p>Este punto es el que más ignoran los diseñadores y el que más les cuesta dinero. Define claramente cuántas rondas de revisión incluye cada entregable y qué pasa cuando el cliente supera ese límite.</p>
+
+<p>Una formulación típica: <em>&ldquo;El precio incluye 2 rondas de revisión por entregable. Las revisiones adicionales se facturarán a 45 &euro;/hora. Una revisión es una lista consolidada de cambios por ronda, no cambios individuales sucesivos.&rdquo;</em></p>
+
+<p>Este párrafo, claro y sin ambigüedades, elimina los malentendidos más costosos del diseño gráfico.</p>
+
+<h3>Plazos de entrega</h3>
+<p>Indica cuándo entregarás cada hito. No pongas fechas absolutas si no has acordado la fecha de inicio. Usa plazos relativos: &ldquo;Primera propuesta de logotipo: 7 días hábiles tras la aprobación del brief y el pago del 50% inicial.&rdquo;</p>
+
+<h3>Condiciones de pago</h3>
+<p>Define claramente: porcentaje de anticipo, cuándo se paga el resto, forma de pago aceptada. Lo más común en diseño es un 50% de anticipo y 50% a la entrega de los archivos definitivos. Para proyectos grandes o de larga duración, considera hitos intermedios de pago.</p>
+
+<p><strong>Incluye también:</strong> que los archivos finales (fuentes, vectores editables, PSD, etc.) se entregan una vez recibido el pago completo. Esto es tu garantía de cobro.</p>
+
+<h3>Propiedad intelectual</h3>
+<p>Especifica qué cedes y qué no. Lo habitual es ceder los derechos de uso comercial del resultado final, pero no los archivos fuente editables (que pueden ofrecerse como servicio adicional). Consulta con tu gestor o un abogado especializado en propiedad intelectual para redactar esto correctamente.</p>
+
+<h3>Fecha de validez del presupuesto</h3>
+<p>30 días es el estándar. Pasado ese plazo, el precio puede revisarse. Esto crea urgencia sin presionar y te protege de compromisos de precio que se estiran indefinidamente.</p>
+
+<h2>Las revisiones: el agujero negro del margen en diseño</h2>
+
+<p>Merece la pena detenerse aquí porque es el error más caro que cometen los diseñadores. La dinámica es siempre la misma: el cliente aprueba el concepto, luego empieza a &ldquo;pulir detalles&rdquo; que se convierten en cambios completos, que se convierten en nuevas iteraciones, que se convierten en semanas de trabajo no facturadas.</p>
+
+<p>La solución no es ser rígido. Es ser claro desde el principio:</p>
+
+<ul>
+<li>Define por escrito qué es una revisión (una lista consolidada de cambios, no cambios individuales enviados por WhatsApp uno por uno).</li>
+<li>Limita el número de rondas incluidas en el precio.</li>
+<li>Establece un precio por revisión adicional antes de empezar, no cuando ya surja el problema.</li>
+<li>Cuando el cliente lleve la tercera ronda extra, no la hagas en silencio &mdash;notifícala y envía una adenda al presupuesto original.</li>
+</ul>
+
+<p>Los diseñadores que implementan una política clara de revisiones ven cómo sus márgenes mejoran sin subir sus tarifas. Simplemente dejan de regalar trabajo.</p>
+
+<h2>Cómo presentar el precio (el orden importa)</h2>
+
+<p>Hay una regla de psicología de ventas que los diseñadores suelen ignorar: <strong>nunca empieces por el precio</strong>. El cerebro humano necesita percibir valor antes de procesar un número.</p>
+
+<p>La estructura correcta de presentación es:</p>
+
+<ol>
+<li><strong>Comprensión del problema:</strong> demuestra que entiendes qué necesita el cliente y por qué.</li>
+<li><strong>Tu propuesta y enfoque:</strong> cómo lo vas a resolver, qué hace especial tu proceso.</li>
+<li><strong>Los entregables concretos:</strong> qué va a recibir exactamente.</li>
+<li><strong>Los plazos:</strong> cuándo lo tendrá.</li>
+<li><strong>El precio:</strong> ahora, cuando el cliente ya entiende el valor, el número tiene contexto.</li>
+</ol>
+
+<p>Si envías el presupuesto por email, considera acompañarlo de un párrafo inicial que recuerde brevemente el contexto del proyecto. No dejes que tu cliente abra el PDF directamente en la página de precios.</p>
+
+<h2>Cómo gestionar el regateo sin perder la venta</h2>
+
+<p>El regateo es inevitable en algunos sectores y culturas empresariales. La clave no es ceder en el precio &mdash;es rediseñar la propuesta.</p>
+
+<p>Cuando un cliente dice &ldquo;es mucho&rdquo;, tienes tres opciones:</p>
+
+<ol>
+<li><strong>Mantener el precio y justificar el valor.</strong> Pregunta qué parte del presupuesto le parece cara. A veces el cliente no ha entendido lo que incluye. Explica, no justifiques.</li>
+<li><strong>Reducir el alcance, no el precio.</strong> &ldquo;Podemos empezar solo con el logotipo y el sistema de color. Los materiales adicionales los hacemos en una segunda fase.&rdquo; Bajas la cifra total sin tocar tu tarifa implícita.</li>
+<li><strong>Ofrecer un plan de pago.</strong> A veces el problema no es el precio total, sino la liquidez en ese momento. Un pago en tres cuotas puede ser la diferencia entre cerrar y no cerrar.</li>
+</ol>
+
+<p>Lo que no debes hacer nunca: bajar el precio sin quitar nada del alcance. Eso le enseña al cliente que tu precio inicial no era serio, e invita a que en el próximo proyecto empiece el regateo desde antes.</p>
+
+<h2>Ejemplo real: presupuesto de branding completo</h2>
+
+<p>Para que todo lo anterior sea concreto, aquí tienes un ejemplo de presupuesto para un proyecto de identidad visual para una empresa de servicios:</p>
+
+<table>
+<thead>
+<tr><th>Entregable</th><th>Descripción</th><th>Precio</th></tr>
+</thead>
+<tbody>
+<tr><td>Estrategia de marca</td><td>Sesión de briefing + análisis de competencia + definición de posicionamiento (documento de 5 páginas)</td><td>350 &euro;</td></tr>
+<tr><td>Diseño de logotipo</td><td>3 propuestas conceptuales + 2 rondas de revisión + entrega en todos los formatos (AI, EPS, SVG, PNG, JPG)</td><td>750 &euro;</td></tr>
+<tr><td>Sistema de identidad</td><td>Paleta de color primaria y secundaria, tipografías corporativas, reglas de uso, versiones positivo/negativo</td><td>400 &euro;</td></tr>
+<tr><td>Manual de marca</td><td>PDF de 20-25 páginas con todas las directrices de uso de la identidad visual</td><td>500 &euro;</td></tr>
+<tr><td>Papelería corporativa</td><td>Diseño de tarjetas de visita (ambas caras), hoja membretada A4, firma de email</td><td>300 &euro;</td></tr>
+</tbody>
+<tfoot>
+<tr><td colspan="2"><strong>Subtotal</strong></td><td><strong>2.300 &euro;</strong></td></tr>
+<tr><td colspan="2">IVA (21%)</td><td>483 &euro;</td></tr>
+<tr><td colspan="2"><strong>Total</strong></td><td><strong>2.783 &euro;</strong></td></tr>
+</tfoot>
+</table>
+
+<p><strong>Condiciones:</strong> 50% (1.150 &euro; + IVA) al inicio, 50% restante a la entrega de los archivos definitivos. Archivos fuente editables (AI, Figma) disponibles como servicio adicional (300 &euro;). Plazo: 21 días hábiles desde la aprobación del briefing y el pago inicial. Validez del presupuesto: 30 días.</p>
+
+<p>&iquest;Ves la diferencia con un simple &ldquo;Diseño de logo: 800 &euro;&rdquo;? El desglose convierte el precio en una decisión de inversión, no en un gasto.</p>
+
+<h2>Herramientas para crear presupuestos de diseño más rápido</h2>
+
+<p>El mayor enemigo del diseñador no es el cliente difícil &mdash;es el tiempo que pierde creando presupuestos. Muchos diseñadores dedican entre 1 y 3 horas a cada propuesta: buscar la plantilla, actualizar los precios, calcular los totales, generar el PDF, enviarlo por email, hacer seguimiento&hellip;</p>
+
+<p>Hay una forma mejor. Un <strong>software de cotizaciones</strong> como DealForge te permite tener un catálogo de servicios con precios predefinidos que insertas con un clic, aplicar descuentos viendo el margen en tiempo real, generar PDFs con tu marca automáticamente, y saber cuándo el cliente ha abierto tu propuesta para hacer seguimiento en el momento exacto.</p>
+
+<p>Si creas 5 presupuestos al mes y reduces el tiempo de cada uno de 90 minutos a 15 minutos, recuperas 6 horas mensuales. A 60 &euro;/hora, son 360 &euro; de capacidad productiva que puedes dedicar a trabajo facturable o, sencillamente, a no trabajar los sábados.</p>
+
+<h2>El presupuesto como herramienta de posicionamiento</h2>
+
+<p>Aquí está el insight que cambia la perspectiva: tu presupuesto no es solo un trámite administrativo. Es la primera muestra de cómo trabajas.</p>
+
+<p>Un presupuesto genérico, en Word sin formato, con un precio global sin desglose, comunica que eres un proveedor más. Un presupuesto estructurado, con tu identidad visual, descripción detallada del proyecto, política clara de revisiones y condiciones transparentes, comunica que eres un profesional serio que sabe lo que hace.</p>
+
+<p>Muchos diseñadores consiguen proyectos &mdash;y a veces mejores clientes que los de la competencia&mdash; simplemente porque su propuesta se ve y se lee de forma más profesional. El trabajo llega después.</p>
+
+<h2>Checklist antes de enviar tu presupuesto de diseño</h2>
+
+<ul>
+<li>&iquest;Has incluido todos tus datos y los del cliente?</li>
+<li>&iquest;El resumen del proyecto refleja exactamente lo que el cliente pidió?</li>
+<li>&iquest;Cada entregable está descrito con suficiente detalle para evitar malentendidos?</li>
+<li>&iquest;Has especificado cuántas revisiones incluye cada línea?</li>
+<li>&iquest;Los cálculos (subtotal, IVA, total) son correctos?</li>
+<li>&iquest;Has indicado los plazos de entrega y las condiciones de pago?</li>
+<li>&iquest;Has puesto fecha de vencimiento al presupuesto?</li>
+<li>&iquest;El PDF tiene tu marca (logo, colores, tipografía)?</li>
+</ul>
+
+<p>Si puedes marcar todos estos puntos, tienes un presupuesto que trabaja por ti incluso antes de que empieces a diseñar.</p>
+
+<h2>Conclusión: cobra lo que vales, por escrito</h2>
+
+<p>La mayoría de los problemas de precio en diseño gráfico no son problemas de precio. Son problemas de comunicación y presentación. Un buen presupuesto justifica tu tarifa, define el alcance, protege tu margen y posiciona tu trabajo como una inversión, no como un gasto.</p>
+
+<p>Elige el modelo de precio que encaje con cada proyecto. Desglosa los entregables con detalle. Define tu política de revisiones desde el primer día. Y deja de aceptar el primer &ldquo;es mucho&rdquo; como una sentencia &mdash;aprende a responder con valor, no con descuentos.</p>
+
+<p>Tu trabajo tiene valor. Tu presupuesto debería reflejarlo.</p>
+
+<p><strong>&iquest;Quieres crear presupuestos de diseño profesionales en minutos, con tu marca y PDF listo para enviar?</strong> Prueba <a href="https://dealforge.es">DealForge</a> gratis y deja de perder tiempo en burocracia para dedicarlo a lo que realmente sabes hacer.</p>`,
+    autor: "DealForge",
+    categoria: "sectores",
+    tags: JSON.stringify([
+      "diseño gráfico",
+      "presupuestos diseño",
+      "freelance",
+      "cómo cobrar",
+      "branding",
+      "tarifas diseño",
+      "pymes",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Presupuestos de diseño gráfico: cómo cobrar lo que vales — DealForge",
+    metaDescripcion:
+      "Guía práctica para diseñadores gráficos: modelos de precio, qué incluir en cada presupuesto, cómo gestionar revisiones y evitar el regateo. Con ejemplo real de branding.",
+    metaKeywords:
+      "presupuesto diseño gráfico, cómo cobrar diseño, tarifa diseñador gráfico, cotización diseño gráfico, precio logotipo, presupuesto branding, freelance diseño gráfico, plantilla presupuesto diseño",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12];
   const results = [];
 
   for (const p of posts) {
