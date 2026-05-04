@@ -2363,7 +2363,314 @@ Cliente: Empresa XYZ S.L. | Fecha: abril 2026 | Ref: COT-2026-0047 | Válida has
       "presupuesto diseño gráfico, cómo cobrar diseño, tarifa diseñador gráfico, cotización diseño gráfico, precio logotipo, presupuesto branding, freelance diseño gráfico, plantilla presupuesto diseño",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12];
+  const post13 = {
+    slug: "cotizaciones-servicios-limpieza-profesional",
+    titulo: "Cotizaciones de servicios de limpieza profesional: guía para ganar más contratos",
+    extracto: "Aprende a crear cotizaciones de limpieza profesional que justifiquen tu precio, eviten malentendidos y cierren más contratos. Con ejemplos reales por tipo de servicio y plantilla de cálculo.",
+    contenido: `<p>Si llevas tiempo en el sector de la limpieza profesional, sabes que el problema no suele ser la calidad del trabajo. El problema es <strong>conseguir el contrato antes de empezar</strong>. Y eso empieza con una cotización que inspire confianza, sea clara y llegue antes que la de tu competencia.</p>
+
+<p>En este artículo vamos a ver cómo hacer cotizaciones de limpieza que ganen contratos, no solo que informen de precios. Desde los tipos de servicio más habituales hasta cómo calcular tus tarifas sin quedarte corto, con ejemplos reales y sin rodeos.</p>
+
+<h2>Por qué las cotizaciones de limpieza fallan (y pierdes clientes)</h2>
+
+<p>Antes de ver qué hacer, conviene entender qué se hace mal. Hay tres errores que se repiten una y otra vez en el sector:</p>
+
+<h3>Presupuestos demasiado vagos</h3>
+<p>&ldquo;Limpieza de oficinas: 800 EUR/mes.&rdquo; ¿Cuántas veces al mes? ¿Qué incluye exactamente? ¿Los baños? ¿Los cristales? ¿Con qué productos? Un presupuesto ambiguo es una invitación a la discusión. El cliente interpreta lo máximo posible, tú cobras lo mínimo posible y el conflicto es inevitable.</p>
+
+<h3>Precios sin justificación</h3>
+<p>Cuando un cliente recibe tres presupuestos de limpieza y el tuyo es el más caro, no se va a quedar simplemente porque sí. Si no explicas por qué tu servicio vale lo que cuesta (materiales de calidad, personal cualificado, seguro de responsabilidad civil, productos ecológicos), el precio gana y pierdes el contrato.</p>
+
+<h3>Tardanza en la respuesta</h3>
+<p>Un cliente que pide tres presupuestos de limpieza no va a esperar una semana. El primero que responde con una propuesta decente suele quedarse con el contrato. La velocidad es una ventaja competitiva tan importante como el precio.</p>
+
+<h2>Tipos de servicio de limpieza y cómo cotizar cada uno</h2>
+
+<p>No todas las limpiezas son iguales, y tu cotización debe reflejarlo. Estos son los tipos más habituales con sus particularidades:</p>
+
+<h3>Limpieza de oficinas y locales comerciales</h3>
+
+<p>Es el pan de cada día para la mayoría de empresas del sector. Los contratos suelen ser recurrentes (diarios, semanales o quincenales) y el cliente busca fiabilidad por encima de todo.</p>
+
+<p>¿Qué hay que especificar en la cotización?</p>
+<ul>
+<li>Superficie total a limpiar (m²)</li>
+<li>Frecuencia exacta (ej: lunes, miércoles y viernes, de 18:00 a 20:00)</li>
+<li>Tareas incluidas: suelos, papeleras, baños, cocina, cristales interiores, mobiliario...</li>
+<li>Tareas excluidas (para evitar el &ldquo;yo pensaba que incluía...&rdquo;)</li>
+<li>Número de personas asignadas</li>
+<li>Productos incluidos en el precio o facturados aparte</li>
+</ul>
+
+<p><strong>Ejemplo de línea de presupuesto:</strong> &ldquo;Servicio de limpieza general de oficina (450 m²) &mdash; 3 días/semana (L/X/V), 2 horas/día, 1 operario. Incluye: suelos, baños, cocina, vaciado de papeleras y mobiliario superficial. No incluye: cristales exteriores, limpieza de zona de servidores.&rdquo;</p>
+
+<h3>Limpieza de comunidades de vecinos</h3>
+
+<p>Las comunidades son un cliente muy habitual pero también muy exigente. El precio lo decide una junta de propietarios, así que tu propuesta va a ser comparada con detalle.</p>
+
+<p>Puntos clave para este tipo de cotización:</p>
+<ul>
+<li>Zonas incluidas: escalera, ascensor, portal, garaje, zonas comunes exteriores</li>
+<li>Frecuencia de cada zona (la escalera puede ser diaria; el garaje, semanal)</li>
+<li>Gestión de incidencias: ¿qué pasa si un vecino ensucia fuera del horario?</li>
+<li>Reposición de consumibles (papel higiénico, jabón) incluida o no</li>
+<li>Duración mínima del contrato y condiciones de renovación</li>
+</ul>
+
+<p>Para comunidades, es recomendable presentar un desglose por zona con su precio individual. La junta puede negociar eliminar alguna zona en lugar de regatear el precio global, y tú mantienes tu margen.</p>
+
+<h3>Limpieza de fin de obra (post-construcción)</h3>
+
+<p>Este servicio es puntual, más intensivo y conlleva mucho más trabajo que una limpieza de mantenimiento. Es habitual en reformas, obras nuevas y locales que van a abrir al público.</p>
+
+<p>Factores que determinan el precio:</p>
+<ul>
+<li>Tipo de obra (reforma parcial vs. obra nueva completa)</li>
+<li>Materiales predominantes (yeso, escayola, pintura, gresite...)</li>
+<li>Superficie y altura de los techos</li>
+<li>Acceso y aparcamiento para tu equipo y vehículo</li>
+<li>Gestión de residuos (¿están incluidos o los lleva la constructora?)</li>
+</ul>
+
+<p>La limpieza de fin de obra no debería cotizarse por m² fijo sin visita previa. El estado de la obra varía enormemente. Una cotización ciega de este tipo suele acabar con pérdidas o con trabajos hechos &ldquo;a medias&rdquo;.</p>
+
+<h3>Limpieza de cristales</h3>
+
+<p>Servicio especializado con su propia estructura de precios. Los factores clave son la altura, el acceso (escalera, andamio, góndola) y la frecuencia.</p>
+
+<ul>
+<li>Especifica si el precio es por cara (interior/exterior) o por cristal completo</li>
+<li>Indica el método de acceso y si requiere equipos especiales</li>
+<li>Aclara si incluye marcos y jambas o solo el cristal</li>
+</ul>
+
+<h3>Limpiezas especiales y desinfección</h3>
+
+<p>Desinfecciones, limpiezas biohazard, eliminación de plagas, tratamientos antihumedad... son servicios que requieren personal y equipos específicos, y cuya cotización debe reflejar el riesgo y la especialización.</p>
+
+<p>Para estos servicios, incluye siempre:</p>
+<ul>
+<li>El protocolo que vas a aplicar</li>
+<li>Los productos homologados que utilizas</li>
+<li>Las certificaciones de tu empresa o personal</li>
+<li>El certificado de tratamiento que entregas al finalizar</li>
+</ul>
+
+<h2>Cómo calcular el precio de tu servicio de limpieza</h2>
+
+<p>Este es el punto donde muchas empresas de limpieza se quedan cortas. Calculan mal sus costes, fijan un precio &ldquo;de mercado&rdquo; y luego se preguntan por qué no ganan dinero. Vamos a hacer los cálculos bien.</p>
+
+<h3>Paso 1: Calcula tu coste por hora de trabajo</h3>
+
+<p>El coste de un operario de limpieza en España (2026) incluye:</p>
+<ul>
+<li>Salario bruto según convenio sectorial (variable por comunidad, entre 9 y 11 EUR/hora para contratos a jornada parcial)</li>
+<li>Seguridad social a cargo de la empresa (~30% del salario bruto)</li>
+<li>Uniformes, EPIs y formación</li>
+<li>Absentismo y sustituciones (provisiona un 5-8%)</li>
+</ul>
+
+<p>Ejemplo: si pagas 10 EUR/hora brutos y añades el 30% de SS, tu coste real es 13 EUR/hora. Con un 6% de absentismo, sube a ~13,80 EUR/hora. A eso hay que sumarle los materiales.</p>
+
+<h3>Paso 2: Calcula el coste de materiales y productos</h3>
+
+<p>Los productos de limpieza representan entre el 5% y el 10% del coste total en servicios de mantenimiento, pero pueden subir al 15-20% en limpiezas intensivas o especiales.</p>
+
+<p>Haz una estimación por tipo de servicio:</p>
+<ul>
+<li>Limpieza de oficina estándar: 0,30-0,60 EUR/m² por mes</li>
+<li>Limpieza de fin de obra: 1,50-3 EUR/m² (según estado)</li>
+<li>Limpieza de cristales: mínimo de desplazamiento + coste por m²</li>
+</ul>
+
+<h3>Paso 3: Añade los gastos generales</h3>
+
+<p>Muchos autónomos y pequeñas empresas de limpieza olvidan incluir sus propios gastos en el precio:</p>
+<ul>
+<li>Seguro de responsabilidad civil (obligatorio y esencial)</li>
+<li>Gasoil y amortización del vehículo</li>
+<li>Maquinaria (fregadoras, aspiradoras industriales, etc.)</li>
+<li>Teléfono, gestoría, software de gestión</li>
+<li>Tu propio tiempo de gestión (visitas, cotizaciones, coordinación)</li>
+</ul>
+
+<p>Una regla práctica: los gastos generales suelen representar entre el 15% y el 25% de tu facturación. Si facturas 10.000 EUR al mes, entre 1.500 y 2.500 EUR van a gastos antes de que veas un euro de beneficio.</p>
+
+<h3>Paso 4: Aplica tu margen</h3>
+
+<p>Una vez tienes el coste total real, aplica tu margen objetivo. Para servicios de limpieza, un margen neto del 10-20% es razonable. Algunos servicios especializados pueden llegar al 30-40%.</p>
+
+<p><strong>Fórmula sencilla:</strong><br>
+Precio de venta = (Coste total × 100) / (100 &minus; margen deseado %)</p>
+
+<p>Si tu coste es 800 EUR y quieres un 20% de margen neto: 800 × 100 / 80 = <strong>1.000 EUR</strong>.</p>
+
+<p>No confundas margen con markup. Un markup del 25% sobre coste no es lo mismo que un margen del 25% sobre el precio de venta.</p>
+
+<h2>Qué debe incluir una cotización de limpieza profesional</h2>
+
+<p>Ahora que sabes cómo calcular el precio, veamos cómo presentarlo. Una cotización de limpieza profesional debe tener, como mínimo:</p>
+
+<h3>1. Tus datos y los del cliente</h3>
+<p>Nombre de tu empresa, CIF, contacto, logotipo. Datos del cliente: empresa, CIF, dirección del servicio y persona de contacto. Parece básico, pero muchas cotizaciones de limpieza son anónimas o incompletas.</p>
+
+<h3>2. Descripción detallada del servicio</h3>
+<p>No &ldquo;limpieza de oficina&rdquo;. Sino: &ldquo;Servicio de limpieza de mantenimiento en oficinas de [Empresa] situadas en [dirección], planta 2 y 3, superficie aproximada 320 m². Frecuencia: martes y jueves, de 19:00 a 21:00. Personal asignado: 2 operarios.&rdquo;</p>
+
+<h3>3. Desglose de tareas</h3>
+<p>Listado de qué se hace en cada visita y con qué periodicidad. Diferencia entre tareas diarias, semanales y mensuales. Esto protege a ambas partes y evita el clásico &ldquo;yo pensaba que incluía limpiar el almacén&rdquo;.</p>
+
+<h3>4. Lo que NO incluye</h3>
+<p>Esta sección es tan importante como la anterior. Especifica expresamente qué no está incluido: cristales exteriores, zonas restringidas, limpiezas de emergencia, tratamientos especiales. Así eliminas expectativas que no puedes cumplir.</p>
+
+<h3>5. Materiales y productos</h3>
+<p>¿Los aportas tú o el cliente? Si los aportas tú, ¿están incluidos en el precio o se facturan aparte? ¿Usas productos ecológicos o convencionales? Cada vez más clientes valoran la limpieza con productos sostenibles y están dispuestos a pagar más por ello.</p>
+
+<h3>6. Precio y forma de pago</h3>
+<p>Precio mensual (o por servicio), forma de pago (transferencia, domiciliación bancaria), fecha de facturación. En contratos recurrentes, indica si el precio incluye o excluye IVA y qué pasa si el cliente cancela una visita.</p>
+
+<h3>7. Duración del contrato y condiciones de rescisión</h3>
+<p>¿El contrato es mensual, trimestral o anual? ¿Qué preaviso se necesita para cancelar? ¿Existe penalización por baja anticipada? Esto es especialmente importante cuando has tenido que comprar equipos o asignar personal específicamente para ese cliente.</p>
+
+<h3>8. Seguro y responsabilidad</h3>
+<p>Menciona expresamente que cuentas con seguro de responsabilidad civil y cuál es su cobertura mínima. Para clientes corporativos o con instalaciones de valor elevado, esto puede ser un factor decisivo. Es tu diferenciador frente a empresas más pequeñas que trabajan sin seguro.</p>
+
+<h3>9. Validez de la cotización</h3>
+<p>Indica durante cuánto tiempo es válida la propuesta (habitual: 30 días). Los costes de personal y materiales cambian, y no puedes comprometerte a un precio indefinidamente.</p>
+
+<h2>Estrategia de precio: cuándo competir en precio y cuándo no</h2>
+
+<p>El sector de la limpieza tiene una competencia feroz. Hay siempre alguien dispuesto a hacer el trabajo más barato. La pregunta es: ¿quieres competir en precio o en valor?</p>
+
+<h3>Cuándo bajar el precio tiene sentido</h3>
+<ul>
+<li>Para entrar en un cliente nuevo de mucho volumen que puede escalar</li>
+<li>Para completar rutas de personal ya asignado (coste marginal bajo)</li>
+<li>Para contratos de larga duración que te dan estabilidad</li>
+</ul>
+
+<h3>Cuándo defender tu precio</h3>
+<ul>
+<li>Cuando ofreces algo diferencial: seguros más altos, productos ecológicos certificados, personal fijo y con formación específica</li>
+<li>Cuando el cliente ya ha tenido problemas con proveedores baratos</li>
+<li>Cuando el coste de adquirir ese cliente es muy alto (muchas visitas, mucho tiempo)</li>
+</ul>
+
+<p>Un truco útil: antes de bajar el precio, ofrece <strong>reducir el alcance</strong>. &ldquo;Si el presupuesto es ajustado, podemos empezar con 2 visitas semanales en lugar de 3 y ajustar la frecuencia de la limpieza de baños.&rdquo; Así no devalúas tu precio por hora y el cliente entiende que la calidad tiene un coste.</p>
+
+<h2>El error del presupuesto &ldquo;cerrado&rdquo; en servicios variables</h2>
+
+<p>Uno de los problemas típicos en limpieza es que el cliente pide una limpieza &ldquo;de lo que haga falta&rdquo; pero espera pagar un precio fijo. Esto es una trampa.</p>
+
+<p>Para servicios donde el volumen puede variar (limpieza post-evento, limpiezas de urgencia, tratamientos especiales), hay dos soluciones:</p>
+
+<ul>
+<li><strong>Tarifa base + extras:</strong> precio fijo por el servicio estándar, con tarifas claras para servicios adicionales</li>
+<li><strong>Precio por hora o m²:</strong> más transparente para servicios puntuales o de volumen variable</li>
+</ul>
+
+<p>Incluir una hoja de tarifas adjunta a tu cotización es muy útil. Así el cliente sabe de antemano cuánto va a costar una limpieza extra o un tratamiento especial, y no hay sorpresas en la factura.</p>
+
+<h2>Cómo hacer seguimiento de tus cotizaciones de limpieza</h2>
+
+<p>Muchas empresas de limpieza envían la cotización y esperan. Error. El seguimiento es donde se ganan o se pierden los contratos.</p>
+
+<p>Una secuencia de seguimiento efectiva:</p>
+
+<ol>
+<li><strong>Al día siguiente del envío:</strong> email o llamada para confirmar que han recibido la propuesta y resolver dudas inmediatas</li>
+<li><strong>A los 5 días:</strong> seguimiento suave. &ldquo;Hola [nombre], quería saber si habéis tenido oportunidad de revisar la propuesta. Si necesitáis cualquier ajuste o aclaración, estamos disponibles.&rdquo;</li>
+<li><strong>A los 12-15 días:</strong> último contacto antes de que caduque la propuesta. Recuerda la fecha de vencimiento de forma natural.</li>
+</ol>
+
+<p>No más de tres contactos sin respuesta. Si en ese punto no hay señales de vida, el cliente no está interesado o ya ha elegido a otro. Cerrar el ciclo y seguir.</p>
+
+<h2>Software de cotizaciones para empresas de limpieza: qué buscar</h2>
+
+<p>Hasta cierto punto de volumen, una plantilla de Word o Excel funciona. Pero cuando manejas más de 10-15 presupuestos al mes, la gestión manual se vuelve un cuello de botella.</p>
+
+<p>Un software de cotizaciones específico para el sector de servicios como <a href="https://dealforge.es">DealForge</a> te permite:</p>
+
+<ul>
+<li>Mantener un catálogo de servicios con tarifas actualizadas (precio/hora, precio/m², precio por tipo de superficie)</li>
+<li>Crear cotizaciones en minutos reutilizando servicios y condiciones estándar</li>
+<li>Generar PDFs profesionales con tu marca, logo y diseño coherente</li>
+<li>Enviar las cotizaciones directamente por email y hacer seguimiento del estado (enviada, vista, aceptada)</li>
+<li>Aplicar reglas de descuento automáticas (por volumen, por duración de contrato)</li>
+<li>Solicitar la firma electrónica del cliente para formalizar el contrato</li>
+</ul>
+
+<p>El tiempo que recuperas en administración lo puedes dedicar a hacer más visitas comerciales, que es donde realmente se gana el negocio.</p>
+
+<h2>Ejemplo real de cotización de limpieza de oficina</h2>
+
+<p>Para aterrizar todo lo anterior, aquí tienes un ejemplo de cómo debería verse una línea detallada en una cotización de limpieza de oficina:</p>
+
+<p><strong>Servicio:</strong> Limpieza de mantenimiento &mdash; Oficinas Planta 3 (380 m²)<br>
+<strong>Frecuencia:</strong> Lunes, miércoles y viernes / 2 horas por visita<br>
+<strong>Personal:</strong> 1 operario fijo asignado<br>
+<strong>Tareas incluidas:</strong></p>
+<ul>
+<li>Barrido y fregado de suelos de toda la planta</li>
+<li>Limpieza de 4 aseos (incluye sanitarios, lavabos, suelos, reposición de consumibles)</li>
+<li>Vaciado y limpieza de papeleras</li>
+<li>Limpieza superficial de mobiliario y pantallas</li>
+<li>Limpieza de cocina (encimera, microondas exterior, fregadero)</li>
+<li>Cristales interiores (mensual)</li>
+</ul>
+<p><strong>No incluye:</strong> Cristales exteriores, limpieza del CPD, zona de archivo, limpiezas de urgencia fuera de horario.<br>
+<strong>Materiales:</strong> Incluidos en el precio. Productos de limpieza profesional certificados. No incluye consumibles de aseos (papel, jabón) salvo acuerdo expreso.<br>
+<strong>Precio mensual:</strong> 780 EUR + IVA<br>
+<strong>Forma de pago:</strong> Domiciliación bancaria, factura el día 1 de cada mes<br>
+<strong>Duración:</strong> Contrato anual, renovación automática. Baja con 30 días de preaviso.</p>
+
+<p>Eso es lo que se llama una cotización sin ambigüedades. Cuando el cliente la lee, sabe exactamente qué recibe y qué no. No hay sorpresas.</p>
+
+<h2>Checklist antes de enviar tu cotización de limpieza</h2>
+
+<ul>
+<li>&iquest;Has especificado la dirección exacta del servicio y las zonas incluidas?</li>
+<li>&iquest;La frecuencia y el horario están claramente detallados?</li>
+<li>&iquest;Has listado las tareas incluidas y las excluidas?</li>
+<li>&iquest;Aparece quién aporta los materiales y qué tipo de productos se usan?</li>
+<li>&iquest;El precio incluye o excluye IVA?</li>
+<li>&iquest;Has indicado la duración del contrato y las condiciones de baja?</li>
+<li>&iquest;Mencionas tu seguro de responsabilidad civil?</li>
+<li>&iquest;La cotización tiene fecha de vencimiento?</li>
+<li>&iquest;El PDF tiene tu logo y datos de contacto completos?</li>
+</ul>
+
+<h2>Conclusión: cotiza con detalle, gana con confianza</h2>
+
+<p>En el sector de la limpieza, la diferencia entre ganar y perder un contrato raramente está en el precio. Está en la confianza que genera tu propuesta. Un presupuesto detallado, claro y enviado rápido dice más sobre la calidad de tu trabajo que cualquier palabra de marketing.</p>
+
+<p>Dedica tiempo a construir una buena plantilla de cotización, define bien tu estructura de costes y establece un proceso de seguimiento. Esos tres cambios pueden doblar tu tasa de cierre sin bajar ni un euro tus tarifas.</p>
+
+<p>Porque el cliente que solo compra por precio nunca será tu mejor cliente. El cliente que elige tu propuesta porque le transmite profesionalidad y claridad, ese sí fideliza.</p>
+
+<p><strong>&iquest;Quieres crear cotizaciones de limpieza profesionales en minutos, con tu marca y enviadas directamente por email?</strong> Prueba <a href="https://dealforge.es">DealForge</a> gratis y deja de perder tiempo en presupuestos para dedicarlo a conseguir más clientes.</p>`,
+    autor: "DealForge",
+    categoria: "sectores",
+    tags: JSON.stringify([
+      "limpieza profesional",
+      "cotizaciones limpieza",
+      "presupuesto limpieza",
+      "empresa de limpieza",
+      "servicios de limpieza",
+      "pymes",
+      "ventas",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Cotizaciones de servicios de limpieza profesional: guía completa — DealForge",
+    metaDescripcion:
+      "Cómo crear cotizaciones de limpieza profesional que ganen contratos: qué incluir, cómo calcular el precio, errores a evitar y ejemplo real por tipo de servicio.",
+    metaKeywords:
+      "cotización limpieza profesional, presupuesto empresa de limpieza, cómo cotizar servicios de limpieza, precio limpieza oficinas, plantilla presupuesto limpieza, tarifa limpieza comunidades, software cotizaciones limpieza",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13];
   const results = [];
 
   for (const p of posts) {
