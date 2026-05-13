@@ -2670,7 +2670,303 @@ Precio de venta = (Coste total × 100) / (100 &minus; margen deseado %)</p>
       "cotización limpieza profesional, presupuesto empresa de limpieza, cómo cotizar servicios de limpieza, precio limpieza oficinas, plantilla presupuesto limpieza, tarifa limpieza comunidades, software cotizaciones limpieza",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13];
+  const post14 = {
+    slug: "presupuestos-desarrollo-web-apps-guia-definitiva",
+    titulo: "Presupuestos de desarrollo web y apps: la guía definitiva para agencias y freelancers",
+    extracto: "Cómo crear presupuestos de desarrollo web y apps que sean claros, justos y cierren más proyectos. Con modelos de precio, qué incluir, cómo calcular el alcance y los errores que te están costando clientes.",
+    contenido: `<p>Desarrollas webs y apps que funcionan. Tus clientes están contentos con el resultado. Pero antes de empezar el proyecto, vives el mismo suplicio de siempre: ¿cuánto cobro por esto?</p>
+
+<p>El presupuesto de desarrollo web es uno de los documentos más difíciles de elaborar en el mundo de los servicios digitales. El alcance es difuso, el cliente no sabe exactamente qué quiere, los tiempos se alargan y siempre aparece &ldquo;una cosa más&rdquo; al final. Si no tienes un sistema claro, cada proyecto se convierte en una caja de sorpresas &mdash; normalmente desagradables.</p>
+
+<p>Esta guía es para agencias de desarrollo web, freelancers y estudios digitales que quieren cotizar mejor: más rápido, con más claridad y con más probabilidad de cerrar el proyecto a buen precio.</p>
+
+<h2>El problema fundamental del presupuesto en desarrollo web</h2>
+
+<p>A diferencia de vender un producto físico, presupuestar un proyecto de desarrollo web implica vender algo que todavía no existe. El cliente tiene una idea &mdash; a veces vaga &mdash; y tú tienes que estimar cuánto tiempo y recursos se necesitan para hacerla realidad sin haber hecho el análisis técnico completo.</p>
+
+<p>Este desajuste produce tres problemas habituales:</p>
+
+<ul>
+<li><strong>Scope creep:</strong> el proyecto original crece sin parar porque el cliente va añadiendo funcionalidades que &ldquo;no son para tanto&rdquo;</li>
+<li><strong>Presupuestos demasiado bajos:</strong> para ganar el proyecto calculas ajustado y luego trabajas con pérdidas</li>
+<li><strong>Discrepancias de expectativas:</strong> el cliente esperaba una cosa y tú entregaste otra (ambas válidas, pero distintas)</li>
+</ul>
+
+<p>La solución no está en ser más caro o más barato. Está en presupuestar mejor.</p>
+
+<h2>Los cuatro modelos de precio en desarrollo web</h2>
+
+<p>Antes de elaborar ningún presupuesto, debes decidir qué modelo de precio vas a aplicar. No todos los proyectos son iguales, y el modelo que elijas va a condicionar cómo calculas el precio y cómo lo presentas.</p>
+
+<h3>Precio fijo (fixed price)</h3>
+
+<p>El cliente paga una cantidad fija por un alcance definido. Es el modelo que más clientes piden porque les da certeza sobre el coste total. También es el más arriesgado para el desarrollador si el alcance no está perfectamente definido.</p>
+
+<p><strong>Cuándo usarlo:</strong> proyectos con requisitos muy claros y cerrados. Una web corporativa de cinco páginas con diseño predefinido. Una landing page. Un módulo específico de funcionalidad concreta.</p>
+
+<p><strong>El error más común:</strong> aceptar precio fijo cuando el alcance es ambiguo. Si el cliente dice &ldquo;quiero un portal de clientes con cosas personalizadas&rdquo;, eso no es un alcance. Es una idea. No cotices precio fijo hasta que no tengas los requisitos concretos.</p>
+
+<h3>Por hora (time &amp; materials)</h3>
+
+<p>El cliente paga por las horas reales trabajadas a una tarifa acordada. El riesgo se comparte: si el proyecto crece, crece el coste de forma proporcional.</p>
+
+<p><strong>Cuándo usarlo:</strong> proyectos de mantenimiento y evolución de sistemas existentes. Proyectos con requisitos cambiantes. Fases iniciales de exploración técnica.</p>
+
+<p><strong>El problema:</strong> muchos clientes tienen miedo al modelo por horas porque sienten que pierden el control del coste. La solución: establece un presupuesto estimado máximo y haz seguimiento transparente. &ldquo;Trabajamos por horas con un techo de 20.000 EUR. Si vemos que nos acercamos, te avisamos antes de seguir.&rdquo;</p>
+
+<h3>Retainer mensual</h3>
+
+<p>El cliente paga una cuota fija mensual por un banco de horas reservadas. Ideal para clientes que necesitan evolución continua de su producto digital.</p>
+
+<p><strong>Cuándo usarlo:</strong> clientes con producto digital en producción que necesitan mejoras constantes, soporte técnico y nuevas funcionalidades de forma recurrente.</p>
+
+<p><strong>Ventaja:</strong> ingresos recurrentes y predecibles para tu agencia o como freelancer. Una de las métricas más sanas que puedes tener en un negocio de servicios digitales.</p>
+
+<h3>Por sprint o fase</h3>
+
+<p>El proyecto se divide en fases o sprints de dos a cuatro semanas, cada uno con un entregable concreto y un precio cerrado. Al final de cada sprint el cliente decide si continúa.</p>
+
+<p><strong>Cuándo usarlo:</strong> proyectos medianos o grandes donde el cliente quiere visibilidad y control. Es el modelo más equilibrado para proyectos complejos.</p>
+
+<p><strong>Ventaja:</strong> reduces tu riesgo porque cobras por fases, el cliente ve avances reales y el proyecto puede ajustarse según los aprendizajes de cada iteración.</p>
+
+<h2>Cómo calcular el precio de un proyecto web</h2>
+
+<p>Tanto si usas precio fijo como por sprint, necesitas estimar el esfuerzo con la mayor precisión posible. Este es el proceso que funciona.</p>
+
+<h3>Paso 1: descompón el proyecto en tareas</h3>
+
+<p>No cotices el proyecto como un todo. Descompónlo en módulos funcionales y tareas concretas. Para una web corporativa con blog y formulario de contacto, la lista podría ser:</p>
+
+<ul>
+<li>Análisis de requisitos y wireframing &mdash; 4 horas</li>
+<li>Diseño UI en Figma: home + páginas interiores &mdash; 12 horas</li>
+<li>Maquetación y desarrollo frontend: home &mdash; 6 horas</li>
+<li>Maquetación: páginas interiores (×4) &mdash; 8 horas</li>
+<li>Integración del blog con CMS &mdash; 8 horas</li>
+<li>Formulario de contacto con notificación por email &mdash; 3 horas</li>
+<li>SEO on-page básico: robots.txt, sitemap, metas &mdash; 3 horas</li>
+<li>Deploy y configuración del hosting &mdash; 2 horas</li>
+<li>Formación al cliente &mdash; 2 horas</li>
+<li>Revisiones y QA &mdash; 4 horas</li>
+</ul>
+
+<p>Total estimado: 52 horas. Con una tarifa de 60 EUR/hora, el precio base sería 3.120 EUR.</p>
+
+<h3>Paso 2: aplica un factor de contingencia</h3>
+
+<p>Los proyectos siempre duran más de lo estimado. Las reuniones imprevistas, los cambios de última hora, los bugs inesperados, la formación extra que no estaba en el plan. El factor de contingencia cubre todo eso.</p>
+
+<ul>
+<li>Proyectos bien definidos: añade un 15&ndash;20% sobre tu estimación base</li>
+<li>Proyectos con requisitos menos claros: añade un 25&ndash;35%</li>
+<li>Proyectos con tecnología nueva para ti: añade hasta un 40&ndash;50%</li>
+</ul>
+
+<p>En el ejemplo anterior: 52h × 1,20 = 62,4 horas → 3.744 EUR. Es más honesto que quedarte corto y luego tener que pedir más dinero o trabajar a pérdidas.</p>
+
+<h3>Paso 3: añade los costes externos</h3>
+
+<p>Los presupuestos de desarrollo frecuentemente olvidan los costes que no son horas de trabajo:</p>
+
+<ul>
+<li>Licencias de plugins, temas o librerías comerciales</li>
+<li>Herramientas de diseño (Figma, Adobe CC)</li>
+<li>Servicios de terceros: Stripe, SendGrid, APIs de pago</li>
+<li>Hosting y dominio del primer año</li>
+<li>Imágenes y recursos gráficos de stock</li>
+</ul>
+
+<p>Estos costes deben aparecer desglosados en tu presupuesto, no mezclados con tus horas. El cliente tiene que entender qué está pagando a quién.</p>
+
+<h3>Paso 4: considera el coste de adquisición del cliente</h3>
+
+<p>¿Cuántas reuniones has tenido para llegar a este presupuesto? ¿Has elaborado una propuesta técnica previa? ¿Has viajado para una reunión presencial? Ese tiempo también tiene valor. Si invertiste seis horas en el proceso de venta de un proyecto de 3.000 EUR, tu margen real ya no es el que calculaste.</p>
+
+<p>Algunos freelancers y agencias cobran una fase de &ldquo;análisis y propuesta&rdquo; remunerada antes de presentar el presupuesto definitivo. Si el proyecto es complejo &mdash; por encima de 15.000 EUR &mdash;, esto tiene todo el sentido del mundo.</p>
+
+<h2>Qué debe incluir un presupuesto de desarrollo web</h2>
+
+<p>Un buen presupuesto no es solo un número. Es un documento que gestiona expectativas, establece el marco de la relación y protege a ambas partes.</p>
+
+<h3>1. Descripción del proyecto y contexto</h3>
+
+<p>Demuestra que has escuchado y entendido lo que el cliente necesita. No copies y pegues lo que te dijeron: sintetízalo con tus propias palabras e incluye el objetivo de negocio detrás del proyecto.</p>
+
+<p><em>&ldquo;El objetivo de este proyecto es sustituir el proceso manual de registro de clientes por una plataforma web que automatice la captación y el envío de documentación, reduciendo el tiempo de onboarding de tres días a menos de dos horas.&rdquo;</em></p>
+
+<p>Eso demuestra que no eres un ejecutor de tareas. Eres un socio estratégico.</p>
+
+<h3>2. Alcance detallado: qué incluye y qué no</h3>
+
+<p>Lista todos los entregables concretos: pantallas, módulos, funcionalidades, integraciones. Y añade una sección explícita de &ldquo;fuera de alcance&rdquo;.</p>
+
+<p>Esta sección es tu mejor defensa contra el scope creep. Si aparece una petición nueva, puedes señalar el contrato: &ldquo;Eso no estaba en el alcance original. Podemos añadirlo con un presupuesto adicional de cambio.&rdquo;</p>
+
+<h3>3. Tecnología y stack</h3>
+
+<p>Indica el lenguaje, framework y herramientas principales que usarás. Esto no es solo para el cliente técnico: le da seguridad de que has pensado en la solución, no solo en el precio.</p>
+
+<h3>4. Fases y calendario</h3>
+
+<p>Divide el proyecto en fases con fechas aproximadas. Si el proyecto tiene dependencias del cliente &mdash; que te proporcione textos, imágenes o accesos &mdash;, inclúyelas explícitamente en el calendario. Si el cliente se retrasa, el plazo se mueve.</p>
+
+<h3>5. Precio desglosado</h3>
+
+<p>Presenta el precio por fase o por módulo funcional, no como un bloque único. Esto tiene varias ventajas: el cliente entiende de dónde viene el precio y lo percibe como más justo; si necesita ajustar el presupuesto, puede negociar quitando módulos en lugar de presionarte para bajar la tarifa global; y en proyectos grandes, facilita las aprobaciones internas.</p>
+
+<h3>6. Condiciones de pago</h3>
+
+<p>Para proyectos de desarrollo web, el estándar del sector es:</p>
+
+<ul>
+<li>30&ndash;50% al inicio del proyecto (anticipo)</li>
+<li>30&ndash;40% en un hito intermedio (entrega del diseño o primera versión funcional)</li>
+<li>20&ndash;30% a la entrega final</li>
+</ul>
+
+<p>No empieces ningún proyecto sin un anticipo. No importa lo grande que sea el cliente ni lo convincente que parezca la relación. El anticipo es la prueba de que el proyecto es real.</p>
+
+<h3>7. Propiedad intelectual</h3>
+
+<p>Especifica cuándo se transfiere la propiedad del código al cliente. Lo habitual: al recibir el pago final. Mientras haya facturas pendientes, el código sigue siendo tuyo.</p>
+
+<h3>8. Mantenimiento y soporte post-entrega</h3>
+
+<p>Indica qué pasa después de la entrega: ¿hay un período de garantía? ¿Qué cubre (bugs del código entregado, sí; nuevas funcionalidades, no)? ¿Ofreces un plan de mantenimiento mensual? Si es así, inclúyelo como opción en el presupuesto. El mantenimiento es una de las líneas de ingresos más rentables y predecibles para cualquier agencia o freelancer.</p>
+
+<h3>9. Número de revisiones incluidas</h3>
+
+<p>Define cuántas rondas de revisión están incluidas en el precio y qué pasa si el cliente solicita más. Sin esta cláusula, un proyecto puede convertirse en un bucle infinito de &ldquo;una cosa más.&rdquo;</p>
+
+<h3>10. Validez del presupuesto</h3>
+
+<p>Indica durante cuánto tiempo es válida la oferta. Treinta días es estándar. Después, los precios pueden variar.</p>
+
+<h2>El scope creep: cómo prevenirlo desde el presupuesto</h2>
+
+<p>El scope creep &mdash; el crecimiento no planificado del alcance &mdash; es la causa número uno de rentabilidad negativa en proyectos de desarrollo web. Y empieza antes de escribir una línea de código: empieza en el presupuesto.</p>
+
+<p>Estas son las cláusulas que debes incluir siempre:</p>
+
+<ul>
+<li><strong>Change order explícito:</strong> cualquier funcionalidad no incluida en el alcance original requiere una orden de cambio por escrito con precio acordado antes de ejecutarse</li>
+<li><strong>Definición de bug vs. nueva funcionalidad:</strong> un bug es algo que no funciona según lo acordado; un cambio en cómo funciona algo ya implementado es una nueva funcionalidad y se factura aparte</li>
+<li><strong>Límite de reuniones incluidas:</strong> en proyectos de precio fijo, define cuántas horas de reunión están incluidas; las reuniones cuestan dinero y deben estar en el precio</li>
+</ul>
+
+<p>No tienes que ser inflexible. Tienes que ser claro. Un cliente que entiende las reglas del juego desde el principio las respeta. Un cliente al que nunca le dijiste las reglas seguirá pidiendo &ldquo;cosas pequeñas&rdquo; indefinidamente.</p>
+
+<h2>Cómo presentar el presupuesto para ganar más proyectos</h2>
+
+<h3>Presenta siempre tres opciones</h3>
+
+<p>En lugar de una sola propuesta, presenta tres versiones del proyecto:</p>
+
+<ul>
+<li><strong>Opción básica:</strong> las funcionalidades esenciales para que el proyecto cumpla su objetivo mínimo</li>
+<li><strong>Opción estándar:</strong> la que realmente recomiendas (normalmente la intermedia)</li>
+<li><strong>Opción premium:</strong> todo lo anterior más funcionalidades adicionales o mayor nivel de acabado</li>
+</ul>
+
+<p>Esto tiene dos efectos: el cliente pasa de decidir si contratar a decidir cuál contratar. Y la opción intermedia &mdash; la que más te interesa vender &mdash; se percibe como la más razonable por efecto del anclaje psicológico.</p>
+
+<h3>Añade el ROI cuando sea posible</h3>
+
+<p>Un presupuesto de 15.000 EUR puede parecer caro hasta que el cliente entiende que el sistema que vas a crear le ahorrará 3.000 EUR al mes en trabajo manual. En cinco meses está amortizado. Pon las cifras encima de la mesa cuando las tengas.</p>
+
+<h3>Envía un PDF profesional, no un email con precios</h3>
+
+<p>La forma en que presentas tu propuesta comunica tu nivel de profesionalidad antes de que el cliente haya leído una sola línea. Un PDF bien diseñado con tu identidad de marca, estructura clara y lenguaje cuidado transmite confianza. Un email con &ldquo;el precio sería unos 8.000 euros, más o menos&rdquo; hace exactamente lo contrario.</p>
+
+<p>Herramientas como <a href="https://dealforge.es">DealForge</a> te permiten generar propuestas en formato PDF con tu branding, estructura de precio por fases y condiciones legales, listas para enviar directamente al cliente desde la plataforma &mdash; con seguimiento del estado incluido para saber cuándo la han abierto y cuándo hacer el seguimiento comercial.</p>
+
+<h2>Errores habituales al cotizar proyectos de desarrollo web</h2>
+
+<h3>Cotizar sin requisitos claros</h3>
+
+<p>Si el cliente no sabe exactamente qué quiere, tú no puedes saber cuánto va a costar. En ese caso, la solución es cobrar por la fase de análisis antes de dar el presupuesto definitivo. Muchas agencias ofrecen un &ldquo;sprint de discovery&rdquo; de una semana con precio fijo que incluye entrevistas, wireframes y especificación técnica. Al final de ese sprint, el presupuesto es mucho más preciso y el cliente entiende mejor el alcance.</p>
+
+<h3>No cobrar el tiempo de gestión</h3>
+
+<p>Las reuniones, los emails de aclaración, la gestión de cambios, la coordinación con proveedores externos... todo eso es trabajo facturable. Si no lo incluyes en el precio, lo estás regalando. Un proyecto que tiene reuniones semanales durante tres meses tiene más de veinte horas de gestión que alguien tiene que pagar.</p>
+
+<h3>Bajar el precio para ganar el proyecto</h3>
+
+<p>Reducir tu tarifa para competir con propuestas más baratas es una trampa. Atraes al cliente más sensible al precio del mercado, trabajas con menor margen y tienes menos presupuesto para hacer un buen trabajo. La competencia de precio en servicios de desarrollo es una carrera hacia el fondo que nadie gana. Mejor perder ese proyecto y dedicar ese tiempo a clientes que valoren lo que ofreces.</p>
+
+<h3>No definir hitos de pago</h3>
+
+<p>Si cobras todo al final, tu flujo de caja sufre y aumentas el riesgo de que el cliente regatee la última factura o desaparezca. Los hitos de pago distribuyen el riesgo a lo largo del proyecto.</p>
+
+<h3>Olvidar las licencias y herramientas externas</h3>
+
+<p>Un plugin de 200 EUR puede parecer irrelevante en un proyecto grande, pero si tienes cinco proyectos así al mes, son 1.000 EUR que salen de tu bolsillo. Cada coste externo debe estar en el presupuesto, con su importe real o estimado.</p>
+
+<h2>Estructura de un presupuesto de desarrollo web</h2>
+
+<p>Para que no partas de cero en cada propuesta, esta es la estructura que deberías usar como base:</p>
+
+<ol>
+<li><strong>Portada:</strong> tu logo, nombre del proyecto, fecha, datos del cliente</li>
+<li><strong>Resumen ejecutivo:</strong> objetivo del proyecto y enfoque propuesto en dos o tres párrafos</li>
+<li><strong>Solución propuesta:</strong> descripción técnica, stack tecnológico, decisiones de arquitectura</li>
+<li><strong>Alcance del proyecto:</strong> módulos y funcionalidades incluidas, desglosadas</li>
+<li><strong>Fuera de alcance:</strong> lo que explícitamente no incluye el presupuesto</li>
+<li><strong>Plan de trabajo y calendario:</strong> fases, hitos y plazos de entrega</li>
+<li><strong>Inversión:</strong> precio desglosado por fase o módulo, IVA, condiciones de pago y anticipo</li>
+<li><strong>Mantenimiento y soporte:</strong> qué pasa después de la entrega y opciones de contrato de mantenimiento</li>
+<li><strong>Sobre nosotros:</strong> breve descripción de tu agencia o perfil, proyectos relevantes, tecnologías dominadas</li>
+<li><strong>Próximos pasos:</strong> qué hacer para arrancar (firma, anticipo, reunión de kick-off)</li>
+</ol>
+
+<p>Con <a href="https://dealforge.es">DealForge</a> puedes guardar esta estructura como plantilla y reutilizarla en cada propuesta nueva, personalizando únicamente el contenido específico de cada cliente. Lo que antes te llevaba tres horas lo tienes en treinta minutos, con resultado más profesional.</p>
+
+<h2>Cómo hacer seguimiento sin resultar pesado</h2>
+
+<p>Enviaste el presupuesto. El cliente dijo &ldquo;lo miro y te digo.&rdquo; Han pasado cuatro días. ¿Qué haces?</p>
+
+<p>Una secuencia de seguimiento razonable para propuestas de desarrollo web:</p>
+
+<ul>
+<li><strong>Día 1&ndash;2 tras el envío:</strong> email breve para confirmar recepción y preguntar si tienen dudas</li>
+<li><strong>Día 5&ndash;7:</strong> seguimiento con valor añadido: un insight relevante para el proyecto, una pregunta sobre sus prioridades, algo que demuestre que sigues pensando en su caso</li>
+<li><strong>Día 12&ndash;15:</strong> último contacto antes de que expire la propuesta; recuerda la fecha de vencimiento de forma natural, sin presionar</li>
+</ul>
+
+<p>Si pasados quince días no hay respuesta, el cliente no está listo o ya ha elegido a otro. Cierra el ciclo y sigue. No hay peor inversión de tiempo que perseguir a alguien que no quiere comprar.</p>
+
+<h2>Conclusión: presupuesta como un socio, no como un proveedor</h2>
+
+<p>La diferencia entre un presupuesto que gana el proyecto y uno que no suele estar en los detalles: en cómo entiendes el problema del cliente, en cómo defines el alcance, en cómo proteges tu tiempo y en cómo presentas el valor de lo que ofreces.</p>
+
+<p>Un buen presupuesto de desarrollo web no es solo un documento de precio. Es la primera entrega real del proyecto: demuestra tu capacidad de análisis, tu orden mental y tu profesionalidad. Si el presupuesto ya impresiona, el proyecto tiene muy buen comienzo.</p>
+
+<p>Trabaja tu plantilla, define tus tarifas con claridad, aplica siempre el factor de contingencia y sé explícito con el alcance. Esas cuatro cosas solas mejorarán tu tasa de cierre y tu rentabilidad más que cualquier bajada de precio.</p>
+
+<p><strong>¿Quieres crear propuestas de desarrollo web en formato profesional, con tu branding y enviadas directamente al cliente?</strong> Prueba <a href="https://dealforge.es">DealForge</a> y deja de perder horas en documentos de Word para dedicarlas a lo que realmente importa: construir proyectos que funcionen.</p>`,
+    autor: "DealForge",
+    categoria: "sectores",
+    tags: JSON.stringify([
+      "desarrollo web",
+      "presupuesto desarrollo web",
+      "cotización apps",
+      "agencias digitales",
+      "freelance",
+      "pricing",
+      "pymes",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Presupuestos de desarrollo web y apps: guía definitiva para agencias y freelancers — DealForge",
+    metaDescripcion:
+      "Cómo crear presupuestos de desarrollo web que cierren proyectos: modelos de precio, qué incluir, cómo calcular el alcance real y evitar el scope creep. Con plantilla de estructura.",
+    metaKeywords:
+      "presupuesto desarrollo web, cotización proyecto web, cómo cotizar desarrollo web, precio aplicación móvil, presupuesto app, cotización freelance desarrollador, plantilla presupuesto web, agencia desarrollo web precio",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14];
   const results = [];
 
   for (const p of posts) {
