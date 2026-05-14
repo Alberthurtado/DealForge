@@ -424,12 +424,15 @@ export default function CotizacionDetailPage() {
   const [condicionesEdit, setCondicionesEdit] = useState("");
   const [condicionesDefecto, setCondicionesDefecto] = useState<string | null>(null);
   const [empresaNombre, setEmpresaNombre] = useState<string>("");
+  const [smtpConfigured, setSmtpConfigured] = useState<boolean | null>(null);
+  const [showSmtpHint, setShowSmtpHint] = useState(false);
 
   useEffect(() => {
     fetch("/api/empresa")
       .then((r) => r.json())
       .then((data) => {
         if (data?.nombre) setEmpresaNombre(data.nombre);
+        setSmtpConfigured(Boolean(data?.smtpHost && data?.smtpUser && data?.smtpPass));
         // Build default T&C based on line item types
         if (cotizacion) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -476,6 +479,12 @@ export default function CotizacionDetailPage() {
 
   function openEmailDialog() {
     if (!cotizacion) return;
+    // Block opening the dialog when SMTP isn't configured — show a hint
+    // that links to Configuración instead of silently failing on submit.
+    if (smtpConfigured === false) {
+      setShowSmtpHint(true);
+      return;
+    }
     // Find principal contact email
     const principal = cotizacion.cliente.contactos?.find((c) => c.principal);
     const contactEmail = principal?.email || cotizacion.cliente.email || "";
@@ -1268,6 +1277,42 @@ export default function CotizacionDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* SMTP Not Configured Hint */}
+      {showSmtpHint && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setShowSmtpHint(false)}>
+          <div onClick={(e) => e.stopPropagation()} className="bg-white rounded-2xl shadow-xl w-full max-w-md">
+            <div className="px-6 py-5">
+              <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
+                <Mail className="w-6 h-6 text-amber-600" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Email no configurado</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                Para enviar cotizaciones por email a tus clientes desde tu propia cuenta,
+                primero tienes que conectar tu servidor SMTP (Gmail, Outlook, dominio propio…).
+              </p>
+              <p className="text-xs text-gray-500 mb-5">
+                Es un proceso de 2 minutos. Mientras tanto, puedes usar el botón
+                <strong> &quot;Vista Previa&quot; </strong> para descargar el PDF y mandarlo manualmente.
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowSmtpHint(false)}
+                  className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-600 border border-border rounded-lg hover:bg-muted transition-colors"
+                >
+                  Más tarde
+                </button>
+                <Link
+                  href="/configuracion#email"
+                  className="flex-1 px-4 py-2.5 text-sm font-semibold bg-[#3a9bb5] text-white text-center rounded-lg hover:bg-[#2d7d94] transition-colors"
+                >
+                  Configurar ahora
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Email Dialog */}
       {emailDialogOpen && (
