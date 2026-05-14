@@ -4,17 +4,44 @@ import { getSession } from "@/lib/auth";
 import { categoriaCreateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 
+// Build an owner filter that returns the categorías visible to the current
+// session: the user's own + their team's shared ones.
+function ownerFilter(session: { userId: string; empresaId?: string | null }) {
+  return session.empresaId
+    ? {
+        OR: [
+          { equipoId: session.empresaId },
+          { usuarioId: session.userId, equipoId: null },
+        ],
+      }
+    : { usuarioId: session.userId };
+}
+
 export async function GET() {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
-  // Categories are shared globally but show product count only for user's products
   const categorias = await prisma.categoria.findMany({
-    include: { _count: { select: { productos: { where: { usuarioId: session.userId } } } } },
+    where: ownerFilter(session),
+    include: {
+      _count: {
+        select: {
+          productos: {
+            where: session.empresaId
+              ? {
+                  OR: [
+                    { equipoId: session.empresaId },
+                    { usuarioId: session.userId, equipoId: null },
+                  ],
+                }
+              : { usuarioId: session.userId },
+          },
+        },
+      },
+    },
     orderBy: { nombre: "asc" },
   });
 
-  // Only return categories that have products for this user (or all for selection)
   return NextResponse.json(categorias);
 }
 
@@ -27,8 +54,12 @@ export async function POST(req: NextRequest) {
     const { data, error } = validateBody(categoriaCreateSchema, body);
     if (error) return error;
 
+    // Reuse if this user already has a categoría with the same name (case-insensitive).
     const existing = await prisma.categoria.findFirst({
-      where: { nombre: { equals: data.nombre, mode: "insensitive" } },
+      where: {
+        nombre: { equals: data.nombre, mode: "insensitive" },
+        ...ownerFilter(session),
+      },
     });
 
     if (existing) {
@@ -36,7 +67,11 @@ export async function POST(req: NextRequest) {
     }
 
     const categoria = await prisma.categoria.create({
-      data: { nombre: data.nombre },
+      data: {
+        nombre: data.nombre,
+        usuarioId: session.userId,
+        equipoId: session.empresaId || null,
+      },
     });
 
     return NextResponse.json(categoria, { status: 201 });

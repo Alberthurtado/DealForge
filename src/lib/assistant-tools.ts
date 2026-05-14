@@ -436,8 +436,13 @@ async function editarProducto(input: Record<string, unknown>, userId: string) {
 
     let categoriaId: string | undefined;
     if (input.categoriaNombre) {
-      const existingCat = await prisma.categoria.findUnique({ where: { nombre: input.categoriaNombre as string } });
-      categoriaId = existingCat ? existingCat.id : (await prisma.categoria.create({ data: { nombre: input.categoriaNombre as string } })).id;
+      const catName = input.categoriaNombre as string;
+      const existingCat = await prisma.categoria.findFirst({
+        where: { nombre: { equals: catName, mode: "insensitive" }, usuarioId: userId },
+      });
+      categoriaId = existingCat
+        ? existingCat.id
+        : (await prisma.categoria.create({ data: { nombre: catName, usuarioId: userId } })).id;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -596,8 +601,13 @@ async function crearProducto(input: Record<string, unknown>, userId: string) {
   try {
     let categoriaId: string | null = null;
     if (input.categoriaNombre) {
-      const existingCat = await prisma.categoria.findUnique({ where: { nombre: input.categoriaNombre as string } });
-      categoriaId = existingCat ? existingCat.id : (await prisma.categoria.create({ data: { nombre: input.categoriaNombre as string } })).id;
+      const catName = input.categoriaNombre as string;
+      const existingCat = await prisma.categoria.findFirst({
+        where: { nombre: { equals: catName, mode: "insensitive" }, usuarioId: userId },
+      });
+      categoriaId = existingCat
+        ? existingCat.id
+        : (await prisma.categoria.create({ data: { nombre: catName, usuarioId: userId } })).id;
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const variantesInput = (input.variantes as any[]) || [];

@@ -47,8 +47,17 @@ model Contacto {
 
 model Categoria {
   id        String     @id @default(cuid())
-  nombre    String     @unique
+  nombre    String
+  usuarioId String?
+  usuario   Usuario?   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  equipoId  String?
+  equipo    Empresa?   @relation("CategoriaEquipo", fields: [equipoId], references: [id])
   productos Producto[]
+  createdAt DateTime   @default(now())
+
+  @@unique([nombre, usuarioId])
+  @@index([usuarioId])
+  @@index([equipoId])
 }
 
 model Producto {
@@ -236,6 +245,7 @@ model Empresa {
   // Business data relations (via equipoId)
   clientes          Cliente[]        @relation("ClienteEquipo")
   productos         Producto[]       @relation("ProductoEquipo")
+  categorias        Categoria[]      @relation("CategoriaEquipo")
   cotizaciones      Cotizacion[]     @relation("CotizacionEquipo")
   contratos         Contrato[]       @relation("ContratoEquipo")
   reglas            ReglaComercial[] @relation("ReglaEquipo")
@@ -309,6 +319,7 @@ model Usuario {
   // Relations to user-owned data
   clientes       Cliente[]
   productos      Producto[]
+  categorias     Categoria[]
   cotizaciones   Cotizacion[]
   contratos      Contrato[]
   reglas         ReglaComercial[]

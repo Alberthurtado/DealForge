@@ -92,7 +92,20 @@ export async function POST(request: NextRequest) {
           if (categoriaCache.has(catName)) {
             categoriaId = categoriaCache.get(catName)!;
           } else {
-            const cat = await prisma.categoria.upsert({ where: { nombre: catName }, update: {}, create: { nombre: catName } });
+            // Scope categoría to the importing user (multi-tenant safe).
+            const ownerWhere = session.empresaId
+              ? { OR: [{ equipoId: session.empresaId }, { usuarioId: session.userId, equipoId: null }] }
+              : { usuarioId: session.userId };
+            const existingCat = await prisma.categoria.findFirst({
+              where: { nombre: { equals: catName, mode: "insensitive" }, ...ownerWhere },
+            });
+            const cat = existingCat ?? await prisma.categoria.create({
+              data: {
+                nombre: catName,
+                usuarioId: session.userId,
+                equipoId: session.empresaId || null,
+              },
+            });
             categoriaId = cat.id;
             categoriaCache.set(catName, cat.id);
           }

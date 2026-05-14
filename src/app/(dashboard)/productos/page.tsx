@@ -13,17 +13,25 @@ import { ProductoTable } from "@/components/productos/producto-table";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
-async function getData(userId: string) {
+async function getData(session: { userId: string; empresaId?: string | null }) {
+  const ownerFilter = session.empresaId
+    ? {
+        OR: [
+          { equipoId: session.empresaId },
+          { usuarioId: session.userId, equipoId: null },
+        ],
+      }
+    : { usuarioId: session.userId };
   const [productos, categorias] = await Promise.all([
     prisma.producto.findMany({
-      where: { usuarioId: userId },
+      where: { usuarioId: session.userId },
       include: {
         categoria: true,
         variantes: { where: { activo: true }, select: { id: true, nombre: true } },
       },
       orderBy: { createdAt: "asc" },
     }),
-    prisma.categoria.findMany({ orderBy: { nombre: "asc" } }),
+    prisma.categoria.findMany({ where: ownerFilter, orderBy: { nombre: "asc" } }),
   ]);
   return { productos, categorias };
 }
@@ -31,7 +39,7 @@ async function getData(userId: string) {
 export default async function ProductosPage() {
   const session = await getSession();
   if (!session) return null;
-  const { productos, categorias } = await getData(session.userId);
+  const { productos, categorias } = await getData(session);
   const plan = session?.plan || "starter";
   const limits = getPlanLimits(plan);
   const planLabel = plan.charAt(0).toUpperCase() + plan.slice(1);

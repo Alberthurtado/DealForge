@@ -12,18 +12,26 @@ export const metadata: Metadata = {
     "Gestiona límites de descuento, productos obligatorios, aprobaciones y promociones.",
 };
 
-async function getData(userId: string) {
+async function getData(session: { userId: string; empresaId?: string | null }) {
+  const ownerFilter = session.empresaId
+    ? {
+        OR: [
+          { equipoId: session.empresaId },
+          { usuarioId: session.userId, equipoId: null },
+        ],
+      }
+    : { usuarioId: session.userId };
   const [reglas, productos, categorias] = await Promise.all([
     prisma.reglaComercial.findMany({
-      where: { usuarioId: userId },
+      where: { usuarioId: session.userId },
       orderBy: [{ prioridad: "desc" }, { createdAt: "desc" }],
     }),
     prisma.producto.findMany({
-      where: { activo: true, usuarioId: userId },
+      where: { activo: true, usuarioId: session.userId },
       include: { categoria: true },
       orderBy: { nombre: "asc" },
     }),
-    prisma.categoria.findMany({ orderBy: { nombre: "asc" } }),
+    prisma.categoria.findMany({ where: ownerFilter, orderBy: { nombre: "asc" } }),
   ]);
   return { reglas, productos, categorias };
 }
@@ -49,7 +57,7 @@ export default async function ReglasPage() {
     );
   }
 
-  const data = await getData(session.userId);
+  const data = await getData(session);
 
   return (
     <div>
