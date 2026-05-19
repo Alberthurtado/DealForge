@@ -737,7 +737,7 @@ async function main() {
 
   for (const post of posts) {
     await prisma.blogPost.upsert({
-      where: { slug: post.slug },
+      where: { slug_locale: { slug: post.slug, locale: "es-ES" } },
       update: {
         titulo: post.titulo,
         extracto: post.extracto,

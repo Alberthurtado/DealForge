@@ -1,0 +1,24 @@
+{
+  "common": {
+    "appName": "DealForge",
+    "loading": "Wird geladen…",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "search": "Suchen",
+    "filter": "Filtern"
+  },
+  "tax": {
+    "labelByCountry": {
+      "ES": "MwSt",
+      "GB": "MwSt",
+      "IE": "MwSt",
+      "DE": "MwSt",
+      "US": "Sales Tax"
+    }
+  }
+}

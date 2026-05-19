@@ -37,8 +37,9 @@ export async function POST(request: NextRequest) {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
-  // Check slug uniqueness
-  const existing = await prisma.blogPost.findUnique({ where: { slug } });
+  // Check slug uniqueness (within the default es-ES locale for now;
+  // when admin UI gains a locale picker, this should use the selected locale)
+  const existing = await prisma.blogPost.findFirst({ where: { slug, locale: "es-ES" } });
   if (existing) {
     return NextResponse.json(
       { error: "Ya existe un artículo con ese slug" },

@@ -13,7 +13,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await prisma.blogPost.findUnique({
+  const post = await prisma.blogPost.findFirst({
     where: { slug, publicado: true },
   });
 
@@ -91,7 +91,7 @@ const CATEGORIAS: Record<string, { label: string; color: string }> = {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await prisma.blogPost.findUnique({
+  const post = await prisma.blogPost.findFirst({
     where: { slug, publicado: true },
   });
 

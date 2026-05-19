@@ -11,12 +11,14 @@ datasource db {
 model Cliente {
   id           String       @id @default(cuid())
   nombre       String
-  ruc          String?
+  ruc          String?       // legacy — kept for backward compat, deprecate after taxIdValue rollout
+  taxIdType    String?       // "nif" | "cif" | "vat-gb" | "vat-ie" | "ustid-de" | "ein-us" | etc.
+  taxIdValue   String?       // country-aware tax identifier (replaces ruc going forward)
   email        String?
   telefono     String?
   direccion    String?
   ciudad       String?
-  pais         String?
+  pais         String?       // ISO 3166-1 alpha-2 customer country — drives tax/reverse-charge logic
   sector       String?
   notas        String?
   usuarioId    String
@@ -208,6 +210,12 @@ model Empresa {
   id            String   @id @default(cuid())
   nombre        String   @default("Mi Empresa")
   cif           String?
+  // i18n + multi-country (added in Phase 0 of internationalization)
+  country       String   @default("ES")    // ISO 3166-1 alpha-2 — drives tax rules and T&C
+  currencyCode  String   @default("EUR")   // ISO 4217 — drives invoicing currency
+  locale        String   @default("es-ES") // BCP 47 — drives UI/email language
+  taxRegime     String?  // optional: "autonomo" | "sl" | "ltd" | "gmbh" | "llc"
+  vatNumber     String?  // generic, country-agnostic (replaces hardcoded `cif` semantics)
   email         String?
   telefono      String?
   direccion     String?
@@ -515,7 +523,8 @@ model PlantillaContrato {
 
 model BlogPost {
   id          String    @id @default(cuid())
-  slug        String    @unique
+  slug        String
+  locale      String    @default("es-ES") // BCP 47 — one post per locale per slug
   titulo      String
   extracto    String    // Short excerpt for previews and meta description
   contenido   String    // Full HTML content
@@ -531,4 +540,7 @@ model BlogPost {
   metaKeywords    String?  // Comma-separated keywords
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+
+  @@unique([slug, locale])
+  @@index([locale])
 }

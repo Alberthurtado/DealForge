@@ -1,0 +1,24 @@
+{
+  "common": {
+    "appName": "DealForge",
+    "loading": "Cargando…",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "search": "Buscar",
+    "filter": "Filtrar"
+  },
+  "tax": {
+    "labelByCountry": {
+      "ES": "IVA",
+      "GB": "VAT",
+      "IE": "VAT",
+      "DE": "MwSt",
+      "US": "Sales Tax"
+    }
+  }
+}

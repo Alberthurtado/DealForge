@@ -3464,8 +3464,8 @@ Precio de venta = (Coste total × 100) / (100 &minus; margen deseado %)</p>
   const results = [];
 
   for (const p of posts) {
-    const existing = await prisma.blogPost.findUnique({
-      where: { slug: p.slug },
+    const existing = await prisma.blogPost.findFirst({
+      where: { slug: p.slug, locale: "es-ES" },
     });
     if (existing) {
       results.push({ slug: p.slug, status: "already_exists" });
