@@ -3460,7 +3460,252 @@ Precio de venta = (Coste total × 100) / (100 &minus; margen deseado %)</p>
       "presupuesto fotografía profesional, cotización fotógrafo, cuánto cobrar por fotografía, tarifas fotógrafo profesional, precio sesión fotográfica, cómo cotizar fotografía, presupuesto sesión fotos, tarifa fotógrafo España",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16];
+  const post17 = {
+    slug: "cotizaciones-servicios-contabilidad-asesoria",
+    titulo: "Cotizaciones para servicios de contabilidad y asesoría: guía práctica para despachos y asesores",
+    extracto: "Cómo estructurar y presentar tus presupuestos de contabilidad y asesoría fiscal, laboral o jurídica para conseguir más clientes y cobrar lo que realmente valen tus servicios.",
+    contenido: `<p>Si tienes un despacho de asesoría o llevas la contabilidad de empresas como autónomo, sabes de primera mano lo difícil que es responder a la pregunta "¿cuánto me cobras?". El problema no es que no sepas cuánto vale tu trabajo. El problema es que ese valor es invisible para el cliente hasta que lo necesita, y para entonces ya has tenido que dar una cifra sin contexto.</p>
+
+<p>Este artículo es una guía práctica para estructurar, presentar y defender tus presupuestos de servicios de contabilidad y asesoría. Sin rodeos y con ejemplos reales del mercado español.</p>
+
+<h2>Por qué los servicios de asesoría son especialmente difíciles de cotizar</h2>
+
+<p>Hay una razón por la que muchos asesores terminan cobrando menos de lo que deberían: el cliente no ve el trabajo. Ve el resultado &mdash; la declaración de IVA presentada, la nómina generada, el contrato revisado &mdash; pero no las horas de actualización normativa, los años de formación, ni el tiempo de respuesta a consultas urgentes que nadie ha pedido explícitamente pero todos esperan.</p>
+
+<p>A esto se añade que la asesoría es un servicio de confianza y de largo plazo. El cliente que llega preguntando precio casi nunca está comprando "una declaración de renta": está comprando tranquilidad, seguridad jurídica y alguien que le avise cuando cambia la normativa que afecta a su negocio. Ese valor es muy difícil de poner en un número sin antes explicarlo bien.</p>
+
+<p>El resultado habitual: asesores que dan un precio por teléfono antes de entender el caso, clientes que comparan ese número con el del competidor sin entender qué incluye cada uno, y una cartera de clientes donde los que más trabajo dan son los que menos pagan.</p>
+
+<h2>Los modelos de precio en asesoría y contabilidad</h2>
+
+<p>No hay un modelo único correcto. Lo que sí hay son modelos más o menos adecuados según el tipo de servicio y el perfil del cliente.</p>
+
+<h3>Cuota fija mensual</h3>
+
+<p>Es el modelo más habitual en asesoría de empresas y autónomos. El cliente paga una cantidad fija al mes y a cambio recibe un conjunto de servicios definidos: contabilidad, declaraciones periódicas, nóminas, consultas incluidas dentro de cierto volumen.</p>
+
+<p><strong>Por qué funciona:</strong> da previsibilidad a ambas partes. El cliente sabe lo que paga. Tú sabes lo que ingresas. Y cuando la relación está bien estructurada, la fidelidad del cliente es muy alta porque cambiar de asesor tiene un coste real (traspaso de documentación, nuevo proceso de conocimiento del negocio).</p>
+
+<p><strong>El riesgo:</strong> la cuota fija tiende a quedarse estancada. Fijas un precio para un autónomo con tres facturas al mes y tres años después ese mismo cliente tiene una SL con cinco empleados y veinte proveedores, pero sigue pagando lo mismo. Revisa las cuotas anualmente y ajústalas a la realidad del cliente.</p>
+
+<h3>Precio por servicio o por proyecto</h3>
+
+<p>Cobras por actuaciones concretas: presentar la declaración de la renta, constituir una sociedad, redactar un contrato de arrendamiento, tramitar una subvención. Cada servicio tiene su precio fijo o su rango.</p>
+
+<p><strong>Por qué funciona:</strong> es muy claro para el cliente. Sabe exactamente por qué paga. Y tú puedes capturar valor en servicios de alto valor como constituciones, reestructuraciones o procedimientos tributarios especiales.</p>
+
+<p><strong>El riesgo:</strong> los proyectos complejos son difíciles de cerrar a precio fijo si no has hecho bien el análisis previo. Un procedimiento de comprobación tributaria que parecía sencillo puede complicarse. Define bien el alcance antes de dar un precio cerrado.</p>
+
+<h3>Precio por hora</h3>
+
+<p>Cobras una tarifa horaria por el tiempo dedicado. Habitual en servicios jurídicos, en consultorías de alto nivel y en actuaciones puntuales fuera del alcance de la cuota mensual.</p>
+
+<p><strong>Por qué funciona:</strong> te protege en proyectos de alcance incierto. Si el cliente quiere que le acompañes en una negociación con Hacienda que puede durar dos horas o diez, el precio por hora es la opción razonable.</p>
+
+<p><strong>El riesgo:</strong> que el cliente perciba que tiene un taxímetro encendido cuando te llama. Algunos clientes se reprimen de hacer consultas que deberían hacer por miedo a que "les cobres". Eso es malo para todos: el cliente no recibe el servicio que necesita y tú no te enteras de problemas que podrías resolver antes de que sean urgentes.</p>
+
+<h3>Precio basado en valor</h3>
+
+<p>El más sofisticado y el más rentable cuando se aplica bien. En lugar de cobrar por tiempo o por servicio, cobras en función del valor económico que generas al cliente: el ahorro fiscal que consigues, la multa que evitas, la financiación que facilitas, la venta que estructuras fiscalmente de forma óptima.</p>
+
+<p><strong>Por qué funciona:</strong> desacopla el precio del tiempo dedicado. Si estructuras una operación de compraventa de empresa de forma que el cliente paga 40.000 EUR menos en impuestos, cobrar 5.000 EUR por ese trabajo es razonable aunque te haya llevado veinte horas, no cien.</p>
+
+<p><strong>El riesgo:</strong> requiere un nivel alto de confianza con el cliente y capacidad de cuantificar el valor con datos. No es el modelo para adquirir clientes nuevos; es el modelo para facturar bien a clientes de alto valor que ya confían en ti.</p>
+
+<h2>Qué incluir en un presupuesto de asesoría</h2>
+
+<p>Un presupuesto de servicios de asesoría mal estructurado genera más confusión que claridad. El cliente no sabe qué está comprando y acaba comparando precios con criterios equivocados. Un buen presupuesto de asesoría tiene que responder a cinco preguntas antes de que el cliente las formule:</p>
+
+<h3>1. ¿Qué incluye exactamente?</h3>
+
+<p>Lista específica de servicios. No "asesoría fiscal y laboral": nombra cada declaración, cada informe, cada gestión incluida. Si incluyes consultas ilimitadas, dilo. Si las consultas tienen un límite de horas mensuales, también.</p>
+
+<p>Ejemplo de descripción clara: "Presentación trimestral de IVA (modelo 303), declaración anual de IVA (modelo 390), pagos fraccionados de IRPF (modelo 130), declaración anual de IRPF, gestión de dos empleados (altas, bajas, nóminas mensuales y seguros sociales), contabilidad mensual hasta 50 asientos, y atención de consultas por email en un plazo de 24 horas hábiles."</p>
+
+<h3>2. ¿Qué NO incluye?</h3>
+
+<p>Igualmente importante. ¿Las gestiones con la Seguridad Social más allá de lo rutinario están incluidas? ¿Y la representación ante Hacienda en caso de requerimiento? ¿Y la declaración de operaciones con terceros (modelo 347)?</p>
+
+<p>Ser explícito sobre lo que no está incluido no hace que el presupuesto parezca peor: hace que parezca profesional. Y protege la relación comercial a largo plazo porque el cliente sabe qué esperar sin llevarse sorpresas.</p>
+
+<h3>3. ¿Cuánto cuesta y cómo se factura?</h3>
+
+<p>Precio mensual, anual o por actuación. Método de pago (domiciliación, transferencia). Preaviso de cancelación. Condiciones en caso de entrega tardía de documentación por parte del cliente, que retrasa tu trabajo y genera coste extra.</p>
+
+<h3>4. ¿Qué necesitas del cliente para prestar el servicio?</h3>
+
+<p>Muchos asesores no incluyen esto en el presupuesto y luego tienen problemas crónicos: el cliente entrega las facturas a final de trimestre con dos días de margen, o no facilita los accesos a la plataforma de la Seguridad Social, o cambia de banco y no avisa. Define qué necesitas del cliente para cumplir los plazos y qué pasa si esa información no llega a tiempo.</p>
+
+<h3>5. ¿Cuánto tiempo de respuesta puedes garantizar?</h3>
+
+<p>El nivel de servicio es una variable de precio, aunque rara vez se menciona explícitamente. Un asesor que responde en 24 horas y otro que responde en una semana no están ofreciendo el mismo servicio aunque el listado de gestiones sea idéntico. Si tienes un tiempo de respuesta diferencial, ponlo por escrito: es un argumento de valor real.</p>
+
+<h2>Cuánto cobrar: rangos habituales en el mercado español (2026)</h2>
+
+<p>Los precios varían significativamente según el tipo de despacho, la especialización, la zona geográfica y el perfil del cliente. Estos rangos son orientativos para el mercado español:</p>
+
+<h3>Contabilidad y fiscalidad para autónomos</h3>
+
+<p>El segmento más competido. Los precios de cuota mensual van desde los 30-50 EUR/mes de gestorías online con modelo estandarizado hasta los 150-300 EUR/mes de despachos con atención personalizada y especialización sectorial.</p>
+
+<p>El error más habitual aquí es competir con las gestorías online de bajo coste en precio. Ese es un juego que no puedes ganar si tienes costes de estructura reales. La alternativa es diferenciarte en especialización (autónomos del sector tecnológico, freelances internacionales, creadores de contenido con ingresos en divisas) o en nivel de servicio (respuesta en el mismo día, asesoramiento proactivo, revisión trimestral de la situación fiscal).</p>
+
+<h3>Contabilidad y fiscalidad para PYMEs (SL con hasta 10 empleados)</h3>
+
+<p>El rango habitual de cuota mensual completa (contabilidad, IVA, IS, nóminas) está entre 200 y 600 EUR/mes dependiendo del volumen de operaciones, el número de empleados y la complejidad de la actividad.</p>
+
+<p>Una PYME con cinco empleados, veinte proveedores y cien facturas al mes requiere un trabajo sustancialmente mayor que un autónomo con actividad sencilla. El presupuesto tiene que reflejar esa realidad.</p>
+
+<h3>Constitución de sociedades</h3>
+
+<p>Entre 300 y 800 EUR por el servicio de asesoría en la constitución de una SL, sin incluir los gastos notariales y registrales que son costes del cliente. La variación depende de si incluyes la redacción de estatutos personalizados, la planificación fiscal inicial y las primeras gestiones de alta en la AEAT y la SS.</p>
+
+<h3>Declaración de la renta (IRPF personal)</h3>
+
+<p>Desde 60-80 EUR para declaraciones sencillas (asalariado sin complicaciones) hasta 200-500 EUR o más para declaraciones complejas (actividades económicas, alquileres, ganancias patrimoniales, criptoactivos, retribuciones en especie, ingresos de múltiples fuentes).</p>
+
+<h3>Procedimientos ante la AEAT (requerimientos, inspecciones)</h3>
+
+<p>Aquí el precio por hora es más habitual. Las tarifas van desde 80-120 EUR/hora para despachos sin especialización específica hasta 200-400 EUR/hora para especialistas en procedimientos tributarios o tributación internacional.</p>
+
+<h3>Asesoría laboral y nóminas</h3>
+
+<p>El coste por empleado al mes suele estar entre 10 y 25 EUR por empleado, dependiendo del número total (a más empleados, menor coste unitario) y la complejidad de los convenios aplicables. Los procesos especiales (EREs, despidos colectivos, negociación de convenio) se presupuestan aparte.</p>
+
+<h2>Cómo presentar el precio sin perder al cliente</h2>
+
+<h3>Nunca des el precio antes de entender el caso</h3>
+
+<p>Cuando alguien llama preguntando "¿cuánto cobráis por llevar la contabilidad de mi empresa?", la respuesta correcta no es dar un rango de precios. La respuesta correcta es hacer las preguntas que necesitas para dar un precio real: ¿tipo de sociedad? ¿actividad? ¿número de empleados? ¿volumen aproximado de facturas al mes? ¿está al corriente con Hacienda?</p>
+
+<p>Un precio dado sin contexto siempre parece demasiado alto o demasiado bajo. Un precio dado después de entender el caso tiene una justificación natural.</p>
+
+<h3>Presenta el precio dentro de una propuesta, no en un email suelto</h3>
+
+<p>Una propuesta profesional de servicios de asesoría, con tu logo, con el desglose de servicios incluidos, con los términos de la relación y con el precio presentado de forma clara, transmite confianza antes de que el cliente haya leído una sola línea. El mismo precio en un email informal con "serían X euros al mes" parece arbitrario.</p>
+
+<p>Herramientas como <a href="https://dealforge.es">DealForge</a> permiten crear esas propuestas de forma rápida con plantillas personalizadas, incluyendo la posibilidad de que el cliente las acepte con firma electrónica desde el mismo documento. Para despachos que mandan diez o quince propuestas al mes, el ahorro de tiempo y la mejora en presentación son inmediatos.</p>
+
+<h3>Ofrece opciones, no un precio único</h3>
+
+<p>Presentar una sola opción pone al cliente en modo "lo acepto o lo rechazo". Presentar tres opciones le pone en modo "¿cuál de estas encaja mejor conmigo?". La psicología de la elección funciona a tu favor cuando tienes varios niveles de servicio bien diferenciados.</p>
+
+<p>Ejemplo de estructura para una PYME:</p>
+
+<ul>
+<li><strong>Básico (320 EUR/mes):</strong> contabilidad mensual, declaraciones trimestrales de IVA y pagos fraccionados, declaración anual de IS, gestoría documental online.</li>
+<li><strong>Estándar (480 EUR/mes):</strong> todo lo anterior más gestión de hasta cinco empleados (nóminas y seguros sociales), declaración anual de IRPF del administrador, atención de consultas en 24 horas.</li>
+<li><strong>Premium (680 EUR/mes):</strong> todo lo anterior más planificación fiscal trimestral, revisión de contratos con proveedores y clientes, informe mensual de situación económica del negocio, atención telefónica directa con el asesor responsable.</li>
+</ul>
+
+<p>Con esta estructura, el cliente no evalúa si tu precio es caro o barato. Evalúa qué nivel de servicio necesita.</p>
+
+<h3>Habla de lo que evitas, no solo de lo que haces</h3>
+
+<p>El valor de un buen asesor no está solo en presentar declaraciones: está en las sanciones que no llegan, en los errores contables que no se cometen, en las oportunidades fiscales que se aprovechan antes de que sea demasiado tarde. Cuando presentas tu propuesta, incluye ejemplos concretos de situaciones que gestionas para el cliente: "te avisamos antes de cada cierre trimestral para que puedas ajustar gastos deducibles", "revisamos cada mes que los pagos a la Seguridad Social están al día para evitar recargos".</p>
+
+<p>Eso convierte el precio mensual de "cuota de asesoría" a "inversión en tranquilidad y ahorro de dinero".</p>
+
+<h2>Errores frecuentes al presupuestar servicios de asesoría</h2>
+
+<h3>Fijar precios sin calcular el tiempo real que dedicas</h3>
+
+<p>Muchos asesores fijan el precio de la cuota mensual "a ojo" o comparando con lo que cobra la competencia, sin calcular cuántas horas dedican realmente a ese cliente. Cuando haces el cálculo, descubres que algunos clientes "baratos" son en realidad los más costosos en tiempo por euro facturado.</p>
+
+<p>Haz el ejercicio una vez: registra el tiempo que dedicas a cada cliente durante un trimestre completo (incluyendo llamadas, emails, gestiones puntuales y tiempo de actualización normativa que les afecta). Divide la facturación de ese cliente entre las horas dedicadas. Si el resultado está por debajo de tu tarifa hora mínima, tienes un problema de precio que hay que corregir.</p>
+
+<h3>No actualizar las cuotas de clientes antiguos</h3>
+
+<p>El cliente que llevas cinco años y que empezó como autónomo ahora tiene una sociedad con tres empleados y ha triplicado su facturación. Pero su cuota sigue siendo la de cuando firmasteis. Revisar y actualizar precios no es una falta de consideración hacia el cliente fiel: es una práctica comercial sana que ambos entendéis si la relación es buena.</p>
+
+<p>Establece una política clara: revisión de cuotas cada doce meses, con comunicación por escrito y justificación del ajuste. Un cliente que lleva años contigo y valora el servicio no se va por una actualización razonable. El que se va solo por precio era un cliente que en algún momento habría sido problema.</p>
+
+<h3>Aceptar todo el trabajo que llega sin filtrar el cliente</h3>
+
+<p>No todos los clientes son buenos clientes. El que siempre entrega la documentación tarde, el que llama todos los días con urgencias que no son urgencias, el que cuestiona cada factura y pide descuentos constantes: estos clientes consumen más recursos de los que generan.</p>
+
+<p>Un presupuesto bien estructurado es también un filtro. Cuando presentas una propuesta profesional con condiciones claras de colaboración, los clientes que buscan asesoría barata sin compromiso suelen descartarse solos. Y eso, a medio plazo, mejora la rentabilidad y la calidad de vida de tu despacho.</p>
+
+<h3>No documentar los acuerdos por escrito</h3>
+
+<p>La asesoría es una relación de largo plazo con mucha comunicación verbal e informal. Pero cuando hay un malentendido sobre qué estaba incluido en la cuota, solo tienes dos opciones: absorber el coste o tener un conflicto con el cliente. La tercera opción &mdash; la correcta &mdash; es tener el acuerdo documentado desde el principio.</p>
+
+<p>Envía siempre una propuesta formal antes de empezar cualquier relación. Que el cliente la acepte por escrito. Y guarda esa documentación. Con <a href="https://dealforge.es">DealForge</a> puedes gestionar la aceptación con firma electrónica y tener el historial de propuestas enviadas y aceptadas centralizado, lo que simplifica enormemente la gestión cuando hay que revisar qué se acordó con quién y cuándo.</p>
+
+<h2>La primera reunión con un cliente potencial: cómo convertirla en un presupuesto ganado</h2>
+
+<p>La mayoría de los clientes de asesoría no deciden por precio: deciden por confianza. Y la confianza se construye (o se destruye) en la primera reunión.</p>
+
+<p>Estos son los puntos que marcan la diferencia en esa primera conversación:</p>
+
+<ul>
+<li><strong>Escucha más de lo que hablas:</strong> el cliente quiere sentir que entiendes su situación concreta, no que le estás dando un discurso genérico. Pregunta sobre su actividad, sus preocupaciones, los problemas que ha tenido con asesores anteriores.</li>
+<li><strong>Identifica el dolor específico:</strong> ¿le preocupa una inspección? ¿tiene dudas sobre cómo tributar una operación concreta? ¿está creciendo y no sabe cómo estructurar el negocio? El precio que defiendas después tiene que resonar con ese dolor específico.</li>
+<li><strong>Muestra que conoces su sector:</strong> si llevas varios clientes del mismo sector, dilo. Si conoces la casuística fiscal de su actividad, dilo. La especialización justifica precios más altos sin que haya que discutirlos.</li>
+<li><strong>No te comprometas a un precio en la reunión:</strong> "te mando una propuesta detallada en 24 horas" es más profesional que dar un número en ese momento y luego tener que rectificar. La propuesta escrita da tiempo para pensar, para estructurar bien el servicio y para presentarlo de forma profesional.</li>
+</ul>
+
+<h2>Qué hacer cuando el cliente dice que es caro</h2>
+
+<p>Va a pasar. Y la respuesta correcta no es justificarte ni bajar el precio automáticamente.</p>
+
+<p>Lo primero es entender qué quiere decir "es caro". En la mayoría de los casos significa una de estas tres cosas:</p>
+
+<ol>
+<li><strong>No entiende qué incluye el precio.</strong> Solución: explica con más detalle el alcance del servicio y lo que evita. "Por esos 400 EUR al mes tienes X gestiones anuales que si las hicieras tú mismo o fuesen urgencias con otro despacho te costarían mucho más."</li>
+<li><strong>Ha visto un precio más bajo en otro sitio.</strong> Solución: pregunta qué incluye esa otra propuesta. En el 80% de los casos incluye menos. Si incluye lo mismo, entonces efectivamente hay una diferencia de precio que tienes que defender con argumentos de calidad o de especialización, no igualando el precio.</li>
+<li><strong>No tiene presupuesto real para esto.</strong> Solución: propón una versión más básica del servicio o sé honesto: "lo que describes necesita un nivel de servicio que tiene un coste mínimo de X. Si ese presupuesto no encaja ahora mismo, puedo recomendarte opciones más económicas para esta fase."</li>
+</ol>
+
+<p>Lo que no debes hacer es bajar el precio sin cambiar el alcance del servicio. Cada vez que haces eso, el cliente aprende que tus precios son negociables y usará esa información en cada renovación. Si bajas el precio, reduce el servicio proporcionalmente y deja claro que es así.</p>
+
+<h2>Automatiza la gestión de presupuestos sin perder la personalización</h2>
+
+<p>Un despacho de asesoría puede manejar decenas de propuestas activas al mismo tiempo: renovaciones de clientes existentes, presupuestos para nuevos clientes, propuestas para servicios adicionales. Gestionar todo eso manualmente en Word o en email es lento y genera pérdidas de seguimiento.</p>
+
+<p>Tener un sistema que te permita crear propuestas a partir de plantillas estandarizadas, personalizarlas para cada cliente y hacer seguimiento de qué propuestas están pendientes de respuesta cambia la eficiencia del proceso. <a href="https://dealforge.es">DealForge</a> está diseñado específicamente para este tipo de flujo: creas la propuesta en minutos, la envías con enlace de firma electrónica y recibes notificación cuando el cliente la ha abierto y cuando la acepta. Nada se pierde en un hilo de email olvidado.</p>
+
+<h2>Conclusión: cotiza como el profesional que eres</h2>
+
+<p>La asesoría y la contabilidad son servicios donde el precio es el primer indicador de calidad que el cliente tiene. Un despacho que cobra 80 EUR al mes transmite un mensaje muy diferente al que cobra 400 EUR, incluso antes de que el cliente haya visto qué incluye cada uno.</p>
+
+<p>Los puntos clave de este artículo:</p>
+
+<ul>
+<li>Elige el modelo de precio más adecuado para cada tipo de cliente y servicio</li>
+<li>Define siempre por escrito qué incluye y qué no incluye tu servicio</li>
+<li>Presenta propuestas formales, no precios verbales ni emails informales</li>
+<li>Ofrece opciones (básico, estándar, premium) en lugar de una sola cifra</li>
+<li>Revisa las cuotas de clientes existentes al menos una vez al año</li>
+<li>Defiende tu precio con el valor que aportas, no bajándolo automáticamente</li>
+<li>Registra el tiempo que dedicas a cada cliente para detectar relaciones no rentables</li>
+</ul>
+
+<p>El asesor o despacho que gana los mejores clientes no es el más barato: es el que mejor comunica lo que hace, presenta sus servicios con claridad y genera confianza desde el primer contacto. El presupuesto es el primer paso de esa confianza.</p>
+
+<p><strong>¿Quieres enviar propuestas de servicios de asesoría de forma profesional, con firma electrónica y seguimiento incluido?</strong> Prueba <a href="https://dealforge.es">DealForge</a> gratis y deja de perder clientes por cómo presentas tu precio, no por lo que cobras.</p>`,
+    autor: "DealForge",
+    categoria: "sectores",
+    tags: JSON.stringify([
+      "cotizaciones asesoría",
+      "presupuesto contabilidad",
+      "despacho asesoría",
+      "tarifas asesor fiscal",
+      "cuánto cobrar asesoría",
+      "autónomos",
+      "pymes",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Cotizaciones para servicios de contabilidad y asesoría: guía práctica 2026 — DealForge",
+    metaDescripcion:
+      "Cómo estructurar y presentar tus presupuestos de contabilidad y asesoría fiscal, laboral o jurídica para conseguir más clientes y cobrar lo que realmente valen tus servicios.",
+    metaKeywords:
+      "cotizaciones asesoría, presupuesto contabilidad, tarifas asesor fiscal, cuánto cobrar asesoría contabilidad, precio asesoría pymes, cotización servicios contables, presupuesto gestoría, asesoría fiscal España",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16, post17];
   const results = [];
 
   for (const p of posts) {
