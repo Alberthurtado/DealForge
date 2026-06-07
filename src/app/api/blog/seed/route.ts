@@ -3705,7 +3705,310 @@ Precio de venta = (Coste total × 100) / (100 &minus; margen deseado %)</p>
       "cotizaciones asesoría, presupuesto contabilidad, tarifas asesor fiscal, cuánto cobrar asesoría contabilidad, precio asesoría pymes, cotización servicios contables, presupuesto gestoría, asesoría fiscal España",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16, post17];
+  const post18 = {
+    slug: "guia-cotizaciones-empresas-seguridad",
+    titulo: "Guía de cotizaciones para empresas de seguridad: cómo presupuestar y ganar contratos",
+    extracto: "Todo lo que necesitas saber para estructurar cotizaciones de servicios de seguridad privada: vigilancia, alarmas, CCTV y control de accesos. Con rangos de precios reales del mercado español.",
+    contenido: `<p>Si tienes una empresa de seguridad privada o instalas sistemas de protección, sabes que ganar un contrato nuevo raramente depende solo de tener el mejor servicio. Depende de cómo presentas tu propuesta, de si el cliente entiende qué está comprando y de si tu precio refleja el valor real de lo que ofreces.</p>
+
+<p>El mercado de la seguridad privada en España mueve más de 4.500 millones de euros al año y atiende desde comunidades de vecinos hasta grandes superficies comerciales. La competencia es alta, los márgenes son ajustados y el cliente —a menudo— compara propuestas sin saber exactamente qué diferencia a una empresa de otra. Tu cotización tiene que hacer ese trabajo de diferenciación antes de que llegues a la reunión.</p>
+
+<p>Esta guía es para empresas de seguridad de todos los tamaños: desde autónomos instaladores de alarmas hasta empresas con plantilla propia de vigilantes. Sin teoría innecesaria, con ejemplos reales.</p>
+
+<h2>El problema principal de las cotizaciones en el sector de la seguridad</h2>
+
+<p>La mayoría de las empresas de seguridad cometen el mismo error: envían un presupuesto que es básicamente una lista de servicios con un precio al lado. Sin explicación del valor, sin desglose claro, sin diferenciación respecto a la competencia.</p>
+
+<p>El resultado es predecible: el cliente compara ese número con el del competidor, elige el más barato (aunque no sea el más adecuado) y después se queja de que el servicio no era lo que esperaba.</p>
+
+<p>Un presupuesto de seguridad bien hecho no compite por precio. Compite por confianza. Y la confianza se construye antes de la firma, con documentación que demuestre que entiendes el riesgo del cliente y tienes la capacidad de gestionarlo.</p>
+
+<h2>Tipos de servicios de seguridad y sus modelos de precio</h2>
+
+<p>El sector de la seguridad privada tiene varios subsectores con lógicas de precio muy diferentes. Antes de hablar de cómo cotizar, es importante entender en cuál operas o en cuáles combinas servicios.</p>
+
+<h3>Vigilancia y guardas de seguridad</h3>
+
+<p>Es el servicio más intensivo en mano de obra. El precio está muy determinado por el convenio colectivo del sector de seguridad privada, que fija los costes laborales mínimos por categoría y turno. El margen de maniobra está en la eficiencia operativa, en la rotación de personal y en los servicios complementarios que añades.</p>
+
+<p>El modelo de precio habitual es la <strong>facturación por hora de servicio</strong>: el cliente paga un precio por hora de vigilante (o puesto), que incluye el coste del trabajador más el margen de la empresa. Los contratos suelen ser mensuales con un número de horas mínimas garantizadas.</p>
+
+<p>Rangos de precio en el mercado español (2026):</p>
+<ul>
+<li>Vigilante de seguridad (horario diurno, entre semana): 14-20 EUR/hora</li>
+<li>Vigilante de seguridad (turno nocturno o fin de semana): 18-26 EUR/hora</li>
+<li>Vigilante con formación especializada (armado, transporte de fondos): 22-35 EUR/hora</li>
+<li>Supervisor o jefe de seguridad: 28-45 EUR/hora</li>
+</ul>
+
+<p>Estas tarifas varían significativamente según la provincia (Madrid y Barcelona tienen costes laborales más altos), el tamaño del contrato (a más horas, menor precio unitario) y la habilitación específica del personal.</p>
+
+<h3>Instalación de sistemas de alarma</h3>
+
+<p>Aquí el modelo de precio tiene dos componentes: el coste de instalación (pago único) y la cuota de mantenimiento y monitorización (recurrente mensual).</p>
+
+<p>El error más común es focalizarse solo en el precio de instalación y usar la monitorización como argumento secundario, cuando en realidad es el componente de mayor valor a largo plazo: es lo que convierte tu empresa en un proveedor recurrente de seguridad, no en un instalador puntual.</p>
+
+<p>Rangos habituales:</p>
+<ul>
+<li>Instalación básica para hogar o local pequeño (central + 4-6 detectores + teclado): 400-900 EUR</li>
+<li>Instalación media para PYME o local comercial (central + 8-15 detectores + comunicador dual): 900-2.500 EUR</li>
+<li>Instalación compleja (nave industrial, multizona, integración con control de accesos): 2.500-8.000 EUR o más</li>
+<li>Cuota de monitorización básica: 15-35 EUR/mes</li>
+<li>Cuota de monitorización con respuesta de vigilantes: 35-80 EUR/mes</li>
+<li>Mantenimiento anual (revisión de equipos, actualizaciones): 80-200 EUR/año según instalación</li>
+</ul>
+
+<h3>Videovigilancia y CCTV</h3>
+
+<p>El precio depende fundamentalmente de tres factores: número de cámaras, resolución y capacidad de almacenamiento, y si la instalación incluye gestión remota o acceso en la nube.</p>
+
+<p>Con la proliferación de cámaras IP de bajo coste, el cliente tiende a infravalorar el servicio de instalación profesional. Tu propuesta tiene que dejar claro qué diferencia a un sistema bien instalado (con cableado estructurado, ángulos óptimos, almacenamiento seguro y cumplimiento RGPD) de una cámara que cualquiera puede comprar en Amazon.</p>
+
+<p>Rangos orientativos:</p>
+<ul>
+<li>Sistema doméstico o local pequeño (4 cámaras HD, NVR local): 600-1.500 EUR instalado</li>
+<li>Sistema para PYME (8-16 cámaras IP 4K, NVR con disco, acceso remoto): 1.500-5.000 EUR instalado</li>
+<li>Sistema empresarial (más de 16 cámaras, gestión centralizada, integración con otros sistemas): desde 5.000 EUR</li>
+<li>Almacenamiento en la nube: 10-30 EUR/cámara/mes según retención de vídeo</li>
+</ul>
+
+<h3>Control de accesos</h3>
+
+<p>Es uno de los segmentos con mayor crecimiento en el sector, impulsado por la digitalización de las empresas y los requisitos de seguridad en instalaciones industriales. El precio combina hardware (lectores, tornos, barreras, cerraduras electrónicas) con software de gestión y la instalación.</p>
+
+<p>Rangos típicos:</p>
+<ul>
+<li>Control de acceso básico para una puerta (lector de tarjeta + electromagnético + software básico): 500-1.200 EUR</li>
+<li>Sistema para edificio de oficinas (5-10 puertas, gestión centralizada, integración con RRHH): 3.000-12.000 EUR</li>
+<li>Sistema industrial (accesos perimetrales, tornos, integración con vídeo): desde 10.000 EUR</li>
+<li>Mantenimiento y licencia de software: 200-500 EUR/año para instalaciones pequeñas, más en grandes</li>
+</ul>
+
+<h3>Seguridad para eventos</h3>
+
+<p>Un segmento especial con su propia lógica: el servicio es puntual, el riesgo es alto y la habilitación del personal es crítica (el RD 2364/1994 y la Ley 5/2014 de Seguridad Privada son estrictos en cuanto a la formación exigida para vigilantes en eventos).</p>
+
+<p>El precio se calcula habitualmente por vigilante/hora con un mínimo de horas, más un sobrecoste por complejidad del evento (tipo de aforo, venta de alcohol, historial de incidentes). Los rangos van de 18 a 40 EUR/hora según el perfil del personal y el tipo de evento.</p>
+
+<h2>Qué debe incluir un presupuesto de seguridad profesional</h2>
+
+<p>Un presupuesto de seguridad que pierde negocios tiene este aspecto: "Vigilante de seguridad turno diurno: X euros/hora. IVA no incluido." El cliente no sabe qué está comprando, y solo puede comparar ese número con el del competidor.</p>
+
+<p>Un presupuesto de seguridad que gana contratos tiene siete componentes que van más allá del precio:</p>
+
+<h3>1. Diagnóstico del riesgo del cliente</h3>
+
+<p>Antes de dar un precio, demuestra que has analizado la situación del cliente. ¿Qué tipo de instalación es? ¿Cuáles son los activos a proteger? ¿Cuál es el historial de incidencias en la zona? ¿Tiene obligaciones legales de seguridad específicas (actividades reguladas, almacenamiento de sustancias peligrosas, acceso de menores)?</p>
+
+<p>Un párrafo de análisis de la situación al inicio de la propuesta demuestra que no estás mandando un presupuesto genérico: estás proponiendo una solución específica. Eso justifica el precio antes de que el cliente lo vea.</p>
+
+<h3>2. Descripción detallada del servicio</h3>
+
+<p>No "vigilancia perimetral". Especifica: número de rondas por turno, protocolo en caso de incidencia, tiempos de respuesta de la Central Receptora de Alarmas (CRA), cobertura de seguro del personal, formación específica del vigilante asignado, sistema de comunicación con el cliente.</p>
+
+<p>Cuanto más específico seas, más difícil es la comparación directa con un competidor que solo pone "vigilante de seguridad". Y más percibe el cliente que está comprando algo de calidad.</p>
+
+<h3>3. Cumplimiento normativo explícito</h3>
+
+<p>La Ley de Seguridad Privada (Ley 5/2014) y su reglamento establecen requisitos muy concretos sobre habilitaciones del personal, autorizaciones de empresa, cobertura de seguro y otros aspectos. Muchos clientes no saben que existe esta regulación, y tampoco saben si su actual proveedor la cumple.</p>
+
+<p>Incluir en tu presupuesto una sección sobre el cumplimiento normativo de tu empresa (autorización del Ministerio del Interior, número de empresa de seguridad habilitada, seguro de responsabilidad civil, formación del personal) no es burocracia: es una ventaja competitiva real. Si el cliente no lo ve en tu propuesta, asume que todos los proveedores son iguales. Si lo ve, entiende que no lo son.</p>
+
+<h3>4. Desglose de precio transparente</h3>
+
+<p>Para servicios de vigilancia, muestra el desglose: coste laboral estimado del puesto, coste de coordinación y supervisión, seguro, margen de la empresa. No tienes que dar todos los detalles internos, pero sí mostrar que el precio tiene una lógica.</p>
+
+<p>Para instalaciones, desglosa siempre equipos y mano de obra por separado. El cliente que entiende que el 40% del precio son equipos y el 60% es instalación y configuración tiene mucho más contexto para evaluar la propuesta que el que solo ve un total.</p>
+
+<h3>5. Opciones de servicio (no solo una opción)</h3>
+
+<p>Presentar una sola propuesta pone al cliente en "acepto o rechazo". Presentar dos o tres opciones le pone en "¿cuál es la más adecuada para mí?".</p>
+
+<p>Ejemplo para instalación de alarma en una PYME:</p>
+<ul>
+<li><strong>Básico:</strong> central con comunicador GSM, seis detectores volumétricos, sirena exterior, sin monitorización. Ideal para clientes que ya tienen seguro y solo necesitan disuasión.</li>
+<li><strong>Estándar:</strong> todo lo anterior más conexión a CRA con respuesta de vigilantes en 20 minutos. Precio mensual bajo pero con la tranquilidad de respuesta profesional.</li>
+<li><strong>Premium:</strong> sistema completo con integración de videovigilancia, acceso remoto desde smartphone, mantenimiento anual incluido y tiempo de respuesta garantizado de 15 minutos.</li>
+</ul>
+
+<p>Con esta estructura, el cliente no evalúa si tu precio es caro. Evalúa qué nivel de protección necesita realmente.</p>
+
+<h3>6. Condiciones del contrato de forma visible</h3>
+
+<p>Duración mínima del contrato, condiciones de cancelación, periodicidad de facturación, cláusulas de revisión de precio, responsabilidades en caso de fallo del servicio. El cliente que descubre estas condiciones después de firmar se siente engañado. El cliente que las conoce antes de firmar confía en ti porque eres transparente.</p>
+
+<h3>7. Referencias o casos similares</h3>
+
+<p>Si has protegido instalaciones similares, mencionarlo (sin violar la confidencialidad del cliente anterior) es un argumento de venta poderoso. "Gestionamos la seguridad de tres almacenes logísticos en la misma zona industrial" o "instalamos sistemas equivalentes en doce locales del mismo sector" transmite especialización sin necesidad de adornos.</p>
+
+<h2>Cómo calcular el precio de un contrato de vigilancia sin perder dinero</h2>
+
+<p>El error más común en empresas de seguridad que empiezan —y también en algunas con años de experiencia— es calcular el precio del servicio de vigilancia sin incluir todos los costes reales.</p>
+
+<p>Estos son los componentes que deben entrar en el cálculo:</p>
+
+<h3>Costes laborales directos</h3>
+
+<p>El salario del vigilante según el convenio colectivo de empresas de seguridad (que actualiza periódicamente tablas salariales, pluses y condiciones). Añade: Seguridad Social a cargo de la empresa (~30% del salario bruto), vacaciones y días de descanso (el vigilante no trabaja 365 días al año, pero el puesto debe estar cubierto), plus de nocturnidad o festivos según el turno, y coste de sustituciones por bajas.</p>
+
+<p>Un puesto de 24 horas/día, 7 días/semana no necesita un vigilante: necesita entre 4,5 y 5 vigilantes equivalentes cuando se calculan correctamente las guardias, los descansos y las sustituciones.</p>
+
+<h3>Costes de coordinación y supervisión</h3>
+
+<p>El tiempo del supervisor que visita el puesto, el coste de la central de coordinación, el sistema de rondas electrónicas, el gestor del contrato. Estos costes son invisibles en la propuesta pero muy reales en la operativa.</p>
+
+<h3>Costes de equipamiento y uniformidad</h3>
+
+<p>Uniforme del vigilante, equipo de comunicación, linterna, medios de defensa si aplica (para vigilantes armados, el coste del arma y seguro específico). En puestos con vehículo propio de ronda, el coste del vehículo y el combustible.</p>
+
+<h3>Seguro de responsabilidad civil</h3>
+
+<p>Obligatorio por ley. El coste varía según el tipo de servicio y el capital asegurado, pero debe estar incluido en el precio del servicio, no tratarse como un gasto aparte.</p>
+
+<h3>Margen de la empresa</h3>
+
+<p>Después de cubrir todos los costes anteriores, el margen neto en contratos de vigilancia para empresas medianas suele estar entre el 10% y el 20%. En instalaciones de sistemas el margen puede ser mayor (25-40%) dado que hay más componente de conocimiento técnico y menos de mano de obra en masa.</p>
+
+<p>Una herramienta de cotización que calcula automáticamente estos costes y aplica el margen correcto puede evitar errores costosos. Con <a href="https://dealforge.es">DealForge</a> puedes crear plantillas de presupuesto específicas para cada tipo de servicio de seguridad, con los costes paramétricos ya configurados, para que cada propuesta nueva sea rápida y no requiera recalcular desde cero.</p>
+
+<h2>Errores frecuentes al cotizar seguridad privada</h2>
+
+<h3>Bajar el precio para ganar el contrato sin recalcular los costes</h3>
+
+<p>Es la trampa más habitual. El cliente pide un descuento, tú lo concedes sin revisar si sigue siendo rentable, y acabas ejecutando un contrato que pierde dinero. En seguridad, donde los costes laborales son fijos y el convenio no perdona, un precio mal calculado no se compensa con eficiencia: se come tu margen directamente.</p>
+
+<p>Antes de hacer cualquier descuento, calcula qué margen te queda. Si el precio que el cliente pide no cubre los costes reales, más vale no firmar que firmar a pérdida.</p>
+
+<h3>No actualizar los contratos cuando sube el convenio</h3>
+
+<p>El convenio colectivo de empresas de seguridad privada actualiza tablas salariales prácticamente cada año. Si tienes contratos firmados con precio fijo sin cláusula de revisión ligada al IPC o al convenio, estás asumiendo el riesgo de un incremento de costes que no puedes trasladar al cliente.</p>
+
+<p>Incluye siempre en el contrato una cláusula de revisión de precio anual vinculada al convenio colectivo. Es una cláusula estándar en el sector y el cliente que conoce el mercado la acepta sin problema.</p>
+
+<h3>Presupuestar instalaciones sin visita previa</h3>
+
+<p>Dar un precio de instalación de CCTV, alarma o control de accesos sin ver físicamente la instalación es un error que acaba costando caro. Las sorpresas en la fase de instalación —cableado complicado, necesidad de obra civil, distancias mayores de las previstas, incompatibilidades con sistemas existentes— pueden doblar o triplicar el tiempo de trabajo estimado.</p>
+
+<p>Haz siempre una visita técnica previa. Si el cliente no quiere recibirte antes de tener el presupuesto, da un rango estimado y deja claro que el precio definitivo requiere visita. Un cliente que no quiere invertir media hora en una visita técnica probablemente tampoco va a ser fácil durante la instalación.</p>
+
+<h3>No incluir el mantenimiento en la propuesta inicial</h3>
+
+<p>Los sistemas de seguridad necesitan mantenimiento. La legislación obliga a revisiones periódicas en instalaciones conectadas a CRA. Si no incluyes el mantenimiento en tu propuesta inicial, el cliente lo ve como un gasto imprevisto cuando surge, y eso genera fricción.</p>
+
+<p>Incluye siempre la opción de contrato de mantenimiento desde la primera propuesta. Es una fuente de ingresos recurrentes y fideliza al cliente porque eres el referente técnico de su instalación.</p>
+
+<h3>Enviar el presupuesto por email sin seguimiento</h3>
+
+<p>Un presupuesto enviado por email y olvidado es un presupuesto perdido. El cliente lo recibe, lo deja para después, lo compara con otros y toma la decisión sin que hayas tenido la oportunidad de resolver sus dudas.</p>
+
+<p>Establece un protocolo de seguimiento: tres días después de enviar la propuesta, llama o escribe para confirmar que la ha recibido y si tiene preguntas. Siete días después, si no hay respuesta, un segundo contacto breve. Más allá de eso, el cliente ha tomado su decisión.</p>
+
+<p>Con herramientas como <a href="https://dealforge.es">DealForge</a> puedes ver en tiempo real cuándo el cliente ha abierto tu propuesta, lo que te da el momento exacto para hacer ese seguimiento: no a ciegas tres días después, sino cuando el cliente acaba de leerla y la tiene fresca.</p>
+
+<h2>Cómo diferenciarte en un mercado con mucha competencia de precio</h2>
+
+<p>El mercado de la seguridad privada en España tiene muchas empresas que compiten por precio. Si entras en esa guerra, ganarás algunos contratos a márgenes que no sostendrán tu negocio a largo plazo.</p>
+
+<p>Estas son las palancas de diferenciación que justifican un precio superior:</p>
+
+<h3>Especialización sectorial</h3>
+
+<p>No es lo mismo proteger un colegio que una joyería, un almacén de materias peligrosas o un centro de datos. Cada sector tiene riesgos específicos, requisitos normativos propios y necesidades de perfil de vigilante distintas. Una empresa que dice "nos especializamos en seguridad para el sector hostelero" o "llevamos quince años en seguridad industrial" transmite mucho más confianza que una empresa generalista.</p>
+
+<p>Si tienes experiencia en un sector, comunícala activamente. En tu propuesta, en tu web, en tus referencias. La especialización es el argumento más poderoso contra la presión de precio.</p>
+
+<h3>Tiempo de respuesta verificable</h3>
+
+<p>Cualquier empresa puede prometer "respuesta rápida". Pocas pueden mostrar datos reales de tiempo de respuesta medio en su CRA. Si tienes esos datos y son buenos, inclúyelos en tus propuestas. "Tiempo medio de respuesta de nuestra CRA: 8 minutos" es un argumento de venta que el competidor que no mide no puede rebatir.</p>
+
+<h3>Tecnología e integración</h3>
+
+<p>El cliente que quiere un vigilante sentado en una garita tiene una mentalidad de seguridad del siglo pasado. El cliente que entiende la seguridad como un sistema integrado —videovigilancia inteligente, control de accesos digital, alertas en tiempo real al smartphone— está dispuesto a pagar más por una solución más completa.</p>
+
+<p>Si ofreces integración de sistemas (alarma + CCTV + control de accesos gestionados desde una sola plataforma), esa propuesta tiene un valor diferencial claro respecto a quien solo instala componentes por separado.</p>
+
+<h3>Transparencia y cumplimiento</h3>
+
+<p>El cliente que ha tenido un problema con una empresa de seguridad sin autorización o con personal sin habilitación sabe lo que cuesta ese error. Mostrar proactivamente tu autorización ministerial, el número de tu empresa habilitada, la cobertura de seguro y las certificaciones de tu personal es una diferenciación real, no burocrática.</p>
+
+<h2>RGPD y seguridad: una consideración que afecta a tus propuestas</h2>
+
+<p>Cualquier servicio de videovigilancia o control de accesos que implique tratamiento de datos personales (imágenes, registros de acceso) está sujeto al Reglamento General de Protección de Datos y a la Ley Orgánica 3/2018. Esto tiene implicaciones directas para tus cotizaciones.</p>
+
+<p>Como instalador o prestador del servicio, eres en muchos casos encargado del tratamiento de los datos que tu sistema captura. El contrato con el cliente debe incluir las cláusulas de encargo de tratamiento que exige el RGPD, y el cliente debe cumplir con sus obligaciones como responsable del tratamiento: informar a los empleados o visitantes sobre la videovigilancia, registrar el sistema en su registro de actividades de tratamiento, limitar la retención de imágenes al período legal.</p>
+
+<p>Incluir en tu propuesta una sección sobre el cumplimiento RGPD del sistema que vas a instalar no es solo una cuestión legal: es otro elemento de diferenciación. Muchos instaladores no lo mencionan. Los clientes que han tenido problemas con la AEPD saben lo que cuesta ignorar esta parte.</p>
+
+<h2>La propuesta que cierra contratos: estructura en cinco partes</h2>
+
+<p>Después de ver todos los componentes anteriores, esta es la estructura que funciona para propuestas de seguridad que se aceptan:</p>
+
+<ol>
+<li><strong>Análisis de la situación del cliente</strong> (media página): qué has observado, qué riesgos tiene su instalación, qué normativa le aplica. Demuestra que has hecho los deberes antes de enviar el precio.</li>
+<li><strong>Solución propuesta</strong> (una o dos páginas): descripción detallada del servicio, equipos o personal incluidos, protocolos, tiempos de respuesta, integraciones. Específico, no genérico.</li>
+<li><strong>Opciones de servicio</strong> (si aplica): básico, estándar, premium. Permite al cliente elegir en lugar de rechazar.</li>
+<li><strong>Precio y condiciones</strong>: desglose claro, duración del contrato, condiciones de revisión, forma de pago. Sin letra pequeña que aparezca después.</li>
+<li><strong>Sobre la empresa</strong> (media página): autorización ministerial, años de experiencia, referencias del sector, certificaciones del personal. No es la parte más importante, pero cierra la confianza.</li>
+</ol>
+
+<p>Esta estructura se puede crear en minutos con plantillas personalizadas. Si mandas diez o veinte propuestas al mes, tener esa plantilla configurada en una herramienta como <a href="https://dealforge.es">DealForge</a> y poder generar cada propuesta en cinco minutos marcando los servicios que aplica al cliente concreto cambia completamente la eficiencia de tu proceso comercial.</p>
+
+<h2>Qué hacer cuando el cliente quiere solo el precio más bajo</h2>
+
+<p>Va a pasar. El cliente que llama con "dame el precio más barato para un vigilante" no está buscando seguridad: está buscando cubrir un expediente. Ese cliente es libre de hacerlo, pero no tiene que ser tu cliente si no encaja con tu propuesta de valor.</p>
+
+<p>Antes de entrar en esa guerra de precios, intenta reencuadrar la conversación:</p>
+
+<ul>
+<li>"¿Qué le preocupa exactamente proteger?" — si la respuesta es específica, hay margen para una propuesta de valor real.</li>
+<li>"¿Ha tenido incidencias en el pasado?" — un cliente que ya ha sufrido un robo entiende el valor de la seguridad mucho mejor.</li>
+<li>"¿Tiene algún requisito legal o de su seguro?" — muchos sectores tienen obligaciones de seguridad que no son opcionales.</li>
+</ul>
+
+<p>Si después de esas preguntas el cliente sigue focalizándose solo en el precio más bajo, puedes darle tu opción más básica con sus limitaciones claramente explicadas, o decirle directamente que no eres la empresa más adecuada para lo que busca. Perder ese cliente no es una pérdida: es un ahorro de tiempo y de problemas.</p>
+
+<h2>Conclusión: cotiza como la empresa de seguridad que quieres ser</h2>
+
+<p>Las empresas de seguridad que crecen de forma sostenible no son necesariamente las más baratas. Son las que consiguen que el cliente entienda qué está comprando, confíe en que van a cumplir lo que prometen y sienta que el precio está justificado por el valor recibido.</p>
+
+<p>Los puntos clave que llevar a la práctica:</p>
+
+<ul>
+<li>Calcula siempre los costes reales antes de dar un precio, incluyendo todos los componentes laborales y de estructura</li>
+<li>Incluye en tus propuestas el análisis del riesgo del cliente, no solo el precio del servicio</li>
+<li>Muestra proactivamente tu cumplimiento normativo: habilitación, seguro, formación del personal</li>
+<li>Presenta siempre al menos dos opciones de servicio para que el cliente elija, no rechace</li>
+<li>Incluye una cláusula de revisión de precio anual en todos los contratos de vigilancia</li>
+<li>Haz seguimiento activo de las propuestas enviadas: el que no insiste, pierde</li>
+<li>Diferénciate por especialización sectorial y tiempo de respuesta verificable, no por precio</li>
+</ul>
+
+<p>El cliente que entiende el valor de la seguridad —y hay muchos— está dispuesto a pagar por una empresa que le transmita confianza desde el primer documento que recibe. Tu propuesta económica es ese primer documento.</p>
+
+<p><strong>¿Quieres crear propuestas de seguridad profesionales en minutos, con firma electrónica y seguimiento de apertura incluido?</strong> Prueba <a href="https://dealforge.es">DealForge</a> gratis y deja de perder contratos por cómo presentas tu precio, no por lo que cobras.</p>`,
+    autor: "DealForge",
+    categoria: "sectores",
+    tags: JSON.stringify([
+      "cotizaciones seguridad",
+      "presupuesto empresa seguridad",
+      "vigilancia privada precios",
+      "instalación alarmas presupuesto",
+      "seguridad privada España",
+      "pymes",
+      "contratos seguridad",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Guía de cotizaciones para empresas de seguridad privada 2026 — DealForge",
+    metaDescripcion:
+      "Cómo estructurar cotizaciones de servicios de seguridad: vigilancia, alarmas, CCTV y control de accesos. Con rangos de precios reales del mercado español y errores que evitar.",
+    metaKeywords:
+      "cotizaciones empresa seguridad, presupuesto vigilancia privada, cómo cotizar seguridad privada, precio vigilante seguridad, instalación alarmas precio, presupuesto CCTV, cotización control accesos, seguridad privada España precio",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16, post17, post18];
   const results = [];
 
   for (const p of posts) {
