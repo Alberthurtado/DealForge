@@ -6,6 +6,12 @@ import { prisma } from "@/lib/prisma";
 
 const COOKIE_NAME = "dealforge_token";
 
+// Session lifetime. The cookie + JWT both last this long, and the
+// middleware slides the window forward on activity so active users
+// effectively stay logged in indefinitely.
+export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30; // 30 days
+export const SESSION_DURATION = "30d";
+
 function getJwtSecret(): Uint8Array {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
@@ -44,7 +50,7 @@ export async function createToken(payload: JWTPayload): Promise<string> {
   return new SignJWT(payload as unknown as Record<string, unknown>)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("7d")
+    .setExpirationTime(SESSION_DURATION)
     .sign(JWT_SECRET);
 }
 

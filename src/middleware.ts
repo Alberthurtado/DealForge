@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify } from "jose";
+import { jwtVerify, SignJWT } from "jose";
 import { checkRateLimit, rateLimitResponse, RATE_LIMITS } from "@/lib/rate-limit";
+
+// Session lifetime (kept in sync with src/lib/auth.ts). The cookie is
+// re-issued on activity so active users stay logged in indefinitely.
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30; // 30 days
+// Only re-sign the token once it's older than this, to avoid re-signing
+// on every single request.
+const SESSION_REFRESH_AFTER_SECONDS = 60 * 60 * 24; // 1 day
 
 // Inlined from api-key.ts to avoid importing Node.js crypto in Edge middleware
 const API_KEY_PREFIX = "dfk_";
@@ -125,7 +132,7 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, JWT_SECRET);
 
     // Rate limit write operations on protected APIs (60/min per IP)
     if (isProtectedAPI && ["POST", "PUT", "DELETE", "PATCH"].includes(request.method)) {
@@ -134,7 +141,37 @@ export async function middleware(request: NextRequest) {
       if (!limit.allowed) return rateLimitResponse(limit.resetAt);
     }
 
-    return NextResponse.next();
+    const response = NextResponse.next();
+
+    // ─── Sliding session ───
+    // Re-issue the token (and cookie) with a fresh 30-day window when the
+    // current one is older than a day. This keeps active users logged in
+    // indefinitely without re-signing on every request. We only do this on
+    // page navigations (GET) to avoid touching API write responses.
+    if (request.method === "GET") {
+      const issuedAt = typeof payload.iat === "number" ? payload.iat : 0;
+      const ageSeconds = Math.floor(Date.now() / 1000) - issuedAt;
+      if (ageSeconds > SESSION_REFRESH_AFTER_SECONDS) {
+        // Re-sign with the same custom claims, fresh iat/exp.
+        const { iat: _iat, exp: _exp, ...claims } = payload;
+        void _iat;
+        void _exp;
+        const freshToken = await new SignJWT(claims)
+          .setProtectedHeader({ alg: "HS256" })
+          .setIssuedAt()
+          .setExpirationTime("30d")
+          .sign(JWT_SECRET);
+        response.cookies.set(COOKIE_NAME, freshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          path: "/",
+          maxAge: SESSION_MAX_AGE_SECONDS,
+        });
+      }
+    }
+
+    return response;
   } catch {
     // Invalid token — clear it and redirect
     if (isProtectedAPI) {

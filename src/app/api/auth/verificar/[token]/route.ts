@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { createToken, getCookieName } from "@/lib/auth";
+import { createToken, getCookieName, SESSION_MAX_AGE_SECONDS } from "@/lib/auth";
 
 export async function GET(
   request: NextRequest,
@@ -67,7 +67,7 @@ export async function GET(
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: SESSION_MAX_AGE_SECONDS,
   });
 
   return response;

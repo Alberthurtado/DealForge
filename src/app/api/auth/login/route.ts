@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { verifyPassword, createToken, getCookieName } from "@/lib/auth";
+import { verifyPassword, createToken, getCookieName, SESSION_MAX_AGE_SECONDS } from "@/lib/auth";
 import { checkRateLimit, RATE_LIMITS, getClientIp, rateLimitResponse } from "@/lib/rate-limit";
 import { loginSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: SESSION_MAX_AGE_SECONDS,
   });
 
   return response;
