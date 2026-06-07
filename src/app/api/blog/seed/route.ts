@@ -4,6 +4,8 @@ import { getSession } from "@/lib/auth";
 import { notifyIndexNow } from "@/lib/indexnow";
 
 // One-time seed endpoint for blog posts — requires authentication
+// GET alias so it can be triggered directly from the browser while logged in
+export { POST as GET };
 export async function POST() {
   const session = await getSession();
   if (!session) {
