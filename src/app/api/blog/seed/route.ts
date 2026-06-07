@@ -4008,7 +4008,281 @@ Precio de venta = (Coste total × 100) / (100 &minus; margen deseado %)</p>
       "cotizaciones empresa seguridad, presupuesto vigilancia privada, cómo cotizar seguridad privada, precio vigilante seguridad, instalación alarmas precio, presupuesto CCTV, cotización control accesos, seguridad privada España precio",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16, post17, post18];
+  const post19 = {
+    slug: "como-calcular-margenes-beneficio-presupuestos",
+    titulo: "Cómo calcular márgenes de beneficio en tus presupuestos: la guía que nadie te enseñó",
+    extracto: "Aprende a calcular correctamente el margen de beneficio en tus presupuestos para no trabajar gratis sin saberlo. Con fórmulas, ejemplos reales y los errores más comunes que cometen autónomos y PYMEs.",
+    contenido: `<p>Hay un problema silencioso que afecta a miles de autónomos y pequeñas empresas en España: trabajan mucho, facturan bien y a final de año descubren que han ganado mucho menos de lo que esperaban. O peor: que algunos de sus mejores clientes, los que más trabajo generan, son en realidad los que menos rentabilidad aportan.</p>
+
+<p>La raíz casi siempre es la misma: un mal cálculo del margen de beneficio en los presupuestos. No porque los propietarios sean malos gestores, sino porque nadie les enseñó a hacerlo bien. La formación empresarial básica brilla por su ausencia en muchos sectores donde la gente llega al negocio desde el oficio, no desde la gestión.</p>
+
+<p>Este artículo lo corrige. Sin jerga de MBA, con ejemplos reales y aplicables desde hoy.</p>
+
+<h2>Margen bruto vs. margen neto: la confusión que cuesta dinero</h2>
+
+<p>Antes de hablar de cómo calcular el margen, hay que dejar claro qué significa exactamente. Porque "margen" es una de esas palabras que todo el mundo usa y poca gente calcula igual.</p>
+
+<h3>Margen bruto</h3>
+
+<p>Es la diferencia entre el precio de venta y el coste directo del producto o servicio, expresado como porcentaje del precio de venta.</p>
+
+<p><strong>Fórmula:</strong> Margen bruto (%) = (Precio de venta - Coste directo) ÷ Precio de venta × 100</p>
+
+<p>Ejemplo: vendes un servicio de instalación por 1.000 EUR. El coste de los materiales y la mano de obra directa es de 600 EUR. Tu margen bruto es:</p>
+
+<p>(1.000 - 600) ÷ 1.000 × 100 = <strong>40%</strong></p>
+
+<p>Parece bien. Pero ese 40% no es lo que te queda a ti. Es lo que queda antes de pagar los gastos fijos de tu negocio.</p>
+
+<h3>Margen neto</h3>
+
+<p>Es el beneficio que queda después de restar todos los costes: directos, indirectos y gastos generales. Es el número que de verdad importa.</p>
+
+<p><strong>Fórmula:</strong> Margen neto (%) = Beneficio neto ÷ Precio de venta × 100</p>
+
+<p>Siguiendo el ejemplo: si de esos 400 EUR de margen bruto tienes que pagar 150 EUR de gastos generales imputables a ese trabajo (alquiler proporcional, seguro, herramientas, vehículo, tiempo de administración), tu margen neto es:</p>
+
+<p>250 ÷ 1.000 × 100 = <strong>25%</strong></p>
+
+<p>Y si además tienes que pagar impuestos sobre ese beneficio, el margen real que te queda en el bolsillo es aún menor.</p>
+
+<p>El error más común: muchos autónomos calculan el margen bruto, se sienten bien y presupuestan como si ese fuera su beneficio real. No lo es.</p>
+
+<h3>Margen vs. markup: la diferencia que hace que vendas más barato de lo que crees</h3>
+
+<p>Hay otra confusión frecuente que merece atención especial: la diferencia entre margen y markup (o recargo).</p>
+
+<p>Si compras un producto por 60 EUR y lo vendes por 100 EUR:</p>
+<ul>
+<li><strong>Markup:</strong> (100 - 60) ÷ 60 × 100 = 66,7%</li>
+<li><strong>Margen:</strong> (100 - 60) ÷ 100 × 100 = 40%</li>
+</ul>
+
+<p>Si dices "voy a aplicar un 40% de margen" pero calculas el precio multiplicando el coste por 1,4, estás aplicando en realidad un 28,6% de margen, no un 40%. Estás vendiendo más barato de lo que crees.</p>
+
+<p>La fórmula correcta para calcular el precio de venta a partir de un margen objetivo es:</p>
+
+<p><strong>Precio de venta = Coste directo ÷ (1 - Margen objetivo)</strong></p>
+
+<p>Ejemplo con margen objetivo del 40%: si el coste directo es 600 EUR → 600 ÷ (1 - 0,40) = 600 ÷ 0,60 = <strong>1.000 EUR</strong></p>
+
+<p>Guarda esta fórmula. Mucha gente que lleva años en el negocio la descubre tarde.</p>
+
+<h2>Qué costes incluir en tus presupuestos (y cuáles se olvidan siempre)</h2>
+
+<p>El error de cálculo más frecuente en presupuestos de autónomos y PYMEs no está en la aritmética: está en qué costes se incluyen en el cálculo. Estos son los que sistemáticamente se olvidan:</p>
+
+<h3>Tu propio tiempo de gestión y comercial</h3>
+
+<p>El tiempo que dedicas a hacer el presupuesto, a reunirte con el cliente, a hacer el seguimiento, a gestionar la factura y el cobro. Si tardas cuatro horas en conseguir un proyecto de 500 EUR, esas cuatro horas tienen un coste.</p>
+
+<p>Calcula tu tarifa horaria interna (cuánto necesitas ganar por hora para que tu negocio sea sostenible) y aplícala al tiempo de gestión de cada proyecto. Si tu tarifa interna es 40 EUR/hora y dedicas cuatro horas de gestión a un proyecto, el coste de gestión es 160 EUR. Eso tiene que estar en el precio.</p>
+
+<h3>Los gastos fijos prorrateados</h3>
+
+<p>El alquiler de la oficina o taller, el seguro de la empresa, las herramientas y su amortización, el software que usas, el vehículo, la formación, la gestoría. Todos estos gastos existen independientemente de si tienes trabajo o no. Y todos tienen que estar cubiertos por tus ventas.</p>
+
+<p>Una forma práctica de incorporarlos a los presupuestos:</p>
+<ol>
+<li>Suma todos tus gastos fijos anuales. Por ejemplo: 24.000 EUR/año</li>
+<li>Estima cuántos proyectos o clientes activos tienes al año. Por ejemplo: 50 proyectos</li>
+<li>Coste de estructura por proyecto: 24.000 ÷ 50 = 480 EUR por proyecto</li>
+<li>Ese importe debe sumarse al coste directo antes de calcular el precio final</li>
+</ol>
+
+<p>Si no lo haces, estás subvencionando los costes fijos de tu negocio con tu margen operativo, y ese margen se evapora.</p>
+
+<h3>Las horas no facturables</h3>
+
+<p>Si trabajas ocho horas al día pero solo facturarás seis (porque las otras dos son administración, prospección o formación), tu tarifa real tiene que cubrir las ocho horas, no las seis. El precio que cobras en las horas facturables tiene que financiar también las no facturables.</p>
+
+<p>Fórmula para la tarifa horaria sostenible:</p>
+<p><strong>Tarifa hora = Ingresos anuales necesarios ÷ Horas facturables al año</strong></p>
+
+<p>Ejemplo: necesitas 48.000 EUR netos al año. Trabajas 46 semanas (descontando vacaciones) con una media de 25 horas facturables por semana.</p>
+<p>48.000 ÷ (46 × 25) = 48.000 ÷ 1.150 = <strong>41,7 EUR/hora como mínimo</strong></p>
+
+<p>Si tu tarifa actual es inferior a ese número, estás ganando menos de lo que necesitas aunque parezcas ocupado.</p>
+
+<h3>El coste del capital y los plazos de cobro</h3>
+
+<p>Si facturas a 60 días pero tienes que pagar tus costes directos al contado, estás financiando a tu cliente durante dos meses. Ese coste financiero es real, especialmente en proyectos grandes. En presupuestos de importes elevados, considera añadir un pequeño porcentaje (1-2%) por el coste de financiación si el cobro es a largo plazo, o negocia anticipos que cubran los costes directos iniciales.</p>
+
+<h3>Las mermas e imprevistos</h3>
+
+<p>En proyectos físicos (construcción, instalaciones, fabricación), siempre hay un porcentaje de material que se pierde, se rompe o hay que repetir. En servicios, siempre hay reuniones adicionales, correcciones imprevistas o requisitos que aparecen a mitad del trabajo.</p>
+
+<p>Incluye un porcentaje de contingencia en tus presupuestos: entre un 5% y un 15% según la complejidad del proyecto y tu historial de desviaciones. No es engordar el precio artificialmente: es ser honesto sobre la realidad de cómo funcionan los proyectos.</p>
+
+<h2>Cómo saber qué margen objetivo poner en cada presupuesto</h2>
+
+<p>No hay un margen "correcto" universal. El margen adecuado depende del sector, del tipo de trabajo, de la posición competitiva de tu empresa y de tus objetivos de negocio. Pero hay referencias útiles:</p>
+
+<h3>Márgenes habituales por tipo de negocio en España</h3>
+
+<ul>
+<li><strong>Servicios profesionales</strong> (consultoría, asesoría, diseño, marketing): margen bruto del 60-80%, margen neto del 20-40%</li>
+<li><strong>Servicios técnicos e instalaciones</strong> (electricidad, fontanería, informática, alarmas): margen bruto del 35-55%, margen neto del 10-25%</li>
+<li><strong>Construcción y reformas</strong>: margen bruto del 15-35%, margen neto del 5-15% (sector con mucho coste directo de materiales y subcontratistas)</li>
+<li><strong>Comercio y distribución</strong>: margen bruto del 20-50% según el producto, margen neto del 3-10%</li>
+<li><strong>Restauración y hostelería</strong>: margen bruto del 65-75% en comida, margen neto del 5-15%</li>
+<li><strong>Formación y educación</strong>: margen bruto del 70-90%, margen neto del 20-45%</li>
+</ul>
+
+<p>Si tu margen neto real está consistentemente por debajo del rango de tu sector, tienes un problema de precio o de estructura de costes que hay que resolver.</p>
+
+<h3>El margen mínimo de supervivencia</h3>
+
+<p>Antes de pensar en márgenes objetivo, calcula cuál es el margen mínimo que necesitas para que tu negocio sobreviva: el que cubre exactamente tus costes fijos y tu salario mínimo necesario sin ningún beneficio adicional.</p>
+
+<p>Si tu margen en un proyecto está por debajo de ese umbral, ese proyecto te está costando dinero, aunque genere ingresos en la cuenta corriente. Identificar esos proyectos es el primer paso para dejar de trabajar gratis.</p>
+
+<h3>El margen de posicionamiento</h3>
+
+<p>Tu margen también comunica algo al mercado. Una empresa que trabaja con márgenes muy bajos para ganar proyectos está posicionándose como la opción barata. Eso funciona a corto plazo pero es insostenible y atrae al tipo de cliente que siempre presiona por más descuentos.</p>
+
+<p>Construir un negocio rentable requiere poder defender márgenes más altos con propuestas de valor más claras. No es una cuestión de codicia: es una cuestión de tener los recursos para dar un buen servicio, contratar buenos profesionales y seguir en el mercado dentro de cinco años.</p>
+
+<h2>Cómo aplicar el cálculo de márgenes en la práctica</h2>
+
+<p>La teoría está bien, pero lo que importa es el proceso que sigues cuando preparas un presupuesto. Aquí tienes un método de cinco pasos aplicable a cualquier tipo de negocio de servicios:</p>
+
+<h3>Paso 1: Identifica todos los costes directos</h3>
+
+<p>Para este proyecto o servicio específico, ¿qué tienes que gastar de forma directa? Materiales, subcontratistas, desplazamientos, licencias o permisos específicos del proyecto, horas de personal directo (a coste, no a precio de venta).</p>
+
+<p>Sé específico. Si estimas "más o menos", el presupuesto se desviará. Si tienes historial de proyectos similares, úsalo. Si no, sé conservador: es mejor sobre-estimar el coste y ajustar que encontrarte a mitad del proyecto sin margen.</p>
+
+<h3>Paso 2: Añade los costes indirectos prorrateados</h3>
+
+<p>El porcentaje de gastos fijos que corresponde a este proyecto, calculado según el método que describimos antes (gastos fijos anuales ÷ número de proyectos estimados, o una proporción del tiempo dedicado).</p>
+
+<h3>Paso 3: Suma el coste de tu tiempo de gestión</h3>
+
+<p>Estima honestamente cuántas horas de gestión, coordinación y seguimiento dedicarás a este proyecto más allá del trabajo técnico directo. Multiplícalo por tu tarifa interna.</p>
+
+<h3>Paso 4: Añade la contingencia</h3>
+
+<p>Entre el 5% y el 15% del total de costes calculados, según la complejidad y el riesgo del proyecto. Proyectos donde el alcance está muy bien definido → 5%. Proyectos con mucha incertidumbre o clientes con historial de cambios → 15%.</p>
+
+<h3>Paso 5: Calcula el precio con el margen objetivo</h3>
+
+<p>Con la suma de todos los costes (coste total del proyecto), aplica la fórmula:</p>
+
+<p><strong>Precio de venta = Coste total ÷ (1 - Margen objetivo)</strong></p>
+
+<p>Ejemplo completo:</p>
+<ul>
+<li>Materiales: 800 EUR</li>
+<li>Mano de obra directa: 400 EUR</li>
+<li>Gastos fijos prorrateados: 200 EUR</li>
+<li>Gestión y coordinación (5h × 40 EUR/h): 200 EUR</li>
+<li>Contingencia (10%): 160 EUR</li>
+<li><strong>Coste total: 1.760 EUR</strong></li>
+<li>Margen objetivo: 30%</li>
+<li><strong>Precio de venta: 1.760 ÷ 0,70 = 2.514 EUR</strong></li>
+</ul>
+
+<p>Si el cliente pide descuento y tú cedes hasta 2.200 EUR, ya sabes exactamente lo que estás cediendo: tu margen baja del 30% al 20%, y tu beneficio neto real se reduce proporcionalmente. Esa información te permite negociar con criterio, no a ciegas.</p>
+
+<h2>Análisis de rentabilidad por cliente: el ejercicio que cambia perspectivas</h2>
+
+<p>Una vez que tienes el método de cálculo claro, hay un ejercicio que recomiendo hacer al menos una vez al año: analizar la rentabilidad real de cada cliente o tipo de proyecto.</p>
+
+<p>El resultado suele ser sorprendente. En casi todos los negocios de servicios hay una distribución desigual:</p>
+
+<ul>
+<li>Un 20-30% de los clientes generan el 70-80% del beneficio real</li>
+<li>Un 30-40% de los clientes tienen una rentabilidad aceptable pero no extraordinaria</li>
+<li>Un 20-30% de los clientes generan ingresos pero poca o ninguna rentabilidad real, o incluso números rojos una vez imputados todos los costes</li>
+</ul>
+
+<p>El cliente que parece "fácil" porque siempre tiene trabajo puede ser el que más horas de gestión, cambios de última hora y presión de precio genera. El cliente más exigente en calidad puede ser el que mejor paga y el que menos problemas da en la ejecución.</p>
+
+<p>Hacer ese análisis requiere llevar un registro del tiempo dedicado a cada cliente y compararlo con la facturación. No hace falta un sistema complejo: una hoja de cálculo con el tiempo real dedicado y los ingresos por cliente es suficiente para ver el patrón.</p>
+
+<h2>Cuándo y cómo revisar tus márgenes</h2>
+
+<p>Los márgenes no son estáticos. Los costes cambian, el mercado cambia, tu posición competitiva evoluciona. Estos son los momentos en que debes revisar activamente tus márgenes:</p>
+
+<h3>Anualmente como mínimo</h3>
+
+<p>Una vez al año, revisa si tus tarifas siguen cubriendo tus costes reales actualizados. La inflación de costes (materiales, energía, mano de obra) no siempre se traslada automáticamente a los precios. Si tus costes han subido un 8% pero tus precios solo un 3%, tu margen real ha bajado cinco puntos.</p>
+
+<h3>Cuando cambia la estructura de costes</h3>
+
+<p>Contratas a alguien, cambias de local, inviertes en equipamiento. Cada cambio significativo en la estructura de costes requiere revisar si los precios actuales siguen siendo adecuados.</p>
+
+<h3>Cuando detectas proyectos no rentables repetidamente</h3>
+
+<p>Si en los últimos seis meses tres proyectos del mismo tipo han terminado con margen inferior al objetivo, hay un problema sistemático de estimación. O el coste directo es mayor de lo que calculas, o el tiempo de gestión está infravalorado, o el tipo de proyecto tiene más imprevistos de los que contemplas. Ajusta la metodología de cálculo, no solo los precios.</p>
+
+<h3>Cuando el mercado cambia</h3>
+
+<p>Si la competencia ha subido precios, si hay escasez de materiales o mano de obra, si aparece una nueva tecnología que cambia los costes de producción. El margen que era razonable hace dos años puede no serlo hoy.</p>
+
+<h2>El papel de la herramienta de presupuestación en el control de márgenes</h2>
+
+<p>Calcular márgenes correctamente a mano o en Excel es posible, pero tiene un coste: tiempo y riesgo de error. Cuando mandas veinte presupuestos al mes, la probabilidad de cometer un error en alguno de ellos es alta. Y un error de cálculo de margen no se ve hasta que el proyecto termina y revisas los números.</p>
+
+<p>Una herramienta de presupuestación profesional permite configurar los costes de forma paramétrica: defines los componentes (materiales, mano de obra, gastos fijos prorrateados, contingencia) y el sistema calcula automáticamente el precio con el margen correcto. Cada presupuesto nuevo aplica esa lógica sin posibilidad de error aritmético.</p>
+
+<p>Con <a href="https://dealforge.es">DealForge</a> puedes crear plantillas de presupuesto donde el margen objetivo está preconfigurado por tipo de servicio. Cuando creas una propuesta nueva, seleccionas los componentes, el sistema calcula el precio correcto y lo presenta de forma profesional al cliente. El margen queda protegido desde el primer momento, sin depender de que alguien recuerde aplicar la fórmula bien en cada ocasión.</p>
+
+<h2>Qué hacer cuando el cliente dice que es caro</h2>
+
+<p>La presión de precio del cliente es el momento donde el control de márgenes se pone a prueba. Si no sabes exactamente cuánto margen tiene tu presupuesto, cualquier descuento que hagas será a ciegas. Si lo sabes, puedes tomar decisiones informadas.</p>
+
+<p>Algunas respuestas posibles cuando el cliente pide descuento, basadas en el conocimiento real de tus márgenes:</p>
+
+<ul>
+<li><strong>Si tienes margen de maniobra:</strong> "Puedo ajustar el precio si reducimos el alcance. Si quitamos [componente X], el precio baja a [Y EUR]." Das el descuento cambiando el alcance, no sacrificando el margen.</li>
+<li><strong>Si estás en el límite:</strong> "Este precio es el mínimo con el que puedo garantizar la calidad que necesitas. Si lo bajo más, tendría que reducir [materiales, tiempo de dedicación, garantía], y no creo que eso sea lo que buscas." Honesto y profesional.</li>
+<li><strong>Si el descuento solicitado excede lo posible:</strong> "El precio que propones no me permite cubrir los costes reales del proyecto con la calidad que necesitas. Puedo recomendarte otras opciones si el presupuesto es ese." Perder un proyecto que no iba a ser rentable no es una pérdida.</li>
+</ul>
+
+<p>Tener los números claros te da confianza para mantener el precio. Y los clientes lo notan: un proveedor que conoce sus costes y defiende su precio con argumentos es más creíble que uno que baja a la primera sin explicación.</p>
+
+<h2>Conclusión: los números que no calculas, te calculan a ti</h2>
+
+<p>No calcular correctamente el margen no significa que no pagues los costes. Significa que los pagas sin saberlo: con horas extra no reconocidas, con proyectos que no generan el beneficio esperado, con clientes que consumen más recursos de los que aportan.</p>
+
+<p>Los puntos clave de este artículo para aplicar desde hoy:</p>
+
+<ul>
+<li>Usa la fórmula correcta: Precio = Coste ÷ (1 - Margen objetivo). No multipliques por el margen, divídelo.</li>
+<li>Incluye en el coste todos los componentes reales: materiales, mano de obra, gastos fijos prorrateados, tiempo de gestión y contingencia.</li>
+<li>Calcula tu tarifa horaria interna mínima basándote en tus ingresos necesarios y las horas realmente facturables.</li>
+<li>Revisa la rentabilidad por cliente al menos una vez al año para identificar qué trabajos te convienen y cuáles no.</li>
+<li>Cuando el cliente pida descuento, reduce el alcance antes que el margen.</li>
+<li>Actualiza tus tarifas al menos una vez al año para absorber el incremento de costes.</li>
+</ul>
+
+<p>Un negocio que controla sus márgenes puede tomar decisiones: qué proyectos aceptar, qué clientes priorizar, cuándo contratar, cuándo invertir. Un negocio que no los controla sobrevive de la facturación y se pregunta al final del año por qué no sobra nada.</p>
+
+<p><strong>¿Quieres presupuestar con márgenes correctos desde el primer clic, sin fórmulas manuales ni riesgo de error?</strong> Prueba <a href="https://dealforge.es">DealForge</a> gratis y configura tus plantillas de presupuesto con el margen que necesitas para que tu negocio sea rentable de verdad.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: JSON.stringify([
+      "márgenes de beneficio",
+      "cómo calcular margen",
+      "rentabilidad presupuestos",
+      "precio de venta",
+      "gestión financiera pymes",
+      "autónomos",
+      "presupuestos profesionales",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Cómo calcular márgenes de beneficio en presupuestos: guía práctica 2026 — DealForge",
+    metaDescripcion:
+      "Aprende a calcular el margen de beneficio real en tus presupuestos: fórmulas correctas, costes que se olvidan siempre y cómo defender tu precio cuando el cliente pide descuento.",
+    metaKeywords:
+      "cómo calcular margen de beneficio, margen en presupuestos, calcular precio de venta con margen, margen bruto neto diferencia, rentabilidad presupuestos pymes, fórmula margen beneficio, markup vs margen, precio con margen autónomos",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16, post17, post18, post19];
   const results = [];
 
   for (const p of posts) {
