@@ -78,6 +78,28 @@ export default function EnContactPage() {
                 <p className="text-sm text-gray-500">Under 48 working hours</p>
               </div>
             </div>
+
+            {/* Quicklinks */}
+            <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">Before you write…</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link href="/en/what-is-cpq" className="text-[#3a9bb5] hover:underline">
+                    What is CPQ? &rarr;
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/en#faq" className="text-[#3a9bb5] hover:underline">
+                    Frequently asked questions &rarr;
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/en/pricing" className="text-[#3a9bb5] hover:underline">
+                    Pricing &amp; plans &rarr;
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Form */}

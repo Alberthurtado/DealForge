@@ -178,6 +178,65 @@ export default function EnHome() {
             Free forever plan · No credit card · Set up in minutes
           </p>
         </div>
+
+        {/* Dashboard mockup */}
+        <div className="max-w-5xl mx-auto mt-16">
+          <div className="bg-white rounded-2xl shadow-2xl shadow-gray-200/60 border border-gray-200 overflow-hidden">
+            {/* Browser chrome */}
+            <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-200">
+              <div className="flex gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-red-400" />
+                <span className="w-3 h-3 rounded-full bg-yellow-400" />
+                <span className="w-3 h-3 rounded-full bg-green-400" />
+              </div>
+              <div className="flex-1 mx-4">
+                <div className="bg-white rounded-md px-4 py-1 text-xs text-gray-500 border border-gray-200 max-w-sm mx-auto">
+                  app.dealforge.es/panel
+                </div>
+              </div>
+            </div>
+            {/* Dashboard preview */}
+            <div className="p-6 bg-[#f8fafc]">
+              <div className="grid grid-cols-4 gap-4 mb-6">
+                {[
+                  { label: "Pipeline", value: "£24,350", color: "text-[#3a9bb5]" },
+                  { label: "Conversion", value: "67%", color: "text-green-600" },
+                  { label: "Avg. deal", value: "£3,044", color: "text-purple-600" },
+                  { label: "Revenue", value: "£18,175", color: "text-amber-600" },
+                ].map((kpi) => (
+                  <div key={kpi.label} className="bg-white rounded-xl p-4 border border-gray-100">
+                    <p className="text-xs text-gray-500 mb-1">{kpi.label}</p>
+                    <p className={`text-lg font-bold ${kpi.color}`}>{kpi.value}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="col-span-2 bg-white rounded-xl p-4 border border-gray-100 h-32 flex items-end gap-2">
+                  {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
+                    <div key={i} className="flex-1 bg-[#3a9bb5]/20 rounded-t-md" style={{ height: `${h}%` }}>
+                      <div
+                        className="w-full bg-[#3a9bb5] rounded-t-md"
+                        style={{ height: `${[85, 70, 92, 65, 78, 88, 72][i]}%` }}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-white rounded-xl p-4 border border-gray-100 space-y-2">
+                  {["Draft", "Sent", "Negotiating", "Won"].map((s, i) => (
+                    <div key={s} className="flex items-center gap-2">
+                      <span
+                        className="w-2.5 h-2.5 rounded-full"
+                        style={{ backgroundColor: ["#94a3b8", "#3b82f6", "#f59e0b", "#22c55e"][i] }}
+                      />
+                      <span className="text-xs text-gray-600 flex-1">{s}</span>
+                      <span className="text-xs font-semibold text-gray-900">{[3, 4, 2, 5][i]}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Benefits */}
