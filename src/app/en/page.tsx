@@ -77,16 +77,44 @@ const FEATURES = [
 
 const FAQS = [
   {
-    q: "What is DealForge?",
-    a: "DealForge is AI-powered quoting (CPQ) software for small businesses, freelancers and sales teams. It helps you create professional quotes, manage clients and products, sign electronically and follow up automatically.",
+    q: "What is CPQ and why do I need it?",
+    a: "CPQ stands for Configure, Price, Quote. It's software that automates building sales quotes — ensuring correct prices, authorised discounts and professional documents. If you quote in spreadsheets, a CPQ tool saves hours every week and removes errors.",
+  },
+  {
+    q: "What can Forge, the AI assistant, do?",
+    a: "Forge can build a complete quote from a plain-English instruction, analyse your sales pipeline, suggest follow-up actions, look up client and product information, and more. It works like a sales assistant that knows all your data in real time.",
   },
   {
     q: "Is there a free plan?",
     a: "Yes. The Starter plan is free forever (10 quotes/month, no credit card). You can also try the online quote generator without signing up.",
   },
   {
-    q: "How is it different from a spreadsheet?",
-    a: "DealForge calculates VAT, discounts and margins automatically, generates a professional PDF, supports legally valid e-signature, and follows up with clients — none of which Excel does.",
+    q: "Is my data secure?",
+    a: "Yes. Your data is stored securely and encrypted, and we never share it with third parties. The AI processes queries in real time without storing conversations. We comply with GDPR and EU data-protection rules.",
+  },
+  {
+    q: "Can I import my existing data?",
+    a: "Yes. You can import clients and products from CSV files in the Integrations section. The system detects duplicates and updates existing records automatically. You can also export all your data at any time.",
+  },
+  {
+    q: "Is there a contract or lock-in?",
+    a: "No. All plans are monthly and you can cancel anytime — no penalties, no minimum term. Your data is yours and you can export it before cancelling.",
+  },
+  {
+    q: "Can I brand my quotes?",
+    a: "Yes. Set your logo, brand colours and company details, and your PDF quotes are generated automatically with your visual identity. Higher plans add extra templates and advanced customisation.",
+  },
+  {
+    q: "How does sending quotes by email work?",
+    a: "From the Pro plan, you can send quotes directly by email from DealForge using your own SMTP and domain. The recipient gets a professional email with the PDF attached, and you can track the status of each send.",
+  },
+  {
+    q: "Does DealForge integrate with my CRM or ERP?",
+    a: "Yes. The Business plan includes CRM integrations, and you can use the REST API to connect DealForge to any tool (Zapier, Make, n8n). CSV import/export is available from the Pro plan.",
+  },
+  {
+    q: "How is it different from quoting in a spreadsheet?",
+    a: "Spreadsheets need manual calculations, have no version control, don't generate PDFs automatically and don't support real-time collaboration. DealForge automates everything: pricing, discounts, taxes, PDF generation, email sending and status tracking.",
   },
   {
     q: "Which currencies do you support?",
@@ -94,9 +122,23 @@ const FAQS = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function EnHome() {
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Navbar locale="en" altHref="/" />
 
       {/* Hero */}
