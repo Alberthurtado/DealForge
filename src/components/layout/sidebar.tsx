@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import Image from "next/image";
 import type { PlanFeatures } from "@/lib/plan-limits";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface NavItem {
   name: string;
@@ -61,11 +62,15 @@ interface SidebarUser {
   features?: PlanFeatures;
 }
 
-export function Sidebar({ user }: { user: SidebarUser | null }) {
+export function Sidebar({ user, lang = "es" }: { user: SidebarUser | null; lang?: DashboardLang }) {
   const pathname = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
+  const t = DASHBOARD_STRINGS[lang];
+
+  // Localized navigation label, falling back to the Spanish name.
+  const label = (item: NavItem) => t.nav[item.href] ?? item.name;
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -83,7 +88,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
   return (
     <aside
       role="navigation"
-      aria-label="Menú principal"
+      aria-label={t.mainMenu}
       data-sidebar
       className={cn(
         "flex flex-col bg-white border-r border-border transition-all duration-300",
@@ -131,7 +136,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
                 <item.icon className="w-5 h-5 shrink-0 opacity-40" />
                 {!collapsed && (
                   <>
-                    <span className="flex-1 opacity-60">{item.name}</span>
+                    <span className="flex-1 opacity-60">{label(item)}</span>
                     <span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-bold rounded bg-purple-100 text-purple-700 uppercase tracking-wider">
                       <Lock className="w-2.5 h-2.5" />
                       {item.requiredPlanLabel}
@@ -154,7 +159,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
               )}
             >
               <item.icon className="w-5 h-5 shrink-0" />
-              {!collapsed && <span>{item.name}</span>}
+              {!collapsed && <span>{label(item)}</span>}
             </Link>
           );
         })}
@@ -190,7 +195,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
                   className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-red-600 transition-colors disabled:opacity-50"
                 >
                   <LogOut className="w-3.5 h-3.5" />
-                  {loggingOut ? "..." : "Salir"}
+                  {loggingOut ? "..." : t.logOut}
                 </button>
               </div>
             </div>
@@ -198,7 +203,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
             <button
               onClick={handleLogout}
               disabled={loggingOut}
-              aria-label="Cerrar sesión"
+              aria-label={t.logOutAria}
               className="flex items-center justify-center w-full py-2 text-muted-foreground hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
             >
               <LogOut className="w-4 h-4" />
@@ -211,7 +216,7 @@ export function Sidebar({ user }: { user: SidebarUser | null }) {
       <div className="px-2 py-3 border-t border-border">
         <button
           onClick={() => setCollapsed(!collapsed)}
-          aria-label={collapsed ? "Expandir menú" : "Colapsar menú"}
+          aria-label={collapsed ? t.expandMenu : t.collapseMenu}
           className="flex items-center justify-center w-full py-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted transition-colors"
         >
           {collapsed ? (
