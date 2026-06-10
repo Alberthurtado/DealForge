@@ -9,6 +9,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { formatCurrency, formatPercent } from "@/lib/utils";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface KpiCardsProps {
   kpis: {
@@ -19,47 +20,52 @@ interface KpiCardsProps {
     totalClientes: number;
     cotizacionesActivas: number;
   };
+  lang?: DashboardLang;
+  currency?: string;
+  locale?: string;
 }
 
-export function KpiCards({ kpis }: KpiCardsProps) {
+export function KpiCards({ kpis, lang = "es", currency = "EUR", locale = "es-ES" }: KpiCardsProps) {
+  const t = DASHBOARD_STRINGS[lang].panel;
+  const money = (n: number) => formatCurrency(n, currency, locale);
   const cards = [
     {
-      title: "Pipeline Total",
-      value: formatCurrency(kpis.totalPipeline),
+      title: t.kpiPipeline,
+      value: money(kpis.totalPipeline),
       icon: DollarSign,
       color: "text-blue-600",
       bg: "bg-blue-50",
     },
     {
-      title: "Tasa de Conversión",
+      title: t.kpiConversion,
       value: formatPercent(kpis.tasaConversion),
       icon: Target,
       color: "text-green-600",
       bg: "bg-green-50",
     },
     {
-      title: "Ticket Promedio",
-      value: formatCurrency(kpis.ticketPromedio),
+      title: t.kpiAvgDeal,
+      value: money(kpis.ticketPromedio),
       icon: TrendingUp,
       color: "text-purple-600",
       bg: "bg-purple-50",
     },
     {
-      title: "Ingresos Ganados",
-      value: formatCurrency(kpis.ingresoTotal),
+      title: t.kpiWonRevenue,
+      value: money(kpis.ingresoTotal),
       icon: Trophy,
       color: "text-amber-600",
       bg: "bg-amber-50",
     },
     {
-      title: "Clientes",
+      title: t.kpiClients,
       value: kpis.totalClientes.toString(),
       icon: Users,
       color: "text-indigo-600",
       bg: "bg-indigo-50",
     },
     {
-      title: "Cotizaciones Activas",
+      title: t.kpiActiveQuotes,
       value: kpis.cotizacionesActivas.toString(),
       icon: FileText,
       color: "text-rose-600",

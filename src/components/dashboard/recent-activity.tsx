@@ -9,6 +9,7 @@ import {
   MessageSquare,
   ArrowRightLeft,
 } from "lucide-react";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface Activity {
   id: string;
@@ -33,11 +34,20 @@ const colorMap: Record<string, string> = {
   NOTA: "text-gray-500 bg-gray-50",
 };
 
-export function RecentActivity({ activities }: { activities: Activity[] }) {
+export function RecentActivity({
+  activities,
+  lang = "es",
+  locale = "es-ES",
+}: {
+  activities: Activity[];
+  lang?: DashboardLang;
+  locale?: string;
+}) {
+  const t = DASHBOARD_STRINGS[lang].panel;
   return (
     <div className="bg-white rounded-xl border border-border p-6">
       <h3 className="text-lg font-semibold text-foreground mb-4">
-        Actividad Reciente
+        {t.recentActivity}
       </h3>
       <div className="space-y-4">
         {activities.map((activity) => {
@@ -56,7 +66,7 @@ export function RecentActivity({ activities }: { activities: Activity[] }) {
                   {activity.cotizacionNumero} &middot; {activity.clienteNombre}
                 </p>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  {formatDate(activity.fecha)}
+                  {formatDate(activity.fecha, locale)}
                 </p>
               </div>
             </div>
@@ -64,7 +74,7 @@ export function RecentActivity({ activities }: { activities: Activity[] }) {
         })}
         {activities.length === 0 && (
           <p className="text-sm text-muted-foreground text-center py-4">
-            No hay actividad reciente
+            {t.noActivity}
           </p>
         )}
       </div>

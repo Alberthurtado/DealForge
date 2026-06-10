@@ -2,8 +2,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { AssistantPanel } from "@/components/assistant/assistant-panel";
 import { getSession } from "@/lib/auth";
 import { getPlanFeatures } from "@/lib/plan-limits";
-import { prisma } from "@/lib/prisma";
-import { resolveDashboardLang } from "@/lib/dashboard-i18n";
+import { getDashboardLang } from "@/lib/dashboard-lang";
 
 export default async function DashboardLayout({
   children,
@@ -14,14 +13,7 @@ export default async function DashboardLayout({
   const features = session ? getPlanFeatures(session.plan) : undefined;
 
   // Dashboard language follows the company's configured locale.
-  let lang: "es" | "en" = "es";
-  if (session?.empresaId) {
-    const empresa = await prisma.empresa.findUnique({
-      where: { id: session.empresaId },
-      select: { locale: true },
-    });
-    lang = resolveDashboardLang(empresa?.locale);
-  }
+  const lang = await getDashboardLang(session?.empresaId);
 
   return (
     <>

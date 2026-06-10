@@ -1,6 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/lib/utils";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface FunnelStage {
   estado: string;
@@ -9,18 +10,32 @@ interface FunnelStage {
   color: string;
 }
 
-export function ConversionFunnel({ data }: { data: FunnelStage[] }) {
-  // Only show active pipeline stages (not Perdida)
+export function ConversionFunnel({
+  data,
+  lang = "es",
+  currency = "EUR",
+  locale = "es-ES",
+}: {
+  data: FunnelStage[];
+  lang?: DashboardLang;
+  currency?: string;
+  locale?: string;
+}) {
+  const dict = DASHBOARD_STRINGS[lang];
+  const t = dict.panel;
+  const stageLabel = (estado: string) => dict.status[estado] ?? estado;
+  const money = (n: number) => formatCurrency(n, currency, locale);
+  // Only show active pipeline stages (not Perdida — stable Spanish key)
   const stages = data.filter((d) => d.estado !== "Perdida");
   const maxCantidad = Math.max(...stages.map((s) => s.cantidad), 1);
 
   return (
     <div className="bg-white rounded-xl border border-border p-6">
       <h3 className="text-lg font-semibold text-foreground mb-1">
-        Embudo de Conversión
+        {t.conversionFunnel}
       </h3>
       <p className="text-xs text-muted-foreground mb-4">
-        Flujo de cotizaciones por etapa
+        {t.conversionFunnelSub}
       </p>
       <div className="space-y-3">
         {stages.map((stage) => {
@@ -32,10 +47,10 @@ export function ConversionFunnel({ data }: { data: FunnelStage[] }) {
             <div key={stage.estado}>
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-medium text-foreground">
-                  {stage.estado}
+                  {stageLabel(stage.estado)}
                 </span>
                 <span className="text-xs text-muted-foreground">
-                  {stage.cantidad} &bull; {formatCurrency(stage.valor)}
+                  {stage.cantidad} &bull; {money(stage.valor)}
                 </span>
               </div>
               <div className="h-8 bg-gray-50 rounded-lg overflow-hidden">
@@ -61,12 +76,10 @@ export function ConversionFunnel({ data }: { data: FunnelStage[] }) {
         <div className="mt-4 pt-3 border-t border-border">
           <div className="flex items-center justify-between text-xs">
             <span className="text-muted-foreground">
-              Perdidas: {data.find((d) => d.estado === "Perdida")!.cantidad}
+              {t.lost}: {data.find((d) => d.estado === "Perdida")!.cantidad}
             </span>
             <span className="text-red-500 font-medium">
-              {formatCurrency(
-                data.find((d) => d.estado === "Perdida")!.valor
-              )}
+              {money(data.find((d) => d.estado === "Perdida")!.valor)}
             </span>
           </div>
         </div>

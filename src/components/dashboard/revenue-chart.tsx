@@ -10,20 +10,32 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { formatCurrency } from "@/lib/utils";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface RevenueData {
   mes: string;
   ingresos: number;
 }
 
-export function RevenueChart({ data }: { data: RevenueData[] }) {
+export function RevenueChart({
+  data,
+  lang = "es",
+  currency = "EUR",
+  locale = "es-ES",
+}: {
+  data: RevenueData[];
+  lang?: DashboardLang;
+  currency?: string;
+  locale?: string;
+}) {
+  const t = DASHBOARD_STRINGS[lang].panel;
   return (
     <div className="bg-white rounded-xl border border-border p-6">
       <h3 className="text-lg font-semibold text-foreground mb-1">
-        Ingresos Mensuales
+        {t.monthlyRevenue}
       </h3>
       <p className="text-xs text-muted-foreground mb-4">
-        Cotizaciones ganadas - últimos 6 meses
+        {t.monthlyRevenueSub}
       </p>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
@@ -47,8 +59,8 @@ export function RevenueChart({ data }: { data: RevenueData[] }) {
             />
             <Tooltip
               formatter={(value: number | undefined) => [
-                formatCurrency(value ?? 0),
-                "Ingresos",
+                formatCurrency(value ?? 0, currency, locale),
+                t.revenue,
               ]}
               contentStyle={{
                 borderRadius: "8px",

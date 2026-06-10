@@ -13,6 +13,7 @@ import {
   Rocket,
   ChevronRight,
 } from "lucide-react";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface OnboardingChecklistProps {
   steps: {
@@ -21,12 +22,14 @@ interface OnboardingChecklistProps {
     hasProductos: boolean;
     hasCotizaciones: boolean;
   };
+  lang?: DashboardLang;
 }
 
 const DISMISS_KEY = "dealforge_onboarding_dismissed";
 const FORGE_USED_KEY = "dealforge_onboarding_forge_used";
 
-export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
+export function OnboardingChecklist({ steps, lang = "es" }: OnboardingChecklistProps) {
+  const t = DASHBOARD_STRINGS[lang].panel;
   const [dismissed, setDismissed] = useState(true); // start hidden to avoid hydration flash
   const [forgeUsed, setForgeUsed] = useState(false);
 
@@ -38,40 +41,40 @@ export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
   const stepList = [
     {
       key: "empresa",
-      label: "Configura tu empresa",
-      desc: "Agrega el nombre, logo y datos de contacto",
+      label: t.stepCompanyLabel,
+      desc: t.stepCompanyDesc,
       href: "/configuracion",
       icon: Settings,
       done: steps.empresaConfigured,
     },
     {
       key: "cliente",
-      label: "Agrega tu primer cliente",
-      desc: "Registra un cliente para empezar a cotizar",
+      label: t.stepClientLabel,
+      desc: t.stepClientDesc,
       href: "/clientes/nuevo",
       icon: UserPlus,
       done: steps.hasClientes,
     },
     {
       key: "producto",
-      label: "Agrega un producto al catálogo",
-      desc: "Crea productos o servicios con precios",
+      label: t.stepProductLabel,
+      desc: t.stepProductDesc,
       href: "/productos/nuevo",
       icon: Package,
       done: steps.hasProductos,
     },
     {
       key: "cotizacion",
-      label: "Crea tu primera cotización",
-      desc: "Genera una propuesta comercial profesional",
+      label: t.stepQuoteLabel,
+      desc: t.stepQuoteDesc,
       href: "/cotizaciones/nueva",
       icon: FileText,
       done: steps.hasCotizaciones,
     },
     {
       key: "forge",
-      label: "Prueba Forge IA",
-      desc: "Tu asistente inteligente — haz clic en el botón de Forge abajo a la derecha",
+      label: t.stepForgeLabel,
+      desc: t.stepForgeDesc,
       href: null,
       icon: Flame,
       done: forgeUsed,
@@ -105,17 +108,17 @@ export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
           </div>
           <div>
             <h3 className="text-lg font-semibold text-gray-900">
-              Guía de inicio rápido
+              {t.quickStart}
             </h3>
             <p className="text-sm text-gray-500">
-              Completa estos pasos para configurar DealForge
+              {t.quickStartSub}
             </p>
           </div>
         </div>
         <button
           onClick={handleDismiss}
           className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
-          title="Ocultar guía"
+          title={t.hideGuide}
         >
           <X className="w-4 h-4" />
         </button>
@@ -125,7 +128,7 @@ export function OnboardingChecklist({ steps }: OnboardingChecklistProps) {
       <div className="mb-5">
         <div className="flex items-center justify-between text-xs text-gray-500 mb-1.5">
           <span>
-            {completedCount} de {stepList.length} completados
+            {t.completedOf(completedCount, stepList.length)}
           </span>
           <span>{Math.round(progress)}%</span>
         </div>

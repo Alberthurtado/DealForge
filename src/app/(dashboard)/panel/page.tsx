@@ -15,8 +15,9 @@ import { QuickActions } from "@/components/dashboard/quick-actions";
 import { RevenueChart } from "@/components/dashboard/revenue-chart";
 import { ConversionFunnel } from "@/components/dashboard/conversion-funnel";
 import { OnboardingChecklist } from "@/components/dashboard/onboarding-checklist";
+import { DASHBOARD_STRINGS, resolveDashboardLang } from "@/lib/dashboard-i18n";
 
-async function getDashboardData(userId: string) {
+async function getDashboardData(userId: string, lang: "es" | "en") {
   const [cotizaciones, totalClientes, recentActivities, empresa, totalProductos] = await Promise.all([
     prisma.cotizacion.findMany({
       where: { usuarioId: userId },
@@ -73,7 +74,10 @@ async function getDashboardData(userId: string) {
 
   // Revenue by month (last 6 months) from won quotes
   const now = new Date();
-  const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+  const monthNames =
+    lang === "en"
+      ? ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      : ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
   const revenueByMonth: Array<{ mes: string; ingresos: number }> = [];
 
   for (let i = 5; i >= 0; i--) {
@@ -124,40 +128,50 @@ async function getDashboardData(userId: string) {
 export default async function DashboardPage() {
   const session = await getSession();
   if (!session) redirect("/login");
-  const data = await getDashboardData(session.userId);
+
+  // Resolve the company's language, currency and locale for display.
+  const empresa = session.empresaId
+    ? await prisma.empresa.findUnique({
+        where: { id: session.empresaId },
+        select: { locale: true, currencyCode: true },
+      })
+    : null;
+  const lang = resolveDashboardLang(empresa?.locale);
+  const currency = empresa?.currencyCode || "EUR";
+  const locale = empresa?.locale || "es-ES";
+  const t = DASHBOARD_STRINGS[lang].panel;
+
+  const data = await getDashboardData(session.userId, lang);
 
   return (
     <div>
-      <PageHeader
-        title="Dashboard"
-        description="Visión general de tu negocio"
-      />
+      <PageHeader title={t.title} description={t.description} />
       <div className="p-6 space-y-6">
-        <OnboardingChecklist steps={data.onboardingSteps} />
-        <KpiCards kpis={data.kpis} />
+        <OnboardingChecklist steps={data.onboardingSteps} lang={lang} />
+        <KpiCards kpis={data.kpis} lang={lang} currency={currency} locale={locale} />
 
         {/* Row 2: Pipeline + Quick Actions */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
-            <PipelineChart data={data.pipelineByStatus} />
+            <PipelineChart data={data.pipelineByStatus} lang={lang} currency={currency} locale={locale} />
           </div>
           <div>
-            <QuickActions />
+            <QuickActions lang={lang} />
           </div>
         </div>
 
         {/* Row 3: Revenue Chart + Conversion Funnel */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
-            <RevenueChart data={data.revenueByMonth} />
+            <RevenueChart data={data.revenueByMonth} lang={lang} currency={currency} locale={locale} />
           </div>
           <div>
-            <ConversionFunnel data={data.pipelineByStatus} />
+            <ConversionFunnel data={data.pipelineByStatus} lang={lang} currency={currency} locale={locale} />
           </div>
         </div>
 
         {/* Row 4: Recent Activity */}
-        <RecentActivity activities={data.recentActivity} />
+        <RecentActivity activities={data.recentActivity} lang={lang} locale={locale} />
       </div>
     </div>
   );

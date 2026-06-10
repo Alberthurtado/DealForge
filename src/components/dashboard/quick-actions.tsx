@@ -2,39 +2,20 @@
 
 import { Plus, UserPlus, BarChart3, Bell } from "lucide-react";
 import Link from "next/link";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
-const actions = [
-  {
-    label: "Nueva Cotización",
-    href: "/cotizaciones/nueva",
-    icon: Plus,
-    color: "bg-primary/10 text-primary",
-  },
-  {
-    label: "Nuevo Cliente",
-    href: "/clientes/nuevo",
-    icon: UserPlus,
-    color: "bg-blue-50 text-blue-600",
-  },
-  {
-    label: "Ver Pipeline",
-    href: "/cotizaciones",
-    icon: BarChart3,
-    color: "bg-amber-50 text-amber-600",
-  },
-  {
-    label: "Reportes",
-    href: "/reportes",
-    icon: Bell,
-    color: "bg-green-50 text-green-600",
-  },
-];
-
-export function QuickActions() {
+export function QuickActions({ lang = "es" }: { lang?: DashboardLang }) {
+  const t = DASHBOARD_STRINGS[lang].panel;
+  const actions = [
+    { label: t.newQuote, href: "/cotizaciones/nueva", icon: Plus, color: "bg-primary/10 text-primary" },
+    { label: t.newClient, href: "/clientes/nuevo", icon: UserPlus, color: "bg-blue-50 text-blue-600" },
+    { label: t.viewPipeline, href: "/cotizaciones", icon: BarChart3, color: "bg-amber-50 text-amber-600" },
+    { label: t.reports, href: "/reportes", icon: Bell, color: "bg-green-50 text-green-600" },
+  ];
   return (
     <div className="bg-white rounded-xl border border-border p-6">
       <h3 className="text-lg font-semibold text-foreground mb-4">
-        Acciones Rápidas
+        {t.quickActions}
       </h3>
       <div className="grid grid-cols-2 gap-3">
         {actions.map((action) => (

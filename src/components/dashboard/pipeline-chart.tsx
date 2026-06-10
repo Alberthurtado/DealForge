@@ -11,6 +11,7 @@ import {
   Cell,
 } from "recharts";
 import { formatCurrency } from "@/lib/utils";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface PipelineData {
   estado: string;
@@ -19,11 +20,24 @@ interface PipelineData {
   color: string;
 }
 
-export function PipelineChart({ data }: { data: PipelineData[] }) {
+export function PipelineChart({
+  data,
+  lang = "es",
+  currency = "EUR",
+  locale = "es-ES",
+}: {
+  data: PipelineData[];
+  lang?: DashboardLang;
+  currency?: string;
+  locale?: string;
+}) {
+  const dict = DASHBOARD_STRINGS[lang];
+  const t = dict.panel;
+  const stageLabel = (estado: string) => dict.status[estado] ?? estado;
   return (
     <div className="bg-white rounded-xl border border-border p-6">
       <h3 className="text-lg font-semibold text-foreground mb-4">
-        Pipeline por Estado
+        {t.pipelineByStage}
       </h3>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
@@ -32,13 +46,14 @@ export function PipelineChart({ data }: { data: PipelineData[] }) {
             <XAxis
               dataKey="estado"
               tick={{ fontSize: 12, fill: "#64748b" }}
+              tickFormatter={(v) => stageLabel(v)}
             />
             <YAxis
               tick={{ fontSize: 12, fill: "#64748b" }}
               tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
-              formatter={(value: number | undefined) => [formatCurrency(value ?? 0), "Valor"]}
+              formatter={(value: number | undefined) => [formatCurrency(value ?? 0, currency, locale), t.value]}
               contentStyle={{
                 borderRadius: "8px",
                 border: "1px solid #e2e8f0",
@@ -60,7 +75,7 @@ export function PipelineChart({ data }: { data: PipelineData[] }) {
               style={{ backgroundColor: item.color }}
             />
             <span className="text-muted-foreground">
-              {item.estado}: {item.cantidad}
+              {stageLabel(item.estado)}: {item.cantidad}
             </span>
           </div>
         ))}
