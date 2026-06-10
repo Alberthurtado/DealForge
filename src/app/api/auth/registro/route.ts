@@ -7,6 +7,28 @@ import { validateBody } from "@/lib/validate";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { sendSystemEmail } from "@/lib/system-email";
 import { buildVerificationEmail, resolveEmailLang } from "@/lib/verification-email";
+import { countryToCurrency } from "@/lib/pricing";
+
+// Derives the new company's country/currency/locale from the signup language
+// and (when available) the visitor's geo. Spanish signups → ES/EUR/es-ES.
+// English signups → GB/GBP/en-GB by default, or US/USD/en-US when geo says US,
+// or IE/EUR/en-GB for Ireland.
+function deriveCompanyLocale(
+  lang: "es" | "en",
+  geoCountry: string | null
+): { country: string; currencyCode: string; locale: string; nombre: string } {
+  if (lang !== "en") {
+    return { country: "ES", currencyCode: "EUR", locale: "es-ES", nombre: "Mi Empresa" };
+  }
+  const geo = (geoCountry || "").toUpperCase();
+  const country = ["GB", "US", "IE"].includes(geo) ? geo : "GB";
+  return {
+    country,
+    currencyCode: countryToCurrency(country),
+    locale: country === "US" ? "en-US" : "en-GB",
+    nombre: "My Company",
+  };
+}
 
 export async function POST(request: NextRequest) {
   // Rate limit: 3 registrations per hour per IP
@@ -36,12 +58,18 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Create empresa (unique per team/company)
+  // Create empresa (unique per team/company), localized from the signup language
+  const signupLang = resolveEmailLang(body?.lang);
+  const geoCountry = request.headers.get("x-vercel-ip-country");
+  const companyLocale = deriveCompanyLocale(signupLang, geoCountry);
   const empresa = await prisma.empresa.create({
     data: {
-      nombre: "Mi Empresa",
+      nombre: companyLocale.nombre,
       plan: "starter",
       planStatus: "active",
+      country: companyLocale.country,
+      currencyCode: companyLocale.currencyCode,
+      locale: companyLocale.locale,
     },
   });
 
