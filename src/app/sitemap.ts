@@ -27,6 +27,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date("2026-06-10"),
     },
     {
+      url: `${baseUrl}/en/what-is-cpq`,
+      lastModified: new Date("2026-06-10"),
+    },
+    {
+      url: `${baseUrl}/en/contact`,
+      lastModified: new Date("2026-06-10"),
+    },
+    {
       url: `${baseUrl}/registro`,
       lastModified: new Date("2026-03-18"),
     },

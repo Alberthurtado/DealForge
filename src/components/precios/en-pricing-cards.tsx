@@ -86,7 +86,7 @@ const PLANS: Plan[] = [
     freeOrCustom: "custom",
     description: "For large organizations with custom needs.",
     cta: "Contact sales",
-    ctaHref: "/contacto",
+    ctaHref: "/en/contact",
     ctaStyle: "outline",
     features: ["Everything in Business", "SSO / SAML", "Dedicated SLA", "Unlimited users", "Custom development"],
   },

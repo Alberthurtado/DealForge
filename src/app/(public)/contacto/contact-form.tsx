@@ -3,7 +3,59 @@
 import { useState } from "react";
 import { Loader2, CheckCircle, Send } from "lucide-react";
 
-export function ContactForm() {
+type Lang = "es" | "en";
+
+const DICT = {
+  es: {
+    successTitle: "¡Mensaje enviado!",
+    successBody: "Gracias por contactarnos. Te responderemos lo antes posible.",
+    name: "Nombre *",
+    namePlaceholder: "Tu nombre",
+    email: "Email *",
+    subject: "Asunto *",
+    selectSubject: "Selecciona un asunto",
+    optDemo: "Solicitar una demo",
+    optGeneral: "Consulta general",
+    optSupport: "Soporte técnico",
+    optEnterprise: "Plan Enterprise",
+    optOther: "Otro",
+    message: "Mensaje *",
+    messagePlaceholder: "¿En qué podemos ayudarte?",
+    privacyPrefix: "Al enviar este formulario, aceptas nuestra",
+    privacy: "Política de privacidad",
+    privacySuffix: "Tus datos se usarán exclusivamente para responder a tu consulta.",
+    sending: "Enviando...",
+    send: "Enviar mensaje",
+    genericError: "Error al enviar el mensaje",
+    connError: "Error de conexión",
+  },
+  en: {
+    successTitle: "Message sent!",
+    successBody: "Thanks for reaching out. We'll get back to you as soon as possible.",
+    name: "Name *",
+    namePlaceholder: "Your name",
+    email: "Email *",
+    subject: "Subject *",
+    selectSubject: "Select a subject",
+    optDemo: "Request a demo",
+    optGeneral: "General enquiry",
+    optSupport: "Technical support",
+    optEnterprise: "Enterprise plan",
+    optOther: "Other",
+    message: "Message *",
+    messagePlaceholder: "How can we help?",
+    privacyPrefix: "By submitting this form, you agree to our",
+    privacy: "Privacy Policy",
+    privacySuffix: "Your data will only be used to respond to your enquiry.",
+    sending: "Sending...",
+    send: "Send message",
+    genericError: "Couldn't send your message",
+    connError: "Connection error",
+  },
+} as const;
+
+export function ContactForm({ lang = "es" }: { lang?: Lang }) {
+  const t = DICT[lang];
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [asunto, setAsunto] = useState("");
@@ -26,12 +78,12 @@ export function ContactForm() {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Error al enviar el mensaje");
+        throw new Error(data.error || t.genericError);
       }
 
       setSuccess(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error de conexión");
+      setError(err instanceof Error ? err.message : t.connError);
     } finally {
       setLoading(false);
     }
@@ -41,10 +93,8 @@ export function ContactForm() {
     return (
       <div className="text-center py-12">
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h3 className="text-xl font-bold text-gray-900 mb-2">¡Mensaje enviado!</h3>
-        <p className="text-gray-500">
-          Gracias por contactarnos. Te responderemos lo antes posible.
-        </p>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{t.successTitle}</h3>
+        <p className="text-gray-500">{t.successBody}</p>
       </div>
     );
   }
@@ -54,7 +104,7 @@ export function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1.5">
-            Nombre *
+            {t.name}
           </label>
           <input
             id="nombre"
@@ -63,12 +113,12 @@ export function ContactForm() {
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#3a9bb5] focus:border-transparent outline-none transition-all"
-            placeholder="Tu nombre"
+            placeholder={t.namePlaceholder}
           />
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-            Email *
+            {t.email}
           </label>
           <input
             id="email"
@@ -77,14 +127,14 @@ export function ContactForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#3a9bb5] focus:border-transparent outline-none transition-all"
-            placeholder="tu@email.com"
+            placeholder="you@email.com"
           />
         </div>
       </div>
 
       <div>
         <label htmlFor="asunto" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Asunto *
+          {t.subject}
         </label>
         <select
           id="asunto"
@@ -93,18 +143,18 @@ export function ContactForm() {
           onChange={(e) => setAsunto(e.target.value)}
           className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#3a9bb5] focus:border-transparent outline-none transition-all"
         >
-          <option value="">Selecciona un asunto</option>
-          <option value="demo">Solicitar una demo</option>
-          <option value="consulta">Consulta general</option>
-          <option value="soporte">Soporte técnico</option>
-          <option value="enterprise">Plan Enterprise</option>
-          <option value="otro">Otro</option>
+          <option value="">{t.selectSubject}</option>
+          <option value="demo">{t.optDemo}</option>
+          <option value="consulta">{t.optGeneral}</option>
+          <option value="soporte">{t.optSupport}</option>
+          <option value="enterprise">{t.optEnterprise}</option>
+          <option value="otro">{t.optOther}</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Mensaje *
+          {t.message}
         </label>
         <textarea
           id="mensaje"
@@ -113,7 +163,7 @@ export function ContactForm() {
           value={mensaje}
           onChange={(e) => setMensaje(e.target.value)}
           className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#3a9bb5] focus:border-transparent outline-none transition-all resize-none"
-          placeholder="¿En qué podemos ayudarte?"
+          placeholder={t.messagePlaceholder}
         />
       </div>
 
@@ -122,9 +172,9 @@ export function ContactForm() {
       )}
 
       <p className="text-xs text-gray-400">
-        Al enviar este formulario, aceptas nuestra{" "}
-        <a href="/privacidad" className="underline hover:text-gray-600">Política de privacidad</a>.
-        Tus datos se usarán exclusivamente para responder a tu consulta.
+        {t.privacyPrefix}{" "}
+        <a href="/privacidad" className="underline hover:text-gray-600">{t.privacy}</a>.{" "}
+        {t.privacySuffix}
       </p>
 
       <button
@@ -133,7 +183,7 @@ export function ContactForm() {
         className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#3a9bb5] text-white rounded-lg font-semibold text-sm hover:bg-[#2d7d94] transition-colors disabled:opacity-50"
       >
         {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-        {loading ? "Enviando..." : "Enviar mensaje"}
+        {loading ? t.sending : t.send}
       </button>
     </form>
   );

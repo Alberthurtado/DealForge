@@ -32,9 +32,9 @@ const NAV_CONFIG: Record<
     home: "/en",
     links: [
       { label: "Features", href: "/en#features" },
-      { label: "Forge AI", href: "/en#forge" },
       { label: "Pricing", href: "/en/pricing" },
-      { label: "FAQ", href: "/en#faq" },
+      { label: "What is CPQ?", href: "/en/what-is-cpq" },
+      { label: "Contact", href: "/en/contact" },
     ],
     login: "Log in",
     cta: "Start Free",

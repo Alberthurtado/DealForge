@@ -71,7 +71,14 @@ export const metadata: Metadata = {
       "Descubre que es un CPQ, como funciona y por que tu PYME lo necesita. Guia educativa completa.",
     images: ["https://dealforge.es/og-que-es-cpq.png"],
   },
-  alternates: { canonical: "https://dealforge.es/que-es-cpq" },
+  alternates: {
+    canonical: "https://dealforge.es/que-es-cpq",
+    languages: {
+      "es-ES": "https://dealforge.es/que-es-cpq",
+      en: "https://dealforge.es/en/what-is-cpq",
+      "x-default": "https://dealforge.es/que-es-cpq",
+    },
+  },
 };
 
 /* ------------------------------------------------------------------ */

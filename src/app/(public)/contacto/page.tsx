@@ -17,7 +17,14 @@ export const metadata: Metadata = {
     description: "Contacta con DealForge. Respuesta en menos de 24h.",
     url: "https://dealforge.es/contacto",
   },
-  alternates: { canonical: "https://dealforge.es/contacto" },
+  alternates: {
+    canonical: "https://dealforge.es/contacto",
+    languages: {
+      "es-ES": "https://dealforge.es/contacto",
+      en: "https://dealforge.es/en/contact",
+      "x-default": "https://dealforge.es/contacto",
+    },
+  },
 };
 
 export default function ContactoPage() {
