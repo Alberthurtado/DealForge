@@ -25,7 +25,14 @@ export const metadata: Metadata = {
     title: "Generador de Cotizaciones Gratis — Sin Registro",
     description: "Crea cotizaciones profesionales en PDF en menos de 2 minutos.",
   },
-  alternates: { canonical: "https://dealforge.es/generador-cotizacion-gratis" },
+  alternates: {
+    canonical: "https://dealforge.es/generador-cotizacion-gratis",
+    languages: {
+      "es-ES": "https://dealforge.es/generador-cotizacion-gratis",
+      en: "https://dealforge.es/en/free-quote-generator",
+      "x-default": "https://dealforge.es/generador-cotizacion-gratis",
+    },
+  },
 };
 
 const FAQS = [
