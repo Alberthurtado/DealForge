@@ -49,7 +49,7 @@ function RegistroForm() {
       const res = await fetch("/api/auth/registro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, email, password, turnstileToken }),
+        body: JSON.stringify({ nombre, email, password, turnstileToken, lang }),
       });
 
       const data = await res.json();

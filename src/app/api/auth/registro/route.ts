@@ -6,6 +6,7 @@ import { registroSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { sendSystemEmail } from "@/lib/system-email";
+import { buildVerificationEmail, resolveEmailLang } from "@/lib/verification-email";
 
 export async function POST(request: NextRequest) {
   // Rate limit: 3 registrations per hour per IP
@@ -67,40 +68,13 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  // Send verification email
+  // Send verification email in the signup language
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://dealforge.es";
   const verifyUrl = `${baseUrl}/verificar/${usuario.verifyToken}`;
+  const emailLang = resolveEmailLang(body?.lang);
+  const { subject, html } = buildVerificationEmail(emailLang, data.nombre, verifyUrl);
 
-  await sendSystemEmail({
-    to: data.email,
-    subject: "Verifica tu cuenta — DealForge",
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 520px; margin: 0 auto; padding: 32px 24px;">
-        <div style="text-align: center; margin-bottom: 32px;">
-          <img src="https://dealforge.es/logo.svg" alt="DealForge" width="48" height="48" style="border-radius: 12px;" />
-        </div>
-        <h1 style="font-size: 22px; font-weight: 700; color: #111827; text-align: center; margin: 0 0 8px;">
-          Bienvenido a DealForge, ${data.nombre}
-        </h1>
-        <p style="font-size: 14px; color: #6b7280; text-align: center; margin: 0 0 32px; line-height: 1.6;">
-          Solo falta un paso: confirma tu email para activar tu cuenta.
-        </p>
-        <div style="text-align: center; margin-bottom: 32px;">
-          <a href="${verifyUrl}" style="display: inline-block; background-color: #3a9bb5; color: white; font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 32px; border-radius: 12px;">
-            Verificar mi email
-          </a>
-        </div>
-        <p style="font-size: 12px; color: #9ca3af; text-align: center; line-height: 1.5;">
-          Si no has creado una cuenta en DealForge, ignora este email.<br />
-          El enlace expira en 24 horas.
-        </p>
-        <hr style="border: none; border-top: 1px solid #f3f4f6; margin: 24px 0;" />
-        <p style="font-size: 11px; color: #d1d5db; text-align: center;">
-          DealForge — CPQ Inteligente con IA para PYMEs
-        </p>
-      </div>
-    `,
-  });
+  await sendSystemEmail({ to: data.email, subject, html });
 
   // DO NOT auto-login — redirect to "check your email" page
   return NextResponse.json({

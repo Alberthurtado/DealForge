@@ -46,6 +46,17 @@ export const AUTH_STRINGS = {
     noAccount: "¿No tienes cuenta?",
     registerFree: "Regístrate gratis",
     genericLoginError: "Error al iniciar sesión",
+    // Verify email ("check your inbox") page
+    yourEmail: "tu email",
+    checkInbox: "Revisa tu bandeja de entrada",
+    sentLinkTo: "Hemos enviado un enlace de verificación a",
+    clickToActivate: "Haz clic en el enlace para activar tu cuenta.",
+    noEmailQ: "¿No ves el email?",
+    spamHint: "Revisa la carpeta de spam o correo no deseado. El email viene de",
+    resend: "Reenviar email de verificación",
+    resending: "Reenviando...",
+    resentOk: "Email reenviado correctamente",
+    alreadyVerified: "Ya he verificado, ir al login",
   },
   en: {
     // Register
@@ -84,6 +95,17 @@ export const AUTH_STRINGS = {
     noAccount: "Don't have an account?",
     registerFree: "Sign up free",
     genericLoginError: "Couldn't sign in",
+    // Verify email ("check your inbox") page
+    yourEmail: "your email",
+    checkInbox: "Check your inbox",
+    sentLinkTo: "We've sent a verification link to",
+    clickToActivate: "Click the link to activate your account.",
+    noEmailQ: "Don't see the email?",
+    spamHint: "Check your spam or junk folder. The email comes from",
+    resend: "Resend verification email",
+    resending: "Resending...",
+    resentOk: "Email resent successfully",
+    alreadyVerified: "Already verified — go to login",
   },
 } as const;
 

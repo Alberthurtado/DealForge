@@ -4,10 +4,13 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Mail, ArrowRight, RefreshCw } from "lucide-react";
 import { useState, Suspense } from "react";
+import { AUTH_STRINGS, resolveAuthLang, withLang } from "@/lib/auth-i18n";
 
 function VerificarEmailContent() {
   const searchParams = useSearchParams();
-  const email = searchParams.get("email") || "tu email";
+  const lang = resolveAuthLang(searchParams.get("lang"));
+  const t = AUTH_STRINGS[lang];
+  const email = searchParams.get("email") || t.yourEmail;
   const [resending, setResending] = useState(false);
   const [resent, setResent] = useState(false);
 
@@ -17,7 +20,7 @@ function VerificarEmailContent() {
       const res = await fetch("/api/auth/reenviar-verificacion", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, lang }),
       });
       if (res.ok) setResent(true);
     } finally {
@@ -33,19 +36,18 @@ function VerificarEmailContent() {
             <Mail className="w-8 h-8 text-[#3a9bb5]" />
           </div>
 
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Revisa tu bandeja de entrada
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{t.checkInbox}</h1>
           <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-            Hemos enviado un enlace de verificacion a{" "}
+            {t.sentLinkTo}{" "}
             <strong className="text-gray-700">{email}</strong>.
             <br />
-            Haz clic en el enlace para activar tu cuenta.
+            {t.clickToActivate}
           </p>
 
           <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left">
             <p className="text-xs text-gray-500 leading-relaxed">
-              <strong className="text-gray-700">¿No ves el email?</strong> Revisa la carpeta de spam o correo no deseado. El email viene de <strong>soporte@dealforge.es</strong>.
+              <strong className="text-gray-700">{t.noEmailQ}</strong> {t.spamHint}{" "}
+              <strong>soporte@dealforge.es</strong>.
             </p>
           </div>
 
@@ -56,21 +58,19 @@ function VerificarEmailContent() {
               className="inline-flex items-center gap-2 text-sm text-[#3a9bb5] font-medium hover:text-[#2d7d94] transition-colors disabled:opacity-50"
             >
               <RefreshCw className={`w-4 h-4 ${resending ? "animate-spin" : ""}`} />
-              {resending ? "Reenviando..." : "Reenviar email de verificacion"}
+              {resending ? t.resending : t.resend}
             </button>
           ) : (
-            <p className="text-sm text-green-600 font-medium">
-              Email reenviado correctamente
-            </p>
+            <p className="text-sm text-green-600 font-medium">{t.resentOk}</p>
           )}
 
           <hr className="my-6 border-gray-100" />
 
           <Link
-            href="/login"
+            href={withLang("/login", lang)}
             className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors"
           >
-            Ya he verificado, ir al login <ArrowRight className="w-3.5 h-3.5" />
+            {t.alreadyVerified} <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
