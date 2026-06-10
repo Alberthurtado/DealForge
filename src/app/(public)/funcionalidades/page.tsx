@@ -31,7 +31,14 @@ export const metadata: Metadata = {
     title: "Funcionalidades — DealForge",
     description: "Todas las funcionalidades CPQ que necesitas para cerrar ventas más rápido.",
   },
-  alternates: { canonical: "https://dealforge.es/funcionalidades" },
+  alternates: {
+    canonical: "https://dealforge.es/funcionalidades",
+    languages: {
+      "es-ES": "https://dealforge.es/funcionalidades",
+      en: "https://dealforge.es/en/features",
+      "x-default": "https://dealforge.es/funcionalidades",
+    },
+  },
 };
 
 export default function FuncionalidadesIndexPage() {
