@@ -11,61 +11,51 @@ export const stripe = new Stripe(process.env.STRIPE_API_KEY || "", {
 export type BillingInterval = "monthly" | "annual";
 export type PriceCurrency = "EUR" | "USD" | "GBP";
 
-// EUR Price IDs (live). These are the original prices and the fallback for
-// any currency that isn't configured yet.
-export const PLAN_PRICE_MAP: Record<string, { monthly: string; annual: string }> = {
+// Live Stripe Price IDs per plan × currency × interval. Price IDs are NOT
+// secrets (they're used client-side in Checkout), so they live in code just
+// like the original EUR prices did. USD/GBP created via
+// scripts/stripe-multicurrency-setup.ts.
+export const PRICE_ID_MATRIX: Record<string, Record<PriceCurrency, { monthly: string; annual: string }>> = {
   pro: {
-    monthly: "price_1T8jsoD3Nsh6V7dkMRt1yQEJ",
-    annual: "price_1TGDmpD3Nsh6V7dkiNLdSrNZ",
+    EUR: { monthly: "price_1T8jsoD3Nsh6V7dkMRt1yQEJ", annual: "price_1TGDmpD3Nsh6V7dkiNLdSrNZ" },
+    USD: { monthly: "price_1TgmoID3Nsh6V7dkjAymbFHC", annual: "price_1TgmoID3Nsh6V7dkwIeSG4iY" },
+    GBP: { monthly: "price_1TgmoID3Nsh6V7dkBtQzm2Ji", annual: "price_1TgmoID3Nsh6V7dkLXa8KCgQ" },
   },
   business: {
-    monthly: "price_1T8jspD3Nsh6V7dkG5A2mbTU",
-    annual: "price_1TGDmpD3Nsh6V7dk5xhBybel",
+    EUR: { monthly: "price_1T8jspD3Nsh6V7dkG5A2mbTU", annual: "price_1TGDmpD3Nsh6V7dk5xhBybel" },
+    USD: { monthly: "price_1TgmoJD3Nsh6V7dkRj2jyC3w", annual: "price_1TgmoJD3Nsh6V7dkvMckG4NE" },
+    GBP: { monthly: "price_1TgmoJD3Nsh6V7dkKfu5jZjd", annual: "price_1TgmoKD3Nsh6V7dkZwr0hAM1" },
   },
 };
 
-// USD/GBP Price IDs are read from env vars so they can be added after running
-// scripts/stripe-multicurrency-setup.ts without a code change. If a currency
-// isn't configured, getPriceId() falls back to the EUR price so checkout never
-// breaks (it would just charge in EUR until the env var is set).
-//
-// Expected env vars (set in Vercel after running the setup script):
-//   STRIPE_PRICE_PRO_USD_MONTHLY / _ANNUAL
-//   STRIPE_PRICE_PRO_GBP_MONTHLY / _ANNUAL
-//   STRIPE_PRICE_BUSINESS_USD_MONTHLY / _ANNUAL
-//   STRIPE_PRICE_BUSINESS_GBP_MONTHLY / _ANNUAL
-function envPrice(plan: string, currency: PriceCurrency, interval: BillingInterval): string | undefined {
-  const key = `STRIPE_PRICE_${plan.toUpperCase()}_${currency}_${interval.toUpperCase()}`;
-  return process.env[key] || undefined;
-}
+// EUR-only view, kept for any code/tooling that referenced the old shape.
+export const PLAN_PRICE_MAP: Record<string, { monthly: string; annual: string }> = {
+  pro: PRICE_ID_MATRIX.pro.EUR,
+  business: PRICE_ID_MATRIX.business.EUR,
+};
 
 /**
  * Get the Stripe Price ID for a plan + interval + currency.
- * Falls back to the EUR price when the requested currency isn't configured.
+ * Falls back to the EUR price if a currency somehow isn't mapped.
  */
 export function getPriceId(
   plan: string,
   interval: BillingInterval = "monthly",
   currency: PriceCurrency = "EUR"
 ): string {
-  const eur = PLAN_PRICE_MAP[plan];
-  if (!eur) throw new Error(`Plan desconocido: ${plan}`);
-  if (currency === "EUR") return eur[interval];
-  return envPrice(plan, currency, interval) || eur[interval];
+  const byCurrency = PRICE_ID_MATRIX[plan];
+  if (!byCurrency) throw new Error(`Plan desconocido: ${plan}`);
+  return (byCurrency[currency] || byCurrency.EUR)[interval];
 }
 
-// Price ID → Plan name (reverse lookup). Includes EUR prices plus any
-// configured USD/GBP env prices so webhooks can resolve the plan.
+// Price ID → Plan name (reverse lookup across all currencies) so webhooks can
+// resolve the plan regardless of the currency the customer paid in.
 export const PRICE_PLAN_MAP: Record<string, string> = (() => {
   const map: Record<string, string> = {};
-  for (const [plan, prices] of Object.entries(PLAN_PRICE_MAP)) {
-    map[prices.monthly] = plan;
-    map[prices.annual] = plan;
-    for (const currency of ["USD", "GBP"] as PriceCurrency[]) {
-      for (const interval of ["monthly", "annual"] as BillingInterval[]) {
-        const id = envPrice(plan, currency, interval);
-        if (id) map[id] = plan;
-      }
+  for (const [plan, byCurrency] of Object.entries(PRICE_ID_MATRIX)) {
+    for (const prices of Object.values(byCurrency)) {
+      map[prices.monthly] = plan;
+      map[prices.annual] = plan;
     }
   }
   return map;
