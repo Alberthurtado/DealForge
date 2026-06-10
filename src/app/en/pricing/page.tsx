@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { Navbar } from "../../_landing/navbar";
+import { FooterEn } from "../../_landing/footer-en";
 import { EnPricingCards } from "@/components/precios/en-pricing-cards";
 import { countryToCurrency } from "@/lib/pricing";
 
@@ -79,20 +80,7 @@ export default async function EnPricingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-gray-100 py-10 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-gray-900">DealForge</span>
-            <span>· AI quoting software for SMBs</span>
-          </div>
-          <div className="flex items-center gap-5">
-            <Link href="/en" className="hover:text-gray-900">Home</Link>
-            <Link href="/precios" className="hover:text-gray-900">Español</Link>
-            <Link href="/login?lang=en" className="hover:text-gray-900">Log in</Link>
-          </div>
-        </div>
-      </footer>
+      <FooterEn />
     </div>
   );
 }

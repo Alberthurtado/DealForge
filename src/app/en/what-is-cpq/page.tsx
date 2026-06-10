@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Settings, Calculator, FileText, ArrowRight, Check } from "lucide-react";
 import { Navbar } from "../../_landing/navbar";
+import { FooterEn } from "../../_landing/footer-en";
 
 export const metadata: Metadata = {
   title: "What is CPQ? Configure, Price, Quote explained (2026 guide)",
@@ -208,20 +209,7 @@ export default function EnWhatIsCpqPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-gray-100 py-10 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-gray-900">DealForge</span>
-            <span>· AI quoting software for SMBs</span>
-          </div>
-          <div className="flex items-center gap-5">
-            <Link href="/en" className="hover:text-gray-900">Home</Link>
-            <Link href="/en/pricing" className="hover:text-gray-900">Pricing</Link>
-            <Link href="/que-es-cpq" className="hover:text-gray-900">Español</Link>
-          </div>
-        </div>
-      </footer>
+      <FooterEn />
     </div>
   );
 }
