@@ -3,15 +3,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import {
+  CURRENCIES,
+  CURRENCY_LABEL,
+  PRICING,
+  formatMoney,
+  isValidCurrency,
+  type Currency,
+  type PaidPlan,
+} from "@/lib/pricing";
 
 type CtaStyle = "primary" | "secondary" | "outline";
 
 interface Plan {
   nombre: string;
-  precioMensual: string;
-  precioAnual?: string;
-  totalAnual?: string;
-  ahorro?: string;
+  planKey?: PaidPlan; // set for paid plans that read from the PRICING matrix
+  precioMensual: string; // used for free/custom plans only
   periodo: string;
   descripcion: string;
   popular?: boolean;
@@ -40,10 +47,8 @@ const PLANES: Plan[] = [
   },
   {
     nombre: "Pro",
+    planKey: "pro",
     precioMensual: "29",
-    precioAnual: "23",
-    totalAnual: "276",
-    ahorro: "72",
     periodo: "/mes",
     descripcion: "Para equipos comerciales que necesitan velocidad y profesionalidad.",
     popular: true,
@@ -66,10 +71,8 @@ const PLANES: Plan[] = [
   },
   {
     nombre: "Business",
+    planKey: "business",
     precioMensual: "79",
-    precioAnual: "63",
-    totalAnual: "756",
-    ahorro: "192",
     periodo: "/mes",
     descripcion: "Para empresas que necesitan control total sobre su proceso de ventas.",
     cta: "Empezar con Business",
@@ -121,13 +124,39 @@ function ctaClasses(style: CtaStyle) {
   }
 }
 
-export function PricingCards() {
+interface Props {
+  // Initial currency, typically derived from the visitor's country on the server.
+  initialCurrency?: Currency;
+}
+
+export function PricingCards({ initialCurrency = "EUR" }: Props) {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+  const [currency, setCurrency] = useState<Currency>(
+    isValidCurrency(initialCurrency) ? initialCurrency : "EUR"
+  );
 
   return (
     <>
-      {/* Billing toggle */}
-      <div className="flex items-center justify-center mb-12">
+      {/* Controls: currency + billing */}
+      <div className="flex flex-col items-center gap-4 mb-12">
+        {/* Currency selector */}
+        <div className="inline-flex items-center p-1 bg-gray-100 rounded-xl gap-1">
+          {CURRENCIES.map((c) => (
+            <button
+              key={c}
+              onClick={() => setCurrency(c)}
+              className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
+                currency === c
+                  ? "bg-white text-gray-900 shadow-sm"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              {CURRENCY_LABEL[c]}
+            </button>
+          ))}
+        </div>
+
+        {/* Billing toggle */}
         <div className="inline-flex items-center p-1 bg-gray-100 rounded-xl gap-1">
           <button
             onClick={() => setBilling("monthly")}
@@ -160,10 +189,12 @@ export function PricingCards() {
         {PLANES.map((plan) => {
           const isCustom = plan.precioMensual === "Contactar";
           const isFree = plan.precioMensual === "0";
-          const price =
-            billing === "annual" && plan.precioAnual
-              ? plan.precioAnual
-              : plan.precioMensual;
+          const pricePoint = plan.planKey ? PRICING[plan.planKey][currency] : null;
+          const displayAmount = pricePoint
+            ? billing === "annual"
+              ? pricePoint.annual
+              : pricePoint.monthly
+            : 0;
 
           return (
             <div
@@ -193,29 +224,32 @@ export function PricingCards() {
                   </div>
                 ) : isFree ? (
                   <div>
-                    <span className="text-3xl font-bold text-gray-900">0€</span>
+                    <span className="text-3xl font-bold text-gray-900">
+                      {formatMoney(0, currency)}
+                    </span>
                     <p className="text-xs text-gray-400 mt-1">para siempre</p>
                   </div>
-                ) : (
+                ) : pricePoint ? (
                   <div>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-3xl font-bold text-gray-900">{price}€</span>
+                      <span className="text-3xl font-bold text-gray-900">
+                        {formatMoney(displayAmount, currency)}
+                      </span>
                       <span className="text-sm text-gray-500">/mes</span>
                     </div>
-                    {billing === "annual" && plan.totalAnual && plan.ahorro ? (
+                    {billing === "annual" ? (
                       <p className="text-xs text-green-600 font-medium mt-1">
-                        {plan.totalAnual}€ facturado anualmente · ahorras {plan.ahorro}€/año
+                        {formatMoney(pricePoint.annualTotal, currency)} facturado anualmente · ahorras{" "}
+                        {formatMoney(pricePoint.save, currency)}/año
                       </p>
                     ) : (
-                      plan.precioAnual && (
-                        <p className="text-xs text-gray-400 mt-1">
-                          o {plan.precioAnual}€/mes con plan anual
-                          <span className="text-green-600 font-medium"> (−20%)</span>
-                        </p>
-                      )
+                      <p className="text-xs text-gray-400 mt-1">
+                        o {formatMoney(pricePoint.annual, currency)}/mes con plan anual
+                        <span className="text-green-600 font-medium"> (−20%)</span>
+                      </p>
                     )}
                   </div>
-                )}
+                ) : null}
               </div>
 
               <Link href={plan.ctaHref} className={ctaClasses(plan.ctaStyle)}>
@@ -236,7 +270,7 @@ export function PricingCards() {
       </div>
 
       <p className="text-center text-xs text-gray-400 mt-6">
-        Sin permanencia · Cancela cuando quieras · Todos los precios en EUR (IVA no incluido)
+        Sin permanencia · Cancela cuando quieras · Precios en {currency}, impuestos no incluidos
       </p>
     </>
   );

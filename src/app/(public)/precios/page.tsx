@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import { Check, X } from "lucide-react";
 import { PricingCards } from "@/components/precios/pricing-cards";
+import { countryToCurrency } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Precios — DealForge | Planes CPQ desde Gratis",
@@ -366,7 +368,12 @@ function CellValue({ value }: { value: boolean | string }) {
 
 /* ── Page ── */
 
-export default function PreciosPage() {
+export default async function PreciosPage() {
+  // Default the currency selector to the visitor's country (Vercel geo header).
+  const hdrs = await headers();
+  const country = hdrs.get("x-vercel-ip-country");
+  const initialCurrency = countryToCurrency(country);
+
   return (
     <div className="min-h-screen bg-white">
       {/* JSON-LD */}
@@ -422,7 +429,7 @@ export default function PreciosPage() {
 
       {/* Pricing Cards — interactive toggle (client component) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
-        <PricingCards />
+        <PricingCards initialCurrency={initialCurrency} />
       </section>
 
       {/* Feature Comparison Table */}

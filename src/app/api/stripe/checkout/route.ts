@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import {
   stripe,
   getPriceId,
   getOrCreateStripeCustomerForEmpresa,
   getOrCreateStripeCustomer,
   getAppUrl,
+  type PriceCurrency,
 } from "@/lib/stripe";
 import { stripeCheckoutSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
@@ -25,7 +27,19 @@ export async function POST(request: NextRequest) {
   const { data, error } = validateBody(stripeCheckoutSchema, body);
   if (error) return error;
 
-  const priceId = getPriceId(data.plan, data.interval);
+  // Resolve billing currency from the company's configured currencyCode.
+  // Falls back to EUR for legacy/Spanish companies.
+  let currency: PriceCurrency = "EUR";
+  if (session.empresaId) {
+    const empresa = await prisma.empresa.findUnique({
+      where: { id: session.empresaId },
+      select: { currencyCode: true },
+    });
+    const code = empresa?.currencyCode?.toUpperCase();
+    if (code === "USD" || code === "GBP") currency = code;
+  }
+
+  const priceId = getPriceId(data.plan, data.interval, currency);
 
   try {
     // Get or create Stripe customer at the empresa level
@@ -70,7 +84,7 @@ export async function POST(request: NextRequest) {
       },
       allow_promotion_codes: true,
       billing_address_collection: "auto",
-      locale: "es",
+      locale: "auto",
     });
 
     return NextResponse.json({ url: checkoutSession.url });
