@@ -43,7 +43,14 @@ export const metadata: Metadata = {
       "Planes transparentes para cada etapa de tu negocio. Empieza gratis y escala cuando lo necesites.",
     images: ["https://dealforge.es/og-precios.png"],
   },
-  alternates: { canonical: "https://dealforge.es/precios" },
+  alternates: {
+    canonical: "https://dealforge.es/precios",
+    languages: {
+      "es-ES": "https://dealforge.es/precios",
+      en: "https://dealforge.es/en/pricing",
+      "x-default": "https://dealforge.es/precios",
+    },
+  },
 };
 
 const jsonLd = [

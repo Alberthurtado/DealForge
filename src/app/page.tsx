@@ -57,6 +57,14 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: "https://dealforge.es/",
+    languages: {
+      "es-ES": "https://dealforge.es/",
+      en: "https://dealforge.es/en",
+      "x-default": "https://dealforge.es/",
+    },
+  },
 };
 
 /* ─── HERO ────────────────────────────────────────────────────── */
@@ -546,7 +554,7 @@ export default function LandingPage() {
   return (
     <>
       <StructuredData />
-      <Navbar />
+      <Navbar altHref="/en" />
       <main>
         <HeroSection />
         <ProblemSection />
