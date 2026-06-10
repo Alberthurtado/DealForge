@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Flame, Eye, EyeOff, Loader2, CheckCircle } from "lucide-react";
 import { TurnstileWidget } from "@/components/ui/turnstile-widget";
 import { AUTH_STRINGS, resolveAuthLang, withLang } from "@/lib/auth-i18n";
+import { track } from "@vercel/analytics";
 
 function RegistroForm() {
   const router = useRouter();
@@ -61,6 +62,7 @@ function RegistroForm() {
       }
 
       // Success — redirect to "check your email" page (keep language)
+      track("signup_completed", { lang });
       router.push(
         withLang(`/verificar-email?email=${encodeURIComponent(email)}`, lang)
       );

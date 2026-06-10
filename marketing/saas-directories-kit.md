@@ -15,7 +15,7 @@
 | **Categorías secundarias** | Proposal Software, Invoicing, CRM, Contract Management |
 | **Pricing model** | Freemium (free plan + paid) |
 | **Precio de entrada** | Free / 29€/mes (Pro) |
-| **Idioma** | Español (target España) |
+| **Idioma** | Español + English (usa https://dealforge.es/en como URL en directorios anglo) |
 | **Email** | info@dealforge.es |
 | **Año fundación** | 2026 |
 | **Plataforma** | Web (SaaS, cloud) |
@@ -74,6 +74,68 @@ Plan gratuito permanente (10 cotizaciones/mes, sin tarjeta). Planes de pago desd
 ### Keywords / tags
 ```
 CPQ, cotizaciones, presupuestos, quoting software, software ventas, firma electrónica, PYMES, autónomos, CRM, propuestas comerciales, facturación, sales automation
+```
+
+---
+
+## 🇬🇧 English copy (para Capterra, G2, SaaSHub, AlternativeTo, Product Hunt y cualquier directorio anglo)
+
+> En directorios internacionales usa la **URL inglesa**: `https://dealforge.es/en` (y `https://dealforge.es/en/pricing` donde pidan pricing URL). El tráfico anglo que aterrice en español rebota.
+
+### Tagline (≤60 characters)
+```
+Professional quotes in minutes, powered by AI
+```
+
+### Short description (≤160 characters)
+```
+AI quoting (CPQ) software for small businesses. Create professional PDF quotes, e-sign legally (eIDAS) and automate follow-ups. Free plan, no card.
+```
+
+### Medium description (≤320 characters)
+```
+DealForge is AI-powered quoting (CPQ) software for SMBs, freelancers and sales teams. Build professional PDF quotes in minutes, calculate VAT and discounts automatically, capture legally valid e-signatures (eIDAS) and never drop a follow-up. Billed in EUR, USD or GBP. Start free — no credit card.
+```
+
+### Long description
+```
+DealForge is AI-powered quoting (CPQ: Configure, Price, Quote) software built for small businesses, freelancers and sales teams who want to stop losing time and deals to spreadsheets.
+
+With DealForge you can:
+• Create professional, branded PDF quotes in minutes.
+• Calculate subtotals, discounts, VAT and margins automatically — no spreadsheet errors.
+• Manage clients and a product catalog with variants and recurring billing.
+• Capture legally valid e-signatures (eIDAS) on quotes and contracts.
+• Automate follow-ups with reminders and ready-to-send email templates.
+• Enforce commercial rules (max discounts, approval flows, mandatory products).
+• Use Forge, an AI assistant that builds complete quotes from plain-English instructions.
+
+Free forever plan (10 quotes/month, no credit card). Paid plans from $29/month, billed in EUR, USD or GBP.
+```
+
+### Key features (English)
+```
+- Professional PDF quotes
+- Forge AI assistant (natural language)
+- Legally valid e-signature (eIDAS)
+- Automatic VAT, discount and margin calculations
+- Client management (built-in CRM)
+- Product catalog with variants and subscriptions
+- Commercial rules and approval flows
+- Automated reminders and follow-ups
+- Contract management with renewals
+- Pipeline reports and metrics
+- Multi-currency billing (EUR, USD, GBP)
+```
+
+### Keywords / tags (English)
+```
+CPQ, quoting software, quote generator, proposal software, sales quotes, e-signature, small business, SMB, freelancer tools, sales automation, invoicing, quote to cash
+```
+
+### AlternativeTo — list as alternative to
+```
+PandaDoc, Qwilr, Proposify, Better Proposals, QuoteWerks, Microsoft Excel
 ```
 
 ---

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 import {
   User,
   Crown,
@@ -138,6 +139,7 @@ export function PlanSection({ user }: { user: PlanUser }) {
 
   async function handleUpgrade(targetPlan: string) {
     setUpgrading(targetPlan);
+    track("checkout_started", { plan: targetPlan, interval: billingInterval });
     try {
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",

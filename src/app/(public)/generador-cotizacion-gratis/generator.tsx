@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Plus, Trash2, Download, FileText, Sparkles, X, Lock } from "lucide-react";
+import { track } from "@vercel/analytics";
 
 type Lang = "es" | "en";
 type Currency = "EUR" | "USD" | "GBP";
@@ -256,6 +257,7 @@ export function Generator({ lang = "es" }: { lang?: Lang }) {
       w.document.write(html);
       w.document.close();
 
+      track("generator_pdf_generated", { lang, currency });
       setTimeout(() => setShowUpsell(true), 400);
     } catch (err) {
       setError(err instanceof Error ? err.message : t.errGeneric);
@@ -641,7 +643,11 @@ export function Generator({ lang = "es" }: { lang?: Lang }) {
                 </div>
               ))}
             </div>
-            <Link href={lang === "en" ? "/registro?lang=en" : "/registro"} className="block w-full text-center bg-[#3a9bb5] hover:bg-[#2d7d94] text-white font-semibold text-sm px-6 py-3 rounded-xl">
+            <Link
+              href={lang === "en" ? "/registro?lang=en" : "/registro"}
+              onClick={() => track("generator_upsell_click", { lang })}
+              className="block w-full text-center bg-[#3a9bb5] hover:bg-[#2d7d94] text-white font-semibold text-sm px-6 py-3 rounded-xl"
+            >
               {t.upsellCta}
             </Link>
           </div>

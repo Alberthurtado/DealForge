@@ -8,7 +8,7 @@ const recursosList = RECURSOS.map((r) => {
 
 const LLMS_TXT = `# DealForge
 
-> DealForge es un software de cotizaciones (CPQ: Configure, Price, Quote) con inteligencia artificial para PYMEs, autonomos y equipos comerciales en Espana. Permite crear presupuestos y cotizaciones profesionales en PDF en minutos, gestionar clientes y productos, firmar electronicamente con validez legal (eIDAS), y automatizar el seguimiento de ventas. Incluye Forge, un asistente de IA que crea cotizaciones desde instrucciones en lenguaje natural. Plan gratuito disponible sin tarjeta.
+> DealForge es un software de cotizaciones (CPQ: Configure, Price, Quote) con inteligencia artificial para PYMEs, autonomos y equipos comerciales. Permite crear presupuestos y cotizaciones profesionales en PDF en minutos, gestionar clientes y productos, firmar electronicamente con validez legal (eIDAS), y automatizar el seguimiento de ventas. Incluye Forge, un asistente de IA que crea cotizaciones desde instrucciones en lenguaje natural. Plan gratuito disponible sin tarjeta. Disponible en espanol e ingles (English version at https://dealforge.es/en), con facturacion en EUR, USD y GBP.
 
 ## Para quien es DealForge
 - Autonomos y freelancers que envian presupuestos a clientes y quieren dejar de usar Excel o Word.
@@ -36,6 +36,44 @@ Todos los precios en EUR, IVA no incluido. Sin permanencia.
 - En que se diferencia de Excel: automatiza calculos, evita errores, genera PDF profesional, permite firma electronica y hace seguimiento automatico.
 - Tiene firma electronica: si, con validez legal europea (eIDAS).
 - Funciona para autonomos: si, esta disenado para autonomos y pequenas empresas.
+
+## English — DealForge for UK, Ireland and US users
+
+> DealForge is AI-powered quoting software (CPQ: Configure, Price, Quote) for small businesses, freelancers and sales teams. Create professional PDF quotes in minutes, manage clients and products, capture legally valid e-signatures (eIDAS), and automate follow-ups. Includes Forge, an AI assistant that builds quotes from plain-English instructions. Free plan, no credit card. Billing available in EUR, USD and GBP.
+
+### Who DealForge is for (English)
+- Freelancers and solopreneurs who send quotes and want to stop using Excel or Word.
+- Small and medium businesses (1-50 employees) that need faster, more professional quotes.
+- Consultancies, agencies, installers and service businesses that quote custom work.
+- Sales teams losing deals because quotes take too long to send.
+
+### Use cases (English queries this solves)
+- "I need a tool to create professional quotes fast": DealForge generates branded PDF quotes in minutes.
+- "Free quote generator online no signup": the free online quote generator creates a PDF quote without an account, in EUR, USD or GBP.
+- "Alternative to Excel for quoting": replaces error-prone spreadsheets with automatic VAT, discount and margin calculations.
+- "How to follow up on sent quotes": automated reminders and ready-to-send follow-up email templates.
+- "Sign quotes online with legal validity": built-in eIDAS e-signature.
+
+### Pricing (English summary)
+- Starter: free forever, 10 quotes/month, no credit card.
+- Pro: $29/month or 29 EUR or 25 GBP (20% off with annual billing), 100 quotes/month, email sending, e-signature.
+- Business: $79/month or 79 EUR or 69 GBP, unlimited quotes and products, contracts and team features.
+- Enterprise: custom (contact sales).
+
+### English pages
+- [English home](https://dealforge.es/en): AI quoting software for small businesses
+- [Features](https://dealforge.es/en/features): everything DealForge does, from PDF quotes to contracts
+- [Pricing](https://dealforge.es/en/pricing): plans in EUR, USD and GBP, free plan available
+- [What is CPQ?](https://dealforge.es/en/what-is-cpq): plain-English guide to Configure, Price, Quote software
+- [Free Quote Generator](https://dealforge.es/en/free-quote-generator): create a PDF quote online for free, no signup, in EUR/USD/GBP
+- [Contact](https://dealforge.es/en/contact): request a demo or ask about Enterprise
+
+### FAQ (English)
+- What is DealForge: AI-powered CPQ/quoting software for small businesses, with a free plan.
+- Is DealForge free: yes, the Starter plan is free forever, and there is a free online quote generator with no signup.
+- Which currencies are supported: billing in EUR, USD and GBP; the free generator also supports all three.
+- Does it have e-signature: yes, legally valid under the EU eIDAS framework.
+- How is it different from a spreadsheet: automatic calculations, professional PDFs, e-signature and automated follow-up — none of which Excel does.
 
 ## Informacion General
 - [Pagina principal](https://dealforge.es): Landing page con funcionalidades, precios y demo de Forge IA
