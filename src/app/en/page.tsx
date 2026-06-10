@@ -117,7 +117,7 @@ export default function EnHome() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
-              href="/registro"
+              href="/registro?lang=en"
               className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-[#3a9bb5] hover:bg-[#2d7d94] px-7 py-3.5 rounded-xl transition-colors shadow-lg shadow-[#3a9bb5]/25"
             >
               <Flame className="w-4 h-4" />
@@ -257,7 +257,7 @@ export default function EnHome() {
             Join the small businesses replacing spreadsheets with DealForge.
           </p>
           <Link
-            href="/registro"
+            href="/registro?lang=en"
             className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#3a9bb5] bg-white hover:bg-gray-50 px-7 py-3.5 rounded-xl transition-colors"
           >
             <Flame className="w-4 h-4" />
@@ -276,7 +276,7 @@ export default function EnHome() {
           <div className="flex items-center gap-5">
             <Link href="/en/pricing" className="hover:text-gray-900">Pricing</Link>
             <Link href="/" className="hover:text-gray-900">Español</Link>
-            <Link href="/login" className="hover:text-gray-900">Log in</Link>
+            <Link href="/login?lang=en" className="hover:text-gray-900">Log in</Link>
           </div>
         </div>
       </footer>

@@ -89,7 +89,7 @@ export default async function EnPricingPage() {
           <div className="flex items-center gap-5">
             <Link href="/en" className="hover:text-gray-900">Home</Link>
             <Link href="/precios" className="hover:text-gray-900">Español</Link>
-            <Link href="/login" className="hover:text-gray-900">Log in</Link>
+            <Link href="/login?lang=en" className="hover:text-gray-900">Log in</Link>
           </div>
         </div>
       </footer>

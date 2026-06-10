@@ -5,11 +5,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Flame, Eye, EyeOff, Loader2 } from "lucide-react";
 import { TurnstileWidget } from "@/components/ui/turnstile-widget";
+import { AUTH_STRINGS, resolveAuthLang, withLang } from "@/lib/auth-i18n";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/panel";
+  const lang = resolveAuthLang(searchParams.get("lang"));
+  const t = AUTH_STRINGS[lang];
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,10 +56,12 @@ function LoginForm() {
       if (!res.ok) {
         // If email not verified, redirect to verification page
         if (data.needsVerification) {
-          router.push(`/verificar-email?email=${encodeURIComponent(data.email || email)}`);
+          router.push(
+            withLang(`/verificar-email?email=${encodeURIComponent(data.email || email)}`, lang)
+          );
           return;
         }
-        setError(data.error || "Error al iniciar sesión");
+        setError(data.error || t.genericLoginError);
         setLoading(false);
         return;
       }
@@ -71,7 +76,7 @@ function LoginForm() {
       // Success — redirect
       router.push(redirect);
     } catch {
-      setError("Error de conexión. Intenta de nuevo.");
+      setError(t.connError);
       setLoading(false);
     }
   }
@@ -84,10 +89,8 @@ function LoginForm() {
           <div className="w-12 h-12 rounded-2xl bg-[#3a9bb5]/10 flex items-center justify-center mx-auto mb-4">
             <Flame className="w-6 h-6 text-[#3a9bb5]" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Bienvenido</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Inicia sesión para acceder a tu cuenta
-          </p>
+          <h1 className="text-2xl font-bold text-gray-900">{t.loginTitle}</h1>
+          <p className="text-sm text-gray-500 mt-1">{t.loginSubtitle}</p>
         </div>
 
         {/* Form */}
@@ -100,7 +103,7 @@ function LoginForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
+              {t.email}
             </label>
             <input
               type="email"
@@ -109,14 +112,14 @@ function LoginForm() {
               required
               autoFocus
               autoComplete="email"
-              placeholder="tu@email.com"
+              placeholder="you@email.com"
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all"
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contraseña
+              {t.password}
             </label>
             <div className="relative">
               <input
@@ -125,7 +128,7 @@ function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
-                placeholder="Tu contraseña"
+                placeholder={t.loginPasswordPlaceholder}
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all pr-10"
               />
               <button
@@ -150,13 +153,13 @@ function LoginForm() {
                 onChange={(e) => setRememberMe(e.target.checked)}
                 className="w-3.5 h-3.5 rounded border-gray-300 text-[#3a9bb5] focus:ring-[#3a9bb5]/50"
               />
-              <span className="text-xs text-gray-500">Recordarme</span>
+              <span className="text-xs text-gray-500">{t.rememberMe}</span>
             </label>
             <Link
-              href="/recuperar"
+              href={withLang("/recuperar", lang)}
               className="text-xs text-[#3a9bb5] hover:text-[#2d7d94] font-medium transition-colors"
             >
-              ¿Olvidaste tu contraseña?
+              {t.forgotPassword}
             </Link>
           </div>
 
@@ -170,30 +173,30 @@ function LoginForm() {
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Iniciando sesión...
+                {t.signingIn}
               </>
             ) : (
-              "Iniciar Sesión"
+              t.signIn
             )}
           </button>
         </form>
 
         {/* Privacy */}
         <p className="mt-4 text-[11px] text-gray-400 text-center leading-relaxed">
-          Al iniciar sesión aceptas nuestros{" "}
-          <Link href="/terminos" className="underline hover:text-gray-600">Términos de servicio</Link>{" "}
-          y <Link href="/privacidad" className="underline hover:text-gray-600">Política de privacidad</Link>.
+          {t.loginTermsPrefix}{" "}
+          <Link href="/terminos" className="underline hover:text-gray-600">{t.terms}</Link>{" "}
+          {t.and} <Link href="/privacidad" className="underline hover:text-gray-600">{t.privacy}</Link>.
         </p>
 
         {/* Footer */}
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-500">
-            ¿No tienes cuenta?{" "}
+            {t.noAccount}{" "}
             <Link
-              href="/registro"
+              href={withLang("/registro", lang)}
               className="font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
             >
-              Regístrate gratis
+              {t.registerFree}
             </Link>
           </p>
         </div>

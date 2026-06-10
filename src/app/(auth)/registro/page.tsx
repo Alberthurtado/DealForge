@@ -1,13 +1,17 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Flame, Eye, EyeOff, Loader2, CheckCircle } from "lucide-react";
 import { TurnstileWidget } from "@/components/ui/turnstile-widget";
+import { AUTH_STRINGS, resolveAuthLang, withLang } from "@/lib/auth-i18n";
 
-export default function RegistroPage() {
+function RegistroForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const lang = resolveAuthLang(searchParams.get("lang"));
+  const t = AUTH_STRINGS[lang];
 
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
@@ -30,12 +34,12 @@ export default function RegistroPage() {
     setError("");
 
     if (!passwordValid) {
-      setError("La contraseña debe tener al menos 8 caracteres");
+      setError(t.passwordTooShort);
       return;
     }
 
     if (!passwordsMatch) {
-      setError("Las contraseñas no coinciden");
+      setError(t.passwordsDontMatch);
       return;
     }
 
@@ -51,15 +55,17 @@ export default function RegistroPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Error al crear la cuenta");
+        setError(data.error || t.genericRegisterError);
         setLoading(false);
         return;
       }
 
-      // Success — redirect to "check your email" page
-      router.push(`/verificar-email?email=${encodeURIComponent(email)}`);
+      // Success — redirect to "check your email" page (keep language)
+      router.push(
+        withLang(`/verificar-email?email=${encodeURIComponent(email)}`, lang)
+      );
     } catch {
-      setError("Error de conexión. Intenta de nuevo.");
+      setError(t.connError);
       setLoading(false);
     }
   }
@@ -72,10 +78,8 @@ export default function RegistroPage() {
           <div className="w-12 h-12 rounded-2xl bg-[#3a9bb5]/10 flex items-center justify-center mx-auto mb-4">
             <Flame className="w-6 h-6 text-[#3a9bb5]" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Crea tu cuenta</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Empieza a cotizar con inteligencia artificial
-          </p>
+          <h1 className="text-2xl font-bold text-gray-900">{t.registerTitle}</h1>
+          <p className="text-sm text-gray-500 mt-1">{t.registerSubtitle}</p>
         </div>
 
         {/* Form */}
@@ -87,9 +91,7 @@ export default function RegistroPage() {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nombre
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.name}</label>
             <input
               type="text"
               value={nombre}
@@ -97,30 +99,26 @@ export default function RegistroPage() {
               required
               autoFocus
               autoComplete="name"
-              placeholder="Tu nombre"
+              placeholder={t.namePlaceholder}
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.email}</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              placeholder="tu@email.com"
+              placeholder="you@email.com"
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contraseña
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.password}</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -128,7 +126,7 @@ export default function RegistroPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="new-password"
-                placeholder="Mínimo 8 caracteres"
+                placeholder={t.passwordPlaceholder}
                 className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all pr-10"
               />
               <button
@@ -136,11 +134,7 @@ export default function RegistroPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
               >
-                {showPassword ? (
-                  <EyeOff className="w-4 h-4" />
-                ) : (
-                  <Eye className="w-4 h-4" />
-                )}
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
             {password.length > 0 && (
@@ -150,47 +144,37 @@ export default function RegistroPage() {
                     passwordValid ? "bg-green-100" : "bg-gray-100"
                   }`}
                 >
-                  {passwordValid && (
-                    <CheckCircle className="w-3 h-3 text-green-600" />
-                  )}
+                  {passwordValid && <CheckCircle className="w-3 h-3 text-green-600" />}
                 </div>
-                <span
-                  className={`text-xs ${
-                    passwordValid ? "text-green-600" : "text-gray-400"
-                  }`}
-                >
-                  Mínimo 8 caracteres
+                <span className={`text-xs ${passwordValid ? "text-green-600" : "text-gray-400"}`}>
+                  {t.min8}
                 </span>
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirmar contraseña
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.confirmPassword}</label>
             <input
               type={showPassword ? "text" : "password"}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
               autoComplete="new-password"
-              placeholder="Repite la contraseña"
+              placeholder={t.confirmPlaceholder}
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/50 focus:border-[#3a9bb5] transition-all"
             />
             {confirmPassword.length > 0 && !passwordsMatch && (
-              <p className="text-xs text-red-500 mt-1">
-                Las contraseñas no coinciden
-              </p>
+              <p className="text-xs text-red-500 mt-1">{t.passwordsDontMatch}</p>
             )}
           </div>
 
           <TurnstileWidget action="registro" onToken={handleToken} />
 
           <p className="text-[11px] text-gray-400 text-center leading-relaxed">
-            Al crear tu cuenta aceptas nuestros{" "}
-            <Link href="/terminos" className="underline hover:text-gray-600">Términos de servicio</Link>{" "}
-            y <Link href="/privacidad" className="underline hover:text-gray-600">Política de privacidad</Link>.
+            {t.termsPrefix}{" "}
+            <Link href="/terminos" className="underline hover:text-gray-600">{t.terms}</Link>{" "}
+            {t.and} <Link href="/privacidad" className="underline hover:text-gray-600">{t.privacy}</Link>.
           </p>
 
           <button
@@ -201,12 +185,12 @@ export default function RegistroPage() {
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Creando cuenta...
+                {t.creatingAccount}
               </>
             ) : (
               <>
                 <Flame className="w-4 h-4" />
-                Crear Cuenta Gratis
+                {t.createAccount}
               </>
             )}
           </button>
@@ -214,24 +198,30 @@ export default function RegistroPage() {
 
         {/* Plan info */}
         <div className="mt-4 p-3 bg-[#3a9bb5]/5 border border-[#3a9bb5]/10 rounded-xl">
-          <p className="text-xs text-[#3a9bb5] text-center font-medium">
-            Plan Starter gratuito: 10 cotizaciones/mes, 5 clientes, Forge IA incluido
-          </p>
+          <p className="text-xs text-[#3a9bb5] text-center font-medium">{t.planInfo}</p>
         </div>
 
         {/* Footer */}
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-500">
-            ¿Ya tienes cuenta?{" "}
+            {t.haveAccount}{" "}
             <Link
-              href="/login"
+              href={withLang("/login", lang)}
               className="font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
             >
-              Iniciar Sesión
+              {t.login}
             </Link>
           </p>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function RegistroPage() {
+  return (
+    <Suspense fallback={<div className="w-full max-w-md h-96" />}>
+      <RegistroForm />
+    </Suspense>
   );
 }

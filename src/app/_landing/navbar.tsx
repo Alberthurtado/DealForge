@@ -58,6 +58,8 @@ export function Navbar({ locale = "es", altHref }: Props) {
   }, []);
 
   const cfg = NAV_CONFIG[locale];
+  // Keep the language through the auth flow for English visitors.
+  const authSuffix = locale === "en" ? "?lang=en" : "";
   const otherLocale: Locale = locale === "es" ? "en" : "es";
   // Default switch target: the other language's home, unless the page provides
   // its exact counterpart via altHref.
@@ -106,13 +108,13 @@ export function Navbar({ locale = "es", altHref }: Props) {
           <div className="hidden md:flex items-center gap-3">
             <LangSwitcher locale={locale} switchHref={switchHref} />
             <Link
-              href="/login"
+              href={`/login${authSuffix}`}
               className="text-sm font-medium text-gray-700 hover:text-gray-900 px-4 py-2 transition-colors"
             >
               {cfg.login}
             </Link>
             <Link
-              href="/registro"
+              href={`/registro${authSuffix}`}
               className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-[#3a9bb5] hover:bg-[#2d7d94] px-5 py-2.5 rounded-xl transition-colors shadow-lg shadow-[#3a9bb5]/25"
             >
               <Flame className="w-4 h-4" />
@@ -161,13 +163,13 @@ export function Navbar({ locale = "es", altHref }: Props) {
                 <LangSwitcher locale={locale} switchHref={switchHref} />
               </div>
               <Link
-                href="/login"
+                href={`/login${authSuffix}`}
                 className="block text-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg"
               >
                 {cfg.login}
               </Link>
               <Link
-                href="/registro"
+                href={`/registro${authSuffix}`}
                 className="block text-center px-3 py-2.5 text-sm font-semibold text-white bg-[#3a9bb5] rounded-lg"
               >
                 {cfg.cta}

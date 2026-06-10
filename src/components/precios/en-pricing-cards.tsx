@@ -33,7 +33,7 @@ const PLANS: Plan[] = [
     freeOrCustom: "free",
     description: "Perfect for freelancers and solopreneurs getting started.",
     cta: "Start free",
-    ctaHref: "/registro",
+    ctaHref: "/registro?lang=en",
     ctaStyle: "outline",
     features: ["10 quotes/month", "5 clients", "10 products", "5 Forge AI queries", "1 user"],
   },
@@ -43,7 +43,7 @@ const PLANS: Plan[] = [
     description: "For sales teams that need speed and a professional edge.",
     popular: true,
     cta: "Get started with Pro",
-    ctaHref: "/registro?plan=pro",
+    ctaHref: "/registro?plan=pro&lang=en",
     ctaStyle: "primary",
     features: [
       "100 quotes/month",
@@ -64,7 +64,7 @@ const PLANS: Plan[] = [
     planKey: "business",
     description: "For companies that want full control over their sales process.",
     cta: "Get started with Business",
-    ctaHref: "/registro?plan=business",
+    ctaHref: "/registro?plan=business&lang=en",
     ctaStyle: "secondary",
     features: [
       "Unlimited quotes",
