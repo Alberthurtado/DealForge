@@ -6,6 +6,7 @@ import { Search, FileText, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
 import { EmptyState } from "@/components/ui/empty-state";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { CotizacionStatusBadge } from "./cotizacion-status-badge";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface CotizacionRow {
   id: string;
@@ -21,24 +22,28 @@ interface CotizacionRow {
   _count: { lineItems: number };
 }
 
-const ESTADOS = [
-  { value: "", label: "Todos" },
-  { value: "BORRADOR", label: "Borrador" },
-  { value: "ENVIADA", label: "Enviada" },
-  { value: "NEGOCIACION", label: "Negociación" },
-  { value: "GANADA", label: "Ganada" },
-  { value: "PERDIDA", label: "Perdida" },
-  { value: "ARCHIVADA", label: "Archivada" },
-];
+const ESTADO_VALUES = ["", "BORRADOR", "ENVIADA", "NEGOCIACION", "GANADA", "PERDIDA", "ARCHIVADA"];
 
 type SortKey = "fecha" | "cliente" | "total" | "numero";
 type SortDir = "asc" | "desc";
 
 export function CotizacionTable({
   cotizaciones,
+  lang = "es",
+  currency = "EUR",
+  locale = "es-ES",
 }: {
   cotizaciones: CotizacionRow[];
+  lang?: DashboardLang;
+  currency?: string;
+  locale?: string;
 }) {
+  const dict = DASHBOARD_STRINGS[lang];
+  const t = dict.quotes;
+  const estados = ESTADO_VALUES.map((value) => ({
+    value,
+    label: value === "" ? t.allStatuses : dict.statusByCode[value] ?? value,
+  }));
   const [search, setSearch] = useState("");
   const [estadoFilter, setEstadoFilter] = useState("");
   const [clienteFilter, setClienteFilter] = useState("");
@@ -115,7 +120,7 @@ export function CotizacionTable({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Buscar por número o cliente..."
+            placeholder={t.searchPlaceholder}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-4 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
@@ -128,7 +133,7 @@ export function CotizacionTable({
           onChange={(e) => setClienteFilter(e.target.value)}
           className="px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white text-foreground"
         >
-          <option value="">Todos los clientes</option>
+          <option value="">{t.allClients}</option>
           {clientes.map((c) => (
             <option key={c.id} value={c.id}>
               {c.nombre}
@@ -137,7 +142,7 @@ export function CotizacionTable({
         </select>
 
         <div className="flex gap-1">
-          {ESTADOS.map((e) => (
+          {estados.map((e) => (
             <button
               key={e.value}
               onClick={() => setEstadoFilter(e.value)}
@@ -162,7 +167,7 @@ export function CotizacionTable({
                 onClick={() => toggleSort("numero")}
               >
                 <span className="inline-flex items-center gap-1">
-                  Cotización <SortIcon column="numero" />
+                  {t.colQuote} <SortIcon column="numero" />
                 </span>
               </th>
               <th
@@ -170,21 +175,21 @@ export function CotizacionTable({
                 onClick={() => toggleSort("cliente")}
               >
                 <span className="inline-flex items-center gap-1">
-                  Cliente <SortIcon column="cliente" />
+                  {t.colClient} <SortIcon column="cliente" />
                 </span>
               </th>
               <th className="text-center px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Estado
+                {t.colStatus}
               </th>
               <th className="text-center px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Items
+                {t.colItems}
               </th>
               <th
                 className="text-right px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider cursor-pointer hover:text-foreground transition-colors select-none"
                 onClick={() => toggleSort("total")}
               >
                 <span className="inline-flex items-center gap-1 justify-end">
-                  Total <SortIcon column="total" />
+                  {t.colTotal} <SortIcon column="total" />
                 </span>
               </th>
               <th
@@ -192,7 +197,7 @@ export function CotizacionTable({
                 onClick={() => toggleSort("fecha")}
               >
                 <span className="inline-flex items-center gap-1">
-                  Fecha <SortIcon column="fecha" />
+                  {t.colDate} <SortIcon column="fecha" />
                 </span>
               </th>
             </tr>
@@ -237,16 +242,16 @@ export function CotizacionTable({
                   </Link>
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <CotizacionStatusBadge estado={cot.estado} />
+                  <CotizacionStatusBadge estado={cot.estado} lang={lang} />
                 </td>
                 <td className="px-4 py-3 text-center text-sm text-muted-foreground">
                   {cot._count.lineItems}
                 </td>
                 <td className="px-4 py-3 text-right text-sm font-semibold text-foreground">
-                  {formatCurrency(cot.total)}
+                  {formatCurrency(cot.total, currency, locale)}
                 </td>
                 <td className="px-4 py-3 text-sm text-muted-foreground">
-                  {formatDate(cot.fechaEmision)}
+                  {formatDate(cot.fechaEmision, locale)}
                 </td>
               </tr>
             ))}
@@ -255,8 +260,8 @@ export function CotizacionTable({
                 <td colSpan={6}>
                   <EmptyState
                     variant="search"
-                    title="Sin resultados"
-                    description="No se encontraron cotizaciones con ese criterio de búsqueda."
+                    title={t.emptyTitle}
+                    description={t.emptyDescription}
                   />
                 </td>
               </tr>

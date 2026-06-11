@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 import { CotizacionTable } from "@/components/cotizaciones/cotizacion-table";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { DASHBOARD_STRINGS, resolveDashboardLang } from "@/lib/dashboard-i18n";
 
 async function getCotizaciones(userId: string) {
   return prisma.cotizacion.findMany({
@@ -27,6 +28,19 @@ async function getCotizaciones(userId: string) {
 export default async function CotizacionesPage() {
   const session = await getSession();
   if (!session) return null;
+
+  // Company language/currency for display
+  const empresa = session.empresaId
+    ? await prisma.empresa.findUnique({
+        where: { id: session.empresaId },
+        select: { locale: true, currencyCode: true },
+      })
+    : null;
+  const lang = resolveDashboardLang(empresa?.locale);
+  const currency = empresa?.currencyCode || "EUR";
+  const locale = empresa?.locale || "es-ES";
+  const t = DASHBOARD_STRINGS[lang].quotes;
+
   const cotizaciones = await getCotizaciones(session.userId);
   const plan = session?.plan || "starter";
   const limits = getPlanLimits(plan);
@@ -44,15 +58,15 @@ export default async function CotizacionesPage() {
   return (
     <div>
       <PageHeader
-        title="Cotizaciones"
-        description={`Gestiona todas tus cotizaciones${limits.cotizacionesMes > 0 ? ` (${cotizacionesMes}/${limits.cotizacionesMes} este mes)` : ""}`}
+        title={t.title}
+        description={`${t.description}${limits.cotizacionesMes > 0 ? ` (${cotizacionesMes}/${limits.cotizacionesMes} ${t.thisMonthSuffix})` : ""}`}
         actions={
           limitReached ? (
             <Link
               href="/configuracion"
               className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg text-sm font-medium hover:bg-amber-700 transition-colors"
             >
-              Mejorar plan
+              {t.upgradePlan}
             </Link>
           ) : (
             <Link
@@ -60,14 +74,14 @@ export default async function CotizacionesPage() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               <Plus className="w-4 h-4" />
-              Nueva Cotización
+              {t.newQuote}
             </Link>
           )
         }
       />
       {limitReached && (
         <UpgradeBanner
-          resource="cotizaciones este mes"
+          resource={t.upgradeResource}
           current={cotizacionesMes}
           limit={limits.cotizacionesMes}
           plan={planLabel}
@@ -76,6 +90,9 @@ export default async function CotizacionesPage() {
       <div className="p-6">
         <CotizacionTable
           cotizaciones={JSON.parse(JSON.stringify(cotizaciones))}
+          lang={lang}
+          currency={currency}
+          locale={locale}
         />
       </div>
     </div>
