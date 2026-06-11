@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { Cliente360 } from "@/components/clientes/cliente-360";
 import { getSession } from "@/lib/auth";
+import { DASHBOARD_STRINGS, resolveDashboardLang } from "@/lib/dashboard-i18n";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 
@@ -37,6 +38,17 @@ export default async function ClienteDetailPage({
     notFound();
   }
 
+  const empresa = session.empresaId
+    ? await prisma.empresa.findUnique({
+        where: { id: session.empresaId },
+        select: { locale: true, currencyCode: true },
+      })
+    : null;
+  const lang = resolveDashboardLang(empresa?.locale);
+  const currency = empresa?.currencyCode || "EUR";
+  const numLocale = empresa?.locale || "es-ES";
+  const t = DASHBOARD_STRINGS[lang].clients;
+
   const ganadas = cliente.cotizaciones.filter((c) => c.estado === "GANADA");
   const perdidas = cliente.cotizaciones.filter((c) => c.estado === "PERDIDA");
   const cerradas = ganadas.length + perdidas.length;
@@ -58,7 +70,7 @@ export default async function ClienteDetailPage({
         title={cliente.nombre}
         description={[cliente.sector, cliente.ciudad].filter(Boolean).join(" - ")}
         breadcrumbs={[
-          { label: "Clientes", href: "/clientes" },
+          { label: t.title, href: "/clientes" },
           { label: cliente.nombre },
         ]}
         actions={
@@ -67,7 +79,7 @@ export default async function ClienteDetailPage({
             className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted transition-colors"
           >
             <Pencil className="w-4 h-4" />
-            Editar
+            {t.editBreadcrumb}
           </Link>
         }
       />
@@ -75,6 +87,9 @@ export default async function ClienteDetailPage({
         <Cliente360
           cliente={JSON.parse(JSON.stringify(cliente))}
           stats={stats}
+          lang={lang}
+          currency={currency}
+          numLocale={numLocale}
         />
       </div>
     </div>

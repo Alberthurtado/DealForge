@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { formatCurrency, formatDate, formatPercent } from "@/lib/utils";
 import { CotizacionStatusBadge } from "@/components/cotizaciones/cotizacion-status-badge";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface Props {
   cliente: {
@@ -53,47 +54,58 @@ interface Props {
     ingresoTotal: number;
     pipelineActivo: number;
   };
+  lang?: DashboardLang;
+  currency?: string;
+  numLocale?: string;
 }
 
-export function Cliente360({ cliente, stats }: Props) {
+export function Cliente360({
+  cliente,
+  stats,
+  lang = "es",
+  currency = "EUR",
+  numLocale = "es-ES",
+}: Props) {
+  const t = DASHBOARD_STRINGS[lang].cliente360;
+  const money = (n: number) => formatCurrency(n, currency, numLocale);
   return (
     <div className="space-y-6">
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {[
           {
-            label: "Cotizaciones",
+            label: t.statQuotes,
             value: stats.totalCotizaciones,
             icon: FileText,
             color: "text-blue-600 bg-blue-50",
           },
           {
-            label: "Ganadas",
+            label: t.statWon,
             value: stats.cotizacionesGanadas,
             icon: Trophy,
             color: "text-green-600 bg-green-50",
           },
           {
-            label: "Perdidas",
+            label: t.statLost,
             value: stats.cotizacionesPerdidas,
             icon: XCircle,
             color: "text-red-600 bg-red-50",
           },
           {
-            label: "Conversión",
+            label: t.statConversion,
             value: formatPercent(stats.tasaConversion),
             icon: TrendingUp,
             color: "text-purple-600 bg-purple-50",
           },
           {
-            label: "Ingresos",
-            value: formatCurrency(stats.ingresoTotal),
+            label: t.statRevenue,
+            value: money(stats.ingresoTotal),
             icon: DollarSign,
             color: "text-amber-600 bg-amber-50",
           },
           {
-            label: "Pipeline",
-            value: formatCurrency(stats.pipelineActivo),
+            label: t.statPipeline,
+            value: money(stats.pipelineActivo),
             icon: TrendingUp,
             color: "text-indigo-600 bg-indigo-50",
           },
@@ -115,13 +127,13 @@ export function Cliente360({ cliente, stats }: Props) {
         {/* Company Info */}
         <div className="bg-white rounded-xl border border-border p-6">
           <h3 className="text-base font-semibold text-foreground mb-4">
-            Datos de la Empresa
+            {t.companyData}
           </h3>
           <div className="space-y-3">
             {cliente.ruc && (
               <div className="flex items-center gap-3 text-sm">
                 <Building2 className="w-4 h-4 text-muted-foreground shrink-0" />
-                <span>CIF: {cliente.ruc}</span>
+                <span>{t.taxId}: {cliente.ruc}</span>
               </div>
             )}
             {cliente.email && (
@@ -155,7 +167,7 @@ export function Cliente360({ cliente, stats }: Props) {
 
           {/* Contacts */}
           <h4 className="text-sm font-semibold text-foreground mt-6 mb-3">
-            Contactos
+            {t.contacts}
           </h4>
           <div className="space-y-3">
             {cliente.contactos.map((contacto) => (
@@ -171,7 +183,7 @@ export function Cliente360({ cliente, stats }: Props) {
                     {contacto.nombre}
                     {contacto.principal && (
                       <span className="ml-2 text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded">
-                        Principal
+                        {t.primary}
                       </span>
                     )}
                   </p>
@@ -191,13 +203,13 @@ export function Cliente360({ cliente, stats }: Props) {
         <div className="lg:col-span-2 bg-white rounded-xl border border-border p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-base font-semibold text-foreground">
-              Historial de Cotizaciones
+              {t.quoteHistory}
             </h3>
             <Link
               href={`/cotizaciones/nueva?clienteId=${cliente.id}`}
               className="text-sm text-primary hover:text-primary/80 font-medium"
             >
-              + Nueva Cotización
+              {t.newQuote}
             </Link>
           </div>
           <div className="space-y-3">
@@ -212,21 +224,21 @@ export function Cliente360({ cliente, stats }: Props) {
                     {cot.numero}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {formatDate(cot.fechaEmision)} &middot; {cot._count.lineItems}{" "}
-                    items
+                    {formatDate(cot.fechaEmision, numLocale)} &middot; {cot._count.lineItems}{" "}
+                    {t.items}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CotizacionStatusBadge estado={cot.estado} />
+                  <CotizacionStatusBadge estado={cot.estado} lang={lang} />
                   <span className="text-sm font-semibold text-foreground">
-                    {formatCurrency(cot.total)}
+                    {money(cot.total)}
                   </span>
                 </div>
               </Link>
             ))}
             {cliente.cotizaciones.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-8">
-                Este cliente no tiene cotizaciones todavía
+                {t.noQuotes}
               </p>
             )}
           </div>
