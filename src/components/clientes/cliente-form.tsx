@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Trash2, Save } from "lucide-react";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface ContactoInput {
   nombre: string;
@@ -29,6 +30,7 @@ interface ClienteFormProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (data: any) => void;
   saving?: boolean;
+  lang?: DashboardLang;
 }
 
 const emptyContacto: ContactoInput = {
@@ -43,7 +45,9 @@ export function ClienteForm({
   initialData,
   onSubmit,
   saving,
+  lang = "es",
 }: ClienteFormProps) {
+  const t = DASHBOARD_STRINGS[lang].clientForm;
   const [form, setForm] = useState<ClienteFormData>({
     nombre: initialData?.nombre || "",
     ruc: initialData?.ruc || "",
@@ -51,7 +55,7 @@ export function ClienteForm({
     telefono: initialData?.telefono || "",
     direccion: initialData?.direccion || "",
     ciudad: initialData?.ciudad || "",
-    pais: initialData?.pais || "España",
+    pais: initialData?.pais || DASHBOARD_STRINGS[lang].clientForm.defaultCountry,
     sector: initialData?.sector || "",
     notas: initialData?.notas || "",
     contactos: initialData?.contactos || [{ ...emptyContacto, principal: true }],
@@ -101,12 +105,12 @@ export function ClienteForm({
       {/* Company Info */}
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-4">
-          Información de la Empresa
+          {t.companyInfo}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-foreground mb-1">
-              Nombre de la Empresa *
+              {t.companyName}
             </label>
             <input
               type="text"
@@ -114,103 +118,103 @@ export function ClienteForm({
               value={form.nombre}
               onChange={(e) => updateField("nombre", e.target.value)}
               className={inputClass}
-              placeholder="Ej: Distribuciones Martinez S.L."
+              placeholder={t.companyNamePlaceholder}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              CIF / NIF
+              {t.taxId}
             </label>
             <input
               type="text"
               value={form.ruc}
               onChange={(e) => updateField("ruc", e.target.value)}
               className={inputClass}
-              placeholder="B12345678"
+              placeholder={t.taxIdPlaceholder}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Sector
+              {t.sector}
             </label>
             <input
               type="text"
               value={form.sector}
               onChange={(e) => updateField("sector", e.target.value)}
               className={inputClass}
-              placeholder="Ej: Tecnología, Distribución..."
+              placeholder={t.sectorPlaceholder}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Email
+              {t.email}
             </label>
             <input
               type="email"
               value={form.email}
               onChange={(e) => updateField("email", e.target.value)}
               className={inputClass}
-              placeholder="info@empresa.com"
+              placeholder={t.emailPlaceholder}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Teléfono
+              {t.phone}
             </label>
             <input
               type="tel"
               value={form.telefono}
               onChange={(e) => updateField("telefono", e.target.value)}
               className={inputClass}
-              placeholder="+34 91 234 5678"
+              placeholder={t.phonePlaceholder}
             />
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-foreground mb-1">
-              Dirección
+              {t.address}
             </label>
             <input
               type="text"
               value={form.direccion}
               onChange={(e) => updateField("direccion", e.target.value)}
               className={inputClass}
-              placeholder="Calle, número, piso"
+              placeholder={t.addressPlaceholder}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Ciudad
+              {t.city}
             </label>
             <input
               type="text"
               value={form.ciudad}
               onChange={(e) => updateField("ciudad", e.target.value)}
               className={inputClass}
-              placeholder="Madrid"
+              placeholder={t.cityPlaceholder}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              País
+              {t.country}
             </label>
             <input
               type="text"
               value={form.pais}
               onChange={(e) => updateField("pais", e.target.value)}
               className={inputClass}
-              placeholder="España"
+              placeholder={t.defaultCountry}
             />
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-foreground mb-1">
-              Notas
+              {t.notes}
             </label>
             <textarea
               value={form.notas}
               onChange={(e) => updateField("notas", e.target.value)}
               className={inputClass}
               rows={3}
-              placeholder="Notas internas sobre este cliente..."
+              placeholder={t.notesPlaceholder}
             />
           </div>
         </div>
@@ -219,13 +223,13 @@ export function ClienteForm({
       {/* Contacts */}
       <div className="bg-white rounded-xl border border-border p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-base font-semibold text-foreground">Contactos</h3>
+          <h3 className="text-base font-semibold text-foreground">{t.contacts}</h3>
           <button
             type="button"
             onClick={addContacto}
             className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-primary/80 font-medium"
           >
-            <Plus className="w-4 h-4" /> Agregar Contacto
+            <Plus className="w-4 h-4" /> {t.addContact}
           </button>
         </div>
         <div className="space-y-4">
@@ -237,7 +241,7 @@ export function ClienteForm({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-muted-foreground mb-1">
-                    Nombre
+                    {t.name}
                   </label>
                   <input
                     type="text"
@@ -246,12 +250,12 @@ export function ClienteForm({
                       updateContacto(i, "nombre", e.target.value)
                     }
                     className={inputClass}
-                    placeholder="Nombre completo"
+                    placeholder={t.fullNamePlaceholder}
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-muted-foreground mb-1">
-                    Cargo
+                    {t.role}
                   </label>
                   <input
                     type="text"
@@ -260,12 +264,12 @@ export function ClienteForm({
                       updateContacto(i, "cargo", e.target.value)
                     }
                     className={inputClass}
-                    placeholder="Director, Gerente..."
+                    placeholder={t.rolePlaceholder}
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-muted-foreground mb-1">
-                    Email
+                    {t.email}
                   </label>
                   <input
                     type="email"
@@ -278,7 +282,7 @@ export function ClienteForm({
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-muted-foreground mb-1">
-                    Teléfono
+                    {t.phone}
                   </label>
                   <input
                     type="tel"
@@ -300,7 +304,7 @@ export function ClienteForm({
                     className="text-primary"
                   />
                   <span className="text-muted-foreground">
-                    Contacto principal
+                    {t.primaryContact}
                   </span>
                 </label>
                 {form.contactos.length > 1 && (
@@ -326,7 +330,7 @@ export function ClienteForm({
           className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 transition-colors"
         >
           <Save className="w-4 h-4" />
-          {saving ? "Guardando..." : "Guardar Cliente"}
+          {saving ? t.saving : t.saveClient}
         </button>
       </div>
     </form>

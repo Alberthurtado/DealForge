@@ -4,10 +4,14 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { ClienteForm } from "@/components/clientes/cliente-form";
+import { DASHBOARD_STRINGS } from "@/lib/dashboard-i18n";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
 
 export default function EditarClientePage() {
   const router = useRouter();
   const params = useParams();
+  const { lang } = useEmpresaLocale();
+  const t = DASHBOARD_STRINGS[lang].clients;
   const [cliente, setCliente] = useState<Record<string, unknown> | null>(null);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -51,14 +55,14 @@ export default function EditarClientePage() {
   return (
     <div>
       <PageHeader
-        title="Editar Cliente"
+        title={t.editClient}
         breadcrumbs={[
-          { label: "Clientes", href: "/clientes" },
+          { label: t.title, href: "/clientes" },
           {
             label: (cliente as { nombre?: string })?.nombre || "",
             href: `/clientes/${params.id}`,
           },
-          { label: "Editar" },
+          { label: t.editBreadcrumb },
         ]}
       />
       <div className="p-6 max-w-3xl">
@@ -66,6 +70,7 @@ export default function EditarClientePage() {
           initialData={cliente as Record<string, unknown>}
           onSubmit={handleSubmit}
           saving={saving}
+          lang={lang}
         />
       </div>
     </div>

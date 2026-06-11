@@ -5,9 +5,13 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { ClienteForm } from "@/components/clientes/cliente-form";
 import { UpgradeBanner } from "@/components/layout/upgrade-banner";
+import { DASHBOARD_STRINGS } from "@/lib/dashboard-i18n";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
 
 export default function NuevoClientePage() {
   const router = useRouter();
+  const { lang } = useEmpresaLocale();
+  const t = DASHBOARD_STRINGS[lang].clients;
   const [saving, setSaving] = useState(false);
   const [limitError, setLimitError] = useState<{
     message: string;
@@ -41,22 +45,22 @@ export default function NuevoClientePage() {
   return (
     <div>
       <PageHeader
-        title="Nuevo Cliente"
+        title={t.newClient}
         breadcrumbs={[
-          { label: "Clientes", href: "/clientes" },
-          { label: "Nuevo" },
+          { label: t.title, href: "/clientes" },
+          { label: t.newBreadcrumb },
         ]}
       />
       {limitError && (
         <UpgradeBanner
-          resource="clientes"
+          resource={t.upgradeResource}
           current={limitError.current}
           limit={limitError.limit}
           plan="Starter"
         />
       )}
       <div className="p-6 max-w-3xl">
-        <ClienteForm onSubmit={handleSubmit} saving={saving} />
+        <ClienteForm onSubmit={handleSubmit} saving={saving} lang={lang} />
       </div>
     </div>
   );
