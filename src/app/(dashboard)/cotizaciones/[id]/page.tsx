@@ -664,6 +664,7 @@ export default function CotizacionDetailPage() {
                     descuento: li.descuento,
                   })),
                 }}
+                lang={lang}
               />
               <EmailTemplatesModal
                 variables={{

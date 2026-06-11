@@ -196,6 +196,17 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
     close: string;
     openInEmail: string;
   };
+  scorecardModal: {
+    triggerTitle: string;
+    modalTitle: string;
+    modalSubtitle: (total: number) => string;
+    pointsPassed: (passed: number, total: number) => string;
+    blockers: (n: number) => string;
+    ptsPassed: (pts: number) => string;
+    ptsFailed: (pts: number) => string;
+    footerTip: string;
+    close: string;
+  };
 }> = {
   es: {
     errChangeStatus: "Error al cambiar el estado",
@@ -340,6 +351,18 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
       variablesLabel: "Variables:", variablesAuto: "— se reemplazan automáticamente.",
       close: "Cerrar", openInEmail: "Abrir en email",
     },
+    scorecardModal: {
+      triggerTitle: "Revisa la calidad antes de enviar",
+      modalTitle: "Scorecard de calidad — pre-envío",
+      modalSubtitle: (total) =>
+        `Revisa estos ${total} puntos antes de enviar la cotización. Ajustarlos aumenta tu tasa de aceptación.`,
+      pointsPassed: (passed, total) => `${passed} de ${total} puntos superados`,
+      blockers: (n) => `${n} bloqueante${n > 1 ? "s" : ""}`,
+      ptsPassed: (pts) => `+${pts} pts`,
+      ptsFailed: (pts) => `0/${pts} pts`,
+      footerTip: "Las cotizaciones con score > 85 tienen el doble de tasa de aceptación.",
+      close: "Cerrar",
+    },
   },
   en: {
     errChangeStatus: "Couldn't change the status",
@@ -483,6 +506,18 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
       selectTemplate: "Select a template", selectTemplateHint: "to preview and copy it",
       variablesLabel: "Variables:", variablesAuto: "— replaced automatically.",
       close: "Close", openInEmail: "Open in email",
+    },
+    scorecardModal: {
+      triggerTitle: "Check quality before sending",
+      modalTitle: "Quality scorecard — pre-send",
+      modalSubtitle: (total) =>
+        `Review these ${total} points before sending the quote. Tweaking them raises your acceptance rate.`,
+      pointsPassed: (passed, total) => `${passed} of ${total} points passed`,
+      blockers: (n) => `${n} blocker${n > 1 ? "s" : ""}`,
+      ptsPassed: (pts) => `+${pts} pts`,
+      ptsFailed: (pts) => `0/${pts} pts`,
+      footerTip: "Quotes scoring above 85 have double the acceptance rate.",
+      close: "Close",
     },
   },
 };

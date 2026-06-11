@@ -14,9 +14,12 @@ import {
   type ScorecardCotizacion,
   type ScorecardResult,
 } from "@/lib/cotizacion-scorecard";
+import { type DashboardLang } from "@/lib/dashboard-i18n";
+import { DETAIL_STRINGS } from "@/lib/cotizacion-detail-i18n";
 
 interface Props {
   cotizacion: ScorecardCotizacion;
+  lang?: DashboardLang;
 }
 
 const COLOR_MAP: Record<
@@ -49,12 +52,13 @@ const COLOR_MAP: Record<
   },
 };
 
-export function CotizacionScorecardModal({ cotizacion }: Props) {
+export function CotizacionScorecardModal({ cotizacion, lang = "es" }: Props) {
+  const t = DETAIL_STRINGS[lang].scorecardModal;
   const [open, setOpen] = useState(false);
 
   const result: ScorecardResult = useMemo(
-    () => computeScorecard(cotizacion),
-    [cotizacion]
+    () => computeScorecard(cotizacion, lang),
+    [cotizacion, lang]
   );
 
   // Trigger button badge color
@@ -66,7 +70,7 @@ export function CotizacionScorecardModal({ cotizacion }: Props) {
         type="button"
         onClick={() => setOpen(true)}
         className={`inline-flex items-center gap-1.5 px-3 py-1.5 border rounded-lg text-xs font-semibold transition-colors ${triggerColor.bg} ${triggerColor.text} border-transparent hover:brightness-95`}
-        title="Revisa la calidad antes de enviar"
+        title={t.triggerTitle}
       >
         <Gauge className="w-3.5 h-3.5" />
         Scorecard
@@ -89,11 +93,10 @@ export function CotizacionScorecardModal({ cotizacion }: Props) {
               <div>
                 <h2 className="font-bold text-gray-900 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-[#3a9bb5]" />
-                  Scorecard de calidad — pre-envío
+                  {t.modalTitle}
                 </h2>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  Revisa estos {result.total} puntos antes de enviar la cotización. Ajustarlos
-                  aumenta tu tasa de aceptación.
+                  {t.modalSubtitle(result.total)}
                 </p>
               </div>
               <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-600">
@@ -121,12 +124,12 @@ export function CotizacionScorecardModal({ cotizacion }: Props) {
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 mt-2">
-                    {result.passed} de {result.total} puntos superados
+                    {t.pointsPassed(result.passed, result.total)}
                     {result.blockers > 0 && (
                       <>
                         {" · "}
                         <span className="text-red-700 font-semibold">
-                          {result.blockers} bloqueante{result.blockers > 1 ? "s" : ""}
+                          {t.blockers(result.blockers)}
                         </span>
                       </>
                     )}
@@ -179,7 +182,7 @@ export function CotizacionScorecardModal({ cotizacion }: Props) {
                               : "bg-gray-100 text-gray-500"
                           }`}
                         >
-                          {c.passed ? `+${c.points} pts` : `0/${c.points} pts`}
+                          {c.passed ? t.ptsPassed(c.points) : t.ptsFailed(c.points)}
                         </span>
                       </div>
                       <p className="text-xs text-gray-500 mt-0.5">{c.description}</p>
@@ -201,14 +204,14 @@ export function CotizacionScorecardModal({ cotizacion }: Props) {
             {/* Footer */}
             <div className="border-t border-gray-100 px-6 py-4 flex items-center justify-between flex-shrink-0">
               <p className="text-xs text-gray-500">
-                💡 Las cotizaciones con score &gt; 85 tienen el doble de tasa de aceptación.
+                💡 {t.footerTip}
               </p>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 className="px-5 py-2 text-sm font-semibold bg-[#3a9bb5] text-white rounded-lg hover:bg-[#2d7d94]"
               >
-                Cerrar
+                {t.close}
               </button>
             </div>
           </div>
