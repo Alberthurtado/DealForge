@@ -38,6 +38,8 @@ import type { LineItemInput } from "@/components/cotizaciones/line-items-editor"
 import type { ValidationResult } from "@/lib/reglas-engine";
 import { ShieldAlert, ShieldCheck, Lock, GitBranch, ScrollText } from "lucide-react";
 import type { PlanFeatures } from "@/lib/plan-limits";
+import { resolveDashboardLang, type DashboardLang } from "@/lib/dashboard-i18n";
+import { DETAIL_STRINGS } from "@/lib/cotizacion-detail-i18n";
 
 interface Cotizacion {
   id: string;
@@ -101,6 +103,12 @@ export default function CotizacionDetailPage() {
   const params = useParams();
   const router = useRouter();
   const { success, error: showError } = useToast();
+  const [lang, setLang] = useState<DashboardLang>("es");
+  const [numLocale, setNumLocale] = useState("es-ES");
+  const [currency, setCurrency] = useState("EUR");
+  const td = DETAIL_STRINGS[lang];
+  const money = (n: number) => formatCurrency(n, currency, numLocale);
+  const fdate = (d: Date | string) => formatDate(d, numLocale);
   const [cotizacion, setCotizacion] = useState<Cotizacion | null>(null);
   const [loading, setLoading] = useState(true);
   const [validation, setValidation] = useState<ValidationResult | null>(null);
@@ -215,7 +223,7 @@ export default function CotizacionDetailPage() {
       success(`Estado cambiado a ${newEstado}`);
     } else {
       const data = await res.json().catch(() => null);
-      showError(data?.error || "Error al cambiar el estado");
+      showError(data?.error || td.errChangeStatus);
     }
     // Always reload approvals — backend may have created new ones
     loadAprobaciones();
@@ -232,10 +240,10 @@ export default function CotizacionDetailPage() {
         router.push(`/cotizaciones/${newCot.id}`);
       } else {
         const data = await res.json().catch(() => null);
-        showError(data?.error || "Error al crear nueva versión");
+        showError(data?.error || td.errNewVersion);
       }
     } catch {
-      showError("Error de conexión");
+      showError(td.errConnection);
     } finally {
       setCreatingVersion(false);
     }
@@ -265,10 +273,10 @@ export default function CotizacionDetailPage() {
     });
     if (res.ok) {
       const newCot = await res.json();
-      success("Cotización duplicada correctamente");
+      success(td.quoteDuplicated);
       router.push(`/cotizaciones/${newCot.id}`);
     } else {
-      showError("Error al duplicar la cotización");
+      showError(td.errDuplicate);
     }
   }
 
@@ -285,7 +293,7 @@ export default function CotizacionDetailPage() {
       success("Cotización archivada");
     } else {
       const data = await res.json().catch(() => null);
-      showError(data?.error || "Error al archivar");
+      showError(data?.error || td.errArchive);
     }
   }
 
@@ -307,7 +315,7 @@ export default function CotizacionDetailPage() {
       success(`Cotización restaurada a ${previousState}`);
     } else {
       const data = await res.json().catch(() => null);
-      showError(data?.error || "Error al desarchivar");
+      showError(data?.error || td.errUnarchive);
     }
   }
 
@@ -324,12 +332,12 @@ export default function CotizacionDetailPage() {
       setCotizacion(updated);
       success(
         next
-          ? "Recordatorios silenciados para esta cotización"
-          : "Recordatorios reactivados"
+          ? td.remindersSilenced
+          : td.remindersReactivated
       );
     } else {
       const data = await res.json().catch(() => null);
-      showError(data?.error || "Error al actualizar recordatorios");
+      showError(data?.error || td.errUpdateReminders);
     }
   }
 
@@ -357,7 +365,7 @@ export default function CotizacionDetailPage() {
         const updated = await res.json();
         setCotizacion(updated);
         setEditingLineItems(false);
-        success("Items actualizados correctamente");
+        success(td.itemsUpdated);
         loadAprobaciones();
         // Re-validate rules
         fetch("/api/reglas/validar", {
@@ -381,10 +389,10 @@ export default function CotizacionDetailPage() {
           .catch(() => {});
       } else {
         const data = await res.json().catch(() => null);
-        showError(data?.error || "Error al guardar los items");
+        showError(data?.error || td.errSaveItems);
       }
     } catch {
-      showError("Error de conexión");
+      showError(td.errConnection);
     } finally {
       setSavingLineItems(false);
     }
@@ -408,11 +416,11 @@ export default function CotizacionDetailPage() {
         if (data?.code === "APPROVAL_REQUIRED") {
           success("Solicitud de aprobación enviada");
         } else {
-          showError(data?.error || "Error al enviar");
+          showError(data?.error || td.errSend);
         }
       }
     } catch {
-      showError("Error de conexión");
+      showError(td.errConnection);
     } finally {
       setSendingToApprove(false);
       loadAprobaciones();
@@ -432,6 +440,9 @@ export default function CotizacionDetailPage() {
       .then((r) => r.json())
       .then((data) => {
         if (data?.nombre) setEmpresaNombre(data.nombre);
+        setLang(resolveDashboardLang(data?.locale));
+        setNumLocale(data?.locale || "es-ES");
+        if (data?.currencyCode) setCurrency(data.currencyCode);
         setSmtpConfigured(Boolean(data?.smtpHost && data?.smtpUser && data?.smtpPass));
         // Build default T&C based on line item types
         if (cotizacion) {
@@ -464,9 +475,9 @@ export default function CotizacionDetailPage() {
       const updated = await res.json();
       setCotizacion(updated);
       setEditingCondiciones(false);
-      success("Términos y condiciones guardados");
+      success(td.termsSaved);
     } else {
-      showError("Error al guardar");
+      showError(td.errSave);
     }
   }
 
@@ -491,15 +502,15 @@ export default function CotizacionDetailPage() {
     const contactName = principal?.nombre || cotizacion.contactoNombre || cotizacion.cliente.nombre;
 
     setEmailTo(contactEmail);
-    setEmailSubject(`Cotización ${cotizacion.numero} - ${cotizacion.cliente.nombre}`);
+    setEmailSubject(td.emailSubject(cotizacion.numero, cotizacion.cliente.nombre));
     setEmailBody(
-      `<p>Estimado/a ${contactName},</p>` +
-      `<p>Le adjuntamos la cotización <strong>${cotizacion.numero}</strong> por un total de <strong>${formatCurrency(cotizacion.total)}</strong>.</p>` +
+      `<p>${td.emailGreeting(contactName)}</p>` +
+      `<p>${td.emailBody1(cotizacion.numero, money(cotizacion.total))}</p>` +
       (cotizacion.fechaVencimiento
-        ? `<p>La cotización tiene validez hasta el ${formatDate(cotizacion.fechaVencimiento)}.</p>`
+        ? `<p>${td.emailValidUntil(fdate(cotizacion.fechaVencimiento))}</p>`
         : "") +
-      `<p>Quedamos a su disposición para cualquier consulta.</p>` +
-      `<p>Saludos cordiales</p>`
+      `<p>${td.emailClosing1}</p>` +
+      `<p>${td.emailClosing2}</p>`
     );
     setEmailDialogOpen(true);
   }
@@ -518,17 +529,17 @@ export default function CotizacionDetailPage() {
         }),
       });
       if (res.ok) {
-        success("Email enviado correctamente");
+        success(td.emailSent);
         setEmailDialogOpen(false);
         // Refresh to show new activity
         const updated = await fetch(`/api/cotizaciones/${params.id}`).then((r) => r.json());
         setCotizacion(updated);
       } else {
         const data = await res.json();
-        showError(data.error || "Error al enviar el email");
+        showError(data.error || td.errSendEmail);
       }
     } catch {
-      showError("Error de conexión al enviar email");
+      showError(td.errSendEmailConn);
     } finally {
       setSendingEmail(false);
     }
@@ -564,29 +575,29 @@ export default function CotizacionDetailPage() {
       <PageHeader
         title={`${cotizacion.numero}${cotizacion.version > 1 || cotizacion.cotizacionOriginalId ? ` v${cotizacion.version}` : ""}`}
         breadcrumbs={[
-          { label: "Cotizaciones", href: "/cotizaciones" },
+          { label: td.quotesBreadcrumb, href: "/cotizaciones" },
           { label: cotizacion.numero },
         ]}
         actions={
           <div className="space-y-3">
             {/* Row 1: Document actions */}
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mr-1">Acciones</span>
+              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mr-1">{td.actions}</span>
               <Link
                 href={`/cotizaciones/${params.id}/preview`}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-medium hover:bg-primary/90 transition-colors"
               >
                 <Eye className="w-3.5 h-3.5" />
-                Vista Previa
+                {td.preview}
               </Link>
               {planFeatures?.emailEnvio === false ? (
                 <Link
                   href="/configuracion"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-purple-200 bg-purple-50 rounded-lg text-xs font-medium text-purple-600 hover:bg-purple-100 transition-colors"
-                  title="Disponible desde el plan Pro"
+                  title={td.proPlanTitle}
                 >
                   <Lock className="w-3 h-3" />
-                  Email
+                  {td.email}
                   <span className="text-[8px] font-bold bg-purple-200 text-purple-700 px-1 py-0.5 rounded uppercase">Pro</span>
                 </Link>
               ) : (
@@ -595,7 +606,7 @@ export default function CotizacionDetailPage() {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border rounded-lg text-xs font-medium hover:bg-muted transition-colors"
                 >
                   <Mail className="w-3.5 h-3.5" />
-                  Email
+                  {td.email}
                 </button>
               )}
               <button
@@ -603,14 +614,14 @@ export default function CotizacionDetailPage() {
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border rounded-lg text-xs font-medium hover:bg-muted transition-colors"
               >
                 <Copy className="w-3.5 h-3.5" />
-                Duplicar
+                {td.duplicate}
               </button>
               <button
                 onClick={toggleSilenciarRecordatorios}
                 title={
                   cotizacion.recordatoriosSilenciados
-                    ? "Recordatorios silenciados — haz clic para reactivar"
-                    : "Silenciar los recordatorios automáticos para esta cotización"
+                    ? td.remindersSilencedTitle
+                    : td.remindersSilenceTitle
                 }
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 border rounded-lg text-xs font-medium transition-colors ${
                   cotizacion.recordatoriosSilenciados
@@ -621,12 +632,12 @@ export default function CotizacionDetailPage() {
                 {cotizacion.recordatoriosSilenciados ? (
                   <>
                     <BellOff className="w-3.5 h-3.5" />
-                    Silenciada
+                    {td.silenced}
                   </>
                 ) : (
                   <>
                     <Bell className="w-3.5 h-3.5" />
-                    Recordatorios
+                    {td.reminders}
                   </>
                 )}
               </button>
@@ -658,7 +669,7 @@ export default function CotizacionDetailPage() {
                 variables={{
                   cliente: cotizacion.cliente.nombre,
                   numero: cotizacion.numero,
-                  total: formatCurrency(cotizacion.total),
+                  total: money(cotizacion.total),
                   empresa: empresaNombre,
                   validez: cotizacion.fechaVencimiento
                     ? String(
@@ -692,17 +703,17 @@ export default function CotizacionDetailPage() {
                     });
                     if (res.ok) {
                       const contrato = await res.json();
-                      success("Contrato creado correctamente");
+                      success(td.contractCreated);
                       router.push(`/contratos/${contrato.id}`);
                     } else {
                       const err = await res.json();
-                      showError(err.error || "Error al crear contrato");
+                      showError(err.error || td.errCreateContract);
                     }
                   }}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded-lg text-xs font-medium hover:bg-green-700 transition-colors"
                 >
                   <ScrollText className="w-3.5 h-3.5" />
-                  Crear Contrato
+                  {td.createContract}
                 </button>
               )}
               {cotizacion.estado === "GANADA" && !planFeatures?.contratos && (
@@ -711,7 +722,7 @@ export default function CotizacionDetailPage() {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-green-200 bg-green-50 text-green-700 rounded-lg text-xs font-medium hover:bg-green-100 transition-colors"
                 >
                   <ScrollText className="w-3.5 h-3.5" />
-                  Contrato
+                  {td.contract}
                   <span className="text-[8px] font-bold bg-purple-200 text-purple-700 px-1 py-0.5 rounded uppercase">Business</span>
                 </Link>
               )}
@@ -722,7 +733,7 @@ export default function CotizacionDetailPage() {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-violet-200 bg-violet-50 rounded-lg text-xs font-medium text-violet-700 hover:bg-violet-100 transition-colors disabled:opacity-50"
                 >
                   <GitBranch className="w-3.5 h-3.5" />
-                  {creatingVersion ? "Creando..." : "Nueva Versión"}
+                  {creatingVersion ? td.creating : td.newVersion}
                 </button>
               )}
               {cotizacion.estado === "ARCHIVADA" ? (
@@ -731,7 +742,7 @@ export default function CotizacionDetailPage() {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-medium hover:bg-primary/90 transition-colors"
                 >
                   <ArchiveRestore className="w-3.5 h-3.5" />
-                  Desarchivar
+                  {td.unarchive}
                 </button>
               ) : (
                 <button
@@ -739,14 +750,14 @@ export default function CotizacionDetailPage() {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-300 text-slate-500 rounded-lg text-xs font-medium hover:bg-slate-50 transition-colors"
                 >
                   <Archive className="w-3.5 h-3.5" />
-                  Archivar
+                  {td.archive}
                 </button>
               )}
             </div>
             {/* Row 2: Status transitions */}
             {(cotizacion.estado === "BORRADOR" || transitions.length > 0) && (
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mr-1">Estado</span>
+                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mr-1">{td.statusLabel}</span>
                 {/* BORRADOR: approval flow buttons */}
                 {cotizacion.estado === "BORRADOR" && (() => {
                   const approvedAll = aprobaciones.length > 0 && aprobaciones.every((a) => a.estado === "APROBADA");
@@ -762,7 +773,7 @@ export default function CotizacionDetailPage() {
                         className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-white rounded-lg text-xs font-medium transition-colors bg-blue-600 hover:bg-blue-700 ${termsBlocked ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <Send className="w-3.5 h-3.5" />
-                        Enviar
+                        {td.send}
                       </button>
                     );
                   }
@@ -775,12 +786,12 @@ export default function CotizacionDetailPage() {
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 text-white rounded-lg text-xs font-medium bg-blue-600 opacity-50 cursor-not-allowed"
                         >
                           <ShieldAlert className="w-3.5 h-3.5" />
-                          Enviar
+                          {td.send}
                         </button>
                         <div className="absolute right-0 top-full mt-1 w-64 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
                           {rejectedApprovals.length > 0
-                            ? `Rechazada por: ${rejectedApprovals.map((a) => a.aprobadorNombre).join(", ")}`
-                            : `Pendiente de aprobación de: ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")}`}
+                            ? td.rejectedBy(rejectedApprovals.map((a) => a.aprobadorNombre).join(", "))
+                            : td.pendingApprovalFrom(pendingApprovals.map((a) => a.aprobadorNombre).join(", "))}
                         </div>
                       </div>
                     );
@@ -793,7 +804,7 @@ export default function CotizacionDetailPage() {
                       className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-white rounded-lg text-xs font-medium transition-colors bg-blue-600 hover:bg-blue-700 ${termsBlocked ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       {sendingToApprove ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ShieldCheck className="w-3.5 h-3.5" />}
-                      {sendingToApprove ? "Enviando..." : "Enviar a Aprobar"}
+                      {sendingToApprove ? td.sending : td.sendToApprove}
                     </button>
                   );
                 })()}
@@ -805,7 +816,7 @@ export default function CotizacionDetailPage() {
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-white rounded-lg text-xs font-medium transition-colors ${t.color}`}
                   >
                     <t.icon className="w-3.5 h-3.5" />
-                    {t.label}
+                    {td.transitions[t.estado] ?? t.label}
                   </button>
                 ))}
               </div>
@@ -820,11 +831,9 @@ export default function CotizacionDetailPage() {
           <div className="flex items-center gap-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800">
             <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0" />
             <div>
-              <p className="text-sm font-medium">Cotización vencida</p>
+              <p className="text-sm font-medium">{td.quoteExpired}</p>
               <p className="text-xs text-amber-600">
-                Esta cotización venció el{" "}
-                {formatDate(cotizacion.fechaVencimiento!)}. Considera duplicarla
-                con nuevas fechas.
+                {td.expiredOn(fdate(cotizacion.fechaVencimiento!))}
               </p>
             </div>
           </div>
@@ -836,12 +845,12 @@ export default function CotizacionDetailPage() {
             <ShieldAlert className={`w-5 h-5 flex-shrink-0 ${rejectedApprovals.length > 0 ? "text-red-500" : "text-amber-500"}`} />
             <div>
               <p className="text-sm font-medium">
-                {rejectedApprovals.length > 0 ? "Aprobación rechazada" : "Pendiente de aprobación"}
+                {rejectedApprovals.length > 0 ? td.approvalRejected : td.pendingApproval}
               </p>
               <p className="text-xs mt-0.5">
                 {rejectedApprovals.length > 0
-                  ? `Rechazada por ${rejectedApprovals.map((a) => a.aprobadorNombre).join(", ")}. No se puede enviar esta cotización.`
-                  : `Esperando aprobación de ${pendingApprovals.map((a) => a.aprobadorNombre).join(", ")} antes de enviar.`}
+                  ? td.rejectedByCannotSend(rejectedApprovals.map((a) => a.aprobadorNombre).join(", "))
+                  : td.waitingApprovalBeforeSend(pendingApprovals.map((a) => a.aprobadorNombre).join(", "))}
               </p>
             </div>
           </div>
@@ -852,9 +861,9 @@ export default function CotizacionDetailPage() {
           <div className="flex items-center gap-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800">
             <FileText className="w-5 h-5 text-amber-500 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-sm font-medium">Faltan términos y condiciones</p>
+              <p className="text-sm font-medium">{td.termsMissing}</p>
               <p className="text-xs text-amber-600">
-                Debes agregar términos y condiciones antes de poder enviar esta cotización.
+                {td.termsMissingDesc}
               </p>
             </div>
             <button
@@ -866,7 +875,7 @@ export default function CotizacionDetailPage() {
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-white border border-amber-300 rounded-lg hover:bg-amber-50 transition-colors text-amber-700"
             >
               <Pencil className="w-3.5 h-3.5" />
-              Agregar
+              {td.add}
             </button>
           </div>
         )}
@@ -876,9 +885,9 @@ export default function CotizacionDetailPage() {
           <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700">
             <Archive className="w-5 h-5 text-slate-400 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-sm font-medium">Cotización archivada</p>
+              <p className="text-sm font-medium">{td.quoteArchived}</p>
               <p className="text-xs text-slate-500">
-                Esta cotización ha sido archivada y no aparece en las métricas del negocio.
+                {td.quoteArchivedDesc}
               </p>
             </div>
             <button
@@ -886,7 +895,7 @@ export default function CotizacionDetailPage() {
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
             >
               <ArchiveRestore className="w-3.5 h-3.5" />
-              Desarchivar
+              {td.unarchive}
             </button>
           </div>
         )}
@@ -911,23 +920,23 @@ export default function CotizacionDetailPage() {
         {/* Header info */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-white rounded-xl border border-border p-4">
-            <p className="text-xs text-muted-foreground mb-1">Estado</p>
+            <p className="text-xs text-muted-foreground mb-1">{td.status}</p>
             <CotizacionStatusBadge estado={cotizacion.estado} />
           </div>
           <div className="bg-white rounded-xl border border-border p-4">
-            <p className="text-xs text-muted-foreground mb-1">Total</p>
-            <p className="text-xl font-bold">{formatCurrency(cotizacion.total)}</p>
+            <p className="text-xs text-muted-foreground mb-1">{td.total}</p>
+            <p className="text-xl font-bold">{money(cotizacion.total)}</p>
           </div>
           <div className="bg-white rounded-xl border border-border p-4">
-            <p className="text-xs text-muted-foreground mb-1">Fecha Emisión</p>
-            <p className="text-sm font-medium">{formatDate(cotizacion.fechaEmision)}</p>
+            <p className="text-xs text-muted-foreground mb-1">{td.issueDate}</p>
+            <p className="text-sm font-medium">{fdate(cotizacion.fechaEmision)}</p>
           </div>
           <div className="bg-white rounded-xl border border-border p-4">
-            <p className="text-xs text-muted-foreground mb-1">Vencimiento</p>
+            <p className="text-xs text-muted-foreground mb-1">{td.dueDate}</p>
             <p className="text-sm font-medium">
               {cotizacion.fechaVencimiento
-                ? formatDate(cotizacion.fechaVencimiento)
-                : "Sin fecha"}
+                ? fdate(cotizacion.fechaVencimiento)
+                : td.noDate}
             </p>
           </div>
         </div>
@@ -937,7 +946,7 @@ export default function CotizacionDetailPage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Client info */}
             <div className="bg-white rounded-xl border border-border p-6">
-              <h3 className="text-base font-semibold mb-3">Cliente</h3>
+              <h3 className="text-base font-semibold mb-3">{td.client}</h3>
               <Link
                 href={`/clientes/${cotizacion.cliente.id}`}
                 className="flex items-center gap-3 group"
@@ -951,7 +960,7 @@ export default function CotizacionDetailPage() {
                   </p>
                   {cotizacion.contactoNombre && (
                     <p className="text-sm text-muted-foreground">
-                      Contacto: {cotizacion.contactoNombre}
+                      {td.contactColon}: {cotizacion.contactoNombre}
                     </p>
                   )}
                 </div>
@@ -961,14 +970,14 @@ export default function CotizacionDetailPage() {
             {/* Line items */}
             <div className="bg-white rounded-xl border border-border p-6">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-base font-semibold">Detalle</h3>
+                <h3 className="text-base font-semibold">{td.detail}</h3>
                 {cotizacion.estado === "BORRADOR" && !editingLineItems && (
                   <button
                     onClick={() => setEditingLineItems(true)}
                     className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <Pencil className="w-3 h-3" />
-                    Editar
+                    {td.edit}
                   </button>
                 )}
               </div>
@@ -994,11 +1003,11 @@ export default function CotizacionDetailPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border text-muted-foreground">
-                    <th className="text-left py-2 font-medium">Descripción</th>
-                    <th className="text-right py-2 font-medium">Cant.</th>
-                    <th className="text-right py-2 font-medium">Precio</th>
-                    <th className="text-right py-2 font-medium">Dto.</th>
-                    <th className="text-right py-2 font-medium">Total</th>
+                    <th className="text-left py-2 font-medium">{td.colDescription}</th>
+                    <th className="text-right py-2 font-medium">{td.colQty}</th>
+                    <th className="text-right py-2 font-medium">{td.colPrice}</th>
+                    <th className="text-right py-2 font-medium">{td.colDiscount}</th>
+                    <th className="text-right py-2 font-medium">{td.colTotal}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1027,13 +1036,13 @@ export default function CotizacionDetailPage() {
                       </td>
                       <td className="text-right py-3">{item.cantidad}</td>
                       <td className="text-right py-3">
-                        {formatCurrency(item.precioUnitario)}
+                        {money(item.precioUnitario)}
                       </td>
                       <td className="text-right py-3">
                         {item.descuento > 0 ? `${item.descuento}%` : "-"}
                       </td>
                       <td className="text-right py-3 font-medium">
-                        {formatCurrency(item.total)}
+                        {money(item.total)}
                       </td>
                     </tr>
                     );
@@ -1044,15 +1053,15 @@ export default function CotizacionDetailPage() {
               {/* Totals */}
               <div className="mt-4 pt-4 border-t border-border space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Subtotal</span>
-                  <span>{formatCurrency(cotizacion.subtotal)}</span>
+                  <span className="text-muted-foreground">{td.subtotal}</span>
+                  <span>{money(cotizacion.subtotal)}</span>
                 </div>
                 {cotizacion.descuentoGlobal > 0 && (
                   <div className="flex justify-between text-sm text-red-600">
-                    <span>Descuento ({cotizacion.descuentoGlobal}%)</span>
+                    <span>{td.discount} ({cotizacion.descuentoGlobal}%)</span>
                     <span>
                       -
-                      {formatCurrency(
+                      {money(
                         cotizacion.subtotal * (cotizacion.descuentoGlobal / 100)
                       )}
                     </span>
@@ -1061,10 +1070,10 @@ export default function CotizacionDetailPage() {
                 {cotizacion.impuesto > 0 ? (
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      IVA ({cotizacion.impuesto}%)
+                      {td.vat} ({cotizacion.impuesto}%)
                     </span>
                     <span>
-                      {formatCurrency(
+                      {money(
                         cotizacion.subtotal *
                           (1 - cotizacion.descuentoGlobal / 100) *
                           (cotizacion.impuesto / 100)
@@ -1073,12 +1082,12 @@ export default function CotizacionDetailPage() {
                   </div>
                 ) : (
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground italic">IVA no incluido</span>
+                    <span className="text-muted-foreground italic">{td.vatNotIncluded}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
-                  <span>Total</span>
-                  <span>{formatCurrency(cotizacion.total)}</span>
+                  <span>{td.total}</span>
+                  <span>{money(cotizacion.total)}</span>
                 </div>
               </div>
               </>
@@ -1088,7 +1097,7 @@ export default function CotizacionDetailPage() {
             {/* Notes */}
             {cotizacion.notas && (
               <div className="bg-white rounded-xl border border-border p-6">
-                <h4 className="text-sm font-semibold mb-1">Notas</h4>
+                <h4 className="text-sm font-semibold mb-1">{td.notes}</h4>
                 <p className="text-sm text-muted-foreground whitespace-pre-line">
                   {cotizacion.notas}
                 </p>
@@ -1100,7 +1109,7 @@ export default function CotizacionDetailPage() {
               <div className="flex items-center justify-between mb-2">
                 <h4 className="text-sm font-semibold flex items-center gap-1.5">
                   <FileText className="w-4 h-4 text-primary" />
-                  Términos y Condiciones
+                  {td.terms}
                 </h4>
                 {["BORRADOR", "NEGOCIACION"].includes(cotizacion.estado) && !editingCondiciones && (
                   <button
@@ -1111,7 +1120,7 @@ export default function CotizacionDetailPage() {
                     className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <Pencil className="w-3 h-3" />
-                    Editar
+                    {td.edit}
                   </button>
                 )}
               </div>
@@ -1122,7 +1131,7 @@ export default function CotizacionDetailPage() {
                     onChange={(e) => setCondicionesEdit(e.target.value)}
                     className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white resize-none"
                     rows={5}
-                    placeholder="Condiciones de pago, entrega, validez..."
+                    placeholder={td.termsPlaceholder}
                     autoFocus
                   />
                   <div className="flex gap-2 justify-end">
@@ -1130,14 +1139,14 @@ export default function CotizacionDetailPage() {
                       onClick={() => setEditingCondiciones(false)}
                       className="px-3 py-1.5 text-xs font-medium border border-border rounded-lg hover:bg-muted transition-colors"
                     >
-                      Cancelar
+                      {td.cancel}
                     </button>
                     <button
                       onClick={saveCondiciones}
                       className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
                     >
                       <Save className="w-3 h-3" />
-                      Guardar
+                      {td.save}
                     </button>
                   </div>
                 </div>
@@ -1148,7 +1157,7 @@ export default function CotizacionDetailPage() {
               ) : (
                 <div className="space-y-2">
                   <p className="text-sm text-amber-500 italic">
-                    Sin términos y condiciones
+                    {td.noTerms}
                   </p>
                   {condicionesDefecto && ["BORRADOR", "NEGOCIACION"].includes(cotizacion.estado) && (
                     <button
@@ -1161,13 +1170,13 @@ export default function CotizacionDetailPage() {
                         if (res.ok) {
                           const updated = await res.json();
                           setCotizacion(updated);
-                          success("Condiciones por defecto aplicadas");
+                          success(td.defaultTermsApplied);
                         }
                       }}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
                     >
                       <FileText className="w-3.5 h-3.5" />
-                      Aplicar condiciones por defecto
+                      {td.applyDefaultTerms}
                     </button>
                   )}
                 </div>
@@ -1181,15 +1190,15 @@ export default function CotizacionDetailPage() {
             {planFeatures?.aprobaciones === false ? (
               <div className="rounded-xl border border-purple-200 bg-purple-50 p-4 text-center">
                 <Lock className="w-5 h-5 text-purple-500 mx-auto mb-2" />
-                <p className="text-xs font-semibold text-purple-800">Aprobaciones</p>
+                <p className="text-xs font-semibold text-purple-800">{td.approvals}</p>
                 <p className="text-[11px] text-purple-600 mt-1 mb-3">
-                  Los flujos de aprobación están disponibles desde el plan Business.
+                  {td.approvalsBusinessDesc}
                 </p>
                 <Link
                   href="/configuracion"
                   className="inline-flex items-center gap-1 px-3 py-1.5 bg-purple-600 text-white rounded-lg text-xs font-medium hover:bg-purple-700 transition-colors"
                 >
-                  Ver plan Business
+                  {td.viewBusinessPlan}
                 </Link>
               </div>
             ) : (
@@ -1203,15 +1212,15 @@ export default function CotizacionDetailPage() {
             {planFeatures?.firmaElectronica === false ? (
               <div className="rounded-xl border border-purple-200 bg-purple-50 p-4 text-center">
                 <Lock className="w-5 h-5 text-purple-500 mx-auto mb-2" />
-                <p className="text-xs font-semibold text-purple-800">Firma Electrónica</p>
+                <p className="text-xs font-semibold text-purple-800">{td.eSignature}</p>
                 <p className="text-[11px] text-purple-600 mt-1 mb-3">
-                  La firma electrónica está disponible desde el plan Pro.
+                  {td.eSignatureProDesc}
                 </p>
                 <Link
                   href="/configuracion"
                   className="inline-flex items-center gap-1 px-3 py-1.5 bg-purple-600 text-white rounded-lg text-xs font-medium hover:bg-purple-700 transition-colors"
                 >
-                  Ver plan Pro
+                  {td.viewProPlan}
                 </Link>
               </div>
             ) : (
@@ -1234,7 +1243,7 @@ export default function CotizacionDetailPage() {
               <div className="bg-white rounded-xl border border-border p-5">
                 <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                   <GitBranch className="w-4 h-4 text-violet-500" />
-                  Historial de Versiones
+                  {td.versionHistory}
                 </h3>
                 <div className="space-y-2">
                   {versions.map((v) => {
@@ -1262,10 +1271,10 @@ export default function CotizacionDetailPage() {
                         </div>
                         <div className="flex items-center justify-between mt-1">
                           <span className="text-[10px] text-muted-foreground">
-                            {formatDate(v.createdAt)}
+                            {fdate(v.createdAt)}
                           </span>
                           <span className="text-[10px] font-medium text-foreground">
-                            {formatCurrency(v.total)}
+                            {money(v.total)}
                           </span>
                         </div>
                       </Link>
@@ -1286,27 +1295,26 @@ export default function CotizacionDetailPage() {
               <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
                 <Mail className="w-6 h-6 text-amber-600" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Email no configurado</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">{td.emailNotConfigured}</h3>
               <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                Para enviar cotizaciones por email a tus clientes desde tu propia cuenta,
-                primero tienes que conectar tu servidor SMTP (Gmail, Outlook, dominio propio…).
+                {td.emailNotConfiguredDesc}
               </p>
               <p className="text-xs text-gray-500 mb-5">
-                Es un proceso de 2 minutos. Mientras tanto, puedes usar el botón
-                <strong> &quot;Vista Previa&quot; </strong> para descargar el PDF y mandarlo manualmente.
+                {td.emailNotConfiguredHint1}
+                <strong> &quot;{td.preview}&quot; </strong>{td.emailNotConfiguredHint2}
               </p>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setShowSmtpHint(false)}
                   className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-600 border border-border rounded-lg hover:bg-muted transition-colors"
                 >
-                  Más tarde
+                  {td.later}
                 </button>
                 <Link
                   href="/configuracion#email"
                   className="flex-1 px-4 py-2.5 text-sm font-semibold bg-[#3a9bb5] text-white text-center rounded-lg hover:bg-[#2d7d94] transition-colors"
                 >
-                  Configurar ahora
+                  {td.configureNow}
                 </Link>
               </div>
             </div>
@@ -1321,7 +1329,7 @@ export default function CotizacionDetailPage() {
             <div className="flex items-center justify-between px-6 py-4 border-b border-border">
               <h3 className="text-base font-semibold flex items-center gap-2">
                 <Mail className="w-5 h-5 text-primary" />
-                Enviar Cotización por Email
+                {td.sendQuoteByEmail}
               </h3>
               <button
                 onClick={() => setEmailDialogOpen(false)}
@@ -1333,7 +1341,7 @@ export default function CotizacionDetailPage() {
             <div className="px-6 py-4 space-y-4">
               <div>
                 <label className="block text-xs font-medium text-muted-foreground mb-1">
-                  Para
+                  {td.to}
                 </label>
                 <input
                   type="email"
@@ -1345,7 +1353,7 @@ export default function CotizacionDetailPage() {
               </div>
               <div>
                 <label className="block text-xs font-medium text-muted-foreground mb-1">
-                  Asunto
+                  {td.subject}
                 </label>
                 <input
                   type="text"
@@ -1356,7 +1364,7 @@ export default function CotizacionDetailPage() {
               </div>
               <div>
                 <label className="block text-xs font-medium text-muted-foreground mb-1">
-                  Mensaje
+                  {td.message}
                 </label>
                 <textarea
                   value={emailBody.replace(/<\/?[^>]+(>|$)/g, (tag) => {
@@ -1376,7 +1384,7 @@ export default function CotizacionDetailPage() {
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground bg-gray-50 rounded-lg px-3 py-2">
                 <FileText className="w-4 h-4 text-primary flex-shrink-0" />
-                Se adjuntará el PDF de la cotización {cotizacion.numero} automáticamente
+                {td.pdfAttached(cotizacion.numero)}
               </div>
             </div>
             <div className="flex justify-end gap-2 px-6 py-4 border-t border-border">
@@ -1384,7 +1392,7 @@ export default function CotizacionDetailPage() {
                 onClick={() => setEmailDialogOpen(false)}
                 className="px-4 py-2 text-sm font-medium border border-border rounded-lg hover:bg-muted transition-colors"
               >
-                Cancelar
+                {td.cancel}
               </button>
               <button
                 onClick={handleSendEmail}
@@ -1394,12 +1402,12 @@ export default function CotizacionDetailPage() {
                 {sendingEmail ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    Enviando...
+                    {td.sending}
                   </>
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    Enviar
+                    {td.send}
                   </>
                 )}
               </button>
