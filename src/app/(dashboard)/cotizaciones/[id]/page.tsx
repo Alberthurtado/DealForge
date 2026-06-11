@@ -688,6 +688,7 @@ export default function CotizacionDetailPage() {
                   cotizacion.cliente.email ||
                   null
                 }
+                lang={lang}
               />
               {cotizacion.estado === "GANADA" && planFeatures?.contratos && (
                 <button

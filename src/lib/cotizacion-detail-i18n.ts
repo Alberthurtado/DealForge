@@ -179,6 +179,23 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
     linkCopied: string;
     errCopy: string;
   };
+  emailTemplatesModal: {
+    triggerButton: string;
+    modalTitle: string;
+    modalSubtitle: string;
+    subject: string;
+    copied: string;
+    copy: string;
+    emailBody: string;
+    tipLabel: string;
+    tip: string;
+    selectTemplate: string;
+    selectTemplateHint: string;
+    variablesLabel: string;
+    variablesAuto: string;
+    close: string;
+    openInEmail: string;
+  };
 }> = {
   es: {
     errChangeStatus: "Error al cambiar el estado",
@@ -313,6 +330,16 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
       requestSent: "Solicitud de firma enviada", errRequest: "Error al solicitar firma",
       errConnection: "Error de conexión", linkCopied: "Enlace de firma copiado", errCopy: "No se pudo copiar",
     },
+    emailTemplatesModal: {
+      triggerButton: "Email de seguimiento",
+      modalTitle: "Plantillas de email de seguimiento",
+      modalSubtitle: "7 emails probados con cadencia de 21 días. Copia o envía directamente.",
+      subject: "Asunto", copied: "Copiado", copy: "Copiar", emailBody: "Cuerpo del email",
+      tipLabel: "Tip:", tip: "personaliza el contenido entre corchetes antes de enviarlo para que suene natural.",
+      selectTemplate: "Selecciona una plantilla", selectTemplateHint: "para previsualizarla y copiarla",
+      variablesLabel: "Variables:", variablesAuto: "— se reemplazan automáticamente.",
+      close: "Cerrar", openInEmail: "Abrir en email",
+    },
   },
   en: {
     errChangeStatus: "Couldn't change the status",
@@ -446,6 +473,16 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
       cancel: "Cancel", send: "Send request", sending: "Sending...",
       requestSent: "Signature request sent", errRequest: "Couldn't request signature",
       errConnection: "Connection error", linkCopied: "Signing link copied", errCopy: "Couldn't copy",
+    },
+    emailTemplatesModal: {
+      triggerButton: "Follow-up email",
+      modalTitle: "Follow-up email templates",
+      modalSubtitle: "7 proven emails on a 21-day cadence. Copy or send directly.",
+      subject: "Subject", copied: "Copied", copy: "Copy", emailBody: "Email body",
+      tipLabel: "Tip:", tip: "personalize the bracketed content before sending so it sounds natural.",
+      selectTemplate: "Select a template", selectTemplateHint: "to preview and copy it",
+      variablesLabel: "Variables:", variablesAuto: "— replaced automatically.",
+      close: "Close", openInEmail: "Open in email",
     },
   },
 };

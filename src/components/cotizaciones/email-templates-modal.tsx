@@ -3,15 +3,18 @@
 import { useState } from "react";
 import { X, Mail, Copy, Check, Send } from "lucide-react";
 import {
-  EMAIL_TEMPLATES,
+  getEmailTemplates,
   renderEmailTemplate,
   type EmailTemplate,
   type EmailVariables,
 } from "@/data/email-templates";
+import { type DashboardLang } from "@/lib/dashboard-i18n";
+import { DETAIL_STRINGS } from "@/lib/cotizacion-detail-i18n";
 
 interface Props {
   variables: EmailVariables;
   clienteEmail?: string | null;
+  lang?: DashboardLang;
 }
 
 const COLOR_MAP: Record<string, string> = {
@@ -24,12 +27,14 @@ const COLOR_MAP: Record<string, string> = {
   gray: "bg-gray-50 text-gray-700 border-gray-200",
 };
 
-export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
+export function EmailTemplatesModal({ variables, clienteEmail, lang = "es" }: Props) {
+  const t = DETAIL_STRINGS[lang].emailTemplatesModal;
+  const templates = getEmailTemplates(lang);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<EmailTemplate | null>(null);
   const [copiedField, setCopiedField] = useState<"asunto" | "cuerpo" | null>(null);
 
-  const rendered = selected ? renderEmailTemplate(selected, variables) : null;
+  const rendered = selected ? renderEmailTemplate(selected, variables, lang) : null;
 
   async function copyToClipboard(text: string, field: "asunto" | "cuerpo") {
     try {
@@ -59,7 +64,7 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
         className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#3a9bb5]/30 bg-[#3a9bb5]/5 text-[#3a9bb5] rounded-lg text-xs font-medium hover:bg-[#3a9bb5]/10 transition-colors"
       >
         <Mail className="w-3.5 h-3.5" />
-        Email de seguimiento
+        {t.triggerButton}
       </button>
 
       {open && (
@@ -79,10 +84,10 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
               <div>
                 <h2 className="font-bold text-gray-900 flex items-center gap-2">
                   <Mail className="w-5 h-5 text-[#3a9bb5]" />
-                  Plantillas de email de seguimiento
+                  {t.modalTitle}
                 </h2>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  7 emails probados con cadencia de 21 días. Copia o envía directamente.
+                  {t.modalSubtitle}
                 </p>
               </div>
               <button
@@ -99,29 +104,29 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
             <div className="flex-1 overflow-hidden grid md:grid-cols-[320px_1fr]">
               {/* List */}
               <div className="overflow-y-auto border-r border-gray-100 p-3 space-y-2 bg-gray-50">
-                {EMAIL_TEMPLATES.map((t) => (
+                {templates.map((tpl) => (
                   <button
-                    key={t.id}
+                    key={tpl.id}
                     type="button"
-                    onClick={() => setSelected(t)}
+                    onClick={() => setSelected(tpl)}
                     className={`w-full text-left p-3 rounded-xl border transition-all ${
-                      selected?.id === t.id
+                      selected?.id === tpl.id
                         ? "border-[#3a9bb5] bg-white ring-2 ring-[#3a9bb5]/20"
                         : "border-gray-200 bg-white hover:border-gray-300"
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="text-xl">{t.icon}</span>
+                      <span className="text-xl">{tpl.icon}</span>
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
-                          COLOR_MAP[t.color] || COLOR_MAP.gray
+                          COLOR_MAP[tpl.color] || COLOR_MAP.gray
                         }`}
                       >
-                        {t.dia}
+                        {tpl.dia}
                       </span>
                     </div>
-                    <h3 className="font-semibold text-sm text-gray-900">{t.nombre}</h3>
-                    <p className="text-xs text-gray-500 mt-1 line-clamp-2">{t.descripcion}</p>
+                    <h3 className="font-semibold text-sm text-gray-900">{tpl.nombre}</h3>
+                    <p className="text-xs text-gray-500 mt-1 line-clamp-2">{tpl.descripcion}</p>
                   </button>
                 ))}
               </div>
@@ -143,7 +148,7 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
                           <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
-                            Asunto
+                            {t.subject}
                           </label>
                           <button
                             onClick={() => copyToClipboard(rendered.asunto, "asunto")}
@@ -151,11 +156,11 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
                           >
                             {copiedField === "asunto" ? (
                               <>
-                                <Check className="w-3 h-3" /> Copiado
+                                <Check className="w-3 h-3" /> {t.copied}
                               </>
                             ) : (
                               <>
-                                <Copy className="w-3 h-3" /> Copiar
+                                <Copy className="w-3 h-3" /> {t.copy}
                               </>
                             )}
                           </button>
@@ -169,7 +174,7 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
                           <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
-                            Cuerpo del email
+                            {t.emailBody}
                           </label>
                           <button
                             onClick={() => copyToClipboard(rendered.cuerpo, "cuerpo")}
@@ -177,11 +182,11 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
                           >
                             {copiedField === "cuerpo" ? (
                               <>
-                                <Check className="w-3 h-3" /> Copiado
+                                <Check className="w-3 h-3" /> {t.copied}
                               </>
                             ) : (
                               <>
-                                <Copy className="w-3 h-3" /> Copiar
+                                <Copy className="w-3 h-3" /> {t.copy}
                               </>
                             )}
                           </button>
@@ -192,7 +197,7 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
                       </div>
 
                       <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 text-xs text-blue-900">
-                        💡 <strong>Tip:</strong> personaliza el contenido entre corchetes antes de enviarlo para que suene natural.
+                        💡 <strong>{t.tipLabel}</strong> {t.tip}
                       </div>
                     </div>
                   </>
@@ -200,8 +205,8 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
                   <div className="h-full flex items-center justify-center text-sm text-gray-400 text-center">
                     <div>
                       <Mail className="w-10 h-10 mx-auto mb-3 text-gray-300" />
-                      <p>Selecciona una plantilla</p>
-                      <p className="text-xs mt-1">para previsualizarla y copiarla</p>
+                      <p>{t.selectTemplate}</p>
+                      <p className="text-xs mt-1">{t.selectTemplateHint}</p>
                     </div>
                   </div>
                 )}
@@ -211,9 +216,9 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
             {/* Footer */}
             <div className="border-t border-gray-100 px-6 py-4 flex items-center justify-between flex-shrink-0">
               <p className="text-xs text-gray-500">
-                Variables: <code className="bg-gray-100 px-1 rounded">{"{{cliente}}"}</code>{" "}
+                {t.variablesLabel} <code className="bg-gray-100 px-1 rounded">{"{{cliente}}"}</code>{" "}
                 <code className="bg-gray-100 px-1 rounded">{"{{empresa}}"}</code>{" "}
-                <code className="bg-gray-100 px-1 rounded">{"{{numero}}"}</code> — se reemplazan automáticamente.
+                <code className="bg-gray-100 px-1 rounded">{"{{numero}}"}</code> {t.variablesAuto}
               </p>
               <div className="flex items-center gap-2">
                 <button
@@ -224,7 +229,7 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
                   }}
                   className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
                 >
-                  Cerrar
+                  {t.close}
                 </button>
                 <button
                   type="button"
@@ -233,7 +238,7 @@ export function EmailTemplatesModal({ variables, clienteEmail }: Props) {
                   className="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold bg-[#3a9bb5] text-white rounded-lg hover:bg-[#2d7d94] disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <Send className="w-4 h-4" />
-                  Abrir en email
+                  {t.openInEmail}
                 </button>
               </div>
             </div>

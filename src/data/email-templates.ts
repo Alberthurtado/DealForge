@@ -14,7 +14,7 @@ export interface EmailTemplate {
   color: string; // tailwind class suffix
 }
 
-export const EMAIL_TEMPLATES: EmailTemplate[] = [
+const ES_TEMPLATES: EmailTemplate[] = [
   {
     id: "dia-2-seguimiento",
     nombre: "Seguimiento suave",
@@ -158,6 +158,164 @@ Un saludo,
   },
 ];
 
+const EN_TEMPLATES: EmailTemplate[] = [
+  {
+    id: "dia-2-seguimiento",
+    nombre: "Soft follow-up",
+    dia: "Day +2",
+    tipo: "seguimiento",
+    icon: "👋",
+    color: "blue",
+    descripcion: "Short and direct. No pressure. Typical reply rate: 22%.",
+    asunto: "Did you get a chance to review proposal {{numero}}?",
+    cuerpo: `Hi {{cliente}},
+
+Did you get a chance to look over the proposal I sent a couple of days ago?
+
+I'd love to hear your first impressions or any questions that came up — happy to clarify whatever you need.
+
+Best,
+{{empresa}}`,
+  },
+  {
+    id: "dia-5-valor",
+    nombre: "Add value",
+    dia: "Day +5",
+    tipo: "valor",
+    icon: "💡",
+    color: "green",
+    descripcion: "Show expertise without selling. Share a useful resource.",
+    asunto: "Something that might be useful for your project",
+    cuerpo: `Hi {{cliente}},
+
+While you're thinking over our proposal, I wanted to share a real case from a client similar to your company who mentioned challenges much like yours.
+
+I've attached the resource (or link). I think you'll find a few ideas worth applying even if we don't end up working together.
+
+If you have a moment this week, I'd be glad to talk it through on a call.
+
+Best,
+{{empresa}}`,
+  },
+  {
+    id: "dia-8-objecion",
+    nombre: "Pre-empt an objection",
+    dia: "Day +8",
+    tipo: "objecion",
+    icon: "🤔",
+    color: "amber",
+    descripcion: "Get ahead of common doubts. Break the silence naturally.",
+    asunto: "A question that often comes up — {{numero}}",
+    cuerpo: `Hi {{cliente}},
+
+Some clients in your situation ask how we handle [typical objection: support, timelines, customization, etc.]. Let me clear it up in case it's giving you pause:
+
+[Brief answer to the objection]
+
+If there's any other part of the proposal causing friction, just tell me and we'll sort it out before moving forward.
+
+Best,
+{{empresa}}`,
+  },
+  {
+    id: "dia-12-urgencia",
+    nombre: "Genuine urgency",
+    dia: "Day +12",
+    tipo: "urgencia",
+    icon: "⏰",
+    color: "orange",
+    descripcion: "Remind them the offer expires. Real urgency, not manipulative.",
+    asunto: "Offer {{numero}} expires in {{validez}} days",
+    cuerpo: `Hi {{cliente}},
+
+A friendly reminder: the proposal I sent is valid until [date]. After that I'd have to revisit the pricing.
+
+If you'd like to go ahead, just confirm here and I'll send you the next step to sign.
+
+If you need more time, let me know and I'll see whether I can hold the current pricing for you.
+
+Best,
+{{empresa}}`,
+  },
+  {
+    id: "dia-15-proof",
+    nombre: "Social proof",
+    dia: "Day +15",
+    tipo: "proof",
+    icon: "🏆",
+    color: "purple",
+    descripcion: "A recent testimonial or success story to build trust.",
+    asunto: "We just started working with [Similar company]",
+    cuerpo: `Hi {{cliente}},
+
+I'm reaching out because this very week we started working with [Similar company], who had challenges much like yours.
+
+Their case:
+- Starting point: [problem]
+- What we're doing: [solution]
+- Expected results: [metric]
+
+I'm sharing it in case it helps you picture how this would apply to your situation. Shall we move ahead with proposal {{numero}}?
+
+Best,
+{{empresa}}`,
+  },
+  {
+    id: "dia-18-cierre",
+    nombre: "Direct close",
+    dia: "Day +18",
+    tipo: "cierre",
+    icon: "🎯",
+    color: "red",
+    descripcion: "Straight to the point. Forces a decision without pressure. Around 18% reply rate.",
+    asunto: "Shall we move ahead, or should I close proposal {{numero}}?",
+    cuerpo: `Hi {{cliente}},
+
+I don't want to be a pest, but I need to plan my schedule.
+
+Would you like to move ahead with proposal {{numero}}, or should I close it for now?
+
+Either answer works for me — I just need to know so I can plan.
+
+Best,
+{{empresa}}`,
+  },
+  {
+    id: "dia-21-breakup",
+    nombre: "Break-up email",
+    dia: "Day +21",
+    tipo: "breakup",
+    icon: "👋",
+    color: "gray",
+    descripcion: "The paradoxical email. Defuses pressure. 33% reply rate — the highest.",
+    asunto: "I'll assume now isn't the right time",
+    cuerpo: `Hi {{cliente}},
+
+I understand now isn't the right moment to move ahead with proposal {{numero}}.
+
+No problem at all — I'll be here when things change. I'll keep your contact, and if you'd like to pick it back up down the road, just drop me a line.
+
+Wishing you every success with whatever you have on your plate right now.
+
+Best,
+{{empresa}}`,
+  },
+];
+
+export type EmailTemplateLang = "es" | "en";
+
+export const EMAIL_TEMPLATES_BY_LANG: Record<EmailTemplateLang, EmailTemplate[]> = {
+  es: ES_TEMPLATES,
+  en: EN_TEMPLATES,
+};
+
+export function getEmailTemplates(lang: EmailTemplateLang = "es"): EmailTemplate[] {
+  return EMAIL_TEMPLATES_BY_LANG[lang] ?? ES_TEMPLATES;
+}
+
+// Back-compat: default Spanish list
+export const EMAIL_TEMPLATES = ES_TEMPLATES;
+
 // ─── Helper para reemplazar variables ───
 export interface EmailVariables {
   cliente?: string;
@@ -169,14 +327,19 @@ export interface EmailVariables {
 
 export function renderEmailTemplate(
   template: EmailTemplate,
-  vars: EmailVariables
+  vars: EmailVariables,
+  lang: EmailTemplateLang = "es"
 ): { asunto: string; cuerpo: string } {
+  const fallback =
+    lang === "en"
+      ? { cliente: "[client]", empresa: "[your company]", numero: "[number]", total: "[total]" }
+      : { cliente: "[cliente]", empresa: "[tu empresa]", numero: "[número]", total: "[total]" };
   const replace = (text: string) =>
     text
-      .replace(/\{\{cliente\}\}/g, vars.cliente || "[cliente]")
-      .replace(/\{\{empresa\}\}/g, vars.empresa || "[tu empresa]")
-      .replace(/\{\{numero\}\}/g, vars.numero || "[número]")
-      .replace(/\{\{total\}\}/g, vars.total || "[total]")
+      .replace(/\{\{cliente\}\}/g, vars.cliente || fallback.cliente)
+      .replace(/\{\{empresa\}\}/g, vars.empresa || fallback.empresa)
+      .replace(/\{\{numero\}\}/g, vars.numero || fallback.numero)
+      .replace(/\{\{total\}\}/g, vars.total || fallback.total)
       .replace(/\{\{validez\}\}/g, vars.validez || "30");
 
   return {
