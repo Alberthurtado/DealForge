@@ -19,6 +19,7 @@ import { ReglasWarnings } from "@/components/reglas/reglas-warnings";
 import type { ValidationResult } from "@/lib/reglas-engine";
 import { CotizacionTemplatePicker } from "@/components/cotizaciones/cotizacion-template-picker";
 import type { CotizacionTemplate } from "@/data/cotizacion-templates";
+import { DASHBOARD_STRINGS, resolveDashboardLang, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface VarianteInfo {
   id: string;
@@ -58,12 +59,7 @@ interface Props {
   saving?: boolean;
 }
 
-const steps = [
-  { id: 0, title: "Cliente", icon: Users },
-  { id: 1, title: "Productos", icon: Package },
-  { id: 2, title: "Precios", icon: Calculator },
-  { id: 3, title: "Resumen", icon: CheckCircle },
-];
+const STEP_ICONS = [Users, Package, Calculator, CheckCircle];
 
 export function CotizacionWizard({
   preselectedClienteId,
@@ -71,6 +67,16 @@ export function CotizacionWizard({
   saving,
 }: Props) {
   const [step, setStep] = useState(0);
+  const [lang, setLang] = useState<DashboardLang>("es");
+  const [numLocale, setNumLocale] = useState("es-ES");
+  const t = DASHBOARD_STRINGS[lang].wizard;
+  const money = (n: number) => formatCurrency(n, form.moneda, numLocale);
+  const steps = [
+    { id: 0, title: t.stepClient, icon: STEP_ICONS[0] },
+    { id: 1, title: t.stepProducts, icon: STEP_ICONS[1] },
+    { id: 2, title: t.stepPricing, icon: STEP_ICONS[2] },
+    { id: 3, title: t.stepSummary, icon: STEP_ICONS[3] },
+  ];
   const [clientes, setClientes] = useState<
     Array<{
       id: string;
@@ -120,6 +126,18 @@ export function CotizacionWizard({
     fetch("/api/productos").then((r) => r.json()).then(setProductos);
     fetch("/api/empresa").then((r) => r.json()).then((empresa) => {
       empresaRef.current = empresa;
+      // Localize wizard + default currency/VAT from the company.
+      const empLang = resolveDashboardLang(empresa?.locale);
+      setLang(empLang);
+      setNumLocale(empresa?.locale || "es-ES");
+      const country = (empresa?.country || "ES").toUpperCase();
+      const defaultVat = country === "GB" ? 20 : country === "IE" ? 23 : country === "DE" ? 19 : country === "US" ? 0 : 21;
+      setForm((f) => ({
+        ...f,
+        moneda: empresa?.currencyCode || f.moneda,
+        impuesto: defaultVat,
+        incluirIva: defaultVat > 0,
+      }));
     }).catch(() => {});
   }, []);
 
@@ -355,13 +373,13 @@ export function CotizacionWizard({
       {step === 0 && (
         <div className="bg-white rounded-xl border border-border p-6 max-w-2xl mx-auto">
           <h3 className="text-lg font-semibold text-foreground mb-4">
-            Seleccionar Cliente
+            {t.selectClient}
           </h3>
           <div className="relative mb-4">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Buscar cliente..."
+              placeholder={t.searchClient}
               value={clienteSearch}
               onChange={(e) => setClienteSearch(e.target.value)}
               className="w-full pl-9 pr-4 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
@@ -408,12 +426,12 @@ export function CotizacionWizard({
           {selectedCliente && (
             <div className="mt-4">
               <label className="block text-sm font-medium text-foreground mb-1">
-                Contacto
+                {t.contact}
               </label>
               {loadingContacts ? (
                 <div className="flex items-center gap-2 py-2 text-sm text-muted-foreground">
                   <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                  Cargando contactos...
+                  {t.loadingContacts}
                 </div>
               ) : clienteContacts.length > 0 ? (
                 <div className="space-y-2">
@@ -435,15 +453,15 @@ export function CotizacionWizard({
                     }}
                     className={inputClass}
                   >
-                    <option value="">Seleccionar contacto...</option>
+                    <option value="">{t.selectContact}</option>
                     {clienteContacts.map((c) => (
                       <option key={c.id} value={c.nombre}>
                         {c.nombre}
                         {c.cargo ? ` — ${c.cargo}` : ""}
-                        {c.principal ? " (Principal)" : ""}
+                        {c.principal ? t.primary : ""}
                       </option>
                     ))}
-                    <option value="__custom__">✏️ Escribir otro nombre...</option>
+                    <option value="__custom__">{t.writeOther}</option>
                   </select>
                   {/* Show contact details when one is selected */}
                   {form.contactoNombre &&
@@ -453,9 +471,9 @@ export function CotizacionWizard({
                           .filter((c) => c.nombre === form.contactoNombre)
                           .map((c) => (
                             <div key={c.id}>
-                              {c.cargo && <p>Cargo: {c.cargo}</p>}
-                              {c.email && <p>Email: {c.email}</p>}
-                              {c.telefono && <p>Teléfono: {c.telefono}</p>}
+                              {c.cargo && <p>{t.role}: {c.cargo}</p>}
+                              {c.email && <p>{t.email}: {c.email}</p>}
+                              {c.telefono && <p>{t.phone}: {c.telefono}</p>}
                             </div>
                           ))}
                       </div>
@@ -470,7 +488,7 @@ export function CotizacionWizard({
                           setForm((f) => ({ ...f, contactoNombre: e.target.value }))
                         }
                         className={inputClass}
-                        placeholder="Nombre del contacto"
+                        placeholder={t.contactName}
                         autoFocus
                       />
                     )}
@@ -483,7 +501,7 @@ export function CotizacionWizard({
                     setForm((f) => ({ ...f, contactoNombre: e.target.value }))
                   }
                   className={inputClass}
-                  placeholder="Nombre del contacto"
+                  placeholder={t.contactName}
                 />
               )}
             </div>
@@ -498,10 +516,10 @@ export function CotizacionWizard({
           <div className="flex items-center justify-between gap-3 bg-gradient-to-r from-[#3a9bb5]/5 to-[#3a9bb5]/10 border border-[#3a9bb5]/20 rounded-xl px-4 py-3">
             <div>
               <p className="text-sm font-semibold text-gray-900">
-                ¿Prefieres empezar desde una plantilla?
+                {t.templateBannerTitle}
               </p>
               <p className="text-xs text-gray-600 mt-0.5">
-                5 plantillas por sector con líneas, notas y T&amp;C prellenadas — personalizables.
+                {t.templateBannerSub}
               </p>
             </div>
             <CotizacionTemplatePicker onApply={applyTemplate} />
@@ -511,13 +529,13 @@ export function CotizacionWizard({
           {/* Product catalog */}
           <div className="bg-white rounded-xl border border-border p-6">
             <h3 className="text-base font-semibold text-foreground mb-3">
-              Catálogo de Productos
+              {t.productCatalog}
             </h3>
             <div className="relative mb-3">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Buscar producto..."
+                placeholder={t.searchProduct}
                 value={productoSearch}
                 onChange={(e) => setProductoSearch(e.target.value)}
                 className="w-full pl-9 pr-4 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
@@ -546,7 +564,7 @@ export function CotizacionWizard({
                           )}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {p.sku} &middot; {formatCurrency(p.precioBase)}/{p.unidad}
+                          {p.sku} &middot; {money(p.precioBase)}/{p.unidad}
                         </p>
                       </div>
                       <button
@@ -569,7 +587,7 @@ export function CotizacionWizard({
                               <div>
                                 <p className="text-sm font-medium">{v.nombre}</p>
                                 <p className="text-xs text-muted-foreground">
-                                  {v.sku} &middot; {formatCurrency(v.precioOverride ?? p.precioBase)}
+                                  {v.sku} &middot; {money(v.precioOverride ?? p.precioBase)}
                                   {Object.entries(attrs).length > 0 && (
                                     <span className="ml-1">
                                       {Object.entries(attrs).map(([k, val]) => (
@@ -594,7 +612,7 @@ export function CotizacionWizard({
                           onClick={() => addProductoSinVariante(p)}
                           className="w-full py-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
                         >
-                          Agregar sin variante
+                          {t.addWithoutVariant}
                         </button>
                       </div>
                     )}
@@ -605,18 +623,18 @@ export function CotizacionWizard({
               onClick={addCustomLine}
               className="mt-3 w-full py-2 border border-dashed border-border rounded-lg text-sm text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
             >
-              + Agregar línea personalizada
+              {t.addCustomLine}
             </button>
           </div>
 
           {/* Selected items */}
           <div className="bg-white rounded-xl border border-border p-6">
             <h3 className="text-base font-semibold text-foreground mb-3">
-              Items Seleccionados ({form.lineItems.length})
+              {t.selectedItems} ({form.lineItems.length})
             </h3>
             {form.lineItems.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">
-                Agrega productos del catálogo
+                {t.addFromCatalog}
               </p>
             ) : (
               <div className="space-y-3">
@@ -633,7 +651,7 @@ export function CotizacionWizard({
                           updateLineItem(i, "descripcion", e.target.value)
                         }
                         className="text-sm font-medium bg-transparent focus:outline-none flex-1"
-                        placeholder="Descripción"
+                        placeholder={t.description}
                       />
                       <button
                         onClick={() => removeLineItem(i)}
@@ -645,7 +663,7 @@ export function CotizacionWizard({
                     <div className="grid grid-cols-3 gap-2">
                       <div>
                         <label className="text-xs text-muted-foreground">
-                          Cantidad
+                          {t.quantity}
                         </label>
                         <input
                           type="number"
@@ -664,7 +682,7 @@ export function CotizacionWizard({
                       </div>
                       <div>
                         <label className="text-xs text-muted-foreground">
-                          Precio Unit.
+                          {t.unitPrice}
                         </label>
                         <input
                           type="number"
@@ -683,7 +701,7 @@ export function CotizacionWizard({
                       </div>
                       <div>
                         <label className="text-xs text-muted-foreground">
-                          Dto. %
+                          {t.discountPct}
                         </label>
                         <input
                           type="number"
@@ -702,8 +720,8 @@ export function CotizacionWizard({
                       </div>
                     </div>
                     <p className="text-xs text-right text-muted-foreground">
-                      Subtotal:{" "}
-                      {formatCurrency(
+                      {t.subtotal}:{" "}
+                      {money(
                         item.cantidad *
                           item.precioUnitario *
                           (1 - item.descuento / 100)
@@ -722,12 +740,12 @@ export function CotizacionWizard({
       {step === 2 && (
         <div className="bg-white rounded-xl border border-border p-6 max-w-2xl mx-auto">
           <h3 className="text-lg font-semibold text-foreground mb-4">
-            Condiciones de Precio
+            {t.pricingConditions}
           </h3>
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
-                Descuento Global (%)
+                {t.globalDiscount}
               </label>
               <input
                 type="number"
@@ -745,7 +763,7 @@ export function CotizacionWizard({
             </div>
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
-                IVA
+                {t.vat}
               </label>
               <div className="space-y-2">
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -767,7 +785,7 @@ export function CotizacionWizard({
                     />
                   </button>
                   <span className="text-sm text-foreground">
-                    {form.incluirIva ? "Incluir IVA" : "Sin IVA"}
+                    {form.incluirIva ? t.includeVat : t.noVat}
                   </span>
                 </label>
                 {form.incluirIva && (
@@ -793,7 +811,7 @@ export function CotizacionWizard({
             </div>
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
-                Moneda
+                {t.currency}
               </label>
               <select
                 value={form.moneda}
@@ -809,7 +827,7 @@ export function CotizacionWizard({
             </div>
             <div>
               <label className="block text-sm font-medium text-foreground mb-1">
-                Fecha de Vencimiento
+                {t.dueDate}
               </label>
               <input
                 type="date"
@@ -827,7 +845,7 @@ export function CotizacionWizard({
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-foreground mb-1">
-              Notas
+              {t.notes}
             </label>
             <textarea
               value={form.notas}
@@ -836,13 +854,13 @@ export function CotizacionWizard({
               }
               className={inputClass}
               rows={2}
-              placeholder="Notas internas o para el cliente..."
+              placeholder={t.notesPlaceholder}
             />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-1">
-              Términos y Condiciones
+              {t.terms}
             </label>
             <textarea
               value={form.condiciones}
@@ -852,39 +870,39 @@ export function CotizacionWizard({
               }}
               className={inputClass}
               rows={3}
-              placeholder="Condiciones de pago, entrega, validez..."
+              placeholder={t.termsPlaceholder}
             />
           </div>
 
           {/* Price summary */}
           <div className="mt-6 p-4 bg-gray-50 rounded-lg space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Subtotal</span>
-              <span>{formatCurrency(subtotal)}</span>
+              <span className="text-muted-foreground">{t.subtotal}</span>
+              <span>{money(subtotal)}</span>
             </div>
             {form.descuentoGlobal > 0 && (
               <div className="flex justify-between text-sm text-red-600">
-                <span>Descuento ({form.descuentoGlobal}%)</span>
+                <span>{t.discount} ({form.descuentoGlobal}%)</span>
                 <span>
-                  -{formatCurrency(subtotal * (form.descuentoGlobal / 100))}
+                  -{money(subtotal * (form.descuentoGlobal / 100))}
                 </span>
               </div>
             )}
             {form.incluirIva ? (
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">
-                  IVA ({form.impuesto}%)
+                  {t.vat} ({form.impuesto}%)
                 </span>
-                <span>{formatCurrency(impuestoMonto)}</span>
+                <span>{money(impuestoMonto)}</span>
               </div>
             ) : (
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground italic">IVA no incluido</span>
+                <span className="text-muted-foreground italic">{t.vatNotIncluded}</span>
               </div>
             )}
             <div className="flex justify-between text-base font-bold border-t border-border pt-2">
-              <span>Total</span>
-              <span>{formatCurrency(total)}</span>
+              <span>{t.total}</span>
+              <span>{money(total)}</span>
             </div>
           </div>
         </div>
@@ -894,7 +912,7 @@ export function CotizacionWizard({
       {step === 3 && (
         <div className="bg-white rounded-xl border border-border p-6 max-w-3xl mx-auto">
           <h3 className="text-lg font-semibold text-foreground mb-4">
-            Resumen de la Cotización
+            {t.summaryTitle}
           </h3>
           {validationResult && (
             <div className="mb-4">
@@ -941,13 +959,13 @@ export function CotizacionWizard({
           )}
           <div className="space-y-4">
             <div className="p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm text-muted-foreground">Cliente</p>
+              <p className="text-sm text-muted-foreground">{t.client}</p>
               <p className="text-base font-semibold">
                 {selectedCliente?.nombre}
               </p>
               {form.contactoNombre && (
                 <p className="text-sm text-muted-foreground">
-                  Contacto: {form.contactoNombre}
+                  {t.contactColon}: {form.contactoNombre}
                 </p>
               )}
             </div>
@@ -955,11 +973,11 @@ export function CotizacionWizard({
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-2">Descripción</th>
-                  <th className="text-right py-2">Cant.</th>
-                  <th className="text-right py-2">Precio</th>
-                  <th className="text-right py-2">Dto.</th>
-                  <th className="text-right py-2">Total</th>
+                  <th className="text-left py-2">{t.colDescription}</th>
+                  <th className="text-right py-2">{t.colQty}</th>
+                  <th className="text-right py-2">{t.colPrice}</th>
+                  <th className="text-right py-2">{t.colDiscount}</th>
+                  <th className="text-right py-2">{t.colTotal}</th>
                 </tr>
               </thead>
               <tbody>
@@ -973,13 +991,13 @@ export function CotizacionWizard({
                       <td className="py-2">{item.descripcion}</td>
                       <td className="text-right py-2">{item.cantidad}</td>
                       <td className="text-right py-2">
-                        {formatCurrency(item.precioUnitario)}
+                        {money(item.precioUnitario)}
                       </td>
                       <td className="text-right py-2">
                         {item.descuento > 0 ? `${item.descuento}%` : "-"}
                       </td>
                       <td className="text-right py-2 font-medium">
-                        {formatCurrency(lineTotal)}
+                        {money(lineTotal)}
                       </td>
                     </tr>
                   );
@@ -990,29 +1008,29 @@ export function CotizacionWizard({
             <div className="p-4 bg-gray-50 rounded-lg space-y-1">
               <div className="flex justify-between text-sm">
                 <span>Subtotal</span>
-                <span>{formatCurrency(subtotal)}</span>
+                <span>{money(subtotal)}</span>
               </div>
               {form.descuentoGlobal > 0 && (
                 <div className="flex justify-between text-sm text-red-600">
-                  <span>Descuento ({form.descuentoGlobal}%)</span>
+                  <span>{t.discount} ({form.descuentoGlobal}%)</span>
                   <span>
-                    -{formatCurrency(subtotal * (form.descuentoGlobal / 100))}
+                    -{money(subtotal * (form.descuentoGlobal / 100))}
                   </span>
                 </div>
               )}
               {form.incluirIva ? (
                 <div className="flex justify-between text-sm">
-                  <span>IVA ({form.impuesto}%)</span>
-                  <span>{formatCurrency(impuestoMonto)}</span>
+                  <span>{t.vat} ({form.impuesto}%)</span>
+                  <span>{money(impuestoMonto)}</span>
                 </div>
               ) : (
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground italic">IVA no incluido</span>
+                  <span className="text-muted-foreground italic">{t.vatNotIncluded}</span>
                 </div>
               )}
               <div className="flex justify-between text-lg font-bold border-t border-border pt-2 mt-2">
-                <span>Total</span>
-                <span>{formatCurrency(total)}</span>
+                <span>{t.total}</span>
+                <span>{money(total)}</span>
               </div>
             </div>
           </div>
@@ -1027,7 +1045,7 @@ export function CotizacionWizard({
           className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted disabled:opacity-30 transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
-          Anterior
+          {t.previous}
         </button>
 
         {step < 3 ? (
@@ -1036,7 +1054,7 @@ export function CotizacionWizard({
             disabled={!canProceed()}
             className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-30 transition-colors"
           >
-            Siguiente
+            {t.next}
             <ChevronRight className="w-4 h-4" />
           </button>
         ) : (
@@ -1047,10 +1065,10 @@ export function CotizacionWizard({
           >
             <Save className="w-4 h-4" />
             {saving
-              ? "Creando..."
+              ? t.creating
               : validationResult?.aprobacionesRequeridas?.length
-                ? "Crear Cotización (Requiere Aprobación)"
-                : "Crear Cotización"}
+                ? t.createQuoteApproval
+                : t.createQuote}
           </button>
         )}
       </div>
