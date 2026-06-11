@@ -522,7 +522,12 @@ export function CotizacionWizard({
                 {t.templateBannerSub}
               </p>
             </div>
-            <CotizacionTemplatePicker onApply={applyTemplate} />
+            <CotizacionTemplatePicker
+              onApply={applyTemplate}
+              lang={lang}
+              moneda={form.moneda}
+              numLocale={numLocale}
+            />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

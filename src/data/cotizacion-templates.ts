@@ -22,7 +22,9 @@ export interface CotizacionTemplate {
   condiciones: string;
 }
 
-export const COTIZACION_TEMPLATES: CotizacionTemplate[] = [
+export type CotizacionTemplateLang = "es" | "en";
+
+const ES_TEMPLATES: CotizacionTemplate[] = [
   {
     id: "servicios-profesionales",
     nombre: "Servicios profesionales",
@@ -250,3 +252,246 @@ NO EXCLUSIVIDAD: El consultor puede prestar servicios similares a terceros no co
 JURISDICCIÓN: Legislación española. Juzgados de [Tu ciudad].`,
   },
 ];
+
+const EN_TEMPLATES: CotizacionTemplate[] = [
+  {
+    id: "servicios-profesionales",
+    nombre: "Professional services",
+    sector: "Consulting / Freelance",
+    icon: "💼",
+    color: "blue",
+    descripcion:
+      "Phased project with analysis, delivery and handover. Ideal for consultancies and freelancers.",
+    lineItems: [
+      {
+        descripcion: "Phase 1 — Analysis and initial assessment",
+        cantidad: 1,
+        precioUnitario: 1500,
+      },
+      {
+        descripcion: "Phase 2 — Project execution",
+        cantidad: 1,
+        precioUnitario: 4500,
+      },
+      {
+        descripcion: "Phase 3 — Handover, training and support (30 days)",
+        cantidad: 1,
+        precioUnitario: 1000,
+      },
+    ],
+    notas:
+      "The project runs in 3 phases with validation milestones. Timelines start once the proposal is accepted and the deposit is paid.",
+    condiciones: `VALIDITY: This offer is valid for 30 days from the issue date.
+
+PAYMENT: 50% on accepting the proposal and 50% on delivery. Payment by bank transfer within 15 days.
+
+SCOPE: The deliverables are those expressly detailed in this quote. Any change to the scope will require an additional quote.
+
+INTELLECTUAL PROPERTY: Rights to the deliverables transfer to the client upon full payment.
+
+CONFIDENTIALITY: Both parties undertake to keep the information exchanged confidential.
+
+JURISDICTION: Any dispute shall be governed by the laws of [your jurisdiction] and submitted to the courts of [your city].`,
+  },
+  {
+    id: "venta-producto",
+    nombre: "Product sale",
+    sector: "Retail / Distribution",
+    icon: "📦",
+    color: "amber",
+    descripcion:
+      "Physical product order with shipping and warranty. Ideal for companies that distribute goods.",
+    lineItems: [
+      {
+        descripcion: "Product [name] — Reference [SKU]",
+        cantidad: 10,
+        precioUnitario: 150,
+      },
+      {
+        descripcion: "Shipping and logistics",
+        cantidad: 1,
+        precioUnitario: 80,
+      },
+      {
+        descripcion: "Installation / setup (optional)",
+        cantidad: 1,
+        precioUnitario: 200,
+        descuento: 100,
+      },
+    ],
+    notas:
+      "Estimated delivery in 7-10 business days from order confirmation. Prices include standard packaging.",
+    condiciones: `VALIDITY: This offer is valid for 30 days from the issue date. Prices may vary depending on availability.
+
+PAYMENT: Payment by bank transfer within 30 days of delivery. Late payments accrue interest of 8% per year.
+
+DELIVERY: The estimated delivery time is specified in the quote. Shipping costs are not included unless expressly stated.
+
+WARRANTY: 24 months against manufacturing defects. Does not cover damage from misuse or normal wear.
+
+RETURNS: We accept returns within 14 calendar days of delivery, in their original packaging.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+  {
+    id: "saas-suscripcion",
+    nombre: "SaaS / Subscription",
+    sector: "Software / Technology",
+    icon: "☁️",
+    color: "purple",
+    descripcion:
+      "Monthly subscription with initial setup and support. Ideal for SaaS companies and recurring products.",
+    lineItems: [
+      {
+        descripcion: "Initial setup and onboarding",
+        cantidad: 1,
+        precioUnitario: 500,
+      },
+      {
+        descripcion: "Platform license — [name] plan",
+        cantidad: 1,
+        precioUnitario: 99,
+        frecuencia: "MENSUAL",
+      },
+      {
+        descripcion: "24/7 priority support",
+        cantidad: 1,
+        precioUnitario: 49,
+        frecuencia: "MENSUAL",
+      },
+    ],
+    notas:
+      "Setup is a one-off payment. The license and support are billed monthly by direct debit. The contract has a minimum term of 12 months.",
+    condiciones: `TERM: The contract has a minimum term of 12 months from the activation date.
+
+BILLING: Billed on a recurring basis according to the agreed frequency (monthly/annual). The client authorizes automatic charging by direct debit or card.
+
+RENEWAL: Automatic renewal for equal periods unless cancellation notice is given 30 days before expiry.
+
+SERVICE LEVELS (SLA): Guaranteed uptime of 99.5% monthly. Support during business hours (Mon-Fri 9:00-18:00).
+
+UPDATES: All product updates included at no extra cost for the duration of the contract.
+
+DATA: The client retains ownership of their data. The provider acts as data processor in accordance with the GDPR.
+
+CANCELLATION: The client may cancel at any time, effective at the end of the billed period. No refunds are given for partial periods.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+  {
+    id: "agencia-creativa",
+    nombre: "Creative / Marketing agency",
+    sector: "Agencies / Marketing",
+    icon: "🎨",
+    color: "pink",
+    descripcion:
+      "Campaign with research, design and execution. Ideal for marketing agencies and creative studios.",
+    lineItems: [
+      {
+        descripcion: "Market research and strategic definition",
+        cantidad: 1,
+        precioUnitario: 1200,
+      },
+      {
+        descripcion: "Art direction and creative concept",
+        cantidad: 1,
+        precioUnitario: 2000,
+      },
+      {
+        descripcion: "Asset production — [number] deliverables",
+        cantidad: 1,
+        precioUnitario: 3500,
+      },
+      {
+        descripcion: "Campaign management and reporting",
+        cantidad: 1,
+        precioUnitario: 800,
+        frecuencia: "MENSUAL",
+      },
+    ],
+    notas:
+      "Includes 2 rounds of revisions per deliverable. Additional revisions are billed at €60/hour. Usage rights transfer upon full payment.",
+    condiciones: `PHASES AND PAYMENTS
+The project is structured in 3 phases with payment milestones:
+- 30% on accepting the proposal
+- 30% on delivery of the first creative concepts
+- 40% on final delivery after approval
+
+REVISIONS
+Up to 2 rounds of revisions per deliverable are included. Additional revisions will be billed at €60/hour.
+
+ASSIGNMENT OF RIGHTS
+Commercial usage rights transfer to the client only upon full payment. The agency reserves the right to use the work in its portfolio unless expressly agreed otherwise.
+
+CLIENT MATERIALS
+The client warrants that they hold the rights to the materials provided (images, text, trademarks). The agency is released from any liability for their use.
+
+TIMELINES
+Timelines are estimates and depend on the client providing feedback and materials on time.
+
+TERMINATION
+In the event of termination, work completed to date will be billed plus 20% as lost profit.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+  {
+    id: "consultoria-retainer",
+    nombre: "Consulting — Monthly retainer",
+    sector: "Strategic consulting",
+    icon: "🧠",
+    color: "green",
+    descripcion:
+      "Monthly retainer with included hours. Ideal for consultancies with recurring clients.",
+    lineItems: [
+      {
+        descripcion: "Monthly retainer — 20 consulting hours included",
+        cantidad: 1,
+        precioUnitario: 2500,
+        frecuencia: "MENSUAL",
+      },
+      {
+        descripcion: "Additional hour beyond retainer",
+        cantidad: 0,
+        precioUnitario: 150,
+      },
+      {
+        descripcion: "Initial setup and service kick-off",
+        cantidad: 1,
+        precioUnitario: 500,
+      },
+    ],
+    notas:
+      "Minimum commitment of 6 months. Unused hours do not roll over between months. Extra hours are flagged to the client before being billed.",
+    condiciones: `MODEL: Consulting service under a monthly retainer model with X hours of dedication included.
+
+MINIMUM TERM: 6 months with automatic monthly renewal unless 30 days' notice is given.
+
+BILLING: Monthly retainer billed in advance within the first 5 days of the month.
+
+EXTRA HOURS: Hours exceeding those contracted are billed at the agreed rate, with prior notice to the client.
+
+SUPPORT HOURS: Mon-Fri 9:00 to 18:00. Guaranteed response within 24 business hours.
+
+ENHANCED CONFIDENTIALITY: Confidentiality obligation during the term and for 5 years after the service ends.
+
+DELIVERABLES: Reports, analyses and documents produced are the client's property upon payment.
+
+NON-EXCLUSIVITY: The consultant may provide similar services to third parties that are not direct competitors.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+];
+
+export const COTIZACION_TEMPLATES_BY_LANG: Record<CotizacionTemplateLang, CotizacionTemplate[]> = {
+  es: ES_TEMPLATES,
+  en: EN_TEMPLATES,
+};
+
+export function getCotizacionTemplates(
+  lang: CotizacionTemplateLang = "es"
+): CotizacionTemplate[] {
+  return COTIZACION_TEMPLATES_BY_LANG[lang] ?? ES_TEMPLATES;
+}
+
+// Back-compat: default Spanish list
+export const COTIZACION_TEMPLATES = ES_TEMPLATES;
