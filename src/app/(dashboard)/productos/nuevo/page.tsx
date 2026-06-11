@@ -5,9 +5,13 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { ProductoForm } from "@/components/productos/producto-form";
 import { UpgradeBanner } from "@/components/layout/upgrade-banner";
+import { DASHBOARD_STRINGS } from "@/lib/dashboard-i18n";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
 
 export default function NuevoProductoPage() {
   const router = useRouter();
+  const { lang } = useEmpresaLocale();
+  const t = DASHBOARD_STRINGS[lang].products;
   const [saving, setSaving] = useState(false);
   const [categorias, setCategorias] = useState<Array<{ id: string; nombre: string }>>([]);
   const [limitError, setLimitError] = useState<{
@@ -47,15 +51,15 @@ export default function NuevoProductoPage() {
   return (
     <div>
       <PageHeader
-        title="Nuevo Producto"
+        title={t.newProduct}
         breadcrumbs={[
-          { label: "Productos", href: "/productos" },
-          { label: "Nuevo" },
+          { label: t.title, href: "/productos" },
+          { label: t.newBreadcrumb },
         ]}
       />
       {limitError && (
         <UpgradeBanner
-          resource="productos"
+          resource={t.upgradeResource}
           current={limitError.current}
           limit={limitError.limit}
           plan="Starter"
@@ -67,6 +71,7 @@ export default function NuevoProductoPage() {
           onCategoriasChange={setCategorias}
           onSubmit={handleSubmit}
           saving={saving}
+          lang={lang}
         />
       </div>
     </div>

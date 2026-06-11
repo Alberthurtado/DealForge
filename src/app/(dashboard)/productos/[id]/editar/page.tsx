@@ -4,10 +4,14 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { ProductoForm } from "@/components/productos/producto-form";
+import { DASHBOARD_STRINGS } from "@/lib/dashboard-i18n";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
 
 export default function EditarProductoPage() {
   const router = useRouter();
   const params = useParams();
+  const { lang } = useEmpresaLocale();
+  const t = DASHBOARD_STRINGS[lang].products;
   const [producto, setProducto] = useState<Record<string, unknown> | null>(null);
   const [categorias, setCategorias] = useState<Array<{ id: string; nombre: string }>>([]);
   const [saving, setSaving] = useState(false);
@@ -51,10 +55,10 @@ export default function EditarProductoPage() {
   return (
     <div>
       <PageHeader
-        title="Editar Producto"
+        title={t.editProduct}
         breadcrumbs={[
-          { label: "Productos", href: "/productos" },
-          { label: "Editar" },
+          { label: t.title, href: "/productos" },
+          { label: t.editBreadcrumb },
         ]}
       />
       <div className="p-6 max-w-2xl">
@@ -64,6 +68,7 @@ export default function EditarProductoPage() {
           onCategoriasChange={setCategorias}
           onSubmit={handleSubmit}
           saving={saving}
+          lang={lang}
         />
       </div>
     </div>
