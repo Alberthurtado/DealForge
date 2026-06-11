@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: "Catálogo de productos y precios.",
 };
 import { ProductoTable } from "@/components/productos/producto-table";
+import { DASHBOARD_STRINGS, resolveDashboardLang } from "@/lib/dashboard-i18n";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
@@ -39,6 +40,19 @@ async function getData(session: { userId: string; empresaId?: string | null }) {
 export default async function ProductosPage() {
   const session = await getSession();
   if (!session) return null;
+
+  // Company language/currency for display
+  const empresaCfg = session.empresaId
+    ? await prisma.empresa.findUnique({
+        where: { id: session.empresaId },
+        select: { locale: true, currencyCode: true },
+      })
+    : null;
+  const lang = resolveDashboardLang(empresaCfg?.locale);
+  const currency = empresaCfg?.currencyCode || "EUR";
+  const locale = empresaCfg?.locale || "es-ES";
+  const t = DASHBOARD_STRINGS[lang].products;
+
   const { productos, categorias } = await getData(session);
   const plan = session?.plan || "starter";
   const limits = getPlanLimits(plan);
@@ -49,15 +63,15 @@ export default async function ProductosPage() {
   return (
     <div>
       <PageHeader
-        title="Productos"
-        description={`Catálogo de productos y servicios${limits.productos > 0 ? ` (${totalProductos}/${limits.productos})` : ""}`}
+        title={t.title}
+        description={`${t.description}${limits.productos > 0 ? ` (${totalProductos}/${limits.productos})` : ""}`}
         actions={
           limitReached ? (
             <Link
               href="/configuracion"
               className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg text-sm font-medium hover:bg-amber-700 transition-colors"
             >
-              Mejorar plan
+              {t.upgradePlan}
             </Link>
           ) : (
             <Link
@@ -65,14 +79,14 @@ export default async function ProductosPage() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               <Plus className="w-4 h-4" />
-              Nuevo Producto
+              {t.newProduct}
             </Link>
           )
         }
       />
       {limitReached && (
         <UpgradeBanner
-          resource="productos"
+          resource={t.upgradeResource}
           current={totalProductos}
           limit={limits.productos}
           plan={planLabel}
@@ -83,6 +97,9 @@ export default async function ProductosPage() {
           productos={JSON.parse(JSON.stringify(productos))}
           categorias={JSON.parse(JSON.stringify(categorias))}
           maxVisible={limits.productos > 0 ? limits.productos : undefined}
+          lang={lang}
+          currency={currency}
+          locale={locale}
         />
       </div>
     </div>

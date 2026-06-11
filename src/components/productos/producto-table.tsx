@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Search, Package, Pencil, Lock } from "lucide-react";
 import { EmptyState } from "@/components/ui/empty-state";
 import { formatCurrency } from "@/lib/utils";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface Producto {
   id: string;
@@ -27,11 +28,18 @@ export function ProductoTable({
   productos,
   categorias,
   maxVisible,
+  lang = "es",
+  currency = "EUR",
+  locale = "es-ES",
 }: {
   productos: Producto[];
   categorias: Categoria[];
   maxVisible?: number;
+  lang?: DashboardLang;
+  currency?: string;
+  locale?: string;
 }) {
+  const t = DASHBOARD_STRINGS[lang].products;
   const [search, setSearch] = useState("");
   const [categoriaFilter, setCategoriaFilter] = useState("");
 
@@ -51,7 +59,7 @@ export function ProductoTable({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Buscar por nombre o SKU..."
+            placeholder={t.searchPlaceholder}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-4 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
@@ -62,7 +70,7 @@ export function ProductoTable({
           onChange={(e) => setCategoriaFilter(e.target.value)}
           className="px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white"
         >
-          <option value="">Todas las categorías</option>
+          <option value="">{t.allCategories}</option>
           {categorias.map((c) => (
             <option key={c.id} value={c.id}>
               {c.nombre}
@@ -76,25 +84,25 @@ export function ProductoTable({
           <thead>
             <tr className="border-b border-border bg-gray-50/50">
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Producto
+                {t.colProduct}
               </th>
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 SKU
               </th>
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Categoría
+                {t.colCategory}
               </th>
               <th className="text-right px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Precio Base
+                {t.colBasePrice}
               </th>
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Unidad
+                {t.colUnit}
               </th>
               <th className="text-center px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Estado
+                {t.colStatus}
               </th>
               <th className="text-center px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Acciones
+                {t.colActions}
               </th>
             </tr>
           </thead>
@@ -153,7 +161,7 @@ export function ProductoTable({
                     )}
                   </td>
                   <td className="px-4 py-3 text-right text-sm font-medium text-foreground">
-                    {formatCurrency(producto.precioBase)}
+                    {formatCurrency(producto.precioBase, currency, locale)}
                   </td>
                   <td className="px-4 py-3 text-sm text-muted-foreground">
                     {producto.unidad}
@@ -166,7 +174,7 @@ export function ProductoTable({
                           : "bg-gray-100 text-gray-500"
                       }`}
                     >
-                      {producto.activo ? "Activo" : "Inactivo"}
+                      {producto.activo ? t.active : t.inactive}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-center">
@@ -191,8 +199,8 @@ export function ProductoTable({
                 <td colSpan={7}>
                   <EmptyState
                     variant="search"
-                    title="Sin resultados"
-                    description="No se encontraron productos con ese criterio de búsqueda."
+                    title={t.emptyTitle}
+                    description={t.emptyDescription}
                   />
                 </td>
               </tr>
@@ -204,9 +212,9 @@ export function ProductoTable({
                     <p className="text-xs text-muted-foreground">
                       <Lock className="w-3 h-3 inline mr-1" />
                       <a href="/configuracion" className="text-primary hover:underline font-medium">
-                        Mejora tu plan
+                        {t.upgradeYourPlan}
                       </a>{" "}
-                      para acceder a todos tus productos
+                      {t.toAccessAll}
                     </p>
                   </div>
                 </td>

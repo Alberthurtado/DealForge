@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: "Listado y gestión de clientes.",
 };
 import { ClienteTable } from "@/components/clientes/cliente-table";
+import { DASHBOARD_STRINGS, resolveDashboardLang } from "@/lib/dashboard-i18n";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
@@ -30,6 +31,19 @@ async function getClientes(userId: string) {
 export default async function ClientesPage() {
   const session = await getSession();
   if (!session) return null;
+
+  // Company language/currency for display
+  const empresa = session.empresaId
+    ? await prisma.empresa.findUnique({
+        where: { id: session.empresaId },
+        select: { locale: true, currencyCode: true },
+      })
+    : null;
+  const lang = resolveDashboardLang(empresa?.locale);
+  const currency = empresa?.currencyCode || "EUR";
+  const locale = empresa?.locale || "es-ES";
+  const t = DASHBOARD_STRINGS[lang].clients;
+
   const clientes = await getClientes(session.userId);
   const plan = session?.plan || "starter";
   const limits = getPlanLimits(plan);
@@ -56,15 +70,15 @@ export default async function ClientesPage() {
   return (
     <div>
       <PageHeader
-        title="Clientes"
-        description={`Gestiona tu cartera de clientes${limits.clientes > 0 ? ` (${totalClientes}/${limits.clientes})` : ""}`}
+        title={t.title}
+        description={`${t.description}${limits.clientes > 0 ? ` (${totalClientes}/${limits.clientes})` : ""}`}
         actions={
           limitReached ? (
             <Link
               href="/configuracion"
               className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg text-sm font-medium hover:bg-amber-700 transition-colors"
             >
-              Mejorar plan
+              {t.upgradePlan}
             </Link>
           ) : (
             <Link
@@ -72,14 +86,14 @@ export default async function ClientesPage() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               <Plus className="w-4 h-4" />
-              Nuevo Cliente
+              {t.newClient}
             </Link>
           )
         }
       />
       {limitReached && (
         <UpgradeBanner
-          resource="clientes"
+          resource={t.upgradeResource}
           current={totalClientes}
           limit={limits.clientes}
           plan={planLabel}
@@ -89,6 +103,9 @@ export default async function ClientesPage() {
         <ClienteTable
           clientes={clientesWithStats}
           maxVisible={limits.clientes > 0 ? limits.clientes : undefined}
+          lang={lang}
+          currency={currency}
+          locale={locale}
         />
       </div>
     </div>

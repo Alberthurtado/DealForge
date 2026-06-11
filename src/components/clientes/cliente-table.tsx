@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Search, Building2, ArrowUpDown, Lock } from "lucide-react";
 import { EmptyState } from "@/components/ui/empty-state";
 import { formatCurrency } from "@/lib/utils";
+import { DASHBOARD_STRINGS, type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface ClienteRow {
   id: string;
@@ -21,10 +22,17 @@ interface ClienteRow {
 export function ClienteTable({
   clientes,
   maxVisible,
+  lang = "es",
+  currency = "EUR",
+  locale = "es-ES",
 }: {
   clientes: ClienteRow[];
   maxVisible?: number;
+  lang?: DashboardLang;
+  currency?: string;
+  locale?: string;
 }) {
+  const t = DASHBOARD_STRINGS[lang].clients;
   const [search, setSearch] = useState("");
   const [sectorFilter, setSectorFilter] = useState("");
 
@@ -50,7 +58,7 @@ export function ClienteTable({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Buscar por nombre, contacto, email o ciudad..."
+            placeholder={t.searchPlaceholder}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-4 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
@@ -61,7 +69,7 @@ export function ClienteTable({
           onChange={(e) => setSectorFilter(e.target.value)}
           className="px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white"
         >
-          <option value="">Todos los sectores</option>
+          <option value="">{t.allSectors}</option>
           {sectores.map((s) => (
             <option key={s} value={s!}>
               {s}
@@ -76,22 +84,22 @@ export function ClienteTable({
           <thead>
             <tr className="border-b border-border bg-gray-50/50">
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Cliente
+                {t.colClient}
               </th>
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Contacto
+                {t.colContact}
               </th>
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Sector
+                {t.colSector}
               </th>
               <th className="text-left px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Ciudad
+                {t.colCity}
               </th>
               <th className="text-center px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Cotizaciones
+                {t.colQuotes}
               </th>
               <th className="text-right px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Ingresos
+                {t.colRevenue}
               </th>
             </tr>
           </thead>
@@ -159,7 +167,7 @@ export function ClienteTable({
                     {cliente.totalCotizaciones}
                   </td>
                   <td className="px-4 py-3 text-right text-sm font-medium text-foreground">
-                    {formatCurrency(cliente.totalIngresos)}
+                    {formatCurrency(cliente.totalIngresos, currency, locale)}
                   </td>
                 </tr>
               );
@@ -169,8 +177,8 @@ export function ClienteTable({
                 <td colSpan={6}>
                   <EmptyState
                     variant="search"
-                    title="Sin resultados"
-                    description="No se encontraron clientes con ese criterio de búsqueda."
+                    title={t.emptyTitle}
+                    description={t.emptyDescription}
                   />
                 </td>
               </tr>
@@ -182,9 +190,9 @@ export function ClienteTable({
                     <p className="text-xs text-muted-foreground">
                       <Lock className="w-3 h-3 inline mr-1" />
                       <a href="/configuracion" className="text-primary hover:underline font-medium">
-                        Mejora tu plan
+                        {t.upgradeYourPlan}
                       </a>{" "}
-                      para acceder a todos tus clientes
+                      {t.toAccessAll}
                     </p>
                   </div>
                 </td>
