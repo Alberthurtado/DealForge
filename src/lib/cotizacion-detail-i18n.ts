@@ -116,6 +116,69 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
   subject: string;
   message: string;
   pdfAttached: (numero: string) => string;
+  activityHistory: string;
+  noActivity: string;
+  lineItemsEditor: {
+    itemDescPlaceholder: string;
+    quantity: string;
+    price: string;
+    discountPct: string;
+    frequency: string;
+    subtotal: string;
+    removeLine: string;
+    emptyItems: string;
+    openCatalog: string;
+    closeCatalog: string;
+    customLine: string;
+    searchProduct: string;
+    addWithoutVariant: string;
+    noProductsFound: string;
+    discount: string;
+    vat: string;
+    breakdownByType: string;
+    oneTimeTotal: string;
+    recurringTotal: string;
+    perMonth: string;
+    total: string;
+    cancel: string;
+    saveItems: string;
+    saving: string;
+    freqNone: string;
+    freqMonthly: string;
+    freqQuarterly: string;
+    freqAnnual: string;
+    freqMonthlyShort: string;
+    freqQuarterlyShort: string;
+    freqAnnualShort: string;
+  };
+  firmaPanel: {
+    title: string;
+    signed: string;
+    subtitle: string;
+    requestSignature: string;
+    emptyTitle: string;
+    emptyDesc: string;
+    signedOn: (date: string) => string;
+    pending: string;
+    copyLink: string;
+    copyLinkTitle: string;
+    dialogTitle: string;
+    signer: string;
+    changeSigner: string;
+    useMainContact: string;
+    signerName: string;
+    signerEmail: string;
+    namePlaceholder: string;
+    emailPlaceholder: string;
+    cancel: string;
+    send: string;
+    sending: string;
+    requestSent: string;
+    errRequest: string;
+    errConnection: string;
+    linkCopied: string;
+    errCopy: string;
+  };
 }> = {
   es: {
     errChangeStatus: "Error al cambiar el estado",
@@ -222,6 +285,34 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
     subject: "Asunto",
     message: "Mensaje",
     pdfAttached: (n) => `Se adjuntará el PDF de la cotización ${n} automáticamente`,
+    activityHistory: "Historial de Actividad",
+    noActivity: "No hay actividad registrada",
+    lineItemsEditor: {
+      itemDescPlaceholder: "Descripción del item", quantity: "Cantidad", price: "Precio", discountPct: "Dto. %",
+      frequency: "Frecuencia", subtotal: "Subtotal", removeLine: "Eliminar",
+      emptyItems: "No hay items. Agrega productos del catálogo o líneas personalizadas.",
+      openCatalog: "Añadir del catálogo", closeCatalog: "Cerrar catálogo", customLine: "Línea personalizada",
+      searchProduct: "Buscar producto...", addWithoutVariant: "Agregar sin variante", noProductsFound: "No se encontraron productos",
+      discount: "Descuento", vat: "IVA", breakdownByType: "Desglose por tipo", oneTimeTotal: "Total único",
+      recurringTotal: "Total recurrente", perMonth: "/mes", total: "Total", cancel: "Cancelar",
+      saveItems: "Guardar Items", saving: "Guardando...",
+      freqNone: "—", freqMonthly: "Mensual", freqQuarterly: "Trimestral", freqAnnual: "Anual",
+      freqMonthlyShort: "/mes", freqQuarterlyShort: "/trim", freqAnnualShort: "/año",
+    },
+    firmaPanel: {
+      title: "Firma Electrónica", signed: "Documento firmado", subtitle: "Solicita la firma digital del cliente",
+      requestSignature: "Solicitar firma",
+      emptyTitle: "Envía una solicitud de firma al cliente para cerrar el acuerdo.",
+      emptyDesc: "El cliente recibirá un enlace seguro para firmar digitalmente. La cotización se marcará como Ganada automáticamente.",
+      signedOn: (date) => `Firmada el ${date}`, pending: "Pendiente", copyLink: "Copiar enlace",
+      copyLinkTitle: "Copiar enlace de firma", dialogTitle: "Solicitar Firma", signer: "Firmante",
+      changeSigner: "Cambiar firmante", useMainContact: "Usar contacto principal",
+      signerName: "Nombre del firmante", signerEmail: "Email del firmante",
+      namePlaceholder: "Juan Pérez", emailPlaceholder: "juan@empresa.com",
+      cancel: "Cancelar", send: "Enviar solicitud", sending: "Enviando...",
+      requestSent: "Solicitud de firma enviada", errRequest: "Error al solicitar firma",
+      errConnection: "Error de conexión", linkCopied: "Enlace de firma copiado", errCopy: "No se pudo copiar",
+    },
   },
   en: {
     errChangeStatus: "Couldn't change the status",
@@ -328,5 +419,33 @@ export const DETAIL_STRINGS: Record<DashboardLang, {
     subject: "Subject",
     message: "Message",
     pdfAttached: (n) => `The PDF of quote ${n} will be attached automatically`,
+    activityHistory: "Activity History",
+    noActivity: "No activity recorded",
+    lineItemsEditor: {
+      itemDescPlaceholder: "Item description", quantity: "Quantity", price: "Price", discountPct: "Disc. %",
+      frequency: "Frequency", subtotal: "Subtotal", removeLine: "Remove",
+      emptyItems: "No items. Add products from the catalog or custom lines.",
+      openCatalog: "Add from catalog", closeCatalog: "Close catalog", customLine: "Custom line",
+      searchProduct: "Search product...", addWithoutVariant: "Add without variant", noProductsFound: "No products found",
+      discount: "Discount", vat: "VAT", breakdownByType: "Breakdown by type", oneTimeTotal: "One-time total",
+      recurringTotal: "Recurring total", perMonth: "/mo", total: "Total", cancel: "Cancel",
+      saveItems: "Save items", saving: "Saving...",
+      freqNone: "—", freqMonthly: "Monthly", freqQuarterly: "Quarterly", freqAnnual: "Annual",
+      freqMonthlyShort: "/mo", freqQuarterlyShort: "/qtr", freqAnnualShort: "/yr",
+    },
+    firmaPanel: {
+      title: "Electronic Signature", signed: "Document signed", subtitle: "Request the client's digital signature",
+      requestSignature: "Request signature",
+      emptyTitle: "Send a signature request to the client to close the deal.",
+      emptyDesc: "The client will receive a secure link to sign digitally. The quote will be marked as Won automatically.",
+      signedOn: (date) => `Signed on ${date}`, pending: "Pending", copyLink: "Copy link",
+      copyLinkTitle: "Copy signing link", dialogTitle: "Request Signature", signer: "Signer",
+      changeSigner: "Change signer", useMainContact: "Use main contact",
+      signerName: "Signer name", signerEmail: "Signer email",
+      namePlaceholder: "John Doe", emailPlaceholder: "john@company.com",
+      cancel: "Cancel", send: "Send request", sending: "Sending...",
+      requestSent: "Signature request sent", errRequest: "Couldn't request signature",
+      errConnection: "Connection error", linkCopied: "Signing link copied", errCopy: "Couldn't copy",
+    },
   },
 };

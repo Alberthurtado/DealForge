@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { PenTool, Check, Clock, Send, Link as LinkIcon, Loader2, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useToast } from "@/components/ui/toast";
 import { formatDate } from "@/lib/utils";
+import { type DashboardLang } from "@/lib/dashboard-i18n";
+import { DETAIL_STRINGS } from "@/lib/cotizacion-detail-i18n";
 
 interface FirmaData {
   id: string;
@@ -25,10 +27,13 @@ interface Props {
   canRequest: boolean;
   onUpdate: () => void;
   defaultContact?: ContactData | null;
+  lang?: DashboardLang;
+  locale?: string;
 }
 
-export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, defaultContact }: Props) {
+export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, defaultContact, lang = "es", locale = "es-ES" }: Props) {
   const { success, error: showError } = useToast();
+  const t = DETAIL_STRINGS[lang].firmaPanel;
   const [dialogOpen, setDialogOpen] = useState(false);
   const [signerName, setSignerName] = useState("");
   const [signerEmail, setSignerEmail] = useState("");
@@ -54,17 +59,17 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
         body: JSON.stringify({ signerName: signerName.trim(), signerEmail: signerEmail.trim() }),
       });
       if (res.ok) {
-        success("Solicitud de firma enviada");
+        success(t.requestSent);
         setDialogOpen(false);
         setSignerName("");
         setSignerEmail("");
         onUpdate();
       } else {
         const data = await res.json().catch(() => null);
-        showError(data?.error || "Error al solicitar firma");
+        showError(data?.error || t.errRequest);
       }
     } catch {
-      showError("Error de conexión");
+      showError(t.errConnection);
     } finally {
       setSending(false);
     }
@@ -73,8 +78,8 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
   function copySignLink(token: string) {
     const url = `${window.location.origin}/firmar/${token}`;
     navigator.clipboard.writeText(url).then(
-      () => success("Enlace de firma copiado"),
-      () => showError("No se pudo copiar")
+      () => success(t.linkCopied),
+      () => showError(t.errCopy)
     );
   }
 
@@ -92,9 +97,9 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
               <PenTool className={`w-4 h-4 ${hasSigned ? "text-green-600" : "text-primary"}`} />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-foreground">Firma Electrónica</h3>
+              <h3 className="text-sm font-semibold text-foreground">{t.title}</h3>
               <p className="text-[11px] text-muted-foreground">
-                {hasSigned ? "Documento firmado" : "Solicita la firma digital del cliente"}
+                {hasSigned ? t.signed : t.subtitle}
               </p>
             </div>
           </div>
@@ -104,7 +109,7 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
             >
               <Send className="w-3.5 h-3.5" />
-              Solicitar firma
+              {t.requestSignature}
             </button>
           )}
         </div>
@@ -115,10 +120,10 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
         {firmas.length === 0 ? (
           <div className="text-center py-3">
             <p className="text-xs text-muted-foreground mb-1">
-              Envía una solicitud de firma al cliente para cerrar el acuerdo.
+              {t.emptyTitle}
             </p>
             <p className="text-[11px] text-muted-foreground/70">
-              El cliente recibirá un enlace seguro para firmar digitalmente. La cotización se marcará como Ganada automáticamente.
+              {t.emptyDesc}
             </p>
           </div>
         ) : (
@@ -131,7 +136,7 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-green-800 truncate">{f.signerName}</p>
                   <p className="text-[11px] text-green-600">
-                    Firmada el {formatDate(f.signedAt!)}
+                    {t.signedOn(formatDate(f.signedAt!, locale))}
                   </p>
                 </div>
               </div>
@@ -148,17 +153,17 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
                     <p className="text-[10px] text-amber-600">{f.signerEmail}</p>
                   </div>
                   <span className="text-[10px] font-semibold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full shrink-0">
-                    Pendiente
+                    {t.pending}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5 mt-2 ml-9">
                   <button
                     onClick={() => copySignLink(f.token)}
                     className="inline-flex items-center gap-0.5 text-[10px] text-primary hover:text-primary/80 transition-colors"
-                    title="Copiar enlace de firma"
+                    title={t.copyLinkTitle}
                   >
                     <LinkIcon className="w-3 h-3" />
-                    Copiar enlace
+                    {t.copyLink}
                   </button>
                 </div>
               </div>
@@ -174,7 +179,7 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
             <div className="flex items-center justify-between px-5 py-3 border-b border-border">
               <h4 className="text-sm font-semibold flex items-center gap-2">
                 <PenTool className="w-4 h-4 text-primary" />
-                Solicitar Firma
+                {t.dialogTitle}
               </h4>
               <button onClick={() => setDialogOpen(false)} className="text-muted-foreground hover:text-foreground">
                 <X className="w-4 h-4" />
@@ -184,7 +189,7 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
               {/* Pre-filled contact info */}
               {defaultContact && !showCustomContact ? (
                 <div className="bg-slate-50 rounded-lg p-3 border border-slate-200">
-                  <p className="text-[11px] text-muted-foreground mb-1.5 uppercase tracking-wider font-medium">Firmante</p>
+                  <p className="text-[11px] text-muted-foreground mb-1.5 uppercase tracking-wider font-medium">{t.signer}</p>
                   <p className="text-sm font-medium text-foreground">{signerName}</p>
                   <p className="text-xs text-muted-foreground">{signerEmail}</p>
                   <button
@@ -193,7 +198,7 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
                     className="inline-flex items-center gap-1 mt-2 text-[11px] text-primary hover:text-primary/80 font-medium"
                   >
                     <ChevronDown className="w-3 h-3" />
-                    Cambiar firmante
+                    {t.changeSigner}
                   </button>
                 </div>
               ) : (
@@ -209,31 +214,31 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
                       className="inline-flex items-center gap-1 text-[11px] text-primary hover:text-primary/80 font-medium"
                     >
                       <ChevronUp className="w-3 h-3" />
-                      Usar contacto principal
+                      {t.useMainContact}
                     </button>
                   )}
                   <div>
                     <label className="block text-xs font-medium text-muted-foreground mb-1">
-                      Nombre del firmante
+                      {t.signerName}
                     </label>
                     <input
                       type="text"
                       value={signerName}
                       onChange={(e) => setSignerName(e.target.value)}
                       className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white"
-                      placeholder="Juan Pérez"
+                      placeholder={t.namePlaceholder}
                     />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-muted-foreground mb-1">
-                      Email del firmante
+                      {t.signerEmail}
                     </label>
                     <input
                       type="email"
                       value={signerEmail}
                       onChange={(e) => setSignerEmail(e.target.value)}
                       className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white"
-                      placeholder="juan@empresa.com"
+                      placeholder={t.emailPlaceholder}
                     />
                   </div>
                 </>
@@ -244,7 +249,7 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
                 onClick={() => setDialogOpen(false)}
                 className="px-3 py-1.5 text-xs font-medium border border-border rounded-lg hover:bg-muted transition-colors"
               >
-                Cancelar
+                {t.cancel}
               </button>
               <button
                 onClick={handleRequest}
@@ -252,7 +257,7 @@ export function FirmaPanel({ cotizacionId, firmas, canRequest, onUpdate, default
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50"
               >
                 {sending ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
-                {sending ? "Enviando..." : "Enviar solicitud"}
+                {sending ? t.sending : t.send}
               </button>
             </div>
           </div>

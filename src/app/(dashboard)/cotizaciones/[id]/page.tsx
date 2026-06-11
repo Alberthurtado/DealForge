@@ -997,6 +997,7 @@ export default function CotizacionDetailPage() {
                   onSave={saveLineItems}
                   onCancel={() => setEditingLineItems(false)}
                   saving={savingLineItems}
+                  lang={lang}
                 />
               ) : (
               <>
@@ -1186,7 +1187,7 @@ export default function CotizacionDetailPage() {
 
           {/* Sidebar - Timeline + Approvals */}
           <div className="space-y-6">
-            <CotizacionTimeline actividades={cotizacion.actividades} />
+            <CotizacionTimeline actividades={cotizacion.actividades} lang={lang} locale={numLocale} />
             {planFeatures?.aprobaciones === false ? (
               <div className="rounded-xl border border-purple-200 bg-purple-50 p-4 text-center">
                 <Lock className="w-5 h-5 text-purple-500 mx-auto mb-2" />
@@ -1236,6 +1237,8 @@ export default function CotizacionDetailPage() {
                     email: principal?.email || cotizacion.cliente.email || null,
                   };
                 })()}
+                lang={lang}
+                locale={numLocale}
               />
             )}
             {/* Version history */}

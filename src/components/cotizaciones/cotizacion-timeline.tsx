@@ -12,6 +12,8 @@ import {
   PenTool,
   GitBranch,
 } from "lucide-react";
+import { type DashboardLang } from "@/lib/dashboard-i18n";
+import { DETAIL_STRINGS } from "@/lib/cotizacion-detail-i18n";
 
 interface Actividad {
   id: string;
@@ -37,13 +39,18 @@ const iconConfig: Record<string, { icon: typeof FileText; color: string }> = {
 
 export function CotizacionTimeline({
   actividades,
+  lang = "es",
+  locale = "es-ES",
 }: {
   actividades: Actividad[];
+  lang?: DashboardLang;
+  locale?: string;
 }) {
+  const t = DETAIL_STRINGS[lang];
   return (
     <div className="bg-white rounded-xl border border-border p-6">
       <h3 className="text-base font-semibold text-foreground mb-4">
-        Historial de Actividad
+        {t.activityHistory}
       </h3>
       <div className="relative">
         {/* Timeline line */}
@@ -65,7 +72,7 @@ export function CotizacionTimeline({
                     {act.descripcion}
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {formatDate(act.createdAt)}
+                    {formatDate(act.createdAt, locale)}
                   </p>
                 </div>
               </div>
@@ -75,7 +82,7 @@ export function CotizacionTimeline({
       </div>
       {actividades.length === 0 && (
         <p className="text-sm text-muted-foreground text-center py-4">
-          No hay actividad registrada
+          {t.noActivity}
         </p>
       )}
     </div>
