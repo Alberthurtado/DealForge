@@ -17,31 +17,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: baseUrl,
       lastModified: new Date("2026-03-18"),
+      alternates: { languages: { "es-ES": baseUrl, "en-US": `${baseUrl}/en` } },
     },
-    // English (en) marketing pages
+    // English (en) marketing pages — paired with their Spanish counterparts via hreflang
     {
       url: `${baseUrl}/en`,
       lastModified: new Date("2026-06-10"),
+      alternates: { languages: { "es-ES": baseUrl, "en-US": `${baseUrl}/en` } },
     },
     {
       url: `${baseUrl}/en/pricing`,
       lastModified: new Date("2026-06-10"),
+      alternates: { languages: { "es-ES": `${baseUrl}/precios`, "en-US": `${baseUrl}/en/pricing` } },
     },
     {
       url: `${baseUrl}/en/what-is-cpq`,
       lastModified: new Date("2026-06-10"),
+      alternates: { languages: { "es-ES": `${baseUrl}/que-es-cpq`, "en-US": `${baseUrl}/en/what-is-cpq` } },
     },
     {
       url: `${baseUrl}/en/features`,
       lastModified: new Date("2026-06-10"),
+      alternates: { languages: { "es-ES": `${baseUrl}/funcionalidades`, "en-US": `${baseUrl}/en/features` } },
     },
     {
       url: `${baseUrl}/en/free-quote-generator`,
       lastModified: new Date("2026-06-10"),
+      alternates: { languages: { "es-ES": `${baseUrl}/generador-cotizacion-gratis`, "en-US": `${baseUrl}/en/free-quote-generator` } },
     },
     {
       url: `${baseUrl}/en/contact`,
       lastModified: new Date("2026-06-10"),
+      alternates: { languages: { "es-ES": `${baseUrl}/contacto`, "en-US": `${baseUrl}/en/contact` } },
     },
     {
       url: `${baseUrl}/registro`,
@@ -78,14 +85,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/contacto`,
       lastModified: new Date("2026-03-18"),
+      alternates: { languages: { "es-ES": `${baseUrl}/contacto`, "en-US": `${baseUrl}/en/contact` } },
     },
     {
       url: `${baseUrl}/precios`,
       lastModified: new Date("2026-03-28"),
+      alternates: { languages: { "es-ES": `${baseUrl}/precios`, "en-US": `${baseUrl}/en/pricing` } },
     },
     {
       url: `${baseUrl}/que-es-cpq`,
       lastModified: new Date("2026-03-28"),
+      alternates: { languages: { "es-ES": `${baseUrl}/que-es-cpq`, "en-US": `${baseUrl}/en/what-is-cpq` } },
     },
     {
       url: `${baseUrl}/glosario`,
@@ -98,6 +108,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/generador-cotizacion-gratis`,
       lastModified: new Date("2026-04-14"),
+      alternates: { languages: { "es-ES": `${baseUrl}/generador-cotizacion-gratis`, "en-US": `${baseUrl}/en/free-quote-generator` } },
     },
   ];
 
@@ -135,6 +146,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/funcionalidades`,
       lastModified: new Date("2026-03-27"),
+      alternates: { languages: { "es-ES": `${baseUrl}/funcionalidades`, "en-US": `${baseUrl}/en/features` } },
     },
     ...features.map((f) => ({
       url: `${baseUrl}/funcionalidades/${f.slug}`,
