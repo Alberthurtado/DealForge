@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { REPORTES_STRINGS } from "@/lib/reportes-i18n";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -61,11 +63,11 @@ interface ReportesData {
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const PERIODS = [
-  { id: "30d", label: "30 días" },
-  { id: "90d", label: "90 días" },
-  { id: "180d", label: "6 meses" },
-  { id: "365d", label: "1 año" },
-  { id: "all", label: "Todo" },
+  { id: "30d" },
+  { id: "90d" },
+  { id: "180d" },
+  { id: "365d" },
+  { id: "all" },
 ] as const;
 
 type PeriodId = typeof PERIODS[number]["id"];
@@ -77,13 +79,13 @@ const FUNNEL_COLORS = [
 ];
 
 const WIDGETS = [
-  { id: "revenue",      label: "Tendencia de Ingresos",   icon: TrendingUp },
-  { id: "winloss",      label: "Ganadas vs Perdidas",      icon: BarChart2 },
-  { id: "conversion",   label: "Tasa de Conversión",       icon: Target },
-  { id: "funnel",       label: "Pipeline por Estado",      icon: BarChart2 },
-  { id: "topClientes",  label: "Top Clientes",             icon: Users },
-  { id: "topProductos", label: "Top Productos",            icon: Package },
-  { id: "categorias",   label: "Ingresos por Categoría",   icon: PieChartIcon },
+  { id: "revenue",      icon: TrendingUp },
+  { id: "winloss",      icon: BarChart2 },
+  { id: "conversion",   icon: Target },
+  { id: "funnel",       icon: BarChart2 },
+  { id: "topClientes",  icon: Users },
+  { id: "topProductos", icon: Package },
+  { id: "categorias",   icon: PieChartIcon },
 ] as const;
 
 const DEFAULT_VISIBILITY: Record<string, boolean> = {
@@ -107,11 +109,11 @@ function TrendBadge({ value, suffix = "%" }: { value: number | null; suffix?: st
   );
 }
 
-function EmptyChart({ height = 200 }: { height?: number }) {
+function EmptyChart({ height = 200, label }: { height?: number; label: string }) {
   return (
     <div className={`flex flex-col items-center justify-center text-muted-foreground`} style={{ height }}>
       <BarChart2 className="w-8 h-8 mb-2 opacity-20" />
-      <p className="text-sm">Sin datos para el período seleccionado</p>
+      <p className="text-sm">{label}</p>
     </div>
   );
 }
@@ -128,7 +130,7 @@ function CardHeader({ title, icon: Icon }: { title: string; icon: React.ElementT
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function CurrencyTooltip({ active, payload, label }: any) {
+function CurrencyTooltip({ active, payload, label, money = formatCurrency }: any) {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white border border-border rounded-xl shadow-lg p-3 text-xs min-w-[140px]">
@@ -139,7 +141,7 @@ function CurrencyTooltip({ active, payload, label }: any) {
             <span className="w-2 h-2 rounded-full" style={{ background: entry.color }} />
             {entry.name}
           </span>
-          <span className="font-medium text-foreground">{formatCurrency(entry.value)}</span>
+          <span className="font-medium text-foreground">{money(entry.value)}</span>
         </div>
       ))}
     </div>
@@ -225,6 +227,9 @@ function LoadingSkeleton() {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export function ReportesContent() {
+  const { lang, currency, locale: numLocale } = useEmpresaLocale();
+  const t = REPORTES_STRINGS[lang];
+  const money = (n: number) => formatCurrency(n, currency, numLocale);
   const [period, setPeriod] = useState<PeriodId>("90d");
   const [data, setData] = useState<ReportesData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -278,7 +283,7 @@ export function ReportesContent() {
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
-              {p.label}
+              {t.periods[p.id]}
             </button>
           ))}
         </div>
@@ -291,7 +296,7 @@ export function ReportesContent() {
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground border border-border rounded-lg hover:bg-muted transition-colors disabled:opacity-50"
           >
             <RefreshCw className={cn("w-3.5 h-3.5", loading && "animate-spin")} />
-            Actualizar
+            {t.refresh}
           </button>
 
           <div className="relative">
@@ -305,13 +310,13 @@ export function ReportesContent() {
               )}
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
-              Personalizar
+              {t.customize}
             </button>
 
             {showWidgets && (
               <div className="absolute right-0 top-full mt-2 w-60 bg-white border border-border rounded-2xl shadow-xl z-50 p-3">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-2 mb-2">
-                  Widgets visibles
+                  {t.visibleWidgets}
                 </p>
                 <div className="space-y-0.5">
                   {WIDGETS.map(w => (
@@ -322,7 +327,7 @@ export function ReportesContent() {
                     >
                       <span className="flex items-center gap-2 text-foreground">
                         <w.icon className="w-4 h-4 text-muted-foreground" />
-                        {w.label}
+                        {t.widgets[w.id]}
                       </span>
                       {visible[w.id]
                         ? <Eye className="w-4 h-4 text-primary" />
@@ -343,8 +348,8 @@ export function ReportesContent() {
           {/* ── KPI Row ── */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <KpiCard
-              label="Ingresos totales"
-              value={formatCurrency(kpis!.totalIngresos)}
+              label={t.kpiTotalRevenue}
+              value={money(kpis!.totalIngresos)}
               icon={DollarSign}
               color="text-indigo-600"
               bgColor="bg-indigo-50"
@@ -352,7 +357,7 @@ export function ReportesContent() {
               trendSuffix="%"
             />
             <KpiCard
-              label="Tasa de conversión"
+              label={t.kpiConversionRate}
               value={`${kpis!.tasaConversion.toFixed(1)}%`}
               icon={Target}
               color="text-emerald-600"
@@ -361,42 +366,42 @@ export function ReportesContent() {
               trendSuffix=" pp"
             />
             <KpiCard
-              label="Deal medio"
-              value={formatCurrency(kpis!.avgDealSize)}
+              label={t.kpiAvgDeal}
+              value={money(kpis!.avgDealSize)}
               icon={TrendingUp}
               color="text-violet-600"
               bgColor="bg-violet-50"
             />
             <KpiCard
-              label="Pipeline activo"
-              value={formatCurrency(kpis!.totalPipeline)}
+              label={t.kpiPipeline}
+              value={money(kpis!.totalPipeline)}
               icon={BarChart2}
               color="text-amber-600"
               bgColor="bg-amber-50"
-              sub={`${kpis!.totalCotizaciones - kpis!.totalGanadas - kpis!.totalPerdidas} cotizaciones abiertas`}
+              sub={t.kpiOpenQuotes(kpis!.totalCotizaciones - kpis!.totalGanadas - kpis!.totalPerdidas)}
             />
             <KpiCard
-              label="Cotizaciones ganadas"
+              label={t.kpiWonQuotes}
               value={String(kpis!.totalGanadas)}
               icon={Trophy}
               color="text-green-600"
               bgColor="bg-green-50"
             />
             <KpiCard
-              label="Cotizaciones emitidas"
+              label={t.kpiIssuedQuotes}
               value={String(kpis!.totalCotizaciones)}
               icon={FileText}
               color="text-blue-600"
               bgColor="bg-blue-50"
-              sub={`${kpis!.totalPerdidas} perdidas`}
+              sub={t.kpiLostSub(kpis!.totalPerdidas)}
             />
           </div>
 
           {/* ── Revenue Trend ── */}
           {visible.revenue && (
             <div className="bg-white rounded-2xl border border-border p-6">
-              <CardHeader title="Tendencia de Ingresos" icon={TrendingUp} />
-              {data.monthly.length < 2 ? <EmptyChart /> : (
+              <CardHeader title={t.chartRevenueTrend} icon={TrendingUp} />
+              {data.monthly.length < 2 ? <EmptyChart label={t.emptyChart} /> : (
                 <div className="h-72">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={data.monthly} margin={{ top: 5, right: 10, bottom: 0, left: 10 }}>
@@ -414,9 +419,9 @@ export function ReportesContent() {
                       <XAxis dataKey="mes" tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false}
                         tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
-                      <Tooltip content={<CurrencyTooltip />} />
+                      <Tooltip content={<CurrencyTooltip money={money} />} />
                       <Legend wrapperStyle={{ fontSize: 12 }} />
-                      <Area type="monotone" dataKey="ingresos" name="Ingresos" stroke="#6366f1" strokeWidth={2.5}
+                      <Area type="monotone" dataKey="ingresos" name={t.seriesRevenue} stroke="#6366f1" strokeWidth={2.5}
                         fill="url(#gradIngresos)" dot={false} activeDot={{ r: 5, fill: "#6366f1" }} />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -429,8 +434,8 @@ export function ReportesContent() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {visible.winloss && (
               <div className="bg-white rounded-2xl border border-border p-6">
-                <CardHeader title="Ganadas vs Perdidas por mes" icon={BarChart2} />
-                {data.monthly.length === 0 ? <EmptyChart /> : (
+                <CardHeader title={t.chartWinLoss} icon={BarChart2} />
+                {data.monthly.length === 0 ? <EmptyChart label={t.emptyChart} /> : (
                   <div className="h-60">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={data.monthly} margin={{ top: 5, right: 10, bottom: 0, left: -10 }} barSize={14}>
@@ -439,8 +444,8 @@ export function ReportesContent() {
                         <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false} allowDecimals={false} />
                         <Tooltip content={<CountTooltip />} />
                         <Legend wrapperStyle={{ fontSize: 12 }} />
-                        <Bar dataKey="ganadas" name="Ganadas" fill="#10b981" radius={[4, 4, 0, 0]} />
-                        <Bar dataKey="perdidas" name="Perdidas" fill="#f87171" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="ganadas" name={t.seriesWon} fill="#10b981" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="perdidas" name={t.seriesLost} fill="#f87171" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -450,8 +455,8 @@ export function ReportesContent() {
 
             {visible.conversion && (
               <div className="bg-white rounded-2xl border border-border p-6">
-                <CardHeader title="Tasa de conversión mensual" icon={Target} />
-                {data.monthly.filter(m => m.tasa !== null).length < 2 ? <EmptyChart /> : (
+                <CardHeader title={t.chartConversionMonthly} icon={Target} />
+                {data.monthly.filter(m => m.tasa !== null).length < 2 ? <EmptyChart label={t.emptyChart} /> : (
                   <div className="h-60">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={data.monthly} margin={{ top: 5, right: 10, bottom: 0, left: -10 }}>
@@ -464,12 +469,12 @@ export function ReportesContent() {
                             active && payload?.length ? (
                               <div className="bg-white border border-border rounded-xl shadow-lg p-3 text-xs">
                                 <p className="font-semibold mb-1">{label}</p>
-                                <p className="text-cyan-600 font-medium">{payload[0].value}% conversión</p>
+                                <p className="text-cyan-600 font-medium">{t.conversionTooltip(payload[0].value)}</p>
                               </div>
                             ) : null
                           }
                         />
-                        <Line type="monotone" dataKey="tasa" name="Conversión" stroke="#06b6d4" strokeWidth={2.5}
+                        <Line type="monotone" dataKey="tasa" name={t.seriesConversion} stroke="#06b6d4" strokeWidth={2.5}
                           dot={{ fill: "#06b6d4", r: 3 }} activeDot={{ r: 5 }} connectNulls={false} />
                       </LineChart>
                     </ResponsiveContainer>
@@ -482,8 +487,8 @@ export function ReportesContent() {
           {/* ── Pipeline Funnel ── */}
           {visible.funnel && (
             <div className="bg-white rounded-2xl border border-border p-6">
-              <CardHeader title="Pipeline por estado" icon={BarChart2} />
-              {data.funnel.every(f => f.count === 0) ? <EmptyChart height={160} /> : (
+              <CardHeader title={t.chartFunnel} icon={BarChart2} />
+              {data.funnel.every(f => f.count === 0) ? <EmptyChart height={160} label={t.emptyChart} /> : (
                 <div className="space-y-3">
                   {data.funnel.map((item, i) => (
                     <div key={item.estado} className="flex items-center gap-4">
@@ -495,14 +500,14 @@ export function ReportesContent() {
                         >
                           {item.count > 0 && (
                             <span className="text-white text-xs font-semibold whitespace-nowrap">
-                              {item.count} cot.
+                              {t.funnelCount(item.count)}
                             </span>
                           )}
                         </div>
                       </div>
                       <div className="w-32 text-right shrink-0">
                         <p className="text-sm font-semibold text-foreground">{formatCurrency(item.valor)}</p>
-                        <p className="text-[11px] text-muted-foreground">{item.pct}% del total</p>
+                        <p className="text-[11px] text-muted-foreground">{t.pctOfTotal(item.pct)}</p>
                       </div>
                     </div>
                   ))}
@@ -515,8 +520,8 @@ export function ReportesContent() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {visible.topClientes && (
               <div className="bg-white rounded-2xl border border-border p-6">
-                <CardHeader title="Top clientes por ingresos" icon={Users} />
-                {data.topClientes.length === 0 ? <EmptyChart height={160} /> : (
+                <CardHeader title={t.chartTopClients} icon={Users} />
+                {data.topClientes.length === 0 ? <EmptyChart height={160} label={t.emptyChart} /> : (
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart
@@ -533,8 +538,8 @@ export function ReportesContent() {
                           tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                         <YAxis type="category" dataKey="nombreCorto" tick={{ fontSize: 11, fill: "#64748b" }}
                           axisLine={false} tickLine={false} width={60} />
-                        <Tooltip content={<CurrencyTooltip />} />
-                        <Bar dataKey="ingresos" name="Ingresos" fill="#6366f1" radius={[0, 4, 4, 0]} />
+                        <Tooltip content={<CurrencyTooltip money={money} />} />
+                        <Bar dataKey="ingresos" name={t.seriesRevenue} fill="#6366f1" radius={[0, 4, 4, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -544,8 +549,8 @@ export function ReportesContent() {
 
             {visible.topProductos && (
               <div className="bg-white rounded-2xl border border-border p-6">
-                <CardHeader title="Top productos por ingresos" icon={Package} />
-                {data.topProductos.length === 0 ? <EmptyChart height={160} /> : (
+                <CardHeader title={t.chartTopProducts} icon={Package} />
+                {data.topProductos.length === 0 ? <EmptyChart height={160} label={t.emptyChart} /> : (
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart
@@ -562,8 +567,8 @@ export function ReportesContent() {
                           tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                         <YAxis type="category" dataKey="nombreCorto" tick={{ fontSize: 11, fill: "#64748b" }}
                           axisLine={false} tickLine={false} width={60} />
-                        <Tooltip content={<CurrencyTooltip />} />
-                        <Bar dataKey="ingresos" name="Ingresos" fill="#8b5cf6" radius={[0, 4, 4, 0]} />
+                        <Tooltip content={<CurrencyTooltip money={money} />} />
+                        <Bar dataKey="ingresos" name={t.seriesRevenue} fill="#8b5cf6" radius={[0, 4, 4, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -576,8 +581,8 @@ export function ReportesContent() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {visible.categorias && (
               <div className="bg-white rounded-2xl border border-border p-6">
-                <CardHeader title="Ingresos por categoría" icon={PieChartIcon} />
-                {data.porCategoria.length === 0 ? <EmptyChart height={200} /> : (
+                <CardHeader title={t.chartRevByCategory} icon={PieChartIcon} />
+                {data.porCategoria.length === 0 ? <EmptyChart height={200} label={t.emptyChart} /> : (
                   <div className="flex items-center gap-6">
                     <div className="h-52 w-52 shrink-0">
                       <ResponsiveContainer width="100%" height="100%">
@@ -601,7 +606,7 @@ export function ReportesContent() {
                               active && payload?.length ? (
                                 <div className="bg-white border border-border rounded-xl shadow-lg p-3 text-xs">
                                   <p className="font-semibold mb-1">{payload[0].name}</p>
-                                  <p className="text-indigo-600 font-medium">{formatCurrency(payload[0].value as number)}</p>
+                                  <p className="text-indigo-600 font-medium">{money(payload[0].value as number)}</p>
                                 </div>
                               ) : null
                             }
@@ -629,8 +634,8 @@ export function ReportesContent() {
 
             {/* Avg deal size trend */}
             <div className="bg-white rounded-2xl border border-border p-6">
-              <CardHeader title="Deal medio mensual" icon={TrendingUp} />
-              {data.monthly.filter(m => m.avgDeal > 0).length < 2 ? <EmptyChart height={200} /> : (
+              <CardHeader title={t.chartAvgDealMonthly} icon={TrendingUp} />
+              {data.monthly.filter(m => m.avgDeal > 0).length < 2 ? <EmptyChart height={200} label={t.emptyChart} /> : (
                 <div className="h-52">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={data.monthly} margin={{ top: 5, right: 10, bottom: 0, left: 10 }}>
@@ -644,8 +649,8 @@ export function ReportesContent() {
                       <XAxis dataKey="mes" tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} axisLine={false} tickLine={false}
                         tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
-                      <Tooltip content={<CurrencyTooltip />} />
-                      <Area type="monotone" dataKey="avgDeal" name="Deal medio" stroke="#8b5cf6" strokeWidth={2.5}
+                      <Tooltip content={<CurrencyTooltip money={money} />} />
+                      <Area type="monotone" dataKey="avgDeal" name={t.seriesAvgDeal} stroke="#8b5cf6" strokeWidth={2.5}
                         fill="url(#gradAvgDeal)" dot={false} activeDot={{ r: 5, fill: "#8b5cf6" }} />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -658,25 +663,25 @@ export function ReportesContent() {
           {data.monthly.length > 0 && (
             <div className="bg-white rounded-2xl border border-border overflow-hidden">
               <div className="px-6 py-4 border-b border-border">
-                <h3 className="text-sm font-semibold text-foreground">Resumen mensual</h3>
+                <h3 className="text-sm font-semibold text-foreground">{t.monthlySummary}</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border bg-muted/30">
-                      <th className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Mes</th>
-                      <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Emitidas</th>
-                      <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Ganadas</th>
-                      <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Perdidas</th>
-                      <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Conversión</th>
-                      <th className="text-right px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Ingresos</th>
+                      <th className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.thMonth}</th>
+                      <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.thIssued}</th>
+                      <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.thWon}</th>
+                      <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.thLost}</th>
+                      <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.thConversion}</th>
+                      <th className="text-right px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.thRevenue}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[...data.monthly].reverse().map((m, i) => (
                       <tr key={m.mes} className={cn("border-b border-border last:border-0", i === 0 && "bg-indigo-50/30")}>
                         <td className="px-6 py-3 font-medium text-foreground">
-                          {m.mes} {i === 0 && <span className="ml-2 text-[10px] font-bold text-indigo-600 bg-indigo-100 px-1.5 py-0.5 rounded-full">Último</span>}
+                          {m.mes} {i === 0 && <span className="ml-2 text-[10px] font-bold text-indigo-600 bg-indigo-100 px-1.5 py-0.5 rounded-full">{t.lastBadge}</span>}
                         </td>
                         <td className="px-4 py-3 text-right text-muted-foreground">{m.cotizaciones}</td>
                         <td className="px-4 py-3 text-right">
@@ -698,7 +703,7 @@ export function ReportesContent() {
                           )}
                         </td>
                         <td className="px-6 py-3 text-right font-semibold text-foreground">
-                          {formatCurrency(m.ingresos)}
+                          {money(m.ingresos)}
                         </td>
                       </tr>
                     ))}
