@@ -11,8 +11,10 @@ import { validateBody } from "@/lib/validate";
 import { sanitizeHtml } from "@/lib/sanitize";
 import { getPlanFeatures, planFeatureResponse } from "@/lib/plan-limits";
 
-function defaultEmailBody(numero: string) {
-  return `<p>Adjuntamos la cotización ${numero}.</p>`;
+function defaultEmailBody(numero: string, lang: "es" | "en") {
+  return lang === "en"
+    ? `<p>Please find quote ${numero} attached.</p>`
+    : `<p>Adjuntamos la cotización ${numero}.</p>`;
 }
 
 export async function POST(
@@ -21,6 +23,7 @@ export async function POST(
 ) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const emailLang = await getDashboardLang(session.empresaId);
 
   if (!getPlanFeatures(session.plan).emailEnvio) {
     return planFeatureResponse("emailEnvio");
@@ -65,12 +68,12 @@ export async function POST(
     await sendEmail({
       to: data.to,
       subject: data.subject,
-      html: safeHtmlBody || defaultEmailBody(cotizacion.numero),
+      html: safeHtmlBody || defaultEmailBody(cotizacion.numero, emailLang),
       attachments: [{ filename: `${cotizacion.numero}.pdf`, content: pdfBuffer, contentType: "application/pdf" }],
     });
 
     await prisma.actividad.create({
-      data: { cotizacionId: id, tipo: "EMAIL_ENVIADO", descripcion: cotizacionActividad(await getDashboardLang(session.empresaId)).sentByEmail(data.to) },
+      data: { cotizacionId: id, tipo: "EMAIL_ENVIADO", descripcion: cotizacionActividad(emailLang).sentByEmail(data.to) },
     });
 
     return NextResponse.json({ success: true });

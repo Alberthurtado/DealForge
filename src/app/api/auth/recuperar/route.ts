@@ -6,6 +6,7 @@ import { validateBody } from "@/lib/validate";
 import { recuperarSchema } from "@/lib/validations";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { sendSystemEmail } from "@/lib/system-email";
+import { getDashboardLang } from "@/lib/dashboard-lang";
 
 export async function POST(request: NextRequest) {
   // Rate limit: 3 per hour per IP
@@ -55,27 +56,31 @@ export async function POST(request: NextRequest) {
 
     // Send email via system email service (MailerSend) so the flow works
     // even when the user's company SMTP is not configured.
+    const isEn = (await getDashboardLang(usuario.empresaId)) === "en";
+    const tr = isEn
+      ? { subject: "Reset your password — DealForge", heading: "Reset your password", intro: `Hi <strong>${usuario.nombre}</strong>, click the button to create a new password.`, cta: "Reset password", note: "This link expires in 1 hour. If you didn't request this change, you can ignore this email." }
+      : { subject: "Restablecer contraseña — DealForge", heading: "Restablecer contraseña", intro: `Hola <strong>${usuario.nombre}</strong>, haz clic en el botón para crear una nueva contraseña.`, cta: "Restablecer contraseña", note: "Este enlace expira en 1 hora. Si no solicitaste este cambio, puedes ignorar este email." };
     await sendSystemEmail({
       to: usuario.email,
-      subject: "Restablecer contraseña — DealForge",
+      subject: tr.subject,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 520px; margin: 0 auto; padding: 32px 20px;">
           <div style="text-align: center; margin-bottom: 32px;">
             <img src="https://dealforge.es/logo.svg" alt="DealForge" width="48" height="48" style="border-radius: 12px;" />
           </div>
           <h1 style="font-size: 22px; font-weight: 700; color: #111827; text-align: center; margin: 0 0 8px;">
-            Restablecer contraseña
+            ${tr.heading}
           </h1>
           <p style="color: #4a4a4a; font-size: 14px; line-height: 1.6; text-align: center; margin: 0 0 24px;">
-            Hola <strong>${usuario.nombre}</strong>, haz clic en el botón para crear una nueva contraseña.
+            ${tr.intro}
           </p>
           <div style="text-align: center; margin: 32px 0;">
             <a href="${resetUrl}" style="display: inline-block; background: #3a9bb5; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 32px; border-radius: 10px;">
-              Restablecer contraseña
+              ${tr.cta}
             </a>
           </div>
           <p style="color: #888; font-size: 12px; text-align: center; line-height: 1.6;">
-            Este enlace expira en 1 hora. Si no solicitaste este cambio, puedes ignorar este email.
+            ${tr.note}
           </p>
         </div>
       `,

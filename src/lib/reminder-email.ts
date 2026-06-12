@@ -1,5 +1,7 @@
 import { formatCurrency, formatDate } from "./utils";
 
+type EmailLang = "es" | "en";
+
 interface SellerFollowUpData {
   baseUrl: string;
   cotizacionId: string;
@@ -14,19 +16,27 @@ interface SellerFollowUpData {
   vendedorNombre: string;
   diasSinActividad: number;
   empresa: { nombre: string; colorPrimario: string };
+  lang?: EmailLang;
 }
 
 export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
   const c = data.empresa.colorPrimario || "#3a9bb5";
+  const lang: EmailLang = data.lang === "en" ? "en" : "es";
+  const numLocale = lang === "en" ? "en-GB" : "es-ES";
+  const money = (n: number) => formatCurrency(n, data.cotizacion.moneda || "EUR", numLocale);
+  const d = data.diasSinActividad;
+  const t = lang === "en"
+    ? { title: "Follow-up pending", subtitle: "Follow-up reminder", greeting: "Hi", intro: `It's been <strong style="color:#1a1a2e;">${d} days</strong> without activity on this quote. We recommend following up so you don't lose the opportunity.`, quote: "Quote", client: "Client", issued: "Issued", total: "Total amount", alert: `⏰ This quote has gone <strong>${d} days</strong> without follow-up. A quick contact can make all the difference.`, viewQuote: "View quote", footerSent: "Sent automatically by", footerVia: "via DealForge", footerOptOut: "You can turn these reminders off in Settings → Reminders", statusNegotiation: "In negotiation", statusSent: "Sent" }
+    : { title: "Seguimiento pendiente", subtitle: "Recordatorio de seguimiento", greeting: "Hola", intro: `Han pasado <strong style="color:#1a1a2e;">${d} días</strong> sin actividad en esta cotización. Te recomendamos hacer seguimiento para no perder la oportunidad.`, quote: "Cotización", client: "Cliente", issued: "Emitida", total: "Importe total", alert: `⏰ Esta cotización lleva <strong>${d} días</strong> sin seguimiento. Un contacto rápido puede marcar la diferencia.`, viewQuote: "Ver cotización", footerSent: "Enviado automáticamente por", footerVia: "a través de DealForge", footerOptOut: "Puedes desactivar estos recordatorios en Configuración → Recordatorios", statusNegotiation: "En negociación", statusSent: "Enviada" };
   const detailUrl = `${data.baseUrl}/cotizaciones/${data.cotizacionId}`;
-  const estadoLabel = data.cotizacion.estado === "NEGOCIACION" ? "En negociación" : "Enviada";
+  const estadoLabel = data.cotizacion.estado === "NEGOCIACION" ? t.statusNegotiation : t.statusSent;
 
   return `<!DOCTYPE html>
-<html lang="es">
+<html lang="${lang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seguimiento pendiente</title>
+  <title>${t.title}</title>
 </head>
 <body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background-color:#f6f9fc;-webkit-font-smoothing:antialiased;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f6f9fc;">
@@ -37,17 +47,17 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
           <tr>
             <td style="background:linear-gradient(135deg,${c},${c}dd);padding:32px 40px;border-radius:16px 16px 0 0;">
               <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">${data.empresa.nombre}</p>
-              <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:0.3px;text-transform:uppercase;">Recordatorio de seguimiento</p>
+              <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:0.3px;text-transform:uppercase;">${t.subtitle}</p>
             </td>
           </tr>
           <!-- Body -->
           <tr>
             <td style="background:#ffffff;padding:40px;border-left:1px solid #e8ecf0;border-right:1px solid #e8ecf0;">
               <p style="margin:0 0 24px;font-size:16px;color:#1a1a2e;line-height:1.5;">
-                Hola <strong>${data.vendedorNombre}</strong>,
+                ${t.greeting} <strong>${data.vendedorNombre}</strong>,
               </p>
               <p style="margin:0 0 28px;font-size:15px;color:#4a5568;line-height:1.6;">
-                Han pasado <strong style="color:#1a1a2e;">${data.diasSinActividad} días</strong> sin actividad en esta cotización. Te recomendamos hacer seguimiento para no perder la oportunidad.
+                ${t.intro}
               </p>
 
               <!-- Quote card -->
@@ -57,7 +67,7 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                       <tr>
                         <td style="padding:0 0 12px;">
-                          <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">Cotización</p>
+                          <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">${t.quote}</p>
                           <p style="margin:4px 0 0;font-size:18px;font-weight:700;color:#1a1a2e;">${data.cotizacion.numero}</p>
                         </td>
                         <td style="padding:0 0 12px;text-align:right;">
@@ -69,12 +79,12 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
                           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                             <tr>
                               <td width="50%" style="padding:8px 0;">
-                                <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Cliente</p>
+                                <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">${t.client}</p>
                                 <p style="margin:3px 0 0;font-size:14px;color:#334155;font-weight:500;">${data.cotizacion.cliente}</p>
                               </td>
                               <td width="50%" style="padding:8px 0;text-align:right;">
-                                <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Emitida</p>
-                                <p style="margin:3px 0 0;font-size:14px;color:#334155;">${formatDate(data.cotizacion.fechaEmision)}</p>
+                                <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">${t.issued}</p>
+                                <p style="margin:3px 0 0;font-size:14px;color:#334155;">${formatDate(data.cotizacion.fechaEmision, numLocale)}</p>
                               </td>
                             </tr>
                           </table>
@@ -82,8 +92,8 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
                       </tr>
                       <tr>
                         <td colspan="2" style="padding:16px 0 0;border-top:1px solid #e2e8f0;">
-                          <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Importe total</p>
-                          <p style="margin:4px 0 0;font-size:28px;font-weight:800;color:${c};letter-spacing:-0.5px;">${formatCurrency(data.cotizacion.total)}</p>
+                          <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">${t.total}</p>
+                          <p style="margin:4px 0 0;font-size:28px;font-weight:800;color:${c};letter-spacing:-0.5px;">${money(data.cotizacion.total)}</p>
                         </td>
                       </tr>
                     </table>
@@ -96,7 +106,7 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
                 <tr>
                   <td style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:14px 20px;">
                     <p style="margin:0;font-size:13px;color:#92400e;line-height:1.5;">
-                      ⏰ Esta cotización lleva <strong>${data.diasSinActividad} días</strong> sin seguimiento. Un contacto rápido puede marcar la diferencia.
+                      ${t.alert}
                     </p>
                   </td>
                 </tr>
@@ -106,7 +116,7 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:32px 0 0;">
                 <tr>
                   <td align="center">
-                    <a href="${detailUrl}" style="display:inline-block;padding:14px 40px;background:${c};color:#ffffff;text-decoration:none;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:0.2px;box-shadow:0 4px 12px ${c}40;">Ver cotización</a>
+                    <a href="${detailUrl}" style="display:inline-block;padding:14px 40px;background:${c};color:#ffffff;text-decoration:none;border-radius:10px;font-weight:700;font-size:15px;letter-spacing:0.2px;box-shadow:0 4px 12px ${c}40;">${t.viewQuote}</a>
                   </td>
                 </tr>
               </table>
@@ -116,10 +126,10 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
           <tr>
             <td style="background:#f8fafc;padding:24px 40px;border-radius:0 0 16px 16px;border:1px solid #e8ecf0;border-top:none;">
               <p style="margin:0;font-size:12px;color:#94a3b8;text-align:center;">
-                Enviado automáticamente por <strong style="color:#64748b;">${data.empresa.nombre}</strong> a través de DealForge
+                ${t.footerSent} <strong style="color:#64748b;">${data.empresa.nombre}</strong> ${t.footerVia}
               </p>
               <p style="margin:8px 0 0;font-size:11px;color:#cbd5e1;text-align:center;">
-                Puedes desactivar estos recordatorios en Configuración → Recordatorios
+                ${t.footerOptOut}
               </p>
             </td>
           </tr>
@@ -144,29 +154,49 @@ interface ClientExpiryData {
   contactoEmail: string;
   diasRestantes: number;
   empresa: { nombre: string; colorPrimario: string };
+  lang?: EmailLang;
 }
 
 export function buildClientExpiryEmail(data: ClientExpiryData): string {
   const c = data.empresa.colorPrimario || "#3a9bb5";
-  const isUrgent = data.diasRestantes <= 1;
+  const lang: EmailLang = data.lang === "en" ? "en" : "es";
+  const numLocale = lang === "en" ? "en-GB" : "es-ES";
+  const money = (n: number) => formatCurrency(n, data.cotizacion.moneda || "EUR", numLocale);
+  const dr = data.diasRestantes;
+  const isUrgent = dr <= 1;
   const urgencyColor = isUrgent ? "#dc2626" : "#f59e0b";
   const urgencyBg = isUrgent ? "#fef2f2" : "#fffbeb";
   const urgencyBorder = isUrgent ? "#fecaca" : "#fde68a";
   const urgencyText = isUrgent ? "#991b1b" : "#92400e";
 
-  const urgencyMessage =
-    data.diasRestantes <= 0
-      ? "Esta cotización vence <strong>hoy</strong>."
-      : data.diasRestantes === 1
-      ? "Esta cotización vence <strong>mañana</strong>."
-      : `Esta cotización vence en <strong>${data.diasRestantes} días</strong>.`;
+  const t = lang === "en"
+    ? {
+        title: "Quote about to expire", subtitle: "Expiry notice", greeting: "Dear",
+        intro: "This is a reminder that the following quote is about to expire. If you'd like to proceed, we recommend confirming it before the expiry date.",
+        quote: "Quote", total: "Total amount", expiry: "Expiry",
+        badge: dr <= 0 ? "Expires today" : dr === 1 ? "Expires tomorrow" : `${dr} days`,
+        urgency: dr <= 0 ? "This quote expires <strong>today</strong>." : dr === 1 ? "This quote expires <strong>tomorrow</strong>." : `This quote expires in <strong>${dr} days</strong>.`,
+        contactSuffix: " If you're interested, please don't hesitate to contact us.",
+        help: "If you have any questions, you can reply directly to this email.",
+        footerSent: "Sent by", footerVia: "via DealForge",
+      }
+    : {
+        title: "Cotización próxima a vencer", subtitle: "Aviso de vencimiento", greeting: "Estimado/a",
+        intro: "Le recordamos que la siguiente cotización está próxima a vencer. Si desea proceder, le recomendamos confirmarla antes de la fecha de vencimiento.",
+        quote: "Cotización", total: "Importe total", expiry: "Vencimiento",
+        badge: dr <= 0 ? "Vence hoy" : dr === 1 ? "Vence mañana" : `${dr} días`,
+        urgency: dr <= 0 ? "Esta cotización vence <strong>hoy</strong>." : dr === 1 ? "Esta cotización vence <strong>mañana</strong>." : `Esta cotización vence en <strong>${dr} días</strong>.`,
+        contactSuffix: " Si tiene interés, no dude en contactarnos.",
+        help: "Si tiene alguna duda, puede responder directamente a este email.",
+        footerSent: "Enviado por", footerVia: "a través de DealForge",
+      };
 
   return `<!DOCTYPE html>
-<html lang="es">
+<html lang="${lang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cotización próxima a vencer</title>
+  <title>${t.title}</title>
 </head>
 <body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background-color:#f6f9fc;-webkit-font-smoothing:antialiased;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f6f9fc;">
@@ -177,17 +207,17 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
           <tr>
             <td style="background:linear-gradient(135deg,${c},${c}dd);padding:32px 40px;border-radius:16px 16px 0 0;">
               <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">${data.empresa.nombre}</p>
-              <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:0.3px;text-transform:uppercase;">Aviso de vencimiento</p>
+              <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:0.3px;text-transform:uppercase;">${t.subtitle}</p>
             </td>
           </tr>
           <!-- Body -->
           <tr>
             <td style="background:#ffffff;padding:40px;border-left:1px solid #e8ecf0;border-right:1px solid #e8ecf0;">
               <p style="margin:0 0 24px;font-size:16px;color:#1a1a2e;line-height:1.5;">
-                Estimado/a <strong>${data.contactoNombre}</strong>,
+                ${t.greeting} <strong>${data.contactoNombre}</strong>,
               </p>
               <p style="margin:0 0 28px;font-size:15px;color:#4a5568;line-height:1.6;">
-                Le recordamos que la siguiente cotización está próxima a vencer. Si desea proceder, le recomendamos confirmarla antes de la fecha de vencimiento.
+                ${t.intro}
               </p>
 
               <!-- Quote card -->
@@ -197,12 +227,12 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                       <tr>
                         <td style="padding:0 0 12px;">
-                          <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">Cotización</p>
+                          <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">${t.quote}</p>
                           <p style="margin:4px 0 0;font-size:18px;font-weight:700;color:#1a1a2e;">${data.cotizacion.numero}</p>
                         </td>
                         <td style="padding:0 0 12px;text-align:right;">
                           <span style="display:inline-block;padding:4px 12px;background:${urgencyColor}18;color:${urgencyColor};font-size:12px;font-weight:600;border-radius:20px;">
-                            ${data.diasRestantes <= 0 ? "Vence hoy" : data.diasRestantes === 1 ? "Vence mañana" : `${data.diasRestantes} días`}
+                            ${t.badge}
                           </span>
                         </td>
                       </tr>
@@ -211,12 +241,12 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
                           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                             <tr>
                               <td width="50%" style="padding:8px 0;">
-                                <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Importe total</p>
-                                <p style="margin:4px 0 0;font-size:24px;font-weight:800;color:${c};letter-spacing:-0.5px;">${formatCurrency(data.cotizacion.total)}</p>
+                                <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">${t.total}</p>
+                                <p style="margin:4px 0 0;font-size:24px;font-weight:800;color:${c};letter-spacing:-0.5px;">${money(data.cotizacion.total)}</p>
                               </td>
                               <td width="50%" style="padding:8px 0;text-align:right;">
-                                <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">Vencimiento</p>
-                                <p style="margin:3px 0 0;font-size:14px;color:${urgencyColor};font-weight:600;">${formatDate(data.cotizacion.fechaVencimiento)}</p>
+                                <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">${t.expiry}</p>
+                                <p style="margin:3px 0 0;font-size:14px;color:${urgencyColor};font-weight:600;">${formatDate(data.cotizacion.fechaVencimiento, numLocale)}</p>
                               </td>
                             </tr>
                           </table>
@@ -232,7 +262,7 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
                 <tr>
                   <td style="background:${urgencyBg};border:1px solid ${urgencyBorder};border-radius:10px;padding:14px 20px;">
                     <p style="margin:0;font-size:13px;color:${urgencyText};line-height:1.5;">
-                      ${isUrgent ? "⚠️" : "⏰"} ${urgencyMessage} Si tiene interés, no dude en contactarnos.
+                      ${isUrgent ? "⚠️" : "⏰"} ${t.urgency}${t.contactSuffix}
                     </p>
                   </td>
                 </tr>
@@ -243,7 +273,7 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
                 <tr>
                   <td align="center">
                     <p style="margin:0;font-size:13px;color:#94a3b8;line-height:1.5;">
-                      Si tiene alguna duda, puede responder directamente a este email.
+                      ${t.help}
                     </p>
                   </td>
                 </tr>
@@ -254,7 +284,7 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
           <tr>
             <td style="background:#f8fafc;padding:24px 40px;border-radius:0 0 16px 16px;border:1px solid #e8ecf0;border-top:none;">
               <p style="margin:0;font-size:12px;color:#94a3b8;text-align:center;">
-                Enviado por <strong style="color:#64748b;">${data.empresa.nombre}</strong> a través de DealForge
+                ${t.footerSent} <strong style="color:#64748b;">${data.empresa.nombre}</strong> ${t.footerVia}
               </p>
             </td>
           </tr>

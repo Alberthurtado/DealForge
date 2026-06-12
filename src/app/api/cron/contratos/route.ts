@@ -9,6 +9,7 @@ function buildContractNotificationEmail({
   contrato,
   empresa,
   vendedorNombre,
+  lang = "es",
 }: {
   tipo: "RENOVACION_PROXIMA" | "RENOVADO_AUTO" | "PENDIENTE_RENOVACION" | "EXPIRADO";
   contrato: {
@@ -20,26 +21,46 @@ function buildContractNotificationEmail({
   };
   empresa: { nombre: string; colorPrimario: string };
   vendedorNombre: string;
+  lang?: "es" | "en";
 }): string {
   const fechaFinStr = contrato.fechaFin.toISOString().split("T")[0];
   const color = empresa.colorPrimario || "#3a9bb5";
+  const isEn = lang === "en";
 
-  const titles: Record<string, string> = {
-    RENOVACION_PROXIMA: "Contrato próximo a vencer",
-    RENOVADO_AUTO: "Contrato renovado automáticamente",
-    PENDIENTE_RENOVACION: "Contrato pendiente de renovación",
-    EXPIRADO: "Contrato expirado",
-  };
+  const titles: Record<string, string> = isEn
+    ? {
+        RENOVACION_PROXIMA: "Contract about to expire",
+        RENOVADO_AUTO: "Contract automatically renewed",
+        PENDIENTE_RENOVACION: "Contract pending renewal",
+        EXPIRADO: "Contract expired",
+      }
+    : {
+        RENOVACION_PROXIMA: "Contrato próximo a vencer",
+        RENOVADO_AUTO: "Contrato renovado automáticamente",
+        PENDIENTE_RENOVACION: "Contrato pendiente de renovación",
+        EXPIRADO: "Contrato expirado",
+      };
 
-  const messages: Record<string, string> = {
-    RENOVACION_PROXIMA: `El contrato <strong>${contrato.numero}</strong> con <strong>${contrato.clienteNombre}</strong> vence el <strong>${fechaFinStr}</strong>. Revisa las condiciones y decide si deseas renovarlo.`,
-    RENOVADO_AUTO: `El contrato <strong>${contrato.numero}</strong> con <strong>${contrato.clienteNombre}</strong> ha sido renovado automáticamente. La nueva fecha de fin ha sido extendida.`,
-    PENDIENTE_RENOVACION: `El contrato <strong>${contrato.numero}</strong> con <strong>${contrato.clienteNombre}</strong> está próximo a vencer el <strong>${fechaFinStr}</strong> y requiere renovación manual.`,
-    EXPIRADO: `El contrato <strong>${contrato.numero}</strong> con <strong>${contrato.clienteNombre}</strong> ha expirado el <strong>${fechaFinStr}</strong> sin renovación.`,
-  };
+  const messages: Record<string, string> = isEn
+    ? {
+        RENOVACION_PROXIMA: `Contract <strong>${contrato.numero}</strong> with <strong>${contrato.clienteNombre}</strong> expires on <strong>${fechaFinStr}</strong>. Review the terms and decide whether to renew it.`,
+        RENOVADO_AUTO: `Contract <strong>${contrato.numero}</strong> with <strong>${contrato.clienteNombre}</strong> has been renewed automatically. The new end date has been extended.`,
+        PENDIENTE_RENOVACION: `Contract <strong>${contrato.numero}</strong> with <strong>${contrato.clienteNombre}</strong> is about to expire on <strong>${fechaFinStr}</strong> and requires manual renewal.`,
+        EXPIRADO: `Contract <strong>${contrato.numero}</strong> with <strong>${contrato.clienteNombre}</strong> expired on <strong>${fechaFinStr}</strong> without renewal.`,
+      }
+    : {
+        RENOVACION_PROXIMA: `El contrato <strong>${contrato.numero}</strong> con <strong>${contrato.clienteNombre}</strong> vence el <strong>${fechaFinStr}</strong>. Revisa las condiciones y decide si deseas renovarlo.`,
+        RENOVADO_AUTO: `El contrato <strong>${contrato.numero}</strong> con <strong>${contrato.clienteNombre}</strong> ha sido renovado automáticamente. La nueva fecha de fin ha sido extendida.`,
+        PENDIENTE_RENOVACION: `El contrato <strong>${contrato.numero}</strong> con <strong>${contrato.clienteNombre}</strong> está próximo a vencer el <strong>${fechaFinStr}</strong> y requiere renovación manual.`,
+        EXPIRADO: `El contrato <strong>${contrato.numero}</strong> con <strong>${contrato.clienteNombre}</strong> ha expirado el <strong>${fechaFinStr}</strong> sin renovación.`,
+      };
+
+  const t = isEn
+    ? { greeting: "Hi", contract: "Contract", client: "Client", monthlyValue: "Monthly value", endDate: "End date", auto: "This is an automated message from" }
+    : { greeting: "Hola", contract: "Contrato", client: "Cliente", monthlyValue: "Valor mensual", endDate: "Fecha fin", auto: "Este es un mensaje automático de" };
 
   return `<!DOCTYPE html>
-<html>
+<html lang="${lang}">
 <head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f7;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f7;padding:32px 0;">
@@ -49,16 +70,16 @@ function buildContractNotificationEmail({
           <h1 style="color:#fff;margin:0;font-size:20px;">${empresa.nombre}</h1>
         </td></tr>
         <tr><td style="padding:32px;">
-          <p style="margin:0 0 8px;color:#666;">Hola ${vendedorNombre},</p>
+          <p style="margin:0 0 8px;color:#666;">${t.greeting} ${vendedorNombre},</p>
           <h2 style="margin:0 0 16px;color:#333;font-size:18px;">${titles[tipo]}</h2>
           <p style="margin:0 0 24px;color:#555;line-height:1.6;">${messages[tipo]}</p>
           <table width="100%" style="background:#f9f9fb;border-radius:6px;padding:16px;margin-bottom:24px;" cellpadding="8">
-            <tr><td style="color:#888;font-size:13px;">Contrato</td><td style="color:#333;font-weight:bold;">${contrato.numero}</td></tr>
-            <tr><td style="color:#888;font-size:13px;">Cliente</td><td style="color:#333;">${contrato.clienteNombre}</td></tr>
-            <tr><td style="color:#888;font-size:13px;">Valor mensual</td><td style="color:#333;">${contrato.valorMensual.toFixed(2)} ${contrato.moneda}</td></tr>
-            <tr><td style="color:#888;font-size:13px;">Fecha fin</td><td style="color:#333;">${fechaFinStr}</td></tr>
+            <tr><td style="color:#888;font-size:13px;">${t.contract}</td><td style="color:#333;font-weight:bold;">${contrato.numero}</td></tr>
+            <tr><td style="color:#888;font-size:13px;">${t.client}</td><td style="color:#333;">${contrato.clienteNombre}</td></tr>
+            <tr><td style="color:#888;font-size:13px;">${t.monthlyValue}</td><td style="color:#333;">${contrato.valorMensual.toFixed(2)} ${contrato.moneda}</td></tr>
+            <tr><td style="color:#888;font-size:13px;">${t.endDate}</td><td style="color:#333;">${fechaFinStr}</td></tr>
           </table>
-          <p style="margin:0;color:#999;font-size:12px;">Este es un mensaje automático de ${empresa.nombre}.</p>
+          <p style="margin:0;color:#999;font-size:12px;">${t.auto} ${empresa.nombre}.</p>
         </td></tr>
       </table>
     </td></tr>
@@ -95,7 +116,7 @@ export async function GET(request: NextRequest) {
 
     // Per-request cache: resolve each company's activity-log language once
     const langCache = new Map<string, ActividadLang>();
-    async function actFor(equipoId: string | null): Promise<ReturnType<typeof contratoActividad>> {
+    async function langFor(equipoId: string | null): Promise<ActividadLang> {
       const key = equipoId || "";
       let lang = langCache.get(key);
       if (!lang) {
@@ -105,7 +126,10 @@ export async function GET(request: NextRequest) {
         lang = resolveDashboardLang(e?.locale);
         langCache.set(key, lang);
       }
-      return contratoActividad(lang);
+      return lang;
+    }
+    async function actFor(equipoId: string | null): Promise<ReturnType<typeof contratoActividad>> {
+      return contratoActividad(await langFor(equipoId));
     }
 
     // ─── 1. Auto-renew contracts past fechaFin with renovacionAutomatica ───
@@ -144,6 +168,7 @@ export async function GET(request: NextRequest) {
 
       // Send notification
       try {
+        const clang = await langFor(contrato.equipoId);
         const html = buildContractNotificationEmail({
           tipo: "RENOVADO_AUTO",
           contrato: {
@@ -155,11 +180,14 @@ export async function GET(request: NextRequest) {
           },
           empresa: empresaInfo,
           vendedorNombre: contrato.usuario.nombre,
+          lang: clang,
         });
 
         const result = await sendSystemEmail({
           to: contrato.usuario.email,
-          subject: `Contrato ${contrato.numero} renovado automáticamente`,
+          subject: clang === "en"
+            ? `Contract ${contrato.numero} automatically renewed`
+            : `Contrato ${contrato.numero} renovado automáticamente`,
           html,
         });
 
@@ -205,6 +233,7 @@ export async function GET(request: NextRequest) {
         pendingRenewal++;
 
         try {
+          const clang = await langFor(contrato.equipoId);
           const html = buildContractNotificationEmail({
             tipo: "PENDIENTE_RENOVACION",
             contrato: {
@@ -216,11 +245,14 @@ export async function GET(request: NextRequest) {
             },
             empresa: empresaInfo,
             vendedorNombre: contrato.usuario.nombre,
+            lang: clang,
           });
 
           const result = await sendSystemEmail({
             to: contrato.usuario.email,
-            subject: `Contrato ${contrato.numero} — renovación pendiente (${daysUntilExpiry} días)`,
+            subject: clang === "en"
+              ? `Contract ${contrato.numero} — renewal pending (${daysUntilExpiry} days)`
+              : `Contrato ${contrato.numero} — renovación pendiente (${daysUntilExpiry} días)`,
             html,
           });
 
@@ -262,6 +294,7 @@ export async function GET(request: NextRequest) {
       expired++;
 
       try {
+        const clang = await langFor(contrato.equipoId);
         const html = buildContractNotificationEmail({
           tipo: "EXPIRADO",
           contrato: {
@@ -273,11 +306,14 @@ export async function GET(request: NextRequest) {
           },
           empresa: empresaInfo,
           vendedorNombre: contrato.usuario.nombre,
+          lang: clang,
         });
 
         const result = await sendSystemEmail({
           to: contrato.usuario.email,
-          subject: `Contrato ${contrato.numero} ha expirado`,
+          subject: clang === "en"
+            ? `Contract ${contrato.numero} has expired`
+            : `Contrato ${contrato.numero} ha expirado`,
           html,
         });
 

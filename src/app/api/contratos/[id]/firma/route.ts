@@ -50,6 +50,8 @@ export async function POST(
 ) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const cflang = await getDashboardLang(session.empresaId);
+  const isEn = cflang === "en";
 
   const { id } = await params;
 
@@ -107,7 +109,7 @@ export async function POST(
     data: {
       contratoId: id,
       tipo: "FIRMA_SOLICITADA",
-      descripcion: contratoActividad(await getDashboardLang(session.empresaId)).signatureRequested(data.signerName, data.signerEmail),
+      descripcion: contratoActividad(cflang).signatureRequested(data.signerName, data.signerEmail),
     },
   });
 
@@ -131,33 +133,35 @@ export async function POST(
   try {
     await sendSystemEmail({
       to: data.signerEmail,
-      subject: `Firma electrónica requerida - Contrato ${contrato.numero}`,
+      subject: isEn
+        ? `Electronic signature required - Contract ${contrato.numero}`
+        : `Firma electrónica requerida - Contrato ${contrato.numero}`,
       html: `
 <!DOCTYPE html>
-<html>
+<html lang="${cflang}">
 <head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f7;">
   <div style="max-width:600px;margin:0 auto;padding:20px;">
     <div style="background:${color};padding:24px 30px;border-radius:12px 12px 0 0;">
       <h1 style="color:white;margin:0;font-size:18px;">${empresa?.nombre || "DealForge"}</h1>
-      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">Firma electrónica requerida</p>
+      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">${isEn ? "Electronic signature required" : "Firma electrónica requerida"}</p>
     </div>
     <div style="background:white;padding:30px;border-radius:0 0 12px 12px;border:1px solid #e5e5e5;border-top:none;">
-      <p style="margin:0 0 16px;font-size:15px;color:#333;">Estimado/a ${data.signerName},</p>
+      <p style="margin:0 0 16px;font-size:15px;color:#333;">${isEn ? "Dear" : "Estimado/a"} ${data.signerName},</p>
       <p style="margin:0 0 20px;font-size:14px;color:#555;">
-        Se requiere su firma electrónica para el siguiente contrato:
+        ${isEn ? "Your electronic signature is required for the following contract:" : "Se requiere su firma electrónica para el siguiente contrato:"}
       </p>
       <div style="background:#f8f9fa;border-radius:8px;padding:16px;margin:0 0 24px;">
         <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:4px 0;color:#888;font-size:12px;">Contrato</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:14px;">${contrato.numero}</td></tr>
-          <tr><td style="padding:4px 0;color:#888;font-size:12px;">Cliente</td><td style="padding:4px 0;text-align:right;font-size:13px;">${contrato.cliente.nombre}</td></tr>
+          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${isEn ? "Contract" : "Contrato"}</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:14px;">${contrato.numero}</td></tr>
+          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${isEn ? "Client" : "Cliente"}</td><td style="padding:4px 0;text-align:right;font-size:13px;">${contrato.cliente.nombre}</td></tr>
         </table>
       </div>
       <div style="text-align:center;margin:24px 0;">
-        <a href="${signUrl}" style="display:inline-block;padding:14px 40px;background:${color};color:white;text-decoration:none;border-radius:8px;font-weight:bold;font-size:15px;">Firmar contrato</a>
+        <a href="${signUrl}" style="display:inline-block;padding:14px 40px;background:${color};color:white;text-decoration:none;border-radius:8px;font-weight:bold;font-size:15px;">${isEn ? "Sign contract" : "Firmar contrato"}</a>
       </div>
       <p style="margin:20px 0 0;font-size:12px;color:#888;text-align:center;">
-        Haga clic en el botón para revisar y firmar el contrato de forma segura.
+        ${isEn ? "Click the button to securely review and sign the contract." : "Haga clic en el botón para revisar y firmar el contrato de forma segura."}
       </p>
     </div>
     <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${empresa?.nombre || "DealForge"} &bull; DealForge</p>

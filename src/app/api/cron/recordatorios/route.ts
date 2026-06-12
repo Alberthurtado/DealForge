@@ -46,7 +46,8 @@ export async function GET(request: NextRequest) {
     });
 
     for (const empresa of empresas) {
-      const act = cotizacionActividad(resolveDashboardLang(empresa.locale));
+      const empLang = resolveDashboardLang(empresa.locale);
+      const act = cotizacionActividad(empLang);
       for (const usuario of empresa.usuarios) {
         // ─── Seller follow-up reminders ────────────────
         const seguimientoDias = empresa.recordatorioSeguimientoDias;
@@ -108,11 +109,14 @@ export async function GET(request: NextRequest) {
             vendedorNombre: usuario.nombre,
             diasSinActividad,
             empresa: { nombre: empresa.nombre, colorPrimario: empresa.colorPrimario },
+            lang: empLang,
           });
 
           const result = await sendSystemEmail({
             to: usuario.email,
-            subject: `Seguimiento pendiente: ${cot.numero} — ${cot.cliente.nombre}`,
+            subject: empLang === "en"
+              ? `Follow-up pending: ${cot.numero} — ${cot.cliente.nombre}`
+              : `Seguimiento pendiente: ${cot.numero} — ${cot.cliente.nombre}`,
             html,
           });
 
@@ -223,11 +227,14 @@ export async function GET(request: NextRequest) {
             contactoEmail: recipientEmail,
             diasRestantes,
             empresa: { nombre: empresa.nombre, colorPrimario: empresa.colorPrimario },
+            lang: empLang,
           });
 
           const result = await sendSystemEmail({
             to: recipientEmail,
-            subject: `Cotización ${cot.numero} — vence ${diasRestantes <= 0 ? "hoy" : diasRestantes === 1 ? "mañana" : `en ${diasRestantes} días`}`,
+            subject: empLang === "en"
+              ? `Quote ${cot.numero} — expires ${diasRestantes <= 0 ? "today" : diasRestantes === 1 ? "tomorrow" : `in ${diasRestantes} days`}`
+              : `Cotización ${cot.numero} — vence ${diasRestantes <= 0 ? "hoy" : diasRestantes === 1 ? "mañana" : `en ${diasRestantes} días`}`,
             html,
           });
 

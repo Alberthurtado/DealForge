@@ -153,12 +153,14 @@ export async function PUT(
 
   // Handle contract signature
   if (firma.contratoId && firma.contrato) {
+    const clang = await getDashboardLang(firma.contrato.equipoId);
+    const cIsEn = clang === "en";
     // Log ContratoActividad FIRMA_COMPLETADA
     await prisma.contratoActividad.create({
       data: {
         contratoId: firma.contratoId,
         tipo: "FIRMA_COMPLETADA",
-        descripcion: contratoActividad(await getDashboardLang(firma.contrato.equipoId)).signedBy(firma.signerName, firma.signerEmail),
+        descripcion: contratoActividad(clang).signedBy(firma.signerName, firma.signerEmail),
       },
     });
 
@@ -185,27 +187,29 @@ export async function PUT(
 
         await sendSystemEmail({
           to: seller.email,
-          subject: `Contrato ${firma.contrato.numero} firmado por ${firma.signerName}`,
+          subject: cIsEn
+            ? `Contract ${firma.contrato.numero} signed by ${firma.signerName}`
+            : `Contrato ${firma.contrato.numero} firmado por ${firma.signerName}`,
           html: `
 <!DOCTYPE html>
-<html>
+<html lang="${clang}">
 <head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f7;">
   <div style="max-width:600px;margin:0 auto;padding:20px;">
     <div style="background:${color};padding:24px 30px;border-radius:12px 12px 0 0;">
       <h1 style="color:white;margin:0;font-size:18px;">${empresa?.nombre || "DealForge"}</h1>
-      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">Contrato firmado</p>
+      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">${cIsEn ? "Contract signed" : "Contrato firmado"}</p>
     </div>
     <div style="background:white;padding:30px;border-radius:0 0 12px 12px;border:1px solid #e5e5e5;border-top:none;">
       <div style="text-align:center;margin:0 0 20px;">
-        <div style="display:inline-block;background:#16a34a;color:white;padding:8px 24px;border-radius:20px;font-weight:bold;font-size:14px;">Firmado</div>
+        <div style="display:inline-block;background:#16a34a;color:white;padding:8px 24px;border-radius:20px;font-weight:bold;font-size:14px;">${cIsEn ? "Signed" : "Firmado"}</div>
       </div>
       <p style="margin:0 0 16px;font-size:14px;color:#555;text-align:center;">
-        El contrato <strong>${firma.contrato.numero}</strong> para <strong>${firma.contrato.cliente.nombre}</strong>
-        ha sido firmado por <strong>${firma.signerName}</strong>.
+        ${cIsEn ? "Contract" : "El contrato"} <strong>${firma.contrato.numero}</strong> ${cIsEn ? "for" : "para"} <strong>${firma.contrato.cliente.nombre}</strong>
+        ${cIsEn ? "has been signed by" : "ha sido firmado por"} <strong>${firma.signerName}</strong>.
       </p>
       <div style="text-align:center;margin:20px 0 0;">
-        <a href="${origin}/contratos/${firma.contratoId}" style="display:inline-block;padding:10px 28px;background:${color};color:white;text-decoration:none;border-radius:8px;font-size:13px;">Ver contrato</a>
+        <a href="${origin}/contratos/${firma.contratoId}" style="display:inline-block;padding:10px 28px;background:${color};color:white;text-decoration:none;border-radius:8px;font-size:13px;">${cIsEn ? "View contract" : "Ver contrato"}</a>
       </div>
     </div>
   </div>

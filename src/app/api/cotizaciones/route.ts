@@ -241,7 +241,7 @@ export async function POST(request: NextRequest) {
           });
           const emailResult = await sendSystemEmail({
             to: aprob.aprobadorEmail,
-            subject: `Aprobación requerida: ${numero}`,
+            subject: lang === "en" ? `Approval required: ${numero}` : `Aprobación requerida: ${numero}`,
             html,
           });
           if (emailResult.success) {
