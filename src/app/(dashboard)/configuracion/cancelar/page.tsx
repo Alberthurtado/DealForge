@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 import { PageHeader } from "@/components/layout/page-header";
 import { CancelForm } from "@/components/configuracion/cancel-form";
+import { resolveDashboardLang } from "@/lib/dashboard-i18n";
+import { CONFIG_STRINGS } from "@/lib/configuracion-i18n";
 
 export const metadata: Metadata = {
   title: "Gestionar Suscripción",
@@ -19,6 +21,8 @@ export default async function CancelarPage() {
   let planStatus = "active";
   let currentPeriodEnd: Date | null = null;
   let hasSubscription = false;
+  let locale = "es-ES";
+  let currency = "EUR";
 
   if (session.empresaId) {
     const empresa = await prisma.empresa.findUnique({
@@ -28,13 +32,20 @@ export default async function CancelarPage() {
         planStatus: true,
         currentPeriodEnd: true,
         stripeSubscriptionId: true,
+        locale: true,
+        currencyCode: true,
       },
     });
     plan = empresa?.plan || "starter";
     planStatus = empresa?.planStatus || "active";
     currentPeriodEnd = empresa?.currentPeriodEnd ?? null;
     hasSubscription = !!empresa?.stripeSubscriptionId;
+    locale = empresa?.locale || "es-ES";
+    currency = empresa?.currencyCode || "EUR";
   }
+
+  const lang = resolveDashboardLang(locale);
+  const tp = CONFIG_STRINGS[lang].cancelPage;
 
   // Fallback for legacy users without empresaId
   if (!hasSubscription) {
@@ -59,7 +70,7 @@ export default async function CancelarPage() {
   }
 
   const endDate = currentPeriodEnd
-    ? new Date(currentPeriodEnd).toLocaleDateString("es-ES", {
+    ? new Date(currentPeriodEnd).toLocaleDateString(locale, {
         day: "numeric",
         month: "long",
         year: "numeric",
@@ -69,8 +80,8 @@ export default async function CancelarPage() {
   return (
     <div>
       <PageHeader
-        title="Gestionar Suscripción"
-        description="Cambia tu plan o cancela la renovación automática"
+        title={tp.title}
+        description={tp.description}
       />
       <div className="p-6">
         <div className="max-w-xl">
@@ -78,6 +89,8 @@ export default async function CancelarPage() {
             currentPlan={plan}
             planStatus={planStatus}
             endDate={endDate}
+            lang={lang}
+            currency={currency}
           />
         </div>
       </div>

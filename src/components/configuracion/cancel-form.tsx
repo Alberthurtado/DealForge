@@ -11,54 +11,31 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import Link from "next/link";
+import { CONFIG_STRINGS } from "@/lib/configuracion-i18n";
+import { type DashboardLang } from "@/lib/dashboard-i18n";
+import { PRICING, formatMoney, isValidCurrency, type Currency } from "@/lib/pricing";
 
 interface Props {
   currentPlan: string;
   planStatus: string;
   endDate: string | null;
+  lang?: DashboardLang;
+  currency?: string;
 }
 
 type TargetPlan = "pro" | "starter";
 
-const PLAN_INFO: Record<
+const PLAN_VISUAL: Record<
   TargetPlan,
-  {
-    label: string;
-    price: string;
-    description: string;
-    features: string[];
-    icon: typeof Flame;
-    color: string;
-    bgColor: string;
-    borderColor: string;
-  }
+  { icon: typeof Flame; color: string; bgColor: string; borderColor: string }
 > = {
   pro: {
-    label: "Pro",
-    price: "29€/mes",
-    description: "Mantén las funciones principales con un precio más bajo.",
-    features: [
-      "100 cotizaciones/mes",
-      "50 clientes · 200 productos",
-      "Forge IA ilimitado",
-      "Firma electrónica y emails",
-      "Hasta 5 usuarios",
-    ],
     icon: Flame,
     color: "text-blue-700",
     bgColor: "bg-blue-50",
     borderColor: "border-blue-200",
   },
   starter: {
-    label: "Starter (Gratis)",
-    price: "0€",
-    description: "Plan gratuito, sin cargo mensual.",
-    features: [
-      "10 cotizaciones/mes",
-      "5 clientes · 10 productos",
-      "5 consultas Forge IA",
-      "1 usuario",
-    ],
     icon: User,
     color: "text-gray-700",
     bgColor: "bg-gray-50",
@@ -66,8 +43,15 @@ const PLAN_INFO: Record<
   },
 };
 
-export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
+export function CancelForm({ currentPlan, planStatus, endDate, lang = "es", currency = "EUR" }: Props) {
   const router = useRouter();
+  const t = CONFIG_STRINGS[lang].cancelForm;
+  const cur: Currency = isValidCurrency(currency) ? currency : "EUR";
+  const proPrice = `${formatMoney(PRICING.pro[cur].monthly, cur)}${CONFIG_STRINGS[lang].planSection.perMonth}`;
+  const planPrice: Record<TargetPlan, string> = {
+    pro: proPrice,
+    starter: formatMoney(0, cur),
+  };
   const [loading, setLoading] = useState<TargetPlan | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<TargetPlan | null>(null);
@@ -88,7 +72,7 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Error al procesar el cambio");
+        setError(data.error || t.errProcess);
         setLoading(null);
         return;
       }
@@ -98,14 +82,13 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
         router.refresh();
       }, 2500);
     } catch {
-      setError("Error de conexión");
+      setError(t.errConnection);
       setLoading(null);
     }
   }
 
   // Success state
   if (done) {
-    const target = PLAN_INFO[done];
     return (
       <div className="bg-white rounded-xl border border-border p-8 text-center space-y-4">
         <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto">
@@ -113,15 +96,15 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
         </div>
         <div>
           <h3 className="text-lg font-semibold text-foreground mb-1">
-            {done === "pro" ? "Plan cambiado a Pro" : "Suscripción cancelada"}
+            {done === "pro" ? t.successProTitle : t.successCancelTitle}
           </h3>
           <p className="text-sm text-muted-foreground">
             {done === "pro"
-              ? `A partir del próximo ciclo de facturación pasarás al plan Pro (29€/mes).`
-              : `Tu suscripción no se renovará${endDate ? ` el ${endDate}` : ""}. Después pasarás al plan Starter gratuito.`}
+              ? t.successProDesc(proPrice)
+              : `${t.successCancelDescPre}${endDate ? t.onDate(endDate) : ""}${t.successCancelDescPost}`}
           </p>
         </div>
-        <p className="text-xs text-muted-foreground">Redirigiendo a configuración...</p>
+        <p className="text-xs text-muted-foreground">{t.redirecting}</p>
       </div>
     );
   }
@@ -132,8 +115,7 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
       <div className="bg-white rounded-xl border border-border p-6 space-y-4">
         <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
           <p className="text-sm font-medium text-amber-800">
-            Tu suscripción ya está programada para cancelarse
-            {endDate ? ` el ${endDate}` : ""}. Después pasarás al plan Starter gratuito.
+            {t.alreadyCancelingPre}{endDate ? t.onDate(endDate) : ""}{t.alreadyCancelingPost}
           </p>
         </div>
         <Link
@@ -141,7 +123,7 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
           className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border border-border rounded-lg hover:bg-muted transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Volver a Configuración
+          {t.backToSettings}
         </Link>
       </div>
     );
@@ -155,12 +137,12 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
       {/* Current plan info */}
       <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
         <p className="text-sm font-semibold text-red-800">
-          Estás a punto de cambiar desde el plan {planLabel}
+          {t.aboutToChange(planLabel)}
         </p>
         {endDate && (
           <p className="text-xs text-red-700 mt-1">
-            Tu acceso actual continúa hasta el{" "}
-            <span className="font-bold">{endDate}</span>.
+            {t.accessUntilPre}
+            <span className="font-bold">{endDate}</span>{t.accessUntilPost}
           </p>
         )}
       </div>
@@ -168,19 +150,20 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
       {/* Downgrade options */}
       <div>
         <p className="text-sm font-semibold text-foreground mb-3">
-          ¿A qué plan quieres cambiar?
+          {t.whichPlan}
         </p>
         <div className="space-y-3">
           {options.map((target) => {
-            const info = PLAN_INFO[target];
-            const Icon = info.icon;
+            const visual = PLAN_VISUAL[target];
+            const info = t.plans[target];
+            const Icon = visual.icon;
             const isLoading = loading === target;
             const isDisabled = loading !== null;
 
             return (
               <div
                 key={target}
-                className={`rounded-xl border-2 p-4 ${info.bgColor} ${info.borderColor}`}
+                className={`rounded-xl border-2 p-4 ${visual.bgColor} ${visual.borderColor}`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3 flex-1">
@@ -189,13 +172,13 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
                         target === "pro" ? "bg-blue-100" : "bg-gray-200"
                       }`}
                     >
-                      <Icon className={`w-5 h-5 ${info.color}`} />
+                      <Icon className={`w-5 h-5 ${visual.color}`} />
                     </div>
                     <div>
-                      <p className={`text-sm font-semibold ${info.color}`}>
-                        Plan {info.label}{" "}
+                      <p className={`text-sm font-semibold ${visual.color}`}>
+                        {t.planPrefix} {info.label}{" "}
                         <span className="font-normal text-muted-foreground">
-                          — {info.price}
+                          — {planPrice[target]}
                         </span>
                       </p>
                       <p className="text-xs text-muted-foreground mt-0.5">
@@ -229,10 +212,10 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
                       <AlertTriangle className="w-4 h-4" />
                     )}
                     {isLoading
-                      ? "Procesando..."
+                      ? t.processing
                       : target === "pro"
-                      ? "Bajar a Pro"
-                      : "Cancelar a Starter"}
+                      ? t.downToPro
+                      : t.cancelToStarter}
                   </button>
                 </div>
               </div>
@@ -253,7 +236,7 @@ export function CancelForm({ currentPlan, planStatus, endDate }: Props) {
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Mantener mi plan actual y volver
+          {t.keepPlan}
         </Link>
       </div>
     </div>
