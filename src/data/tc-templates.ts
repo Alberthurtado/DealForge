@@ -10,7 +10,9 @@ export interface TCTemplate {
   contenido: string;
 }
 
-export const TC_TEMPLATES: TCTemplate[] = [
+export type TCTemplateLang = "es" | "en";
+
+const ES_TEMPLATES: TCTemplate[] = [
   {
     id: "basica-servicios",
     nombre: "Básica — Servicios profesionales",
@@ -188,3 +190,194 @@ LANGUAGE / IDIOMA: In case of discrepancy, the Spanish version shall prevail.
 JURISDICTION / JURISDICCIÓN: Spanish law applies. Courts of [Your city], Spain.`,
   },
 ];
+
+const EN_TEMPLATES: TCTemplate[] = [
+  {
+    id: "basica-servicios",
+    nombre: "Basic — Professional services",
+    tipo: "transaccional",
+    descripcion: "Ideal for freelancers and consultants selling services per project.",
+    icon: "💼",
+    contenido: `VALIDITY: This offer is valid for 30 days from the issue date.
+
+PAYMENT: 50% on accepting the proposal and 50% on delivery. Payment by bank transfer within 15 days.
+
+SCOPE: The deliverables are those expressly detailed in this quote. Any change to the scope will require an additional quote.
+
+INTELLECTUAL PROPERTY: Rights to the deliverables transfer to the client upon full payment.
+
+CONFIDENTIALITY: Both parties undertake to keep the information exchanged confidential.
+
+JURISDICTION: Any dispute shall be governed by the laws of [your jurisdiction] and submitted to the courts of [your city].`,
+  },
+  {
+    id: "basica-producto",
+    nombre: "Basic — Product sale",
+    tipo: "transaccional",
+    descripcion: "For companies selling physical goods, with shipping and warranty clauses.",
+    icon: "📦",
+    contenido: `VALIDITY: This offer is valid for 30 days from the issue date. Prices may vary depending on availability.
+
+PAYMENT: Payment by bank transfer within 30 days of delivery. Late payments accrue interest of 8% per year.
+
+DELIVERY: The estimated delivery time is specified in the quote. Shipping costs are not included unless expressly stated.
+
+WARRANTY: 24 months against manufacturing defects. Does not cover damage from misuse or normal wear.
+
+RETURNS: We accept returns within 14 calendar days of delivery, in their original packaging.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+  {
+    id: "completa-b2b",
+    nombre: "Full B2B — Maximum protection",
+    tipo: "transaccional",
+    descripcion: "Extensive T&C for B2B sales with robust legal clauses.",
+    icon: "🛡️",
+    contenido: `1. VALIDITY OF THE OFFER
+This offer is valid for 30 days from issue. After this period, a new quote will be required.
+
+2. PAYMENT TERMS
+A 30% deposit is required on accepting the proposal. The remaining balance is due within 30 days of the invoice. Late payments incur a late-payment surcharge of 8% per year under applicable legislation.
+
+3. DELIVERABLES AND TIMELINES
+The deliverables and timelines are those expressly stated in this quote. Any change to the scope requires an addendum signed by both parties.
+
+4. CANCELLATION
+If cancelled after work has started, the percentage of the project already completed will be billed, with a minimum of 30%.
+
+5. INTELLECTUAL PROPERTY
+Rights to the deliverables transfer to the client once the full invoiced amount has been paid.
+
+6. CONFIDENTIALITY
+Both parties undertake to keep any information exchanged confidential for 3 years after the project ends.
+
+7. LIABILITY
+The supplier's total liability is limited to the total amount of this quote.
+
+8. DATA PROTECTION
+Personal data is processed in accordance with applicable data-protection law (GDPR). See our policy at [web].
+
+9. JURISDICTION AND GOVERNING LAW
+Any resulting dispute shall be submitted to the courts of [your city], governed by the laws of [your jurisdiction].`,
+  },
+  {
+    id: "saas-suscripcion",
+    nombre: "SaaS / Subscription",
+    tipo: "contractual",
+    descripcion: "For SaaS companies with monthly or annual subscription models.",
+    icon: "☁️",
+    contenido: `TERM: The contract has a minimum term of 12 months from the activation date.
+
+BILLING: Billed on a recurring basis according to the agreed frequency (monthly/annual). The client authorizes automatic charging by direct debit or card.
+
+RENEWAL: Automatic renewal for equal periods unless cancellation notice is given 30 days before expiry.
+
+SERVICE LEVELS (SLA): Guaranteed uptime of 99.5% monthly. Support during business hours (Mon-Fri 9:00-18:00).
+
+UPDATES: All product updates included at no extra cost for the duration of the contract.
+
+DATA: The client retains ownership of their data. The provider acts as data processor in accordance with the GDPR.
+
+CANCELLATION: The client may cancel at any time, effective at the end of the billed period. No refunds are given for partial periods.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+  {
+    id: "agencia-creativa",
+    nombre: "Creative / Marketing agency",
+    tipo: "transaccional",
+    descripcion: "For agencies with phased projects and assignment of rights.",
+    icon: "🎨",
+    contenido: `PHASES AND PAYMENTS
+The project is structured in 3 phases with payment milestones:
+- 30% on accepting the proposal
+- 30% on delivery of the first creative concepts
+- 40% on final delivery after approval
+
+REVISIONS
+Up to 2 rounds of revisions per deliverable are included. Additional revisions will be billed at €60/hour.
+
+ASSIGNMENT OF RIGHTS
+Commercial usage rights transfer to the client only upon full payment. The agency reserves the right to use the work in its portfolio unless expressly agreed otherwise.
+
+CLIENT MATERIALS
+The client warrants that they hold the rights to the materials provided (images, text, trademarks). The agency is released from any liability for their use.
+
+TIMELINES
+Timelines are estimates and depend on the client providing feedback and materials on time.
+
+TERMINATION
+In the event of termination, work completed to date will be billed plus 20% as lost profit.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+  {
+    id: "consultoria-retainer",
+    nombre: "Consulting — Monthly retainer",
+    tipo: "contractual",
+    descripcion: "For consultancies with a monthly retainer model with included hours.",
+    icon: "🧠",
+    contenido: `MODEL: Consulting service under a monthly retainer model with X hours of dedication included.
+
+MINIMUM TERM: 6 months with automatic monthly renewal unless 30 days' notice is given.
+
+BILLING: Monthly retainer billed in advance within the first 5 days of the month.
+
+EXTRA HOURS: Hours exceeding those contracted are billed at the agreed rate, with prior notice to the client.
+
+SUPPORT HOURS: Mon-Fri 9:00 to 18:00. Guaranteed response within 24 business hours.
+
+ENHANCED CONFIDENTIALITY: Confidentiality obligation during the term and for 5 years after the service ends.
+
+DELIVERABLES: Reports, analyses and documents produced are the client's property upon payment.
+
+NON-EXCLUSIVITY: The consultant may provide similar services to third parties that are not direct competitors.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+  {
+    id: "minimalista",
+    nombre: "Minimalist — Sole trader",
+    tipo: "transaccional",
+    descripcion: "Short version for sole traders starting out. 5 essential clauses.",
+    icon: "✏️",
+    contenido: `• Offer valid for 30 days.
+• Payment: 50% on acceptance, 50% on delivery. Bank transfer.
+• Timelines are indicative and depend on the client providing materials on time.
+• Any change to the scope means a new quote.
+• Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+  {
+    id: "internacional",
+    nombre: "International / Multi-currency",
+    tipo: "ambas",
+    descripcion: "For clients outside your home country or with currency fluctuation.",
+    icon: "🌍",
+    contenido: `VALIDITY: This offer is valid for 30 days from the issue date.
+
+CURRENCY: Prices are in the currency stated on the quote. For payments in another currency, the exchange rate at the invoice date applies. A price-adjustment clause applies if the exchange rate fluctuates by more than 5%.
+
+PAYMENT: Payment by international bank transfer (SWIFT) within 30 days. All bank fees are borne by the client.
+
+TAX: For intra-EU clients with a valid VIES VAT number, reverse charge applies (invoice without VAT). For clients outside the EU, the invoice is issued without VAT as an export.
+
+INCOTERMS: EXW (Ex Works) unless otherwise stated in the quotation.
+
+LANGUAGE: In case of discrepancy between language versions, the English version shall prevail.
+
+JURISDICTION: Governed by the laws of [your jurisdiction]. Courts of [your city].`,
+  },
+];
+
+export const TC_TEMPLATES_BY_LANG: Record<TCTemplateLang, TCTemplate[]> = {
+  es: ES_TEMPLATES,
+  en: EN_TEMPLATES,
+};
+
+export function getTCTemplates(lang: TCTemplateLang = "es"): TCTemplate[] {
+  return TC_TEMPLATES_BY_LANG[lang] ?? ES_TEMPLATES;
+}
+
+// Back-compat: default Spanish list
+export const TC_TEMPLATES = ES_TEMPLATES;

@@ -2,19 +2,23 @@
 
 import { useState } from "react";
 import { X, Check, FileText, Sparkles } from "lucide-react";
-import { TC_TEMPLATES, type TCTemplate } from "@/data/tc-templates";
+import { getTCTemplates, type TCTemplate } from "@/data/tc-templates";
+import { CONFIG_STRINGS } from "@/lib/configuracion-i18n";
+import { type DashboardLang } from "@/lib/dashboard-i18n";
 
 interface Props {
   tipo: "transaccional" | "contractual";
   onApply: (contenido: string) => void;
+  lang?: DashboardLang;
 }
 
-export function TCTemplatesModal({ tipo, onApply }: Props) {
+export function TCTemplatesModal({ tipo, onApply, lang = "es" }: Props) {
+  const tx = CONFIG_STRINGS[lang].tcModal;
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<TCTemplate | null>(null);
 
   // Filter templates by tipo (ambas = aplicable a los dos)
-  const templates = TC_TEMPLATES.filter((t) => t.tipo === tipo || t.tipo === "ambas");
+  const templates = getTCTemplates(lang).filter((t) => t.tipo === tipo || t.tipo === "ambas");
 
   function handleApply() {
     if (!selected) return;
@@ -31,7 +35,7 @@ export function TCTemplatesModal({ tipo, onApply }: Props) {
         className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
       >
         <Sparkles className="w-3.5 h-3.5" />
-        Usar plantilla
+        {tx.useTemplate}
       </button>
 
       {open && (
@@ -48,11 +52,11 @@ export function TCTemplatesModal({ tipo, onApply }: Props) {
               <div>
                 <h2 className="font-bold text-gray-900 flex items-center gap-2">
                   <FileText className="w-5 h-5 text-[#3a9bb5]" />
-                  Galería de plantillas T&C —{" "}
-                  {tipo === "transaccional" ? "Transaccionales" : "Contractuales"}
+                  {tx.galleryTitle}{" "}
+                  {tipo === "transaccional" ? tx.transactional : tx.contractual}
                 </h2>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  Elige una base y personalízala. Puedes editarla libremente después de aplicarla.
+                  {tx.subtitle}
                 </p>
               </div>
               <button
@@ -113,8 +117,8 @@ export function TCTemplatesModal({ tipo, onApply }: Props) {
                   <div className="h-full flex items-center justify-center text-sm text-gray-400 text-center">
                     <div>
                       <FileText className="w-10 h-10 mx-auto mb-3 text-gray-300" />
-                      <p>Selecciona una plantilla de la lista</p>
-                      <p className="text-xs mt-1">para ver su contenido</p>
+                      <p>{tx.emptyTitle}</p>
+                      <p className="text-xs mt-1">{tx.emptyHint}</p>
                     </div>
                   </div>
                 )}
@@ -124,7 +128,7 @@ export function TCTemplatesModal({ tipo, onApply }: Props) {
             {/* Footer */}
             <div className="border-t border-gray-100 px-6 py-4 flex items-center justify-between flex-shrink-0">
               <p className="text-xs text-gray-500">
-                💡 Recuerda reemplazar <code className="bg-gray-100 px-1.5 py-0.5 rounded">[Tu ciudad]</code> tras aplicarla.
+                💡 {tx.footerTipPre}<code className="bg-gray-100 px-1.5 py-0.5 rounded">{tx.footerCityCode}</code>{tx.footerTipPost}
               </p>
               <div className="flex items-center gap-2">
                 <button
@@ -132,7 +136,7 @@ export function TCTemplatesModal({ tipo, onApply }: Props) {
                   onClick={() => setOpen(false)}
                   className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
                 >
-                  Cancelar
+                  {tx.cancel}
                 </button>
                 <button
                   type="button"
@@ -140,7 +144,7 @@ export function TCTemplatesModal({ tipo, onApply }: Props) {
                   disabled={!selected}
                   className="px-5 py-2 text-sm font-semibold bg-[#3a9bb5] text-white rounded-lg hover:bg-[#2d7d94] disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  Aplicar plantilla
+                  {tx.apply}
                 </button>
               </div>
             </div>

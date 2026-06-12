@@ -4,6 +4,8 @@ import { useState, useRef } from "react";
 import { Upload, Check, Building2, Hash, Mail, Eye, EyeOff, FileText, Bell } from "lucide-react";
 import { useToast } from "@/components/ui/toast";
 import { TCTemplatesModal } from "./tc-templates-modal";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { CONFIG_STRINGS } from "@/lib/configuracion-i18n";
 
 interface EmpresaData {
   nombre: string;
@@ -32,29 +34,15 @@ interface EmpresaData {
   recordatoriosActivos: boolean;
 }
 
-const PLANTILLAS = [
-  {
-    id: "moderna",
-    nombre: "Moderna",
-    descripcion: "Gradientes, colores vivos, bordes redondeados",
-  },
-  {
-    id: "clasica",
-    nombre: "Clásica",
-    descripcion: "Formal con líneas, tabla con bordes, profesional",
-  },
-  {
-    id: "minimalista",
-    nombre: "Minimalista",
-    descripcion: "Sin color, líneas finas, mucho espacio blanco",
-  },
-];
+const PLANTILLAS = ["moderna", "clasica", "minimalista"];
 
 const inputClass =
   "w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white";
 
 export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
   const { success, error: showError } = useToast();
+  const { lang } = useEmpresaLocale();
+  const t = CONFIG_STRINGS[lang].empresaForm;
   const [form, setForm] = useState<EmpresaData>(initialData);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -75,12 +63,12 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
         body: JSON.stringify(form),
       });
       if (res.ok) {
-        success("Configuración guardada correctamente");
+        success(t.configSaved);
       } else {
-        showError("Error al guardar la configuración");
+        showError(t.errSave);
       }
     } catch {
-      showError("Error de conexión");
+      showError(t.errConnection);
     } finally {
       setSaving(false);
     }
@@ -103,12 +91,12 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
 
       if (res.ok) {
         setForm((prev) => ({ ...prev, logoUrl: data.logoUrl }));
-        success("Logo actualizado");
+        success(t.logoUpdated);
       } else {
-        showError(data.error || "Error al subir el logo");
+        showError(data.error || t.errUploadLogo);
       }
     } catch {
-      showError("Error al subir el archivo");
+      showError(t.errUploadFile);
     } finally {
       setUploading(false);
     }
@@ -120,24 +108,24 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-4 flex items-center gap-2">
           <Building2 className="w-5 h-5 text-primary" />
-          Datos de la Empresa
+          {t.companyData}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Nombre de la empresa *
+              {t.companyName}
             </label>
             <input
               type="text"
               value={form.nombre}
               onChange={(e) => updateField("nombre", e.target.value)}
               className={inputClass}
-              placeholder="Mi Empresa S.L."
+              placeholder={t.companyNamePlaceholder}
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              CIF / NIF
+              {t.taxId}
             </label>
             <input
               type="text"
@@ -149,19 +137,19 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Email
+              {t.email}
             </label>
             <input
               type="email"
               value={form.email || ""}
               onChange={(e) => updateField("email", e.target.value)}
               className={inputClass}
-              placeholder="info@miempresa.es"
+              placeholder={t.emailPlaceholder}
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Teléfono
+              {t.phone}
             </label>
             <input
               type="tel"
@@ -173,50 +161,50 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div className="md:col-span-2">
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Dirección
+              {t.address}
             </label>
             <input
               type="text"
               value={form.direccion || ""}
               onChange={(e) => updateField("direccion", e.target.value)}
               className={inputClass}
-              placeholder="Calle Principal 1, Planta 3"
+              placeholder={t.addressPlaceholder}
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Ciudad
+              {t.city}
             </label>
             <input
               type="text"
               value={form.ciudad || ""}
               onChange={(e) => updateField("ciudad", e.target.value)}
               className={inputClass}
-              placeholder="Madrid"
+              placeholder={t.cityPlaceholder}
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              País
+              {t.country}
             </label>
             <input
               type="text"
               value={form.pais || ""}
               onChange={(e) => updateField("pais", e.target.value)}
               className={inputClass}
-              placeholder="España"
+              placeholder={t.countryPlaceholder}
             />
           </div>
           <div className="md:col-span-2">
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Sitio Web
+              {t.website}
             </label>
             <input
               type="text"
               value={form.web || ""}
               onChange={(e) => updateField("web", e.target.value)}
               className={inputClass}
-              placeholder="www.miempresa.es"
+              placeholder={t.websitePlaceholder}
             />
           </div>
         </div>
@@ -225,7 +213,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       {/* Section 2: Logo */}
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-4">
-          Logo de la Empresa
+          {t.logoTitle}
         </h3>
         <div className="flex items-start gap-6">
           {/* Logo preview */}
@@ -243,8 +231,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
 
           <div className="flex-1">
             <p className="text-sm text-muted-foreground mb-3">
-              Sube el logo de tu empresa. Se mostrará en las cotizaciones PDF.
-              Formatos: PNG, JPG, SVG, WebP. Max 500KB.
+              {t.logoDesc}
             </p>
             <input
               ref={fileInputRef}
@@ -259,7 +246,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
               className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border border-border rounded-lg hover:bg-muted transition-colors disabled:opacity-50"
             >
               <Upload className="w-4 h-4" />
-              {uploading ? "Subiendo..." : "Subir logo"}
+              {uploading ? t.uploading : t.uploadLogo}
             </button>
           </div>
         </div>
@@ -268,19 +255,20 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       {/* Section 3: PDF Template */}
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1">
-          Plantilla de Cotización
+          {t.templateTitle}
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Selecciona el diseño para tus cotizaciones PDF
+          {t.templateDesc}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {PLANTILLAS.map((p) => {
-            const isSelected = form.plantillaPdf === p.id;
+          {PLANTILLAS.map((id) => {
+            const isSelected = form.plantillaPdf === id;
+            const tpl = t.templates[id];
             return (
               <button
-                key={p.id}
-                onClick={() => updateField("plantillaPdf", p.id)}
+                key={id}
+                onClick={() => updateField("plantillaPdf", id)}
                 className={`relative rounded-xl border-2 p-4 text-left transition-all ${
                   isSelected
                     ? "border-primary bg-primary/5 ring-1 ring-primary/20"
@@ -294,11 +282,11 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
                 )}
 
                 {/* Mini mockup */}
-                <PlantillaMockup tipo={p.id} color={form.colorPrimario} />
+                <PlantillaMockup tipo={id} color={form.colorPrimario} t={t} />
 
-                <p className="text-sm font-semibold mt-3">{p.nombre}</p>
+                <p className="text-sm font-semibold mt-3">{tpl.nombre}</p>
                 <p className="text-[11px] text-muted-foreground mt-0.5">
-                  {p.descripcion}
+                  {tpl.descripcion}
                 </p>
               </button>
             );
@@ -309,10 +297,10 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       {/* Section 4: Primary Color */}
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1">
-          Color Primario
+          {t.colorTitle}
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Se usa en el encabezado y totales de tus cotizaciones
+          {t.colorDesc}
         </p>
         <div className="flex items-center gap-4">
           <input
@@ -324,7 +312,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           <div>
             <p className="text-sm font-medium">{form.colorPrimario}</p>
             <p className="text-xs text-muted-foreground">
-              Haz click para cambiar el color
+              {t.colorClickToChange}
             </p>
           </div>
           <div
@@ -338,15 +326,15 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
           <Hash className="w-5 h-5 text-primary" />
-          Numeración de Cotizaciones
+          {t.numberingTitle}
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Define el prefijo para tus cotizaciones. El formato final será: PREFIJO-AÑO-0001
+          {t.numberingDesc}
         </p>
         <div className="flex items-center gap-4">
           <div className="flex-1 max-w-xs">
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Prefijo
+              {t.prefix}
             </label>
             <input
               type="text"
@@ -364,7 +352,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div className="flex-1">
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Vista previa
+              {t.preview}
             </label>
             <div className="px-3 py-2 text-sm bg-gray-50 border border-border rounded-lg text-muted-foreground font-mono">
               {form.prefijoCotizacion || "COT"}-{new Date().getFullYear()}-0001
@@ -377,15 +365,15 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
           <Hash className="w-5 h-5 text-primary" />
-          Vencimiento por Defecto
+          {t.expiryTitle}
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Días de validez que se asignan automáticamente a cada nueva cotización
+          {t.expiryDesc}
         </p>
         <div className="flex items-center gap-4">
           <div className="flex-1 max-w-xs">
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Días de vencimiento
+              {t.expiryDays}
             </label>
             <input
               type="number"
@@ -401,10 +389,10 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div className="flex-1">
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Vista previa
+              {t.preview}
             </label>
             <div className="px-3 py-2 text-sm bg-gray-50 border border-border rounded-lg text-muted-foreground">
-              Cada cotización vencerá <strong className="text-foreground">{form.diasVencimiento} días</strong> después de su creación
+              {t.expiryPreviewPre}<strong className="text-foreground">{t.expiryPreviewDays(form.diasVencimiento)}</strong>{t.expiryPreviewPost}
             </div>
           </div>
         </div>
@@ -415,20 +403,21 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
         <div>
           <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
             <FileText className="w-5 h-5 text-primary" />
-            Términos y Condiciones
+            {t.tcTitle}
           </h3>
           <p className="text-xs text-muted-foreground mb-4">
-            Se aplican automáticamente según el tipo de líneas en la cotización. Si la cotización tiene ambos tipos, se combinan.
+            {t.tcDesc}
           </p>
         </div>
 
         <div>
           <div className="flex items-center justify-between mb-1">
             <label className="block text-sm font-medium text-foreground">
-              T&C Transaccionales <span className="text-xs text-muted-foreground font-normal">(productos/servicios de pago único)</span>
+              {t.tcTransactional} <span className="text-xs text-muted-foreground font-normal">{t.tcTransactionalHint}</span>
             </label>
             <TCTemplatesModal
               tipo="transaccional"
+              lang={lang}
               onApply={(contenido) =>
                 setForm((prev) => ({ ...prev, condicionesTransaccional: contenido }))
               }
@@ -441,17 +430,18 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
             }
             className={inputClass}
             rows={4}
-            placeholder="Ej: Pago a 30 días. Precios no incluyen transporte. Garantía de 12 meses..."
+            placeholder={t.tcTransactionalPlaceholder}
           />
         </div>
 
         <div>
           <div className="flex items-center justify-between mb-1">
             <label className="block text-sm font-medium text-foreground">
-              Condiciones por defecto para Contratos <span className="text-xs text-muted-foreground font-normal">(se rellenan automáticamente en cada nuevo contrato)</span>
+              {t.tcContractDefault} <span className="text-xs text-muted-foreground font-normal">{t.tcContractHint}</span>
             </label>
             <TCTemplatesModal
               tipo="contractual"
+              lang={lang}
               onApply={(contenido) =>
                 setForm((prev) => ({ ...prev, condicionesContractual: contenido }))
               }
@@ -464,13 +454,13 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
             }
             className={inputClass}
             rows={4}
-            placeholder="Ej: Duración mínima 12 meses. Renovación automática salvo preaviso de 30 días. Cancelación con 30 días de antelación..."
+            placeholder={t.tcContractPlaceholder}
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-foreground mb-1">
-            T&C Generales <span className="text-xs text-muted-foreground font-normal">(fallback si no hay específicos)</span>
+            {t.tcGeneral} <span className="text-xs text-muted-foreground font-normal">{t.tcGeneralHint}</span>
           </label>
           <textarea
             value={form.condicionesDefecto || ""}
@@ -479,13 +469,13 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
             }
             className={inputClass}
             rows={3}
-            placeholder="Condiciones generales que aplican a todas las cotizaciones..."
+            placeholder={t.tcGeneralPlaceholder}
           />
         </div>
 
         <p className="text-xs text-amber-600 flex items-center gap-1.5">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500" />
-          Las cotizaciones no se pueden enviar sin términos y condiciones
+          {t.tcWarning}
         </p>
       </div>
 
@@ -493,15 +483,15 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
           <Mail className="w-5 h-5 text-primary" />
-          Configuración de Email (SMTP)
+          {t.smtpTitle}
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Configura tu servidor SMTP para enviar cotizaciones por email directamente desde la app
+          {t.smtpDesc}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Servidor SMTP
+              {t.smtpServer}
             </label>
             <input
               type="text"
@@ -513,7 +503,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Puerto
+              {t.smtpPort}
             </label>
             <input
               type="number"
@@ -527,19 +517,19 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Usuario SMTP
+              {t.smtpUser}
             </label>
             <input
               type="text"
               value={form.smtpUser || ""}
               onChange={(e) => updateField("smtpUser", e.target.value)}
               className={inputClass}
-              placeholder="tu@email.com"
+              placeholder={t.smtpUserPlaceholder}
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
-              Contraseña SMTP
+              {t.smtpPass}
             </label>
             <div className="relative">
               <input
@@ -547,7 +537,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
                 value={form.smtpPass || ""}
                 onChange={(e) => updateField("smtpPass", e.target.value)}
                 className={inputClass + " pr-10"}
-                placeholder="Contraseña o App Password"
+                placeholder={t.smtpPassPlaceholder}
               />
               <button
                 type="button"
@@ -569,7 +559,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
                 className="rounded border-border"
               />
               <span className="text-sm text-muted-foreground">
-                Usar SSL/TLS (puerto 465). Desactivar para STARTTLS (puerto 587).
+                {t.smtpSecure}
               </span>
             </label>
           </div>
@@ -578,44 +568,44 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           <div className="p-3 bg-blue-50 border border-blue-100 rounded-lg">
             <p className="text-xs font-semibold text-blue-800 mb-1.5">Gmail</p>
             <p className="text-xs text-blue-700 leading-relaxed">
-              Servidor: <code className="bg-blue-100 px-1 rounded">smtp.gmail.com</code> &middot; Puerto: <code className="bg-blue-100 px-1 rounded">587</code> &middot; SSL/TLS: desactivado
+              {t.serverColon} <code className="bg-blue-100 px-1 rounded">smtp.gmail.com</code> &middot; {t.portColon} <code className="bg-blue-100 px-1 rounded">587</code> &middot; {t.sslColon} {t.sslOff}
             </p>
             <p className="text-xs text-blue-700 mt-1 leading-relaxed">
-              <strong>Requiere App Password</strong> (no funciona con tu contraseña normal si tienes 2FA activado):
+              <strong>{t.gmailRequiresApp}</strong>{t.gmailNote}
             </p>
             <ol className="text-xs text-blue-700 mt-1 ml-4 list-decimal space-y-0.5">
-              <li>Ve a <span className="font-medium">myaccount.google.com/apppasswords</span></li>
-              <li>Pon un nombre (ej: &quot;DealForge&quot;) y pulsa Crear</li>
-              <li>Copia la contraseña de 16 caracteres generada y pégala aquí</li>
+              {t.gmailSteps.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
             </ol>
           </div>
           <div className="p-3 bg-indigo-50 border border-indigo-100 rounded-lg">
             <p className="text-xs font-semibold text-indigo-800 mb-1.5">Outlook / Microsoft 365</p>
             <p className="text-xs text-indigo-700 leading-relaxed">
-              Servidor: <code className="bg-indigo-100 px-1 rounded">smtp-mail.outlook.com</code> &middot; Puerto: <code className="bg-indigo-100 px-1 rounded">587</code> &middot; SSL/TLS: desactivado
+              {t.serverColon} <code className="bg-indigo-100 px-1 rounded">smtp-mail.outlook.com</code> &middot; {t.portColon} <code className="bg-indigo-100 px-1 rounded">587</code> &middot; {t.sslColon} {t.sslOff}
             </p>
             <p className="text-xs text-indigo-700 mt-1 leading-relaxed">
-              Si tienes 2FA activado, necesitas un App Password:
+              {t.outlookNote}
             </p>
             <ol className="text-xs text-indigo-700 mt-1 ml-4 list-decimal space-y-0.5">
-              <li>Ve a <span className="font-medium">account.microsoft.com/security</span></li>
-              <li>Opciones de seguridad avanzadas &rarr; Contraseñas de aplicaciones</li>
-              <li>Crea una nueva y pégala aquí</li>
+              {t.outlookSteps.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
             </ol>
             <p className="text-[10px] text-indigo-500 mt-1">
-              Nota: Algunas cuentas de empresa con Microsoft 365 requieren que el administrador habilite SMTP AUTH.
+              {t.outlookAdminNote}
             </p>
           </div>
           <div className="p-3 bg-purple-50 border border-purple-100 rounded-lg">
             <p className="text-xs font-semibold text-purple-800 mb-1">Yahoo</p>
             <p className="text-xs text-purple-700 leading-relaxed">
-              Servidor: <code className="bg-purple-100 px-1 rounded">smtp.mail.yahoo.com</code> &middot; Puerto: <code className="bg-purple-100 px-1 rounded">465</code> &middot; SSL/TLS: <strong>activado</strong>
+              {t.serverColon} <code className="bg-purple-100 px-1 rounded">smtp.mail.yahoo.com</code> &middot; {t.portColon} <code className="bg-purple-100 px-1 rounded">465</code> &middot; {t.sslColon} <strong>{t.sslOn}</strong>
             </p>
           </div>
           <div className="p-3 bg-green-50 border border-green-100 rounded-lg flex items-start gap-2">
             <svg className="w-4 h-4 text-green-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
             <p className="text-xs text-green-700">
-              <strong>Tus credenciales están seguras.</strong> La contraseña se almacena cifrada en la base de datos local de DealForge y nunca se comparte con terceros. Solo se usa para enviar emails desde tu propio servidor SMTP.
+              <strong>{t.securityNoteStrong}</strong>{t.securityNote}
             </p>
           </div>
         </div>
@@ -635,12 +625,12 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
                   const res = await fetch("/api/email/test", { method: "POST" });
                   const data = await res.json();
                   if (res.ok) {
-                    success("Email de prueba enviado a " + (form.smtpUser || form.email));
+                    success(t.testEmailSent(form.smtpUser || form.email || ""));
                   } else {
-                    showError(data.error || "Error al enviar email de prueba");
+                    showError(data.error || t.errTestEmail);
                   }
                 } catch {
-                  showError("Error de conexión");
+                  showError(t.errConnection);
                 } finally {
                   setTestingEmail(false);
                 }
@@ -649,7 +639,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
               className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border border-border rounded-lg hover:bg-muted transition-colors disabled:opacity-50"
             >
               <Mail className="w-4 h-4" />
-              {testingEmail ? "Enviando..." : "Enviar Email de Prueba"}
+              {testingEmail ? t.testSending : t.sendTestEmail}
             </button>
           </div>
         )}
@@ -659,10 +649,10 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
           <Bell className="w-5 h-5 text-primary" />
-          Recordatorios Automáticos
+          {t.remindersTitle}
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
-          Envía recordatorios automáticos al vendedor y al cliente para mejorar el seguimiento
+          {t.remindersDesc}
         </p>
 
         <div className="space-y-4">
@@ -676,8 +666,8 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
               className="rounded border-border w-4 h-4"
             />
             <div>
-              <span className="text-sm font-medium text-foreground">Activar recordatorios</span>
-              <p className="text-xs text-muted-foreground">Se envían automáticamente cada día a las 8:00 UTC</p>
+              <span className="text-sm font-medium text-foreground">{t.enableReminders}</span>
+              <p className="text-xs text-muted-foreground">{t.remindersSchedule}</p>
             </div>
           </label>
 
@@ -685,7 +675,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 pl-7">
               <div>
                 <label className="block text-xs font-medium text-muted-foreground mb-1">
-                  Días sin actividad para recordar al vendedor
+                  {t.reminderSellerDays}
                 </label>
                 <input
                   type="number"
@@ -701,12 +691,12 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
                   className={inputClass}
                 />
                 <p className="text-[10px] text-muted-foreground mt-1">
-                  Si una cotización enviada no tiene actividad en este número de días, se envía un recordatorio al vendedor.
+                  {t.reminderSellerHint}
                 </p>
               </div>
               <div>
                 <label className="block text-xs font-medium text-muted-foreground mb-1">
-                  Días antes del vencimiento para avisar al cliente
+                  {t.reminderClientDays}
                 </label>
                 <input
                   type="number"
@@ -722,7 +712,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
                   className={inputClass}
                 />
                 <p className="text-[10px] text-muted-foreground mt-1">
-                  Se envía un recordatorio al cliente cuando la cotización está a punto de vencer.
+                  {t.reminderClientHint}
                 </p>
               </div>
             </div>
@@ -737,7 +727,7 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
           disabled={saving}
           className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
         >
-          {saving ? "Guardando..." : "Guardar Configuración"}
+          {saving ? t.saving : t.saveConfig}
         </button>
       </div>
     </div>
@@ -745,7 +735,15 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
 }
 
 /* Mini visual mockup for each template */
-function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
+function PlantillaMockup({
+  tipo,
+  color,
+  t,
+}: {
+  tipo: string;
+  color: string;
+  t: { mockupQuote: string; mockupTotal: string; mockupTotalLine: string };
+}) {
   if (tipo === "moderna") {
     return (
       <div className="w-full h-28 rounded-lg border border-gray-200 bg-white overflow-hidden text-[6px]">
@@ -754,7 +752,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
           style={{ background: `linear-gradient(135deg, ${color}, ${color}dd)` }}
         >
           <div className="w-4 h-4 bg-white/30 rounded" />
-          <div className="text-white font-bold text-[7px]">COTIZACIÓN</div>
+          <div className="text-white font-bold text-[7px]">{t.mockupQuote}</div>
         </div>
         <div className="px-2 py-1.5 space-y-1">
           <div className="flex gap-2">
@@ -772,7 +770,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
               className="h-3 w-12 rounded text-white flex items-center justify-center font-bold"
               style={{ backgroundColor: color }}
             >
-              TOTAL
+              {t.mockupTotal}
             </div>
           </div>
         </div>
@@ -786,7 +784,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
         <div className="h-7 px-2 flex items-center justify-between border-b-2 border-gray-800">
           <div className="w-4 h-4 bg-gray-200 rounded-sm" />
           <div className="font-bold text-gray-800 text-[7px] tracking-wider">
-            COTIZACIÓN
+            {t.mockupQuote}
           </div>
         </div>
         <div className="px-2 py-1.5 space-y-1">
@@ -801,7 +799,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
           </div>
           <div className="flex justify-end pt-0.5">
             <div className="h-3 w-12 border-t-2 border-gray-800 text-gray-800 flex items-center justify-center font-bold">
-              TOTAL
+              {t.mockupTotal}
             </div>
           </div>
         </div>
@@ -815,7 +813,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
       <div className="h-7 px-2 flex items-center justify-between">
         <div className="w-4 h-4 bg-gray-100 rounded-full" />
         <div className="text-gray-400 text-[7px] font-light tracking-widest">
-          COTIZACIÓN
+          {t.mockupQuote}
         </div>
       </div>
       <div className="px-2 py-1.5 space-y-1.5">
@@ -832,7 +830,7 @@ function PlantillaMockup({ tipo, color }: { tipo: string; color: string }) {
         <div className="h-px bg-gray-100" />
         <div className="flex justify-end">
           <div className="text-gray-500 font-medium text-[7px]">
-            Total: 0,00 EUR
+            {t.mockupTotalLine}
           </div>
         </div>
       </div>
