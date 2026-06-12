@@ -6,6 +6,8 @@ import { PlanSection } from "@/components/configuracion/plan-section";
 import { ApiKeySection } from "@/components/configuracion/api-key-section";
 import { TeamSection } from "@/components/configuracion/team-section";
 import { getSession } from "@/lib/auth";
+import { resolveDashboardLang } from "@/lib/dashboard-i18n";
+import { CONFIG_STRINGS } from "@/lib/configuracion-i18n";
 
 export const metadata: Metadata = {
   title: "Configuración",
@@ -49,9 +51,13 @@ export default async function ConfiguracionPage() {
           planStatus: true,
           stripeSubscriptionId: true,
           currentPeriodEnd: true,
+          locale: true,
         },
       })
     : null;
+
+  const lang = resolveDashboardLang(empresa?.locale);
+  const tp = CONFIG_STRINGS[lang].page;
 
   // Fallback: get usuario data for legacy users
   const usuario = session
@@ -79,8 +85,8 @@ export default async function ConfiguracionPage() {
   return (
     <div>
       <PageHeader
-        title="Configuración"
-        description="Datos de tu empresa y plantillas de cotización"
+        title={tp.title}
+        description={tp.description}
       />
       <div className="p-6">
         {usuario && (

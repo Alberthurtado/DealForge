@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Key, Copy, RefreshCw, Trash2, Check, Loader2, ArrowUpRight } from "lucide-react";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { CONFIG_STRINGS } from "@/lib/configuracion-i18n";
 
 interface ApiKeyInfo {
   hasKey: boolean;
@@ -10,6 +12,8 @@ interface ApiKeyInfo {
 }
 
 export function ApiKeySection({ plan }: { plan: string }) {
+  const { lang, locale: numLocale } = useEmpresaLocale();
+  const t = CONFIG_STRINGS[lang].apiKeySection;
   const [keyInfo, setKeyInfo] = useState<ApiKeyInfo | null>(null);
   const [newKey, setNewKey] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -31,14 +35,12 @@ export function ApiKeySection({ plan }: { plan: string }) {
         if (data.error) setError(data.error);
         else setKeyInfo(data);
       })
-      .catch(() => setError("Error al cargar información de API key"))
+      .catch(() => setError(t.errLoad))
       .finally(() => setLoading(false));
-  }, [isPaid]);
+  }, [isPaid, t.errLoad]);
 
   const handleGenerate = async () => {
-    const msg = keyInfo?.hasKey
-      ? "Esto invalidará tu API key actual. Los sistemas que la usen dejarán de funcionar. ¿Continuar?"
-      : "Se generará una nueva API key. Solo se mostrará una vez. ¿Continuar?";
+    const msg = keyInfo?.hasKey ? t.confirmRegenerate : t.confirmGenerate;
     if (!confirm(msg)) return;
 
     setGenerating(true);
@@ -54,14 +56,14 @@ export function ApiKeySection({ plan }: { plan: string }) {
         setKeyInfo({ hasKey: true, prefix: data.prefix, createdAt: data.createdAt });
       }
     } catch {
-      setError("Error al generar API key");
+      setError(t.errGenerate);
     } finally {
       setGenerating(false);
     }
   };
 
   const handleRevoke = async () => {
-    if (!confirm("Esto eliminará tu API key permanentemente. Los sistemas que la usen dejarán de funcionar. ¿Continuar?")) return;
+    if (!confirm(t.confirmRevoke)) return;
 
     setRevoking(true);
     setError(null);
@@ -75,7 +77,7 @@ export function ApiKeySection({ plan }: { plan: string }) {
         setNewKey(null);
       }
     } catch {
-      setError("Error al revocar API key");
+      setError(t.errRevoke);
     } finally {
       setRevoking(false);
     }
@@ -108,20 +110,20 @@ export function ApiKeySection({ plan }: { plan: string }) {
         </div>
         <div>
           <h3 className="text-base font-semibold text-gray-900">API Key</h3>
-          <p className="text-sm text-gray-500">Conecta sistemas externos con tu cuenta de DealForge</p>
+          <p className="text-sm text-gray-500">{t.subtitle}</p>
         </div>
       </div>
 
       {!isPaid && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
           <p className="text-sm text-amber-800 mb-2">
-            Las API Keys están disponibles en los planes <strong>Pro</strong> y <strong>Business</strong>.
+            {t.gatePre}<strong>Pro</strong>{t.gateAnd}<strong>Business</strong>{t.gatePost}
           </p>
           <a
             href="/configuracion#plan"
             className="inline-flex items-center gap-1 text-sm font-medium text-amber-700 hover:text-amber-900"
           >
-            Mejorar plan <ArrowUpRight className="h-3.5 w-3.5" />
+            {t.upgradePlan} <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
         </div>
       )}
@@ -129,7 +131,7 @@ export function ApiKeySection({ plan }: { plan: string }) {
       {isPaid && loading && (
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <Loader2 className="h-4 w-4 animate-spin" />
-          Cargando...
+          {t.loading}
         </div>
       )}
 
@@ -145,7 +147,7 @@ export function ApiKeySection({ plan }: { plan: string }) {
           {newKey && (
             <div className="rounded-lg border border-green-200 bg-green-50 p-4">
               <p className="text-sm font-medium text-green-800 mb-2">
-                Tu nueva API key (cópiala ahora, no se mostrará de nuevo):
+                {t.newKeyLabel}
               </p>
               <div className="flex items-center gap-2">
                 <code className="flex-1 rounded bg-white px-3 py-2 text-sm font-mono text-gray-900 border border-green-200 break-all">
@@ -154,13 +156,13 @@ export function ApiKeySection({ plan }: { plan: string }) {
                 <button
                   onClick={handleCopy}
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-green-300 bg-white text-green-700 hover:bg-green-50 transition-colors"
-                  title="Copiar"
+                  title={t.copy}
                 >
                   {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 </button>
               </div>
               {copied && (
-                <p className="text-xs text-green-600 mt-1">Copiada al portapapeles</p>
+                <p className="text-xs text-green-600 mt-1">{t.copiedClipboard}</p>
               )}
             </div>
           )}
@@ -170,12 +172,12 @@ export function ApiKeySection({ plan }: { plan: string }) {
             <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">API Key activa</p>
+                  <p className="text-sm text-gray-600">{t.activeKey}</p>
                   <code className="text-sm font-mono text-gray-900">dfk_...{keyInfo.prefix}</code>
                 </div>
                 {keyInfo.createdAt && (
                   <p className="text-xs text-gray-500">
-                    Creada: {new Date(keyInfo.createdAt).toLocaleDateString("es-ES")}
+                    {t.createdLabel(new Date(keyInfo.createdAt).toLocaleDateString(numLocale))}
                   </p>
                 )}
               </div>
@@ -186,10 +188,10 @@ export function ApiKeySection({ plan }: { plan: string }) {
           {keyInfo?.hasKey && (
             <details className="text-sm text-gray-600">
               <summary className="cursor-pointer font-medium hover:text-gray-900">
-                Cómo usar tu API key
+                {t.howToUse}
               </summary>
               <div className="mt-2 rounded-lg bg-gray-900 p-3 text-gray-100 font-mono text-xs overflow-x-auto">
-                <span className="text-gray-400"># Ejemplo: listar clientes</span>
+                <span className="text-gray-400">{t.exampleComment}</span>
                 <br />
                 curl -H &quot;Authorization: Bearer dfk_...{keyInfo.prefix}&quot; \
                 <br />
@@ -212,7 +214,7 @@ export function ApiKeySection({ plan }: { plan: string }) {
               ) : (
                 <Key className="h-4 w-4" />
               )}
-              {keyInfo?.hasKey ? "Regenerar" : "Generar API Key"}
+              {keyInfo?.hasKey ? t.regenerate : t.generate}
             </button>
 
             {keyInfo?.hasKey && (
@@ -222,7 +224,7 @@ export function ApiKeySection({ plan }: { plan: string }) {
                 className="inline-flex items-center gap-2 rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50 transition-colors"
               >
                 {revoking ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
-                Revocar
+                {t.revoke}
               </button>
             )}
           </div>
