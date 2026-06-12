@@ -5,12 +5,16 @@ import Link from "next/link";
 import { FileText, Plus, Star, Pencil } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { DeletePlantillaButton } from "./delete-button";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { CONTRATOS_STRINGS } from "@/lib/contratos-i18n";
 
 export default async function PlantillasContratoPage() {
   const session = await getSession();
   if (!session) redirect("/login");
 
   const empresaId = session.empresaId || session.userId;
+  const lang = await getDashboardLang(session.empresaId);
+  const t = CONTRATOS_STRINGS[lang].plantillas;
 
   const plantillas = await prisma.plantillaContrato.findMany({
     where: { empresaId },
@@ -27,18 +31,18 @@ export default async function PlantillasContratoPage() {
   return (
     <div>
       <PageHeader
-        title="Plantillas de contrato"
-        description="Gestiona las plantillas para generar documentos de contrato"
+        title={t.listTitle}
+        description={t.listDescription}
         breadcrumbs={[
-          { label: "Contratos", href: "/contratos" },
-          { label: "Plantillas" },
+          { label: CONTRATOS_STRINGS[lang].list.pageTitle, href: "/contratos" },
+          { label: t.breadcrumbPlantillas },
         ]}
         actions={
           <Link
             href="/contratos/plantillas/nueva"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
           >
-            <Plus className="w-3.5 h-3.5" /> Nueva plantilla
+            <Plus className="w-3.5 h-3.5" /> {t.newTemplate}
           </Link>
         }
       />
@@ -47,15 +51,15 @@ export default async function PlantillasContratoPage() {
         {plantillas.length === 0 ? (
           <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
             <FileText className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-            <h3 className="text-sm font-semibold text-gray-700 mb-1">Sin plantillas</h3>
+            <h3 className="text-sm font-semibold text-gray-700 mb-1">{t.emptyTitle}</h3>
             <p className="text-sm text-gray-400 mb-4">
-              Crea tu primera plantilla de contrato con variables dinámicas
+              {t.emptyDesc}
             </p>
             <Link
               href="/contratos/plantillas/nueva"
               className="inline-flex items-center gap-1.5 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
             >
-              <Plus className="w-3.5 h-3.5" /> Crear plantilla
+              <Plus className="w-3.5 h-3.5" /> {t.createTemplate}
             </Link>
           </div>
         ) : (
@@ -75,7 +79,7 @@ export default async function PlantillasContratoPage() {
                         <h3 className="font-semibold text-gray-900 text-sm">{p.nombre}</h3>
                         {p.esDefault && (
                           <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
-                            <Star className="w-2.5 h-2.5" /> Default
+                            <Star className="w-2.5 h-2.5" /> {t.defaultBadge}
                           </span>
                         )}
                       </div>
@@ -91,9 +95,9 @@ export default async function PlantillasContratoPage() {
                     href={`/contratos/plantillas/${p.id}/editar`}
                     className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <Pencil className="w-3 h-3" /> Editar
+                    <Pencil className="w-3 h-3" /> {t.edit}
                   </Link>
-                  <DeletePlantillaButton id={p.id} nombre={p.nombre} esDefault={p.esDefault} />
+                  <DeletePlantillaButton id={p.id} nombre={p.nombre} esDefault={p.esDefault} lang={lang} />
                 </div>
               </div>
             ))}

@@ -5,9 +5,14 @@ import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { TEMPLATE_VARIABLES, DEFAULT_CONTRACT_TEMPLATE } from "@/lib/contract-template";
 import { Loader2, Copy, Check } from "lucide-react";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { CONTRATOS_STRINGS } from "@/lib/contratos-i18n";
 
 export default function NuevaPlantillaPage() {
   const router = useRouter();
+  const { lang } = useEmpresaLocale();
+  const t = CONTRATOS_STRINGS[lang].plantillas;
+  const tv = CONTRATOS_STRINGS[lang].varLabels;
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [contenido, setContenido] = useState(DEFAULT_CONTRACT_TEMPLATE);
@@ -18,7 +23,7 @@ export default function NuevaPlantillaPage() {
 
   async function handleSave() {
     if (!nombre.trim() || !contenido.trim()) {
-      setError("El nombre y el contenido son obligatorios");
+      setError(t.errNameContentRequired);
       return;
     }
     setSaving(true);
@@ -33,7 +38,7 @@ export default function NuevaPlantillaPage() {
         router.push("/contratos/plantillas");
       } else {
         const data = await res.json();
-        setError(data.error || "Error al guardar");
+        setError(data.error || t.errSave);
       }
     } finally {
       setSaving(false);
@@ -49,12 +54,12 @@ export default function NuevaPlantillaPage() {
   return (
     <div>
       <PageHeader
-        title="Nueva plantilla de contrato"
-        description="Crea una plantilla HTML con variables dinámicas"
+        title={t.newPageTitle}
+        description={t.newPageDesc}
         breadcrumbs={[
-          { label: "Contratos", href: "/contratos" },
-          { label: "Plantillas", href: "/contratos/plantillas" },
-          { label: "Nueva" },
+          { label: CONTRATOS_STRINGS[lang].list.pageTitle, href: "/contratos" },
+          { label: t.breadcrumbPlantillas, href: "/contratos/plantillas" },
+          { label: t.breadcrumbNew },
         ]}
       />
 
@@ -65,26 +70,26 @@ export default function NuevaPlantillaPage() {
             <div className="bg-white rounded-xl border border-gray-200 p-5 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nombre <span className="text-red-500">*</span>
+                  {t.name} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  placeholder="Ej: Contrato estándar de servicios"
+                  placeholder={t.namePlaceholder}
                   className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Descripción
+                  {t.description}
                 </label>
                 <input
                   type="text"
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
-                  placeholder="Descripción opcional"
+                  placeholder={t.descriptionPlaceholder}
                   className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
                 />
               </div>
@@ -98,17 +103,17 @@ export default function NuevaPlantillaPage() {
                   className="w-4 h-4 accent-primary"
                 />
                 <label htmlFor="esDefault" className="text-sm text-gray-700">
-                  Usar como plantilla predeterminada
+                  {t.useAsDefault}
                 </label>
               </div>
             </div>
 
             <div className="bg-white rounded-xl border border-gray-200 p-5">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Contenido HTML <span className="text-red-500">*</span>
+                {t.htmlContent} <span className="text-red-500">*</span>
               </label>
               <p className="text-xs text-gray-400 mb-3">
-                HTML con variables entre dobles llaves, ej: {`{{cliente.nombre}}`}
+                {t.htmlHint}{`{{cliente.nombre}}`}
               </p>
               <textarea
                 value={contenido}
@@ -131,7 +136,7 @@ export default function NuevaPlantillaPage() {
                 onClick={() => router.push("/contratos/plantillas")}
                 className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg border border-gray-200"
               >
-                Cancelar
+                {t.cancel}
               </button>
               <button
                 onClick={handleSave}
@@ -139,7 +144,7 @@ export default function NuevaPlantillaPage() {
                 className="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 disabled:opacity-50 flex items-center gap-1.5"
               >
                 {saving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                Guardar plantilla
+                {t.saveTemplate}
               </button>
             </div>
           </div>
@@ -147,9 +152,9 @@ export default function NuevaPlantillaPage() {
           {/* Variables sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl border border-gray-200 p-5 sticky top-4">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Variables disponibles</h3>
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">{t.availableVariables}</h3>
               <p className="text-xs text-gray-400 mb-3">
-                Haz clic para copiar al portapapeles
+                {t.clickToCopy}
               </p>
               <div className="space-y-1 max-h-[600px] overflow-y-auto">
                 {TEMPLATE_VARIABLES.map((v) => (
@@ -160,7 +165,7 @@ export default function NuevaPlantillaPage() {
                   >
                     <div>
                       <code className="text-xs font-mono text-primary">{v.key}</code>
-                      <p className="text-xs text-gray-400">{v.label}</p>
+                      <p className="text-xs text-gray-400">{tv[v.key] ?? v.label}</p>
                     </div>
                     {copiedKey === v.key ? (
                       <Check className="w-3.5 h-3.5 text-green-500 shrink-0" />

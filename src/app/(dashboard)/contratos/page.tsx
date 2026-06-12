@@ -5,6 +5,8 @@ import { PageHeader } from "@/components/layout/page-header";
 import Link from "next/link";
 import { ScrollText, Clock, AlertTriangle, XCircle, CheckCircle, TrendingUp, Search } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { CONTRATOS_STRINGS } from "@/lib/contratos-i18n";
 
 interface Contrato {
   id: string;
@@ -20,12 +22,12 @@ interface Contrato {
   _count: { lineItems: number; enmiendas: number };
 }
 
-const ESTADO_CONFIG: Record<string, { label: string; color: string; icon: typeof CheckCircle }> = {
-  ACTIVO: { label: "Activo", color: "bg-green-100 text-green-700", icon: CheckCircle },
-  PENDIENTE_RENOVACION: { label: "Pendiente Renovación", color: "bg-amber-100 text-amber-700", icon: Clock },
-  RENOVADO: { label: "Renovado", color: "bg-blue-100 text-blue-700", icon: TrendingUp },
-  CANCELADO: { label: "Cancelado", color: "bg-red-100 text-red-700", icon: XCircle },
-  EXPIRADO: { label: "Expirado", color: "bg-gray-100 text-gray-600", icon: AlertTriangle },
+const ESTADO_CONFIG: Record<string, { color: string; icon: typeof CheckCircle }> = {
+  ACTIVO: { color: "bg-green-100 text-green-700", icon: CheckCircle },
+  PENDIENTE_RENOVACION: { color: "bg-amber-100 text-amber-700", icon: Clock },
+  RENOVADO: { color: "bg-blue-100 text-blue-700", icon: TrendingUp },
+  CANCELADO: { color: "bg-red-100 text-red-700", icon: XCircle },
+  EXPIRADO: { color: "bg-gray-100 text-gray-600", icon: AlertTriangle },
 };
 
 function diasRestantes(fechaFin: string): number {
@@ -33,14 +35,19 @@ function diasRestantes(fechaFin: string): number {
   return Math.ceil(diff / (1000 * 60 * 60 * 24));
 }
 
-function diasColor(dias: number): { bg: string; text: string; label: string } {
-  if (dias <= 0) return { bg: "bg-gray-100", text: "text-gray-500", label: "Expirado" };
+function diasColor(dias: number, expiredLabel: string): { bg: string; text: string; label: string } {
+  if (dias <= 0) return { bg: "bg-gray-100", text: "text-gray-500", label: expiredLabel };
   if (dias <= 14) return { bg: "bg-red-100", text: "text-red-700", label: `${dias}d` };
   if (dias <= 64) return { bg: "bg-amber-100", text: "text-amber-700", label: `${dias}d` };
   return { bg: "bg-green-100", text: "text-green-700", label: `${dias}d` };
 }
 
 export default function ContratosPage() {
+  const { lang, currency, locale: numLocale } = useEmpresaLocale();
+  const t = CONTRATOS_STRINGS[lang].list;
+  const te = CONTRATOS_STRINGS[lang].estados;
+  const money = (n: number) => formatCurrency(n, currency, numLocale);
+  const fdate = (d: string) => formatDate(d, numLocale);
   const [contratos, setContratos] = useState<Contrato[]>([]);
   const [loading, setLoading] = useState(true);
   const [filtroEstado, setFiltroEstado] = useState("");
@@ -71,18 +78,18 @@ export default function ContratosPage() {
   return (
     <div>
       <PageHeader
-        title="Contratos"
-        description="Gestión de contratos recurrentes y renovaciones"
+        title={t.pageTitle}
+        description={t.pageDescription}
       />
 
       <div className="p-6">
         {/* KPIs */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {[
-            { label: "Contratos Activos", value: activos.length, icon: ScrollText, color: "text-green-600" },
-            { label: "MRR", value: formatCurrency(mrr), icon: TrendingUp, color: "text-blue-600" },
-            { label: "Próximos a Vencer", value: proximosVencer, icon: AlertTriangle, color: "text-amber-600" },
-            { label: "Cancelados", value: cancelados, icon: XCircle, color: "text-red-500" },
+            { label: t.kpiActive, value: activos.length, icon: ScrollText, color: "text-green-600" },
+            { label: t.kpiMrr, value: money(mrr), icon: TrendingUp, color: "text-blue-600" },
+            { label: t.kpiExpiringSoon, value: proximosVencer, icon: AlertTriangle, color: "text-amber-600" },
+            { label: t.kpiCancelled, value: cancelados, icon: XCircle, color: "text-red-500" },
           ].map((kpi) => (
             <div key={kpi.label} className="bg-white rounded-xl border border-gray-200 p-4">
               <div className="flex items-center gap-2 mb-1">
@@ -105,7 +112,7 @@ export default function ContratosPage() {
                 <div className="flex items-start gap-3 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-red-800 mb-4">
                   <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-sm font-semibold">Contratos críticos ({critical.length})</p>
+                    <p className="text-sm font-semibold">{t.criticalTitle(critical.length)}</p>
                     <p className="text-xs text-red-600 mt-0.5">
                       {critical.map((c) => `${c.numero} (${c.cliente.nombre}) — ${diasRestantes(c.fechaFin)}d`).join(" · ")}
                     </p>
@@ -116,7 +123,7 @@ export default function ContratosPage() {
                 <div className="flex items-start gap-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 mb-4">
                   <Clock className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-sm font-semibold">Próximos a vencer ({warning.length})</p>
+                    <p className="text-sm font-semibold">{t.expiringSoonTitle(warning.length)}</p>
                     <p className="text-xs text-amber-600 mt-0.5">
                       {warning.map((c) => `${c.numero} (${c.cliente.nombre}) — ${diasRestantes(c.fechaFin)}d`).join(" · ")}
                     </p>
@@ -133,7 +140,7 @@ export default function ContratosPage() {
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Buscar por número o cliente..."
+              placeholder={t.searchPlaceholder}
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
@@ -144,22 +151,22 @@ export default function ContratosPage() {
             onChange={(e) => setFiltroEstado(e.target.value)}
             className="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
           >
-            <option value="">Todos los estados</option>
-            <option value="ACTIVO">Activos</option>
-            <option value="PENDIENTE_RENOVACION">Pendiente Renovación</option>
-            <option value="CANCELADO">Cancelados</option>
-            <option value="EXPIRADO">Expirados</option>
+            <option value="">{t.allStatuses}</option>
+            <option value="ACTIVO">{t.filterActive}</option>
+            <option value="PENDIENTE_RENOVACION">{t.filterPendingRenewal}</option>
+            <option value="CANCELADO">{t.filterCancelled}</option>
+            <option value="EXPIRADO">{t.filterExpired}</option>
           </select>
         </div>
 
         {/* Table */}
         {loading ? (
-          <div className="text-center py-12 text-gray-400">Cargando contratos...</div>
+          <div className="text-center py-12 text-gray-400">{t.loading}</div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-12">
             <ScrollText className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-            <p className="text-gray-500 font-medium">No hay contratos</p>
-            <p className="text-sm text-gray-400 mt-1">Los contratos se crean desde cotizaciones ganadas</p>
+            <p className="text-gray-500 font-medium">{t.emptyTitle}</p>
+            <p className="text-sm text-gray-400 mt-1">{t.emptyDesc}</p>
           </div>
         ) : (
           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -167,13 +174,13 @@ export default function ContratosPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 text-xs text-gray-500 uppercase tracking-wider">
-                    <th className="text-left px-4 py-3 font-semibold">Contrato</th>
-                    <th className="text-left px-4 py-3 font-semibold">Cliente</th>
-                    <th className="text-left px-4 py-3 font-semibold">Estado</th>
-                    <th className="text-center px-4 py-3 font-semibold">Días</th>
-                    <th className="text-right px-4 py-3 font-semibold">Valor/mes</th>
-                    <th className="text-left px-4 py-3 font-semibold">Vencimiento</th>
-                    <th className="text-left px-4 py-3 font-semibold">Renovación</th>
+                    <th className="text-left px-4 py-3 font-semibold">{t.thContract}</th>
+                    <th className="text-left px-4 py-3 font-semibold">{t.thClient}</th>
+                    <th className="text-left px-4 py-3 font-semibold">{t.thStatus}</th>
+                    <th className="text-center px-4 py-3 font-semibold">{t.thDays}</th>
+                    <th className="text-right px-4 py-3 font-semibold">{t.thValuePerMonth}</th>
+                    <th className="text-left px-4 py-3 font-semibold">{t.thExpiry}</th>
+                    <th className="text-left px-4 py-3 font-semibold">{t.thRenewal}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -191,12 +198,12 @@ export default function ContratosPage() {
                         <td className="px-4 py-3">
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${cfg.color}`}>
                             <cfg.icon className="w-3 h-3" />
-                            {cfg.label}
+                            {te[c.estado] ?? c.estado}
                           </span>
                         </td>
                         <td className="px-4 py-3 text-center">
                           {["ACTIVO", "PENDIENTE_RENOVACION"].includes(c.estado) ? (() => {
-                            const dc = diasColor(dias);
+                            const dc = diasColor(dias, t.expired);
                             return (
                               <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${dc.bg} ${dc.text}`}>
                                 {dias <= 14 && dias > 0 && <AlertTriangle className="w-3 h-3" />}
@@ -208,14 +215,14 @@ export default function ContratosPage() {
                           )}
                         </td>
                         <td className="px-4 py-3 text-right font-medium text-gray-900">
-                          {formatCurrency(c.valorMensual)}
+                          {money(c.valorMensual)}
                         </td>
                         <td className="px-4 py-3">
-                          <span className="text-gray-600">{formatDate(c.fechaFin)}</span>
+                          <span className="text-gray-600">{fdate(c.fechaFin)}</span>
                         </td>
                         <td className="px-4 py-3">
                           <span className={`text-xs ${c.renovacionAutomatica ? "text-green-600" : "text-gray-500"}`}>
-                            {c.renovacionAutomatica ? "Automática" : "Manual"}
+                            {c.renovacionAutomatica ? t.renewalAuto : t.renewalManual}
                           </span>
                         </td>
                       </tr>
