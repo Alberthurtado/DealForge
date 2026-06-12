@@ -34,6 +34,57 @@ const es = {
     errGenerate: "Error al generar API key",
     errRevoke: "Error al revocar API key",
   },
+  teamSection: {
+    title: "Equipo",
+    membersLabel: (n: number) => `${n} miembro${n !== 1 ? "s" : ""}`,
+    planPrefix: "Plan",
+    you: "(tú)",
+    pendingInvites: "Invitaciones pendientes",
+    expires: (date: string) => `Expira ${date}`,
+    inviteMember: "Invitar miembro",
+    slotsAvailable: (n: number) =>
+      `(${n} hueco${n !== 1 ? "s" : ""} disponible${n !== 1 ? "s" : ""})`,
+    emailPlaceholder: "email@empresa.com",
+    sending: "Enviando...",
+    invite: "Invitar",
+    shareExistingTitle: "Compartir datos existentes",
+    shareExistingDesc:
+      "Al aceptar la invitación, estos datos pasarán a ser visibles para todo el equipo.",
+    shareItems: {
+      clientes: "Clientes",
+      productos: "Productos",
+      cotizaciones: "Cotizaciones",
+      contratos: "Contratos",
+    } as Record<string, string>,
+    inviteSuccess: "Invitación enviada correctamente",
+    inviteLinkNote:
+      "El invitado recibirá un email con un enlace para unirse al equipo. El enlace expira en 7 días.",
+    limitReached: (max: number, plan: string) =>
+      `Has alcanzado el límite de ${max} miembro${max !== 1 ? "s" : ""} de tu plan ${plan}`,
+    upgradeToAdd: (plan: string) =>
+      `Mejora al plan ${plan} para agregar más usuarios al equipo.`,
+    viewPlans: "Ver planes",
+    availableRoles: "Roles disponibles",
+    removeMember: "Eliminar miembro",
+    confirmRemove:
+      "¿Eliminar a este miembro del equipo?\n\nLos datos que este usuario creó (clientes, cotizaciones, etc.) seguirán siendo visibles para el equipo. Solo se eliminará su acceso.",
+    errInvite: "Error al enviar la invitación",
+    errConnection: "Error de conexión",
+    roles: {
+      ADMIN: {
+        label: "Administrador",
+        description: "Acceso completo: configuración, facturación, gestión de usuarios",
+      },
+      SALES: {
+        label: "Vendedor",
+        description: "Puede crear y editar cotizaciones, clientes y productos",
+      },
+      VIEWER: {
+        label: "Observador",
+        description: "Solo lectura — puede ver cotizaciones y reportes",
+      },
+    } as Record<string, { label: string; description: string }>,
+  },
   planSection: {
     title: "Tu Cuenta y Plan",
     planPrefix: "Plan",
@@ -147,6 +198,56 @@ const en: typeof es = {
     errLoad: "Couldn't load API key info",
     errGenerate: "Couldn't generate API key",
     errRevoke: "Couldn't revoke API key",
+  },
+  teamSection: {
+    title: "Team",
+    membersLabel: (n: number) => `${n} member${n !== 1 ? "s" : ""}`,
+    planPrefix: "Plan",
+    you: "(you)",
+    pendingInvites: "Pending invitations",
+    expires: (date: string) => `Expires ${date}`,
+    inviteMember: "Invite member",
+    slotsAvailable: (n: number) => `(${n} seat${n !== 1 ? "s" : ""} available)`,
+    emailPlaceholder: "email@company.com",
+    sending: "Sending...",
+    invite: "Invite",
+    shareExistingTitle: "Share existing data",
+    shareExistingDesc:
+      "When the invitation is accepted, this data becomes visible to the whole team.",
+    shareItems: {
+      clientes: "Clients",
+      productos: "Products",
+      cotizaciones: "Quotes",
+      contratos: "Contracts",
+    },
+    inviteSuccess: "Invitation sent successfully",
+    inviteLinkNote:
+      "The invitee will receive an email with a link to join the team. The link expires in 7 days.",
+    limitReached: (max: number, plan: string) =>
+      `You've reached the ${max}-member limit of your ${plan} plan`,
+    upgradeToAdd: (plan: string) =>
+      `Upgrade to the ${plan} plan to add more users to your team.`,
+    viewPlans: "View plans",
+    availableRoles: "Available roles",
+    removeMember: "Remove member",
+    confirmRemove:
+      "Remove this member from the team?\n\nThe data this user created (clients, quotes, etc.) will remain visible to the team. Only their access will be removed.",
+    errInvite: "Couldn't send the invitation",
+    errConnection: "Connection error",
+    roles: {
+      ADMIN: {
+        label: "Admin",
+        description: "Full access: settings, billing, user management",
+      },
+      SALES: {
+        label: "Sales",
+        description: "Can create and edit quotes, clients and products",
+      },
+      VIEWER: {
+        label: "Viewer",
+        description: "Read-only — can view quotes and reports",
+      },
+    },
   },
   planSection: {
     title: "Your Account & Plan",
