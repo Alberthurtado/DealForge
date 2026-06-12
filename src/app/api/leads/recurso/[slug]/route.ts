@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getRecurso, type Recurso } from "@/data/recursos";
+import { getRecursoEn } from "@/data/recursos-en";
 
 function escape(s: string) {
   return s
@@ -9,7 +10,34 @@ function escape(s: string) {
     .replace(/"/g, "&quot;");
 }
 
-function renderHTML(recurso: Recurso): string {
+const PDF_STRINGS = {
+  es: {
+    downloadPdf: "Descargar PDF",
+    solution: "→ Solución:",
+    introduction: "Introducción",
+    mainContent: "Contenido principal",
+    keyData: "Datos clave",
+    quickChecklist: "Checklist rápido",
+    checkWhat: "Marca lo que ya cumples hoy:",
+    startFree: "Empieza Gratis — dealforge.es",
+  },
+  en: {
+    downloadPdf: "Download PDF",
+    solution: "→ Solution:",
+    introduction: "Introduction",
+    mainContent: "Main content",
+    keyData: "Key data",
+    quickChecklist: "Quick checklist",
+    checkWhat: "Check what you already do today:",
+    startFree: "Start free — dealforge.es",
+  },
+};
+
+function renderHTML(recurso: Recurso, lang: "es" | "en"): string {
+  const t = PDF_STRINGS[lang];
+  const registroUrl = lang === "en"
+    ? `https://dealforge.es/registro?lang=en&utm_source=recurso-pdf&utm_medium=lead-magnet&utm_campaign=${encodeURIComponent(recurso.slug)}`
+    : `https://dealforge.es/registro?utm_source=recurso-pdf&utm_medium=lead-magnet&utm_campaign=${encodeURIComponent(recurso.slug)}`;
   const fullTitle = recurso.tituloResaltado
     ? `${recurso.titulo} <span>${escape(recurso.tituloResaltado)}</span>`
     : escape(recurso.titulo);
@@ -23,7 +51,7 @@ function renderHTML(recurso: Recurso): string {
     <div class="seccion-content">
       <h3>${escape(s.titulo)}</h3>
       <p>${escape(s.desc)}</p>
-      ${s.solucion ? `<p class="solucion"><strong>→ Solución:</strong> ${escape(s.solucion)}</p>` : ""}
+      ${s.solucion ? `<p class="solucion"><strong>${t.solution}</strong> ${escape(s.solucion)}</p>` : ""}
     </div>
   </div>`
     )
@@ -44,7 +72,7 @@ function renderHTML(recurso: Recurso): string {
     .join("");
 
   return `<!DOCTYPE html>
-<html lang="es">
+<html lang="${lang}">
 <head>
   <meta charset="UTF-8">
   <title>${escape(plainTitle)} — DealForge</title>
@@ -152,7 +180,7 @@ function renderHTML(recurso: Recurso): string {
   <span>DealForge — ${escape(recurso.badge)}</span>
   <button class="download-btn" onclick="window.print()">
     <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
-    Descargar PDF
+    ${t.downloadPdf}
   </button>
 </div>
 <div class="spacer" style="height: 42px;"></div>
@@ -167,19 +195,19 @@ function renderHTML(recurso: Recurso): string {
 </div>
 
 <div class="page">
-  <h2>Introducción</h2>
+  <h2>${t.introduction}</h2>
   <p class="intro">${escape(recurso.introduccion)}</p>
 
-  <h2>Contenido principal</h2>
+  <h2>${t.mainContent}</h2>
   ${seccionesHTML}
 
-  ${tipsHTML ? `<h2>Datos clave</h2><div class="tips-grid">${tipsHTML}</div>` : ""}
+  ${tipsHTML ? `<h2>${t.keyData}</h2><div class="tips-grid">${tipsHTML}</div>` : ""}
 
   ${
     checklistHTML
       ? `
-  <h2>Checklist rápido</h2>
-  <p style="font-size: 11px; color: #6b7280; margin-bottom: 6px;">Marca lo que ya cumples hoy:</p>
+  <h2>${t.quickChecklist}</h2>
+  <p style="font-size: 11px; color: #6b7280; margin-bottom: 6px;">${t.checkWhat}</p>
   <div class="checklist">
     <div class="checklist-grid">${checklistHTML}</div>
   </div>
@@ -190,9 +218,7 @@ function renderHTML(recurso: Recurso): string {
   <div class="cta">
     <h2>${escape(recurso.ctaTitulo)}</h2>
     <p>${escape(recurso.ctaDescripcion)}</p>
-    <a href="https://dealforge.es/registro?utm_source=recurso-pdf&utm_medium=lead-magnet&utm_campaign=${encodeURIComponent(
-      recurso.slug
-    )}" class="cta-btn">Empieza Gratis — dealforge.es</a>
+    <a href="${registroUrl}" class="cta-btn">${t.startFree}</a>
   </div>
 
   <div class="footer">
@@ -209,12 +235,14 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const recurso = getRecurso(slug);
+  const recursoEs = getRecurso(slug);
+  const recurso = recursoEs ?? getRecursoEn(slug);
   if (!recurso) {
     return new NextResponse("Recurso no encontrado", { status: 404 });
   }
+  const lang: "es" | "en" = recursoEs ? "es" : "en";
 
-  const html = renderHTML(recurso);
+  const html = renderHTML(recurso, lang);
 
   return new NextResponse(html, {
     headers: {

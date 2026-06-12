@@ -7,7 +7,59 @@ import { Loader2, Download, CheckCircle } from "lucide-react";
 interface Props {
   recursoSlug: string;
   filename: string;
+  lang?: "es" | "en";
 }
+
+const STRINGS = {
+  es: {
+    successTitle: "¡Tu recurso está listo!",
+    successDesc: "La descarga debería abrirse automáticamente. Si no, haz clic abajo.",
+    download: "Descargar",
+    successNote: "También recibirás recursos y consejos por email en próximos días.",
+    formTitle: "Descarga gratis",
+    formSubtitle: "Acceso inmediato. Sin spam.",
+    name: "Nombre *",
+    namePlaceholder: "Tu nombre",
+    email: "Email profesional *",
+    emailPlaceholder: "tu@empresa.com",
+    company: "Empresa",
+    companyOptional: "(opcional)",
+    companyPlaceholder: "Nombre de tu empresa",
+    submit: "Descargar gratis",
+    submitting: "Enviando...",
+    errGeneric: "Error al enviar",
+    errRegister: "Error al registrar",
+    legalPre: "Al descargar, aceptas nuestros ",
+    terms: "Términos",
+    and: " y ",
+    privacy: "Privacidad",
+    legalPost: ". Recibirás emails con consejos. Puedes darte de baja cuando quieras. Datos protegidos por RGPD.",
+  },
+  en: {
+    successTitle: "Your resource is ready!",
+    successDesc: "The download should open automatically. If not, click below.",
+    download: "Download",
+    successNote: "You'll also receive resources and tips by email over the coming days.",
+    formTitle: "Download for free",
+    formSubtitle: "Instant access. No spam.",
+    name: "Name *",
+    namePlaceholder: "Your name",
+    email: "Work email *",
+    emailPlaceholder: "you@company.com",
+    company: "Company",
+    companyOptional: "(optional)",
+    companyPlaceholder: "Your company name",
+    submit: "Download for free",
+    submitting: "Sending...",
+    errGeneric: "Couldn't send",
+    errRegister: "Couldn't register",
+    legalPre: "By downloading, you accept our ",
+    terms: "Terms",
+    and: " and ",
+    privacy: "Privacy",
+    legalPost: ". You'll receive emails with tips. You can unsubscribe anytime. Data protected under GDPR.",
+  },
+};
 
 function getUtmParams(searchParams: URLSearchParams) {
   return {
@@ -18,7 +70,8 @@ function getUtmParams(searchParams: URLSearchParams) {
   };
 }
 
-export function LeadForm({ recursoSlug }: Props) {
+export function LeadForm({ recursoSlug, lang = "es" }: Props) {
+  const t = STRINGS[lang];
   const searchParams = useSearchParams();
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
@@ -55,13 +108,13 @@ export function LeadForm({ recursoSlug }: Props) {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Error al registrar");
+        throw new Error(data.error || t.errRegister);
       }
 
       setSuccess(true);
       window.open(pdfUrl, "_blank");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error al enviar");
+      setError(err instanceof Error ? err.message : t.errGeneric);
     } finally {
       setLoading(false);
     }
@@ -73,9 +126,9 @@ export function LeadForm({ recursoSlug }: Props) {
         <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="w-8 h-8 text-green-500" />
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">¡Tu recurso está listo!</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{t.successTitle}</h3>
         <p className="text-sm text-gray-600 mb-6">
-          La descarga debería abrirse automáticamente. Si no, haz clic abajo.
+          {t.successDesc}
         </p>
         <a
           href={pdfUrl}
@@ -84,10 +137,10 @@ export function LeadForm({ recursoSlug }: Props) {
           className="inline-flex items-center gap-2 bg-[#3a9bb5] hover:bg-[#2d7d94] text-white font-semibold text-sm px-6 py-3 rounded-xl transition-colors"
         >
           <Download className="w-4 h-4" />
-          Descargar
+          {t.download}
         </a>
         <p className="text-xs text-gray-400 mt-4">
-          También recibirás recursos y consejos por email en próximos días.
+          {t.successNote}
         </p>
       </div>
     );
@@ -99,14 +152,14 @@ export function LeadForm({ recursoSlug }: Props) {
         <div className="w-14 h-14 rounded-2xl bg-[#3a9bb5]/10 flex items-center justify-center mx-auto mb-3">
           <Download className="w-7 h-7 text-[#3a9bb5]" />
         </div>
-        <h3 className="text-lg font-bold text-gray-900">Descarga gratis</h3>
-        <p className="text-sm text-gray-500 mt-1">Acceso inmediato. Sin spam.</p>
+        <h3 className="text-lg font-bold text-gray-900">{t.formTitle}</h3>
+        <p className="text-sm text-gray-500 mt-1">{t.formSubtitle}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
-            Nombre *
+            {t.name}
           </label>
           <input
             id="nombre"
@@ -114,14 +167,14 @@ export function LeadForm({ recursoSlug }: Props) {
             required
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-            placeholder="Tu nombre"
+            placeholder={t.namePlaceholder}
             className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/20 focus:border-[#3a9bb5] transition-colors"
           />
         </div>
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-            Email profesional *
+            {t.email}
           </label>
           <input
             id="email"
@@ -129,21 +182,21 @@ export function LeadForm({ recursoSlug }: Props) {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="tu@empresa.com"
+            placeholder={t.emailPlaceholder}
             className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/20 focus:border-[#3a9bb5] transition-colors"
           />
         </div>
 
         <div>
           <label htmlFor="empresa" className="block text-sm font-medium text-gray-700 mb-1">
-            Empresa <span className="text-gray-400">(opcional)</span>
+            {t.company} <span className="text-gray-400">{t.companyOptional}</span>
           </label>
           <input
             id="empresa"
             type="text"
             value={empresa}
             onChange={(e) => setEmpresa(e.target.value)}
-            placeholder="Nombre de tu empresa"
+            placeholder={t.companyPlaceholder}
             className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#3a9bb5]/20 focus:border-[#3a9bb5] transition-colors"
           />
         </div>
@@ -158,14 +211,14 @@ export function LeadForm({ recursoSlug }: Props) {
           className="w-full inline-flex items-center justify-center gap-2 bg-[#3a9bb5] hover:bg-[#2d7d94] text-white font-semibold text-sm px-6 py-3 rounded-xl transition-colors disabled:opacity-50 shadow-lg shadow-[#3a9bb5]/25"
         >
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
-          {loading ? "Enviando..." : "Descargar gratis"}
+          {loading ? t.submitting : t.submit}
         </button>
 
         <p className="text-[11px] text-gray-400 text-center leading-relaxed">
-          Al descargar, aceptas nuestros{" "}
-          <a href="/terminos" className="underline hover:text-gray-600">Términos</a> y{" "}
-          <a href="/privacidad" className="underline hover:text-gray-600">Privacidad</a>.
-          Recibirás emails con consejos. Puedes darte de baja cuando quieras. Datos protegidos por RGPD.
+          {t.legalPre}
+          <a href="/terminos" className="underline hover:text-gray-600">{t.terms}</a>{t.and}
+          <a href="/privacidad" className="underline hover:text-gray-600">{t.privacy}</a>
+          {t.legalPost}
         </p>
       </form>
     </div>

@@ -4,6 +4,7 @@ import { industrias } from "@/data/industrias";
 import { features } from "@/data/features";
 import { comparaciones } from "@/data/comparaciones";
 import { RECURSOS } from "@/data/recursos";
+import { RECURSOS_EN } from "@/data/recursos-en";
 
 // Rebuild sitemap every hour instead of every request
 export const revalidate = 3600;
@@ -153,11 +154,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  // Lead magnet resources
+  // Lead magnet resources (ES + EN with hreflang alternates)
   const resourcePages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/recursos`,
       lastModified: new Date("2026-04-14"),
+      alternates: {
+        languages: {
+          "es-ES": `${baseUrl}/recursos`,
+          "en-US": `${baseUrl}/en/resources`,
+        },
+      },
     },
     ...RECURSOS.map((r) => ({
       url: `${baseUrl}/recursos/${r.slug}`,
@@ -165,5 +172,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...blogPosts, ...industryPages, ...featurePages, ...comparisonPages, ...resourcePages];
+  const resourcePagesEn: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/en/resources`,
+      lastModified: new Date("2026-04-14"),
+      alternates: {
+        languages: {
+          "es-ES": `${baseUrl}/recursos`,
+          "en-US": `${baseUrl}/en/resources`,
+        },
+      },
+    },
+    ...RECURSOS_EN.map((r) => ({
+      url: `${baseUrl}/en/resources/${r.slug}`,
+      lastModified: new Date(r.publicadoEn),
+    })),
+  ];
+
+  return [...staticPages, ...blogPosts, ...industryPages, ...featurePages, ...comparisonPages, ...resourcePages, ...resourcePagesEn];
 }
