@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { sendSystemEmail } from "@/lib/system-email";
 import { NextRequest, NextResponse } from "next/server";
+import { contratoActividad, type ActividadLang } from "@/lib/actividad-i18n";
+import { resolveDashboardLang } from "@/lib/dashboard-i18n";
 
 function buildContractNotificationEmail({
   tipo,
@@ -91,6 +93,21 @@ export async function GET(request: NextRequest) {
       colorPrimario: empresa?.colorPrimario || "#3a9bb5",
     };
 
+    // Per-request cache: resolve each company's activity-log language once
+    const langCache = new Map<string, ActividadLang>();
+    async function actFor(equipoId: string | null): Promise<ReturnType<typeof contratoActividad>> {
+      const key = equipoId || "";
+      let lang = langCache.get(key);
+      if (!lang) {
+        const e = equipoId
+          ? await prisma.empresa.findUnique({ where: { id: equipoId }, select: { locale: true } })
+          : null;
+        lang = resolveDashboardLang(e?.locale);
+        langCache.set(key, lang);
+      }
+      return contratoActividad(lang);
+    }
+
     // ─── 1. Auto-renew contracts past fechaFin with renovacionAutomatica ───
     const autoRenewContracts = await prisma.contrato.findMany({
       where: {
@@ -107,6 +124,7 @@ export async function GET(request: NextRequest) {
     for (const contrato of autoRenewContracts) {
       const nuevaFechaFin = new Date(contrato.fechaFin);
       nuevaFechaFin.setMonth(nuevaFechaFin.getMonth() + contrato.duracionMeses);
+      const cact = await actFor(contrato.equipoId);
 
       await prisma.contrato.update({
         where: { id: contrato.id },
@@ -116,7 +134,7 @@ export async function GET(request: NextRequest) {
           actividades: {
             create: {
               tipo: "RENOVADO",
-              descripcion: `Contrato renovado automáticamente por ${contrato.duracionMeses} meses. Nueva fecha de fin: ${nuevaFechaFin.toISOString().split("T")[0]}`,
+              descripcion: cact.renewedAuto(contrato.duracionMeses, nuevaFechaFin.toISOString().split("T")[0]),
             },
           },
         },
@@ -170,6 +188,7 @@ export async function GET(request: NextRequest) {
       );
 
       if (daysUntilExpiry <= contrato.diasAvisoRenovacion) {
+        const cact = await actFor(contrato.equipoId);
         await prisma.contrato.update({
           where: { id: contrato.id },
           data: {
@@ -177,7 +196,7 @@ export async function GET(request: NextRequest) {
             actividades: {
               create: {
                 tipo: "ESTADO_CAMBIADO",
-                descripcion: `Contrato cambiado a PENDIENTE_RENOVACION. Vence en ${daysUntilExpiry} días.`,
+                descripcion: cact.pendingRenewal(daysUntilExpiry),
               },
             },
           },
@@ -226,6 +245,7 @@ export async function GET(request: NextRequest) {
     });
 
     for (const contrato of expiredContracts) {
+      const cact = await actFor(contrato.equipoId);
       await prisma.contrato.update({
         where: { id: contrato.id },
         data: {
@@ -233,7 +253,7 @@ export async function GET(request: NextRequest) {
           actividades: {
             create: {
               tipo: "ESTADO_CAMBIADO",
-              descripcion: `Contrato expirado. Fecha de fin: ${contrato.fechaFin.toISOString().split("T")[0]}`,
+              descripcion: cact.expired(contrato.fechaFin.toISOString().split("T")[0]),
             },
           },
         },

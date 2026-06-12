@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { contratoActividad } from "@/lib/actividad-i18n";
 
 export async function PATCH(
   request: NextRequest,
@@ -8,6 +10,7 @@ export async function PATCH(
 ) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const act = contratoActividad(await getDashboardLang(session.empresaId));
 
   const { id, enmiendaId } = await params;
   const body = await request.json();
@@ -47,7 +50,7 @@ export async function PATCH(
         data: {
           contratoId: id,
           tipo: "ACTUALIZACION",
-          descripcion: `Enmienda (${enmienda.tipo}) aceptada: ${enmienda.descripcion}. Nuevo valor: €${enmienda.valorNuevo.toFixed(2)}`,
+          descripcion: act.amendmentAccepted(enmienda.tipo, enmienda.descripcion, `€${enmienda.valorNuevo.toFixed(2)}`),
         },
       }),
     ]);
@@ -62,7 +65,7 @@ export async function PATCH(
         data: {
           contratoId: id,
           tipo: "ACTUALIZACION",
-          descripcion: `Enmienda (${enmienda.tipo}) rechazada: ${enmienda.descripcion}`,
+          descripcion: act.amendmentRejected(enmienda.tipo, enmienda.descripcion),
         },
       }),
     ]);

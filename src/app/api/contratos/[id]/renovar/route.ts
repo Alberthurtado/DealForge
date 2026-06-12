@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { contratoActividad } from "@/lib/actividad-i18n";
 import { z } from "zod";
 import { validateBody } from "@/lib/validate";
 import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
@@ -66,7 +68,7 @@ export async function POST(
       actividades: {
         create: {
           tipo: "RENOVADO",
-          descripcion: `Contrato ${contrato.numero} renovado por ${duracion} meses. Nueva fecha de fin: ${nuevaFechaFin.toISOString().split("T")[0]}`,
+          descripcion: contratoActividad(await getDashboardLang(session.empresaId)).renewed(duracion, nuevaFechaFin.toISOString().split("T")[0]),
         },
       },
     },

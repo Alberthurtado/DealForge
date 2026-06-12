@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { sendSystemEmail } from "@/lib/system-email";
 import { buildSellerFollowUpEmail, buildClientExpiryEmail } from "@/lib/reminder-email";
 import { NextRequest, NextResponse } from "next/server";
+import { resolveDashboardLang } from "@/lib/dashboard-i18n";
+import { cotizacionActividad } from "@/lib/actividad-i18n";
 
 const ELIGIBLE_PLANS = ["pro", "business", "enterprise"];
 const ELIGIBLE_ESTADOS = ["ENVIADA", "NEGOCIACION"];
@@ -33,6 +35,7 @@ export async function GET(request: NextRequest) {
         id: true,
         nombre: true,
         colorPrimario: true,
+        locale: true,
         recordatorioSeguimientoDias: true,
         recordatorioVencimientoDias: true,
         usuarios: {
@@ -43,6 +46,7 @@ export async function GET(request: NextRequest) {
     });
 
     for (const empresa of empresas) {
+      const act = cotizacionActividad(resolveDashboardLang(empresa.locale));
       for (const usuario of empresa.usuarios) {
         // ─── Seller follow-up reminders ────────────────
         const seguimientoDias = empresa.recordatorioSeguimientoDias;
@@ -125,7 +129,7 @@ export async function GET(request: NextRequest) {
               data: {
                 cotizacionId: cot.id,
                 tipo: "RECORDATORIO_ENVIADO",
-                descripcion: `Recordatorio de seguimiento enviado al vendedor (${diasSinActividad} días sin actividad)`,
+                descripcion: act.reminderSeller(diasSinActividad),
               },
             });
 
@@ -240,7 +244,7 @@ export async function GET(request: NextRequest) {
               data: {
                 cotizacionId: cot.id,
                 tipo: "RECORDATORIO_ENVIADO",
-                descripcion: `Recordatorio de vencimiento enviado al cliente (${diasRestantes} días restantes)`,
+                descripcion: act.reminderClient(diasRestantes),
               },
             });
 

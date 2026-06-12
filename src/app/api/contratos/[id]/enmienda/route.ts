@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { contratoActividad } from "@/lib/actividad-i18n";
 import { z } from "zod";
 import { validateBody } from "@/lib/validate";
 import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
@@ -45,6 +47,7 @@ export async function POST(
 ) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const act = contratoActividad(await getDashboardLang(session.empresaId));
 
   const rl = checkRateLimit(`contratos:enmienda:${session.userId}`, RATE_LIMITS.apiWrite);
   if (!rl.allowed) return rateLimitResponse(rl.resetAt);
@@ -89,7 +92,7 @@ export async function POST(
       data: {
         contratoId: id,
         tipo: "ENMIENDA",
-        descripcion: `Enmienda (${data.tipo}) creada para contrato ${contrato.numero}: ${data.descripcion}`,
+        descripcion: act.amendmentCreated(data.tipo, contrato.numero, data.descripcion),
       },
     }),
   ]);

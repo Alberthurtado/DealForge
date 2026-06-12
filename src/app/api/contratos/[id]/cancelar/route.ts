@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { contratoActividad } from "@/lib/actividad-i18n";
 import { z } from "zod";
 import { validateBody } from "@/lib/validate";
 import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
@@ -54,7 +56,7 @@ export async function POST(
       actividades: {
         create: {
           tipo: "CANCELADO",
-          descripcion: `Contrato ${contrato.numero} cancelado. Motivo: ${data.motivoCancelacion}`,
+          descripcion: contratoActividad(await getDashboardLang(session.empresaId)).cancelled(contrato.numero, data.motivoCancelacion),
         },
       },
     },
