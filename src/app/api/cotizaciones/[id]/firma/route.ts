@@ -35,6 +35,7 @@ export async function POST(
 ) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const sigLang = await getDashboardLang(session.empresaId);
 
   // Check plan
   const user = await prisma.usuario.findUnique({ where: { id: session.userId }, select: { plan: true } });
@@ -76,7 +77,7 @@ export async function POST(
     data: {
       cotizacionId: id,
       tipo: "FIRMA_SOLICITADA",
-      descripcion: cotizacionActividad(await getDashboardLang(session.empresaId)).signatureRequested(data.signerName, data.signerEmail),
+      descripcion: cotizacionActividad(sigLang).signatureRequested(data.signerName, data.signerEmail),
     },
   });
 
@@ -103,11 +104,12 @@ export async function POST(
         nombre: empresa?.nombre || "DealForge",
         colorPrimario: empresa?.colorPrimario || "#3a9bb5",
       },
+      lang: sigLang,
     });
 
     sendSystemEmail({
       to: data.signerEmail,
-      subject: `Firma requerida: ${cotizacion.numero}`,
+      subject: sigLang === "en" ? `Signature required: ${cotizacion.numero}` : `Firma requerida: ${cotizacion.numero}`,
       html,
     }).catch((err) => console.error("[firma] Error sending email:", err));
   }

@@ -225,7 +225,8 @@ export async function PUT(
   }
 
   // Handle quote signature (existing behavior)
-  const qact = cotizacionActividad(await getDashboardLang(firma.cotizacion.equipoId));
+  const qlang = await getDashboardLang(firma.cotizacion.equipoId);
+  const qact = cotizacionActividad(qlang);
   // Log activity
   await prisma.actividad.create({
     data: {
@@ -278,6 +279,7 @@ export async function PUT(
           numero: firma.cotizacion.numero,
           total: firma.cotizacion.total,
           cliente: firma.cotizacion.cliente.nombre,
+          moneda: firma.cotizacion.moneda,
         },
         signerName: firma.signerName,
         signedAt: updated.signedAt!,
@@ -285,11 +287,12 @@ export async function PUT(
           nombre: empresa?.nombre || "DealForge",
           colorPrimario: empresa?.colorPrimario || "#3a9bb5",
         },
+        lang: qlang,
       });
 
       await sendSystemEmail({
         to: seller.email,
-        subject: `Cotización ${firma.cotizacion.numero} firmada por ${firma.signerName}`,
+        subject: qlang === "en" ? `Quote ${firma.cotizacion.numero} signed by ${firma.signerName}` : `Cotización ${firma.cotizacion.numero} firmada por ${firma.signerName}`,
         html,
       });
     }
