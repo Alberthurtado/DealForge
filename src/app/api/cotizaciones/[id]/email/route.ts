@@ -3,6 +3,8 @@ import { sendEmail } from "@/lib/email";
 import { generateCotizacionPdf } from "@/lib/pdf-cotizacion";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { cotizacionActividad } from "@/lib/actividad-i18n";
 import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
 import { sendEmailSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
@@ -68,7 +70,7 @@ export async function POST(
     });
 
     await prisma.actividad.create({
-      data: { cotizacionId: id, tipo: "EMAIL_ENVIADO", descripcion: `Cotización enviada por email a ${data.to}` },
+      data: { cotizacionId: id, tipo: "EMAIL_ENVIADO", descripcion: cotizacionActividad(await getDashboardLang(session.empresaId)).sentByEmail(data.to) },
     });
 
     return NextResponse.json({ success: true });

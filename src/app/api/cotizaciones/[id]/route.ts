@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { cotizacionActividad, statusLabel, type ActividadLang } from "@/lib/actividad-i18n";
 import { cotizacionUpdateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 import { validarCotizacion, type ProductoCategoriaMap } from "@/lib/reglas-engine";
@@ -47,8 +49,10 @@ async function evaluateAndCreateApprovals(
   cotizacionId: string,
   userId: string,
   empresaId: string | undefined,
-  request: NextRequest
+  request: NextRequest,
+  lang: ActividadLang = "es"
 ) {
+  const act = cotizacionActividad(lang);
   const ownerFilter = empresaId
     ? { OR: [{ equipoId: empresaId }, { usuarioId: userId, equipoId: null }] }
     : { usuarioId: userId };
@@ -80,7 +84,7 @@ async function evaluateAndCreateApprovals(
       cantidad: li.cantidad, precioUnitario: li.precioUnitario, descuento: li.descuento,
     })),
     descuentoGlobal: cotizacion.descuentoGlobal, subtotal: cotizacion.subtotal, total: cotizacion.total,
-  }, catMap);
+  }, catMap, lang);
 
   if (result.aprobacionesRequeridas.length === 0) return [];
 
@@ -108,7 +112,7 @@ async function evaluateAndCreateApprovals(
 
   if (newApprovals.length > 0) {
     await prisma.actividad.create({
-      data: { cotizacionId, tipo: "APROBACION_REQUERIDA", descripcion: `Aprobación requerida de: ${newApprovals.map((a) => a.aprobadorNombre).join(", ")}` },
+      data: { cotizacionId, tipo: "APROBACION_REQUERIDA", descripcion: act.approvalRequired(newApprovals.map((a) => a.aprobadorNombre).join(", ")) },
     });
     try {
       const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
@@ -141,6 +145,7 @@ export async function PUT(
 ) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const lang = await getDashboardLang(session.empresaId);
 
   const { id } = await params;
   const owned = await prisma.cotizacion.findFirst({
@@ -173,7 +178,7 @@ export async function PUT(
       return NextResponse.json({ error: "No se puede enviar la cotización sin términos y condiciones." }, { status: 400 });
     }
     if (updateData.estado === "ENVIADA" && current?.estado === "BORRADOR") {
-      await evaluateAndCreateApprovals(id, session.userId, session.empresaId, request);
+      await evaluateAndCreateApprovals(id, session.userId, session.empresaId, request, lang);
       const blockingApprovals = await prisma.aprobacion.findMany({
         where: { cotizacionId: id, estado: { in: ["PENDIENTE", "RECHAZADA"] } },
         select: { estado: true, aprobadorNombre: true },
@@ -189,7 +194,7 @@ export async function PUT(
     }
     if (current && current.estado !== updateData.estado) {
       await prisma.actividad.create({
-        data: { cotizacionId: id, tipo: "ESTADO_CAMBIADO", descripcion: `Estado cambiado de ${current.estado} a ${updateData.estado}`, estadoAnterior: current.estado, estadoNuevo: updateData.estado as string },
+        data: { cotizacionId: id, tipo: "ESTADO_CAMBIADO", descripcion: cotizacionActividad(lang).statusChanged(statusLabel(current.estado, lang), statusLabel(updateData.estado as string, lang)), estadoAnterior: current.estado, estadoNuevo: updateData.estado as string },
       });
     }
   }

@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { cotizacionActividad } from "@/lib/actividad-i18n";
 import { getPlanFeatures, planFeatureResponse } from "@/lib/plan-limits";
 import { firmaRequestSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
@@ -74,7 +76,7 @@ export async function POST(
     data: {
       cotizacionId: id,
       tipo: "FIRMA_SOLICITADA",
-      descripcion: `Firma solicitada a ${data.signerName} (${data.signerEmail})`,
+      descripcion: cotizacionActividad(await getDashboardLang(session.empresaId)).signatureRequested(data.signerName, data.signerEmail),
     },
   });
 

@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { validarCotizacion, type ProductoCategoriaMap } from "@/lib/reglas-engine";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { cotizacionActividad } from "@/lib/actividad-i18n";
 import { buildApprovalRequestEmail } from "@/lib/approval-email";
 import { sendSystemEmail } from "@/lib/system-email";
 import { getSession } from "@/lib/auth";
@@ -48,6 +50,8 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const lang = await getDashboardLang(session.empresaId);
+  const act = cotizacionActividad(lang);
 
   // ── Plan limit check (team-aware) ──
   const now = new Date();
@@ -161,7 +165,7 @@ export async function POST(request: NextRequest) {
       actividades: {
         create: {
           tipo: "CREADA",
-          descripcion: "Cotización creada",
+          descripcion: act.creada(),
         },
       },
     },
@@ -188,7 +192,7 @@ export async function POST(request: NextRequest) {
       descuentoGlobal,
       subtotal,
       total,
-    }, catMap);
+    }, catMap, lang);
 
     if (result.aprobacionesRequeridas.length > 0) {
       const createdAprobaciones = [];
@@ -207,7 +211,7 @@ export async function POST(request: NextRequest) {
         data: {
           cotizacionId: cotizacion.id,
           tipo: "APROBACION_REQUERIDA",
-          descripcion: `Aprobación requerida de: ${result.aprobacionesRequeridas.map((r) => r.aprobador.nombre).join(", ")}`,
+          descripcion: act.approvalRequired(result.aprobacionesRequeridas.map((r) => r.aprobador.nombre).join(", ")),
         },
       });
 

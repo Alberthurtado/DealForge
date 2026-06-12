@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { cotizacionActividad } from "@/lib/actividad-i18n";
 
 export async function GET(
   _request: NextRequest,
@@ -52,6 +54,7 @@ export async function POST(
 ) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const act = cotizacionActividad(await getDashboardLang(session.empresaId));
 
   const { id } = await params;
 
@@ -153,7 +156,7 @@ export async function POST(
       actividades: {
         create: {
           tipo: "CREADA",
-          descripcion: `Nueva versión v${newVersion} creada desde ${source.numero}`,
+          descripcion: act.versionFrom(newVersion, source.numero),
         },
       },
     },
@@ -169,7 +172,7 @@ export async function POST(
     data: {
       cotizacionId: source.id,
       tipo: "ESTADO_CAMBIADO",
-      descripcion: `Archivada automáticamente al crear versión v${newVersion}`,
+      descripcion: act.archivedOnVersion(newVersion),
       estadoAnterior: source.estado,
       estadoNuevo: "ARCHIVADA",
     },
@@ -181,7 +184,7 @@ export async function POST(
       data: {
         cotizacionId: originalId,
         tipo: "VERSION_CREADA",
-        descripcion: `Nueva versión v${newVersion} creada`,
+        descripcion: act.versionCreated(newVersion),
       },
     });
   }

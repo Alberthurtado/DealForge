@@ -4,6 +4,8 @@ import { buildSignatureNotificationEmail } from "@/lib/signature-email";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
 import { firmaSignSchema } from "@/lib/validations";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { cotizacionActividad, contratoActividad } from "@/lib/actividad-i18n";
 import { validateBody } from "@/lib/validate";
 
 export async function GET(
@@ -156,7 +158,7 @@ export async function PUT(
       data: {
         contratoId: firma.contratoId,
         tipo: "FIRMA_COMPLETADA",
-        descripcion: `Contrato firmado por ${firma.signerName} (${firma.signerEmail})`,
+        descripcion: contratoActividad(await getDashboardLang(firma.contrato.equipoId)).signedBy(firma.signerName, firma.signerEmail),
       },
     });
 
@@ -223,12 +225,13 @@ export async function PUT(
   }
 
   // Handle quote signature (existing behavior)
+  const qact = cotizacionActividad(await getDashboardLang(firma.cotizacion.equipoId));
   // Log activity
   await prisma.actividad.create({
     data: {
       cotizacionId: firma.cotizacionId,
       tipo: "FIRMA_COMPLETADA",
-      descripcion: `Cotización firmada por ${firma.signerName} (${firma.signerEmail})`,
+      descripcion: qact.signedBy(firma.signerName, firma.signerEmail),
     },
   });
 
@@ -242,7 +245,7 @@ export async function PUT(
       data: {
         cotizacionId: firma.cotizacionId,
         tipo: "CAMBIO_ESTADO",
-        descripcion: "Cotización marcada como Ganada automáticamente al recibir firma electrónica",
+        descripcion: qact.wonOnSignature(),
       },
     });
   }

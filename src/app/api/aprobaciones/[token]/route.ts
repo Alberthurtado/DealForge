@@ -5,6 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit, RATE_LIMITS, rateLimitResponse } from "@/lib/rate-limit";
 import { aprobacionResolveSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { cotizacionActividad } from "@/lib/actividad-i18n";
 
 export async function GET(
   request: NextRequest,
@@ -114,12 +116,13 @@ export async function PUT(
   });
 
   // Log activity
-  const statusLabel = data.estado === "APROBADA" ? "aprobada" : "rechazada";
+  const act = cotizacionActividad(await getDashboardLang(aprobacion.cotizacion.equipoId));
+  const statusAction = data.estado === "APROBADA" ? act.approvedAction : act.rejectedAction;
   await prisma.actividad.create({
     data: {
       cotizacionId: aprobacion.cotizacionId,
       tipo: "APROBACION_RESUELTA",
-      descripcion: `Cotización ${statusLabel} por ${aprobacion.aprobadorNombre}${data.comentario ? `: ${data.comentario}` : ""}`,
+      descripcion: act.resolvedBy(statusAction, aprobacion.aprobadorNombre, data.comentario || undefined),
     },
   });
 
