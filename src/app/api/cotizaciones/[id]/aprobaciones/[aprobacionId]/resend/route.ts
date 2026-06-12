@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { buildApprovalRequestEmail } from "@/lib/approval-email";
 import { sendSystemEmail, isSystemEmailConfigured } from "@/lib/system-email";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
@@ -12,6 +13,7 @@ export async function POST(
   if (!session) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
+  const lang = await getDashboardLang(session.empresaId);
 
   const { id, aprobacionId } = await params;
 
@@ -92,11 +94,12 @@ export async function POST(
       nombre: empresa?.nombre || "DealForge",
       colorPrimario: empresa?.colorPrimario || "#3a9bb5",
     },
+    lang,
   });
 
   const emailResult = await sendSystemEmail({
     to: aprobacion.aprobadorEmail,
-    subject: `Aprobación requerida: ${aprobacion.cotizacion.numero}`,
+    subject: lang === "en" ? `Approval required: ${aprobacion.cotizacion.numero}` : `Aprobación requerida: ${aprobacion.cotizacion.numero}`,
     html,
   });
 

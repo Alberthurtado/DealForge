@@ -126,8 +126,9 @@ async function evaluateAndCreateApprovals(
             aprobadorNombre: aprob.aprobadorNombre, razon: aprob.razon,
             empresa: { nombre: empresaData?.nombre || "DealForge", colorPrimario: empresaData?.colorPrimario || "#3a9bb5" },
             lineItems: cotizacion.lineItems.map((i) => ({ descripcion: i.descripcion, cantidad: i.cantidad, total: i.total })),
+            lang,
           });
-          const emailResult = await sendSystemEmail({ to: aprob.aprobadorEmail, subject: `Aprobación requerida: ${cotizacion.numero}`, html });
+          const emailResult = await sendSystemEmail({ to: aprob.aprobadorEmail, subject: lang === "en" ? `Approval required: ${cotizacion.numero}` : `Aprobación requerida: ${cotizacion.numero}`, html });
           if (emailResult.success) {
             await prisma.aprobacion.update({ where: { id: aprob.id }, data: { emailEnviadoAt: new Date() } });
           }

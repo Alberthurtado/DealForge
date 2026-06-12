@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
+import { getDashboardLang } from "@/lib/dashboard-lang";
 import { aprobacionCreateSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 import { sendSystemEmail, isSystemEmailConfigured } from "@/lib/system-email";
@@ -32,6 +33,7 @@ export async function POST(
 ) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  const lang = await getDashboardLang(session.empresaId);
 
   const { id } = await params;
 
@@ -109,11 +111,12 @@ export async function POST(
             nombre: empresa?.nombre || "DealForge",
             colorPrimario: empresa?.colorPrimario || "#3a9bb5",
           },
+          lang,
         });
 
         const result = await sendSystemEmail({
           to: aprobacion.aprobadorEmail,
-          subject: `Aprobacion requerida: ${cotizacion.numero}`,
+          subject: lang === "en" ? `Approval required: ${cotizacion.numero}` : `Aprobación requerida: ${cotizacion.numero}`,
           html,
         });
 

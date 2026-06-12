@@ -116,7 +116,8 @@ export async function PUT(
   });
 
   // Log activity
-  const act = cotizacionActividad(await getDashboardLang(aprobacion.cotizacion.equipoId));
+  const lang = await getDashboardLang(aprobacion.cotizacion.equipoId);
+  const act = cotizacionActividad(lang);
   const statusAction = data.estado === "APROBADA" ? act.approvedAction : act.rejectedAction;
   await prisma.actividad.create({
     data: {
@@ -167,6 +168,7 @@ export async function PUT(
             numero: aprobacion.cotizacion.numero,
             total: aprobacion.cotizacion.total,
             cliente: aprobacion.cotizacion.cliente.nombre,
+            moneda: aprobacion.cotizacion.moneda,
           },
           aprobadorNombre: aprobacion.aprobadorNombre,
           estado: data.estado,
@@ -175,6 +177,7 @@ export async function PUT(
             nombre: empresa?.nombre || "DealForge",
             colorPrimario: empresa?.colorPrimario || "#3a9bb5",
           },
+          lang,
         });
 
         const subject = allApproved
