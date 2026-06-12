@@ -95,11 +95,44 @@ interface ConfigPromocion {
 
 // ========== ENGINE ==========
 
+export type ReglasLang = "es" | "en";
+
+// Message builders for engine-generated messages. User-entered custom messages
+// (config.mensaje) are left as the user typed them.
+const MSG = {
+  es: {
+    lineDiscountExceeds: (d: number, desc: string, max: number) =>
+      `Descuento de línea (${d}%) en "${desc}" excede el límite de ${max}%`,
+    globalDiscountExceeds: (d: number, max: number) =>
+      `Descuento global (${d}%) excede el límite de ${max}%`,
+    missingRequired: (nombre: string) =>
+      `Faltan productos obligatorios según la regla "${nombre}"`,
+    aprobLine: (v: number, u: number) => `Descuento de línea (${v}%) supera el umbral de ${u}%`,
+    aprobGlobal: (v: number, u: number) => `Descuento global (${v}%) supera el umbral de ${u}%`,
+    aprobMonto: (v: string, u: string) => `Monto total (${v}) supera el umbral de ${u}`,
+    promoAvailable: (nombre: string) => `Promoción "${nombre}" disponible`,
+  },
+  en: {
+    lineDiscountExceeds: (d: number, desc: string, max: number) =>
+      `Line discount (${d}%) on "${desc}" exceeds the ${max}% limit`,
+    globalDiscountExceeds: (d: number, max: number) =>
+      `Global discount (${d}%) exceeds the ${max}% limit`,
+    missingRequired: (nombre: string) =>
+      `Required products are missing per the rule "${nombre}"`,
+    aprobLine: (v: number, u: number) => `Line discount (${v}%) exceeds the ${u}% threshold`,
+    aprobGlobal: (v: number, u: number) => `Global discount (${v}%) exceeds the ${u}% threshold`,
+    aprobMonto: (v: string, u: string) => `Total amount (${v}) exceeds the ${u} threshold`,
+    promoAvailable: (nombre: string) => `Promotion "${nombre}" available`,
+  },
+};
+
 export function validarCotizacion(
   reglas: ReglaComercialData[],
   quote: QuoteData,
-  productoCategoriaMap: ProductoCategoriaMap = {}
+  productoCategoriaMap: ProductoCategoriaMap = {},
+  lang: ReglasLang = "es"
 ): ValidationResult {
+  const m = MSG[lang];
   const violaciones: Violacion[] = [];
   const promocionesAplicables: PromocionAplicable[] = [];
   const aprobacionesRequeridas: AprobacionRequerida[] = [];
@@ -118,16 +151,16 @@ export function validarCotizacion(
 
     switch (regla.tipo) {
       case "LIMITE_DESCUENTO":
-        evaluarLimiteDescuento(regla, config as ConfigLimiteDescuento, quote, productoCategoriaMap, violaciones);
+        evaluarLimiteDescuento(regla, config as ConfigLimiteDescuento, quote, productoCategoriaMap, violaciones, m);
         break;
       case "PRODUCTO_OBLIGATORIO":
-        evaluarProductoObligatorio(regla, config as ConfigProductoObligatorio, quote, productoCategoriaMap, violaciones);
+        evaluarProductoObligatorio(regla, config as ConfigProductoObligatorio, quote, productoCategoriaMap, violaciones, m);
         break;
       case "APROBACION":
-        evaluarAprobacion(regla, config as ConfigAprobacion, quote, aprobacionesRequeridas);
+        evaluarAprobacion(regla, config as ConfigAprobacion, quote, aprobacionesRequeridas, m);
         break;
       case "PROMOCION":
-        evaluarPromocion(regla, config as ConfigPromocion, quote, promocionesAplicables);
+        evaluarPromocion(regla, config as ConfigPromocion, quote, promocionesAplicables, m);
         break;
     }
   }
@@ -145,7 +178,8 @@ function evaluarLimiteDescuento(
   config: ConfigLimiteDescuento,
   quote: QuoteData,
   catMap: ProductoCategoriaMap,
-  violaciones: Violacion[]
+  violaciones: Violacion[],
+  m: (typeof MSG)["es"]
 ) {
   const { tipoLimite, maxDescuentoLinea, maxDescuentoGlobal, aplicaA } = config;
 
@@ -165,7 +199,7 @@ function evaluarLimiteDescuento(
         reglaNombre: regla.nombre,
         tipo: regla.tipo,
         severidad: "advertencia",
-        mensaje: `Descuento de línea (${item.descuento}%) en "${item.descripcion}" excede el límite de ${maxDescuentoLinea}%`,
+        mensaje: m.lineDiscountExceeds(item.descuento, item.descripcion, maxDescuentoLinea),
       });
     }
   }
@@ -178,7 +212,7 @@ function evaluarLimiteDescuento(
         reglaNombre: regla.nombre,
         tipo: regla.tipo,
         severidad: "advertencia",
-        mensaje: `Descuento global (${quote.descuentoGlobal}%) excede el límite de ${maxDescuentoGlobal}%`,
+        mensaje: m.globalDiscountExceeds(quote.descuentoGlobal, maxDescuentoGlobal),
       });
     }
   }
@@ -189,7 +223,8 @@ function evaluarProductoObligatorio(
   config: ConfigProductoObligatorio,
   quote: QuoteData,
   catMap: ProductoCategoriaMap,
-  violaciones: Violacion[]
+  violaciones: Violacion[],
+  m: (typeof MSG)["es"]
 ) {
   const { condicion, productosRequeridos, mensaje } = config;
   const productIdsInQuote = quote.lineItems
@@ -215,7 +250,7 @@ function evaluarProductoObligatorio(
       reglaNombre: regla.nombre,
       tipo: regla.tipo,
       severidad: "advertencia",
-      mensaje: mensaje || `Faltan productos obligatorios según la regla "${regla.nombre}"`,
+      mensaje: mensaje || m.missingRequired(regla.nombre),
       productosFaltantes: missing,
     });
   }
@@ -225,7 +260,8 @@ function evaluarAprobacion(
   regla: ReglaComercialData,
   config: ConfigAprobacion,
   quote: QuoteData,
-  aprobaciones: AprobacionRequerida[]
+  aprobaciones: AprobacionRequerida[],
+  m: (typeof MSG)["es"]
 ) {
   const { condiciones, aprobador } = config;
 
@@ -238,17 +274,17 @@ function evaluarAprobacion(
       triggered = cond.operador === "mayor_que"
         ? maxLineDiscount > cond.umbral
         : maxLineDiscount >= cond.umbral;
-      if (triggered) razon = `Descuento de línea (${maxLineDiscount}%) supera el umbral de ${cond.umbral}%`;
+      if (triggered) razon = m.aprobLine(maxLineDiscount, cond.umbral);
     } else if (cond.tipo === "descuento_global") {
       triggered = cond.operador === "mayor_que"
         ? quote.descuentoGlobal > cond.umbral
         : quote.descuentoGlobal >= cond.umbral;
-      if (triggered) razon = `Descuento global (${quote.descuentoGlobal}%) supera el umbral de ${cond.umbral}%`;
+      if (triggered) razon = m.aprobGlobal(quote.descuentoGlobal, cond.umbral);
     } else if (cond.tipo === "monto_total") {
       triggered = cond.operador === "mayor_que"
         ? quote.total > cond.umbral
         : quote.total >= cond.umbral;
-      if (triggered) razon = `Monto total (${quote.total.toFixed(2)}) supera el umbral de ${cond.umbral.toFixed(2)}`;
+      if (triggered) razon = m.aprobMonto(quote.total.toFixed(2), cond.umbral.toFixed(2));
     }
 
     if (triggered) {
@@ -272,7 +308,8 @@ function evaluarPromocion(
   regla: ReglaComercialData,
   config: ConfigPromocion,
   quote: QuoteData,
-  promociones: PromocionAplicable[]
+  promociones: PromocionAplicable[],
+  m: (typeof MSG)["es"]
 ) {
   const { fechaInicio, fechaFin, productoIds, tipoPromocion, valor, mensaje } = config;
 
@@ -296,7 +333,7 @@ function evaluarPromocion(
     productoIds: matchingProducts,
     tipoPromocion,
     valor,
-    mensaje: mensaje || `Promoción "${regla.nombre}" disponible`,
+    mensaje: mensaje || m.promoAvailable(regla.nombre),
   });
 }
 

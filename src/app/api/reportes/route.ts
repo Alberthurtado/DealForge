@@ -6,6 +6,16 @@ export async function GET(request: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
+  // Resolve company locale for month labels + funnel status names
+  const empresa = session.empresaId
+    ? await prisma.empresa.findUnique({
+        where: { id: session.empresaId },
+        select: { locale: true },
+      })
+    : null;
+  const numLocale = empresa?.locale || "es-ES";
+  const isEn = numLocale.startsWith("en");
+
   const { searchParams } = new URL(request.url);
   const period = searchParams.get("period") || "90d";
 
@@ -66,7 +76,7 @@ export async function GET(request: NextRequest) {
   cotizaciones.forEach(c => {
     const d = new Date(c.fechaEmision);
     const order = d.getFullYear() * 100 + d.getMonth();
-    const key = new Intl.DateTimeFormat("es-ES", { month: "short", year: "2-digit" }).format(d);
+    const key = new Intl.DateTimeFormat(numLocale, { month: "short", year: "2-digit" }).format(d);
     if (!monthlyMap[key]) {
       monthlyMap[key] = { mes: key, ingresos: 0, ganadas: 0, perdidas: 0, cotizaciones: 0, _order: order };
     }
@@ -94,10 +104,9 @@ export async function GET(request: NextRequest) {
   }
 
   // ── Pipeline funnel ───────────────────────────────────────────────────────
-  const estadoLabels: Record<string, string> = {
-    BORRADOR: "Borrador", ENVIADA: "Enviada", EN_REVISION: "En Revisión",
-    APROBADA: "Aprobada", GANADA: "Ganada",
-  };
+  const estadoLabels: Record<string, string> = isEn
+    ? { BORRADOR: "Draft", ENVIADA: "Sent", EN_REVISION: "In Review", APROBADA: "Approved", GANADA: "Won" }
+    : { BORRADOR: "Borrador", ENVIADA: "Enviada", EN_REVISION: "En Revisión", APROBADA: "Aprobada", GANADA: "Ganada" };
   const estadoOrder = ["BORRADOR", "ENVIADA", "EN_REVISION", "APROBADA", "GANADA"];
   const funnelMap: Record<string, { count: number; valor: number }> = {};
   estadoOrder.forEach(e => { funnelMap[e] = { count: 0, valor: 0 }; });

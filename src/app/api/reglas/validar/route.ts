@@ -5,6 +5,7 @@ import { reglasValidarSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 import { getSession } from "@/lib/auth";
 import { getPlanFeatures } from "@/lib/plan-limits";
+import { getDashboardLang } from "@/lib/dashboard-lang";
 
 export async function POST(request: NextRequest) {
   const session = await getSession();
@@ -26,10 +27,12 @@ export async function POST(request: NextRequest) {
   const catMap: ProductoCategoriaMap = {};
   for (const p of productos) catMap[p.id] = p.categoriaId;
 
+  const lang = await getDashboardLang(session.empresaId);
   const result = validarCotizacion(
     reglas,
     { lineItems: data.lineItems, descuentoGlobal: data.descuentoGlobal, subtotal: data.subtotal, total: data.total },
-    catMap
+    catMap,
+    lang
   );
 
   return NextResponse.json(result);
