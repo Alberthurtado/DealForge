@@ -3,6 +3,8 @@
 import { useState, useCallback, useRef } from "react";
 import { Upload, FileUp, Users, Package, Download, Loader2, CheckCircle, AlertTriangle, X } from "lucide-react";
 import Papa from "papaparse";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { INTEGRACIONES_STRINGS } from "@/lib/integraciones-i18n";
 
 type ImportType = "clientes" | "productos";
 
@@ -24,6 +26,8 @@ interface ImportResult {
 }
 
 export function ImportPanel() {
+  const { lang } = useEmpresaLocale();
+  const t = INTEGRACIONES_STRINGS[lang].importPanel;
   const [tipo, setTipo] = useState<ImportType>("clientes");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<Record<string, string>[]>([]);
@@ -56,7 +60,7 @@ export function ImportPanel() {
         setPreview(rows.slice(0, 5));
       },
       error: () => {
-        alert("Error al leer el archivo CSV");
+        alert(t.errReadCsv);
         reset();
       },
     });
@@ -85,7 +89,7 @@ export function ImportPanel() {
       const data = await res.json();
       setResult(data);
     } catch {
-      setResult({ created: 0, updated: 0, errors: ["Error de conexión"] });
+      setResult({ created: 0, updated: 0, errors: [t.errConnection] });
     } finally {
       setImporting(false);
     }
@@ -109,7 +113,7 @@ export function ImportPanel() {
     <div className="space-y-4">
       {/* Type selector */}
       <div className="bg-white rounded-xl border border-border p-4">
-        <label className="block text-sm font-medium mb-2">Tipo de datos a importar</label>
+        <label className="block text-sm font-medium mb-2">{t.dataType}</label>
         <div className="flex gap-2">
           <button
             onClick={() => { setTipo("clientes"); reset(); }}
@@ -120,7 +124,7 @@ export function ImportPanel() {
             }`}
           >
             <Users className="w-4 h-4" />
-            Clientes
+            {t.clientes}
           </button>
           <button
             onClick={() => { setTipo("productos"); reset(); }}
@@ -131,7 +135,7 @@ export function ImportPanel() {
             }`}
           >
             <Package className="w-4 h-4" />
-            Productos
+            {t.productos}
           </button>
         </div>
       </div>
@@ -139,13 +143,13 @@ export function ImportPanel() {
       {/* Template download + dropzone */}
       <div className="bg-white rounded-xl border border-border p-4">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-sm font-medium">Archivo CSV</span>
+          <span className="text-sm font-medium">{t.csvFile}</span>
           <button
             onClick={downloadTemplate}
             className="inline-flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 font-medium transition-colors"
           >
             <Download className="w-3.5 h-3.5" />
-            Descargar plantilla
+            {t.downloadTemplate}
           </button>
         </div>
 
@@ -163,10 +167,10 @@ export function ImportPanel() {
           >
             <FileUp className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
             <p className="text-sm font-medium text-foreground">
-              Arrastra tu archivo CSV aquí
+              {t.dragHere}
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              o haz clic para seleccionar
+              {t.orClick}
             </p>
             <input
               ref={fileRef}
@@ -185,7 +189,7 @@ export function ImportPanel() {
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium truncate">{file.name}</p>
               <p className="text-xs text-muted-foreground">
-                {totalRows} registros encontrados · {headers.length} columnas
+                {t.recordsFound(totalRows, headers.length)}
               </p>
             </div>
             <button onClick={reset} className="text-muted-foreground hover:text-foreground">
@@ -199,7 +203,7 @@ export function ImportPanel() {
       {preview.length > 0 && !result && (
         <div className="bg-white rounded-xl border border-border p-4">
           <h4 className="text-sm font-medium mb-3">
-            Vista previa (primeras {preview.length} de {totalRows} filas)
+            {t.previewTitle(preview.length, totalRows)}
           </h4>
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
@@ -212,7 +216,7 @@ export function ImportPanel() {
                   ))}
                   {headers.length > 8 && (
                     <th className="text-left px-2 py-1.5 font-medium text-muted-foreground">
-                      +{headers.length - 8} más
+                      {t.moreCols(headers.length - 8)}
                     </th>
                   )}
                 </tr>
@@ -222,7 +226,7 @@ export function ImportPanel() {
                   <tr key={i} className="border-b border-border">
                     {headers.slice(0, 8).map((h) => (
                       <td key={h} className="px-2 py-1.5 text-foreground whitespace-nowrap max-w-[200px] truncate">
-                        {row[h] || <span className="text-muted-foreground italic">vacío</span>}
+                        {row[h] || <span className="text-muted-foreground italic">{t.empty}</span>}
                       </td>
                     ))}
                     {headers.length > 8 && <td className="px-2 py-1.5 text-muted-foreground">...</td>}
@@ -241,12 +245,12 @@ export function ImportPanel() {
               {importing ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Importando...
+                  {t.importing}
                 </>
               ) : (
                 <>
                   <Upload className="w-4 h-4" />
-                  Importar {totalRows} registros
+                  {t.importN(totalRows)}
                 </>
               )}
             </button>
@@ -263,20 +267,20 @@ export function ImportPanel() {
             ) : (
               <AlertTriangle className="w-6 h-6 text-amber-500" />
             )}
-            <h4 className="text-base font-semibold">Resultado de la importación</h4>
+            <h4 className="text-base font-semibold">{t.resultTitle}</h4>
           </div>
           <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="text-center p-3 bg-green-50 rounded-lg">
               <p className="text-2xl font-bold text-green-700">{result.created}</p>
-              <p className="text-xs text-green-600">Creados</p>
+              <p className="text-xs text-green-600">{t.created}</p>
             </div>
             <div className="text-center p-3 bg-blue-50 rounded-lg">
               <p className="text-2xl font-bold text-blue-700">{result.updated}</p>
-              <p className="text-xs text-blue-600">Actualizados</p>
+              <p className="text-xs text-blue-600">{t.updated}</p>
             </div>
             <div className="text-center p-3 bg-red-50 rounded-lg">
               <p className="text-2xl font-bold text-red-700">{result.errors.length}</p>
-              <p className="text-xs text-red-600">Errores</p>
+              <p className="text-xs text-red-600">{t.errors}</p>
             </div>
           </div>
           {result.errors.length > 0 && (
@@ -291,7 +295,7 @@ export function ImportPanel() {
               onClick={reset}
               className="text-sm text-primary font-medium hover:text-primary/80 transition-colors"
             >
-              Importar otro archivo
+              {t.importAnother}
             </button>
           </div>
         </div>

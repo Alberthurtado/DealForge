@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Users, Package, FileText, Download, Loader2 } from "lucide-react";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { INTEGRACIONES_STRINGS } from "@/lib/integraciones-i18n";
 
 interface ExportOption {
   tipo: string;
@@ -12,6 +14,8 @@ interface ExportOption {
 }
 
 export function ExportPanel() {
+  const { lang } = useEmpresaLocale();
+  const t = INTEGRACIONES_STRINGS[lang].exportPanel;
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [exporting, setExporting] = useState<string | null>(null);
 
@@ -32,22 +36,22 @@ export function ExportPanel() {
   const options: ExportOption[] = [
     {
       tipo: "clientes",
-      label: "Clientes",
-      description: "Exporta todos tus clientes con datos de contacto principal. Compatible con Salesforce, HubSpot, Zoho.",
+      label: t.options.clientes.label,
+      description: t.options.clientes.description,
       icon: Users,
       count: counts.clientes ?? null,
     },
     {
       tipo: "productos",
-      label: "Productos",
-      description: "Exporta el catálogo de productos con SKU, precios y categorías. Compatible con SAP, Odoo, Holded.",
+      label: t.options.productos.label,
+      description: t.options.productos.description,
       icon: Package,
       count: counts.productos ?? null,
     },
     {
       tipo: "cotizaciones",
-      label: "Cotizaciones",
-      description: "Exporta todas las cotizaciones con estado, cliente, totales y fechas. Ideal para análisis en Excel.",
+      label: t.options.cotizaciones.label,
+      description: t.options.cotizaciones.description,
       icon: FileText,
       count: counts.cotizaciones ?? null,
     },
@@ -57,7 +61,7 @@ export function ExportPanel() {
     setExporting(tipo);
     try {
       const res = await fetch(`/api/integraciones/export?tipo=${tipo}`);
-      if (!res.ok) throw new Error("Error al exportar");
+      if (!res.ok) throw new Error("export failed");
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -68,7 +72,7 @@ export function ExportPanel() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch {
-      alert("Error al exportar los datos");
+      alert(t.errExport);
     } finally {
       setExporting(null);
     }
@@ -78,7 +82,7 @@ export function ExportPanel() {
     <div className="space-y-4">
       <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3">
         <p className="text-sm text-blue-800">
-          <strong>Formato CSV</strong> — Los archivos exportados usan formato CSV (separado por comas) compatible con Excel, Google Sheets, y la mayoría de CRMs y ERPs.
+          <strong>{t.csvNoteStrong}</strong>{t.csvNote}
         </p>
       </div>
 
@@ -96,7 +100,7 @@ export function ExportPanel() {
                 <h3 className="text-sm font-semibold">{opt.label}</h3>
                 {opt.count !== null && (
                   <p className="text-xs text-muted-foreground">
-                    {opt.count} registros
+                    {t.records(opt.count)}
                   </p>
                 )}
               </div>
@@ -112,12 +116,12 @@ export function ExportPanel() {
               {exporting === opt.tipo ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Exportando...
+                  {t.exporting}
                 </>
               ) : (
                 <>
                   <Download className="w-4 h-4" />
-                  Exportar CSV
+                  {t.exportCsv}
                 </>
               )}
             </button>

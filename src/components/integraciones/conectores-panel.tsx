@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { Globe, Zap, Cloud, Database, Building2, BarChart3, ShoppingCart, Briefcase, Save, Loader2, CheckCircle } from "lucide-react";
 import { useToast } from "@/components/ui/toast";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { INTEGRACIONES_STRINGS } from "@/lib/integraciones-i18n";
 
 interface Conector {
   id: string;
   nombre: string;
-  descripcion: string;
   tipo: "crm" | "erp" | "webhook";
   icon: typeof Globe;
   color: string;
@@ -16,21 +17,23 @@ interface Conector {
 
 const CONECTORES: Conector[] = [
   // CRMs
-  { id: "salesforce", nombre: "Salesforce", descripcion: "Sincroniza clientes, contactos y oportunidades con Salesforce CRM", tipo: "crm", icon: Cloud, color: "text-blue-600 bg-blue-50", disponible: false },
-  { id: "hubspot", nombre: "HubSpot", descripcion: "Conecta con HubSpot CRM para gestionar contactos y deals", tipo: "crm", icon: BarChart3, color: "text-orange-600 bg-orange-50", disponible: false },
-  { id: "pipedrive", nombre: "Pipedrive", descripcion: "Sincroniza pipeline de ventas y contactos con Pipedrive", tipo: "crm", icon: Briefcase, color: "text-green-600 bg-green-50", disponible: false },
-  { id: "zoho", nombre: "Zoho CRM", descripcion: "Integra con Zoho CRM para gestionar leads y cotizaciones", tipo: "crm", icon: Globe, color: "text-red-600 bg-red-50", disponible: false },
+  { id: "salesforce", nombre: "Salesforce", tipo: "crm", icon: Cloud, color: "text-blue-600 bg-blue-50", disponible: false },
+  { id: "hubspot", nombre: "HubSpot", tipo: "crm", icon: BarChart3, color: "text-orange-600 bg-orange-50", disponible: false },
+  { id: "pipedrive", nombre: "Pipedrive", tipo: "crm", icon: Briefcase, color: "text-green-600 bg-green-50", disponible: false },
+  { id: "zoho", nombre: "Zoho CRM", tipo: "crm", icon: Globe, color: "text-red-600 bg-red-50", disponible: false },
   // ERPs
-  { id: "sap", nombre: "SAP Business One", descripcion: "Conecta con SAP B1 para sincronizar productos, clientes y pedidos", tipo: "erp", icon: Database, color: "text-indigo-600 bg-indigo-50", disponible: false },
-  { id: "odoo", nombre: "Odoo", descripcion: "Integra con Odoo ERP para inventario, facturación y contabilidad", tipo: "erp", icon: ShoppingCart, color: "text-purple-600 bg-purple-50", disponible: false },
-  { id: "holded", nombre: "Holded", descripcion: "Sincroniza facturas, productos y clientes con Holded", tipo: "erp", icon: Building2, color: "text-teal-600 bg-teal-50", disponible: false },
-  { id: "a3erp", nombre: "A3ERP", descripcion: "Conecta con A3ERP para contabilidad y gestión empresarial", tipo: "erp", icon: Database, color: "text-cyan-600 bg-cyan-50", disponible: false },
+  { id: "sap", nombre: "SAP Business One", tipo: "erp", icon: Database, color: "text-indigo-600 bg-indigo-50", disponible: false },
+  { id: "odoo", nombre: "Odoo", tipo: "erp", icon: ShoppingCart, color: "text-purple-600 bg-purple-50", disponible: false },
+  { id: "holded", nombre: "Holded", tipo: "erp", icon: Building2, color: "text-teal-600 bg-teal-50", disponible: false },
+  { id: "a3erp", nombre: "A3ERP", tipo: "erp", icon: Database, color: "text-cyan-600 bg-cyan-50", disponible: false },
   // Webhook
-  { id: "webhook", nombre: "Webhook", descripcion: "Envía notificaciones HTTP cuando se crean o actualizan cotizaciones", tipo: "webhook", icon: Zap, color: "text-amber-600 bg-amber-50", disponible: true },
+  { id: "webhook", nombre: "Webhook", tipo: "webhook", icon: Zap, color: "text-amber-600 bg-amber-50", disponible: true },
 ];
 
 export function ConectoresPanel() {
   const { success, error: showError } = useToast();
+  const { lang } = useEmpresaLocale();
+  const t = INTEGRACIONES_STRINGS[lang].conectoresPanel;
   const [webhookUrl, setWebhookUrl] = useState("");
   const [webhookExpanded, setWebhookExpanded] = useState(false);
   const [savingWebhook, setSavingWebhook] = useState(false);
@@ -47,10 +50,10 @@ export function ConectoresPanel() {
     try {
       localStorage.setItem("dealforge_webhook_url", webhookUrl);
       setWebhookSaved(true);
-      success("Webhook configurado correctamente");
+      success(t.webhookConfigured);
       setTimeout(() => setWebhookSaved(false), 3000);
     } catch {
-      showError("Error al guardar");
+      showError(t.errSave);
     } finally {
       setSavingWebhook(false);
     }
@@ -68,34 +71,34 @@ export function ConectoresPanel() {
               <div className="flex items-center gap-2">
                 <h4 className="text-sm font-semibold">{conector.nombre}</h4>
                 <span className="inline-flex px-1.5 py-0.5 text-[10px] font-medium bg-green-100 text-green-700 rounded-full">
-                  Disponible
+                  {t.availableBadge}
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground mt-0.5">{conector.descripcion}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{t.descriptions[conector.id] ?? ""}</p>
             </div>
             <button
               onClick={() => setWebhookExpanded(!webhookExpanded)}
               className="text-xs text-primary font-medium hover:text-primary/80 transition-colors"
             >
-              {webhookExpanded ? "Cerrar" : "Configurar"}
+              {webhookExpanded ? t.close : t.configure}
             </button>
           </div>
           {webhookExpanded && (
             <div className="mt-4 pt-4 border-t border-border space-y-3">
               <div>
                 <label className="block text-xs font-medium text-muted-foreground mb-1">
-                  URL del Webhook
+                  {t.webhookUrl}
                 </label>
                 <input
                   type="url"
                   value={webhookUrl}
                   onChange={(e) => setWebhookUrl(e.target.value)}
-                  placeholder="https://tu-servidor.com/webhook"
+                  placeholder={t.webhookUrlPlaceholder}
                   className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white"
                 />
               </div>
               <p className="text-xs text-muted-foreground">
-                Recibiremos un POST con los datos de la cotización cuando se cree o cambie de estado.
+                {t.webhookNote}
               </p>
               <button
                 onClick={saveWebhook}
@@ -109,7 +112,7 @@ export function ConectoresPanel() {
                 ) : (
                   <Save className="w-3.5 h-3.5" />
                 )}
-                {webhookSaved ? "Guardado" : "Guardar"}
+                {webhookSaved ? t.saved : t.save}
               </button>
             </div>
           )}
@@ -127,17 +130,17 @@ export function ConectoresPanel() {
             <div className="flex items-center gap-2">
               <h4 className="text-sm font-semibold">{conector.nombre}</h4>
               <span className="inline-flex px-1.5 py-0.5 text-[10px] font-medium bg-gray-100 text-gray-500 rounded-full">
-                Próximamente
+                {t.comingSoon}
               </span>
             </div>
-            <p className="text-xs text-muted-foreground mt-0.5">{conector.descripcion}</p>
+            <p className="text-xs text-muted-foreground mt-0.5">{t.descriptions[conector.id] ?? ""}</p>
           </div>
         </div>
         <button
           disabled
           className="mt-3 w-full px-3 py-1.5 text-xs font-medium border border-border rounded-lg text-muted-foreground bg-muted/50 cursor-not-allowed"
         >
-          Conectar
+          {t.connect}
         </button>
       </div>
     );

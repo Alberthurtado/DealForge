@@ -6,23 +6,27 @@ import { ExportPanel } from "@/components/integraciones/export-panel";
 import { ImportPanel } from "@/components/integraciones/import-panel";
 import { ConectoresPanel } from "@/components/integraciones/conectores-panel";
 import { Download, Upload, Plug } from "lucide-react";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { INTEGRACIONES_STRINGS } from "@/lib/integraciones-i18n";
 
 const tabs = [
-  { id: "exportar", label: "Exportar", icon: Download },
-  { id: "importar", label: "Importar", icon: Upload },
-  { id: "conectores", label: "Conectores", icon: Plug },
+  { id: "exportar", labelKey: "tabExport", icon: Download },
+  { id: "importar", labelKey: "tabImport", icon: Upload },
+  { id: "conectores", labelKey: "tabConnectors", icon: Plug },
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
 
 export default function IntegracionesPage() {
+  const { lang } = useEmpresaLocale();
+  const t = INTEGRACIONES_STRINGS[lang].page;
   const [activeTab, setActiveTab] = useState<TabId>("exportar");
 
   return (
     <div>
       <PageHeader
-        title="Integraciones"
-        description="Importa y exporta datos, conecta con tu CRM y ERP"
+        title={t.title}
+        description={t.description}
       />
       <div className="p-6 space-y-6">
         {/* Tabs */}
@@ -38,7 +42,7 @@ export default function IntegracionesPage() {
               }`}
             >
               <tab.icon className="w-4 h-4" />
-              {tab.label}
+              {t[tab.labelKey]}
             </button>
           ))}
         </div>
