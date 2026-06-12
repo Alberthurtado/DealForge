@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { REGLAS_STRINGS } from "@/lib/reglas-i18n";
 
 const inputClass =
   "w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white";
@@ -19,6 +21,9 @@ interface Props {
 }
 
 export function AprobacionForm({ initial, onSave, saving }: Props) {
+  const { lang } = useEmpresaLocale();
+  const tf = REGLAS_STRINGS[lang].forms;
+  const t = tf.aprobacion;
   const config = initial?.configuracion || {};
   const aprobador = config.aprobador as { nombre?: string; email?: string } | undefined;
 
@@ -60,16 +65,16 @@ export function AprobacionForm({ initial, onSave, saving }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Nombre *
+          {tf.name}
         </label>
-        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} required placeholder="Aprobación Dir. Comercial" />
+        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} required placeholder={t.namePlaceholder} />
       </div>
 
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="text-xs font-medium text-muted-foreground">Condiciones</label>
+          <label className="text-xs font-medium text-muted-foreground">{t.conditions}</label>
           <button type="button" onClick={addCondicion} className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80">
-            <Plus className="w-3 h-3" /> Agregar
+            <Plus className="w-3 h-3" /> {t.add}
           </button>
         </div>
         <div className="space-y-2">
@@ -80,9 +85,9 @@ export function AprobacionForm({ initial, onSave, saving }: Props) {
                 onChange={(e) => updateCondicion(i, "tipo", e.target.value)}
                 className="flex-1 px-2 py-1.5 text-sm border border-border rounded-lg bg-white"
               >
-                <option value="descuento_linea">Descuento línea</option>
-                <option value="descuento_global">Descuento global</option>
-                <option value="monto_total">Monto total</option>
+                <option value="descuento_linea">{t.condLineDiscount}</option>
+                <option value="descuento_global">{t.condGlobalDiscount}</option>
+                <option value="monto_total">{t.condTotalAmount}</option>
               </select>
               <select
                 value={cond.operador}
@@ -114,23 +119,23 @@ export function AprobacionForm({ initial, onSave, saving }: Props) {
 
       <div className="border-t border-border pt-4">
         <label className="block text-xs font-medium text-muted-foreground mb-2">
-          Aprobador
+          {t.approver}
         </label>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs text-muted-foreground mb-1">Nombre *</label>
-            <input type="text" value={aprobNombre} onChange={(e) => setAprobNombre(e.target.value)} className={inputClass} required placeholder="Ana García" />
+            <label className="block text-xs text-muted-foreground mb-1">{t.approverName}</label>
+            <input type="text" value={aprobNombre} onChange={(e) => setAprobNombre(e.target.value)} className={inputClass} required placeholder={t.approverNamePlaceholder} />
           </div>
           <div>
-            <label className="block text-xs text-muted-foreground mb-1">Email *</label>
-            <input type="email" value={aprobEmail} onChange={(e) => setAprobEmail(e.target.value)} className={inputClass} required placeholder="ana@empresa.es" />
+            <label className="block text-xs text-muted-foreground mb-1">{t.email}</label>
+            <input type="email" value={aprobEmail} onChange={(e) => setAprobEmail(e.target.value)} className={inputClass} required placeholder={t.approverEmailPlaceholder} />
           </div>
         </div>
       </div>
 
       <div className="flex justify-end pt-2">
         <button type="submit" disabled={saving || !nombre || !aprobNombre || !aprobEmail} className="px-5 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50">
-          {saving ? "Guardando..." : initial ? "Actualizar" : "Crear Regla"}
+          {saving ? tf.saving : initial ? tf.update : tf.createRule}
         </button>
       </div>
     </form>

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { REGLAS_STRINGS } from "@/lib/reglas-i18n";
 
 const inputClass =
   "w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white";
@@ -18,6 +20,9 @@ interface Props {
 }
 
 export function PromocionForm({ productos, initial, onSave, saving }: Props) {
+  const { lang } = useEmpresaLocale();
+  const tf = REGLAS_STRINGS[lang].forms;
+  const t = tf.promocion;
   const config = initial?.configuracion || {};
   const [nombre, setNombre] = useState(initial?.nombre || "");
   const [fechaInicio, setFechaInicio] = useState((config.fechaInicio as string) || "");
@@ -53,21 +58,21 @@ export function PromocionForm({ productos, initial, onSave, saving }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Nombre *
+          {tf.name}
         </label>
-        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} required placeholder="Promo Verano 2026" />
+        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} required placeholder={t.namePlaceholder} />
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Fecha inicio *
+            {t.startDate}
           </label>
           <input type="date" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} className={inputClass} required />
         </div>
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Fecha fin *
+            {t.endDate}
           </label>
           <input type="date" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} className={inputClass} required />
         </div>
@@ -75,7 +80,7 @@ export function PromocionForm({ productos, initial, onSave, saving }: Props) {
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Productos en promoción
+          {t.productsInPromo}
         </label>
         <div className="max-h-32 overflow-y-auto border border-border rounded-lg p-2 space-y-1">
           {productos.map((p) => (
@@ -95,16 +100,16 @@ export function PromocionForm({ productos, initial, onSave, saving }: Props) {
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Tipo de promoción
+            {t.promoType}
           </label>
           <select value={tipoPromocion} onChange={(e) => setTipoPromocion(e.target.value)} className={inputClass}>
-            <option value="descuento_porcentaje">Descuento %</option>
-            <option value="precio_fijo">Precio fijo</option>
+            <option value="descuento_porcentaje">{t.discountPct}</option>
+            <option value="precio_fijo">{t.fixedPrice}</option>
           </select>
         </div>
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            {tipoPromocion === "descuento_porcentaje" ? "Descuento (%)" : "Precio (EUR)"}
+            {tipoPromocion === "descuento_porcentaje" ? t.discountLabel : t.priceLabel}
           </label>
           <input type="number" min={0} value={valor} onChange={(e) => setValor(Number(e.target.value))} className={inputClass} />
         </div>
@@ -112,14 +117,14 @@ export function PromocionForm({ productos, initial, onSave, saving }: Props) {
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Mensaje (opcional)
+          {t.message}
         </label>
-        <input type="text" value={mensaje} onChange={(e) => setMensaje(e.target.value)} className={inputClass} placeholder="20% de descuento en productos seleccionados" />
+        <input type="text" value={mensaje} onChange={(e) => setMensaje(e.target.value)} className={inputClass} placeholder={t.messagePlaceholder} />
       </div>
 
       <div className="flex justify-end pt-2">
         <button type="submit" disabled={saving || !nombre || !fechaInicio || !fechaFin || productoIds.length === 0} className="px-5 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50">
-          {saving ? "Guardando..." : initial ? "Actualizar" : "Crear Regla"}
+          {saving ? tf.saving : initial ? tf.update : tf.createRule}
         </button>
       </div>
     </form>

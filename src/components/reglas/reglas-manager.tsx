@@ -8,6 +8,8 @@ import { LimiteDescuentoForm } from "./forms/limite-descuento-form";
 import { ProductoObligatorioForm } from "./forms/producto-obligatorio-form";
 import { AprobacionForm } from "./forms/aprobacion-form";
 import { PromocionForm } from "./forms/promocion-form";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { REGLAS_STRINGS } from "@/lib/reglas-i18n";
 
 interface Regla {
   id: string;
@@ -38,34 +40,16 @@ interface Props {
 }
 
 const SECTIONS = [
-  {
-    tipo: "LIMITE_DESCUENTO",
-    titulo: "Límites de Descuento",
-    descripcion: "Descuento máximo permitido por línea o global",
-    Icon: Percent,
-  },
-  {
-    tipo: "PRODUCTO_OBLIGATORIO",
-    titulo: "Productos Obligatorios",
-    descripcion: "Si se incluye un producto o categoría, debe incluirse otro obligatoriamente",
-    Icon: Link2,
-  },
-  {
-    tipo: "APROBACION",
-    titulo: "Aprobaciones Requeridas",
-    descripcion: "Aprobador necesario cuando se superan ciertos umbrales",
-    Icon: UserCheck,
-  },
-  {
-    tipo: "PROMOCION",
-    titulo: "Promociones",
-    descripcion: "Descuentos temporales por fecha para productos específicos",
-    Icon: Tag,
-  },
+  { tipo: "LIMITE_DESCUENTO", Icon: Percent },
+  { tipo: "PRODUCTO_OBLIGATORIO", Icon: Link2 },
+  { tipo: "APROBACION", Icon: UserCheck },
+  { tipo: "PROMOCION", Icon: Tag },
 ];
 
 export function ReglasManager({ initialReglas, productos, categorias }: Props) {
   const { success, error: showError } = useToast();
+  const { lang } = useEmpresaLocale();
+  const t = REGLAS_STRINGS[lang].manager;
   const [reglas, setReglas] = useState<Regla[]>(initialReglas);
   const [saving, setSaving] = useState(false);
   const [modalOpen, setModalOpen] = useState<string | null>(null); // tipo for new, or "edit-{id}" for edit
@@ -93,9 +77,9 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
         if (res.ok) {
           const updated = await res.json();
           setReglas((prev) => prev.map((r) => (r.id === updated.id ? updated : r)));
-          success("Regla actualizada");
+          success(t.ruleUpdated);
         } else {
-          showError("Error al actualizar");
+          showError(t.errUpdate);
         }
       } else {
         const res = await fetch("/api/reglas", {
@@ -106,13 +90,13 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
         if (res.ok) {
           const created = await res.json();
           setReglas((prev) => [created, ...prev]);
-          success("Regla creada");
+          success(t.ruleCreated);
         } else {
-          showError("Error al crear");
+          showError(t.errCreate);
         }
       }
     } catch {
-      showError("Error de conexión");
+      showError(t.errConnection);
     } finally {
       setSaving(false);
       setModalOpen(null);
@@ -132,7 +116,7 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
         setReglas((prev) => prev.map((r) => (r.id === updated.id ? updated : r)));
       }
     } catch {
-      showError("Error al cambiar estado");
+      showError(t.errToggle);
     }
   }
 
@@ -141,10 +125,10 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
       const res = await fetch(`/api/reglas/${regla.id}`, { method: "DELETE" });
       if (res.ok) {
         setReglas((prev) => prev.filter((r) => r.id !== regla.id));
-        success("Regla eliminada");
+        success(t.ruleDeleted);
       }
     } catch {
-      showError("Error al eliminar");
+      showError(t.errDelete);
     }
   }
 
@@ -194,21 +178,21 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
     switch (regla.tipo) {
       case "LIMITE_DESCUENTO": {
         const parts: string[] = [];
-        if (config.maxDescuentoLinea !== undefined) parts.push(`Línea max: ${config.maxDescuentoLinea}%`);
-        if (config.maxDescuentoGlobal !== undefined) parts.push(`Global max: ${config.maxDescuentoGlobal}%`);
-        return parts.join(" | ") || "Sin configurar";
+        if (config.maxDescuentoLinea !== undefined) parts.push(t.lineMax(config.maxDescuentoLinea));
+        if (config.maxDescuentoGlobal !== undefined) parts.push(t.globalMax(config.maxDescuentoGlobal));
+        return parts.join(" | ") || t.notConfigured;
       }
       case "PRODUCTO_OBLIGATORIO": {
         const cond = config.condicion as { tipo?: string; ids?: string[] } | undefined;
         const reqs = (config.productosRequeridos as string[]) || [];
         const triggerCount = cond?.ids?.length || 0;
-        return `${triggerCount} disparador(es) → ${reqs.length} producto(s) obligatorio(s)`;
+        return t.productoObligSummary(triggerCount, reqs.length);
       }
       case "APROBACION": {
         const aprobador = config.aprobador as { nombre?: string } | undefined;
         const conds = (config.condiciones as Array<{ tipo: string; umbral: number }>) || [];
         const condText = conds.map((c) => {
-          const label = c.tipo === "descuento_linea" ? "Dto. línea" : c.tipo === "descuento_global" ? "Dto. global" : "Monto";
+          const label = c.tipo === "descuento_linea" ? t.aprobLineDisc : c.tipo === "descuento_global" ? t.aprobGlobalDisc : t.aprobAmount;
           const unit = c.tipo === "monto_total" ? " EUR" : "%";
           return `${label} > ${c.umbral}${unit}`;
         }).join(", ");
@@ -221,7 +205,7 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
         const fi = config.fechaInicio as string;
         const ff = config.fechaFin as string;
         const valorText = tipo === "descuento_porcentaje" ? `${valor}%` : `${valor} EUR`;
-        return `${valorText} en ${prods.length} producto(s) | ${fi || "?"} a ${ff || "?"}`;
+        return t.promoSummary(valorText, prods.length, fi || "?", ff || "?");
       }
       default:
         return "";
@@ -243,20 +227,20 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
               <section.Icon className="w-5 h-5 text-primary shrink-0" />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-semibold text-foreground">{section.titulo}</h3>
+                  <h3 className="text-sm font-semibold text-foreground">{t.sections[section.tipo].titulo}</h3>
                   {sectionReglas.length > 0 && (
                     <span className="text-[10px] bg-gray-100 text-muted-foreground px-1.5 py-0.5 rounded-full">
                       {sectionReglas.length}
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground mt-0.5">{section.descripcion}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{t.sections[section.tipo].descripcion}</p>
               </div>
               <button
                 onClick={(e) => { e.stopPropagation(); openNew(section.tipo); }}
                 className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors shrink-0"
               >
-                <Plus className="w-3 h-3" /> Agregar
+                <Plus className="w-3 h-3" /> {t.add}
               </button>
               {isExpanded ? (
                 <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />
@@ -269,7 +253,7 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
               <div className="px-6 pb-4">
                 {sectionReglas.length === 0 ? (
                   <p className="text-xs text-muted-foreground italic py-2">
-                    No hay reglas de este tipo. Haz click en &quot;Agregar&quot; para crear una.
+                    {t.emptyType}
                   </p>
                 ) : (
                   <div className="space-y-2">
@@ -287,7 +271,7 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
                           className={`w-8 h-5 rounded-full relative transition-colors shrink-0 ${
                             regla.activa ? "bg-primary" : "bg-gray-300"
                           }`}
-                          title={regla.activa ? "Desactivar" : "Activar"}
+                          title={regla.activa ? t.deactivate : t.activate}
                         >
                           <div
                             className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
@@ -307,14 +291,14 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
                           <button
                             onClick={() => openEdit(regla)}
                             className="p-1.5 text-muted-foreground hover:text-foreground rounded-md hover:bg-gray-100 transition-colors"
-                            title="Editar"
+                            title={t.edit}
                           >
                             <Pencil className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleDelete(regla)}
                             className="p-1.5 text-muted-foreground hover:text-red-500 rounded-md hover:bg-red-50 transition-colors"
-                            title="Eliminar"
+                            title={t.delete}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -331,7 +315,7 @@ export function ReglasManager({ initialReglas, productos, categorias }: Props) {
 
       {/* Modal for creating/editing rules */}
       <ReglaFormModal
-        title={editingRegla ? `Editar: ${editingRegla.nombre}` : `Nueva Regla`}
+        title={editingRegla ? t.modalEdit(editingRegla.nombre) : t.modalNew}
         open={modalOpen !== null}
         onClose={closeModal}
       >

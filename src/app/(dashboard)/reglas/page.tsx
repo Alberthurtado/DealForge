@@ -5,6 +5,8 @@ import { ReglasManager } from "@/components/reglas/reglas-manager";
 import { FeatureGateBanner } from "@/components/layout/feature-gate-banner";
 import { getSession } from "@/lib/auth";
 import { getPlanFeatures } from "@/lib/plan-limits";
+import { getDashboardLang } from "@/lib/dashboard-lang";
+import { REGLAS_STRINGS } from "@/lib/reglas-i18n";
 
 export const metadata: Metadata = {
   title: "Reglas Comerciales",
@@ -40,18 +42,20 @@ export default async function ReglasPage() {
   const session = await getSession();
   if (!session) return null;
   const features = getPlanFeatures(session.plan || "starter");
+  const lang = await getDashboardLang(session.empresaId);
+  const t = REGLAS_STRINGS[lang].page;
 
   if (!features.reglasComerciales) {
     return (
       <div>
         <PageHeader
-          title="Reglas Comerciales"
-          description="Límites, productos obligatorios, aprobaciones y promociones"
+          title={t.title}
+          description={t.description}
         />
         <FeatureGateBanner
-          feature="Reglas Comerciales"
+          feature={t.gateFeature}
           requiredPlan="Pro"
-          description="Crea reglas de descuento, productos obligatorios, aprobaciones y promociones para controlar tu proceso de ventas. Disponible desde el plan Pro."
+          description={t.gateDescription}
         />
       </div>
     );
@@ -62,8 +66,8 @@ export default async function ReglasPage() {
   return (
     <div>
       <PageHeader
-        title="Reglas Comerciales"
-        description="Límites, productos obligatorios, aprobaciones y promociones"
+        title={t.title}
+        description={t.description}
       />
       <div className="p-6">
         <ReglasManager

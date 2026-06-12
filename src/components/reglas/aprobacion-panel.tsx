@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Check, X, Clock, UserCheck, Mail, RotateCw, Link as LinkIcon } from "lucide-react";
 import { useToast } from "@/components/ui/toast";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { REGLAS_STRINGS } from "@/lib/reglas-i18n";
 
 interface AprobacionData {
   id: string;
@@ -25,6 +27,8 @@ interface Props {
 
 export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props) {
   const { success, error: showError } = useToast();
+  const { lang } = useEmpresaLocale();
+  const t = REGLAS_STRINGS[lang].aprobacionPanel;
   const [resending, setResending] = useState<string | null>(null);
 
   if (aprobaciones.length === 0) return null;
@@ -37,14 +41,14 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
         { method: "POST" }
       );
       if (res.ok) {
-        success("Email de aprobación reenviado");
+        success(t.emailResent);
         onUpdate();
       } else {
         const data = await res.json().catch(() => null);
-        showError(data?.error || "Error al reenviar email");
+        showError(data?.error || t.errResend);
       }
     } catch {
-      showError("Error de conexión");
+      showError(t.errConnection);
     } finally {
       setResending(null);
     }
@@ -53,8 +57,8 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
   function copyApprovalLink(token: string) {
     const url = `${window.location.origin}/aprobar/${token}`;
     navigator.clipboard.writeText(url).then(
-      () => success("Enlace copiado"),
-      () => showError("No se pudo copiar")
+      () => success(t.linkCopied),
+      () => showError(t.errCopy)
     );
   }
 
@@ -65,7 +69,7 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
     <div className="bg-white rounded-xl border border-border p-5">
       <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
         <UserCheck className="w-4 h-4 text-primary" />
-        Aprobaciones
+        {t.title}
       </h3>
 
       <div className="space-y-2">
@@ -78,18 +82,18 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
                 <p className="text-[10px] text-amber-600">{a.aprobadorEmail}</p>
               </div>
               <span className="text-[10px] font-medium text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full shrink-0">
-                Pendiente
+                {t.pending}
               </span>
             </div>
             {/* Email status + actions */}
             <div className="flex items-center gap-1.5 mt-2 ml-5">
               {a.emailEnviadoAt ? (
                 <span className="inline-flex items-center gap-1 text-[10px] text-green-700">
-                  <Mail className="w-3 h-3" /> Email enviado
+                  <Mail className="w-3 h-3" /> {t.emailSent}
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1 text-[10px] text-gray-400">
-                  <Mail className="w-3 h-3" /> Email pendiente
+                  <Mail className="w-3 h-3" /> {t.emailPending}
                 </span>
               )}
               <span className="text-gray-200">|</span>
@@ -97,10 +101,10 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
                 onClick={() => handleResendEmail(a.id)}
                 disabled={resending === a.id}
                 className="inline-flex items-center gap-0.5 text-[10px] text-primary hover:text-primary/80 transition-colors disabled:opacity-50"
-                title="Reenviar email de aprobación"
+                title={t.resendTitle}
               >
                 <RotateCw className={`w-3 h-3 ${resending === a.id ? "animate-spin" : ""}`} />
-                Reenviar
+                {t.resend}
               </button>
               {a.token && (
                 <>
@@ -108,16 +112,16 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
                   <button
                     onClick={() => copyApprovalLink(a.token!)}
                     className="inline-flex items-center gap-0.5 text-[10px] text-primary hover:text-primary/80 transition-colors"
-                    title="Copiar enlace de aprobación"
+                    title={t.copyLinkTitle}
                   >
                     <LinkIcon className="w-3 h-3" />
-                    Copiar enlace
+                    {t.copyLink}
                   </button>
                 </>
               )}
             </div>
             <p className="text-[10px] text-amber-600/70 mt-1.5 ml-5">
-              Solo el aprobador puede responder desde el enlace enviado por email
+              {t.onlyApproverNote}
             </p>
           </div>
         ))}
@@ -141,7 +145,7 @@ export function AprobacionPanel({ cotizacionId, aprobaciones, onUpdate }: Props)
                 {a.aprobadorNombre}
               </p>
               <p className={`text-[10px] ${a.estado === "APROBADA" ? "text-green-600" : "text-red-600"}`}>
-                {a.estado === "APROBADA" ? "Aprobada" : "Rechazada"}
+                {a.estado === "APROBADA" ? t.approved : t.rejected}
                 {a.comentario && ` — ${a.comentario}`}
               </p>
             </div>

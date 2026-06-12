@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { REGLAS_STRINGS } from "@/lib/reglas-i18n";
 
 const inputClass =
   "w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white";
@@ -24,6 +26,9 @@ interface Props {
 }
 
 export function ProductoObligatorioForm({ productos, categorias, initial, onSave, saving }: Props) {
+  const { lang } = useEmpresaLocale();
+  const tf = REGLAS_STRINGS[lang].forms;
+  const t = tf.productoObligatorio;
   const config = initial?.configuracion || {};
   const condicion = config.condicion as { tipo?: string; ids?: string[] } | undefined;
 
@@ -54,24 +59,24 @@ export function ProductoObligatorioForm({ productos, categorias, initial, onSave
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Nombre *
+          {tf.name}
         </label>
-        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} required placeholder="Soporte obligatorio con licencias" />
+        <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} required placeholder={t.namePlaceholder} />
       </div>
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Cuando la cotización incluye...
+          {t.whenQuoteIncludes}
         </label>
         <select value={condTipo} onChange={(e) => { setCondTipo(e.target.value); setCondIds([]); }} className={inputClass}>
-          <option value="producto">Un producto específico</option>
-          <option value="categoria">Una categoría</option>
+          <option value="producto">{t.aSpecificProduct}</option>
+          <option value="categoria">{t.aCategory}</option>
         </select>
       </div>
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Seleccionar {condTipo === "producto" ? "productos" : "categorías"} disparadores
+          {condTipo === "producto" ? t.selectTriggersProducts : t.selectTriggersCategories}
         </label>
         <div className="max-h-32 overflow-y-auto border border-border rounded-lg p-2 space-y-1">
           {options.map((opt) => (
@@ -85,13 +90,13 @@ export function ProductoObligatorioForm({ productos, categorias, initial, onSave
               {opt.nombre}
             </label>
           ))}
-          {options.length === 0 && <p className="text-xs text-muted-foreground">No hay opciones</p>}
+          {options.length === 0 && <p className="text-xs text-muted-foreground">{t.noOptions}</p>}
         </div>
       </div>
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Productos requeridos (obligatorios)
+          {t.requiredProducts}
         </label>
         <div className="max-h-32 overflow-y-auto border border-border rounded-lg p-2 space-y-1">
           {productos.map((p) => (
@@ -110,14 +115,14 @@ export function ProductoObligatorioForm({ productos, categorias, initial, onSave
 
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Mensaje personalizado (opcional)
+          {t.customMessage}
         </label>
-        <input type="text" value={mensaje} onChange={(e) => setMensaje(e.target.value)} className={inputClass} placeholder="Soporte Básico es obligatorio con licencias" />
+        <input type="text" value={mensaje} onChange={(e) => setMensaje(e.target.value)} className={inputClass} placeholder={t.customMessagePlaceholder} />
       </div>
 
       <div className="flex justify-end pt-2">
         <button type="submit" disabled={saving || !nombre || condIds.length === 0 || requeridos.length === 0} className="px-5 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50">
-          {saving ? "Guardando..." : initial ? "Actualizar" : "Crear Regla"}
+          {saving ? tf.saving : initial ? tf.update : tf.createRule}
         </button>
       </div>
     </form>

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { AlertTriangle, UserCheck, Tag, Plus } from "lucide-react";
-import { formatCurrency } from "@/lib/utils";
 import type { Violacion, AprobacionRequerida, PromocionAplicable } from "@/lib/reglas-engine";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { REGLAS_STRINGS } from "@/lib/reglas-i18n";
 
 interface ProductoInfo {
   id: string;
@@ -36,6 +37,8 @@ function AddProductoInline({
   producto: ProductoInfo;
   onAdd: (cantidad: number, precio: number) => void;
 }) {
+  const { lang } = useEmpresaLocale();
+  const t = REGLAS_STRINGS[lang].warnings;
   const [cantidad, setCantidad] = useState(1);
   const [precio, setPrecio] = useState(producto.precioBase);
 
@@ -45,7 +48,7 @@ function AddProductoInline({
         {producto.nombre}
       </span>
       <div className="flex items-center gap-1">
-        <label className="text-[10px] text-amber-500">Cant:</label>
+        <label className="text-[10px] text-amber-500">{t.qty}</label>
         <input
           type="number"
           min="1"
@@ -56,7 +59,7 @@ function AddProductoInline({
         />
       </div>
       <div className="flex items-center gap-1">
-        <label className="text-[10px] text-amber-500">Precio:</label>
+        <label className="text-[10px] text-amber-500">{t.price}</label>
         <input
           type="number"
           min="0"
@@ -71,7 +74,7 @@ function AddProductoInline({
         className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-amber-600 text-white rounded hover:bg-amber-700 transition-colors"
       >
         <Plus className="w-3 h-3" />
-        Incluir
+        {t.includeBtn}
       </button>
     </div>
   );
@@ -86,6 +89,8 @@ export function ReglasWarnings({
   onAddProducto,
   onApplyPromocion,
 }: Props) {
+  const { lang } = useEmpresaLocale();
+  const t = REGLAS_STRINGS[lang].warnings;
   if (violaciones.length === 0 && aprobacionesRequeridas.length === 0 && promocionesAplicables.length === 0) {
     return null;
   }
@@ -113,7 +118,7 @@ export function ReglasWarnings({
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle className="w-4 h-4 text-amber-600" />
             <span className="text-sm font-medium text-amber-800">
-              Advertencias de reglas ({violaciones.length})
+              {t.ruleWarnings(violaciones.length)}
             </span>
           </div>
           <ul className="space-y-2">
@@ -158,7 +163,7 @@ export function ReglasWarnings({
             <div className="flex items-center gap-2">
               <UserCheck className="w-4 h-4 text-green-600" />
               <span className="text-sm font-medium text-green-800">
-                Todas las aprobaciones completadas
+                {t.allApprovalsDone}
               </span>
             </div>
             <ul className="space-y-1 mt-2">
@@ -170,7 +175,7 @@ export function ReglasWarnings({
                   <li key={i} className="text-xs text-green-700 flex items-start gap-1.5">
                     <span className="text-green-500 mt-0.5">&#10003;</span>
                     <span>
-                      <strong>{existing?.aprobadorNombre || a.aprobador.nombre}</strong> ha aprobado &mdash; {a.razon}
+                      <strong>{existing?.aprobadorNombre || a.aprobador.nombre}</strong>{t.approvedMid}{a.razon}
                     </span>
                   </li>
                 );
@@ -183,7 +188,7 @@ export function ReglasWarnings({
             <div className="flex items-center gap-2 mb-2">
               <AlertTriangle className="w-4 h-4 text-red-600" />
               <span className="text-sm font-medium text-red-800">
-                Aprobacion rechazada
+                {t.approvalRejected}
               </span>
             </div>
             <ul className="space-y-1">
@@ -193,7 +198,7 @@ export function ReglasWarnings({
                   <li key={ex.id} className="text-xs text-red-700 flex items-start gap-1.5">
                     <span className="text-red-400 mt-0.5">&#10007;</span>
                     <span>
-                      <strong>{ex.aprobadorNombre}</strong> ({ex.aprobadorEmail}) ha rechazado la cotizacion
+                      <strong>{ex.aprobadorNombre}</strong>{t.rejectedSuffix(ex.aprobadorEmail)}
                     </span>
                   </li>
                 ))}
@@ -205,7 +210,7 @@ export function ReglasWarnings({
             <div className="flex items-center gap-2 mb-2">
               <UserCheck className="w-4 h-4 text-amber-600" />
               <span className="text-sm font-medium text-amber-800">
-                Pendiente de aprobacion ({aprobacionesRequeridas.length})
+                {t.pendingApproval(aprobacionesRequeridas.length)}
               </span>
             </div>
             <ul className="space-y-1">
@@ -213,7 +218,7 @@ export function ReglasWarnings({
                 <li key={i} className="text-xs text-amber-700 flex items-start gap-1.5">
                   <span className="text-amber-400 mt-0.5">&#8226;</span>
                   <span>
-                    Esperando respuesta de <strong>{a.aprobador.nombre}</strong> ({a.aprobador.email})
+                    {t.waitingResponsePre}<strong>{a.aprobador.nombre}</strong> ({a.aprobador.email})
                   </span>
                 </li>
               ))}
@@ -225,7 +230,7 @@ export function ReglasWarnings({
             <div className="flex items-center gap-2 mb-2">
               <UserCheck className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-medium text-blue-800">
-                Aprobaciones requeridas ({aprobacionesRequeridas.length})
+                {t.requiredApprovals(aprobacionesRequeridas.length)}
               </span>
             </div>
             <ul className="space-y-1">
@@ -248,7 +253,7 @@ export function ReglasWarnings({
           <div className="flex items-center gap-2 mb-2">
             <Tag className="w-4 h-4 text-green-600" />
             <span className="text-sm font-medium text-green-800">
-              Promociones disponibles ({promocionesAplicables.length})
+              {t.availablePromos(promocionesAplicables.length)}
             </span>
           </div>
           <ul className="space-y-2">
@@ -266,7 +271,7 @@ export function ReglasWarnings({
                         className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
                       >
                         <Tag className="w-3 h-3" />
-                        Aplicar
+                        {t.apply}
                       </button>
                     )}
                   </div>

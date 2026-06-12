@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+import { REGLAS_STRINGS } from "@/lib/reglas-i18n";
 
 const inputClass =
   "w-full px-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-white";
@@ -12,6 +14,9 @@ interface Props {
 }
 
 export function LimiteDescuentoForm({ initial, onSave, saving }: Props) {
+  const { lang } = useEmpresaLocale();
+  const tf = REGLAS_STRINGS[lang].forms;
+  const t = tf.limiteDescuento;
   const config = initial?.configuracion || {};
   const [nombre, setNombre] = useState(initial?.nombre || "");
   const [tipoLimite, setTipoLimite] = useState<string>(
@@ -40,35 +45,35 @@ export function LimiteDescuentoForm({ initial, onSave, saving }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Nombre de la regla *
+          {tf.ruleName}
         </label>
         <input
           type="text"
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
           className={inputClass}
-          placeholder="Límite general de descuento"
+          placeholder={t.namePlaceholder}
           required
         />
       </div>
       <div>
         <label className="block text-xs font-medium text-muted-foreground mb-1">
-          Aplica a
+          {t.appliesTo}
         </label>
         <select
           value={tipoLimite}
           onChange={(e) => setTipoLimite(e.target.value)}
           className={inputClass}
         >
-          <option value="ambos">Descuento de línea y global</option>
-          <option value="linea">Solo descuento de línea</option>
-          <option value="global">Solo descuento global</option>
+          <option value="ambos">{t.bothLineGlobal}</option>
+          <option value="linea">{t.onlyLine}</option>
+          <option value="global">{t.onlyGlobal}</option>
         </select>
       </div>
       {(tipoLimite === "linea" || tipoLimite === "ambos") && (
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Descuento máximo por línea (%)
+            {t.maxPerLine}
           </label>
           <input
             type="number"
@@ -83,7 +88,7 @@ export function LimiteDescuentoForm({ initial, onSave, saving }: Props) {
       {(tipoLimite === "global" || tipoLimite === "ambos") && (
         <div>
           <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Descuento global máximo (%)
+            {t.maxGlobal}
           </label>
           <input
             type="number"
@@ -101,7 +106,7 @@ export function LimiteDescuentoForm({ initial, onSave, saving }: Props) {
           disabled={saving || !nombre}
           className="px-5 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
         >
-          {saving ? "Guardando..." : initial ? "Actualizar" : "Crear Regla"}
+          {saving ? tf.saving : initial ? tf.update : tf.createRule}
         </button>
       </div>
     </form>
