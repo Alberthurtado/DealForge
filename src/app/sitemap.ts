@@ -5,6 +5,7 @@ import { features } from "@/data/features";
 import { comparaciones } from "@/data/comparaciones";
 import { RECURSOS } from "@/data/recursos";
 import { RECURSOS_EN } from "@/data/recursos-en";
+import { industriasEn, ES_TO_EN_INDUSTRIA } from "@/data/industrias-en";
 
 // Rebuild sitemap every hour instead of every request
 export const revalidate = 3600;
@@ -153,10 +154,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/plantilla-cotizacion`,
       lastModified: new Date("2026-03-27"),
+      alternates: { languages: { "es-ES": `${baseUrl}/plantilla-cotizacion`, "en-US": `${baseUrl}/en/quote-template` } },
     },
-    ...industrias.map((ind) => ({
-      url: `${baseUrl}/plantilla-cotizacion/${ind.slug}`,
-      lastModified: new Date("2026-03-27"),
+    ...industrias.map((ind) => {
+      const enSlug = ES_TO_EN_INDUSTRIA[ind.slug];
+      return {
+        url: `${baseUrl}/plantilla-cotizacion/${ind.slug}`,
+        lastModified: new Date("2026-03-27"),
+        ...(enSlug
+          ? {
+              alternates: {
+                languages: {
+                  "es-ES": `${baseUrl}/plantilla-cotizacion/${ind.slug}`,
+                  "en-US": `${baseUrl}/en/quote-template/${enSlug}`,
+                },
+              },
+            }
+          : {}),
+      };
+    }),
+  ];
+
+  // English quote-template pages (first translated batch)
+  const industryPagesEn: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/en/quote-template`,
+      lastModified: new Date("2026-06-13"),
+      alternates: { languages: { "es-ES": `${baseUrl}/plantilla-cotizacion`, "en-US": `${baseUrl}/en/quote-template` } },
+    },
+    ...industriasEn.map((ind) => ({
+      url: `${baseUrl}/en/quote-template/${ind.slug}`,
+      lastModified: new Date("2026-06-13"),
     })),
   ];
 
@@ -220,5 +248,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...blogPosts, ...industryPages, ...featurePages, ...comparisonPages, ...resourcePages, ...resourcePagesEn];
+  return [...staticPages, ...blogPosts, ...industryPages, ...industryPagesEn, ...featurePages, ...comparisonPages, ...resourcePages, ...resourcePagesEn];
 }
