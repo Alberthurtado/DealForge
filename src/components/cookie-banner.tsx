@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 declare global {
   interface Window {
@@ -11,12 +12,43 @@ declare global {
 
 const COOKIE_KEY = "dealforge_cookie_consent";
 
+const STR = {
+  es: {
+    title: "Utilizamos cookies",
+    bodyPre: "Usamos cookies esenciales para el funcionamiento del sitio y cookies de análisis (Google Analytics) para mejorar tu experiencia. Puedes aceptar todas o solo las esenciales. ",
+    privacy: "Política de privacidad",
+    essentialTitle: "Cookies esenciales",
+    essentialDesc: "Necesarias para el funcionamiento básico: sesión de usuario, preferencias de idioma y seguridad. No se pueden desactivar.",
+    analyticsTitle: "Cookies de análisis",
+    analyticsDesc: "Google Analytics (G-97QZPF80KT): nos ayudan a entender cómo usas el sitio para mejorar la experiencia. Datos anonimizados.",
+    hideDetails: "Ocultar detalles",
+    showDetails: "Ver detalles",
+    essentialOnly: "Solo esenciales",
+    acceptAll: "Aceptar todas",
+  },
+  en: {
+    title: "We use cookies",
+    bodyPre: "We use essential cookies for the site to work and analytics cookies (Google Analytics) to improve your experience. You can accept all or essential only. ",
+    privacy: "Privacy policy",
+    essentialTitle: "Essential cookies",
+    essentialDesc: "Required for basic functionality: user session, language preferences and security. These can't be disabled.",
+    analyticsTitle: "Analytics cookies",
+    analyticsDesc: "Google Analytics (G-97QZPF80KT): helps us understand how you use the site to improve the experience. Anonymized data.",
+    hideDetails: "Hide details",
+    showDetails: "View details",
+    essentialOnly: "Essential only",
+    acceptAll: "Accept all",
+  },
+};
+
 type ConsentLevel = "all" | "essential" | null;
 
 export function CookieBanner() {
   const [mounted, setMounted] = useState(false);
   const [consent, setConsent] = useState<ConsentLevel>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const pathname = usePathname();
+  const t = STR[pathname?.startsWith("/en") ? "en" : "es"];
 
   useEffect(() => {
     setMounted(true);
@@ -65,17 +97,15 @@ export function CookieBanner() {
           {/* Header */}
           <div>
             <h3 className="text-base font-semibold text-gray-900 mb-1">
-              Utilizamos cookies
+              {t.title}
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Usamos cookies esenciales para el funcionamiento del sitio y cookies
-              de análisis (Google Analytics) para mejorar tu experiencia. Puedes
-              aceptar todas o solo las esenciales.{" "}
+              {t.bodyPre}
               <Link
                 href="/privacidad"
                 className="text-[#3a9bb5] hover:underline font-medium"
               >
-                Política de privacidad
+                {t.privacy}
               </Link>
             </p>
           </div>
@@ -86,20 +116,18 @@ export function CookieBanner() {
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0" />
                 <div>
-                  <p className="font-medium text-gray-900">Cookies esenciales</p>
+                  <p className="font-medium text-gray-900">{t.essentialTitle}</p>
                   <p className="text-gray-500">
-                    Necesarias para el funcionamiento básico: sesión de usuario,
-                    preferencias de idioma y seguridad. No se pueden desactivar.
+                    {t.essentialDesc}
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-blue-500 mt-1.5 shrink-0" />
                 <div>
-                  <p className="font-medium text-gray-900">Cookies de análisis</p>
+                  <p className="font-medium text-gray-900">{t.analyticsTitle}</p>
                   <p className="text-gray-500">
-                    Google Analytics (G-97QZPF80KT): nos ayudan a entender cómo
-                    usas el sitio para mejorar la experiencia. Datos anonimizados.
+                    {t.analyticsDesc}
                   </p>
                 </div>
               </div>
@@ -112,19 +140,19 @@ export function CookieBanner() {
               onClick={() => setShowDetails(!showDetails)}
               className="text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2 order-3 sm:order-1 sm:mr-auto"
             >
-              {showDetails ? "Ocultar detalles" : "Ver detalles"}
+              {showDetails ? t.hideDetails : t.showDetails}
             </button>
             <button
               onClick={handleEssentialOnly}
               className="px-5 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors order-2"
             >
-              Solo esenciales
+              {t.essentialOnly}
             </button>
             <button
               onClick={handleAcceptAll}
               className="px-5 py-2.5 text-sm font-medium text-white bg-[#3a9bb5] hover:bg-[#2d7d94] rounded-lg transition-colors order-1 sm:order-3"
             >
-              Aceptar todas
+              {t.acceptAll}
             </button>
           </div>
         </div>
