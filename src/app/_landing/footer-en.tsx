@@ -36,9 +36,10 @@ export function FooterEn() {
           <div>
             <h4 className="font-semibold text-white text-sm mb-4">Resources</h4>
             <ul className="space-y-2.5 text-sm">
+              <li><Link href="/en/quote-template" className="hover:text-white transition-colors">Quote templates by industry</Link></li>
+              <li><Link href="/en/resources" className="hover:text-white transition-colors">Free resources</Link></li>
+              <li><Link href="/en/free-quote-generator" className="hover:text-white transition-colors">Free quote generator</Link></li>
               <li><Link href="/en/what-is-cpq" className="hover:text-white transition-colors">What is CPQ?</Link></li>
-              <li><Link href="/en/contact" className="hover:text-white transition-colors">Contact</Link></li>
-              <li><Link href="/" className="hover:text-white transition-colors">Español 🇪🇸</Link></li>
             </ul>
           </div>
 
@@ -49,6 +50,8 @@ export function FooterEn() {
               <li><Link href="/en/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link href="/en/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
               <li><Link href="/en/gdpr" className="hover:text-white transition-colors">GDPR</Link></li>
+              <li><Link href="/en/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/" className="hover:text-white transition-colors">Español 🇪🇸</Link></li>
             </ul>
           </div>
         </div>
