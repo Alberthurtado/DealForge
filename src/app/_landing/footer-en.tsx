@@ -2,10 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Full English footer, mirroring the Spanish home footer. Links point to
-// English pages where they exist. Legal pages are still Spanish-only for now
-// (no English versions yet) — kept here so the links exist; English legal
-// pages are a planned follow-up. A language link sends visitors to the
-// Spanish site.
+// English pages, including the English legal pages (/en/privacy, /en/terms,
+// /en/gdpr). A language link sends visitors to the Spanish site.
 export function FooterEn() {
   return (
     <footer className="bg-gray-900 text-gray-400">
@@ -48,9 +46,9 @@ export function FooterEn() {
           <div>
             <h4 className="font-semibold text-white text-sm mb-4">Legal</h4>
             <ul className="space-y-2.5 text-sm">
-              <li><Link href="/privacidad" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terminos" className="hover:text-white transition-colors">Terms of Service</Link></li>
-              <li><Link href="/rgpd" className="hover:text-white transition-colors">GDPR</Link></li>
+              <li><Link href="/en/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/en/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+              <li><Link href="/en/gdpr" className="hover:text-white transition-colors">GDPR</Link></li>
             </ul>
           </div>
         </div>

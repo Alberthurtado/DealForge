@@ -73,14 +73,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/privacidad`,
       lastModified: new Date("2026-03-09"),
+      alternates: { languages: { "es-ES": `${baseUrl}/privacidad`, "en-US": `${baseUrl}/en/privacy` } },
     },
     {
       url: `${baseUrl}/terminos`,
       lastModified: new Date("2026-03-09"),
+      alternates: { languages: { "es-ES": `${baseUrl}/terminos`, "en-US": `${baseUrl}/en/terms` } },
     },
     {
       url: `${baseUrl}/rgpd`,
       lastModified: new Date("2026-03-09"),
+      alternates: { languages: { "es-ES": `${baseUrl}/rgpd`, "en-US": `${baseUrl}/en/gdpr` } },
+    },
+    // English legal pages
+    {
+      url: `${baseUrl}/en/privacy`,
+      lastModified: new Date("2026-03-09"),
+      alternates: { languages: { "es-ES": `${baseUrl}/privacidad`, "en-US": `${baseUrl}/en/privacy` } },
+    },
+    {
+      url: `${baseUrl}/en/terms`,
+      lastModified: new Date("2026-03-09"),
+      alternates: { languages: { "es-ES": `${baseUrl}/terminos`, "en-US": `${baseUrl}/en/terms` } },
+    },
+    {
+      url: `${baseUrl}/en/gdpr`,
+      lastModified: new Date("2026-03-09"),
+      alternates: { languages: { "es-ES": `${baseUrl}/rgpd`, "en-US": `${baseUrl}/en/gdpr` } },
     },
     {
       url: `${baseUrl}/contacto`,
