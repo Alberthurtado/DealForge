@@ -5,9 +5,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { CotizacionWizard } from "@/components/cotizaciones/cotizacion-wizard";
 import { UpgradeBanner } from "@/components/layout/upgrade-banner";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+
+const STR = {
+  es: { title: "Nueva Cotización", crumbList: "Cotizaciones", crumbNew: "Nueva", resource: "cotizaciones este mes" },
+  en: { title: "New Quote", crumbList: "Quotes", crumbNew: "New", resource: "quotes this month" },
+};
 
 function NuevaCotizacionContent() {
   const router = useRouter();
+  const { lang } = useEmpresaLocale();
+  const t = STR[lang];
   const searchParams = useSearchParams();
   const preselectedClienteId = searchParams.get("clienteId") || "";
   const [saving, setSaving] = useState(false);
@@ -44,15 +52,15 @@ function NuevaCotizacionContent() {
   return (
     <div>
       <PageHeader
-        title="Nueva Cotización"
+        title={t.title}
         breadcrumbs={[
-          { label: "Cotizaciones", href: "/cotizaciones" },
-          { label: "Nueva" },
+          { label: t.crumbList, href: "/cotizaciones" },
+          { label: t.crumbNew },
         ]}
       />
       {limitError && (
         <UpgradeBanner
-          resource="cotizaciones este mes"
+          resource={t.resource}
           current={limitError.current}
           limit={limitError.limit}
           plan="Starter"
