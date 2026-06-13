@@ -5,6 +5,44 @@ import { X, Send, Flame, RotateCcw } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ChatMessage, TypingIndicator } from "./chat-message";
 import { AssistantButton } from "./assistant-button";
+import { useEmpresaLocale } from "@/lib/use-empresa-locale";
+
+const STR = {
+  es: {
+    ariaLabel: "Asistente IA Forge",
+    subtitle: "Asistente IA de DealForge",
+    clearChat: "Limpiar chat",
+    close: "Cerrar",
+    greetingTitle: "Hola, soy Forge",
+    greetingBody: "Tu asistente comercial inteligente. Pregúntame sobre clientes, cotizaciones, productos o estrategia de ventas.",
+    suggestions: [
+      "¿Qué cotizaciones necesitan follow-up?",
+      "Dame un resumen del negocio",
+      "¿Qué clientes tengo?",
+      "¿Qué puedes hacer?",
+    ],
+    placeholder: "Escribe tu pregunta...",
+    disclaimer: "Forge usa IA para asistirte. Verifica la información importante.",
+    connError: "Lo siento, hubo un error de conexión. Intenta de nuevo.",
+  },
+  en: {
+    ariaLabel: "Forge AI Assistant",
+    subtitle: "DealForge AI Assistant",
+    clearChat: "Clear chat",
+    close: "Close",
+    greetingTitle: "Hi, I'm Forge",
+    greetingBody: "Your smart sales assistant. Ask me about clients, quotes, products or sales strategy.",
+    suggestions: [
+      "Which quotes need follow-up?",
+      "Give me a business summary",
+      "Which clients do I have?",
+      "What can you do?",
+    ],
+    placeholder: "Type your question...",
+    disclaimer: "Forge uses AI to assist you. Verify important information.",
+    connError: "Sorry, there was a connection error. Please try again.",
+  },
+};
 
 interface Message {
   id: string;
@@ -48,6 +86,8 @@ export function AssistantPanel({ userId }: AssistantPanelProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+  const { lang } = useEmpresaLocale();
+  const t = STR[lang];
 
   // Persist messages to localStorage whenever they change
   useEffect(() => {
@@ -141,7 +181,7 @@ export function AssistantPanel({ userId }: AssistantPanelProps) {
         {
           id: Date.now().toString(),
           role: "assistant",
-          content: "Lo siento, hubo un error de conexión. Intenta de nuevo.",
+          content: t.connError,
         },
       ]);
     } finally {
@@ -177,7 +217,7 @@ export function AssistantPanel({ userId }: AssistantPanelProps) {
       <div
         data-assistant-panel
         role="complementary"
-        aria-label="Asistente IA Forge"
+        aria-label={t.ariaLabel}
         className={`fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-gray-50 shadow-2xl transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -190,21 +230,21 @@ export function AssistantPanel({ userId }: AssistantPanelProps) {
             </div>
             <div>
               <h2 className="text-sm font-semibold text-gray-900">Forge</h2>
-              <p className="text-xs text-gray-500">Asistente IA de DealForge</p>
+              <p className="text-xs text-gray-500">{t.subtitle}</p>
             </div>
           </div>
           <div className="flex items-center gap-1">
             <button
               onClick={clearChat}
               className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
-              title="Limpiar chat"
+              title={t.clearChat}
             >
               <RotateCcw className="h-4 w-4" />
             </button>
             <button
               onClick={() => setIsOpen(false)}
               className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
-              title="Cerrar"
+              title={t.close}
             >
               <X className="h-4 w-4" />
             </button>
@@ -219,19 +259,13 @@ export function AssistantPanel({ userId }: AssistantPanelProps) {
                 <Flame className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-base font-semibold text-gray-800 mb-1">
-                Hola, soy Forge
+                {t.greetingTitle}
               </h3>
               <p className="text-sm text-gray-500 mb-6">
-                Tu asistente comercial inteligente. Pregúntame sobre clientes,
-                cotizaciones, productos o estrategia de ventas.
+                {t.greetingBody}
               </p>
               <div className="grid gap-2 w-full max-w-xs">
-                {[
-                  "Qué cotizaciones necesitan follow-up?",
-                  "Dame un resumen del negocio",
-                  "Qué clientes tengo?",
-                  "Qué puedes hacer?",
-                ].map((suggestion) => (
+                {t.suggestions.map((suggestion) => (
                   <button
                     key={suggestion}
                     onClick={() => sendMessage(suggestion)}
@@ -268,7 +302,7 @@ export function AssistantPanel({ userId }: AssistantPanelProps) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Escribe tu pregunta..."
+              placeholder={t.placeholder}
               disabled={isLoading}
               className="flex-1 bg-transparent py-1.5 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none disabled:opacity-50"
             />
@@ -281,7 +315,7 @@ export function AssistantPanel({ userId }: AssistantPanelProps) {
             </button>
           </div>
           <p className="mt-1.5 text-center text-[10px] text-gray-400">
-            Forge usa IA para asistirte. Verifica la información importante.
+            {t.disclaimer}
           </p>
         </div>
       </div>
