@@ -506,7 +506,7 @@ export function ReportesContent() {
                         </div>
                       </div>
                       <div className="w-32 text-right shrink-0">
-                        <p className="text-sm font-semibold text-foreground">{formatCurrency(item.valor)}</p>
+                        <p className="text-sm font-semibold text-foreground">{money(item.valor)}</p>
                         <p className="text-[11px] text-muted-foreground">{t.pctOfTotal(item.pct)}</p>
                       </div>
                     </div>
