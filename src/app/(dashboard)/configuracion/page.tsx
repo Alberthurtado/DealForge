@@ -52,6 +52,7 @@ export default async function ConfiguracionPage() {
           stripeSubscriptionId: true,
           currentPeriodEnd: true,
           locale: true,
+          currencyCode: true,
         },
       })
     : null;

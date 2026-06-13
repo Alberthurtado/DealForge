@@ -100,6 +100,11 @@ const es = {
     apply: "Aplicar plantilla",
   },
   empresaForm: {
+    localizationTitle: "Idioma y Moneda",
+    localizationDesc: "Define el idioma del panel y la moneda de tus cotizaciones",
+    languageLabel: "Idioma del panel",
+    currencyLabel: "Moneda",
+    langChangeNote: "Al guardar, el panel se recargará en el nuevo idioma.",
     companyData: "Datos de la Empresa",
     companyName: "Nombre de la empresa *",
     companyNamePlaceholder: "Mi Empresa S.L.",
@@ -447,6 +452,11 @@ const en: typeof es = {
     apply: "Apply template",
   },
   empresaForm: {
+    localizationTitle: "Language & Currency",
+    localizationDesc: "Set your dashboard language and the currency used in quotes",
+    languageLabel: "Dashboard language",
+    currencyLabel: "Currency",
+    langChangeNote: "On save, the dashboard will reload in the new language.",
     companyData: "Company Details",
     companyName: "Company name *",
     companyNamePlaceholder: "My Company Ltd.",

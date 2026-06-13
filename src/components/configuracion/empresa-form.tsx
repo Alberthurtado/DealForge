@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Upload, Check, Building2, Hash, Mail, Eye, EyeOff, FileText, Bell } from "lucide-react";
+import { Upload, Check, Building2, Hash, Mail, Eye, EyeOff, FileText, Bell, Languages } from "lucide-react";
 import { useToast } from "@/components/ui/toast";
 import { TCTemplatesModal } from "./tc-templates-modal";
 import { useEmpresaLocale } from "@/lib/use-empresa-locale";
@@ -32,7 +32,21 @@ interface EmpresaData {
   recordatorioSeguimientoDias: number;
   recordatorioVencimientoDias: number;
   recordatoriosActivos: boolean;
+  locale: string | null;
+  currencyCode: string | null;
 }
+
+const LOCALE_OPTIONS = [
+  { value: "es-ES", label: "Español" },
+  { value: "en-US", label: "English (US)" },
+  { value: "en-GB", label: "English (UK)" },
+];
+
+const CURRENCY_OPTIONS = [
+  { value: "EUR", label: "EUR — €" },
+  { value: "USD", label: "USD — $" },
+  { value: "GBP", label: "GBP — £" },
+];
 
 const PLANTILLAS = ["moderna", "clasica", "minimalista"];
 
@@ -64,6 +78,11 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
       });
       if (res.ok) {
         success(t.configSaved);
+        // The dashboard language follows empresa.locale, resolved server-side.
+        // If it changed, reload so the whole panel re-renders in the new language.
+        if ((form.locale || "es-ES") !== (initialData.locale || "es-ES")) {
+          setTimeout(() => window.location.reload(), 600);
+        }
       } else {
         showError(t.errSave);
       }
@@ -104,6 +123,46 @@ export function EmpresaForm({ initialData }: { initialData: EmpresaData }) {
 
   return (
     <div className="max-w-3xl space-y-6">
+      {/* Section 0: Localization (language + currency) */}
+      <div className="bg-white rounded-xl border border-border p-6">
+        <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
+          <Languages className="w-5 h-5 text-primary" />
+          {t.localizationTitle}
+        </h3>
+        <p className="text-xs text-muted-foreground mb-4">{t.localizationDesc}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs font-medium text-muted-foreground mb-1">
+              {t.languageLabel}
+            </label>
+            <select
+              value={form.locale || "es-ES"}
+              onChange={(e) => updateField("locale", e.target.value)}
+              className={inputClass}
+            >
+              {LOCALE_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-muted-foreground mb-1">
+              {t.currencyLabel}
+            </label>
+            <select
+              value={form.currencyCode || "EUR"}
+              onChange={(e) => updateField("currencyCode", e.target.value)}
+              className={inputClass}
+            >
+              {CURRENCY_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <p className="text-[11px] text-muted-foreground/70 mt-3">{t.langChangeNote}</p>
+      </div>
+
       {/* Section 1: Company info */}
       <div className="bg-white rounded-xl border border-border p-6">
         <h3 className="text-base font-semibold text-foreground mb-4 flex items-center gap-2">

@@ -229,6 +229,9 @@ export const empresaUpdateSchema = z.object({
   recordatorioSeguimientoDias: z.number().int().min(1).max(30).optional(),
   recordatorioVencimientoDias: z.number().int().min(1).max(30).optional(),
   recordatoriosActivos: z.boolean().optional(),
+  // Localization — dashboard language, number/date locale and currency
+  locale: z.enum(["es-ES", "en-US", "en-GB"]).optional(),
+  currencyCode: z.string().regex(/^[A-Z]{3}$/, "Código de moneda inválido").optional(),
 });
 
 // ─── Firma Electrónica ──────────────────────────
