@@ -892,6 +892,450 @@ export const industriasEn: Industria[] = [
       "Send the quote or maintenance contract with electronic signature for acceptance.",
     ],
   },
+  {
+    slug: "transport",
+    nombre: "Transport & Logistics",
+    titulo: "Quote Template for Transport & Logistics",
+    descripcion: "Quote transport, removals, logistics and distribution services with clear routes, vehicles and rates.",
+    emoji: "🚛",
+    color: "#795548",
+    ejemploLineas: [
+      { descripcion: "Long-haul transport (full truck)", cantidad: 1, precio: 850 },
+      { descripcion: "Loading and unloading (2 operatives, 4h)", cantidad: 1, precio: 320 },
+      { descripcion: "Packing and goods protection", cantidad: 1, precio: 200 },
+      { descripcion: "Transport insurance", cantidad: 1, precio: 120 },
+      { descripcion: "Temporary storage (1 week)", cantidad: 1, precio: 150 },
+    ],
+    problemas: [
+      "WhatsApp rates with no formal commitment",
+      "No breakdown of additional services",
+      "Disputes due to a lack of documentation",
+      "Competing on price with no added value",
+    ],
+    beneficios: [
+      "Rates by route, weight or volume",
+      "Insurance and terms included",
+      "Instant acceptance with electronic signature",
+      "Service history per client",
+    ],
+    keywords: ["transport quote", "removals quote", "logistics quote", "freight transport quote"],
+    icp: {
+      cargo: "Fleet manager or sales lead",
+      empresaTipo: "Transport company of 3-25 vehicles",
+      dolor: "Sends rates over WhatsApp with no formal record, which causes problems when there are disputes.",
+      cita: "The client says I quoted a different price and I have no way to prove it because it was a voice message.",
+    },
+    casoDeUso: {
+      antes: "Replied over WhatsApp with a price per route and a voice message explaining the terms.",
+      despues: "Sends a formal quote with the route, vehicle type, additional services, insurance and terms in writing.",
+      resultado: "Disputes are resolved with the signed documentation, clients perceive greater professionalism, and agreements are on record.",
+    },
+    faqs: [
+      {
+        pregunta: "Can I quote by route, weight or volume depending on the service?",
+        respuesta: "Yes, each quote line can have its own unit: per trip, per kg, per m³ or per km. You can combine different units in the same document.",
+      },
+      {
+        pregunta: "How do I include transport insurance in the quote?",
+        respuesta: "You can add a specific line for insurance with the cost and the coverage terms in the notes. It's documented and signed by the client.",
+      },
+      {
+        pregunta: "Can it be used for removals with packing and assembly?",
+        respuesta: "Yes, you can break it down: transport, packing, loading/unloading, furniture assembly and insurance. Each service as an independent line with its price.",
+      },
+    ],
+    featuresEspecificos: [
+      { icono: "Truck", titulo: "Routes and vehicles", desc: "Detail origin, destination, vehicle type and characteristics." },
+      { icono: "Shield", titulo: "Documented insurance", desc: "Include insurance terms and coverage in the quote." },
+      { icono: "Package", titulo: "Additional services", desc: "Break down packing, loading, unloading and storage." },
+      { icono: "FileText", titulo: "Formal record", desc: "Every service is documented with the client's signature." },
+    ],
+    stats: [
+      { valor: "3 min", label: "per transport quote" },
+      { valor: "Routes", label: "with a full breakdown" },
+      { valor: "Insurance", label: "included and documented" },
+    ],
+    guia: `<p>Transport and logistics quotes must account for variables that other industries don't handle: distance, weight and volume of the goods, the type of vehicle required, cargo insurance, tolls and waiting times during loading and unloading. The client needs to know exactly what the quoted price covers and which items can incur surcharges, such as night-time deliveries, difficult access or temperature-controlled goods.</p>
+<p>For recurring distribution services, the quote should set rates per route, per kilometre or per pallet, with volume-discount tiers. For removals and one-off transport, it's best to detail the packing included, the number of porters, the availability of a tail-lift and the contents insurance coverage. Transparency on these items avoids disputes and builds lasting commercial relationships.</p>
+<p>DealForge lets you set up transport quotes with predefined routes, rates per leg and automatic cost calculation. The document includes the goods-insurance terms and is sent with electronic signature, formalising the service before the first item is loaded.</p>`,
+    howToSteps: [
+      "Open the Transport template and fill in the client details and the origin and destination points.",
+      "State the type of cargo, weight, volume and vehicle needed for the service.",
+      "Break down the cost by item: transport, insurance, packing, tolls and waiting times.",
+      "Set liability terms, delivery times and insurance coverage.",
+      "Send the transport quote and receive the electronically signed confirmation.",
+    ],
+  },
+  {
+    slug: "training",
+    nombre: "Training",
+    titulo: "Quote Template for Training & Courses",
+    descripcion: "Quote in-company training programmes, courses, workshops and coaching with detailed content, duration and materials.",
+    emoji: "📚",
+    color: "#3F51B5",
+    ejemploLineas: [
+      { descripcion: "Training programme design", cantidad: 1, precio: 500 },
+      { descripcion: "In-person sessions (8h)", cantidad: 2, precio: 1200 },
+      { descripcion: "Custom learning materials", cantidad: 20, precio: 25 },
+      { descripcion: "E-learning platform (3 months)", cantidad: 1, precio: 400 },
+      { descripcion: "Certification and assessment", cantidad: 20, precio: 30 },
+    ],
+    problemas: [
+      "Generic proposals with no customisation",
+      "Difficulty communicating the ROI of training",
+      "Slow approvals from the HR department",
+      "No follow-up after the proposal",
+    ],
+    beneficios: [
+      "A detailed programme with objectives and content",
+      "Clear price per learner or flat rate",
+      "Quick approval with electronic signature",
+      "Automatic follow-up of pending proposals",
+    ],
+    keywords: ["training quote", "corporate course quote", "coaching quote", "in-company training quote"],
+    icp: {
+      cargo: "Freelance trainer or academy director",
+      empresaTipo: "Training company of 1-10 trainers",
+      dolor: "Proposals pass through several departments (HR, management, procurement) and get lost along the way.",
+      cita: "HR told me my proposal was approved, but then finance asked for more details and two months went by.",
+    },
+    casoDeUso: {
+      antes: "Sent a generic PDF with the syllabus and the price, without adapting to the company's specific objectives.",
+      despues: "Creates customised proposals with learning objectives, a detailed programme, included materials and a price per learner.",
+      resultado: "Companies see a proposal tailored to their needs, approvals are quicker, and there's less back-and-forth with HR.",
+    },
+    faqs: [
+      {
+        pregunta: "Can I quote per learner or with a flat rate for groups?",
+        respuesta: "Yes, you can use the quantity to state the number of learners and the unit price per person, or create a line with a flat rate for a closed group.",
+      },
+      {
+        pregunta: "How do I include the training programme within the proposal?",
+        respuesta: "You can add detailed notes with the objectives, modules, the duration of each session and the methodology. It's all integrated into the same document.",
+      },
+      {
+        pregunta: "Can I offer in-person and online options in the same proposal?",
+        respuesta: "Yes, you can create versions or optional lines for in-person, online or hybrid formats, each with its own price and terms.",
+      },
+    ],
+    featuresEspecificos: [
+      { icono: "BookOpen", titulo: "Detailed programme", desc: "Include objectives, modules and methodology in the proposal." },
+      { icono: "Users", titulo: "Price per learner", desc: "Automatically calculate the total based on the number of participants." },
+      { icono: "Layers", titulo: "Flexible formats", desc: "Quote in-person, online or hybrid options in a single document." },
+      { icono: "Mail", titulo: "Follow-up with HR", desc: "Know when they open the proposal so you can re-engage." },
+    ],
+    stats: [
+      { valor: "8 min", label: "per training proposal" },
+      { valor: "Programme", label: "detailed, with objectives" },
+      { valor: "Per learner", label: "or flat rate" },
+    ],
+    guia: `<p>Training and professional development proposals should go beyond a list of courses with prices. The client — whether an HR department, an educational centre or an independent professional — needs to see the learning objectives, the detailed syllabus, the teaching methodology, the duration of each module and the skills participants will gain on completing the training.</p>
+<p>How you quote varies by format: in-company training is usually quoted per day or per full programme, while courses open to the public tend to be quoted per learner with group discounts. Including learning materials, digital tools, completion certificates and post-training support in the proposal raises the perceived value and justifies rates above the competition.</p>
+<p>DealForge lets you structure training proposals with modules, objectives and prices per learner or flat rate. You can send the proposal to the training manager with automatic follow-up to know when they review it, and close the deal with electronic signature without bureaucratic delays.</p>`,
+    howToSteps: [
+      "Select the Training template and enter the details of the requesting client or company.",
+      "Structure the proposal by modules with learning objectives, duration and methodology.",
+      "Define the pricing model: price per learner, per day or per full programme.",
+      "Include materials, certification, post-training support and cancellation terms.",
+      "Send the training proposal with electronic signature to formalise the agreement.",
+    ],
+  },
+  {
+    slug: "security",
+    nombre: "Security",
+    titulo: "Quote Template for Security Companies",
+    descripcion: "Quote security services: guarding, alarms, CCTV, access control and event security.",
+    emoji: "🔒",
+    color: "#F44336",
+    ejemploLineas: [
+      { descripcion: "Alarm system (panel + sensors)", cantidad: 1, precio: 890 },
+      { descripcion: "IP CCTV cameras (4 units)", cantidad: 4, precio: 220 },
+      { descripcion: "8-channel NVR recorder", cantidad: 1, precio: 350 },
+      { descripcion: "Installation and cabling", cantidad: 1, precio: 600 },
+      { descripcion: "Annual maintenance", cantidad: 1, precio: 240 },
+    ],
+    problemas: [
+      "Technical quotes that are hard to understand",
+      "No comparison of options for the client",
+      "Maintenance contracts that aren't formalised",
+      "Competing with large firms without a professional image",
+    ],
+    beneficios: [
+      "Equipment broken down with specifications",
+      "Basic/mid/premium options in a single PDF",
+      "Maintenance contract with electronic signature",
+      "A professional image that builds trust",
+    ],
+    keywords: ["security quote", "alarm quote", "CCTV quote", "guarding quote", "access control quote"],
+    icp: {
+      cargo: "Security sales manager",
+      empresaTipo: "Security and installations company of 5-30 employees",
+      dolor: "Technical quotes confuse the client and they end up choosing the company that explains it most clearly.",
+      cita: "Our system is better than the competition's, but the client doesn't understand it because my quote looks like a list of components.",
+    },
+    casoDeUso: {
+      antes: "Listed technical components with references the client didn't understand, without explaining what each one did.",
+      despues: "Presents equipment with clear descriptions, grouped by zones, with tier options and a maintenance contract.",
+      resultado: "Clients understand what they'll receive, choose with more confidence, and sign up for maintenance once they see clear terms.",
+    },
+    faqs: [
+      {
+        pregunta: "Can I present tier options (basic, mid, premium) in a single quote?",
+        respuesta: "Yes, you can create versions or optional lines for each tier, with different equipment and prices. The client chooses the option they prefer.",
+      },
+      {
+        pregunta: "How do I include the maintenance contract alongside the installation?",
+        respuesta: "You can add lines for installation and a recurring annual line for maintenance. The contract terms go in the document notes.",
+      },
+      {
+        pregunta: "Can I quote event security with guards and temporary equipment?",
+        respuesta: "Yes, you can create lines for guards (hours × price/hour), temporary equipment and coordination, all broken down for the event organiser.",
+      },
+    ],
+    featuresEspecificos: [
+      { icono: "Shield", titulo: "Clear equipment", desc: "Describe each component in language the client understands." },
+      { icono: "Layers", titulo: "Tier options", desc: "Present basic, professional and premium packages in one document." },
+      { icono: "Settings", titulo: "Technical specs", desc: "Include references and specs without losing clarity." },
+      { icono: "FileText", titulo: "Maintenance contract", desc: "Formalise annual maintenance with electronic signature." },
+    ],
+    stats: [
+      { valor: "8 min", label: "per security quote" },
+      { valor: "3 tiers", label: "in a single document" },
+      { valor: "Contract", label: "maintenance included" },
+    ],
+    guia: `<p>The quote for a security system — alarms, video surveillance, access control or physical guarding — must be tailored to the specific needs of each site. Protecting a private home is not the same as protecting a logistics warehouse or a retail unit open to the public. The proposal should include a prior security assessment that identifies the vulnerable points and justifies the proposed solution.</p>
+<p>It's essential to break down the cost of the equipment (cameras, sensors, alarm panel, smart locks), the installation, the commissioning and the monthly monitoring-centre subscription. Offering different tiers — basic, advanced and premium — in a single quote makes the client's decision easier and increases the average order value by showing the benefits of each level of protection.</p>
+<p>DealForge lets security companies create quotes with comparable options, separating equipment from recurring fees and maintenance contracts. The client can approve the installation with electronic signature, and you formalise both the installation contract and the monthly service contract in a single digital flow.</p>`,
+    howToSteps: [
+      "Open the Security template and enter the client details and the installation address.",
+      "Select the equipment needed: cameras, sensors, alarm panel and access control.",
+      "Present several tiers (basic, advanced, premium) so the client can compare options.",
+      "Separate the installation cost from the monthly monitoring and maintenance fees.",
+      "Send the quote with electronic signature to formalise the installation and service contract.",
+    ],
+  },
+  {
+    slug: "dental-clinic",
+    nombre: "Dental Clinic",
+    titulo: "Quote Template for Dental Clinics",
+    descripcion: "Generate professional dental quotes: orthodontics, implants, cosmetic dentistry and treatments with a clear breakdown for the patient.",
+    emoji: "🦷",
+    color: "#00ACC1",
+    ejemploLineas: [
+      { descripcion: "Assessment and diagnosis (panoramic x-ray)", cantidad: 1, precio: 80 },
+      { descripcion: "Professional dental cleaning", cantidad: 1, precio: 60 },
+      { descripcion: "Composite filling", cantidad: 3, precio: 75 },
+      { descripcion: "Zirconia crown", cantidad: 2, precio: 450 },
+      { descripcion: "LED whitening", cantidad: 1, precio: 300 },
+    ],
+    problemas: [
+      "Patients who don't understand the treatments",
+      "Paper quotes that get lost",
+      "No follow-up of pending quotes",
+      "Comparisons with other clinics without context",
+    ],
+    beneficios: [
+      "Treatments explained clearly",
+      "Financing options included",
+      "Digital acceptance without visiting the clinic",
+      "Automatic follow-up of quotes",
+    ],
+    keywords: ["dental quote", "dental clinic quote", "orthodontics quote", "dental implants quote"],
+    icp: {
+      cargo: "Clinic director or patient-care lead",
+      empresaTipo: "Dental clinic of 2-10 surgeries",
+      dolor: "Patients receive the quote, go home to think about it and never call back.",
+      cita: "We hand the treatment plan to the patient and never hear anything more. We have no way to follow up without being pushy.",
+    },
+    casoDeUso: {
+      antes: "Printed the quote in the surgery, the patient took it away and in most cases never got back in touch.",
+      despues: "Sends the quote by email with a clear explanation of each treatment, financing options and digital acceptance.",
+      resultado: "Patients review the quote calmly at home, the clinic knows when they open it and can follow up at the right moment.",
+    },
+    faqs: [
+      {
+        pregunta: "Can I include financing or instalment payment options?",
+        respuesta: "Yes, you can add notes with the financing terms: monthly instalments, initial deposit and duration. The patient sees clearly how to pay.",
+      },
+      {
+        pregunta: "How do I present alternative treatments for the patient to choose?",
+        respuesta: "You can create optional lines or different versions: for example, implant vs. bridge, invisible aligners vs. braces, each option with its price.",
+      },
+      {
+        pregunta: "Can the patient accept the quote without coming to the clinic?",
+        respuesta: "Yes, they receive the quote by email and can accept it with an electronic signature from their phone. There's a legal record of acceptance.",
+      },
+    ],
+    featuresEspecificos: [
+      { icono: "Heart", titulo: "Clear treatments", desc: "Explain each procedure in language the patient understands." },
+      { icono: "Calculator", titulo: "Financing included", desc: "Present instalment payment options within the quote." },
+      { icono: "Mail", titulo: "Digital sending", desc: "The patient receives and accepts the quote from their phone." },
+      { icono: "BarChart", titulo: "Active follow-up", desc: "Know when the patient opens the quote so you can follow up." },
+    ],
+    stats: [
+      { valor: "3 min", label: "per dental quote" },
+      { valor: "Digital", label: "acceptance from the phone" },
+      { valor: "Follow-up", label: "automatic for patients" },
+    ],
+    guia: `<p>A dental quote has particularities that set it apart from any other service quote: it's drawn up after a clinical diagnosis, it can cover multiple treatments across different teeth, and it must be understandable to a patient with no medical training. Detailing each treatment — filling, root canal, crown, implant, orthodontics — with the tooth affected, the number of sessions and the individual cost helps the patient prioritise and plan their investment.</p>
+<p>Many clinics lose patients because the quote is handed over on paper during the appointment and the patient doesn't review it until days later, by which point they've already consulted another clinic. Offering financing options, distinguishing between urgent and cosmetic treatments, and including a phased treatment plan make even large quotes easier to accept.</p>
+<p>DealForge lets dental clinics generate digital quotes per patient with lines per treatment and tooth, send them to the patient's phone for calm review at home, and receive acceptance with electronic signature. Automatic follow-up alerts you if the patient hasn't responded so you can re-engage the conversation at the right time.</p>`,
+    howToSteps: [
+      "Select the Dental Clinic template and enter the patient details.",
+      "Add each treatment stating the tooth, procedure, sessions and cost.",
+      "Organise treatments by priority: urgent, necessary and cosmetic-optional.",
+      "Include financing options and phased payment terms if applicable.",
+      "Send the quote to the patient's phone for acceptance with electronic signature.",
+    ],
+  },
+  {
+    slug: "interior-design",
+    nombre: "Interior Design",
+    titulo: "Quote Template for Interior Design & Décor",
+    descripcion: "Quote interior design projects: space design, furniture selection, materials and decorative renovation work.",
+    emoji: "🛋️",
+    color: "#AB47BC",
+    ejemploLineas: [
+      { descripcion: "Initial consultation and briefing", cantidad: 1, precio: 200 },
+      { descripcion: "Interior design project (plans + 3D)", cantidad: 1, precio: 2500 },
+      { descripcion: "Furniture and materials selection", cantidad: 1, precio: 800 },
+      { descripcion: "Purchasing and supplier management", cantidad: 1, precio: 600 },
+      { descripcion: "Site supervision (4 visits)", cantidad: 4, precio: 250 },
+    ],
+    problemas: [
+      "Clients who can't picture the final result",
+      "Quotes that mix design and execution",
+      "Constant changes with no price update",
+      "No formalisation of terms and timelines",
+    ],
+    beneficios: [
+      "Design and execution phases kept separate",
+      "Versioning for material changes",
+      "PDF with renders and moodboards included",
+      "Electronic signature to start the project",
+    ],
+    keywords: ["interior design quote", "décor quote", "interiors design quote", "interior designer quote"],
+    icp: {
+      cargo: "Interior designer or professional decorator",
+      empresaTipo: "Interior design studio of 1-8 professionals",
+      dolor: "The client constantly changes their mind about materials and colours and the quote never reflects reality.",
+      cita: "Every time the client sees something new on Pinterest they want to change everything, and I don't know how to charge them for the changes.",
+    },
+    casoDeUso: {
+      antes: "Sent a single quote that mixed design fees with the cost of furniture and execution, without separating phases.",
+      despues: "Clearly separates design fees, the cost of furniture and materials, and site supervision into distinct sections.",
+      resultado: "The client understands what they're paying for at each phase, material changes are handled with updated versions, and design fees aren't disputed.",
+    },
+    faqs: [
+      {
+        pregunta: "Can I separate design fees from the cost of furniture and works?",
+        respuesta: "Yes, you can create independent sections for design (your fees), furniture (cost of pieces), purchasing management and site supervision.",
+      },
+      {
+        pregunta: "How do I handle the material or furniture changes the client requests?",
+        respuesta: "You duplicate the quote, update the affected lines and send a new version. The client approves the changes with electronic signature.",
+      },
+      {
+        pregunta: "Can I include links to moodboards or renders in the quote?",
+        respuesta: "Yes, you can add notes with links to your moodboard or include detailed descriptions of the aesthetic proposal alongside the financial breakdown.",
+      },
+    ],
+    featuresEspecificos: [
+      { icono: "Home", titulo: "Project by spaces", desc: "Organise the quote by room or zone of the project." },
+      { icono: "PenTool", titulo: "Design vs. execution", desc: "Clearly separate design fees from the cost of the works." },
+      { icono: "Layers", titulo: "Material versioning", desc: "Each material change generates a new documented version." },
+      { icono: "Star", titulo: "Premium presentation", desc: "A professional PDF that reflects the quality of your work." },
+    ],
+    stats: [
+      { valor: "10 min", label: "per interior design quote" },
+      { valor: "Phases", label: "of design and execution" },
+      { valor: "Versions", label: "for every change" },
+    ],
+    guia: `<p>An interior design project is quoted very differently depending on its scope: a few hours of décor advice is not the same as a full project that includes space design, furniture selection, site management and trade coordination. The proposal must make clear which phases it covers — concept, technical design, shopping list, execution supervision — and what deliverables the client will receive at each one.</p>
+<p>The interior designer who breaks the quote down into design fees and estimated execution cost (furniture, textiles, lighting, renovation) offers total transparency. It's advisable to separate the professional fee from the investment in materials and third-party labour, stating whether purchases are handled on the client's behalf or whether the studio applies a management margin on suppliers.</p>
+<p>DealForge lets interior design studios create phased proposals with automatic versioning, ideal for a sector where changes of concept and material selection are constant. The client approves each phase with electronic signature, and you keep a clear record of the decisions made throughout the design process.</p>`,
+    howToSteps: [
+      "Choose the Interior Design template and record the client details and the project location.",
+      "Structure the proposal by phases: concept, technical design, material selection and supervision.",
+      "Separate the design fees from the estimated execution and furniture budget.",
+      "Detail each phase's deliverables: plans, renders, moodboards, shopping list.",
+      "Send the phased proposal with electronic signature to approve the start of the project.",
+    ],
+  },
+  {
+    slug: "accounting",
+    nombre: "Accounting & Advisory",
+    titulo: "Quote Template for Accountants & Advisory Firms",
+    descripcion: "Quote accounting, tax, payroll and corporate advisory services with monthly or per-service rates.",
+    emoji: "📊",
+    color: "#546E7A",
+    ejemploLineas: [
+      { descripcion: "Monthly bookkeeping (up to 50 invoices)", cantidad: 12, precio: 150 },
+      { descripcion: "Quarterly tax returns (VAT)", cantidad: 4, precio: 120 },
+      { descripcion: "Annual personal tax return", cantidad: 1, precio: 80 },
+      { descripcion: "Corporate tax return", cantidad: 1, precio: 300 },
+      { descripcion: "Payroll advisory (up to 5 payslips)", cantidad: 12, precio: 100 },
+    ],
+    problemas: [
+      "Clients who don't understand what the fee includes",
+      "No formal service contract",
+      "Extra services that weren't quoted",
+      "Competing on monthly price alone",
+    ],
+    beneficios: [
+      "Monthly vs. one-off services broken down",
+      "Clear terms on what's included and what isn't",
+      "Annual renewal with electronic signature",
+      "A professional image for the firm",
+    ],
+    keywords: ["accountant quote", "tax advisory quote", "bookkeeping quote", "accounting firm quote"],
+    icp: {
+      cargo: "Practice principal or tax adviser",
+      empresaTipo: "Accounting or advisory firm of 2-15 professionals",
+      dolor: "Clients call with queries that aren't included in the fee and they don't know how to charge for them without creating conflict.",
+      cita: "The client thinks that paying £150 a month means they can call me about anything, but that wasn't what we agreed.",
+    },
+    casoDeUso: {
+      antes: "Agreed the fee verbally and sent an email with the monthly price, without detailing exactly which services it included.",
+      despues: "Sends a formal proposal with included services, limits (number of invoices, payslips), extra services and the price of each.",
+      resultado: "Clients know exactly what their fee includes, extra services are charged without conflict, and renewals are formalised every year.",
+    },
+    faqs: [
+      {
+        pregunta: "Can I detail exactly what the monthly fee includes and what it doesn't?",
+        respuesta: "Yes, you can list each included service (bookkeeping, returns, payroll) with its limits and add notes on what counts as an extra service.",
+      },
+      {
+        pregunta: "How do I quote one-off services like company formation?",
+        respuesta: "You can add lines for one-off services with a unit price. The same document can mix recurring and one-off services.",
+      },
+      {
+        pregunta: "Can it be used for annual renewals of the client base?",
+        respuesta: "Yes, you can duplicate the previous year's quote, update prices if needed and send the renewal with electronic signature.",
+      },
+    ],
+    featuresEspecificos: [
+      { icono: "Calculator", titulo: "Detailed monthly fee", desc: "Break down what the monthly fee includes and excludes." },
+      { icono: "FileText", titulo: "Clear extra services", desc: "Define the price of each additional service outside the fee." },
+      { icono: "Briefcase", titulo: "Annual renewal", desc: "Renew contracts each year in one click with electronic signature." },
+      { icono: "BarChart", titulo: "Client-base management", desc: "History of proposals and contracts for each client." },
+    ],
+    stats: [
+      { valor: "5 min", label: "per advisory proposal" },
+      { valor: "Monthly", label: "with defined limits" },
+      { valor: "Renewal", label: "annual, digitised" },
+    ],
+    guia: `<p>Accounting and advisory firms mostly operate on monthly fees that cover a package of recurring services: bookkeeping, quarterly tax returns, preparation of annual accounts, payroll management and employment advice. The service proposal must specify precisely what the monthly fee includes and which services are billed separately, such as company formation, tax inspections or expert reports.</p>
+<p>A common mistake is offering a generic fee without defining limits: number of accounting entries, employees on payroll, returns included or monthly queries. When these limits aren't clear, friction arises when charging for additional services the client thought were covered. Detailing the included filings — VAT, corporate tax, payroll — gives clarity to the freelancer or SME evaluating your offer.</p>
+<p>With DealForge you can create tax and accounting advisory proposals with monthly services broken down, automatic calculation of the annual fee and digital contract renewal. The client electronically signs the service agreement, and you have a documentary record of what was agreed that protects both parties against any future discrepancy.</p>`,
+    howToSteps: [
+      "Open the Accounting template and enter the client details (freelancer or company).",
+      "Define the services included in the monthly fee: bookkeeping, tax, payroll, employment.",
+      "Set the service limits: entries, employees, returns and queries included.",
+      "State the additional services with a per-unit price outside the monthly fee.",
+      "Send the advisory proposal with electronic signature to formalise the annual contract.",
+    ],
+  },
 ];
 
 export function getIndustriaEn(slug: string): Industria | undefined {
@@ -913,4 +1357,10 @@ export const ES_TO_EN_INDUSTRIA: Record<string, string> = {
   electricidad: "electrical",
   fontaneria: "plumbing",
   jardineria: "gardening",
+  transporte: "transport",
+  formacion: "training",
+  seguridad: "security",
+  "clinica-dental": "dental-clinic",
+  interiorismo: "interior-design",
+  contabilidad: "accounting",
 };
