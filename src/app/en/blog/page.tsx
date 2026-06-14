@@ -1,34 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { prisma } from "@/lib/prisma";
+import { blogPostsEn } from "@/data/blog-en";
 import { Calendar, Clock, ArrowRight, Flame } from "lucide-react";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Blog — DealForge",
   description:
-    "Artículos sobre ventas, CPQ, automatización comercial e inteligencia artificial para PYMEs. Aprende a optimizar tu proceso de cotizaciones.",
+    "Articles on sales, CPQ, sales automation and artificial intelligence for small businesses. Learn how to optimise your quoting process.",
   keywords: [
-    "blog ventas", "CPQ", "cotizaciones", "automatización comercial",
-    "inteligencia artificial ventas", "PYMEs", "DealForge blog",
+    "sales blog", "CPQ", "quotes", "sales automation",
+    "AI sales", "small business", "DealForge blog",
   ],
   openGraph: {
     title: "Blog — DealForge",
-    description: "Artículos sobre ventas, CPQ e inteligencia artificial para PYMEs.",
-    url: "https://dealforge.es/blog",
+    description: "Articles on sales, CPQ and artificial intelligence for small businesses.",
+    url: "https://dealforge.es/en/blog",
     siteName: "DealForge",
-    locale: "es_ES",
+    locale: "en_GB",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Blog — DealForge",
-    description: "Artículos sobre ventas, CPQ e inteligencia artificial para PYMEs.",
+    description: "Articles on sales, CPQ and artificial intelligence for small businesses.",
   },
   alternates: {
-    canonical: "https://dealforge.es/blog",
+    canonical: "https://dealforge.es/en/blog",
     languages: {
       "es-ES": "https://dealforge.es/blog",
       en: "https://dealforge.es/en/blog",
@@ -38,16 +36,16 @@ export const metadata: Metadata = {
 };
 
 const CATEGORIAS: Record<string, { label: string; color: string }> = {
-  ventas: { label: "Ventas", color: "bg-blue-50 text-blue-700" },
+  ventas: { label: "Sales", color: "bg-blue-50 text-blue-700" },
   cpq: { label: "CPQ", color: "bg-teal-50 text-teal-700" },
-  ia: { label: "IA", color: "bg-purple-50 text-purple-700" },
-  producto: { label: "Producto", color: "bg-amber-50 text-amber-700" },
-  guias: { label: "Guias", color: "bg-green-50 text-green-700" },
+  ia: { label: "AI", color: "bg-purple-50 text-purple-700" },
+  producto: { label: "Product", color: "bg-amber-50 text-amber-700" },
+  guias: { label: "Guides", color: "bg-green-50 text-green-700" },
   general: { label: "General", color: "bg-gray-50 text-gray-700" },
 };
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString("es-ES", {
+function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -59,52 +57,42 @@ function readingTime(content: string): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
-export default async function BlogPage() {
-  const posts = await prisma.blogPost.findMany({
-    where: { publicado: true },
-    orderBy: { publishedAt: "desc" },
-  });
+export default function EnBlogPage() {
+  const posts = [...blogPostsEn].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 
   return (
     <>
-      {/* JSON-LD Blog structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Blog",
-            name: "Blog DealForge",
-            description: "Artículos sobre ventas, CPQ e inteligencia artificial para PYMEs",
-            url: "https://dealforge.es/blog",
+            name: "DealForge Blog",
+            description: "Articles on sales, CPQ and artificial intelligence for small businesses",
+            url: "https://dealforge.es/en/blog",
+            inLanguage: "en",
             publisher: {
               "@type": "Organization",
               name: "DealForge",
               url: "https://dealforge.es",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://dealforge.es/logo.svg",
-              },
+              logo: { "@type": "ImageObject", url: "https://dealforge.es/logo.svg" },
             },
             blogPost: posts.map((post) => ({
               "@type": "BlogPosting",
               headline: post.titulo,
               description: post.extracto,
-              url: `https://dealforge.es/blog/${post.slug}`,
-              datePublished: post.publishedAt?.toISOString(),
-              dateModified: post.updatedAt.toISOString(),
-              author: {
-                "@type": "Organization",
-                name: post.autor,
-              },
-              ...(post.imagen && {
-                image: post.imagen,
-              }),
+              url: `https://dealforge.es/en/blog/${post.slug}`,
+              datePublished: post.publishedAt,
+              dateModified: post.updatedAt || post.publishedAt,
+              author: { "@type": "Organization", name: post.autor },
+              ...(post.imagen && { image: post.imagen }),
             })),
           }),
         }}
       />
-      {/* BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -112,8 +100,8 @@ export default async function BlogPage() {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Inicio", item: "https://dealforge.es" },
-              { "@type": "ListItem", position: 2, name: "Blog", item: "https://dealforge.es/blog" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://dealforge.es/en" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://dealforge.es/en/blog" },
             ],
           }),
         }}
@@ -123,15 +111,15 @@ export default async function BlogPage() {
         {/* Header */}
         <header className="border-b border-gray-100 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2.5">
+            <Link href="/en" className="flex items-center gap-2.5">
               <Image src="/logo.svg" alt="DealForge" width={32} height={32} className="rounded-lg" />
               <span className="font-bold text-lg text-gray-900">DealForge</span>
             </Link>
             <Link
-              href="/registro"
+              href="/registro?lang=en"
               className="text-sm font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
             >
-              Empieza gratis &rarr;
+              Start free &rarr;
             </Link>
           </div>
         </header>
@@ -144,10 +132,10 @@ export default async function BlogPage() {
               Blog
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              Artículos y recursos
+              Articles and resources
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Consejos sobre ventas, automatización comercial e inteligencia artificial para hacer crecer tu negocio.
+              Tips on sales, sales automation and artificial intelligence to grow your business.
             </p>
           </div>
 
@@ -157,17 +145,15 @@ export default async function BlogPage() {
               <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-4">
                 <Flame className="w-8 h-8 text-gray-300" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                Próximamente
-              </h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Coming soon</h2>
               <p className="text-gray-500 max-w-md mx-auto">
-                Estamos preparando artículos increíbles sobre ventas, CPQ e inteligencia artificial. Vuelve pronto.
+                We're preparing great articles on sales, CPQ and artificial intelligence. Check back soon.
               </p>
               <Link
-                href="/"
+                href="/en"
                 className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
               >
-                Volver a la página principal
+                Back to the homepage
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -177,11 +163,12 @@ export default async function BlogPage() {
                 const cat = CATEGORIAS[post.categoria] || CATEGORIAS.general;
                 return (
                   <article
-                    key={post.id}
+                    key={post.slug}
                     className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:shadow-gray-200/50 transition-all"
                   >
                     {post.imagen && (
                       <div className="aspect-[2/1] overflow-hidden bg-gray-100">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={post.imagen}
                           alt={post.titulo}
@@ -194,30 +181,24 @@ export default async function BlogPage() {
                         <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${cat.color}`}>
                           {cat.label}
                         </span>
-                        {post.publishedAt && (
-                          <span className="flex items-center gap-1 text-xs text-gray-400">
-                            <Calendar className="w-3 h-3" />
-                            {formatDate(post.publishedAt)}
-                          </span>
-                        )}
+                        <span className="flex items-center gap-1 text-xs text-gray-400">
+                          <Calendar className="w-3 h-3" />
+                          {formatDate(post.publishedAt)}
+                        </span>
                         <span className="flex items-center gap-1 text-xs text-gray-400">
                           <Clock className="w-3 h-3" />
                           {readingTime(post.contenido)} min
                         </span>
                       </div>
                       <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#3a9bb5] transition-colors">
-                        <Link href={`/blog/${post.slug}`}>
-                          {post.titulo}
-                        </Link>
+                        <Link href={`/en/blog/${post.slug}`}>{post.titulo}</Link>
                       </h2>
-                      <p className="text-sm text-gray-600 line-clamp-3 mb-4">
-                        {post.extracto}
-                      </p>
+                      <p className="text-sm text-gray-600 line-clamp-3 mb-4">{post.extracto}</p>
                       <Link
-                        href={`/blog/${post.slug}`}
+                        href={`/en/blog/${post.slug}`}
                         className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3a9bb5] hover:text-[#2d7d94] transition-colors"
                       >
-                        Leer articulo
+                        Read article
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
@@ -230,7 +211,7 @@ export default async function BlogPage() {
 
         {/* Footer */}
         <footer className="border-t border-gray-100 py-8 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} DealForge. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} DealForge. All rights reserved.</p>
         </footer>
       </div>
     </>

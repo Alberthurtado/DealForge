@@ -36,6 +36,7 @@ export function FooterEn() {
           <div>
             <h4 className="font-semibold text-white text-sm mb-4">Resources</h4>
             <ul className="space-y-2.5 text-sm">
+              <li><Link href="/en/blog" className="hover:text-white transition-colors">Blog</Link></li>
               <li><Link href="/en/quote-template" className="hover:text-white transition-colors">Quote templates by industry</Link></li>
               <li><Link href="/en/resources" className="hover:text-white transition-colors">Free resources</Link></li>
               <li><Link href="/en/free-quote-generator" className="hover:text-white transition-colors">Free quote generator</Link></li>

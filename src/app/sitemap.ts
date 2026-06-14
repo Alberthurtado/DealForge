@@ -6,6 +6,7 @@ import { comparaciones } from "@/data/comparaciones";
 import { RECURSOS } from "@/data/recursos";
 import { RECURSOS_EN } from "@/data/recursos-en";
 import { industriasEn } from "@/data/industrias-en";
+import { blogPostsEn } from "@/data/blog-en";
 
 // Rebuild sitemap every hour instead of every request
 export const revalidate = 3600;
@@ -132,6 +133,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // BlogPost model may not exist yet — skip
   }
 
+  // English blog (data-file based)
+  const blogPagesEn: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/en/blog`,
+      lastModified: new Date("2026-06-14"),
+    },
+    ...blogPostsEn.map((post) => ({
+      url: `${baseUrl}/en/blog/${post.slug}`,
+      lastModified: new Date(post.updatedAt || post.publishedAt),
+    })),
+  ];
+
   // Programmatic SEO pages — industry templates
   const industryPages: MetadataRoute.Sitemap = [
     {
@@ -203,5 +216,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...blogPosts, ...industryPages, ...industryPagesEn, ...featurePages, ...comparisonPages, ...resourcePages, ...resourcePagesEn];
+  return [...staticPages, ...blogPosts, ...blogPagesEn, ...industryPages, ...industryPagesEn, ...featurePages, ...comparisonPages, ...resourcePages, ...resourcePagesEn];
 }
