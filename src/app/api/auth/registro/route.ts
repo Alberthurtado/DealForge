@@ -6,26 +6,33 @@ import { registroSchema } from "@/lib/validations";
 import { validateBody } from "@/lib/validate";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { sendSystemEmail } from "@/lib/system-email";
-import { buildVerificationEmail, resolveEmailLang } from "@/lib/verification-email";
+import { buildVerificationEmail } from "@/lib/verification-email";
 import { countryToCurrency } from "@/lib/pricing";
 
-// Derives the new company's country/currency/locale from the signup language
-// and (when available) the visitor's geo. Spanish signups → ES/EUR/es-ES.
-// English signups → GB/GBP/en-GB by default, or US/USD/en-US when geo says US,
-// or IE/EUR/en-GB for Ireland.
+// Detects the dashboard language from the browser's Accept-Language header.
+// Spanish ("es", "es-ES", "es-419", …) → "es"; everything else → "en".
+function langFromAcceptLanguage(header: string | null): "es" | "en" {
+  const first = (header || "").split(",")[0]?.trim().toLowerCase() || "";
+  return first.startsWith("es") ? "es" : "en";
+}
+
+// Derives the new company's country/currency/locale. Currency is auto-detected
+// purely from the visitor's geo (GBP=UK, EUR=eurozone, USD=rest); language is
+// independent (browser-detected). Spanish → es-ES; English → en-US when billed
+// in USD, otherwise en-GB.
 function deriveCompanyLocale(
   lang: "es" | "en",
   geoCountry: string | null
 ): { country: string; currencyCode: string; locale: string; nombre: string } {
-  if (lang !== "en") {
-    return { country: "ES", currencyCode: "EUR", locale: "es-ES", nombre: "Mi Empresa" };
-  }
   const geo = (geoCountry || "").toUpperCase();
-  const country = ["GB", "US", "IE"].includes(geo) ? geo : "GB";
+  const currencyCode = countryToCurrency(geo);
+  if (lang !== "en") {
+    return { country: geo || "ES", currencyCode, locale: "es-ES", nombre: "Mi Empresa" };
+  }
   return {
-    country,
-    currencyCode: countryToCurrency(country),
-    locale: country === "US" ? "en-US" : "en-GB",
+    country: geo || "GB",
+    currencyCode,
+    locale: currencyCode === "USD" ? "en-US" : "en-GB",
     nombre: "My Company",
   };
 }
@@ -58,8 +65,11 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Create empresa (unique per team/company), localized from the signup language
-  const signupLang = resolveEmailLang(body?.lang);
+  // Language is auto-detected from the browser (Accept-Language). An explicit
+  // ?lang=en (visitor came from the English marketing site) forces English;
+  // otherwise we honour the browser language (es → es, anything else → en).
+  const browserLang = langFromAcceptLanguage(request.headers.get("accept-language"));
+  const signupLang: "es" | "en" = body?.lang === "en" ? "en" : browserLang;
   const geoCountry = request.headers.get("x-vercel-ip-country");
   const companyLocale = deriveCompanyLocale(signupLang, geoCountry);
   const empresa = await prisma.empresa.create({
@@ -96,11 +106,10 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  // Send verification email in the signup language
+  // Send verification email in the detected signup language
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://dealforge.es";
   const verifyUrl = `${baseUrl}/verificar/${usuario.verifyToken}`;
-  const emailLang = resolveEmailLang(body?.lang);
-  const { subject, html } = buildVerificationEmail(emailLang, data.nombre, verifyUrl);
+  const { subject, html } = buildVerificationEmail(signupLang, data.nombre, verifyUrl);
 
   await sendSystemEmail({ to: data.email, subject, html });
 

@@ -60,14 +60,23 @@ export function formatMoney(amount: number, currency: Currency): string {
     : `${amount}${symbol}`;
 }
 
-// Maps an ISO 3166-1 alpha-2 country to the currency we bill it in.
-// Anything not US/UK falls back to EUR (our home currency).
+// Countries in the eurozone (+ EUR-using microstates). Used to bill in EUR.
+const EUROZONE = new Set([
+  "AT", "BE", "HR", "CY", "EE", "FI", "FR", "DE", "GR", "IE", "IT", "LV",
+  "LT", "LU", "MT", "NL", "PT", "SK", "SI", "ES", // 20 eurozone members
+  "AD", "MC", "SM", "VA", "ME", "XK", // microstates / unilateral EUR users
+]);
+
+// Maps an ISO 3166-1 alpha-2 country to the currency we bill it in:
+//   GBP for the UK, EUR for the eurozone, USD for everywhere else.
+// When the country is unknown (no geo header) we fall back to EUR, our
+// home currency, since DealForge is a Spain-based (.es) product.
 export function countryToCurrency(country: string | null | undefined): Currency {
-  if (!country) return "EUR";
-  const c = country.toUpperCase();
-  if (c === "US") return "USD";
+  const c = (country || "").toUpperCase();
+  if (!c) return "EUR";
   if (c === "GB" || c === "UK") return "GBP";
-  return "EUR";
+  if (EUROZONE.has(c)) return "EUR";
+  return "USD";
 }
 
 export function isValidCurrency(value: string): value is Currency {
