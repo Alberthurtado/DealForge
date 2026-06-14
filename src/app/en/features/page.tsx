@@ -14,8 +14,15 @@ import {
   Plug,
   ArrowRight,
 } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 import { Navbar } from "../../_landing/navbar";
 import { FooterEn } from "../../_landing/footer-en";
+import { featuresEn } from "@/data/features-en";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getIcon(name: string): any {
+  return (LucideIcons as Record<string, unknown>)[name] || LucideIcons.HelpCircle;
+}
 
 export const metadata: Metadata = {
   title: "Features — DealForge | AI Quoting Software for Small Businesses",
@@ -132,6 +139,39 @@ export default function EnFeaturesPage() {
               <p className="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Explore each feature — links to the detail pages */}
+      <section className="pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Explore each feature in detail</h2>
+            <p className="mt-2 text-gray-500">In-depth pages for every capability, with examples and FAQs.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {featuresEn.map((f) => {
+              const Icon = getIcon(f.icono);
+              return (
+                <Link
+                  key={f.slug}
+                  href={`/en/features/${f.slug}`}
+                  className="group flex items-center gap-3 rounded-xl border border-gray-100 p-4 hover:border-gray-200 hover:shadow-sm transition-all"
+                >
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${f.color}15` }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: f.color }} />
+                  </div>
+                  <span className="font-medium text-gray-900 text-sm group-hover:text-[#3a9bb5] transition-colors flex-1">
+                    {f.nombre}
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-[#3a9bb5] transition-colors flex-shrink-0" />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
 
