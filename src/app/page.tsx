@@ -25,6 +25,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Navbar } from "./_landing/navbar";
+import { HeroWalkthrough } from "@/components/home/hero-walkthrough";
 import { PricingSection } from "@/components/home/pricing-section";
 import { ForgeShowcase } from "./_landing/forge-showcase";
 import { FAQAccordion } from "./_landing/faq-accordion";
@@ -82,115 +83,64 @@ function HeroSection() {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#3a9bb5]/10 text-[#3a9bb5] text-sm font-semibold rounded-full mb-6 animate-fade-in">
-            <Sparkles className="w-4 h-4" />
-            CPQ con Inteligencia Artificial
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+          {/* Left — copy */}
+          <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#3a9bb5]/10 text-[#3a9bb5] text-sm font-semibold rounded-full mb-6 animate-fade-in">
+              <Sparkles className="w-4 h-4" />
+              CPQ con Inteligencia Artificial
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-[1.1] mb-6 animate-fade-in">
+              De cliente a presupuesto enviado en{" "}
+              <span className="text-[#3a9bb5]">menos de 5 minutos</span>
+            </h1>
+
+            <p className="text-lg text-gray-600 mb-8 animate-fade-in">
+              DealForge te guía paso a paso desde la solicitud del cliente hasta la
+              propuesta final. Configura productos, precios y descuentos, genera un PDF
+              profesional y realiza seguimiento de cada oportunidad sin hojas de cálculo.
+            </p>
+
+            <ul className="space-y-2.5 mb-8 text-left max-w-md mx-auto lg:mx-0 animate-fade-in">
+              {[
+                "Crea presupuestos en minutos",
+                "Reduce errores de precios y descuentos",
+                "Responde más rápido a tus clientes",
+                "Haz seguimiento completo de cada presupuesto",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-2.5">
+                  <CheckCircle className="w-5 h-5 text-[#3a9bb5] mt-0.5 flex-shrink-0" />
+                  <span className="text-[15px] text-gray-700">{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 animate-fade-in">
+              <Link
+                href="/registro"
+                className="inline-flex items-center gap-2 text-base font-semibold text-white bg-[#3a9bb5] hover:bg-[#2d7d94] px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-[#3a9bb5]/25 hover:shadow-xl hover:shadow-[#3a9bb5]/30"
+              >
+                <Flame className="w-5 h-5" />
+                Crear presupuesto
+              </Link>
+              <a
+                href="#forge"
+                className="inline-flex items-center gap-2 text-base font-semibold text-gray-700 border-2 border-gray-200 hover:border-[#3a9bb5] hover:text-[#3a9bb5] px-8 py-3.5 rounded-xl transition-all"
+              >
+                Ver cómo funciona
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+            <p className="mt-4 text-xs text-gray-400 text-center lg:text-left animate-fade-in">
+              Plan gratuito para siempre · Sin tarjeta de crédito
+            </p>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6 animate-fade-in">
-            Cotizaciones inteligentes{" "}
-            <span className="text-[#3a9bb5]">con IA</span> para PYMEs
-          </h1>
-
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 animate-fade-in">
-            Configura productos, calcula precios y genera cotizaciones profesionales
-            en minutos — con <strong>Forge</strong>, tu asistente de IA integrado.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in">
-            <Link
-              href="/registro"
-              className="inline-flex items-center gap-2 text-base font-semibold text-white bg-[#3a9bb5] hover:bg-[#2d7d94] px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-[#3a9bb5]/25 hover:shadow-xl hover:shadow-[#3a9bb5]/30"
-            >
-              <Flame className="w-5 h-5" />
-              Empieza Gratis
-            </Link>
-            <a
-              href="#forge"
-              className="inline-flex items-center gap-2 text-base font-semibold text-gray-700 border-2 border-gray-200 hover:border-[#3a9bb5] hover:text-[#3a9bb5] px-8 py-3.5 rounded-xl transition-all"
-            >
-              Ver Demo
-              <ArrowRight className="w-4 h-4" />
-            </a>
+          {/* Right — animated product walkthrough */}
+          <div className="animate-fade-in lg:pl-4">
+            <HeroWalkthrough lang="es" />
           </div>
-        </div>
-
-        {/* Dashboard mockup */}
-        <div className="max-w-5xl mx-auto animate-fade-in">
-          <div className="bg-white rounded-2xl shadow-2xl shadow-gray-200/60 border border-gray-200 overflow-hidden">
-            {/* Browser chrome */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-200">
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-400" />
-                <span className="w-3 h-3 rounded-full bg-yellow-400" />
-                <span className="w-3 h-3 rounded-full bg-green-400" />
-              </div>
-              <div className="flex-1 mx-4">
-                <div className="bg-white rounded-md px-4 py-1 text-xs text-gray-500 border border-gray-200 max-w-sm mx-auto">
-                  app.dealforge.es/panel
-                </div>
-              </div>
-            </div>
-            {/* Dashboard preview */}
-            <div className="p-6 bg-[#f8fafc]">
-              <div className="grid grid-cols-4 gap-4 mb-6">
-                {[
-                  { label: "Pipeline", value: "24.350 EUR", color: "text-[#3a9bb5]" },
-                  { label: "Conversión", value: "67%", color: "text-green-600" },
-                  { label: "Ticket medio", value: "3.044 EUR", color: "text-purple-600" },
-                  { label: "Ingresos", value: "18.175 EUR", color: "text-amber-600" },
-                ].map((kpi) => (
-                  <div key={kpi.label} className="bg-white rounded-xl p-4 border border-gray-100">
-                    <p className="text-xs text-gray-500 mb-1">{kpi.label}</p>
-                    <p className={`text-lg font-bold ${kpi.color}`}>{kpi.value}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2 bg-white rounded-xl p-4 border border-gray-100 h-32 flex items-end gap-2">
-                  {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
-                    <div
-                      key={i}
-                      className="flex-1 bg-[#3a9bb5]/20 rounded-t-md"
-                      style={{ height: `${h}%` }}
-                    >
-                      <div
-                        className="w-full bg-[#3a9bb5] rounded-t-md"
-                        style={{ height: `${[85, 70, 92, 65, 78, 88, 72][i]}%` }}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="bg-white rounded-xl p-4 border border-gray-100 space-y-2">
-                  {["Borrador", "Enviada", "Negociación", "Ganada"].map((s, i) => (
-                    <div key={s} className="flex items-center gap-2">
-                      <span
-                        className="w-2.5 h-2.5 rounded-full"
-                        style={{ backgroundColor: ["#94a3b8", "#3b82f6", "#f59e0b", "#22c55e"][i] }}
-                      />
-                      <span className="text-xs text-gray-600 flex-1">{s}</span>
-                      <span className="text-xs font-semibold text-gray-900">{[3, 4, 2, 5][i]}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Value props */}
-        <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mt-16">
-          {[
-            { value: "Gratis", label: "Para empezar" },
-            { value: "IA", label: "Genera cotizaciones" },
-            { value: "PDF", label: "Firma electrónica" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-3xl font-bold text-[#3a9bb5]">{stat.value}</p>
-              <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>

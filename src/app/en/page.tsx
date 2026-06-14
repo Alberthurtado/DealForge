@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Navbar } from "../_landing/navbar";
 import { FooterEn } from "../_landing/footer-en";
+import { HeroWalkthrough } from "@/components/home/hero-walkthrough";
 
 export const metadata: Metadata = {
   title: "DealForge — AI Quoting Software (CPQ) for Small Businesses",
@@ -144,96 +145,62 @@ export default function EnHome() {
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#3a9bb5]/10 text-[#3a9bb5] text-xs font-semibold mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            AI-powered quoting for small businesses
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-[1.1]">
-            Professional quotes in{" "}
-            <span className="text-[#3a9bb5]">minutes</span>, not hours
-          </h1>
-          <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            DealForge is the AI quoting software (CPQ) that helps SMBs and freelancers
-            send polished, accurate quotes and win more deals. Automatic VAT and
-            discounts, e-signature, follow-ups and a built-in AI assistant.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/registro?lang=en"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-[#3a9bb5] hover:bg-[#2d7d94] px-7 py-3.5 rounded-xl transition-colors shadow-lg shadow-[#3a9bb5]/25"
-            >
-              <Flame className="w-4 h-4" />
-              Start free — no card
-            </Link>
-            <Link
-              href="/en/pricing"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-gray-900 px-7 py-3.5 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors"
-            >
-              See pricing
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <p className="mt-4 text-xs text-gray-400">
-            Free forever plan · No credit card · Set up in minutes
-          </p>
-        </div>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+            {/* Left — copy */}
+            <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#3a9bb5]/10 text-[#3a9bb5] text-xs font-semibold mb-6">
+                <Sparkles className="w-3.5 h-3.5" />
+                AI-powered quoting for small businesses
+              </div>
+              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight leading-[1.1]">
+                From customer request to quote sent in{" "}
+                <span className="text-[#3a9bb5]">under 5 minutes</span>
+              </h1>
+              <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+                DealForge guides you from customer request to final proposal. Configure
+                products, pricing and discounts, generate professional PDFs and track every
+                opportunity without spreadsheets.
+              </p>
 
-        {/* Dashboard mockup */}
-        <div className="max-w-5xl mx-auto mt-16">
-          <div className="bg-white rounded-2xl shadow-2xl shadow-gray-200/60 border border-gray-200 overflow-hidden">
-            {/* Browser chrome */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-200">
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-400" />
-                <span className="w-3 h-3 rounded-full bg-yellow-400" />
-                <span className="w-3 h-3 rounded-full bg-green-400" />
-              </div>
-              <div className="flex-1 mx-4">
-                <div className="bg-white rounded-md px-4 py-1 text-xs text-gray-500 border border-gray-200 max-w-sm mx-auto">
-                  app.dealforge.es/panel
-                </div>
-              </div>
-            </div>
-            {/* Dashboard preview */}
-            <div className="p-6 bg-[#f8fafc]">
-              <div className="grid grid-cols-4 gap-4 mb-6">
+              <ul className="mt-8 space-y-2.5 text-left max-w-md mx-auto lg:mx-0">
                 {[
-                  { label: "Pipeline", value: "£24,350", color: "text-[#3a9bb5]" },
-                  { label: "Conversion", value: "67%", color: "text-green-600" },
-                  { label: "Avg. deal", value: "£3,044", color: "text-purple-600" },
-                  { label: "Revenue", value: "£18,175", color: "text-amber-600" },
-                ].map((kpi) => (
-                  <div key={kpi.label} className="bg-white rounded-xl p-4 border border-gray-100">
-                    <p className="text-xs text-gray-500 mb-1">{kpi.label}</p>
-                    <p className={`text-lg font-bold ${kpi.color}`}>{kpi.value}</p>
-                  </div>
+                  "Create quotes in minutes",
+                  "Reduce pricing mistakes",
+                  "Respond faster to customers",
+                  "Track every quote from start to finish",
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-2.5">
+                    <Check className="w-5 h-5 text-[#3a9bb5] mt-0.5 flex-shrink-0" />
+                    <span className="text-[15px] text-gray-700">{b}</span>
+                  </li>
                 ))}
+              </ul>
+
+              <div className="mt-8 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
+                <Link
+                  href="/registro?lang=en"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-[#3a9bb5] hover:bg-[#2d7d94] px-7 py-3.5 rounded-xl transition-colors shadow-lg shadow-[#3a9bb5]/25"
+                >
+                  <Flame className="w-4 h-4" />
+                  Create Quote
+                </Link>
+                <a
+                  href="#forge"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-gray-900 px-7 py-3.5 rounded-xl border border-gray-200 hover:border-gray-300 transition-colors"
+                >
+                  See How It Works
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2 bg-white rounded-xl p-4 border border-gray-100 h-32 flex items-end gap-2">
-                  {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
-                    <div key={i} className="flex-1 bg-[#3a9bb5]/20 rounded-t-md" style={{ height: `${h}%` }}>
-                      <div
-                        className="w-full bg-[#3a9bb5] rounded-t-md"
-                        style={{ height: `${[85, 70, 92, 65, 78, 88, 72][i]}%` }}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="bg-white rounded-xl p-4 border border-gray-100 space-y-2">
-                  {["Draft", "Sent", "Negotiating", "Won"].map((s, i) => (
-                    <div key={s} className="flex items-center gap-2">
-                      <span
-                        className="w-2.5 h-2.5 rounded-full"
-                        style={{ backgroundColor: ["#94a3b8", "#3b82f6", "#f59e0b", "#22c55e"][i] }}
-                      />
-                      <span className="text-xs text-gray-600 flex-1">{s}</span>
-                      <span className="text-xs font-semibold text-gray-900">{[3, 4, 2, 5][i]}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <p className="mt-4 text-xs text-gray-400 text-center lg:text-left">
+                Free forever plan · No credit card required
+              </p>
+            </div>
+
+            {/* Right — animated product walkthrough */}
+            <div className="lg:pl-4">
+              <HeroWalkthrough lang="en" />
             </div>
           </div>
         </div>
