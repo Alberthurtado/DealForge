@@ -604,6 +604,599 @@ export const featuresEn: Feature[] = [
     ],
     plan: "Pro",
   },
+  {
+    slug: "approvals",
+    nombre: "Approvals",
+    titulo: "Quote Approval Flow | Automatic workflow — DealForge",
+    descripcion:
+      "Configure approval flows by amount, discount or client. Quotes that need authorisation reach the right approver automatically.",
+    icono: "CheckCircle",
+    color: "#10b981",
+    heroSubtitle:
+      "Define who must approve what and forget about chasing sign-offs over chat. Quotes that exceed your policies are routed automatically to the right approver.",
+    problema: {
+      titulo: "Why do you need an approval flow?",
+      puntos: [
+        "High-value quotes or those with aggressive discounts go out unsupervised. You learn about risky terms once the client has already accepted and you can't go back.",
+        "The approval process is informal: a chat message to the boss that gets lost among 200 conversations. There's no record of who approved what or when.",
+        "Salespeople get frustrated waiting days for approvals because the manager doesn't review in time. Meanwhile, the client loses interest.",
+      ],
+    },
+    solucion: {
+      titulo: "How DealForge automates approvals",
+      puntos: [
+        {
+          titulo: "Configurable escalation rules",
+          desc: "Define approval conditions: quotes over a set amount require director approval, discounts above 20% need the sales manager. Rules combine and prioritise automatically.",
+        },
+        {
+          titulo: "Multi-channel notifications",
+          desc: "The approver receives the request by email with a quote summary, resulting margin and client history. They can approve or reject in one click from the email or the app.",
+        },
+        {
+          titulo: "Configurable approval flow",
+          desc: "Define who must approve based on the quote's conditions. If the approver rejects, the quote returns to the salesperson with comments so they can adjust and resubmit.",
+        },
+        {
+          titulo: "Full audit trail",
+          desc: "Every approval or rejection is recorded with date, time, user and comments. Ideal for internal audits, dispute resolution and continuous improvement of commercial policies.",
+        },
+      ],
+    },
+    pasos: [
+      {
+        num: "1",
+        titulo: "Configure the approval rules",
+        desc: "Define which conditions trigger an approval: total amount, discount percentage, client type or combinations of criteria.",
+      },
+      {
+        num: "2",
+        titulo: "Assign approvers",
+        desc: "Designate who approves based on the configured conditions. The approver receives the request by email and can approve or reject from there.",
+      },
+      {
+        num: "3",
+        titulo: "The salesperson quotes and the flow activates",
+        desc: "When a quote meets the conditions, the salesperson sees that it needs approval and the flow starts automatically. Everyone involved gets notifications on each status change.",
+      },
+    ],
+    faqs: [
+      {
+        pregunta: "Can the salesperson send the quote before approval?",
+        respuesta:
+          "No. While the quote is pending approval, the send button is locked. The salesperson can see the flow status and who the pending approver is. This guarantees nothing goes out without the corresponding authorisation.",
+      },
+      {
+        pregunta: "Can I approve from my phone?",
+        respuesta:
+          "Yes. The request email includes approve/reject buttons that work from any device. You can also access the pending-approvals panel from your phone's browser.",
+      },
+      {
+        pregunta: "What happens if an approver goes on holiday?",
+        respuesta:
+          "You can manually reassign the approval to someone else from the quote panel. You can also cancel the request and create a new one with another approver.",
+      },
+    ],
+    keywords: [
+      "quote approval",
+      "sales approval flow",
+      "approval workflow CPQ",
+      "discount authorisation",
+      "multi-level approval",
+      "company quote control",
+      "automatic sales approvals",
+    ],
+    plan: "Business",
+  },
+  {
+    slug: "electronic-signature",
+    nombre: "Electronic Signature",
+    titulo: "Electronic Quote Signing | Accept proposals online — DealForge",
+    descripcion:
+      "Let your clients sign quotes electronically. Cut closing time from weeks to hours with legally valid digital acceptance.",
+    icono: "PenTool",
+    color: "#3a9bb5",
+    heroSubtitle:
+      "Your client receives the quote, reviews the terms and signs with one click from any device. No printing, scanning or posting paper. Close deals in hours, not weeks.",
+    problema: {
+      titulo: "Why do you need electronic signatures on your quotes?",
+      puntos: [
+        "The client accepts verbally but takes days to return the signed document. Meanwhile, they may change their mind or receive a better offer.",
+        "The print-sign-scan-resend process adds friction that kills opportunities. Some clients drop out just because the process is so cumbersome.",
+        "You have no clear legal record of when and how the client accepted the terms. In a dispute, an 'ok, go ahead' email doesn't carry much legal weight.",
+      ],
+    },
+    solucion: {
+      titulo: "How DealForge simplifies signing",
+      puntos: [
+        {
+          titulo: "One-click signing from the email",
+          desc: "The client receives a secure link where they see the quote, review the terms and sign with one click or by drawing their signature. No need to create an account or download software.",
+        },
+        {
+          titulo: "Simple electronic signature certificate",
+          desc: "Each signature generates a certificate including timestamp, signer's IP, verified email and document hash. DealForge's signature is a simple electronic signature under the eIDAS Regulation (EU 910/2014). It records the signer's identity, date, time and IP. For contracts requiring an advanced or qualified electronic signature, we recommend consulting a legal advisor.",
+        },
+        {
+          titulo: "Instant acceptance notification",
+          desc: "When the client signs, the salesperson and manager get an immediate notification. The quote automatically moves to 'Won' status and contract creation can be triggered.",
+        },
+      ],
+    },
+    pasos: [
+      {
+        num: "1",
+        titulo: "Enable electronic signature on the quote",
+        desc: "When sending the quote, turn on the electronic signature option. Define which fields require a signature and who must sign (it can be more than one person).",
+      },
+      {
+        num: "2",
+        titulo: "The client reviews and signs",
+        desc: "The client opens the link, reviews the full document with zoom and scroll, and signs in the marked fields. The process takes under 2 minutes.",
+      },
+      {
+        num: "3",
+        titulo: "Download the signed document",
+        desc: "Both parties receive the signed PDF with the signature certificate included. The document is stored in DealForge as a permanent record.",
+      },
+    ],
+    faqs: [
+      {
+        pregunta: "Is the electronic signature legally valid?",
+        respuesta:
+          "DealForge offers a simple electronic signature, recognised by the EU eIDAS Regulation. The certificate includes document integrity, signer identification and a record of date and IP. For contracts requiring an advanced or qualified electronic signature, we recommend consulting a legal advisor about the specific requirements of your case.",
+      },
+      {
+        pregunta: "Do I need a digital certificate to sign?",
+        respuesta:
+          "No. DealForge uses a simple electronic signature, which doesn't require a qualified digital certificate. For quotes and commercial agreements, the simple signature is sufficient and legally valid under eIDAS. Qualified certificates are only required for dealings with public administration.",
+      },
+      {
+        pregunta: "Can several people sign the same document?",
+        respuesta:
+          "Yes. You can define multiple signers in a specific order (first the buyer, then the director) or allow parallel signing. Each signer gets their own link and the document progresses as signatures are completed.",
+      },
+      {
+        pregunta: "Does the client need to register to sign?",
+        respuesta:
+          "No. The signer only needs to access the secure link they receive by email. Their identity is verified through the email it was sent to and optionally via an SMS code. No account, password or extra software required.",
+      },
+    ],
+    keywords: [
+      "electronic quote signature",
+      "digital signature sales proposal",
+      "accept quote online",
+      "legal electronic signature",
+      "sign proposals small business",
+      "digitally signed document",
+      "close sales electronic signature",
+    ],
+    plan: "Pro",
+  },
+  {
+    slug: "automatic-reminders",
+    nombre: "Automatic Reminders",
+    titulo: "Automatic Quote Reminders | Effortless follow-up — DealForge",
+    descripcion:
+      "Automate quote follow-up with scheduled reminders. Never lose a sale for lack of timely follow-up again.",
+    icono: "Bell",
+    color: "#eab308",
+    heroSubtitle:
+      "60% of sales are lost for lack of follow-up. DealForge sends automatic reminders to your team and your clients so no quote goes unanswered.",
+    problema: {
+      titulo: "Why do you need automatic reminders?",
+      puntos: [
+        "Your salespeople handle dozens of quotes at once and it's humanly impossible to remember to follow up on each one. The ones not chased are lost.",
+        "Quotes have a validity date, but no one warns the client when it's about to expire. The client finds out late and asks for a new quote with updated prices.",
+        "There's no system to flag when a quote has gone 5 days without a reply. The salesperson forgets it and the client assumes you're not interested in the deal.",
+      ],
+    },
+    solucion: {
+      titulo: "How DealForge automates follow-up",
+      puntos: [
+        {
+          titulo: "Automatic follow-up sequences",
+          desc: "Define a sequence: reminder to the salesperson at 48 hours, email to the client at 5 days, alert to the manager at 7 days. The sequence runs by itself until the quote changes status.",
+        },
+        {
+          titulo: "Expiry alerts",
+          desc: "Configure alerts that notify the salesperson and optionally the client when a quote is about to expire. Give the salesperson time to renew the validity and the client urgency to decide.",
+        },
+        {
+          titulo: "Custom internal reminders",
+          desc: "Let each salesperson create manual reminders for specific quotes: 'Call on Friday after their budget meeting'. Reminders appear as notifications in the app.",
+        },
+      ],
+    },
+    pasos: [
+      {
+        num: "1",
+        titulo: "Configure the follow-up sequences",
+        desc: "Define how many reminders to send, to whom (salesperson, client or both) and at what intervals. You can create different sequences by quote type or amount.",
+      },
+      {
+        num: "2",
+        titulo: "Sequences activate on send",
+        desc: "When a salesperson sends a quote, the follow-up sequence starts automatically. If the client replies or the quote closes, the sequence stops on its own.",
+      },
+      {
+        num: "3",
+        titulo: "Monitor the team's follow-up",
+        desc: "From the dashboard, see which quotes have pending follow-up, which are in an active sequence and which have exhausted all reminders without a reply.",
+      },
+    ],
+    faqs: [
+      {
+        pregunta: "Can I customise the content of the reminders?",
+        respuesta:
+          "Yes. Each step of the sequence has its own editable email template. You can use variables like the client's name, the quote amount and remaining validity days. Internal reminders to the salesperson are also customisable.",
+      },
+      {
+        pregunta: "What if the client replies before the next reminder?",
+        respuesta:
+          "If the quote changes status (accepted, rejected, new version), the sequence stops automatically. We don't want a client who has already accepted to receive a 'still waiting for your reply' email.",
+      },
+      {
+        pregunta: "Can I have different sequences depending on the quote amount?",
+        respuesta:
+          "Yes. You can create rules like: quotes under a set amount get 2 reminders over 7 days, while larger quotes get 5 reminders over 30 days with escalation to management. The system applies the right sequence based on the criteria you define.",
+      },
+    ],
+    keywords: [
+      "quote reminders",
+      "automatic sales follow-up",
+      "quote expiry alerts",
+      "automate sales follow-up",
+      "client reminder email",
+      "sales follow-up sequence",
+      "salesperson notifications",
+    ],
+    plan: "Pro",
+  },
+  {
+    slug: "versioning",
+    nombre: "Versioning",
+    titulo: "Quote Versioning | Change control on proposals — DealForge",
+    descripcion:
+      "Keep a complete history of every version of your quotes. Review previous versions, restore proposals and negotiate with full transparency.",
+    icono: "GitBranch",
+    color: "#a855f7",
+    heroSubtitle:
+      "Every change to a quote generates a new version. Review the full version history, restore previous proposals and keep a clear record of the whole negotiation.",
+    problema: {
+      titulo: "Why do you need versioning on your quotes?",
+      puntos: [
+        "The client asks for changes three times and you no longer know what the original price was or what changed in each round. You end up comparing PDFs by hand looking for differences.",
+        "A salesperson overwrites a quote by mistake and loses the version the client had already verbally accepted. There's no way to recover it.",
+        "In an internal audit, you need to show how a negotiation evolved but you only have the final version. You can't justify why those terms were reached.",
+      ],
+    },
+    solucion: {
+      titulo: "How DealForge versions your quotes",
+      puntos: [
+        {
+          titulo: "Automatic versions on every change",
+          desc: "Every time a quote is modified and saved, a new version is created with a sequential number (v1, v2, v3). The previous version stays immutable and accessible at any time.",
+        },
+        {
+          titulo: "Change history on a timeline",
+          desc: "You can see all previous versions on the quote record and review the changes on the timeline. Each version records date, author and a summary of the modifications made.",
+        },
+        {
+          titulo: "One-click restore",
+          desc: "If you need to go back to a previous version, you can restore it as the new active version. The intermediate history isn't lost: the restore is recorded as a new version that's a copy of the previous one.",
+        },
+      ],
+    },
+    pasos: [
+      {
+        num: "1",
+        titulo: "Edit the quote as normal",
+        desc: "Change products, prices or terms as you normally would. On save, DealForge creates the new version automatically. You don't need to do anything special.",
+      },
+      {
+        num: "2",
+        titulo: "Review the version history",
+        desc: "From the quote, access the versions panel where you see each iteration with date, change author and a summary of the modifications.",
+      },
+      {
+        num: "3",
+        titulo: "Review or restore as needed",
+        desc: "Review previous versions to understand how the negotiation evolved, or restore a version if the client prefers earlier terms.",
+      },
+    ],
+    faqs: [
+      {
+        pregunta: "Are previous versions accessible to the client?",
+        respuesta:
+          "Not by default. The client only sees the most recent version you send them. You can share previous versions manually if you need to for the negotiation, but the full history is internal.",
+      },
+      {
+        pregunta: "Is there a limit on versions per quote?",
+        respuesta:
+          "No. You can have as many versions as needed. We've seen complex negotiations with more than 15 versions and the system handles them without issue.",
+      },
+      {
+        pregunta: "Can I see what changed between versions?",
+        respuesta:
+          "Yes. Each version includes a record on the timeline with the changes made. You can open any previous version to review the products, prices and terms it had at that moment.",
+      },
+    ],
+    keywords: [
+      "quote versioning",
+      "proposal version history",
+      "quote change control",
+      "review quote versions",
+      "restore previous quote",
+      "negotiation traceability",
+      "sales proposal versions",
+    ],
+    plan: "Starter",
+  },
+  {
+    slug: "import-export",
+    nombre: "Import / Export",
+    titulo: "Import & Export Data | Excel and CSV integration — DealForge",
+    descripcion:
+      "Import clients, products and quotes from Excel or CSV. Export your data anytime. Your information is always yours and portable.",
+    icono: "Plug",
+    color: "#64748b",
+    heroSubtitle:
+      "Bring all your existing information into DealForge in minutes and export whatever you need whenever you want. No lock-in: your data is always yours.",
+    problema: {
+      titulo: "Why do you need to import and export data?",
+      puntos: [
+        "You have years of client and product data in Excel that you can't abandon. Starting from scratch in a new tool is unviable when you handle thousands of records.",
+        "Your accounting team needs the quote data in Excel for their reports. Copying each record by hand consumes hours and creates errors.",
+        "You worry about vendor lock-in: if DealForge doesn't work for you, you need to be able to get your data out without relying on tech support.",
+      ],
+    },
+    solucion: {
+      titulo: "How DealForge handles your data",
+      puntos: [
+        {
+          titulo: "Guided import with column mapping",
+          desc: "Upload your Excel or CSV file and the import wizard shows you the detected columns. Drag and drop to map your columns to DealForge's fields. The system validates the data before importing and shows you errors to fix.",
+        },
+        {
+          titulo: "Catalogue import with prices",
+          desc: "Import your full catalogue with prices, categories, SKU and descriptions in a single operation. If you already have segment price lists, you can import them as separate lists keeping their relationship to the products.",
+        },
+        {
+          titulo: "Full export in one click",
+          desc: "Export clients, products, quotes or any combination to Excel or CSV. Apply filters before exporting to get only the data you need. The export includes all fields, including custom ones.",
+        },
+        {
+          titulo: "On-demand export",
+          desc: "Export the data you need at any time with filters applied. Ideal for feeding accounting or BI reports whenever you need it.",
+        },
+      ],
+    },
+    pasos: [
+      {
+        num: "1",
+        titulo: "Prepare your file",
+        desc: "Organise your data in Excel or CSV with clear headers. You don't need a specific format: the mapper adapts to your structure.",
+      },
+      {
+        num: "2",
+        titulo: "Upload and map columns",
+        desc: "Load the file, review the preview and assign each column to the corresponding field in DealForge. The system validates data and shows errors to fix before importing.",
+      },
+      {
+        num: "3",
+        titulo: "Verify and confirm",
+        desc: "Review the import summary: valid records, duplicates detected and errors found. Confirm to complete the import or download the error report to fix and retry.",
+      },
+    ],
+    faqs: [
+      {
+        pregunta: "What file formats does the import accept?",
+        respuesta:
+          "DealForge accepts .xlsx (Excel), .xls (legacy Excel) and .csv (comma-separated values) files. The maximum size per file is 50 MB, enough for over 500,000 records. If your file is larger, you can split it and import in batches.",
+      },
+      {
+        pregunta: "Does the import detect and handle duplicates?",
+        respuesta:
+          "Yes. The system compares records by key fields (tax ID for clients, SKU for products) and shows you the duplicates found. You can choose to skip duplicates, overwrite them with the new data or review them one by one.",
+      },
+      {
+        pregunta: "Can I export quote data with line detail?",
+        respuesta:
+          "Yes. The quote export includes both the header (client, date, total amount, status) and the detail of each line (product, quantity, price, discount). You can export headers only or headers with lines as needed.",
+      },
+      {
+        pregunta: "Is my data safe if I cancel the service?",
+        respuesta:
+          "You can always export all your data before cancelling. After cancellation, we keep your data for 90 days during which you can request a final export. Your information is never trapped in DealForge.",
+      },
+    ],
+    keywords: [
+      "import data CPQ",
+      "export quotes Excel",
+      "migrate sales data",
+      "import clients CSV",
+      "export products Excel",
+      "company data portability",
+      "Excel quotes integration",
+    ],
+    plan: "Starter",
+  },
+  {
+    slug: "contract-management",
+    nombre: "Contract Management",
+    titulo: "Post-Sale Contract Management | From quote to contract — DealForge",
+    descripcion:
+      "Turn won quotes into contracts automatically. Manage validity, clauses and contract documents without leaving your CPQ.",
+    icono: "ScrollText",
+    color: "#059669",
+    heroSubtitle:
+      "When a quote becomes a sale, DealForge generates the contract automatically. Manage validity, clauses and renewals from the same place you quoted.",
+    problema: {
+      titulo: "Why do you need integrated contract management?",
+      puntos: [
+        "The quote is won but the contract is managed in another system (or in Word folders). You lose the connection between what was quoted and what was contracted, creating inconsistencies.",
+        "No one monitors the validity of active contracts. You find out a contract expired when the client calls to complain or once they've already signed with a competitor.",
+        "Special clauses and terms agreed during the negotiation get lost among emails and aren't reflected in the final contract.",
+      ],
+    },
+    solucion: {
+      titulo: "How DealForge connects quotes with contracts",
+      puntos: [
+        {
+          titulo: "Automatic generation from a won quote",
+          desc: "When a quote moves to 'Won' status, DealForge generates a draft contract using a predefined template. Client data, products, prices and terms are carried over automatically.",
+        },
+        {
+          titulo: "Contract templates with dynamic variables",
+          desc: "Create contract templates with fields that fill in automatically: company name, tax ID, contracted products, amounts, validity and payment terms. Add optional clauses by type of service.",
+        },
+        {
+          titulo: "Validity and status control",
+          desc: "Each contract has a start date, end date and status (draft, active, expiring, expired, cancelled). The contracts dashboard shows a consolidated view of all contracts with expiry alerts.",
+        },
+        {
+          titulo: "Document repository",
+          desc: "Store the signed contract and related documents (addenda, annexes, delivery notes) linked to both the contract and the client. The full contract history is accessible from the client record.",
+        },
+      ],
+    },
+    pasos: [
+      {
+        num: "1",
+        titulo: "Configure contract templates",
+        desc: "Create templates with your company's legal format, including dynamic variables for client and quote data. Define standard and optional clauses.",
+      },
+      {
+        num: "2",
+        titulo: "Generate the contract when the quote is won",
+        desc: "When a quote is marked as won, select the template and DealForge generates the contract with all the data pre-filled. Review, adjust clauses if needed and send for signature.",
+      },
+      {
+        num: "3",
+        titulo: "Monitor validity and renewals",
+        desc: "From the contracts dashboard, monitor upcoming expiries, contracts due for renewal and statuses. Automatic alerts warn you with configurable lead time.",
+      },
+    ],
+    faqs: [
+      {
+        pregunta: "Can I use my own legal templates?",
+        respuesta:
+          "Yes. You can upload your existing contract templates and add DealForge's dynamic variables. This lets your legal department keep control over the legal text while the commercial data fills in automatically.",
+      },
+      {
+        pregunta: "Is the generated contract editable?",
+        respuesta:
+          "Yes. The generated contract is a draft you can fully edit before sending. You can modify clauses, add special terms and adjust any section. Once signed, the document is locked.",
+      },
+      {
+        pregunta: "Can I link a contract to several quotes?",
+        respuesta:
+          "Yes. Some master contracts cover multiple quotes. You can create one contract and link several quotes to it, keeping the traceability of each deal under the umbrella of the main contract.",
+      },
+    ],
+    keywords: [
+      "contract management small business",
+      "contract from quote",
+      "contract validity control",
+      "company contract templates",
+      "post-sale contracts",
+      "digital contract repository",
+      "commercial contract software",
+      "integrated CPQ contracts",
+    ],
+    plan: "Business",
+  },
+  {
+    slug: "renewals-alerts",
+    nombre: "Renewals & Alerts",
+    titulo: "Automatic Renewals & Alerts | Client retention — DealForge",
+    descripcion:
+      "Automate renewals of contracts and recurring services. Proactive alerts that stop you losing clients to forgotten expiries.",
+    icono: "RefreshCw",
+    color: "#dc2626",
+    heroSubtitle:
+      "Don't lose clients to expired contracts no one renewed in time. DealForge alerts your team weeks in advance and generates the renewal quote automatically.",
+    problema: {
+      titulo: "Why do you need renewal management?",
+      puntos: [
+        "Your recurring-service contracts expire without anyone noticing. The client doesn't renew because no one contacted them and you lose recurring revenue that cost a lot to acquire.",
+        "You have no visibility into how much recurring revenue is at risk of not renewing this quarter. Financial planning is a guessing game.",
+        "The renewal process is manual: find the original contract, create a new quote, adjust prices and send. With 50 renewals a month, it's a full-time job.",
+      ],
+    },
+    solucion: {
+      titulo: "How DealForge automates renewals",
+      puntos: [
+        {
+          titulo: "Staggered expiry alerts",
+          desc: "Configure alerts at 90, 60 and 30 days before expiry. Each alert goes to the assigned salesperson and the manager. With enough time, your team contacts the client before they look for alternatives.",
+        },
+        {
+          titulo: "Automatic renewal quote",
+          desc: "DealForge generates a renewal quote pre-filled with the same products, quantities and terms of the current contract. The salesperson just reviews, adjusts the price if an annual increase applies and sends.",
+        },
+        {
+          titulo: "Renewals dashboard",
+          desc: "See in one place all the pending renewals for the month, quarter or year. Filter by amount, salesperson or loss risk. Quickly identify which accounts need priority attention.",
+        },
+        {
+          titulo: "Automatic price increase",
+          desc: "Configure annual increase rules: fixed percentage, inflation-index based or customised per client. When generating the renewal, the price already reflects the adjustment agreed in the original contract.",
+        },
+      ],
+    },
+    pasos: [
+      {
+        num: "1",
+        titulo: "Configure expiry alerts",
+        desc: "Define how many days before expiry you want to receive each alert and who should receive it. You can create different rules by contract type or amount.",
+      },
+      {
+        num: "2",
+        titulo: "Review the renewals dashboard",
+        desc: "Each week, check the upcoming renewals. The system prioritises by amount and proximity to expiry so your team focuses on what matters most.",
+      },
+      {
+        num: "3",
+        titulo: "Send the renewal in one click",
+        desc: "Open the pre-generated renewal quote, verify the data, adjust what's needed and send it to the client. The whole process takes under 5 minutes per renewal.",
+      },
+    ],
+    faqs: [
+      {
+        pregunta: "Can I fully automate the renewal with no human intervention?",
+        respuesta:
+          "You can automate generating the quote and sending the first email to the client, but we recommend a salesperson reviews each renewal before sending. Some renewals need a price adjustment, scope changes or a conversation with the client first.",
+      },
+      {
+        pregunta: "How do I handle price increases on renewals?",
+        respuesta:
+          "You can configure automatic increase rules: a fixed annual percentage, based on an inflation index (e.g. CPI) or a custom percentage per client. The renewal quote is generated with the price adjusted according to the defined rule.",
+      },
+      {
+        pregunta: "Can I see which recurring revenue is at risk?",
+        respuesta:
+          "Yes. The dashboard shows the total value of contracts expiring in each period, segmented by renewal status (pending, in progress, renewed, lost). You can project the expected recurring revenue and the churn rate for each quarter.",
+      },
+      {
+        pregunta: "Does the system flag clients at risk of not renewing?",
+        respuesta:
+          "The system automatically alerts you when a contract enters the amber zone (64-15 days) or red zone (under 14 days). These visual alerts on the dashboard let you prioritise which accounts need urgent attention before they expire.",
+      },
+    ],
+    keywords: [
+      "automatic contract renewals",
+      "contract expiry alerts",
+      "client retention small business",
+      "SaaS renewal management",
+      "recurring revenue renewal",
+      "automate service renewal",
+      "renewals dashboard",
+      "contract churn prevention",
+    ],
+    plan: "Business",
+  },
 ];
 
 export function getFeatureEn(slug: string): Feature | undefined {
@@ -619,4 +1212,11 @@ export const ES_TO_EN_FEATURE: Record<string, string> = {
   "reportes-metricas": "reports-metrics",
   "forge-ia": "forge-ai",
   "envio-emails": "email-sending",
+  "aprobaciones": "approvals",
+  "firma-electronica": "electronic-signature",
+  "recordatorios": "automatic-reminders",
+  "versionado": "versioning",
+  "importar-exportar": "import-export",
+  "gestion-contratos": "contract-management",
+  "renovaciones-alertas": "renewals-alerts",
 };
