@@ -34,6 +34,7 @@ const NAV_CONFIG: Record<
       { label: "Features", href: "/en/features" },
       { label: "Pricing", href: "/en/pricing" },
       { label: "What is CPQ?", href: "/en/what-is-cpq" },
+      { label: "Blog", href: "/en/blog" },
       { label: "Contact", href: "/en/contact" },
     ],
     login: "Log in",
