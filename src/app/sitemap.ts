@@ -7,6 +7,7 @@ import { RECURSOS } from "@/data/recursos";
 import { RECURSOS_EN } from "@/data/recursos-en";
 import { industriasEn } from "@/data/industrias-en";
 import { blogPostsEn } from "@/data/blog-en";
+import { featuresEn } from "@/data/features-en";
 
 // Rebuild sitemap every hour instead of every request
 export const revalidate = 3600;
@@ -181,6 +182,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
+  // English feature pages (the /en/features hub is in staticPages)
+  const featurePagesEn: MetadataRoute.Sitemap = featuresEn.map((f) => ({
+    url: `${baseUrl}/en/features/${f.slug}`,
+    lastModified: new Date("2026-06-14"),
+  }));
+
   // Comparison pages
   const comparisonPages: MetadataRoute.Sitemap = [
     {
@@ -216,5 +223,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...blogPosts, ...blogPagesEn, ...industryPages, ...industryPagesEn, ...featurePages, ...comparisonPages, ...resourcePages, ...resourcePagesEn];
+  return [...staticPages, ...blogPosts, ...blogPagesEn, ...industryPages, ...industryPagesEn, ...featurePages, ...featurePagesEn, ...comparisonPages, ...resourcePages, ...resourcePagesEn];
 }

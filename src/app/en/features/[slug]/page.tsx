@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { features } from "@/data/features";
-import { ES_TO_EN_FEATURE } from "@/data/features-en";
+import { featuresEn, getFeatureEn } from "@/data/features-en";
 import { ArrowRight, ChevronDown, X, CheckCircle } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 
@@ -12,12 +11,8 @@ function getIcon(name: string): any {
   return (LucideIcons as Record<string, unknown>)[name] || LucideIcons.HelpCircle;
 }
 
-function getFeature(slug: string) {
-  return features.find((f) => f.slug === slug);
-}
-
 export function generateStaticParams() {
-  return features.map((f) => ({ slug: f.slug }));
+  return featuresEn.map((f) => ({ slug: f.slug }));
 }
 
 export async function generateMetadata({
@@ -26,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const feat = getFeature(slug);
+  const feat = getFeatureEn(slug);
   if (!feat) return {};
 
   return {
@@ -36,9 +31,9 @@ export async function generateMetadata({
     openGraph: {
       title: feat.titulo,
       description: feat.descripcion,
-      url: `https://dealforge.es/funcionalidades/${feat.slug}`,
+      url: `https://dealforge.es/en/features/${feat.slug}`,
       siteName: "DealForge",
-      locale: "es_ES",
+      locale: "en_GB",
       type: "website",
     },
     twitter: {
@@ -46,28 +41,17 @@ export async function generateMetadata({
       title: feat.titulo,
       description: feat.descripcion,
     },
-    alternates: {
-      canonical: `https://dealforge.es/funcionalidades/${feat.slug}`,
-      ...(ES_TO_EN_FEATURE[feat.slug]
-        ? {
-            languages: {
-              "es-ES": `https://dealforge.es/funcionalidades/${feat.slug}`,
-              en: `https://dealforge.es/en/features/${ES_TO_EN_FEATURE[feat.slug]}`,
-              "x-default": `https://dealforge.es/funcionalidades/${feat.slug}`,
-            },
-          }
-        : {}),
-    },
+    alternates: { canonical: `https://dealforge.es/en/features/${feat.slug}` },
   };
 }
 
-export default async function FeaturePage({
+export default async function EnFeaturePage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const feat = getFeature(slug);
+  const feat = getFeatureEn(slug);
   if (!feat) notFound();
 
   const color = feat.color;
@@ -79,19 +63,18 @@ export default async function FeaturePage({
       "@type": "WebPage",
       name: feat.titulo,
       description: feat.descripcion,
-      url: `https://dealforge.es/funcionalidades/${feat.slug}`,
+      url: `https://dealforge.es/en/features/${feat.slug}`,
+      inLanguage: "en",
       isPartOf: { "@type": "WebSite", name: "DealForge", url: "https://dealforge.es" },
       breadcrumb: {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Inicio", item: "https://dealforge.es" },
-          { "@type": "ListItem", position: 2, name: "Funcionalidades", item: "https://dealforge.es/funcionalidades" },
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://dealforge.es/en" },
+          { "@type": "ListItem", position: 2, name: "Features", item: "https://dealforge.es/en/features" },
           { "@type": "ListItem", position: 3, name: feat.nombre },
         ],
       },
     },
-    // FAQPage schema removed — Google restricted FAQ rich results
-    // to government/healthcare sites since August 2023
   ];
 
   return (
@@ -103,16 +86,16 @@ export default async function FeaturePage({
       {/* Header */}
       <header className="border-b border-gray-100 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
+          <Link href="/en" className="flex items-center gap-2.5">
             <Image src="/logo.svg" alt="DealForge" width={28} height={28} className="rounded-md" />
             <span className="font-bold text-gray-900 text-lg">DealForge</span>
           </Link>
           <Link
-            href="/registro"
+            href="/registro?lang=en"
             className="text-sm font-semibold text-white px-4 py-2 rounded-lg transition-colors"
             style={{ backgroundColor: color }}
           >
-            Empieza gratis
+            Start free
           </Link>
         </div>
       </header>
@@ -120,9 +103,9 @@ export default async function FeaturePage({
       {/* Breadcrumbs */}
       <nav className="max-w-5xl mx-auto px-4 sm:px-6 py-4">
         <ol className="flex items-center gap-2 text-sm text-gray-400">
-          <li><Link href="/" className="hover:text-gray-600">Inicio</Link></li>
+          <li><Link href="/en" className="hover:text-gray-600">Home</Link></li>
           <li>/</li>
-          <li><Link href="/funcionalidades" className="hover:text-gray-600">Funcionalidades</Link></li>
+          <li><Link href="/en/features" className="hover:text-gray-600">Features</Link></li>
           <li>/</li>
           <li className="text-gray-700 font-medium">{feat.nombre}</li>
         </ol>
@@ -142,7 +125,7 @@ export default async function FeaturePage({
               <Icon className="w-10 h-10" style={{ color }} />
             </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4" style={{ backgroundColor: `${color}15`, color }}>
-              Disponible desde plan {feat.plan}
+              Available from the {feat.plan} plan
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               {feat.titulo}
@@ -151,11 +134,11 @@ export default async function FeaturePage({
               {feat.heroSubtitle}
             </p>
             <Link
-              href="/registro"
+              href="/registro?lang=en"
               className="inline-flex items-center gap-2 text-white px-8 py-3.5 rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl"
               style={{ backgroundColor: color, boxShadow: `0 10px 25px -5px ${color}40` }}
             >
-              Empieza gratis <ArrowRight className="w-4 h-4" />
+              Start free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </section>
@@ -204,7 +187,7 @@ export default async function FeaturePage({
         {/* ===== HOW IT WORKS ===== */}
         <section className="mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-10">
-            Cómo funciona
+            How it works
           </h2>
           <div className="grid sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {feat.pasos.map((paso, i) => (
@@ -228,7 +211,7 @@ export default async function FeaturePage({
         {/* ===== FAQ ===== */}
         <section className="mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8">
-            Preguntas frecuentes
+            Frequently asked questions
           </h2>
           <div className="max-w-3xl mx-auto space-y-3">
             {feat.faqs.map((faq, i) => (
@@ -253,24 +236,24 @@ export default async function FeaturePage({
           </div>
           <div className="relative">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-              Empieza a usar {feat.nombre} hoy
+              Start using {feat.nombre} today
             </h2>
             <p className="text-white/80 mb-8 max-w-xl mx-auto">
-              Configura {feat.nombre.toLowerCase()} en minutos y transforma tu proceso de ventas. Sin tarjeta de crédito.
+              Set up {feat.nombre.toLowerCase()} in minutes and transform your sales process. No credit card required.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/registro"
+                href="/registro?lang=en"
                 className="inline-flex items-center gap-2 bg-white px-8 py-3.5 rounded-xl font-bold hover:bg-gray-50 transition-colors"
                 style={{ color }}
               >
-                Empieza gratis <ArrowRight className="w-4 h-4" />
+                Start free <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/funcionalidades"
+                href="/en/features"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
               >
-                Ver todas las funcionalidades
+                See all features
               </Link>
             </div>
           </div>
@@ -279,15 +262,12 @@ export default async function FeaturePage({
 
       {/* Related features */}
       {(() => {
-        const currentIndex = features.findIndex((f) => f.slug === feat.slug);
-        const related = features
-          .filter((_, i) => i !== currentIndex)
-          .sort(() => 0.5 - ((currentIndex * 7 + features.length) % 3) / 3)
-          .slice(0, 3);
+        const related = featuresEn.filter((f) => f.slug !== feat.slug).slice(0, 3);
+        if (related.length === 0) return null;
         return (
           <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-              También te puede interesar
+              You might also be interested in
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {related.map((r) => {
@@ -295,7 +275,7 @@ export default async function FeaturePage({
                 return (
                   <Link
                     key={r.slug}
-                    href={`/funcionalidades/${r.slug}`}
+                    href={`/en/features/${r.slug}`}
                     className="group p-6 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all"
                   >
                     <div
@@ -322,11 +302,11 @@ export default async function FeaturePage({
       <footer className="border-t border-gray-100 py-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} DealForge. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} DealForge. All rights reserved.
             {" · "}
-            <Link href="/privacidad" className="hover:text-gray-600 underline">Privacidad</Link>
+            <Link href="/en/privacy" className="hover:text-gray-600 underline">Privacy</Link>
             {" · "}
-            <Link href="/terminos" className="hover:text-gray-600 underline">Términos</Link>
+            <Link href="/en/terms" className="hover:text-gray-600 underline">Terms</Link>
           </p>
         </div>
       </footer>
