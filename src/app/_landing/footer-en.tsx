@@ -26,6 +26,7 @@ export function FooterEn() {
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/en/features" className="hover:text-white transition-colors">Features</Link></li>
               <li><Link href="/en/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
+              <li><Link href="/en/compare" className="hover:text-white transition-colors">Comparisons</Link></li>
               <li><Link href="/en/free-quote-generator" className="hover:text-white transition-colors">Free quote generator</Link></li>
               <li><Link href="/login?lang=en" className="hover:text-white transition-colors">Log in</Link></li>
               <li><Link href="/registro?lang=en" className="hover:text-white transition-colors">Start free</Link></li>

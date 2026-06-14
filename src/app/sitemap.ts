@@ -8,6 +8,7 @@ import { RECURSOS_EN } from "@/data/recursos-en";
 import { industriasEn } from "@/data/industrias-en";
 import { blogPostsEn } from "@/data/blog-en";
 import { featuresEn } from "@/data/features-en";
+import { comparacionesEn } from "@/data/comparaciones-en";
 
 // Rebuild sitemap every hour instead of every request
 export const revalidate = 3600;
@@ -200,6 +201,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
+  // English comparison pages
+  const comparisonPagesEn: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/en/compare`,
+      lastModified: new Date("2026-06-14"),
+    },
+    ...comparacionesEn.map((c) => ({
+      url: `${baseUrl}/en/compare/${c.slug}`,
+      lastModified: new Date("2026-06-14"),
+    })),
+  ];
+
   // Lead magnet resources (ES + EN)
   const resourcePages: MetadataRoute.Sitemap = [
     {
@@ -223,5 +236,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...blogPosts, ...blogPagesEn, ...industryPages, ...industryPagesEn, ...featurePages, ...featurePagesEn, ...comparisonPages, ...resourcePages, ...resourcePagesEn];
+  return [...staticPages, ...blogPosts, ...blogPagesEn, ...industryPages, ...industryPagesEn, ...featurePages, ...featurePagesEn, ...comparisonPages, ...comparisonPagesEn, ...resourcePages, ...resourcePagesEn];
 }
