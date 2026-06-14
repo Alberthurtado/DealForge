@@ -302,6 +302,439 @@ export const blogPostsEn: BlogPostEn[] = [
 <p><strong>Create professional quotes now:</strong> <a href="/registro?lang=en">Sign up free at DealForge</a> and generate your first PDF quote in under 5 minutes. No hassle, no learning curve.</p>
 `.trim(),
   },
+
+  // ─── 3. 5 quoting mistakes that lose you sales ───
+  {
+    slug: "5-quoting-mistakes-that-lose-sales",
+    titulo: "5 quoting mistakes that lose you sales",
+    extracto:
+      "Discover the 5 most common mistakes small businesses make when creating quotes and how to fix them to close more sales.",
+    categoria: "ventas",
+    tags: ["sales", "quotes", "mistakes", "small business", "estimates"],
+    autor: "DealForge",
+    publishedAt: "2026-03-20T08:30:00Z",
+    metaTitulo: "5 quoting mistakes that lose you sales",
+    metaDescripcion:
+      "Avoid the 5 most frequent mistakes in sales quotes. Learn how each one affects your sales and what to do to fix it.",
+    metaKeywords:
+      "quoting mistakes, losing sales, sales quotes, improve quotes, quote errors",
+    contenido: `
+<p>Preparing quotes is one of the most important (and most undervalued) activities in any small business. A good quote can be the nudge the client needs to say yes. A bad one can mean they don't even reply.</p>
+
+<p>After analysing hundreds of sales processes in small businesses, we've identified 5 recurring mistakes that directly affect closing sales. The good news is that they all have a fix.</p>
+
+<h2>Mistake 1: Taking too long to send the quote</h2>
+
+<h3>The problem</h3>
+
+<p>A potential client contacts you interested in your services. You tell them you'll send a quote. 24, 48 or even 72 hours go by before they receive it. By then, they've already requested quotes from two competitors and probably made a decision.</p>
+
+<p>According to a Harvard Business Review study, companies that respond to a lead within the first hour are <strong>7 times more likely</strong> to qualify the prospect than those that respond after an hour. Speed matters — a lot.</p>
+
+<h3>The fix</h3>
+
+<p>Automate quote creation so you can send quotes in minutes, not days. Having a digital catalogue with up-to-date prices and predefined templates lets you generate a professional quote while you're still on the call with the client.</p>
+
+<p>Check out our <a href="/en/resources">free resources</a> to learn how to optimise your quoting process step by step.</p>
+
+<h2>Mistake 2: Generic quotes with no personalisation</h2>
+
+<h3>The problem</h3>
+
+<p>Sending the same quote to every client, only changing the name, is a mistake many small businesses make without realising. The client senses you haven't given them attention, that they're "just another one" and that you haven't understood their specific needs.</p>
+
+<p>A generic quote says: "Here are our prices". A personalised quote says: "I've listened to what you need and this is my proposal for your specific situation".</p>
+
+<h3>The fix</h3>
+
+<p>Personalise each quote with:</p>
+
+<ul>
+  <li>An <strong>introductory note</strong> that references the previous conversation or meeting.</li>
+  <li><strong>Products or services relevant</strong> to the needs the client expressed (not your whole catalogue).</li>
+  <li><strong>Package options</strong> adapted to their budget or scale.</li>
+  <li>The <strong>client's name</strong> and their company details spelled correctly.</li>
+</ul>
+
+<p>Personalisation doesn't have to take more time if you have the right tools. A system with modular templates lets you create personalised quotes in minutes.</p>
+
+<h2>Mistake 3: A lack of clarity on prices and terms</h2>
+
+<h3>The problem</h3>
+
+<p>Have you ever received a quote where it's unclear whether tax is included, what the payment method is or how long the offer is valid? Ambiguity creates distrust, and distrust kills sales.</p>
+
+<p>Clients want to know exactly how much they're going to pay and under what terms. If they have to ask you to clarify something that should be in the document, you've lost points.</p>
+
+<h3>The fix</h3>
+
+<p>Every quote should clearly and visibly include:</p>
+
+<ul>
+  <li><strong>Detailed breakdown:</strong> Unit price, quantity, line subtotal.</li>
+  <li><strong>Taxes:</strong> VAT or other applicable taxes, clearly separated.</li>
+  <li><strong>Final total:</strong> What the client will actually pay, no surprises.</li>
+  <li><strong>Validity:</strong> The date until which prices hold (usually 15-30 days).</li>
+  <li><strong>Payment terms:</strong> Deadlines, accepted methods, possible early-payment discounts.</li>
+  <li><strong>Delivery times:</strong> When they'll receive the product or service.</li>
+</ul>
+
+<p>Transparency doesn't just avoid misunderstandings; it also speeds up the client's decision-making.</p>
+
+<h2>Mistake 4: Sloppy, unprofessional presentation</h2>
+
+<h3>The problem</h3>
+
+<p>Your quote is a reflection of your company. If you send a document with different fonts, no logo, inconsistent colours or a format that looks different on every device, you're communicating disorganisation.</p>
+
+<p>No matter how good your product or service is; if the quote doesn't convey professionalism, the client will wonder whether the rest of your work is just as careless. The first visual impression counts more than we think.</p>
+
+<h3>The fix</h3>
+
+<p>Invest time (once) in creating a professional template that includes:</p>
+
+<ul>
+  <li><strong>Your logo</strong> in a prominent place.</li>
+  <li><strong>Consistent brand colours</strong> throughout the document.</li>
+  <li><strong>Legible typography</strong> and a clear visual hierarchy.</li>
+  <li><strong>An orderly structure:</strong> Header, body with the breakdown, terms and footer.</li>
+  <li><strong>PDF format:</strong> Never send quotes in editable formats like .docx or .xlsx.</li>
+</ul>
+
+<p>Once you have the template, every new quote keeps the same visual quality with no extra effort.</p>
+
+<h2>Mistake 5: No follow-up after sending</h2>
+
+<h3>The problem</h3>
+
+<p>This is perhaps the most costly mistake and the easiest to make. You send a perfect quote — well designed, personalised and on time... and then you sit back and wait. Days go by with no reply and you don't contact the client again.</p>
+
+<p>The reality is that clients are busy. They may have seen your quote, found it interesting, but an urgent meeting distracted them and they forgot. Without proactive follow-up on your part, that sale cools off until it disappears.</p>
+
+<h3>The fix</h3>
+
+<p>Set up a systematic follow-up process:</p>
+
+<ol>
+  <li><strong>Day 1:</strong> Send the quote with a short, professional message.</li>
+  <li><strong>Day 2-3:</strong> If you haven't had a reply, send a follow-up email asking whether they have any questions.</li>
+  <li><strong>Day 7:</strong> Make a brief call. Sometimes a 2-minute conversation closes what an email can't.</li>
+  <li><strong>Day 14:</strong> Final follow-up before the quote expires. Create urgency naturally: "Just a reminder that this quote is valid until Friday".</li>
+</ol>
+
+<p>Modern CPQ tools let you know when the client has opened the quote, which helps you pick the perfect moment to follow up.</p>
+
+<h2>The cumulative impact of these mistakes</h2>
+
+<p>Each of these mistakes, on its own, can cost you the occasional sale. But when they combine, the impact is devastating. Picture this scenario:</p>
+
+<p>An interested client asks you for a quote. You take two days to send it (Mistake 1). When you send it, it's a generic template (Mistake 2) with confusing prices (Mistake 3) and sloppy formatting (Mistake 4). The client, unimpressed, leaves it in their inbox. You never follow up (Mistake 5). Sale lost.</p>
+
+<p>Now picture the opposite: you send the quote in 10 minutes, personalised for the client, with clear prices, professional design, and you follow up the next day. Your chances of closing multiply.</p>
+
+<h2>How DealForge helps you avoid these 5 mistakes</h2>
+
+<p>We designed DealForge with exactly these problems in mind:</p>
+
+<ul>
+  <li><strong>Speed:</strong> Generate quotes in minutes, not hours, thanks to your digital catalogue and predefined templates.</li>
+  <li><strong>Personalisation:</strong> Each quote adapts to the client with notes, specific products and package options.</li>
+  <li><strong>Clarity:</strong> Automatic calculation of prices, taxes and totals. No errors, no ambiguity.</li>
+  <li><strong>Professionalism:</strong> PDFs with your branding, consistent formatting and clean design on every document.</li>
+  <li><strong>Follow-up:</strong> Notifications when the client opens your quote so you know when to get in touch.</li>
+</ul>
+
+<blockquote>
+  <p>Don't lose any more sales to avoidable mistakes. The quoting process is far too important to leave to chance.</p>
+</blockquote>
+
+<p><strong>Start quoting better today:</strong> <a href="/registro?lang=en">Sign up free at DealForge</a> and remove these 5 mistakes from your sales process from day one.</p>
+`.trim(),
+  },
+
+  // ─── 4. CPQ vs CRM: differences and when you need each ───
+  {
+    slug: "cpq-vs-crm-differences",
+    titulo: "CPQ vs CRM: differences and when you need each",
+    extracto:
+      "Understand the key differences between a CPQ and a CRM, how they complement each other, and which one your small business needs as it grows.",
+    categoria: "cpq",
+    tags: ["cpq", "crm", "comparison", "sales", "tools"],
+    autor: "DealForge",
+    publishedAt: "2026-03-23T11:00:00Z",
+    metaTitulo: "CPQ vs CRM: differences and when you need each",
+    metaDescripcion:
+      "Compare CPQ and CRM: what each one does, how they differ and how to decide which your small business needs. A complete guide with practical examples.",
+    metaKeywords:
+      "cpq vs crm, cpq crm differences, crm for small business, cpq or crm, sales tools",
+    contenido: `
+<p>If you're looking for tools to improve your sales process, you've surely come across two acronyms that appear constantly: <strong>CRM</strong> and <strong>CPQ</strong>. Both are sales tools, both promise to improve your efficiency and both seem to do "something with clients and quotes". But they are very different.</p>
+
+<p>In this article we explain what each one does, how they differ and, most importantly, when you need one, the other or both.</p>
+
+<h2>What a CRM is</h2>
+
+<p>CRM stands for <strong>Customer Relationship Management</strong>. A CRM is a tool that helps you organise and manage your interactions with clients and prospects throughout the entire sales cycle.</p>
+
+<p>The main functions of a CRM include:</p>
+
+<ul>
+  <li><strong>Contact management:</strong> A centralised database of clients, prospects and companies.</li>
+  <li><strong>Sales pipeline:</strong> A view of the sales funnel with opportunities at each stage.</li>
+  <li><strong>Interaction history:</strong> A record of calls, emails, meetings and notes with each contact.</li>
+  <li><strong>Task tracking:</strong> Reminders and pending activities for the sales team.</li>
+  <li><strong>Reports and metrics:</strong> Data on conversion, sales cycle, team performance, etc.</li>
+</ul>
+
+<p>In short, a CRM tells you <strong>who</strong> your client is, <strong>where</strong> they are in the buying process and <strong>what interactions</strong> you've had with them.</p>
+
+<h2>What a CPQ is</h2>
+
+<p>CPQ stands for <strong>Configure, Price, Quote</strong>. As we explain in detail in our article <a href="/en/what-is-cpq">what a CPQ is</a>, it's a tool that automates the creation of quotes and estimates.</p>
+
+<p>The main functions of a CPQ include:</p>
+
+<ul>
+  <li><strong>Product catalogue:</strong> A database of products and services with prices, rules and options.</li>
+  <li><strong>Guided configuration:</strong> Product selection with business rules that prevent invalid combinations.</li>
+  <li><strong>Automatic price calculation:</strong> Discounts, margins, taxes and totals with no manual intervention.</li>
+  <li><strong>Document generation:</strong> Professional PDFs with your company branding, ready to send to the client.</li>
+  <li><strong>Approvals:</strong> Approval flows for discounts that exceed certain limits.</li>
+</ul>
+
+<p>In short, a CPQ tells you <strong>what</strong> you'll offer the client, at <strong>what price</strong>, and generates the <strong>document</strong> that formalises the proposal.</p>
+
+<h2>The fundamental difference</h2>
+
+<p>The simplest way to understand the difference is this:</p>
+
+<ul>
+  <li>The <strong>CRM</strong> manages the <strong>relationship</strong> with the client (who they are, what they want, when to talk to them).</li>
+  <li>The <strong>CPQ</strong> manages the <strong>offer</strong> for the client (what you offer, at what price, in which document).</li>
+</ul>
+
+<p>They are complementary tools, not substitutes. A CRM without a CPQ knows everything about the client but can't quickly generate a professional quote. A CPQ without a CRM generates excellent quotes but has no context about the client's history.</p>
+
+<h2>Detailed comparison</h2>
+
+<p>Let's look at the differences point by point for a clear picture:</p>
+
+<h3>Main focus</h3>
+<p>The CRM focuses on people and relationships. It records every touchpoint, every email, every call. Its goal is that you never lose the thread of a sales conversation. The CPQ, on the other hand, focuses on the product and the price. Its goal is that every quote is accurate, consistent and professional.</p>
+
+<h3>Point in the sales cycle</h3>
+<p>The CRM covers the whole cycle: from when a lead enters your radar until they become a client and beyond (after-sales, renewals, upselling). The CPQ kicks in at a specific moment: when you need to create a financial proposal for the client.</p>
+
+<h3>Main users</h3>
+<p>The CRM is used by the whole sales team, marketing and even support. The CPQ is used mainly by salespeople and, in small businesses, often by the director or founder themselves.</p>
+
+<h3>Key data it handles</h3>
+<p>The CRM handles contact data, interactions and history. The CPQ handles product catalogues, pricing rules and document templates.</p>
+
+<h2>When you need a CRM</h2>
+
+<p>A CRM is essential when:</p>
+
+<ul>
+  <li>Your sales team has more than 2-3 people and they need to share client information.</li>
+  <li>You manage a volume of leads that's impossible to track mentally or with notes.</li>
+  <li>You want to measure metrics like conversion rate, sales cycle or performance per salesperson.</li>
+  <li>You need to coordinate marketing and sales with a common database.</li>
+  <li>Your sales process involves multiple interactions over weeks or months.</li>
+</ul>
+
+<h2>When you need a CPQ</h2>
+
+<p>A CPQ becomes necessary when:</p>
+
+<ul>
+  <li>You send more than 5-10 quotes a week and the manual process takes up too much time.</li>
+  <li>Your catalogue has some complexity: multiple products, price variations or volume discounts.</li>
+  <li>You need all your salespeople to send quotes with the same format and the same pricing rules.</li>
+  <li>You've lost sales to pricing errors, badly calculated discounts or quotes that took too long.</li>
+  <li>You want to project a professional, consistent image in every sales proposal.</li>
+</ul>
+
+<h2>When you need both</h2>
+
+<p>The combination of CRM and CPQ is the most powerful. You need it when:</p>
+
+<ul>
+  <li>Your sales process is complex: you identify a lead (CRM), qualify it (CRM), prepare a proposal (CPQ), follow up (CRM) and close (both).</li>
+  <li>You want your salespeople to have the full client context when creating a quote.</li>
+  <li>You need reports that connect sales activity (CRM) with quoting results (CPQ).</li>
+</ul>
+
+<p>In an ideal flow, the salesperson sees in their CRM that a lead is ready to receive a proposal, opens the CPQ, generates the quote in minutes with the right products, sends it, and the CRM automatically records that activity.</p>
+
+<h2>The role of artificial intelligence</h2>
+
+<p>Both CRMs and CPQs are incorporating artificial intelligence to be even more useful. In the case of the CPQ, AI can:</p>
+
+<ul>
+  <li><strong>Suggest products:</strong> Based on what similar clients bought.</li>
+  <li><strong>Optimise prices:</strong> Recommending discounts that maximise the chance of closing without sacrificing margin.</li>
+  <li><strong>Detect errors:</strong> Spotting inconsistencies before the quote goes out.</li>
+  <li><strong>Write descriptions:</strong> Generating personalised text for each proposal.</li>
+</ul>
+
+<p>If you're interested in how AI is changing sales, you can explore the capabilities of <a href="/en/features">Forge AI</a>, our artificial intelligence assistant built into DealForge.</p>
+
+<h2>Which solution to choose by stage</h2>
+
+<p>Not all small businesses need the same thing at the same time. Here's a practical guide based on your situation:</p>
+
+<h3>You're starting out (1-3 people, few clients)</h3>
+<p>You can probably manage your contacts with a simple spreadsheet, but a CPQ will already save you time and improve your professional image. Start there.</p>
+
+<h3>You're growing (4-15 people, dozens of active clients)</h3>
+<p>You now need a CRM so you don't lose the thread of conversations. And a CPQ is almost essential if you send more than 10 quotes a week. It's time to have both.</p>
+
+<h3>You're established (15+ people, multiple salespeople)</h3>
+<p>Integrated CRM and CPQ are the norm. You need information to flow between both systems without friction. Look for solutions that offer native integrations.</p>
+
+<blockquote>
+  <p>The CRM tells you who to sell to. The CPQ helps you sell to them well. Together, they're the foundation of an efficient sales process.</p>
+</blockquote>
+
+<p><strong>Discover the CPQ designed for small businesses:</strong> <a href="/registro?lang=en">Try DealForge free</a> and complement your CRM with the quoting tool your sales team needs.</p>
+`.trim(),
+  },
+
+  // ─── 5. How AI is transforming small business sales ───
+  {
+    slug: "how-ai-is-transforming-small-business-sales",
+    titulo: "How AI is transforming small business sales",
+    extracto:
+      "Explore how artificial intelligence is changing the way small businesses sell: from lead generation to writing proposals.",
+    categoria: "ia",
+    tags: ["artificial intelligence", "sales", "small business", "automation", "productivity"],
+    autor: "DealForge",
+    publishedAt: "2026-03-26T09:30:00Z",
+    metaTitulo: "How AI is transforming small business sales",
+    metaDescripcion:
+      "Discover how small businesses are using artificial intelligence to sell faster, automate tasks and compete with large companies.",
+    metaKeywords:
+      "ai small business sales, artificial intelligence sales, sales automation, ai for small business",
+    contenido: `
+<p>Artificial intelligence is no longer science fiction or something reserved for tech giants with multi-million budgets. In the last two years, AI has become so democratised that a 5-person small business can access tools that until recently were only within reach of large corporations.</p>
+
+<p>But beyond the hype and exaggerated promises, there are concrete, practical uses of AI that are changing the way small businesses sell. In this article we look at the most relevant ones.</p>
+
+<h2>The current state of AI in sales</h2>
+
+<p>Before getting into practical cases, it's important to understand what AI can (and can't) do in a small-business sales context in 2026.</p>
+
+<p>Today's AI excels in three fundamental areas:</p>
+
+<ul>
+  <li><strong>Natural language processing:</strong> Understanding and generating text with near-human quality.</li>
+  <li><strong>Pattern analysis:</strong> Identifying trends in large volumes of data.</li>
+  <li><strong>Intelligent automation:</strong> Carrying out repetitive tasks with judgement, not just fixed rules.</li>
+</ul>
+
+<p>What AI still doesn't do well is replace human relationships, understand a client's emotions or make complex strategic decisions. And that's precisely what makes the human sales team valuable.</p>
+
+<h2>5 practical AI applications in sales for small businesses</h2>
+
+<h3>1. Automatic writing of proposals and quotes</h3>
+
+<p>This is perhaps the most immediate application with the greatest return for a small business. AI can help you write product descriptions, personalised notes for clients and accompanying text for your quotes.</p>
+
+<p>Instead of writing from scratch every time you prepare a proposal, the AI analyses the client context and generates a draft you can review and adjust in seconds. The result is a quote that sounds personalised without requiring 30 minutes of writing.</p>
+
+<p>In <a href="/en/features">Forge AI</a>, our assistant built into DealForge, we've implemented exactly this: the system suggests descriptions, adjusts the tone to the type of client and generates accompanying text you can approve with one click.</p>
+
+<h3>2. Intelligent lead qualification</h3>
+
+<p>Not all leads have the same potential. AI can analyse the available data about a prospect (sector, company size, previous interactions, behaviour on your website) and assign them a close-probability score.</p>
+
+<p>For a small business with limited resources, this is especially valuable. Instead of devoting the same time to every lead, you can concentrate your efforts on those most likely to become clients. It's not about ignoring anyone, but about prioritising intelligently.</p>
+
+<h3>3. Predictive sales analysis</h3>
+
+<p>AI can analyse your sales history and spot patterns the human eye would struggle to see:</p>
+
+<ul>
+  <li>Which products sell best at certain times of year.</li>
+  <li>How long, on average, a lead takes to convert depending on its source.</li>
+  <li>Which type of discount has the greatest impact on closing without overly hurting the margin.</li>
+  <li>Which of your quotes are accepted and which are rejected, and why.</li>
+</ul>
+
+<p>This information lets you make decisions based on data, not intuition. And in a small-business environment where every pound and every hour counts, that makes a significant difference.</p>
+
+<h3>4. Automation of sales follow-up</h3>
+
+<p>One of the biggest problems in sales is follow-up. You know you should call that client who asked for a quote a week ago, but between meetings, admin tasks and other priorities, you forget.</p>
+
+<p>AI can automate part of this process:</p>
+
+<ul>
+  <li><strong>Automatic follow-up emails:</strong> Written in a natural tone, personalised to the context and sent at the optimal time.</li>
+  <li><strong>Smart alerts:</strong> Notifications when a client opens your quote or when they've gone X days without replying.</li>
+  <li><strong>Next-action suggestions:</strong> Based on the history, the AI suggests whether it's better to call, send an email or wait.</li>
+</ul>
+
+<h3>5. Conversational assistant for the sales team</h3>
+
+<p>Imagine being able to ask an assistant: "What are this week's 5 pending quotes with the highest value" or "Which client hasn't bought in the last 3 months" and getting an immediate answer without having to navigate tables and filters.</p>
+
+<p>AI assistants built into sales tools let salespeople interact with their data naturally, saving time and reducing friction with technology. This is especially useful for teams that aren't technical.</p>
+
+<h2>What AI won't replace</h2>
+
+<p>It's important to be honest about the limitations. AI is a tool, not a replacement for the human team. These are the areas where the human factor remains irreplaceable:</p>
+
+<ul>
+  <li><strong>Complex negotiation:</strong> Important negotiations require empathy, reading non-verbal language and real-time adaptation that AI can't offer.</li>
+  <li><strong>Relationships of trust:</strong> Clients buy from people, not algorithms. The personal relationship is still the main driver of B2B sales.</li>
+  <li><strong>Sales strategy:</strong> Deciding which market to enter, which product to launch or how to position yourself requires an understanding of context that goes beyond data analysis.</li>
+  <li><strong>Creative problem-solving:</strong> When a client has an atypical need, it's the human who finds the creative solution.</li>
+</ul>
+
+<p>The key is to use AI to remove repetitive work and free up time for these high-value activities.</p>
+
+<h2>How to start using AI in your sales process</h2>
+
+<p>If you're a small business wanting to start taking advantage of AI in sales, here are some practical steps:</p>
+
+<h3>Step 1: Identify the repetitive tasks</h3>
+
+<p>Make a list of the activities that consume the most time in your sales process. Usually they'll be: creating quotes, writing follow-up emails, looking up client information and updating the CRM.</p>
+
+<h3>Step 2: Start with a single tool</h3>
+
+<p>Don't try to implement AI in everything at once. Choose the task that consumes the most time and find a tool that automates it. If it's quote creation, a CPQ with built-in AI is the ideal starting point.</p>
+
+<h3>Step 3: Measure the impact</h3>
+
+<p>Before implementing, measure how much time you currently spend on that task. After implementing, measure again. Comparing the before and after is the best way to confirm the value.</p>
+
+<h3>Step 4: Scale gradually</h3>
+
+<p>Once you've confirmed the value of the first tool, add more. Gradual adoption is more sustainable and creates less resistance in the team.</p>
+
+<h2>The near future: what to expect</h2>
+
+<p>AI in sales is evolving rapidly. Some trends we'll see take hold over the coming months:</p>
+
+<ul>
+  <li><strong>Multimodal AI:</strong> Tools that understand text, voice and images to offer more complete assistance.</li>
+  <li><strong>Personalisation at scale:</strong> Each client will receive communications and offers genuinely tailored to their context, with no manual effort.</li>
+  <li><strong>Automation of complete flows:</strong> From detecting a lead to sending the quote, with minimal human intervention.</li>
+  <li><strong>Local and private AI:</strong> Models that run on your own infrastructure, without sending client data to third parties.</li>
+</ul>
+
+<p>Small businesses that start adopting these tools now will have a significant competitive advantage over those that wait.</p>
+
+<blockquote>
+  <p>AI doesn't replace the salesperson; it empowers them. It takes away the boring tasks and gives them more time for what they do best: connecting with people and closing sales.</p>
+</blockquote>
+
+<p><strong>Try AI applied to sales:</strong> <a href="/registro?lang=en">Create your free DealForge account</a> and discover how Forge AI can help you quote faster, personalise better and sell more.</p>
+`.trim(),
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
