@@ -2065,6 +2065,237 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p><strong>Want to simplify the whole process?</strong> With <a href="/registro?lang=en">DealForge</a> you can generate professional quotes in minutes, send them as a link or PDF, and see in real time when they're opened. Start free, no credit card required.</p>`,
   },
+  // ─── 14. Construction & renovation quotes ───
+  {
+    slug: "construction-renovation-quotes-guide",
+    titulo: "How to create construction and renovation quotes that win jobs",
+    extracto:
+      "Learn to create professional construction and renovation estimates: chapters, line items, materials, labour, VAT and how to avoid the mistakes that lose jobs.",
+    categoria: "guias",
+    tags: ["construction quotes", "renovation estimates", "building estimate", "renovations", "construction", "small business", "estimate line items", "VAT"],
+    autor: "DealForge",
+    publishedAt: "2026-05-04T09:00:00Z",
+    metaTitulo: "How to create construction and renovation quotes | Guide 2026 — DealForge",
+    metaDescripcion:
+      "A complete guide to quoting building works and renovations: chapter structure, VAT, margin calculation and the mistakes that lose jobs. For small businesses in the sector.",
+    metaKeywords:
+      "construction quotes, renovation estimate, building estimate, how to quote renovations, renovation VAT, construction estimate line items, renovation quoting software, building quote template",
+    contenido: `<p>In construction and renovations, <strong>the quote is the sale</strong>. Before a single brick is laid, before you talk about timelines or materials, the client has already made their decision by reading your quote. And if that quote looks confusing, incomplete or unprofessional, they go with the next one.</p>
+
+<p>This article is written for construction firms, renovators, installers and tradespeople who want to quote better, win more jobs and have fewer problems with clients during the works.</p>
+
+<h2>Why construction quotes are different</h2>
+
+<p>A consulting or marketing quote is, by comparison, simple: you describe the service, set the price and you're done. Construction and renovation quotes are a completely different animal for three reasons:</p>
+
+<ul>
+<li><strong>The technical complexity is high.</strong> A full home renovation can involve civil works, plumbing, electrics, joinery, painting and even architecture. Each line item has its own pricing logic.</li>
+<li><strong>Unforeseen issues are part of the business.</strong> Opening a wall and finding non-compliant installations, or discovering hidden damp, are situations the quote should account for (or at least not ignore).</li>
+<li><strong>The client isn't an expert.</strong> Your client doesn't know the difference between a premium porcelain tile and a second-grade one. If you don't explain what you include and what you don't, misunderstandings are guaranteed.</li>
+</ul>
+
+<p>A well-made construction quote isn't just a price list. It's a document that manages expectations, protects your margin and drastically reduces conflicts during the works.</p>
+
+<h2>The structure of a professional construction quote</h2>
+
+<p>The industry standard organises quotes by <strong>chapters and line items</strong>. Here's how it works:</p>
+
+<h3>Chapters</h3>
+<p>They group line items by type of work. For example:</p>
+<ul>
+<li>Chapter 01 — Demolition and structural work</li>
+<li>Chapter 02 — Electrical installation</li>
+<li>Chapter 03 — Plumbing and drainage</li>
+<li>Chapter 04 — Finishes and surfaces</li>
+<li>Chapter 05 — Interior joinery</li>
+<li>Chapter 06 — Painting</li>
+</ul>
+
+<p>This structure lets the client see at a glance where the money goes, and lets you control the profitability of each phase of the project.</p>
+
+<h3>Line items</h3>
+<p>Each line item describes a specific unit of work. A well-written line item includes:</p>
+
+<ul>
+<li><strong>Technical description:</strong> exactly what's done (e.g. "Bathroom tiling with rectified 60x60 cm porcelain, including adhesive, levelling and joint sealing")</li>
+<li><strong>Unit of measure:</strong> m², linear m, unit, hour, etc.</li>
+<li><strong>Quantity:</strong> the real project measurements</li>
+<li><strong>Unit price:</strong> per that unit of measure</li>
+<li><strong>Line total:</strong> quantity × unit price</li>
+</ul>
+
+<p>The level of detail in the line items is what separates a professional estimator from an amateur. Being vague is expensive: if you put "full bathroom renovation — £3,500" with no breakdown, the client will assume that includes everything, including what you weren't going to do.</p>
+
+<h2>The 8 things that can't be missing from your renovation quote</h2>
+
+<h3>1. Complete details of both parties</h3>
+<p>Your company with its tax number, the client's company or name with their tax number, the site address and contact details for both. It sounds basic, but many renovation quotes don't even include the address where the work will be carried out.</p>
+
+<h3>2. Date and quote number</h3>
+<p>You need to reference each quote uniquely. When you talk on the phone three weeks later, you both need to know which document you're discussing. Use a system like QUO-2026-0042.</p>
+
+<h3>3. Description of the scope of works</h3>
+<p>Before getting into the chapter breakdown, include an introductory paragraph explaining what the quote covers. For example: "This quote comprises the full renovation of the main bathroom at the property located at [address], including demolition, installation, surfaces and finishes per the specifications agreed during the visit on [date]."</p>
+
+<h3>4. Breakdown by chapters and line items</h3>
+<p>The core of the quote. The more detailed, the better protected you are. If a job doesn't appear in the quote and the client claims it, you have a problem. If it appears and you can point to it, you don't.</p>
+
+<h3>5. Materials included (and excluded)</h3>
+<p>Always specify whether materials are included or are the client's responsibility. If included, state the quality or reference (e.g. "matt porcelain stoneware tile, first quality, price ≤ £30/m²"). If the client wants to swap it for something more expensive, it's an extra.</p>
+
+<h3>6. What is NOT included</h3>
+<p>An exclusions section is pure gold. Explicitly include what's out of scope: moving furniture, waste removal if not contemplated, work that depends on third parties, building permits if applicable. This avoids the classic "but wasn't that in the quote?"</p>
+
+<h3>7. Financial terms and payment method</h3>
+<p>The payment schedule is critical in construction. The norm is:</p>
+<ul>
+<li>30-40% on signing the quote or at the start of works</li>
+<li>30-40% at an intermediate stage (when a certain progress is reached)</li>
+<li>The rest on completion and handover</li>
+</ul>
+<p>Never start a job without at least the first payment received. And put it in the contract, not just the quote.</p>
+
+<h3>8. Completion time and quote validity</h3>
+<p>State the estimated time in working days (not calendar days, unless you work non-stop) and the quote's validity date. Material prices in construction fluctuate. A quote with no expiry date can become a problem if the client accepts it 6 months later with different material prices.</p>
+
+<h2>VAT on renovations: the detail many forget</h2>
+
+<p>Construction and renovation works don't always carry the standard VAT rate. In many countries there's a reduced rate for certain home renovations and improvements, subject to specific conditions (type of property, age of the building, the proportion of materials versus labour, accessibility works, and so on).</p>
+
+<p>Before preparing your quote, confirm the VAT rate that applies in your country and to your specific job. Applying the standard rate where a reduced one applies can lose you the job on price. And applying a reduced rate where the standard one applies can land you in trouble with the tax authority.</p>
+
+<p><em>Practical tip:</em> where a reduced rate depends on the client's circumstances (for example, that the property is their main residence), keep written evidence on file to protect you in case of an inspection. If in doubt, check with your accountant.</p>
+
+<h2>How to calculate the price of a renovation line item</h2>
+
+<p>The most common mistake of novice renovators is to calculate the price as "materials + labour + a bit more". That isn't a margin, that's hoping it works out. The correct formula is:</p>
+
+<h3>Direct cost</h3>
+<ul>
+<li>Materials (purchase price + transport + estimated 5-10% wastage)</li>
+<li>Labour (hours × the real cost of the operative, including employer's contributions)</li>
+<li>Subcontractors (if you outsource part of the work)</li>
+<li>Ancillary means (scaffolding, specific tools, skip hire)</li>
+</ul>
+
+<h3>Indirect costs</h3>
+<p>The costs that aren't tied to a specific job but that exist: public liability insurance, vehicle, accountancy, machinery depreciation, the cost of your own quoting time. In renovations, this is usually estimated at 15-20% of the direct costs.</p>
+
+<h3>Commercial margin</h3>
+<p>The real profit you want from the job. Remember that the margin is calculated on the selling price, not on the cost. If you want a 20% margin, the multiplier on the cost is 1.25 (not 1.20).</p>
+
+<p>Formula: <strong>Selling price = Total cost / (1 − desired margin)</strong></p>
+
+<p>Example: if the total cost of a line item is £800 and you want a 25% margin, the selling price is 800 / 0.75 = £1,067.</p>
+
+<h2>The most expensive mistakes when quoting renovations</h2>
+
+<h3>Mistake 1: Measuring badly or not measuring</h3>
+<p>Don't quote from memory or "by eye". Visit the site, measure personally or with a laser device. A 10% difference in square metres of tiling can mean hundreds of pounds between the real cost and what you quoted.</p>
+
+<h3>Mistake 2: Not allowing for unforeseen issues</h3>
+<p>In old buildings, especially those over 30 years old, unforeseen issues are the norm. Include a "contingencies" line of between 5% and 10% of the total, clearly explained to the client. It's better to justify it upfront than to argue over it during the job.</p>
+
+<h3>Mistake 3: Not specifying the quality</h3>
+<p>"Aluminium window with double glazing" can be anything from £150 to £800 per unit. If you don't specify the quality and the client expects the most expensive, you have a problem. State the product reference or a maximum material price.</p>
+
+<h3>Mistake 4: Accepting verbal changes with no additional cost</h3>
+<p>The client asks for changes during the job. It's inevitable. But every change that isn't documented and doesn't generate a signed additional quote is work you'll do for free. Set out a clear protocol in your quote: any change to the scope is handled via an additional quote before it's carried out.</p>
+
+<h3>Mistake 5: Quoting too late</h3>
+<p>In renovations, speed matters. If a client requests three quotes and you take ten days while the others respond in 48 hours, you've already lost, regardless of price. Response speed conveys operational capability.</p>
+
+<h2>Structure template for a renovation quote</h2>
+
+<p>Here's an example structure for a bathroom renovation you can adapt:</p>
+
+<p><strong>CHAPTER 01 — DEMOLITION</strong></p>
+<ul>
+<li>01.01 Demolition of existing tiling (m²)</li>
+<li>01.02 Demolition of existing flooring (m²)</li>
+<li>01.03 Removal and transport of rubble (unit)</li>
+</ul>
+
+<p><strong>CHAPTER 02 — INSTALLATIONS</strong></p>
+<ul>
+<li>02.01 Plumbing installation (PEX pipes, connections) (unit)</li>
+<li>02.02 Replacement of radiator with electric towel rail (unit)</li>
+<li>02.03 Bathroom consumer-unit upgrade (unit)</li>
+</ul>
+
+<p><strong>CHAPTER 03 — SURFACES</strong></p>
+<ul>
+<li>03.01 Wall tiling with rectified 60x120 porcelain (m²)</li>
+<li>03.02 Anti-slip 60x60 stoneware flooring (m²)</li>
+</ul>
+
+<p><strong>CHAPTER 04 — SANITARYWARE AND FITTINGS</strong></p>
+<ul>
+<li>04.01 Supply and installation of wall-hung toilet (unit)</li>
+<li>04.02 Supply and installation of double basin (unit)</li>
+<li>04.03 Supply and installation of walk-in shower (unit)</li>
+</ul>
+
+<p><strong>CHAPTER 05 — JOINERY</strong></p>
+<ul>
+<li>05.01 Supply and installation of white lacquered door (unit)</li>
+</ul>
+
+<p><strong>CHAPTER SUMMARY</strong></p>
+<ul>
+<li>01 Demolition: £XX</li>
+<li>02 Installations: £XX</li>
+<li>03 Surfaces: £XX</li>
+<li>04 Sanitaryware: £XX</li>
+<li>05 Joinery: £XX</li>
+<li>SUBTOTAL: £XX</li>
+<li>VAT: £XX</li>
+<li><strong>TOTAL: £XX</strong></li>
+</ul>
+
+<h2>How to manage changes during the job</h2>
+
+<p>"Extras" are the main source of conflict in the sector. The client asks for something that wasn't in the quote, you do it assuming they'll pay, and at the end of the project there's an argument. This is avoided with a clear process:</p>
+
+<ol>
+<li><strong>Don't carry out any change without a signed document.</strong> However small the extra work, generate a numbered additional quote and get a signature before starting.</li>
+<li><strong>Record measurement variations.</strong> If during the works you find there's more surface than expected, communicate it in writing immediately, not at the end of the job.</li>
+<li><strong>Document unforeseen issues with photos.</strong> When a surprise appears behind a wall, take photos before acting. That evidence is what will justify the additional cost to the client.</li>
+</ol>
+
+<h2>Tools to quote faster</h2>
+
+<p>Most renovators still use Excel or Word templates for their quotes. It works, but it has clear limits:</p>
+
+<ul>
+<li>Copying and pasting between projects introduces errors</li>
+<li>Keeping an up-to-date price database is tedious</li>
+<li>Generating the final PDF and sending it by email are extra manual steps</li>
+<li>There's no way to know whether the client opened the quote</li>
+</ul>
+
+<p>Quoting software like <strong>DealForge</strong> lets you keep your catalogue of line items with up-to-date prices, build quotes by dragging in items and generating the PDF with your logo in minutes. You can see in real time whether the client has opened the quote, and manage the whole sales process from one platform.</p>
+
+<p>For companies that do more than 10-15 quotes a month, the time saved with a good tool pays for the subscription many times over in the first week.</p>
+
+<h2>Final tips to win more jobs with your quotes</h2>
+
+<p><strong>Present the quote in person whenever you can.</strong> A quote that arrives in a cold email has a much lower conversion rate than one you present, explaining the technical decisions you made. The client pays for your judgement, not just your labour.</p>
+
+<p><strong>Back up the quote with references to similar jobs.</strong> Include a link to your website or two or three photos of similar renovations you've done. Uncertainty is the biggest enemy of the buying decision.</p>
+
+<p><strong>The cheapest doesn't always win.</strong> In renovations, many clients have learned the hard way that the lowest quote is usually the most expensive in the end. If your price is higher, justify it with material quality, warranties, a realistic completion time and the professionalism of the team.</p>
+
+<p><strong>Follow up at 3 and 7 days.</strong> Most jobs are decided in the first week. A calm follow-up call or message ("Have you had a chance to review the quote?") can make the difference between winning or losing the job to a competitor.</p>
+
+<h2>Conclusion</h2>
+
+<p>A well-made construction or renovation quote is much more than a price list. It's the tool with which you manage the client's expectations, protect your margin, reduce conflicts during the works and convey the professionalism that justifies your price.</p>
+
+<p>Apply the chapter-and-line-item structure, always specify qualities and exclusions, apply the correct VAT and establish a clear process for managing scope changes. With those principles well embedded, you'll win more jobs and have far fewer headaches on the ones you carry out.</p>
+
+<p><strong>Want to create renovation quotes in minutes, with the line-item breakdown and a professional PDF included?</strong> Try <a href="/registro?lang=en">DealForge</a> free and start quoting like a big company, even if you're a sole trader or a small business.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
