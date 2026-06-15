@@ -2547,6 +2547,1021 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 
 <p><strong>Want to create marketing quotes in minutes, with your service catalogue and a professional PDF included?</strong> Try <a href="/registro?lang=en">DealForge</a> free and start closing more contracts with less time spent on sales admin.</p>`,
   },
+  {
+    slug: "graphic-design-quotes-charge-what-youre-worth",
+    titulo: "Graphic design quotes: how to charge what you're worth (and get a yes)",
+    extracto: "Most graphic designers charge less than they should. This practical guide shows you how to structure design quotes that justify your price, reduce haggling and protect your margin.",
+    contenido: `<p>There's a scene that plays out constantly in the graphic design world. The client asks for a quote. You spend two days working out hours, materials and margin. You send a figure that feels fair. The client replies: <em>&ldquo;That's a lot, can't you do it for half?&rdquo;</em>. And you, afraid of losing the project, accept.</p>
+
+<p>If this sounds familiar, the problem isn't your price. It's how you're presenting and justifying it. A <strong>well-structured graphic design quote</strong> doesn't just state a cost — it sells the value of what you offer before the client sees any work.</p>
+
+<p>In this guide we'll look at exactly how to do that.</p>
+
+<h2>Why do designers charge less than they should?</h2>
+
+<p>It's not a lack of talent or experience. It's pricing psychology mixed with fear of rejection. The most common reasons:</p>
+
+<ul>
+<li><strong>They miscalculate their real costs.</strong> Many designers only count visible working hours (designing the piece), ignoring time spent on briefing, revisions, meetings, file exports and client management. If you spend 8 hours on a project but 12 in total, you're giving away 33% of your time.</li>
+<li><strong>They're afraid of losing the client.</strong> A scarcity mindset leads you to accept any price for fear the client will go to someone cheaper. The result: you end up working for clients who don't value your work and who will always want more for less.</li>
+<li><strong>They don't know how to present the price.</strong> Sending a number with no context is the easiest way to invite haggling. A price with no justification is just a number the client will try to reduce.</li>
+</ul>
+
+<p>The solution to all three problems is the same: a <strong>well-structured professional quote</strong>.</p>
+
+<h2>The 4 pricing models in graphic design</h2>
+
+<p>Before talking about how to structure the quote, you need to be clear on which pricing model you're working with. Not all of them work the same in every situation.</p>
+
+<h3>1. Hourly rate</h3>
+
+<p>The most traditional and the one that causes the most problems. You charge an hourly rate (for example, £60/hour) and bill according to time spent. The problem: the faster and more efficient you are, the less you earn. You punish your own productivity.</p>
+
+<p><strong>When it makes sense:</strong> on projects with very uncertain scope, brand consultancy, audits or maintenance work where it's impossible to estimate time in advance.</p>
+
+<h3>2. Fixed price per project</h3>
+
+<p>You define a fixed price for a specific deliverable. For example: &ldquo;Logo design with 3 concepts and 2 rounds of revisions: £800&rdquo;. The client knows exactly what they're paying. You know exactly what you're delivering.</p>
+
+<p><strong>When it makes sense:</strong> on most design projects with a defined scope (logos, branding, marketing materials, packaging, etc.). It's the model I most recommend for designers starting to professionalise their process.</p>
+
+<h3>3. Monthly retainer</h3>
+
+<p>The client pays a fixed amount per month in exchange for a guaranteed number of hours or deliverables. For example: &ldquo;10 social media design pieces per month: £600/month&rdquo;.</p>
+
+<p><strong>When it makes sense:</strong> with recurring clients who have ongoing design needs. It's the most predictable model and ideal for the financial stability of your studio or freelance business.</p>
+
+<h3>4. Value-based pricing</h3>
+
+<p>The most advanced and the one that generates the most money. Instead of calculating how long you take, you calculate how much the result is worth to the client. If you redesign the packaging of a product that sells £500,000 a year and the new design improves sales by 10%, your work is worth far more than 50 hours at £60/hour.</p>
+
+<p><strong>When it makes sense:</strong> when you have demonstrable experience, can measure the impact of your work and work with companies that understand the ROI of design. Don't try to apply it from day one — it requires credibility and case studies.</p>
+
+<h2>How to calculate your base rate (without selling yourself short)</h2>
+
+<p>If you use hourly or project pricing, you need a base rate that covers all your costs and leaves you a real margin. Here's the honest calculation many people avoid doing:</p>
+
+<ol>
+<li><strong>Fixed monthly costs:</strong> rent (or a proportional share if you work from home), software (Adobe CC, Figma, etc.), amortised hardware, insurance, accountant, marketing and training. Add it all up.</li>
+<li><strong>Real billable hours:</strong> of the 8 hours you work a day, how many are actually billable? Subtract meetings, admin tasks, training, your own marketing and unproductive time. The reality for most freelancers is between 4 and 6 billable hours a day.</li>
+<li><strong>Desired profit:</strong> how much do you want to earn per month net, after paying all your costs and taxes? Be realistic and ambitious at the same time.</li>
+</ol>
+
+<p>With those three numbers you can calculate your minimum hourly rate. If your fixed costs are £1,500/month, you want to earn £3,000/month and you have 100 billable hours a month, your minimum rate is £45/hour. And that's the <em>minimum</em>, not the price you should charge.</p>
+
+<h2>What a professional graphic design quote must include</h2>
+
+<p>A well-made design quote has several layers. Each one serves a specific purpose:</p>
+
+<h3>Identification details</h3>
+<p>Your name or business name, company/VAT number, contact details, your studio logo. And the client's full details. It sounds basic, but there are designers who send quotes as if they were informal emails. A quote is a legal document — treat it like one.</p>
+
+<h3>Reference number and date</h3>
+<p>A consecutive numbering system (DG-2026-047) and the issue date. This makes tracking easier and positions you as someone organised. The expiry date is just as important — a quote with no expiry is an invitation for the client to call you six months later expecting the same price.</p>
+
+<h3>Project description (the summarised brief)</h3>
+<p>Before the prices, include a paragraph summarising your understanding of the project. &ldquo;Complete visual identity design for an organic food startup, including logo, colour palette, typography, brand guidelines and applications on business cards and corporate stationery.&rdquo;</p>
+
+<p>This section has two functions: it confirms you've understood what the client needs and it establishes the scope. Anything not here isn't included in the price.</p>
+
+<h3>Breakdown of deliverables with line-by-line pricing</h3>
+<p>This is the heart of the quote. Don't put a single overall price. Break down each deliverable with its description and individual price:</p>
+
+<ul>
+<li>Logo design (3 concepts + 2 rounds of revisions)</li>
+<li>Colour system and corporate typography</li>
+<li>Visual identity guidelines (PDF, 20 pages)</li>
+<li>Business card application (design, not printing)</li>
+<li>Email signature templates</li>
+</ul>
+
+<p>The breakdown serves several key functions. First, it justifies the total price — when the client sees 8 lines of deliverables, the final number seems reasonable. Second, it protects your scope: if the client wants to add something not on the list, you have a contractual basis to charge separately. Third, if the client has a limited budget, they can prioritise which deliverables they need first.</p>
+
+<h3>Included revisions and additional changes policy</h3>
+<p>This is the point most designers ignore and the one that costs them the most money. Clearly define how many rounds of revisions each deliverable includes and what happens when the client exceeds that limit.</p>
+
+<p>A typical wording: <em>&ldquo;The price includes 2 rounds of revisions per deliverable. Additional revisions will be billed at £45/hour. A revision is a consolidated list of changes per round, not successive individual changes.&rdquo;</em></p>
+
+<p>This paragraph, clear and unambiguous, eliminates the most expensive misunderstandings in graphic design.</p>
+
+<h3>Delivery timelines</h3>
+<p>State when you'll deliver each milestone. Don't use absolute dates if you haven't agreed the start date. Use relative timelines: &ldquo;First logo concept: 7 working days after brief approval and the 50% upfront payment.&rdquo;</p>
+
+<h3>Payment terms</h3>
+<p>Clearly define: deposit percentage, when the rest is paid, accepted payment method. The most common in design is 50% upfront and 50% on delivery of the final files. For large or long-running projects, consider intermediate payment milestones.</p>
+
+<p><strong>Also include:</strong> that the final files (fonts, editable vectors, PSD, etc.) are delivered once full payment is received. This is your guarantee of getting paid.</p>
+
+<h3>Intellectual property</h3>
+<p>Specify what you hand over and what you don't. The norm is to transfer commercial usage rights to the final result, but not the editable source files (which can be offered as an add-on service). Consult your accountant or a lawyer specialising in intellectual property to word this correctly.</p>
+
+<h3>Quote validity date</h3>
+<p>30 days is the standard. After that, the price may be revised. This creates urgency without pressure and protects you from price commitments that stretch on indefinitely.</p>
+
+<h2>Revisions: the black hole of design margin</h2>
+
+<p>It's worth pausing here because it's the most expensive mistake designers make. The dynamic is always the same: the client approves the concept, then starts &ldquo;polishing details&rdquo; that turn into complete changes, that turn into new iterations, that turn into weeks of unbilled work.</p>
+
+<p>The solution isn't to be rigid. It's to be clear from the start:</p>
+
+<ul>
+<li>Define in writing what a revision is (a consolidated list of changes, not individual changes sent one by one over WhatsApp).</li>
+<li>Limit the number of rounds included in the price.</li>
+<li>Set a price per additional revision before you start, not when the problem comes up.</li>
+<li>When the client is on their third extra round, don't do it silently — flag it and send an addendum to the original quote.</li>
+</ul>
+
+<p>Designers who implement a clear revisions policy see their margins improve without raising their rates. They simply stop giving work away.</p>
+
+<h2>How to present the price (the order matters)</h2>
+
+<p>There's a sales psychology rule that designers tend to ignore: <strong>never start with the price</strong>. The human brain needs to perceive value before processing a number.</p>
+
+<p>The correct presentation structure is:</p>
+
+<ol>
+<li><strong>Understanding the problem:</strong> show that you understand what the client needs and why.</li>
+<li><strong>Your proposal and approach:</strong> how you're going to solve it, what makes your process special.</li>
+<li><strong>The concrete deliverables:</strong> what they're going to receive exactly.</li>
+<li><strong>The timelines:</strong> when they'll have it.</li>
+<li><strong>The price:</strong> now, when the client already understands the value, the number has context.</li>
+</ol>
+
+<p>If you send the quote by email, consider including an opening paragraph that briefly recalls the project context. Don't let your client open the PDF straight to the pricing page.</p>
+
+<h2>How to handle haggling without losing the sale</h2>
+
+<p>Haggling is inevitable in some sectors and business cultures. The key isn't to give in on price — it's to redesign the proposal.</p>
+
+<p>When a client says &ldquo;that's a lot&rdquo;, you have three options:</p>
+
+<ol>
+<li><strong>Hold the price and justify the value.</strong> Ask which part of the quote seems expensive. Sometimes the client hasn't understood what's included. Explain, don't justify.</li>
+<li><strong>Reduce the scope, not the price.</strong> &ldquo;We can start with just the logo and colour system. The additional materials we do in a second phase.&rdquo; You lower the total figure without touching your implied rate.</li>
+<li><strong>Offer a payment plan.</strong> Sometimes the problem isn't the total price but cash flow at that moment. Payment in three instalments can be the difference between closing and not closing.</li>
+</ol>
+
+<p>What you should never do: lower the price without removing anything from the scope. That teaches the client your initial price wasn't serious, and invites them to start haggling even earlier on the next project.</p>
+
+<h2>Real example: complete branding quote</h2>
+
+<p>To make all of the above concrete, here's an example quote for a visual identity project for a services company:</p>
+
+<table>
+<thead>
+<tr><th>Deliverable</th><th>Description</th><th>Price</th></tr>
+</thead>
+<tbody>
+<tr><td>Brand strategy</td><td>Briefing session + competitor analysis + positioning definition (5-page document)</td><td>£350</td></tr>
+<tr><td>Logo design</td><td>3 concepts + 2 rounds of revisions + delivery in all formats (AI, EPS, SVG, PNG, JPG)</td><td>£750</td></tr>
+<tr><td>Identity system</td><td>Primary and secondary colour palette, corporate typography, usage rules, positive/negative versions</td><td>£400</td></tr>
+<tr><td>Brand guidelines</td><td>20-25 page PDF with all visual identity usage guidelines</td><td>£500</td></tr>
+<tr><td>Corporate stationery</td><td>Business card design (both sides), A4 letterhead, email signature</td><td>£300</td></tr>
+</tbody>
+<tfoot>
+<tr><td colspan="2"><strong>Subtotal</strong></td><td><strong>£2,300</strong></td></tr>
+<tr><td colspan="2">VAT (20%)</td><td>£460</td></tr>
+<tr><td colspan="2"><strong>Total</strong></td><td><strong>£2,760</strong></td></tr>
+</tfoot>
+</table>
+
+<p><strong>Terms:</strong> 50% (£1,150 + VAT) upfront, remaining 50% on delivery of the final files. Editable source files (AI, Figma) available as an add-on service (£300). Timeline: 21 working days from brief approval and the upfront payment. Quote validity: 30 days.</p>
+
+<p>See the difference with a simple &ldquo;Logo design: £800&rdquo;? The breakdown turns the price into an investment decision, not an expense.</p>
+
+<h2>Tools to create design quotes faster</h2>
+
+<p>The designer's biggest enemy isn't the difficult client — it's the time wasted creating quotes. Many designers spend between 1 and 3 hours on each proposal: finding the template, updating the prices, calculating totals, generating the PDF, emailing it, following up&hellip;</p>
+
+<p>There's a better way. <strong>Quoting software</strong> like DealForge lets you have a service catalogue with predefined prices you insert with one click, apply discounts while seeing the margin in real time, generate branded PDFs automatically, and know when the client has opened your proposal so you can follow up at exactly the right moment.</p>
+
+<p>If you create 5 quotes a month and reduce the time on each from 90 minutes to 15 minutes, you recover 6 hours a month. At £60/hour, that's £360 of productive capacity you can devote to billable work or, quite simply, to not working Saturdays.</p>
+
+<h2>The quote as a positioning tool</h2>
+
+<p>Here's the insight that changes the perspective: your quote isn't just an administrative formality. It's the first sample of how you work.</p>
+
+<p>A generic quote, in unformatted Word, with a single overall price and no breakdown, communicates that you're just another supplier. A structured quote, with your visual identity, a detailed project description, a clear revisions policy and transparent terms, communicates that you're a serious professional who knows what they're doing.</p>
+
+<p>Many designers win projects — and sometimes better clients than the competition's — simply because their proposal looks and reads more professionally. The work comes afterwards.</p>
+
+<h2>Checklist before sending your design quote</h2>
+
+<ul>
+<li>Have you included all your details and the client's?</li>
+<li>Does the project summary reflect exactly what the client asked for?</li>
+<li>Is each deliverable described in enough detail to avoid misunderstandings?</li>
+<li>Have you specified how many revisions each line includes?</li>
+<li>Are the calculations (subtotal, VAT, total) correct?</li>
+<li>Have you stated the delivery timelines and payment terms?</li>
+<li>Have you set an expiry date on the quote?</li>
+<li>Does the PDF have your branding (logo, colours, typography)?</li>
+</ul>
+
+<p>If you can tick all these boxes, you have a quote that works for you even before you start designing.</p>
+
+<h2>Conclusion: charge what you're worth, in writing</h2>
+
+<p>Most pricing problems in graphic design aren't pricing problems. They're communication and presentation problems. A good quote justifies your rate, defines the scope, protects your margin and positions your work as an investment, not an expense.</p>
+
+<p>Choose the pricing model that fits each project. Break down the deliverables in detail. Define your revisions policy from day one. And stop accepting the first &ldquo;that's a lot&rdquo; as a verdict — learn to respond with value, not discounts.</p>
+
+<p>Your work has value. Your quote should reflect it.</p>
+
+<p><strong>Want to create professional design quotes in minutes, with your branding and a PDF ready to send?</strong> Try <a href="/registro?lang=en">DealForge</a> free and stop wasting time on admin so you can spend it on what you actually do best.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: ["graphic design", "design quotes", "freelance", "how to charge", "branding", "design rates", "small business"],
+    publishedAt: "2026-06-15T10:00:00.000Z",
+    metaTitulo: "Graphic design quotes: how to charge what you're worth — DealForge",
+    metaDescripcion: "Practical guide for graphic designers: pricing models, what to include in every quote, how to manage revisions and avoid haggling. With a real branding example.",
+    metaKeywords: "graphic design quote, how to charge for design, graphic designer rate, design quote, logo price, branding quote, freelance graphic design, design quote template",
+  },
+  {
+    slug: "professional-cleaning-service-quotes-guide",
+    titulo: "Professional cleaning service quotes: a guide to winning more contracts",
+    extracto: "Learn to create professional cleaning quotes that justify your price, avoid misunderstandings and close more contracts. With real examples by service type and a pricing template.",
+    contenido: `<p>If you've been in the professional cleaning sector for a while, you know the problem usually isn't the quality of the work. The problem is <strong>winning the contract before you start</strong>. And that begins with a quote that inspires confidence, is clear and arrives before your competition's.</p>
+
+<p>In this article we'll look at how to make cleaning quotes that win contracts, not just state prices. From the most common service types to how to calculate your rates without selling yourself short, with real examples and no fluff.</p>
+
+<h2>Why cleaning quotes fail (and you lose clients)</h2>
+
+<p>Before looking at what to do, it helps to understand what's done wrong. There are three mistakes that come up again and again in the sector:</p>
+
+<h3>Quotes that are too vague</h3>
+<p>&ldquo;Office cleaning: £800/month.&rdquo; How many times a month? What exactly does it include? The bathrooms? The windows? With what products? An ambiguous quote is an invitation to dispute. The client assumes the maximum possible, you charge the minimum possible and conflict is inevitable.</p>
+
+<h3>Prices with no justification</h3>
+<p>When a client receives three cleaning quotes and yours is the most expensive, they won't stay just because. If you don't explain why your service is worth what it costs (quality materials, trained staff, public liability insurance, eco-friendly products), the price wins and you lose the contract.</p>
+
+<h3>Slow response</h3>
+<p>A client asking for three cleaning quotes won't wait a week. The first to respond with a decent proposal usually keeps the contract. Speed is a competitive advantage as important as price.</p>
+
+<h2>Types of cleaning service and how to quote each one</h2>
+
+<p>Not all cleaning is the same, and your quote should reflect that. These are the most common types with their particularities:</p>
+
+<h3>Office and commercial premises cleaning</h3>
+
+<p>It's the bread and butter for most companies in the sector. Contracts are usually recurring (daily, weekly or fortnightly) and the client looks for reliability above all.</p>
+
+<p>What needs to be specified in the quote?</p>
+<ul>
+<li>Total area to be cleaned (m²)</li>
+<li>Exact frequency (e.g. Monday, Wednesday and Friday, 6pm to 8pm)</li>
+<li>Included tasks: floors, bins, bathrooms, kitchen, internal windows, furniture...</li>
+<li>Excluded tasks (to avoid the &ldquo;I thought it included...&rdquo;)</li>
+<li>Number of people assigned</li>
+<li>Products included in the price or billed separately</li>
+</ul>
+
+<p><strong>Example quote line:</strong> &ldquo;General office cleaning service (450 m²) — 3 days/week (Mon/Wed/Fri), 2 hours/day, 1 operative. Includes: floors, bathrooms, kitchen, emptying bins and surface dusting of furniture. Does not include: external windows, server room cleaning.&rdquo;</p>
+
+<h3>Communal building cleaning</h3>
+
+<p>Residential blocks are a very common but also very demanding client. The price is decided by a residents' committee, so your proposal will be compared in detail.</p>
+
+<p>Key points for this type of quote:</p>
+<ul>
+<li>Areas included: staircase, lift, entrance hall, car park, external common areas</li>
+<li>Frequency of each area (the staircase may be daily; the car park, weekly)</li>
+<li>Incident management: what happens if a resident makes a mess outside hours?</li>
+<li>Replenishment of consumables (toilet paper, soap) included or not</li>
+<li>Minimum contract duration and renewal terms</li>
+</ul>
+
+<p>For communal buildings, it's advisable to present a breakdown by area with its individual price. The committee can negotiate removing an area instead of haggling over the overall price, and you keep your margin.</p>
+
+<h3>End-of-build cleaning (post-construction)</h3>
+
+<p>This service is one-off, more intensive and involves far more work than maintenance cleaning. It's common in renovations, new builds and premises about to open to the public.</p>
+
+<p>Factors that determine the price:</p>
+<ul>
+<li>Type of work (partial renovation vs. complete new build)</li>
+<li>Predominant materials (plaster, paint, tile grout...)</li>
+<li>Floor area and ceiling height</li>
+<li>Access and parking for your team and vehicle</li>
+<li>Waste management (is it included or does the builder handle it?)</li>
+</ul>
+
+<p>End-of-build cleaning shouldn't be quoted at a fixed price per m² without a site visit. The state of the build varies enormously. A blind quote of this kind usually ends in losses or work done &ldquo;half-way&rdquo;.</p>
+
+<h3>Window cleaning</h3>
+
+<p>A specialist service with its own pricing structure. The key factors are height, access (ladder, scaffold, cradle) and frequency.</p>
+
+<ul>
+<li>Specify whether the price is per side (interior/exterior) or per complete window</li>
+<li>State the access method and whether it requires special equipment</li>
+<li>Clarify whether it includes frames and sills or just the glass</li>
+</ul>
+
+<h3>Specialist cleaning and disinfection</h3>
+
+<p>Disinfections, biohazard cleaning, pest removal, anti-damp treatments... are services that require specific staff and equipment, and whose quote must reflect the risk and specialisation.</p>
+
+<p>For these services, always include:</p>
+<ul>
+<li>The protocol you're going to apply</li>
+<li>The approved products you use</li>
+<li>Your company's or staff's certifications</li>
+<li>The treatment certificate you provide on completion</li>
+</ul>
+
+<h2>How to calculate the price of your cleaning service</h2>
+
+<p>This is where many cleaning companies fall short. They miscalculate their costs, set a &ldquo;market&rdquo; price and then wonder why they're not making money. Let's do the maths properly.</p>
+
+<h3>Step 1: Calculate your cost per hour of work</h3>
+
+<p>The cost of a cleaning operative includes:</p>
+<ul>
+<li>Gross wage (varies by region and contract type)</li>
+<li>Employer's National Insurance and pension contributions on top of the gross wage</li>
+<li>Uniforms, PPE and training</li>
+<li>Absence and cover (set aside 5-8%)</li>
+</ul>
+
+<p>Example: if you pay £12/hour gross and add employer contributions, your real cost might be around £14/hour. With a 6% absence allowance, it rises to ~£14.80/hour. On top of that you have to add materials.</p>
+
+<h3>Step 2: Calculate the cost of materials and products</h3>
+
+<p>Cleaning products represent between 5% and 10% of the total cost in maintenance services, but can rise to 15-20% in intensive or specialist cleaning.</p>
+
+<p>Make an estimate by service type:</p>
+<ul>
+<li>Standard office cleaning: £0.30-0.60/m² per month</li>
+<li>End-of-build cleaning: £1.50-3/m² (depending on condition)</li>
+<li>Window cleaning: minimum call-out + cost per m²</li>
+</ul>
+
+<h3>Step 3: Add overheads</h3>
+
+<p>Many sole traders and small cleaning businesses forget to include their own costs in the price:</p>
+<ul>
+<li>Public liability insurance (essential)</li>
+<li>Fuel and vehicle depreciation</li>
+<li>Machinery (scrubber dryers, industrial vacuums, etc.)</li>
+<li>Phone, accountant, management software</li>
+<li>Your own management time (visits, quotes, coordination)</li>
+</ul>
+
+<p>A practical rule: overheads usually represent between 15% and 25% of your turnover. If you turn over £10,000 a month, between £1,500 and £2,500 goes on overheads before you see a penny of profit.</p>
+
+<h3>Step 4: Apply your margin</h3>
+
+<p>Once you have the real total cost, apply your target margin. For cleaning services, a net margin of 10-20% is reasonable. Some specialist services can reach 30-40%.</p>
+
+<p><strong>Simple formula:</strong><br>
+Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
+
+<p>If your cost is £800 and you want a 20% net margin: 800 × 100 / 80 = <strong>£1,000</strong>.</p>
+
+<p>Don't confuse margin with markup. A 25% markup on cost isn't the same as a 25% margin on the sale price.</p>
+
+<h2>What a professional cleaning quote must include</h2>
+
+<p>Now that you know how to calculate the price, let's see how to present it. A professional cleaning quote should have, as a minimum:</p>
+
+<h3>1. Your details and the client's</h3>
+<p>Your company name, registration/VAT number, contact, logo. Client details: company, registration number, service address and contact person. It sounds basic, but many cleaning quotes are anonymous or incomplete.</p>
+
+<h3>2. Detailed service description</h3>
+<p>Not &ldquo;office cleaning&rdquo;. Instead: &ldquo;Maintenance cleaning service in [Company]'s offices at [address], floors 2 and 3, approximate area 320 m². Frequency: Tuesday and Thursday, 7pm to 9pm. Staff assigned: 2 operatives.&rdquo;</p>
+
+<h3>3. Task breakdown</h3>
+<p>A list of what's done on each visit and how often. Distinguish between daily, weekly and monthly tasks. This protects both parties and avoids the classic &ldquo;I thought it included cleaning the storeroom&rdquo;.</p>
+
+<h3>4. What it does NOT include</h3>
+<p>This section is as important as the previous one. Expressly specify what isn't included: external windows, restricted areas, emergency cleaning, special treatments. That way you eliminate expectations you can't meet.</p>
+
+<h3>5. Materials and products</h3>
+<p>Do you provide them or the client? If you provide them, are they included in the price or billed separately? Do you use eco-friendly or conventional products? More and more clients value cleaning with sustainable products and are willing to pay more for it.</p>
+
+<h3>6. Price and payment terms</h3>
+<p>Monthly price (or per service), payment method (transfer, direct debit), billing date. In recurring contracts, state whether the price includes or excludes VAT and what happens if the client cancels a visit.</p>
+
+<h3>7. Contract duration and termination terms</h3>
+<p>Is the contract monthly, quarterly or annual? How much notice is needed to cancel? Is there a penalty for early termination? This is especially important when you've had to buy equipment or assign staff specifically for that client.</p>
+
+<h3>8. Insurance and liability</h3>
+<p>Expressly mention that you have public liability insurance and what its minimum cover is. For corporate clients or those with high-value premises, this can be a decisive factor. It's your differentiator against smaller companies working without insurance.</p>
+
+<h3>9. Quote validity</h3>
+<p>State how long the proposal is valid for (usually 30 days). Staff and material costs change, and you can't commit to a price indefinitely.</p>
+
+<h2>Pricing strategy: when to compete on price and when not to</h2>
+
+<p>The cleaning sector has fierce competition. There's always someone willing to do the job cheaper. The question is: do you want to compete on price or on value?</p>
+
+<h3>When lowering the price makes sense</h3>
+<ul>
+<li>To win a new high-volume client that can scale</li>
+<li>To fill the routes of staff already assigned (low marginal cost)</li>
+<li>For long-term contracts that give you stability</li>
+</ul>
+
+<h3>When to defend your price</h3>
+<ul>
+<li>When you offer something differential: higher insurance, certified eco-friendly products, permanent staff with specific training</li>
+<li>When the client has already had problems with cheap suppliers</li>
+<li>When the cost of acquiring that client is very high (many visits, a lot of time)</li>
+</ul>
+
+<p>A useful trick: before lowering the price, offer to <strong>reduce the scope</strong>. &ldquo;If the budget is tight, we can start with 2 weekly visits instead of 3 and adjust the frequency of bathroom cleaning.&rdquo; That way you don't devalue your hourly rate and the client understands that quality has a cost.</p>
+
+<h2>The &ldquo;fixed&rdquo; quote mistake on variable services</h2>
+
+<p>One of the typical problems in cleaning is that the client asks for cleaning &ldquo;of whatever's needed&rdquo; but expects to pay a fixed price. This is a trap.</p>
+
+<p>For services where volume can vary (post-event cleaning, emergency cleaning, special treatments), there are two solutions:</p>
+
+<ul>
+<li><strong>Base rate + extras:</strong> fixed price for the standard service, with clear rates for additional services</li>
+<li><strong>Price per hour or m²:</strong> more transparent for one-off or variable-volume services</li>
+</ul>
+
+<p>Including a rate sheet attached to your quote is very useful. That way the client knows in advance how much an extra clean or a special treatment will cost, and there are no surprises on the invoice.</p>
+
+<h2>How to follow up on your cleaning quotes</h2>
+
+<p>Many cleaning companies send the quote and wait. Mistake. Follow-up is where contracts are won or lost.</p>
+
+<p>An effective follow-up sequence:</p>
+
+<ol>
+<li><strong>The day after sending:</strong> email or call to confirm they've received the proposal and resolve immediate questions</li>
+<li><strong>After 5 days:</strong> a gentle follow-up. &ldquo;Hi [name], I wanted to know whether you've had a chance to review the proposal. If you need any adjustment or clarification, we're available.&rdquo;</li>
+<li><strong>After 12-15 days:</strong> last contact before the proposal expires. Mention the expiry date naturally.</li>
+</ol>
+
+<p>No more than three contacts without a reply. If at that point there are no signs of life, the client isn't interested or has already chosen someone else. Close the loop and move on.</p>
+
+<h2>Quoting software for cleaning companies: what to look for</h2>
+
+<p>Up to a certain volume, a Word or Excel template works. But when you handle more than 10-15 quotes a month, manual management becomes a bottleneck.</p>
+
+<p>Quoting software designed for the services sector like <a href="/registro?lang=en">DealForge</a> lets you:</p>
+
+<ul>
+<li>Keep a service catalogue with up-to-date rates (price/hour, price/m², price by surface type)</li>
+<li>Create quotes in minutes by reusing standard services and terms</li>
+<li>Generate professional PDFs with your branding, logo and consistent design</li>
+<li>Send quotes directly by email and track their status (sent, viewed, accepted)</li>
+<li>Apply automatic discount rules (by volume, by contract duration)</li>
+<li>Request the client's electronic signature to formalise the contract</li>
+</ul>
+
+<p>The time you recover on admin you can spend on more sales visits, which is where the business is really won.</p>
+
+<h2>Real example of an office cleaning quote</h2>
+
+<p>To ground all of the above, here's an example of how a detailed line should look in an office cleaning quote:</p>
+
+<p><strong>Service:</strong> Maintenance cleaning — Floor 3 offices (380 m²)<br>
+<strong>Frequency:</strong> Monday, Wednesday and Friday / 2 hours per visit<br>
+<strong>Staff:</strong> 1 permanent operative assigned<br>
+<strong>Included tasks:</strong></p>
+<ul>
+<li>Sweeping and mopping floors across the whole floor</li>
+<li>Cleaning 4 toilets (includes sanitaryware, basins, floors, replenishing consumables)</li>
+<li>Emptying and cleaning bins</li>
+<li>Surface cleaning of furniture and screens</li>
+<li>Kitchen cleaning (worktop, microwave exterior, sink)</li>
+<li>Internal windows (monthly)</li>
+</ul>
+<p><strong>Does not include:</strong> External windows, server room cleaning, archive area, out-of-hours emergency cleaning.<br>
+<strong>Materials:</strong> Included in the price. Certified professional cleaning products. Does not include toilet consumables (paper, soap) unless expressly agreed.<br>
+<strong>Monthly price:</strong> £780 + VAT<br>
+<strong>Payment terms:</strong> Direct debit, invoiced on the 1st of each month<br>
+<strong>Duration:</strong> Annual contract, automatic renewal. Termination with 30 days' notice.</p>
+
+<p>That's what you call an unambiguous quote. When the client reads it, they know exactly what they receive and what they don't. No surprises.</p>
+
+<h2>Checklist before sending your cleaning quote</h2>
+
+<ul>
+<li>Have you specified the exact service address and the areas included?</li>
+<li>Are the frequency and schedule clearly detailed?</li>
+<li>Have you listed the included and excluded tasks?</li>
+<li>Does it state who provides the materials and what type of products are used?</li>
+<li>Does the price include or exclude VAT?</li>
+<li>Have you stated the contract duration and termination terms?</li>
+<li>Do you mention your public liability insurance?</li>
+<li>Does the quote have an expiry date?</li>
+<li>Does the PDF have your logo and complete contact details?</li>
+</ul>
+
+<h2>Conclusion: quote in detail, win with confidence</h2>
+
+<p>In the cleaning sector, the difference between winning and losing a contract is rarely the price. It's the confidence your proposal generates. A detailed, clear quote sent quickly says more about the quality of your work than any marketing words.</p>
+
+<p>Spend time building a good quote template, define your cost structure well and establish a follow-up process. Those three changes can double your close rate without dropping your rates by a penny.</p>
+
+<p>Because the client who only buys on price will never be your best client. The client who chooses your proposal because it conveys professionalism and clarity — that's the one who stays loyal.</p>
+
+<p><strong>Want to create professional cleaning quotes in minutes, with your branding and sent directly by email?</strong> Try <a href="/registro?lang=en">DealForge</a> free and stop wasting time on quotes so you can spend it on winning more clients.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: ["professional cleaning", "cleaning quotes", "cleaning quote", "cleaning company", "cleaning services", "small business", "sales"],
+    publishedAt: "2026-06-15T10:30:00.000Z",
+    metaTitulo: "Professional cleaning service quotes: complete guide — DealForge",
+    metaDescripcion: "How to create professional cleaning quotes that win contracts: what to include, how to calculate the price, mistakes to avoid and a real example by service type.",
+    metaKeywords: "professional cleaning quote, cleaning company quote, how to quote cleaning services, office cleaning price, cleaning quote template, communal cleaning rate, cleaning quoting software",
+  },
+  {
+    slug: "web-app-development-quotes-definitive-guide",
+    titulo: "Web and app development quotes: the definitive guide for agencies and freelancers",
+    extracto: "How to create web and app development quotes that are clear, fair and close more projects. With pricing models, what to include, how to calculate scope and the mistakes costing you clients.",
+    contenido: `<p>You build websites and apps that work. Your clients are happy with the result. But before starting the project, you go through the same ordeal as always: how much do I charge for this?</p>
+
+<p>The web development quote is one of the hardest documents to put together in the world of digital services. The scope is fuzzy, the client doesn't know exactly what they want, timelines stretch out and there's always &ldquo;one more thing&rdquo; at the end. If you don't have a clear system, every project becomes a box of surprises — usually unpleasant ones.</p>
+
+<p>This guide is for web development agencies, freelancers and digital studios who want to quote better: faster, with more clarity and with a higher chance of closing the project at a good price.</p>
+
+<h2>The fundamental problem with web development quotes</h2>
+
+<p>Unlike selling a physical product, quoting a web development project means selling something that doesn't exist yet. The client has an idea — sometimes vague — and you have to estimate how much time and resources are needed to make it real without having done the full technical analysis.</p>
+
+<p>This mismatch produces three common problems:</p>
+
+<ul>
+<li><strong>Scope creep:</strong> the original project grows endlessly because the client keeps adding features that are &ldquo;no big deal&rdquo;</li>
+<li><strong>Quotes that are too low:</strong> to win the project you estimate tight and then work at a loss</li>
+<li><strong>Expectation mismatches:</strong> the client expected one thing and you delivered another (both valid, but different)</li>
+</ul>
+
+<p>The solution isn't to be more expensive or cheaper. It's to quote better.</p>
+
+<h2>The four pricing models in web development</h2>
+
+<p>Before putting together any quote, you must decide which pricing model you're going to apply. Not all projects are the same, and the model you choose will determine how you calculate the price and how you present it.</p>
+
+<h3>Fixed price</h3>
+
+<p>The client pays a fixed amount for a defined scope. It's the model most clients ask for because it gives them certainty over the total cost. It's also the riskiest for the developer if the scope isn't perfectly defined.</p>
+
+<p><strong>When to use it:</strong> projects with very clear, closed requirements. A five-page corporate website with a predefined design. A landing page. A specific module of concrete functionality.</p>
+
+<p><strong>The most common mistake:</strong> accepting a fixed price when the scope is ambiguous. If the client says &ldquo;I want a customer portal with custom features&rdquo;, that's not a scope. It's an idea. Don't quote a fixed price until you have the concrete requirements.</p>
+
+<h3>Time &amp; materials</h3>
+
+<p>The client pays for the actual hours worked at an agreed rate. The risk is shared: if the project grows, the cost grows proportionally.</p>
+
+<p><strong>When to use it:</strong> maintenance and evolution of existing systems. Projects with changing requirements. Initial technical exploration phases.</p>
+
+<p><strong>The problem:</strong> many clients are afraid of the hourly model because they feel they lose control of the cost. The solution: set an estimated maximum budget and track it transparently. &ldquo;We work by the hour with a cap of £20,000. If we see we're getting close, we'll let you know before continuing.&rdquo;</p>
+
+<h3>Monthly retainer</h3>
+
+<p>The client pays a fixed monthly fee for a reserved bank of hours. Ideal for clients who need continuous evolution of their digital product.</p>
+
+<p><strong>When to use it:</strong> clients with a digital product in production who need constant improvements, technical support and new features on a recurring basis.</p>
+
+<p><strong>Advantage:</strong> recurring, predictable income for your agency or freelance business. One of the healthiest metrics you can have in a digital services business.</p>
+
+<h3>By sprint or phase</h3>
+
+<p>The project is divided into phases or sprints of two to four weeks, each with a concrete deliverable and a closed price. At the end of each sprint the client decides whether to continue.</p>
+
+<p><strong>When to use it:</strong> medium or large projects where the client wants visibility and control. It's the most balanced model for complex projects.</p>
+
+<p><strong>Advantage:</strong> you reduce your risk because you bill by phase, the client sees real progress and the project can be adjusted based on the learnings of each iteration.</p>
+
+<h2>How to calculate the price of a web project</h2>
+
+<p>Whether you use fixed price or by sprint, you need to estimate the effort as accurately as possible. This is the process that works.</p>
+
+<h3>Step 1: break the project down into tasks</h3>
+
+<p>Don't quote the project as a whole. Break it down into functional modules and concrete tasks. For a corporate website with a blog and contact form, the list might be:</p>
+
+<ul>
+<li>Requirements analysis and wireframing — 4 hours</li>
+<li>UI design in Figma: home + interior pages — 12 hours</li>
+<li>Frontend build and development: home — 6 hours</li>
+<li>Build: interior pages (×4) — 8 hours</li>
+<li>Blog integration with CMS — 8 hours</li>
+<li>Contact form with email notification — 3 hours</li>
+<li>Basic on-page SEO: robots.txt, sitemap, metas — 3 hours</li>
+<li>Deploy and hosting configuration — 2 hours</li>
+<li>Client training — 2 hours</li>
+<li>Revisions and QA — 4 hours</li>
+</ul>
+
+<p>Estimated total: 52 hours. At a rate of £60/hour, the base price would be £3,120.</p>
+
+<h3>Step 2: apply a contingency factor</h3>
+
+<p>Projects always take longer than estimated. Unforeseen meetings, last-minute changes, unexpected bugs, the extra training that wasn't in the plan. The contingency factor covers all that.</p>
+
+<ul>
+<li>Well-defined projects: add 15&ndash;20% on top of your base estimate</li>
+<li>Projects with less clear requirements: add 25&ndash;35%</li>
+<li>Projects with technology new to you: add up to 40&ndash;50%</li>
+</ul>
+
+<p>In the previous example: 52h × 1.20 = 62.4 hours → £3,744. It's more honest than selling yourself short and then having to ask for more money or work at a loss.</p>
+
+<h3>Step 3: add external costs</h3>
+
+<p>Development quotes frequently forget the costs that aren't working hours:</p>
+
+<ul>
+<li>Licences for commercial plugins, themes or libraries</li>
+<li>Design tools (Figma, Adobe CC)</li>
+<li>Third-party services: Stripe, SendGrid, payment APIs</li>
+<li>First-year hosting and domain</li>
+<li>Stock images and graphic resources</li>
+</ul>
+
+<p>These costs should appear broken down in your quote, not mixed in with your hours. The client has to understand what they're paying and to whom.</p>
+
+<h3>Step 4: consider the cost of acquiring the client</h3>
+
+<p>How many meetings have you had to reach this quote? Have you put together a prior technical proposal? Have you travelled for an in-person meeting? That time has value too. If you invested six hours in the sales process for a £3,000 project, your real margin is no longer what you calculated.</p>
+
+<p>Some freelancers and agencies charge for a paid &ldquo;analysis and proposal&rdquo; phase before presenting the final quote. If the project is complex — above £15,000 — this makes complete sense.</p>
+
+<h2>What a web development quote must include</h2>
+
+<p>A good quote isn't just a number. It's a document that manages expectations, sets the framework for the relationship and protects both parties.</p>
+
+<h3>1. Project description and context</h3>
+
+<p>Show that you've listened to and understood what the client needs. Don't copy and paste what they told you: synthesise it in your own words and include the business goal behind the project.</p>
+
+<p><em>&ldquo;The goal of this project is to replace the manual client registration process with a web platform that automates onboarding and document submission, reducing onboarding time from three days to under two hours.&rdquo;</em></p>
+
+<p>That shows you're not a task executor. You're a strategic partner.</p>
+
+<h3>2. Detailed scope: what's included and what's not</h3>
+
+<p>List all the concrete deliverables: screens, modules, features, integrations. And add an explicit &ldquo;out of scope&rdquo; section.</p>
+
+<p>This section is your best defence against scope creep. If a new request comes up, you can point to the contract: &ldquo;That wasn't in the original scope. We can add it with an additional change quote.&rdquo;</p>
+
+<h3>3. Technology and stack</h3>
+
+<p>State the main language, framework and tools you'll use. This isn't just for the technical client: it reassures them that you've thought about the solution, not just the price.</p>
+
+<h3>4. Phases and timeline</h3>
+
+<p>Divide the project into phases with approximate dates. If the project has dependencies on the client — providing you with text, images or access — include them explicitly in the timeline. If the client is late, the deadline moves.</p>
+
+<h3>5. Itemised price</h3>
+
+<p>Present the price by phase or by functional module, not as a single block. This has several advantages: the client understands where the price comes from and perceives it as fairer; if they need to adjust the budget, they can negotiate by removing modules instead of pressuring you to lower the overall rate; and on large projects, it makes internal approvals easier.</p>
+
+<h3>6. Payment terms</h3>
+
+<p>For web development projects, the industry standard is:</p>
+
+<ul>
+<li>30&ndash;50% at the start of the project (deposit)</li>
+<li>30&ndash;40% at an intermediate milestone (design delivery or first working version)</li>
+<li>20&ndash;30% on final delivery</li>
+</ul>
+
+<p>Don't start any project without a deposit. It doesn't matter how big the client is or how convincing the relationship seems. The deposit is the proof that the project is real.</p>
+
+<h3>7. Intellectual property</h3>
+
+<p>Specify when ownership of the code transfers to the client. The norm: on receiving the final payment. While there are outstanding invoices, the code remains yours.</p>
+
+<h3>8. Post-delivery maintenance and support</h3>
+
+<p>State what happens after delivery: is there a warranty period? What does it cover (bugs in the delivered code, yes; new features, no)? Do you offer a monthly maintenance plan? If so, include it as an option in the quote. Maintenance is one of the most profitable and predictable revenue lines for any agency or freelancer.</p>
+
+<h3>9. Number of revisions included</h3>
+
+<p>Define how many rounds of revisions are included in the price and what happens if the client requests more. Without this clause, a project can turn into an infinite loop of &ldquo;one more thing.&rdquo;</p>
+
+<h3>10. Quote validity</h3>
+
+<p>State how long the offer is valid for. Thirty days is standard. After that, prices may change.</p>
+
+<h2>Scope creep: how to prevent it from the quote</h2>
+
+<p>Scope creep — the unplanned growth of the scope — is the number one cause of negative profitability in web development projects. And it starts before writing a line of code: it starts in the quote.</p>
+
+<p>These are the clauses you should always include:</p>
+
+<ul>
+<li><strong>Explicit change order:</strong> any feature not included in the original scope requires a written change order with an agreed price before being executed</li>
+<li><strong>Definition of bug vs. new feature:</strong> a bug is something that doesn't work as agreed; a change to how something already implemented works is a new feature and is billed separately</li>
+<li><strong>Limit on included meetings:</strong> in fixed-price projects, define how many meeting hours are included; meetings cost money and should be in the price</li>
+</ul>
+
+<p>You don't have to be inflexible. You have to be clear. A client who understands the rules of the game from the start respects them. A client you never told the rules to will keep asking for &ldquo;small things&rdquo; indefinitely.</p>
+
+<h2>How to present the quote to win more projects</h2>
+
+<h3>Always present three options</h3>
+
+<p>Instead of a single proposal, present three versions of the project:</p>
+
+<ul>
+<li><strong>Basic option:</strong> the essential features for the project to meet its minimum goal</li>
+<li><strong>Standard option:</strong> the one you actually recommend (usually the middle one)</li>
+<li><strong>Premium option:</strong> all of the above plus additional features or a higher level of finish</li>
+</ul>
+
+<p>This has two effects: the client goes from deciding whether to hire to deciding which to hire. And the middle option — the one you most want to sell — is perceived as the most reasonable through the psychological anchoring effect.</p>
+
+<h3>Add the ROI when possible</h3>
+
+<p>A £15,000 quote can seem expensive until the client understands that the system you're going to build will save them £3,000 a month in manual work. In five months it's paid off. Put the figures on the table when you have them.</p>
+
+<h3>Send a professional PDF, not an email with prices</h3>
+
+<p>The way you present your proposal communicates your level of professionalism before the client has read a single line. A well-designed PDF with your brand identity, clear structure and careful language conveys trust. An email saying &ldquo;the price would be about £8,000, more or less&rdquo; does exactly the opposite.</p>
+
+<p>Tools like <a href="/registro?lang=en">DealForge</a> let you generate proposals in PDF format with your branding, a phased pricing structure and legal terms, ready to send directly to the client from the platform — with status tracking included so you know when they've opened it and when to follow up.</p>
+
+<h2>Common mistakes when quoting web development projects</h2>
+
+<h3>Quoting without clear requirements</h3>
+
+<p>If the client doesn't know exactly what they want, you can't know how much it will cost. In that case, the solution is to charge for the analysis phase before giving the final quote. Many agencies offer a one-week &ldquo;discovery sprint&rdquo; at a fixed price that includes interviews, wireframes and technical specification. At the end of that sprint, the quote is much more precise and the client understands the scope better.</p>
+
+<h3>Not charging for management time</h3>
+
+<p>Meetings, clarification emails, change management, coordination with external suppliers... all of that is billable work. If you don't include it in the price, you're giving it away. A project with weekly meetings over three months has more than twenty hours of management that someone has to pay for.</p>
+
+<h3>Lowering the price to win the project</h3>
+
+<p>Reducing your rate to compete with cheaper proposals is a trap. You attract the most price-sensitive client in the market, work with a lower margin and have less budget to do a good job. Price competition in development services is a race to the bottom that no one wins. Better to lose that project and devote that time to clients who value what you offer.</p>
+
+<h3>Not defining payment milestones</h3>
+
+<p>If you charge everything at the end, your cash flow suffers and you increase the risk of the client haggling over the last invoice or disappearing. Payment milestones distribute the risk across the project.</p>
+
+<h3>Forgetting licences and external tools</h3>
+
+<p>A £200 plugin can seem irrelevant on a large project, but if you have five projects like that a month, that's £1,000 coming out of your pocket. Every external cost should be in the quote, with its real or estimated amount.</p>
+
+<h2>Structure of a web development quote</h2>
+
+<p>So you don't start from scratch on every proposal, this is the structure you should use as a base:</p>
+
+<ol>
+<li><strong>Cover:</strong> your logo, project name, date, client details</li>
+<li><strong>Executive summary:</strong> project goal and proposed approach in two or three paragraphs</li>
+<li><strong>Proposed solution:</strong> technical description, tech stack, architecture decisions</li>
+<li><strong>Project scope:</strong> included modules and features, broken down</li>
+<li><strong>Out of scope:</strong> what the quote explicitly does not include</li>
+<li><strong>Work plan and timeline:</strong> phases, milestones and delivery dates</li>
+<li><strong>Investment:</strong> price broken down by phase or module, VAT, payment terms and deposit</li>
+<li><strong>Maintenance and support:</strong> what happens after delivery and maintenance contract options</li>
+<li><strong>About us:</strong> a brief description of your agency or profile, relevant projects, technologies mastered</li>
+<li><strong>Next steps:</strong> what to do to get started (signature, deposit, kick-off meeting)</li>
+</ol>
+
+<p>With <a href="/registro?lang=en">DealForge</a> you can save this structure as a template and reuse it on every new proposal, customising only the content specific to each client. What used to take you three hours you have in thirty minutes, with a more professional result.</p>
+
+<h2>How to follow up without being a pain</h2>
+
+<p>You sent the quote. The client said &ldquo;I'll look at it and get back to you.&rdquo; Four days have passed. What do you do?</p>
+
+<p>A reasonable follow-up sequence for web development proposals:</p>
+
+<ul>
+<li><strong>Day 1&ndash;2 after sending:</strong> a brief email to confirm receipt and ask if they have questions</li>
+<li><strong>Day 5&ndash;7:</strong> a value-added follow-up: a relevant insight for the project, a question about their priorities, something that shows you're still thinking about their case</li>
+<li><strong>Day 12&ndash;15:</strong> last contact before the proposal expires; mention the expiry date naturally, without pressure</li>
+</ul>
+
+<p>If after fifteen days there's no reply, the client isn't ready or has already chosen someone else. Close the loop and move on. There's no worse investment of time than chasing someone who doesn't want to buy.</p>
+
+<h2>Conclusion: quote like a partner, not a supplier</h2>
+
+<p>The difference between a quote that wins the project and one that doesn't is usually in the details: in how you understand the client's problem, in how you define the scope, in how you protect your time and in how you present the value of what you offer.</p>
+
+<p>A good web development quote isn't just a pricing document. It's the project's first real delivery: it demonstrates your analytical capacity, your mental order and your professionalism. If the quote already impresses, the project is off to a great start.</p>
+
+<p>Work on your template, define your rates clearly, always apply the contingency factor and be explicit with the scope. Those four things alone will improve your close rate and your profitability more than any price cut.</p>
+
+<p><strong>Want to create web development proposals in a professional format, with your branding and sent directly to the client?</strong> Try <a href="/registro?lang=en">DealForge</a> and stop wasting hours on Word documents so you can spend them on what really matters: building projects that work.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: ["web development", "web development quote", "app quote", "digital agencies", "freelance", "pricing", "small business"],
+    publishedAt: "2026-06-15T11:00:00.000Z",
+    metaTitulo: "Web and app development quotes: the definitive guide for agencies and freelancers — DealForge",
+    metaDescripcion: "How to create web development quotes that close projects: pricing models, what to include, how to calculate real scope and avoid scope creep. With a structure template.",
+    metaKeywords: "web development quote, web project quote, how to quote web development, mobile app price, app quote, freelance developer quote, web quote template, web development agency price",
+  },
+  {
+    slug: "how-to-quote-consulting-services-practical-guide",
+    titulo: "How to quote consulting services: a practical guide for consultants and advisers",
+    extracto: "Learn to set rates, choose the right pricing model and create proposals that win projects. A practical guide for independent consultants and consulting firms.",
+    contenido: `<p>Quoting consulting services is, probably, one of the hardest parts of the business. It's not like selling a product with a list price. Every project is different, every client has a different perception of value, and if you get the price wrong, you either leave money on the table or lose the project. Neither option is good.</p>
+
+<p>In this article we'll look, without beating around the bush, at how to structure your consulting quotes so they're competitive, profitable and professional. From how to calculate your real rate to how to present the price to the client without sending them running.</p>
+
+<h2>Why quoting consulting is different from quoting products</h2>
+
+<p>When you sell a product, the price is relatively easy: cost of manufacture plus margin. When you sell consulting, the price depends on far more subjective factors:</p>
+
+<ul>
+<li><strong>The value you generate for the client</strong>, which can be enormous and hard to quantify</li>
+<li><strong>Your experience and reputation</strong>, which are hard to compare directly</li>
+<li><strong>The scope of the project</strong>, which almost always changes over time</li>
+<li><strong>The risk you take on</strong>, especially if you work on results</li>
+</ul>
+
+<p>All of this means many consultants either undervalue themselves (to be competitive) or present proposals so high they scare clients off. The solution lies in understanding the available pricing models and choosing the one that best fits each situation.</p>
+
+<h2>The four pricing models in consulting</h2>
+
+<p>There's no single correct way to charge for consulting. These are the four main models, with their honest advantages and disadvantages:</p>
+
+<h3>1. Hourly rate</h3>
+
+<p>The simplest and most common among consultants starting out. You define an hourly rate and charge based on the time spent.</p>
+
+<p><strong>Advantages:</strong> easy to explain, transparent, protects your time if the project drags on.<br>
+<strong>Disadvantages:</strong> it penalises efficiency (the better you work, the less you earn), makes it harder for the client to approve the budget because they don't know the final cost, and creates friction in the relationship when the client feels "the meter is running".</p>
+
+<p><strong>When to use it:</strong> for exploratory or open-ended work, for clients you already trust, or when you genuinely can't estimate the time needed.</p>
+
+<h3>2. Fixed price per project</h3>
+
+<p>You define a total price for the delivered result, regardless of the hours invested.</p>
+
+<p><strong>Advantages:</strong> the client knows exactly what they'll pay, it makes budget approval easier, and if you're efficient, your margin grows.<br>
+<strong>Disadvantages:</strong> you take on the risk of the project dragging on, and a bad initial estimate can ruin the project's profitability.</p>
+
+<p><strong>When to use it:</strong> for well-defined projects with a clear scope. Never use it when the client doesn't know exactly what they want; you'll end up working for free.</p>
+
+<h3>3. Monthly retainer (fixed fee)</h3>
+
+<p>The client pays a fixed amount per month in exchange for availability, a set number of hours or a bundle of recurring services.</p>
+
+<p><strong>Advantages:</strong> predictable income, a more stable relationship with the client, lower acquisition cost per client.<br>
+<strong>Disadvantages:</strong> it can become comfortable for the client (who'll use more hours than agreed) and for you (who stops innovating and settles).</p>
+
+<p><strong>When to use it:</strong> for ongoing consulting relationships where the client needs regular support: strategic consulting, legal advice, marketing, outsourced HR.</p>
+
+<h3>4. Value-based pricing</h3>
+
+<p>The price doesn't reflect time or costs, but the economic value the project generates for the client. If you help a company generate £500,000 in additional revenue, charging £50,000 isn't expensive even if you "only" spent 40 hours.</p>
+
+<p><strong>Advantages:</strong> it frees you from the trap of selling time, aligns your incentives with the client's, and can multiply your income per hour worked.<br>
+<strong>Disadvantages:</strong> it requires a lot of trust and credentials, the client needs to understand and accept the value logic, and it's not always easy to quantify the value in advance.</p>
+
+<p><strong>When to use it:</strong> when you can clearly quantify the impact of your work on business results. Sales consulting, process optimisation, digital transformation with measurable ROI.</p>
+
+<h2>How to calculate your real rate as a consultant</h2>
+
+<p>Before setting a price, you need to know what it costs you to work. Many consultants get this wrong because they only calculate the time they spend "on the project" and forget everything else.</p>
+
+<p>A practical formula to calculate your minimum hourly rate:</p>
+
+<ol>
+<li><strong>Calculate your total annual costs:</strong> the income you need to live + National Insurance or contributions + tools + office + marketing + training + taxes</li>
+<li><strong>Estimate the real billable hours:</strong> it's not 8 hours a day. Between internal meetings, prospecting, admin, training and holidays, a consultant usually bills between 1,000 and 1,400 hours a year. Be conservative: use 1,000 hours.</li>
+<li><strong>Add your target margin:</strong> if you want to earn 30% on costs, multiply.</li>
+</ol>
+
+<p>A real example:</p>
+<ul>
+<li>Total annual costs: £60,000</li>
+<li>Estimated billable hours: 1,000 hours</li>
+<li>Minimum rate: £60/hour</li>
+<li>With a 40% margin: <strong>£84/hour</strong></li>
+</ul>
+
+<p>If your current rate is below that number, you're losing money, even if you don't see it directly. You're subsidising your clients with your time.</p>
+
+<p>An extra tip: review your rate at least once a year. Inflation, the growth of your experience and the evolution of the market are legitimate reasons to raise prices.</p>
+
+<h2>What a professional consulting proposal must include</h2>
+
+<p>A consulting quote isn't just a number. It's a sales document. These are the sections that can't be missing:</p>
+
+<h3>Executive summary</h3>
+<p>One or two pages that show you understand the client's problem better than anyone. Don't talk about yourself yet, talk about the client: their situation, their challenges, the consequences of not acting. If the client reads the executive summary and thinks "exactly, this is what's happening to me", you've already won 50%.</p>
+
+<h3>Project scope</h3>
+<p>Define precisely what the project includes and, just as importantly, what it does <em>not</em> include. Scope creep (when the project grows without the price growing) is the silent killer of profitability in consulting. Be explicit: "This project includes X. It does not include Y or Z, which would be quoted separately if needed."</p>
+
+<h3>Methodology and phases</h3>
+<p>Explain how you're going to work. It doesn't need to be a treatise, but the client needs to understand the process: what phases there are, what's delivered in each, who does what. This builds trust and reduces the perception of risk.</p>
+
+<h3>Concrete deliverables</h3>
+<p>What is the client going to receive at the end? List the deliverables tangibly: diagnostic report, prioritised action plan, working sessions, team training, process documentation. Intangibles scare clients; concrete deliverables don't.</p>
+
+<h3>Timeline</h3>
+<p>Key dates, delivery milestones, estimated duration. A project with no dates is a project with no end.</p>
+
+<h3>Team and credentials</h3>
+<p>Who's going to work on the project and why they're the right people. Briefly, but with data: relevant experience, similar clients, previous results. Credentials aren't ego, they're social proof that reduces the client's perceived risk.</p>
+
+<h3>Pricing proposal</h3>
+<p>The price. Here there's a golden rule: <strong>never present a single price if you can present options</strong>. Options (basic, standard, premium) shift the conversation from "do I buy it?" to "which do I buy?". Plus, the middle option usually wins, and you can design it to be the most profitable for you.</p>
+
+<h3>Terms and next steps</h3>
+<p>Payment terms (a deposit of 30-50% at the start is standard in consulting), proposal validity, what you need from the client to get started, and how to accept the proposal. Make signing easy: the simpler it is to say "yes", the more you sell.</p>
+
+<h2>How to present the price without losing the client</h2>
+
+<p>The price is the moment of tension in every quote. Here are the techniques that really work:</p>
+
+<h3>Anchor before revealing the price</h3>
+<p>Before giving your price, help the client visualise the value. If your analysis can identify inefficiencies costing £200,000 a year, that number is the anchor. Your fee of £30,000 no longer sounds like a lot, it sounds like an investment with a 566% ROI.</p>
+
+<h3>Break the price down into investment per day or result</h3>
+<p>A £15,000 project over three months is £167 a day. Presented that way, it seems much more accessible. Or calculate the price per result: if the project lasts three months and saves the team 8 hours a week, how much is that worth in salaries? Make that calculation explicit in the proposal.</p>
+
+<h3>Don't apologise for your price</h3>
+<p>One of the most common mistakes: using defensive language when presenting the price. "Although it may seem high…", "I know it's a significant investment…", "if the price is a problem we can negotiate…". All of that communicates insecurity and opens the door to negotiation before the client has asked for it.</p>
+
+<p>Present the price with confidence. If the client wants to negotiate, let them ask. Don't hand them the weapons.</p>
+
+<h3>Tie the price to scope, not to time</h3>
+<p>Never say "I charge X hours at Y per hour". Say "the project costs Z and includes these deliverables". When the price is tied to time, the client always feels they can negotiate more hours. When it's tied to the result, the conversation is different.</p>
+
+<h2>Common mistakes in consulting quotes</h2>
+
+<p>After talking to hundreds of consultants, these are the mistakes that come up most:</p>
+
+<ul>
+<li><strong>Quoting without a prior diagnosis.</strong> If you don't understand the client's problem well, your proposal will be generic. A discovery meeting before quoting isn't wasted time; it's the investment that wins projects.</li>
+<li><strong>Underestimating management time.</strong> Meetings, emails, revisions, coordination with the client's team... all of that is time that must be in the price or in the project scope.</li>
+<li><strong>Not including a contingency buffer.</strong> Projects almost always get complicated. Add between 15% and 25% of contingency to the price or the timeline, and be transparent about why it exists.</li>
+<li><strong>Giving prices verbally before the written proposal.</strong> If you say a number in a meeting and then the written proposal has nuances or conditions, you've created unnecessary friction. Numbers, always in writing and always with context.</li>
+<li><strong>Proposals that are too long.</strong> More pages don't mean more value. A 40-page proposal nobody reads is worse than a 10-page one that convinces. Prioritise clarity over exhaustiveness.</li>
+<li><strong>Not setting an expiry date.</strong> A proposal with no expiry is a proposal that never closes. Always set a validity: 15 or 30 days is usual.</li>
+</ul>
+
+<h2>Consulting quote structure: a practical example</h2>
+
+<p>So all of the above is clear, here's an example structure for a strategic consulting proposal:</p>
+
+<p><strong>Client:</strong> Industrial distribution company, 50 employees, margin problems in the direct sales channel.</p>
+
+<p><strong>Proposal:</strong></p>
+
+<ul>
+<li><em>Executive summary (1 page):</em> "Your sales team closes projects in 45% of cases, compared with 65% in the sector. The problem isn't the team, it's the quoting process and the sales cycle. This project will attack those two root causes."</li>
+<li><em>Scope:</em> diagnosis of the sales process, redesign of the quoting flow, implementation of a CPQ tool, training of the sales team (5 people).</li>
+<li><em>Does not include:</em> ERP integration, changes to the commission structure, post-implementation support beyond 90 days.</li>
+<li><em>Phases:</em> Phase 1 – Diagnosis (3 weeks). Phase 2 – Design and implementation (6 weeks). Phase 3 – Training and launch (2 weeks).</li>
+<li><em>Deliverables:</em> diagnostic report, new documented process, tool configuration, 3 training sessions, 30 days of post-launch support.</li>
+<li><em>Price:</em> £18,500 + VAT. 40% on signing, 30% at the start of Phase 2, 30% on final delivery.</li>
+<li><em>Validity:</em> 30 days from the date sent.</li>
+</ul>
+
+<p>This proposal is concrete, has tangible deliverables, defines the scope and what it doesn't include, and presents the price tied to results. It's exactly what builds trust and makes the "yes" easier.</p>
+
+<h2>Tools to create professional consulting proposals</h2>
+
+<p>The reality of the independent consultant or small consulting firm is that they spend too much time with Word, PDF and spreadsheets trying to make everything add up and look good. That's time that isn't billed and that's exhausting.</p>
+
+<p><strong>Quoting software</strong> designed for professional services can make a real difference:</p>
+
+<ul>
+<li>Proposal templates with your branding, ready to customise in minutes</li>
+<li>A service catalogue with prices, which you can combine to create proposals quickly</li>
+<li>Automatic calculation of totals, VAT and discounts</li>
+<li>Email sending with tracking (you know when the client has opened the proposal)</li>
+<li>Status control for each proposal: sent, viewed, approved, rejected</li>
+</ul>
+
+<p>In DealForge, for example, you can create your consulting service catalogue with unit prices, define proposal templates for different types of projects, and send PDF proposals with your logo directly to the client. The tracking module alerts you when the client opens the proposal, which is the ideal moment to follow up by phone.</p>
+
+<p>It's not a tool just for large companies. It's designed specifically for small businesses and sole traders who want to professionalise their sales process without setting up a complex technology infrastructure.</p>
+
+<h2>Conclusion</h2>
+
+<p>Quoting well in consulting isn't an exact science, but it isn't magic either. It's a process you learn, refine with experience and systematise with the right tools.</p>
+
+<p>The key points to take away from this article:</p>
+
+<ul>
+<li>Choose the pricing model that best fits each project, not the most comfortable one by default</li>
+<li>Calculate your real rate including all costs, not just the time on the project</li>
+<li>A proposal is a sales document, not just a quote: work on it as such</li>
+<li>Define the scope precisely, explicitly including what isn't included</li>
+<li>Present the price with confidence and tied to value, not to time</li>
+<li>Systematise the process so creating a good proposal doesn't take you half a day</li>
+</ul>
+
+<p>The consultant who wins more projects isn't always the cheapest or the most technically brilliant. It's the one who presents their value most clearly and professionally. That starts with the quote.</p>
+
+<p><strong>Want to create professional-looking consulting proposals, in minutes and without technical hassle?</strong> Try <a href="/registro?lang=en">DealForge</a> and spend that time on what really generates value: your clients.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: ["consulting", "consulting quote", "consulting proposal", "consultant rates", "sales proposal", "sole traders", "small business"],
+    publishedAt: "2026-06-15T11:30:00.000Z",
+    metaTitulo: "How to quote consulting services: a practical guide — DealForge",
+    metaDescripcion: "Learn to set rates, choose the right pricing model and create consulting proposals that win projects. With practical examples and a quote structure.",
+    metaKeywords: "how to quote consulting, consulting quote, consultant rate, consulting pricing proposal, consulting services price, how to charge for consulting, professional services quote, consulting retainer",
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
