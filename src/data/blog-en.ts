@@ -1071,6 +1071,178 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p>The learning curve is minimal and the results are immediate. Your sales team will thank you.</p>`,
   },
+  // ─── 9. Excel vs quoting software: when to switch ───
+  {
+    slug: "excel-vs-quoting-software-when-to-switch",
+    titulo: "Excel vs quoting software: when to make the switch",
+    extracto:
+      "Excel is where almost every salesperson starts. But there comes a point where it holds you back more than it helps. Here's the exact signal for knowing when to switch to dedicated software.",
+    categoria: "producto",
+    tags: ["Excel", "quotes", "estimates", "quoting software", "CPQ", "productivity", "sales tools", "small business"],
+    autor: "DealForge",
+    publishedAt: "2026-04-14T09:00:00Z",
+    metaTitulo: "Excel vs Quoting Software: When to Make the Switch — DealForge",
+    metaDescripcion:
+      "Still using Excel to quote? Discover the exact signals that it's time to switch to dedicated software, and how to make the transition without disruption.",
+    metaKeywords:
+      "excel vs quoting software, stop using excel for quotes, quoting software small business, when to switch from excel, quote software, professional quoting tool, CPQ, automate excel quotes",
+    contenido: `<p>Almost every business starts the same way: an Excel template, a bit of brand colour, and off you go quoting. And it works. At first, it works well.</p>
+
+<p>But there comes a moment — and almost every salesperson remembers it — when something goes wrong. A quote sent with last year's price. A discount applied to the wrong row. A client asking about a proposal you can't find among the twenty files named things like <code>quote_final_DEFINITIVE_v3.xlsx</code>.</p>
+
+<p>This article isn't an attack on Excel. It's a brilliant tool for what it was designed for. But quoting isn't analysing data: it's selling. And for that, Excel has very specific limits worth knowing before they cost you a deal.</p>
+
+<h2>Why everyone starts with Excel (and it makes sense)</h2>
+
+<p>Excel is free (or nearly), everyone knows it, and in a business's first months the priority is to get out and sell, not to build infrastructure. With a decent template you can produce a presentable quote in twenty minutes.</p>
+
+<p>What's more, Excel gives you total control. You can add any column, change any formula, structure discounts exactly how you want. That flexibility is seductive, especially if you're the only one touching the file.</p>
+
+<p>The problem is that flexibility has a cost you don't see until the business grows. And by then, you're buried in operational debt.</p>
+
+<h2>The five signs Excel is no longer working for you</h2>
+
+<h3>1. You waste time hunting for the latest version</h3>
+
+<p>How many times have you searched for a quote sent three weeks ago? How many minutes have you spent opening files to find the one with the correct prices?</p>
+
+<p>With Excel, each quote is a separate file. It's saved in a folder, sent by email, edited locally. The result is a chaotic file system where the "truth" about a proposal's status is scattered across your local disk, the client's email and maybe a shared Drive folder with five different versions.</p>
+
+<p>This isn't a problem of personal organisation: it's a structural problem with the format. Excel wasn't designed to manage the lifecycle of commercial documents.</p>
+
+<h3>2. Calculation errors cost you real money</h3>
+
+<p>A formula that doesn't update when you add a new line. A unit price changed manually that doesn't reflect the updated catalogue. A VIP client discount applied at 15% when it should be 10%.</p>
+
+<p>In Excel, all these errors are possible — and frequent. A study by EuSpRIG (European Spreadsheet Risks Interest Group) estimates that more than 90% of corporate spreadsheets contain errors. Most are silent: the total looks reasonable, no one questions it, and the proposal goes out with an incorrect margin.</p>
+
+<p>In some cases the error works against you (you quote cheaper than you should). In others it works against the client, which creates tension when the invoice arrives. Either way, the damage is done.</p>
+
+<h3>3. You don't know the status of your quotes</h3>
+
+<p>Quick question: right now, how many quotes have you sent and are awaiting a reply? How many have gone more than two weeks without a response? When did you last follow up with each client?</p>
+
+<p>If you can't answer that in under thirty seconds, you have a sales-visibility problem. And Excel can't give it to you because it's a document, not a system.</p>
+
+<p>The direct consequence: quotes that die from a lack of follow-up. The client didn't say no, they simply didn't reply. And you, with your head in the next thing, didn't call back. You didn't lose that deal to the competition: you lost it to silence.</p>
+
+<h3>4. Your professional image suffers (even if they don't tell you)</h3>
+
+<p>The quote is, in many cases, the first formal document the client receives from you. It's the moment they stop talking to a person and start evaluating a company.</p>
+
+<p>An Excel template with the default font, no logo properly placed, no proposal number, no clearly formatted payment terms... doesn't convey the same trust as a clean PDF with a professional header and a digital signature.</p>
+
+<p>Clients won't tell you "your quote looks amateurish". They'll simply go with whoever inspired more confidence from the first contact.</p>
+
+<h3>5. You can't scale the team without chaos</h3>
+
+<p>While it's just you, the Excel system can limp along. But the moment there are two people quoting — a junior salesperson, a partner, someone covering holidays — the system collapses.</p>
+
+<p>Who has the up-to-date catalogue? Which template do we use? How do I know the payment terms my colleague set are the right ones for that client? Where are the quotes they sent while I was travelling?</p>
+
+<p>Chaos doesn't arrive all at once. It arrives gradually, one confusing file at a time, until one day someone sends a proposal with year-old prices and no one knows exactly how it happened.</p>
+
+<h2>What you really gain by moving to dedicated software</h2>
+
+<p>The easy answer is "speed". And it's true: generating a quote with CPQ software is three to five times faster than with Excel once you have the catalogue set up. But speed is only the most visible benefit. The most important ones are others.</p>
+
+<h3>Pipeline control: knowing what's happening with each proposal</h3>
+
+<p>Quoting software tells you, at a glance, how many proposals you have at each stage: draft, sent, viewed by the client, accepted, rejected, expired. You can see how much value is at each stage of the funnel and prioritise follow-up where it has the most impact.</p>
+
+<p>That's what separates a reactive salesperson (who responds when the client calls) from a proactive one (who gets in touch at the right moment, when the proposal has gone X days without a reply).</p>
+
+<h3>Correct prices, always</h3>
+
+<p>With a centralised product catalogue, the unit price is updated once and reflected in all new quotes automatically. Discounts by client, by volume or by product type are configured once and applied with no manual intervention.</p>
+
+<p>The result: zero pricing errors. And when you need to raise rates — something that happens often in the current inflationary climate — you do it in a single place, not hunting through twenty files for "the good one".</p>
+
+<h3>A professional look without spending time on design</h3>
+
+<p>The best quoting software generates professional-looking PDFs automatically: a header with your logo, well-structured product lines, a correct VAT breakdown, payment terms, a footer with legal details. You fill in the content; the system handles the format.</p>
+
+<p>The time you used to spend adjusting columns and margins in Excel, you'll spend understanding the client's needs before sending the proposal.</p>
+
+<h3>Friction-free collaboration</h3>
+
+<p>The whole team works on the same system. The sales manager can see each salesperson's quotes. A new employee can start quoting correctly from day one because the catalogue, templates and terms are already set up. No one depends on asking a colleague "can you send me your quote template?".</p>
+
+<h3>Data for better decisions</h3>
+
+<p>Which products appear most in your won quotes? In what price range do you have the highest close rate? What kind of discount speeds up the client's decision? With Excel you'll never have those answers because the data is fragmented across hundreds of files. With dedicated software, that information is there, waiting for you to use it to fine-tune your pricing strategy.</p>
+
+<h2>The "advanced Excel" argument</h2>
+
+<p>There's one type of user who always shows up in this conversation: the one with "a very advanced Excel". Macros, pivot tables, data validations, dropdown lists with the catalogue products. Sometimes it's impressive.</p>
+
+<p>The problem isn't the file's technical complexity. The problem is that this advanced Excel was built by one person, is understood by that person, and if that person leaves or falls ill, the system stops working. On top of that, it's still a file: it has no status, no traceable change history, it doesn't send follow-up reminders, and it generates no pipeline metrics.</p>
+
+<p>Advanced Excel is a sign that the business needs a real system. The effort invested in building it would have paid off more by setting up a tool designed for the job.</p>
+
+<h2>When it does NOT make sense to switch</h2>
+
+<p>In all honesty: there are situations where Excel is perfectly adequate.</p>
+
+<ul>
+<li><strong>If you quote fewer than two or three times a month.</strong> The volume doesn't justify the cost of adopting and learning a new tool. A good Excel or Google Sheets template is enough.</li>
+<li><strong>If all your quotes are highly customised and unique.</strong> Businesses where each proposal is a one-off project (a singular architecture project, a very specific strategic consulting engagement) sometimes fit free-form documents better than structured forms. Although even here, good software allows enough flexibility.</li>
+<li><strong>If you've just started and are still validating your pricing model.</strong> Don't build systems on prices that will change every week. First validate, then systematise.</li>
+</ul>
+
+<p>The switch makes sense when the pain of staying with Excel outweighs the friction of learning something new. And that point comes sooner than it seems.</p>
+
+<h2>The ideal moment to switch</h2>
+
+<p>It's not when you're already in crisis. It's not when you've lost your third deal to a pricing error. The ideal moment is when you start to feel the friction, before it becomes a systemic problem.</p>
+
+<p>Some concrete indicators that the moment has arrived:</p>
+
+<ul>
+<li>You send more than ten quotes a month</li>
+<li>You have more than one person involved in the sales process</li>
+<li>You've had at least one incorrect-price incident in the last six months</li>
+<li>You can't say from memory how many proposals you have open right now</li>
+<li>The time between the client's request and sending the quote exceeds 24 hours</li>
+</ul>
+
+<p>If two or more of these criteria apply, the switch will pay back the time invested within the first month.</p>
+
+<h2>How to make the transition without drama</h2>
+
+<p>The biggest blocker to switching tools isn't the cost: it's the fear of disruption. "I can't stop to learn a new system right now." It's understandable, but the logic fails: the longer you wait, the more quotes you have in Excel, the more history there is to migrate, and the deeper the habit.</p>
+
+<p>The transition is simpler than it seems if you do it in order:</p>
+
+<ol>
+<li><strong>Export your product catalogue to a clean spreadsheet.</strong> Name, description, unit price, VAT rate. That's all you need to start.</li>
+<li><strong>Set up a base template</strong> with your logo, your usual payment terms and your legal footer. Thirty minutes of work you won't repeat.</li>
+<li><strong>Create the first five quotes in the new system</strong> in parallel to how you'd do them in Excel. This gives you confidence with no risk.</li>
+<li><strong>From week two, you only use the new system.</strong> Not "for important quotes". For all of them. Consistency is what builds the habit.</li>
+</ol>
+
+<p>With DealForge, for example, the onboarding process is designed so that in under an hour you have your catalogue loaded and your first quote ready to send. You don't need technical training or an implementation consultant. If you can use a spreadsheet, you can use DealForge.</p>
+
+<h2>The question that really matters</h2>
+
+<p>There's a very simple way to know whether you need a change: calculate how much time you spend each week on quote-related tasks — creating, correcting, searching, following up, resending — and multiply it by your hourly cost.</p>
+
+<p>For most small businesses, that number is between 3 and 8 hours a week. At an opportunity cost of £40/hour, that's between £120 and £320 a week in sales time not being spent generating new leads or closing existing deals.</p>
+
+<p>Quoting software costs between £30 and £100 a month depending on the features. The arithmetic doesn't leave much room for doubt.</p>
+
+<p>The argument isn't technological. It's economic: how much is your sales time worth, and what's the best thing you can do with it?</p>
+
+<h2>Conclusion</h2>
+
+<p>Excel isn't the problem. The problem is continuing to use Excel once you've passed the threshold where it makes sense. And that threshold comes faster than you anticipate.</p>
+
+<p>The transition to dedicated software isn't a luxury for big companies. It's the right operational decision at the right moment: when the sales process starts to be a brake rather than an engine.</p>
+
+<p>If you recognise any of the signs in this article in your day-to-day, the best time to switch was six months ago. The second best time is today.</p>
+
+<p><strong>Want to see how it works in practice?</strong> <a href="/registro?lang=en">DealForge</a> has a free trial with no credit card required. In under an hour you can have your catalogue loaded and your first quote sent.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
