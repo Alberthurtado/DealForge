@@ -1,9 +1,18 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Navbar } from "@/app/_landing/navbar";
 import { FooterEn } from "@/app/_landing/footer-en";
 import { AUTHOR, authorPersonJsonLd } from "@/data/author";
 import { Linkedin, ArrowRight, Flame } from "lucide-react";
+
+// Render the real headshot only when the file actually exists in /public,
+// otherwise fall back to initials — so the page never shows a broken image.
+const hasPhoto = fs.existsSync(
+  path.join(process.cwd(), "public", AUTHOR.imagePublicPath.replace(/^\//, ""))
+);
 
 export const metadata: Metadata = {
   title: `${AUTHOR.name} — Founder / Product Lead`,
@@ -45,12 +54,23 @@ export default function AuthorPage() {
         <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-32 pb-20">
           {/* Header */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-            <div
-              aria-hidden="true"
-              className="w-24 h-24 flex-shrink-0 rounded-2xl bg-[#3a9bb5]/10 text-[#3a9bb5] flex items-center justify-center text-2xl font-bold"
-            >
-              {initials}
-            </div>
+            {hasPhoto ? (
+              <Image
+                src={AUTHOR.imagePublicPath}
+                alt={`${AUTHOR.name} — ${AUTHOR.jobTitle}`}
+                width={112}
+                height={112}
+                priority
+                className="w-28 h-28 flex-shrink-0 rounded-2xl object-cover border border-gray-100 shadow-sm"
+              />
+            ) : (
+              <div
+                aria-hidden="true"
+                className="w-24 h-24 flex-shrink-0 rounded-2xl bg-[#3a9bb5]/10 text-[#3a9bb5] flex items-center justify-center text-2xl font-bold"
+              >
+                {initials}
+              </div>
+            )}
             <div className="text-center sm:text-left">
               <h1 className="text-3xl font-bold text-gray-900">{AUTHOR.name}</h1>
               <p className="mt-1 text-[#3a9bb5] font-semibold">{AUTHOR.jobTitle}</p>

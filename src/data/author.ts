@@ -8,6 +8,9 @@ export const AUTHOR = {
   url: "https://dealforge.es/about/albert-hurtado",
   bio: "Albert Hurtado builds DealForge, an AI-powered quoting platform for freelancers and small businesses, focused on making quote creation faster, clearer, and more professional.",
   linkedIn: "https://www.linkedin.com/in/alberthurtado/",
+  // Headshot. Drop the file at public/team/albert-hurtado.jpg for it to render.
+  imagePublicPath: "/team/albert-hurtado.jpg",
+  imageUrl: "https://dealforge.es/team/albert-hurtado.jpg",
   expertise: [
     "quoting software",
     "sales operations",
@@ -36,6 +39,7 @@ export const authorPersonJsonLd = {
     name: "DealForge",
     url: "https://dealforge.es",
   },
+  image: AUTHOR.imageUrl,
   knowsAbout: [...AUTHOR.expertise],
   knowsLanguage: [...AUTHOR.languageCodes],
   sameAs: [AUTHOR.linkedIn],
