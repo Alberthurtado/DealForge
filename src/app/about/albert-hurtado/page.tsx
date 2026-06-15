@@ -10,9 +10,11 @@ import { Linkedin, ArrowRight, Flame } from "lucide-react";
 
 // Render the real headshot only when the file actually exists in /public,
 // otherwise fall back to initials — so the page never shows a broken image.
-const hasPhoto = fs.existsSync(
-  path.join(process.cwd(), "public", AUTHOR.imagePublicPath.replace(/^\//, ""))
-);
+function headshotExists(): boolean {
+  return fs.existsSync(
+    path.join(process.cwd(), "public", AUTHOR.imagePublicPath.replace(/^\//, ""))
+  );
+}
 
 export const metadata: Metadata = {
   title: `${AUTHOR.name} — Founder / Product Lead`,
@@ -42,6 +44,7 @@ const initials = AUTHOR.name
   .join("");
 
 export default function AuthorPage() {
+  const hasPhoto = headshotExists();
   return (
     <>
       <script
