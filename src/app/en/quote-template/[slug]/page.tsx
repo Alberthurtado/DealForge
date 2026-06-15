@@ -36,7 +36,7 @@ export async function generateMetadata({
 }
 
 function formatCurrency(n: number) {
-  return new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(n);
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

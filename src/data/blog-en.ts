@@ -774,7 +774,7 @@ export const blogPostsEn: BlogPostEn[] = [
 <p>A consecutive numbering system (for example, QUO-2026-0042) lets you stay organised and makes communication easier. When your client says &ldquo;I've seen your proposal&rdquo;, you'll both know exactly which one they mean.</p>
 
 <h3>4. Detailed description of products or services</h3>
-<p>This is where many fail. It's not enough to put &ldquo;Consulting service: £5,000&rdquo;. Break down each line with a clear description, quantity, unit price and discounts if any. <strong>The more transparent you are, the more trust you build.</strong></p>
+<p>This is where many fail. It's not enough to put &ldquo;Consulting service: $5,000&rdquo;. Break down each line with a clear description, quantity, unit price and discounts if any. <strong>The more transparent you are, the more trust you build.</strong></p>
 
 <h3>5. Taxes and totals</h3>
 <p>Clearly state the subtotal, the VAT (or applicable tax) and the final total. Don't make your client do mental maths. Make things easy.</p>
@@ -1227,9 +1227,9 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p>There's a very simple way to know whether you need a change: calculate how much time you spend each week on quote-related tasks — creating, correcting, searching, following up, resending — and multiply it by your hourly cost.</p>
 
-<p>For most small businesses, that number is between 3 and 8 hours a week. At an opportunity cost of £40/hour, that's between £120 and £320 a week in sales time not being spent generating new leads or closing existing deals.</p>
+<p>For most small businesses, that number is between 3 and 8 hours a week. At an opportunity cost of $40/hour, that's between $120 and $320 a week in sales time not being spent generating new leads or closing existing deals.</p>
 
-<p>Quoting software costs between £30 and £100 a month depending on the features. The arithmetic doesn't leave much room for doubt.</p>
+<p>Quoting software costs between $30 and $100 a month depending on the features. The arithmetic doesn't leave much room for doubt.</p>
 
 <p>The argument isn't technological. It's economic: how much is your sales time worth, and what's the best thing you can do with it?</p>
 
@@ -1280,7 +1280,7 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <h2>The follow-up protocol that works</h2>
 
-<p>Here's a framework that works for most small-business sales cycles, with mid-ticket services (between £1,000 and £20,000). Adjust it to your sector, but use it as a starting point:</p>
+<p>Here's a framework that works for most small-business sales cycles, with mid-ticket services (between $1,000 and $20,000). Adjust it to your sector, but use it as a starting point:</p>
 
 <h3>Day 0: the quote and closing the first contact</h3>
 
@@ -1377,7 +1377,7 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p>One of the most frequent questions: how many follow-ups are too many?</p>
 
-<p>The honest answer: it depends on the ticket and the sales cycle. For a £2,000 sale with a quick decision, three contacts over two weeks is enough. For a £50,000 sale with multiple stakeholders, you can spend six months in active follow-up without it being excessive.</p>
+<p>The honest answer: it depends on the ticket and the sales cycle. For a $2,000 sale with a quick decision, three contacts over two weeks is enough. For a $50,000 sale with multiple stakeholders, you can spend six months in active follow-up without it being excessive.</p>
 
 <p>The stop signal isn't time, but the client's response. If they explicitly ask you to stop, you stop. If they tell you the project has been cancelled, you thank them and close. If they simply don't respond after five or six well-spaced attempts, you move them to passive follow-up (an email a month) and spend your energy on hotter leads.</p>
 
@@ -1410,11 +1410,11 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <h2>A practical example: a renovation company</h2>
 
-<p>Imagine a renovation company that sends between 15 and 25 quotes a month. The average ticket is £8,000. With a 20% close rate, they win 3-5 projects a month.</p>
+<p>Imagine a renovation company that sends between 15 and 25 quotes a month. The average ticket is $8,000. With a 20% close rate, they win 3-5 projects a month.</p>
 
 <p>The problem: many quotes go without systematic follow-up because the manager also handles the technical side. Result: leads that cool off, clients who end up hiring the competition not because they were cheaper, but because they were more consistent in their contact.</p>
 
-<p>With a structured protocol and automatic reminders, that same company can raise its close rate to 28-30% without increasing the number of quotes sent. In economic terms: 1-2 additional projects a month, £8,000-£16,000 more revenue with the same sales effort.</p>
+<p>With a structured protocol and automatic reminders, that same company can raise its close rate to 28-30% without increasing the number of quotes sent. In economic terms: 1-2 additional projects a month, $8,000-$16,000 more revenue with the same sales effort.</p>
 
 <p>Follow-up isn't an extra. It's part of the sales process.</p>
 
@@ -1517,7 +1517,7 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p>The rule of thumb: if the client can misinterpret something, write it explicitly. Post-project disputes almost always originate in an ambiguous quote.</p>
 
-<p>Example of a weak description: <em>"Website design: £1,200"</em></p>
+<p>Example of a weak description: <em>"Website design: $1,200"</em></p>
 
 <p>Example of a solid description: <em>"Design and development of a corporate website in WordPress: up to 5 pages (Home, Services, About us, Blog, Contact), contact form, mobile optimisation, Google Analytics integration, 2 rounds of design revisions. Does not include copywriting, photography or web hosting."</em></p>
 
@@ -1541,9 +1541,9 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p>Why itemise instead of just stating the total? For two reasons:</p>
 
-<p>First: the business client needs to see the net amount separately for their accounting. If you only see a total of £1,452 with no breakdown, you have to start calculating. That creates friction.</p>
+<p>First: the business client needs to see the net amount separately for their accounting. If you only see a total of $1,452 with no breakdown, you have to start calculating. That creates friction.</p>
 
-<p>Second: the breakdown makes the price look more reasonable. Three lines of £300, £400 and £500 are perceived differently from a single block of £1,200, even though they're the same.</p>
+<p>Second: the breakdown makes the price look more reasonable. Three lines of $300, $400 and $500 are perceived differently from a single block of $1,200, even though they're the same.</p>
 
 <p>If you've applied discounts, show them explicitly too. A visible discount has commercial value. A price quietly cut does not.</p>
 
@@ -1689,7 +1689,7 @@ export const blogPostsEn: BlogPostEn[] = [
 <p>The problem has three dimensions:</p>
 
 <ul>
-<li><strong>Economic:</strong> Every deal lost to slowness is revenue that doesn't come in. If you have an average ticket of £3,000 and lose two sales a month for this reason, you're leaving £72,000 a year on the table.</li>
+<li><strong>Economic:</strong> Every deal lost to slowness is revenue that doesn't come in. If you have an average ticket of $3,000 and lose two sales a month for this reason, you're leaving $72,000 a year on the table.</li>
 <li><strong>Commercial:</strong> The prospect that doesn't close with you doesn't disappear. They close with your competition and build a relationship with them. That client doesn't come back.</li>
 <li><strong>Reputational:</strong> In small markets or specific verticals, the perception of being "slow to respond" spreads. Clients talk about these experiences.</li>
 </ul>
@@ -1963,7 +1963,7 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p>It may seem a minor detail, but sending a quote from <em>yourbusiness2009@gmail.com</em> or <em>pete.smith.plumber@hotmail.com</em> sends a signal about how formal your business is.</p>
 
-<p>If you don't have your own domain, get one. An email like <em>quotes@yourbusiness.com</em> or <em>hello@yourbusiness.com</em> costs less than £10 a year and projects a radically different image. It's one of the highest-ROI investments you can make in your professional image.</p>
+<p>If you don't have your own domain, get one. An email like <em>quotes@yourbusiness.com</em> or <em>hello@yourbusiness.com</em> costs less than $10 a year and projects a radically different image. It's one of the highest-ROI investments you can make in your professional image.</p>
 
 <h2>Mistake 9: Not following up</h2>
 
@@ -2124,7 +2124,7 @@ export const blogPostsEn: BlogPostEn[] = [
 <li><strong>Line total:</strong> quantity × unit price</li>
 </ul>
 
-<p>The level of detail in the line items is what separates a professional estimator from an amateur. Being vague is expensive: if you put "full bathroom renovation — £3,500" with no breakdown, the client will assume that includes everything, including what you weren't going to do.</p>
+<p>The level of detail in the line items is what separates a professional estimator from an amateur. Being vague is expensive: if you put "full bathroom renovation — $3,500" with no breakdown, the client will assume that includes everything, including what you weren't going to do.</p>
 
 <h2>The 8 things that can't be missing from your renovation quote</h2>
 
@@ -2141,7 +2141,7 @@ export const blogPostsEn: BlogPostEn[] = [
 <p>The core of the quote. The more detailed, the better protected you are. If a job doesn't appear in the quote and the client claims it, you have a problem. If it appears and you can point to it, you don't.</p>
 
 <h3>5. Materials included (and excluded)</h3>
-<p>Always specify whether materials are included or are the client's responsibility. If included, state the quality or reference (e.g. "matt porcelain stoneware tile, first quality, price ≤ £30/m²"). If the client wants to swap it for something more expensive, it's an extra.</p>
+<p>Always specify whether materials are included or are the client's responsibility. If included, state the quality or reference (e.g. "matt porcelain stoneware tile, first quality, price ≤ $30/m²"). If the client wants to swap it for something more expensive, it's an extra.</p>
 
 <h3>6. What is NOT included</h3>
 <p>An exclusions section is pure gold. Explicitly include what's out of scope: moving furniture, waste removal if not contemplated, work that depends on third parties, building permits if applicable. This avoids the classic "but wasn't that in the quote?"</p>
@@ -2186,7 +2186,7 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p>Formula: <strong>Selling price = Total cost / (1 − desired margin)</strong></p>
 
-<p>Example: if the total cost of a line item is £800 and you want a 25% margin, the selling price is 800 / 0.75 = £1,067.</p>
+<p>Example: if the total cost of a line item is $800 and you want a 25% margin, the selling price is 800 / 0.75 = $1,067.</p>
 
 <h2>The most expensive mistakes when quoting renovations</h2>
 
@@ -2197,7 +2197,7 @@ export const blogPostsEn: BlogPostEn[] = [
 <p>In old buildings, especially those over 30 years old, unforeseen issues are the norm. Include a "contingencies" line of between 5% and 10% of the total, clearly explained to the client. It's better to justify it upfront than to argue over it during the job.</p>
 
 <h3>Mistake 3: Not specifying the quality</h3>
-<p>"Aluminium window with double glazing" can be anything from £150 to £800 per unit. If you don't specify the quality and the client expects the most expensive, you have a problem. State the product reference or a maximum material price.</p>
+<p>"Aluminium window with double glazing" can be anything from $150 to $800 per unit. If you don't specify the quality and the client expects the most expensive, you have a problem. State the product reference or a maximum material price.</p>
 
 <h3>Mistake 4: Accepting verbal changes with no additional cost</h3>
 <p>The client asks for changes during the job. It's inevitable. But every change that isn't documented and doesn't generate a signed additional quote is work you'll do for free. Set out a clear protocol in your quote: any change to the scope is handled via an additional quote before it's carried out.</p>
@@ -2243,14 +2243,14 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p><strong>CHAPTER SUMMARY</strong></p>
 <ul>
-<li>01 Demolition: £XX</li>
-<li>02 Installations: £XX</li>
-<li>03 Surfaces: £XX</li>
-<li>04 Sanitaryware: £XX</li>
-<li>05 Joinery: £XX</li>
-<li>SUBTOTAL: £XX</li>
-<li>VAT: £XX</li>
-<li><strong>TOTAL: £XX</strong></li>
+<li>01 Demolition: $XX</li>
+<li>02 Installations: $XX</li>
+<li>03 Surfaces: $XX</li>
+<li>04 Sanitaryware: $XX</li>
+<li>05 Joinery: $XX</li>
+<li>SUBTOTAL: $XX</li>
+<li>VAT: $XX</li>
+<li><strong>TOTAL: $XX</strong></li>
 </ul>
 
 <h2>How to manage changes during the job</h2>
@@ -2376,7 +2376,7 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <h3>2. Service breakdown</h3>
 
-<p>This is where most agencies fall short. Instead of writing "social media management: £1,000/month", detail:</p>
+<p>This is where most agencies fall short. Instead of writing "social media management: $1,000/month", detail:</p>
 
 <ul>
 <li>Which networks (Instagram, LinkedIn, TikTok…)</li>
@@ -2472,7 +2472,7 @@ export const blogPostsEn: BlogPostEn[] = [
 <p>In marketing, your previous work is your best sales argument. A concrete success story ("we helped a B2B software company triple its organic leads in 9 months with this methodology") does more than three pages of service descriptions.</p>
 
 <h3>Proposals that are too long</h3>
-<p>More isn't more. A 40-page proposal for a £2,000/month retainer scares more than it convinces. The client doesn't have time to read it. Keep the core to 5-8 well-structured pages, with the technical details in optional appendices.</p>
+<p>More isn't more. A 40-page proposal for a $2,000/month retainer scares more than it convinces. The client doesn't have time to read it. Keep the core to 5-8 well-structured pages, with the technical details in optional appendices.</p>
 
 <h3>Not keeping previous versions</h3>
 <p>When a client comes back six months later and says "what did that proposal you sent me say?", you can't have the quotes lost among emails. Keep an organised record of all your proposals, with the versions and statuses. This also gives you data to analyse which types of proposals have the best close rate.</p>
@@ -2516,14 +2516,14 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 <table>
 <thead><tr><th>Service</th><th>Detail</th><th>Price/month</th></tr></thead>
 <tbody>
-<tr><td>Instagram + LinkedIn management</td><td>4 posts/week (mix of carousel, static, short reels). Monthly editorial calendar. Community management Mon-Fri (reply within 24h).</td><td>£1,050</td></tr>
-<tr><td>Monthly newsletter</td><td>1 monthly email to the client's database. Copy, design and sending via Mailchimp. Open and click report.</td><td>£350</td></tr>
+<tr><td>Instagram + LinkedIn management</td><td>4 posts/week (mix of carousel, static, short reels). Monthly editorial calendar. Community management Mon-Fri (reply within 24h).</td><td>$1,050</td></tr>
+<tr><td>Monthly newsletter</td><td>1 monthly email to the client's database. Copy, design and sending via Mailchimp. Open and click report.</td><td>$350</td></tr>
 <tr><td>Monthly reporting</td><td>Dashboard with key KPIs: reach, engagement, follower growth, email opens.</td><td>Included</td></tr>
 </tbody>
 <tfoot>
-<tr><td colspan="2"><strong>Monthly subtotal</strong></td><td><strong>£1,400</strong></td></tr>
-<tr><td colspan="2">VAT (20%)</td><td>£280</td></tr>
-<tr><td colspan="2"><strong>Monthly total</strong></td><td><strong>£1,680</strong></td></tr>
+<tr><td colspan="2"><strong>Monthly subtotal</strong></td><td><strong>$1,400</strong></td></tr>
+<tr><td colspan="2">VAT (20%)</td><td>$280</td></tr>
+<tr><td colspan="2"><strong>Monthly total</strong></td><td><strong>$1,680</strong></td></tr>
 </tfoot>
 </table>
 
@@ -2535,7 +2535,7 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 
 <hr/>
 
-<p>See the difference with a simple "social management: £1,050/month"? The level of detail justifies the price, reduces doubts and protects both parties.</p>
+<p>See the difference with a simple "social management: $1,050/month"? The level of detail justifies the price, reduces doubts and protects both parties.</p>
 
 <h2>Conclusion: your quote is your first deliverable</h2>
 
@@ -2575,25 +2575,25 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 
 <h3>1. Hourly rate</h3>
 
-<p>The most traditional and the one that causes the most problems. You charge an hourly rate (for example, £60/hour) and bill according to time spent. The problem: the faster and more efficient you are, the less you earn. You punish your own productivity.</p>
+<p>The most traditional and the one that causes the most problems. You charge an hourly rate (for example, $60/hour) and bill according to time spent. The problem: the faster and more efficient you are, the less you earn. You punish your own productivity.</p>
 
 <p><strong>When it makes sense:</strong> on projects with very uncertain scope, brand consultancy, audits or maintenance work where it's impossible to estimate time in advance.</p>
 
 <h3>2. Fixed price per project</h3>
 
-<p>You define a fixed price for a specific deliverable. For example: &ldquo;Logo design with 3 concepts and 2 rounds of revisions: £800&rdquo;. The client knows exactly what they're paying. You know exactly what you're delivering.</p>
+<p>You define a fixed price for a specific deliverable. For example: &ldquo;Logo design with 3 concepts and 2 rounds of revisions: $800&rdquo;. The client knows exactly what they're paying. You know exactly what you're delivering.</p>
 
 <p><strong>When it makes sense:</strong> on most design projects with a defined scope (logos, branding, marketing materials, packaging, etc.). It's the model I most recommend for designers starting to professionalise their process.</p>
 
 <h3>3. Monthly retainer</h3>
 
-<p>The client pays a fixed amount per month in exchange for a guaranteed number of hours or deliverables. For example: &ldquo;10 social media design pieces per month: £600/month&rdquo;.</p>
+<p>The client pays a fixed amount per month in exchange for a guaranteed number of hours or deliverables. For example: &ldquo;10 social media design pieces per month: $600/month&rdquo;.</p>
 
 <p><strong>When it makes sense:</strong> with recurring clients who have ongoing design needs. It's the most predictable model and ideal for the financial stability of your studio or freelance business.</p>
 
 <h3>4. Value-based pricing</h3>
 
-<p>The most advanced and the one that generates the most money. Instead of calculating how long you take, you calculate how much the result is worth to the client. If you redesign the packaging of a product that sells £500,000 a year and the new design improves sales by 10%, your work is worth far more than 50 hours at £60/hour.</p>
+<p>The most advanced and the one that generates the most money. Instead of calculating how long you take, you calculate how much the result is worth to the client. If you redesign the packaging of a product that sells $500,000 a year and the new design improves sales by 10%, your work is worth far more than 50 hours at $60/hour.</p>
 
 <p><strong>When it makes sense:</strong> when you have demonstrable experience, can measure the impact of your work and work with companies that understand the ROI of design. Don't try to apply it from day one — it requires credibility and case studies.</p>
 
@@ -2607,7 +2607,7 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 <li><strong>Desired profit:</strong> how much do you want to earn per month net, after paying all your costs and taxes? Be realistic and ambitious at the same time.</li>
 </ol>
 
-<p>With those three numbers you can calculate your minimum hourly rate. If your fixed costs are £1,500/month, you want to earn £3,000/month and you have 100 billable hours a month, your minimum rate is £45/hour. And that's the <em>minimum</em>, not the price you should charge.</p>
+<p>With those three numbers you can calculate your minimum hourly rate. If your fixed costs are $1,500/month, you want to earn $3,000/month and you have 100 billable hours a month, your minimum rate is $45/hour. And that's the <em>minimum</em>, not the price you should charge.</p>
 
 <h2>What a professional graphic design quote must include</h2>
 
@@ -2640,7 +2640,7 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 <h3>Included revisions and additional changes policy</h3>
 <p>This is the point most designers ignore and the one that costs them the most money. Clearly define how many rounds of revisions each deliverable includes and what happens when the client exceeds that limit.</p>
 
-<p>A typical wording: <em>&ldquo;The price includes 2 rounds of revisions per deliverable. Additional revisions will be billed at £45/hour. A revision is a consolidated list of changes per round, not successive individual changes.&rdquo;</em></p>
+<p>A typical wording: <em>&ldquo;The price includes 2 rounds of revisions per deliverable. Additional revisions will be billed at $45/hour. A revision is a consolidated list of changes per round, not successive individual changes.&rdquo;</em></p>
 
 <p>This paragraph, clear and unambiguous, eliminates the most expensive misunderstandings in graphic design.</p>
 
@@ -2712,22 +2712,22 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 <tr><th>Deliverable</th><th>Description</th><th>Price</th></tr>
 </thead>
 <tbody>
-<tr><td>Brand strategy</td><td>Briefing session + competitor analysis + positioning definition (5-page document)</td><td>£350</td></tr>
-<tr><td>Logo design</td><td>3 concepts + 2 rounds of revisions + delivery in all formats (AI, EPS, SVG, PNG, JPG)</td><td>£750</td></tr>
-<tr><td>Identity system</td><td>Primary and secondary colour palette, corporate typography, usage rules, positive/negative versions</td><td>£400</td></tr>
-<tr><td>Brand guidelines</td><td>20-25 page PDF with all visual identity usage guidelines</td><td>£500</td></tr>
-<tr><td>Corporate stationery</td><td>Business card design (both sides), A4 letterhead, email signature</td><td>£300</td></tr>
+<tr><td>Brand strategy</td><td>Briefing session + competitor analysis + positioning definition (5-page document)</td><td>$350</td></tr>
+<tr><td>Logo design</td><td>3 concepts + 2 rounds of revisions + delivery in all formats (AI, EPS, SVG, PNG, JPG)</td><td>$750</td></tr>
+<tr><td>Identity system</td><td>Primary and secondary colour palette, corporate typography, usage rules, positive/negative versions</td><td>$400</td></tr>
+<tr><td>Brand guidelines</td><td>20-25 page PDF with all visual identity usage guidelines</td><td>$500</td></tr>
+<tr><td>Corporate stationery</td><td>Business card design (both sides), A4 letterhead, email signature</td><td>$300</td></tr>
 </tbody>
 <tfoot>
-<tr><td colspan="2"><strong>Subtotal</strong></td><td><strong>£2,300</strong></td></tr>
-<tr><td colspan="2">VAT (20%)</td><td>£460</td></tr>
-<tr><td colspan="2"><strong>Total</strong></td><td><strong>£2,760</strong></td></tr>
+<tr><td colspan="2"><strong>Subtotal</strong></td><td><strong>$2,300</strong></td></tr>
+<tr><td colspan="2">VAT (20%)</td><td>$460</td></tr>
+<tr><td colspan="2"><strong>Total</strong></td><td><strong>$2,760</strong></td></tr>
 </tfoot>
 </table>
 
-<p><strong>Terms:</strong> 50% (£1,150 + VAT) upfront, remaining 50% on delivery of the final files. Editable source files (AI, Figma) available as an add-on service (£300). Timeline: 21 working days from brief approval and the upfront payment. Quote validity: 30 days.</p>
+<p><strong>Terms:</strong> 50% ($1,150 + VAT) upfront, remaining 50% on delivery of the final files. Editable source files (AI, Figma) available as an add-on service ($300). Timeline: 21 working days from brief approval and the upfront payment. Quote validity: 30 days.</p>
 
-<p>See the difference with a simple &ldquo;Logo design: £800&rdquo;? The breakdown turns the price into an investment decision, not an expense.</p>
+<p>See the difference with a simple &ldquo;Logo design: $800&rdquo;? The breakdown turns the price into an investment decision, not an expense.</p>
 
 <h2>Tools to create design quotes faster</h2>
 
@@ -2735,7 +2735,7 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 
 <p>There's a better way. <strong>Quoting software</strong> like DealForge lets you have a service catalogue with predefined prices you insert with one click, apply discounts while seeing the margin in real time, generate branded PDFs automatically, and know when the client has opened your proposal so you can follow up at exactly the right moment.</p>
 
-<p>If you create 5 quotes a month and reduce the time on each from 90 minutes to 15 minutes, you recover 6 hours a month. At £60/hour, that's £360 of productive capacity you can devote to billable work or, quite simply, to not working Saturdays.</p>
+<p>If you create 5 quotes a month and reduce the time on each from 90 minutes to 15 minutes, you recover 6 hours a month. At $60/hour, that's $360 of productive capacity you can devote to billable work or, quite simply, to not working Saturdays.</p>
 
 <h2>The quote as a positioning tool</h2>
 
@@ -2790,7 +2790,7 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 <p>Before looking at what to do, it helps to understand what's done wrong. There are three mistakes that come up again and again in the sector:</p>
 
 <h3>Quotes that are too vague</h3>
-<p>&ldquo;Office cleaning: £800/month.&rdquo; How many times a month? What exactly does it include? The bathrooms? The windows? With what products? An ambiguous quote is an invitation to dispute. The client assumes the maximum possible, you charge the minimum possible and conflict is inevitable.</p>
+<p>&ldquo;Office cleaning: $800/month.&rdquo; How many times a month? What exactly does it include? The bathrooms? The windows? With what products? An ambiguous quote is an invitation to dispute. The client assumes the maximum possible, you charge the minimum possible and conflict is inevitable.</p>
 
 <h3>Prices with no justification</h3>
 <p>When a client receives three cleaning quotes and yours is the most expensive, they won't stay just because. If you don't explain why your service is worth what it costs (quality materials, trained staff, public liability insurance, eco-friendly products), the price wins and you lose the contract.</p>
@@ -2884,7 +2884,7 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 <li>Absence and cover (set aside 5-8%)</li>
 </ul>
 
-<p>Example: if you pay £12/hour gross and add employer contributions, your real cost might be around £14/hour. With a 6% absence allowance, it rises to ~£14.80/hour. On top of that you have to add materials.</p>
+<p>Example: if you pay $12/hour gross and add employer contributions, your real cost might be around $14/hour. With a 6% absence allowance, it rises to ~$14.80/hour. On top of that you have to add materials.</p>
 
 <h3>Step 2: Calculate the cost of materials and products</h3>
 
@@ -2892,8 +2892,8 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 
 <p>Make an estimate by service type:</p>
 <ul>
-<li>Standard office cleaning: £0.30-0.60/m² per month</li>
-<li>End-of-build cleaning: £1.50-3/m² (depending on condition)</li>
+<li>Standard office cleaning: $0.30-0.60/m² per month</li>
+<li>End-of-build cleaning: $1.50-3/m² (depending on condition)</li>
 <li>Window cleaning: minimum call-out + cost per m²</li>
 </ul>
 
@@ -2908,7 +2908,7 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 <li>Your own management time (visits, quotes, coordination)</li>
 </ul>
 
-<p>A practical rule: overheads usually represent between 15% and 25% of your turnover. If you turn over £10,000 a month, between £1,500 and £2,500 goes on overheads before you see a penny of profit.</p>
+<p>A practical rule: overheads usually represent between 15% and 25% of your turnover. If you turn over $10,000 a month, between $1,500 and $2,500 goes on overheads before you see a penny of profit.</p>
 
 <h3>Step 4: Apply your margin</h3>
 
@@ -2917,7 +2917,7 @@ Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/202
 <p><strong>Simple formula:</strong><br>
 Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
-<p>If your cost is £800 and you want a 20% net margin: 800 × 100 / 80 = <strong>£1,000</strong>.</p>
+<p>If your cost is $800 and you want a 20% net margin: 800 × 100 / 80 = <strong>$1,000</strong>.</p>
 
 <p>Don't confuse margin with markup. A 25% markup on cost isn't the same as a 25% margin on the sale price.</p>
 
@@ -3034,7 +3034,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 </ul>
 <p><strong>Does not include:</strong> External windows, server room cleaning, archive area, out-of-hours emergency cleaning.<br>
 <strong>Materials:</strong> Included in the price. Certified professional cleaning products. Does not include toilet consumables (paper, soap) unless expressly agreed.<br>
-<strong>Monthly price:</strong> £780 + VAT<br>
+<strong>Monthly price:</strong> $780 + VAT<br>
 <strong>Payment terms:</strong> Direct debit, invoiced on the 1st of each month<br>
 <strong>Duration:</strong> Annual contract, automatic renewal. Termination with 30 days' notice.</p>
 
@@ -3113,7 +3113,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p><strong>When to use it:</strong> maintenance and evolution of existing systems. Projects with changing requirements. Initial technical exploration phases.</p>
 
-<p><strong>The problem:</strong> many clients are afraid of the hourly model because they feel they lose control of the cost. The solution: set an estimated maximum budget and track it transparently. &ldquo;We work by the hour with a cap of £20,000. If we see we're getting close, we'll let you know before continuing.&rdquo;</p>
+<p><strong>The problem:</strong> many clients are afraid of the hourly model because they feel they lose control of the cost. The solution: set an estimated maximum budget and track it transparently. &ldquo;We work by the hour with a cap of $20,000. If we see we're getting close, we'll let you know before continuing.&rdquo;</p>
 
 <h3>Monthly retainer</h3>
 
@@ -3152,7 +3152,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <li>Revisions and QA — 4 hours</li>
 </ul>
 
-<p>Estimated total: 52 hours. At a rate of £60/hour, the base price would be £3,120.</p>
+<p>Estimated total: 52 hours. At a rate of $60/hour, the base price would be $3,120.</p>
 
 <h3>Step 2: apply a contingency factor</h3>
 
@@ -3164,7 +3164,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <li>Projects with technology new to you: add up to 40&ndash;50%</li>
 </ul>
 
-<p>In the previous example: 52h × 1.20 = 62.4 hours → £3,744. It's more honest than selling yourself short and then having to ask for more money or work at a loss.</p>
+<p>In the previous example: 52h × 1.20 = 62.4 hours → $3,744. It's more honest than selling yourself short and then having to ask for more money or work at a loss.</p>
 
 <h3>Step 3: add external costs</h3>
 
@@ -3182,9 +3182,9 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h3>Step 4: consider the cost of acquiring the client</h3>
 
-<p>How many meetings have you had to reach this quote? Have you put together a prior technical proposal? Have you travelled for an in-person meeting? That time has value too. If you invested six hours in the sales process for a £3,000 project, your real margin is no longer what you calculated.</p>
+<p>How many meetings have you had to reach this quote? Have you put together a prior technical proposal? Have you travelled for an in-person meeting? That time has value too. If you invested six hours in the sales process for a $3,000 project, your real margin is no longer what you calculated.</p>
 
-<p>Some freelancers and agencies charge for a paid &ldquo;analysis and proposal&rdquo; phase before presenting the final quote. If the project is complex — above £15,000 — this makes complete sense.</p>
+<p>Some freelancers and agencies charge for a paid &ldquo;analysis and proposal&rdquo; phase before presenting the final quote. If the project is complex — above $15,000 — this makes complete sense.</p>
 
 <h2>What a web development quote must include</h2>
 
@@ -3274,11 +3274,11 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h3>Add the ROI when possible</h3>
 
-<p>A £15,000 quote can seem expensive until the client understands that the system you're going to build will save them £3,000 a month in manual work. In five months it's paid off. Put the figures on the table when you have them.</p>
+<p>A $15,000 quote can seem expensive until the client understands that the system you're going to build will save them $3,000 a month in manual work. In five months it's paid off. Put the figures on the table when you have them.</p>
 
 <h3>Send a professional PDF, not an email with prices</h3>
 
-<p>The way you present your proposal communicates your level of professionalism before the client has read a single line. A well-designed PDF with your brand identity, clear structure and careful language conveys trust. An email saying &ldquo;the price would be about £8,000, more or less&rdquo; does exactly the opposite.</p>
+<p>The way you present your proposal communicates your level of professionalism before the client has read a single line. A well-designed PDF with your brand identity, clear structure and careful language conveys trust. An email saying &ldquo;the price would be about $8,000, more or less&rdquo; does exactly the opposite.</p>
 
 <p>Tools like <a href="/registro?lang=en">DealForge</a> let you generate proposals in PDF format with your branding, a phased pricing structure and legal terms, ready to send directly to the client from the platform — with status tracking included so you know when they've opened it and when to follow up.</p>
 
@@ -3302,7 +3302,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h3>Forgetting licences and external tools</h3>
 
-<p>A £200 plugin can seem irrelevant on a large project, but if you have five projects like that a month, that's £1,000 coming out of your pocket. Every external cost should be in the quote, with its real or estimated amount.</p>
+<p>A $200 plugin can seem irrelevant on a large project, but if you have five projects like that a month, that's $1,000 coming out of your pocket. Every external cost should be in the quote, with its real or estimated amount.</p>
 
 <h2>Structure of a web development quote</h2>
 
@@ -3408,7 +3408,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h3>4. Value-based pricing</h3>
 
-<p>The price doesn't reflect time or costs, but the economic value the project generates for the client. If you help a company generate £500,000 in additional revenue, charging £50,000 isn't expensive even if you "only" spent 40 hours.</p>
+<p>The price doesn't reflect time or costs, but the economic value the project generates for the client. If you help a company generate $500,000 in additional revenue, charging $50,000 isn't expensive even if you "only" spent 40 hours.</p>
 
 <p><strong>Advantages:</strong> it frees you from the trap of selling time, aligns your incentives with the client's, and can multiply your income per hour worked.<br>
 <strong>Disadvantages:</strong> it requires a lot of trust and credentials, the client needs to understand and accept the value logic, and it's not always easy to quantify the value in advance.</p>
@@ -3429,10 +3429,10 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>A real example:</p>
 <ul>
-<li>Total annual costs: £60,000</li>
+<li>Total annual costs: $60,000</li>
 <li>Estimated billable hours: 1,000 hours</li>
-<li>Minimum rate: £60/hour</li>
-<li>With a 40% margin: <strong>£84/hour</strong></li>
+<li>Minimum rate: $60/hour</li>
+<li>With a 40% margin: <strong>$84/hour</strong></li>
 </ul>
 
 <p>If your current rate is below that number, you're losing money, even if you don't see it directly. You're subsidising your clients with your time.</p>
@@ -3472,10 +3472,10 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <p>The price is the moment of tension in every quote. Here are the techniques that really work:</p>
 
 <h3>Anchor before revealing the price</h3>
-<p>Before giving your price, help the client visualise the value. If your analysis can identify inefficiencies costing £200,000 a year, that number is the anchor. Your fee of £30,000 no longer sounds like a lot, it sounds like an investment with a 566% ROI.</p>
+<p>Before giving your price, help the client visualise the value. If your analysis can identify inefficiencies costing $200,000 a year, that number is the anchor. Your fee of $30,000 no longer sounds like a lot, it sounds like an investment with a 566% ROI.</p>
 
 <h3>Break the price down into investment per day or result</h3>
-<p>A £15,000 project over three months is £167 a day. Presented that way, it seems much more accessible. Or calculate the price per result: if the project lasts three months and saves the team 8 hours a week, how much is that worth in salaries? Make that calculation explicit in the proposal.</p>
+<p>A $15,000 project over three months is $167 a day. Presented that way, it seems much more accessible. Or calculate the price per result: if the project lasts three months and saves the team 8 hours a week, how much is that worth in salaries? Make that calculation explicit in the proposal.</p>
 
 <h3>Don't apologise for your price</h3>
 <p>One of the most common mistakes: using defensive language when presenting the price. "Although it may seem high…", "I know it's a significant investment…", "if the price is a problem we can negotiate…". All of that communicates insecurity and opens the door to negotiation before the client has asked for it.</p>
@@ -3512,7 +3512,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <li><em>Does not include:</em> ERP integration, changes to the commission structure, post-implementation support beyond 90 days.</li>
 <li><em>Phases:</em> Phase 1 – Diagnosis (3 weeks). Phase 2 – Design and implementation (6 weeks). Phase 3 – Training and launch (2 weeks).</li>
 <li><em>Deliverables:</em> diagnostic report, new documented process, tool configuration, 3 training sessions, 30 days of post-launch support.</li>
-<li><em>Price:</em> £18,500 + VAT. 40% on signing, 30% at the start of Phase 2, 30% on final delivery.</li>
+<li><em>Price:</em> $18,500 + VAT. 40% on signing, 30% at the start of Phase 2, 30% on final delivery.</li>
 <li><em>Validity:</em> 30 days from the date sent.</li>
 </ul>
 
@@ -3629,7 +3629,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>A practical way to calculate it: add all your monthly costs (personal and business), divide by the number of projects you can realistically do per month, and that's your minimum price per project. If you're charging less than that, you're losing money on every job.</p>
 
-<p>Example: if your total costs are £3,500/month and you can do 8 projects a month, your minimum price is £437 per project. To that you add your desired profit margin and you reach the market price you should charge.</p>
+<p>Example: if your total costs are $3,500/month and you can do 8 projects a month, your minimum price is $437 per project. To that you add your desired profit margin and you reach the market price you should charge.</p>
 
 <h2>What a photography quote must include</h2>
 
@@ -3678,33 +3678,33 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h3>Wedding photography</h3>
 
-<p>Weddings are probably the most in-demand and most competitive speciality. The price range goes from around £700 for a photographer just starting out to £4,000-6,000 or more for professionals with an established portfolio.</p>
+<p>Weddings are probably the most in-demand and most competitive speciality. The price range goes from around $700 for a photographer just starting out to $4,000-6,000 or more for professionals with an established portfolio.</p>
 
 <p>The most common mistake is competing on price with the cheapest photographers in the market. If your niche is elegant weddings with a luxury album, you're in a different market from someone doing budget shoots. Don't compete with people who aren't your direct competition.</p>
 
 <h3>Corporate and business photography</h3>
 
-<p>Corporate portrait sessions, photos for websites and communications, team and office shoots. The usual range: between £450 and £2,500 per session, depending on the scope, the number of people and the locations.</p>
+<p>Corporate portrait sessions, photos for websites and communications, team and office shoots. The usual range: between $450 and $2,500 per session, depending on the scope, the number of people and the locations.</p>
 
 <p>In this segment, clients usually have a budget, but they need to clearly see the ROI: these photos go on their website, on LinkedIn, in marketing materials. When you frame them in that context — "these photos will be the first thing a potential client sees when they visit your website" — the price justifies itself.</p>
 
 <h3>Product photography for e-commerce</h3>
 
-<p>The most common pricing is structured by number of items and by type of image (product only, with model, lifestyle). Usual ranges: £12-45 per item for basic studio product photography; £70-180 or more for lifestyle photography with model and props.</p>
+<p>The most common pricing is structured by number of items and by type of image (product only, with model, lifestyle). Usual ranges: $12-45 per item for basic studio product photography; $70-180 or more for lifestyle photography with model and props.</p>
 
 <p>In this segment, batch pricing works very well: a progressive discount above a certain volume of items. A client with 200 items a year is much more valuable than one with 20, and deserves a different price.</p>
 
 <h3>Property photography</h3>
 
-<p>Between £130 and £450 per property, depending on the size, the area and whether it includes video or aerial drone photography. Typical clients are estate agencies and developers with a constant volume of work, which makes the price per project lower but the commercial relationship more stable.</p>
+<p>Between $130 and $450 per property, depending on the size, the area and whether it includes video or aerial drone photography. Typical clients are estate agencies and developers with a constant volume of work, which makes the price per project lower but the commercial relationship more stable.</p>
 
 <h3>Event photography</h3>
 
-<p>From company presentations to trade shows and conferences. The range goes from £280 for a short event to £1,500-3,000 for full-day or multi-day events. Including travel and clearly defining the coverage hours is essential in this type of work.</p>
+<p>From company presentations to trade shows and conferences. The range goes from $280 for a short event to $1,500-3,000 for full-day or multi-day events. Including travel and clearly defining the coverage hours is essential in this type of work.</p>
 
 <h3>Fashion and advertising photography</h3>
 
-<p>This is where prices vary the most. An advertising production can go from £450 for a small local brand to tens of thousands for a national campaign. Here, usage rights carry enormous weight in the final price.</p>
+<p>This is where prices vary the most. An advertising production can go from $450 for a small local brand to tens of thousands for a national campaign. Here, usage rights carry enormous weight in the final price.</p>
 
 <h2>How to present and defend your price</h2>
 
@@ -3787,9 +3787,9 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <p>With that information, you prepare a proposal with three options:</p>
 
 <ul>
-<li><strong>Basic:</strong> session at their offices, a neutral background, two edited photos per person. £850.</li>
-<li><strong>Standard:</strong> session at their offices, two different backgrounds (formal and informal), three edited photos per person, a selection gallery of five options per person. £1,250.</li>
-<li><strong>Premium:</strong> all of the above plus a group session and work-environment photos, five edited photos per person, delivery in five working days. £1,700.</li>
+<li><strong>Basic:</strong> session at their offices, a neutral background, two edited photos per person. $850.</li>
+<li><strong>Standard:</strong> session at their offices, two different backgrounds (formal and informal), three edited photos per person, a selection gallery of five options per person. $1,250.</li>
+<li><strong>Premium:</strong> all of the above plus a group session and work-environment photos, five edited photos per person, delivery in five working days. $1,700.</li>
 </ul>
 
 <p>You present the three options with a description of what each includes, payment terms (50% deposit, 50% before delivery), cancellation policy and a 30-day validity.</p>
@@ -3870,7 +3870,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>The most sophisticated and most profitable when applied well. Instead of charging for time or service, you charge based on the economic value you generate for the client: the tax saving you achieve, the penalty you avoid, the financing you facilitate, the sale you structure tax-efficiently.</p>
 
-<p><strong>Why it works:</strong> it decouples the price from the time spent. If you structure a business sale so the client pays £40,000 less in tax, charging £5,000 for that work is reasonable even if it took you twenty hours, not a hundred.</p>
+<p><strong>Why it works:</strong> it decouples the price from the time spent. If you structure a business sale so the client pays $40,000 less in tax, charging $5,000 for that work is reasonable even if it took you twenty hours, not a hundred.</p>
 
 <p><strong>The risk:</strong> it requires a high level of trust with the client and the ability to quantify the value with data. It's not the model for acquiring new clients; it's the model for billing well to high-value clients who already trust you.</p>
 
@@ -3908,31 +3908,31 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h3>Accounting and tax for sole traders</h3>
 
-<p>The most competitive segment. Monthly fee prices go from around £30-50/month for online firms with a standardised model to £150-300/month for firms with personalised attention and sector specialisation.</p>
+<p>The most competitive segment. Monthly fee prices go from around $30-50/month for online firms with a standardised model to $150-300/month for firms with personalised attention and sector specialisation.</p>
 
 <p>The most common mistake here is competing on price with low-cost online firms. That's a game you can't win if you have real overhead costs. The alternative is to differentiate on specialisation (sole traders in the tech sector, international freelancers, content creators with foreign-currency income) or on service level (same-day response, proactive advice, quarterly review of the tax position).</p>
 
 <h3>Accounting and tax for SMEs (limited companies with up to 10 employees)</h3>
 
-<p>The usual range for a complete monthly fee (bookkeeping, VAT, Corporation Tax, payroll) is between £200 and £600/month depending on the volume of transactions, the number of employees and the complexity of the activity.</p>
+<p>The usual range for a complete monthly fee (bookkeeping, VAT, Corporation Tax, payroll) is between $200 and $600/month depending on the volume of transactions, the number of employees and the complexity of the activity.</p>
 
 <p>An SME with five employees, twenty suppliers and a hundred invoices a month requires substantially more work than a sole trader with simple activity. The quote has to reflect that reality.</p>
 
 <h3>Company incorporation</h3>
 
-<p>Between £300 and £800 for the advisory service of incorporating a company, not including registration fees which are the client's costs. The variation depends on whether you include drafting bespoke articles, initial tax planning and the first registrations with the tax and payroll authorities.</p>
+<p>Between $300 and $800 for the advisory service of incorporating a company, not including registration fees which are the client's costs. The variation depends on whether you include drafting bespoke articles, initial tax planning and the first registrations with the tax and payroll authorities.</p>
 
 <h3>Personal tax return (Self Assessment)</h3>
 
-<p>From £60-80 for simple returns (an employee with no complications) to £200-500 or more for complex returns (self-employment income, rental property, capital gains, crypto-assets, benefits in kind, income from multiple sources).</p>
+<p>From $60-80 for simple returns (an employee with no complications) to $200-500 or more for complex returns (self-employment income, rental property, capital gains, crypto-assets, benefits in kind, income from multiple sources).</p>
 
 <h3>Procedures with the tax authority (enquiries, investigations)</h3>
 
-<p>Here the hourly rate is more common. Rates go from £80-120/hour for firms with no specific specialisation to £200-400/hour for specialists in tax procedures or international taxation.</p>
+<p>Here the hourly rate is more common. Rates go from $80-120/hour for firms with no specific specialisation to $200-400/hour for specialists in tax procedures or international taxation.</p>
 
 <h3>Payroll and employment advice</h3>
 
-<p>The cost per employee per month is usually between £10 and £25 per employee, depending on the total number (more employees, lower unit cost) and the complexity of the contracts. Special processes (redundancies, collective dismissals) are quoted separately.</p>
+<p>The cost per employee per month is usually between $10 and $25 per employee, depending on the total number (more employees, lower unit cost) and the complexity of the contracts. Special processes (redundancies, collective dismissals) are quoted separately.</p>
 
 <h2>How to present the price without losing the client</h2>
 
@@ -3944,7 +3944,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h3>Present the price within a proposal, not in a loose email</h3>
 
-<p>A professional advisory services proposal, with your logo, with the breakdown of included services, with the terms of the relationship and with the price presented clearly, conveys trust before the client has read a single line. The same price in an informal email saying "it would be £X a month" seems arbitrary.</p>
+<p>A professional advisory services proposal, with your logo, with the breakdown of included services, with the terms of the relationship and with the price presented clearly, conveys trust before the client has read a single line. The same price in an informal email saying "it would be $X a month" seems arbitrary.</p>
 
 <p>Tools like <a href="/registro?lang=en">DealForge</a> let you create those proposals quickly with custom templates, including the option for the client to accept them with an electronic signature from the document itself. For firms sending ten or fifteen proposals a month, the time saving and the improvement in presentation are immediate.</p>
 
@@ -3955,9 +3955,9 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <p>Example structure for an SME:</p>
 
 <ul>
-<li><strong>Basic (£320/month):</strong> monthly bookkeeping, quarterly VAT returns, annual accounts and Corporation Tax filing, online document portal.</li>
-<li><strong>Standard (£480/month):</strong> all of the above plus payroll for up to five employees, the director's personal tax return, query support within 24 hours.</li>
-<li><strong>Premium (£680/month):</strong> all of the above plus quarterly tax planning, review of supplier and client contracts, a monthly report on the business's financial position, direct phone access to the responsible adviser.</li>
+<li><strong>Basic ($320/month):</strong> monthly bookkeeping, quarterly VAT returns, annual accounts and Corporation Tax filing, online document portal.</li>
+<li><strong>Standard ($480/month):</strong> all of the above plus payroll for up to five employees, the director's personal tax return, query support within 24 hours.</li>
+<li><strong>Premium ($680/month):</strong> all of the above plus quarterly tax planning, review of supplier and client contracts, a monthly report on the business's financial position, direct phone access to the responsible adviser.</li>
 </ul>
 
 <p>With this structure, the client doesn't evaluate whether your price is expensive or cheap. They evaluate which service level they need.</p>
@@ -4014,9 +4014,9 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <p>The first thing is to understand what "it's expensive" means. In most cases it means one of these three things:</p>
 
 <ol>
-<li><strong>They don't understand what the price includes.</strong> Solution: explain the scope of the service and what it prevents in more detail. "For that £400 a month you get X annual tasks that, if you did them yourself or they were urgencies with another firm, would cost you much more."</li>
+<li><strong>They don't understand what the price includes.</strong> Solution: explain the scope of the service and what it prevents in more detail. "For that $400 a month you get X annual tasks that, if you did them yourself or they were urgencies with another firm, would cost you much more."</li>
 <li><strong>They've seen a lower price elsewhere.</strong> Solution: ask what that other proposal includes. In 80% of cases it includes less. If it includes the same, then there genuinely is a price difference you have to defend with quality or specialisation arguments, not by matching the price.</li>
-<li><strong>They don't have a real budget for this.</strong> Solution: propose a more basic version of the service or be honest: "what you describe needs a service level with a minimum cost of £X. If that budget doesn't fit right now, I can recommend more economical options for this phase."</li>
+<li><strong>They don't have a real budget for this.</strong> Solution: propose a more basic version of the service or be honest: "what you describe needs a service level with a minimum cost of $X. If that budget doesn't fit right now, I can recommend more economical options for this phase."</li>
 </ol>
 
 <p>What you must not do is lower the price without changing the scope of the service. Every time you do that, the client learns your prices are negotiable and will use that information at every renewal. If you lower the price, reduce the service proportionally and make it clear that's the case.</p>
@@ -4029,7 +4029,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h2>Conclusion: quote like the professional you are</h2>
 
-<p>Advisory and accounting are services where the price is the first indicator of quality the client has. A firm charging £80 a month conveys a very different message from one charging £400, even before the client has seen what each includes.</p>
+<p>Advisory and accounting are services where the price is the first indicator of quality the client has. A firm charging $80 a month conveys a very different message from one charging $400, even before the client has seen what each includes.</p>
 
 <p>The key points of this article:</p>
 
@@ -4084,10 +4084,10 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>Indicative market price ranges:</p>
 <ul>
-<li>Security officer (daytime, weekdays): £14-20/hour</li>
-<li>Security officer (night shift or weekend): £18-26/hour</li>
-<li>Officer with specialist training (close protection, cash transport): £22-35/hour</li>
-<li>Supervisor or security manager: £28-45/hour</li>
+<li>Security officer (daytime, weekdays): $14-20/hour</li>
+<li>Security officer (night shift or weekend): $18-26/hour</li>
+<li>Officer with specialist training (close protection, cash transport): $22-35/hour</li>
+<li>Supervisor or security manager: $28-45/hour</li>
 </ul>
 
 <p>These rates vary significantly by region (large cities have higher labour costs), the size of the contract (more hours, lower unit price) and the specific licensing of the staff.</p>
@@ -4100,12 +4100,12 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>Usual ranges:</p>
 <ul>
-<li>Basic installation for a home or small premises (panel + 4-6 detectors + keypad): £400-900</li>
-<li>Medium installation for an SME or commercial premises (panel + 8-15 detectors + dual communicator): £900-2,500</li>
-<li>Complex installation (industrial unit, multi-zone, integration with access control): £2,500-8,000 or more</li>
-<li>Basic monitoring fee: £15-35/month</li>
-<li>Monitoring with keyholding/guard response: £35-80/month</li>
-<li>Annual maintenance (equipment inspection, updates): £80-200/year depending on the installation</li>
+<li>Basic installation for a home or small premises (panel + 4-6 detectors + keypad): $400-900</li>
+<li>Medium installation for an SME or commercial premises (panel + 8-15 detectors + dual communicator): $900-2,500</li>
+<li>Complex installation (industrial unit, multi-zone, integration with access control): $2,500-8,000 or more</li>
+<li>Basic monitoring fee: $15-35/month</li>
+<li>Monitoring with keyholding/guard response: $35-80/month</li>
+<li>Annual maintenance (equipment inspection, updates): $80-200/year depending on the installation</li>
 </ul>
 
 <h3>CCTV and video surveillance</h3>
@@ -4116,10 +4116,10 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>Indicative ranges:</p>
 <ul>
-<li>Domestic or small premises system (4 HD cameras, local NVR): £600-1,500 installed</li>
-<li>SME system (8-16 4K IP cameras, NVR with disk, remote access): £1,500-5,000 installed</li>
-<li>Enterprise system (more than 16 cameras, centralised management, integration with other systems): from £5,000</li>
-<li>Cloud storage: £10-30/camera/month depending on video retention</li>
+<li>Domestic or small premises system (4 HD cameras, local NVR): $600-1,500 installed</li>
+<li>SME system (8-16 4K IP cameras, NVR with disk, remote access): $1,500-5,000 installed</li>
+<li>Enterprise system (more than 16 cameras, centralised management, integration with other systems): from $5,000</li>
+<li>Cloud storage: $10-30/camera/month depending on video retention</li>
 </ul>
 
 <h3>Access control</h3>
@@ -4128,21 +4128,21 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>Typical ranges:</p>
 <ul>
-<li>Basic access control for one door (card reader + magnetic lock + basic software): £500-1,200</li>
-<li>System for an office building (5-10 doors, centralised management, HR integration): £3,000-12,000</li>
-<li>Industrial system (perimeter access, turnstiles, video integration): from £10,000</li>
-<li>Maintenance and software licence: £200-500/year for small installations, more for large ones</li>
+<li>Basic access control for one door (card reader + magnetic lock + basic software): $500-1,200</li>
+<li>System for an office building (5-10 doors, centralised management, HR integration): $3,000-12,000</li>
+<li>Industrial system (perimeter access, turnstiles, video integration): from $10,000</li>
+<li>Maintenance and software licence: $200-500/year for small installations, more for large ones</li>
 </ul>
 
 <h3>Event security</h3>
 
 <p>A special segment with its own logic: the service is one-off, the risk is high and the staff's licensing is critical (regulation is strict about the training required for event stewards and officers).</p>
 
-<p>The price is usually calculated per officer/hour with a minimum number of hours, plus a surcharge for event complexity (capacity, alcohol sales, incident history). Ranges run from £18 to £40/hour depending on the staff profile and the type of event.</p>
+<p>The price is usually calculated per officer/hour with a minimum number of hours, plus a surcharge for event complexity (capacity, alcohol sales, incident history). Ranges run from $18 to $40/hour depending on the staff profile and the type of event.</p>
 
 <h2>What a professional security quote must include</h2>
 
-<p>A security quote that loses business looks like this: "Security officer, daytime shift: £X/hour. VAT not included." The client doesn't know what they're buying, and can only compare that number with a competitor's.</p>
+<p>A security quote that loses business looks like this: "Security officer, daytime shift: $X/hour. VAT not included." The client doesn't know what they're buying, and can only compare that number with a competitor's.</p>
 
 <p>A security quote that wins contracts has seven components that go beyond the price:</p>
 
@@ -4364,7 +4364,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p><strong>Formula:</strong> Gross margin (%) = (Sale price - Direct cost) ÷ Sale price × 100</p>
 
-<p>Example: you sell an installation service for £1,000. The cost of the materials and direct labour is £600. Your gross margin is:</p>
+<p>Example: you sell an installation service for $1,000. The cost of the materials and direct labour is $600. Your gross margin is:</p>
 
 <p>(1,000 - 600) ÷ 1,000 × 100 = <strong>40%</strong></p>
 
@@ -4376,7 +4376,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p><strong>Formula:</strong> Net margin (%) = Net profit ÷ Sale price × 100</p>
 
-<p>Following the example: if from those £400 of gross margin you have to pay £150 of overheads attributable to that job (proportional rent, insurance, tools, vehicle, admin time), your net margin is:</p>
+<p>Following the example: if from those $400 of gross margin you have to pay $150 of overheads attributable to that job (proportional rent, insurance, tools, vehicle, admin time), your net margin is:</p>
 
 <p>250 ÷ 1,000 × 100 = <strong>25%</strong></p>
 
@@ -4388,7 +4388,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>There's another frequent confusion that deserves special attention: the difference between margin and markup.</p>
 
-<p>If you buy a product for £60 and sell it for £100:</p>
+<p>If you buy a product for $60 and sell it for $100:</p>
 <ul>
 <li><strong>Markup:</strong> (100 - 60) ÷ 60 × 100 = 66.7%</li>
 <li><strong>Margin:</strong> (100 - 60) ÷ 100 × 100 = 40%</li>
@@ -4400,7 +4400,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p><strong>Sale price = Direct cost ÷ (1 - Target margin)</strong></p>
 
-<p>Example with a 40% target margin: if the direct cost is £600 → 600 ÷ (1 - 0.40) = 600 ÷ 0.60 = <strong>£1,000</strong></p>
+<p>Example with a 40% target margin: if the direct cost is $600 → 600 ÷ (1 - 0.40) = 600 ÷ 0.60 = <strong>$1,000</strong></p>
 
 <p>Keep this formula. Many people who've been in business for years discover it late.</p>
 
@@ -4410,9 +4410,9 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <h3>Your own management and sales time</h3>
 
-<p>The time you spend creating the quote, meeting the client, following up, managing the invoice and collection. If it takes you four hours to win a £500 project, those four hours have a cost.</p>
+<p>The time you spend creating the quote, meeting the client, following up, managing the invoice and collection. If it takes you four hours to win a $500 project, those four hours have a cost.</p>
 
-<p>Calculate your internal hourly rate (how much you need to earn per hour for your business to be sustainable) and apply it to the management time of each project. If your internal rate is £40/hour and you spend four hours of management on a project, the management cost is £160. That has to be in the price.</p>
+<p>Calculate your internal hourly rate (how much you need to earn per hour for your business to be sustainable) and apply it to the management time of each project. If your internal rate is $40/hour and you spend four hours of management on a project, the management cost is $160. That has to be in the price.</p>
 
 <h3>Apportioned fixed costs</h3>
 
@@ -4420,9 +4420,9 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>A practical way to incorporate them into quotes:</p>
 <ol>
-<li>Add up all your annual fixed costs. For example: £24,000/year</li>
+<li>Add up all your annual fixed costs. For example: $24,000/year</li>
 <li>Estimate how many projects or active clients you have a year. For example: 50 projects</li>
-<li>Structure cost per project: 24,000 ÷ 50 = £480 per project</li>
+<li>Structure cost per project: 24,000 ÷ 50 = $480 per project</li>
 <li>That amount must be added to the direct cost before calculating the final price</li>
 </ol>
 
@@ -4435,8 +4435,8 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <p>Formula for the sustainable hourly rate:</p>
 <p><strong>Hourly rate = Annual income needed ÷ Billable hours per year</strong></p>
 
-<p>Example: you need £48,000 net a year. You work 46 weeks (after holidays) with an average of 25 billable hours a week.</p>
-<p>48,000 ÷ (46 × 25) = 48,000 ÷ 1,150 = <strong>£41.7/hour as a minimum</strong></p>
+<p>Example: you need $48,000 net a year. You work 46 weeks (after holidays) with an average of 25 billable hours a week.</p>
+<p>48,000 ÷ (46 × 25) = 48,000 ÷ 1,150 = <strong>$41.7/hour as a minimum</strong></p>
 
 <p>If your current rate is below that number, you're earning less than you need even though you seem busy.</p>
 
@@ -4509,17 +4509,17 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 
 <p>Complete example:</p>
 <ul>
-<li>Materials: £800</li>
-<li>Direct labour: £400</li>
-<li>Apportioned fixed costs: £200</li>
-<li>Management and coordination (5h × £40/h): £200</li>
-<li>Contingency (10%): £160</li>
-<li><strong>Total cost: £1,760</strong></li>
+<li>Materials: $800</li>
+<li>Direct labour: $400</li>
+<li>Apportioned fixed costs: $200</li>
+<li>Management and coordination (5h × $40/h): $200</li>
+<li>Contingency (10%): $160</li>
+<li><strong>Total cost: $1,760</strong></li>
 <li>Target margin: 30%</li>
-<li><strong>Sale price: 1,760 ÷ 0.70 = £2,514</strong></li>
+<li><strong>Sale price: 1,760 ÷ 0.70 = $2,514</strong></li>
 </ul>
 
-<p>If the client asks for a discount and you give way to £2,200, you now know exactly what you're giving up: your margin drops from 30% to 20%, and your real net profit reduces proportionally. That information lets you negotiate with judgement, not blindly.</p>
+<p>If the client asks for a discount and you give way to $2,200, you now know exactly what you're giving up: your margin drops from 30% to 20%, and your real net profit reduces proportionally. That information lets you negotiate with judgement, not blindly.</p>
 
 <h2>Profitability analysis by client: the exercise that changes perspectives</h2>
 
@@ -4572,7 +4572,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <p>Some possible responses when the client asks for a discount, based on real knowledge of your margins:</p>
 
 <ul>
-<li><strong>If you have room to manoeuvre:</strong> "I can adjust the price if we reduce the scope. If we remove [component X], the price drops to [£Y]." You give the discount by changing the scope, not sacrificing the margin.</li>
+<li><strong>If you have room to manoeuvre:</strong> "I can adjust the price if we reduce the scope. If we remove [component X], the price drops to [$Y]." You give the discount by changing the scope, not sacrificing the margin.</li>
 <li><strong>If you're at the limit:</strong> "This price is the minimum at which I can guarantee the quality you need. If I lower it further, I'd have to reduce [materials, time, warranty], and I don't think that's what you're looking for." Honest and professional.</li>
 <li><strong>If the requested discount exceeds what's possible:</strong> "The price you propose doesn't let me cover the real costs of the project with the quality you need. I can recommend other options if that's the budget." Losing a project that wasn't going to be profitable isn't a loss.</li>
 </ul>

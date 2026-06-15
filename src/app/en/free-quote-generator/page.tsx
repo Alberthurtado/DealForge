@@ -46,7 +46,7 @@ const FAQS = [
   },
   {
     q: "Which currencies are supported?",
-    a: "You can generate the quote in EUR, USD or GBP — pick your currency in the form.",
+    a: "You can generate the quote in USD, EUR or GBP — pick your currency in the form.",
   },
   {
     q: "How do I remove the 'DealForge' watermark?",
@@ -70,7 +70,7 @@ const jsonLd = [
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     inLanguage: "en",
-    offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   },
   {
     "@context": "https://schema.org",

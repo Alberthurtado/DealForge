@@ -10,7 +10,7 @@ import { countryToCurrency } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "Pricing — DealForge | Quoting Software Plans from Free",
   description:
-    "Simple, transparent pricing for DealForge, the AI quoting (CPQ) software for small businesses. Free plan available. Billed in EUR, USD or GBP. Save 20% with annual billing.",
+    "Simple, transparent pricing for DealForge, the AI quoting (CPQ) software for small businesses. Free plan available. Billed in USD, EUR or GBP. Save 20% with annual billing.",
   keywords: [
     "DealForge pricing", "CPQ pricing", "quoting software price",
     "quote software pricing", "free quoting software", "CPQ plans",
@@ -105,7 +105,7 @@ const FAQS = [
   },
   {
     q: "Do you offer an annual discount?",
-    a: "Yes. Annual billing saves 20% compared to paying monthly, in every currency (EUR, USD and GBP).",
+    a: "Yes. Annual billing saves 20% compared to paying monthly, in every currency (USD, EUR and GBP).",
   },
   {
     q: "What payment methods do you accept?",
@@ -149,7 +149,9 @@ function CellValue({ value }: { value: boolean | string }) {
 export default async function EnPricingPage() {
   const hdrs = await headers();
   const country = hdrs.get("x-vercel-ip-country");
-  const initialCurrency = countryToCurrency(country) === "EUR" ? "GBP" : countryToCurrency(country);
+  // EN default currency is USD. UK visitors still get GBP via geo; eurozone /
+  // unknown-geo EN visitors (countryToCurrency → EUR) fall back to USD here.
+  const initialCurrency = countryToCurrency(country) === "EUR" ? "USD" : countryToCurrency(country);
 
   return (
     <div className="min-h-screen bg-white">
@@ -165,7 +167,7 @@ export default async function EnPricingPage() {
             Simple, transparent pricing
           </h1>
           <p className="mt-4 text-lg text-gray-600">
-            Start free. Upgrade when you&rsquo;re ready. Billed in EUR, USD or GBP.
+            Start free. Upgrade when you&rsquo;re ready. Billed in USD, EUR or GBP.
           </p>
         </div>
       </section>

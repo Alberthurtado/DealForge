@@ -109,10 +109,10 @@ interface Props {
   initialCurrency?: Currency;
 }
 
-export function EnPricingCards({ initialCurrency = "GBP" }: Props) {
+export function EnPricingCards({ initialCurrency = "USD" }: Props) {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
   const [currency, setCurrency] = useState<Currency>(
-    isValidCurrency(initialCurrency) ? initialCurrency : "GBP"
+    isValidCurrency(initialCurrency) ? initialCurrency : "USD"
   );
 
   return (

@@ -186,7 +186,7 @@ export function Generator({ lang = "es" }: { lang?: Lang }) {
     { id: uid(), concepto: "", cantidad: 1, precio: 0, descuento: 0 },
   ]);
 
-  const [currency, setCurrency] = useState<Currency>(lang === "en" ? "GBP" : "EUR");
+  const [currency, setCurrency] = useState<Currency>(lang === "en" ? "USD" : "EUR");
   const [iva, setIva] = useState(lang === "en" ? 20 : 21);
   const [retencion, setRetencion] = useState(0);
   const [notas, setNotas] = useState("");

@@ -1293,7 +1293,7 @@ export const industriasEn: Industria[] = [
       cargo: "Practice principal or tax adviser",
       empresaTipo: "Accounting or advisory firm of 2-15 professionals",
       dolor: "Clients call with queries that aren't included in the fee and they don't know how to charge for them without creating conflict.",
-      cita: "The client thinks that paying £150 a month means they can call me about anything, but that wasn't what we agreed.",
+      cita: "The client thinks that paying $150 a month means they can call me about anything, but that wasn't what we agreed.",
     },
     casoDeUso: {
       antes: "Agreed the fee verbally and sent an email with the monthly price, without detailing exactly which services it included.",

@@ -120,7 +120,7 @@ const FAQS = [
   },
   {
     q: "Which currencies do you support?",
-    a: "You can be billed in EUR, USD or GBP. Pricing adapts to your market automatically.",
+    a: "You can be billed in USD, EUR or GBP. Pricing adapts to your market automatically.",
   },
 ];
 
@@ -282,7 +282,7 @@ export default function EnHome() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-900">Simple, transparent pricing</h2>
           <p className="mt-3 text-gray-600">
-            Start free. Upgrade when you&rsquo;re ready. Billed in EUR, USD or GBP.
+            Start free. Upgrade when you&rsquo;re ready. Billed in USD, EUR or GBP.
           </p>
           <div className="mt-8">
             <Link
