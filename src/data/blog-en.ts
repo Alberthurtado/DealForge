@@ -4344,6 +4344,267 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
     metaDescripcion: "How to structure security service quotes: manned guarding, alarms, CCTV and access control. With real market price ranges and mistakes to avoid.",
     metaKeywords: "security company quotes, manned guarding quote, how to quote private security, security officer price, alarm installation price, CCTV quote, access control quote, private security price",
   },
+  {
+    slug: "how-to-calculate-profit-margins-in-quotes",
+    titulo: "How to calculate profit margins in your quotes: the guide nobody taught you",
+    extracto: "Learn to correctly calculate the profit margin in your quotes so you don't work for free without knowing it. With formulas, real examples and the most common mistakes sole traders and SMEs make.",
+    contenido: `<p>There's a silent problem affecting thousands of sole traders and small businesses: they work hard, bill well and at the end of the year discover they've earned far less than they expected. Or worse: that some of their best clients, the ones who generate the most work, are actually the ones contributing the least profitability.</p>
+
+<p>The root cause is almost always the same: a bad calculation of the profit margin in their quotes. Not because the owners are bad managers, but because nobody taught them to do it properly. Basic business training is conspicuously absent in many sectors where people come to the business from the trade, not from management.</p>
+
+<p>This article fixes that. No MBA jargon, with real examples you can apply from today.</p>
+
+<h2>Gross margin vs. net margin: the confusion that costs money</h2>
+
+<p>Before talking about how to calculate the margin, we need to be clear on exactly what it means. Because "margin" is one of those words everyone uses and few people calculate the same way.</p>
+
+<h3>Gross margin</h3>
+
+<p>It's the difference between the sale price and the direct cost of the product or service, expressed as a percentage of the sale price.</p>
+
+<p><strong>Formula:</strong> Gross margin (%) = (Sale price - Direct cost) ÷ Sale price × 100</p>
+
+<p>Example: you sell an installation service for £1,000. The cost of the materials and direct labour is £600. Your gross margin is:</p>
+
+<p>(1,000 - 600) ÷ 1,000 × 100 = <strong>40%</strong></p>
+
+<p>Looks good. But that 40% isn't what's left for you. It's what's left before paying your business's fixed costs.</p>
+
+<h3>Net margin</h3>
+
+<p>It's the profit left after subtracting all costs: direct, indirect and overheads. It's the number that really matters.</p>
+
+<p><strong>Formula:</strong> Net margin (%) = Net profit ÷ Sale price × 100</p>
+
+<p>Following the example: if from those £400 of gross margin you have to pay £150 of overheads attributable to that job (proportional rent, insurance, tools, vehicle, admin time), your net margin is:</p>
+
+<p>250 ÷ 1,000 × 100 = <strong>25%</strong></p>
+
+<p>And if on top of that you have to pay tax on that profit, the real margin left in your pocket is even smaller.</p>
+
+<p>The most common mistake: many sole traders calculate the gross margin, feel good and quote as if that were their real profit. It isn't.</p>
+
+<h3>Margin vs. markup: the difference that makes you sell cheaper than you think</h3>
+
+<p>There's another frequent confusion that deserves special attention: the difference between margin and markup.</p>
+
+<p>If you buy a product for £60 and sell it for £100:</p>
+<ul>
+<li><strong>Markup:</strong> (100 - 60) ÷ 60 × 100 = 66.7%</li>
+<li><strong>Margin:</strong> (100 - 60) ÷ 100 × 100 = 40%</li>
+</ul>
+
+<p>If you say "I'm going to apply a 40% margin" but calculate the price by multiplying the cost by 1.4, you're actually applying a 28.6% margin, not 40%. You're selling cheaper than you think.</p>
+
+<p>The correct formula to calculate the sale price from a target margin is:</p>
+
+<p><strong>Sale price = Direct cost ÷ (1 - Target margin)</strong></p>
+
+<p>Example with a 40% target margin: if the direct cost is £600 → 600 ÷ (1 - 0.40) = 600 ÷ 0.60 = <strong>£1,000</strong></p>
+
+<p>Keep this formula. Many people who've been in business for years discover it late.</p>
+
+<h2>What costs to include in your quotes (and which ones are always forgotten)</h2>
+
+<p>The most frequent calculation error in sole traders' and SMEs' quotes isn't in the arithmetic: it's in which costs are included in the calculation. These are the ones systematically forgotten:</p>
+
+<h3>Your own management and sales time</h3>
+
+<p>The time you spend creating the quote, meeting the client, following up, managing the invoice and collection. If it takes you four hours to win a £500 project, those four hours have a cost.</p>
+
+<p>Calculate your internal hourly rate (how much you need to earn per hour for your business to be sustainable) and apply it to the management time of each project. If your internal rate is £40/hour and you spend four hours of management on a project, the management cost is £160. That has to be in the price.</p>
+
+<h3>Apportioned fixed costs</h3>
+
+<p>The office or workshop rent, the business insurance, the tools and their depreciation, the software you use, the vehicle, training, the accountant. All these costs exist regardless of whether you have work or not. And all of them have to be covered by your sales.</p>
+
+<p>A practical way to incorporate them into quotes:</p>
+<ol>
+<li>Add up all your annual fixed costs. For example: £24,000/year</li>
+<li>Estimate how many projects or active clients you have a year. For example: 50 projects</li>
+<li>Structure cost per project: 24,000 ÷ 50 = £480 per project</li>
+<li>That amount must be added to the direct cost before calculating the final price</li>
+</ol>
+
+<p>If you don't, you're subsidising your business's fixed costs with your operating margin, and that margin evaporates.</p>
+
+<h3>Non-billable hours</h3>
+
+<p>If you work eight hours a day but only bill six (because the other two are admin, prospecting or training), your real rate has to cover the eight hours, not the six. The price you charge in the billable hours has to fund the non-billable ones too.</p>
+
+<p>Formula for the sustainable hourly rate:</p>
+<p><strong>Hourly rate = Annual income needed ÷ Billable hours per year</strong></p>
+
+<p>Example: you need £48,000 net a year. You work 46 weeks (after holidays) with an average of 25 billable hours a week.</p>
+<p>48,000 ÷ (46 × 25) = 48,000 ÷ 1,150 = <strong>£41.7/hour as a minimum</strong></p>
+
+<p>If your current rate is below that number, you're earning less than you need even though you seem busy.</p>
+
+<h3>The cost of capital and payment terms</h3>
+
+<p>If you invoice on 60-day terms but have to pay your direct costs upfront, you're financing your client for two months. That financial cost is real, especially on large projects. On high-value quotes, consider adding a small percentage (1-2%) for the financing cost if payment is long-term, or negotiate deposits that cover the initial direct costs.</p>
+
+<h3>Waste and unforeseen events</h3>
+
+<p>On physical projects (construction, installations, manufacturing), there's always a percentage of material that's lost, broken or has to be redone. In services, there are always additional meetings, unforeseen corrections or requirements that appear mid-job.</p>
+
+<p>Include a contingency percentage in your quotes: between 5% and 15% depending on the project's complexity and your history of overruns. It's not artificially padding the price: it's being honest about the reality of how projects work.</p>
+
+<h2>How to know what target margin to put in each quote</h2>
+
+<p>There's no universal "correct" margin. The right margin depends on the sector, the type of work, your company's competitive position and your business goals. But there are useful references:</p>
+
+<h3>Typical margins by type of business</h3>
+
+<ul>
+<li><strong>Professional services</strong> (consulting, advisory, design, marketing): gross margin of 60-80%, net margin of 20-40%</li>
+<li><strong>Technical services and installations</strong> (electrical, plumbing, IT, alarms): gross margin of 35-55%, net margin of 10-25%</li>
+<li><strong>Construction and renovation</strong>: gross margin of 15-35%, net margin of 5-15% (a sector with a lot of direct cost in materials and subcontractors)</li>
+<li><strong>Retail and distribution</strong>: gross margin of 20-50% depending on the product, net margin of 3-10%</li>
+<li><strong>Hospitality and catering</strong>: gross margin of 65-75% on food, net margin of 5-15%</li>
+<li><strong>Training and education</strong>: gross margin of 70-90%, net margin of 20-45%</li>
+</ul>
+
+<p>If your real net margin is consistently below your sector's range, you have a pricing or cost-structure problem to solve.</p>
+
+<h3>The minimum survival margin</h3>
+
+<p>Before thinking about target margins, calculate the minimum margin you need for your business to survive: the one that covers exactly your fixed costs and your minimum necessary salary with no additional profit.</p>
+
+<p>If your margin on a project is below that threshold, that project is costing you money, even if it generates income in the bank account. Identifying those projects is the first step to stop working for free.</p>
+
+<h3>The positioning margin</h3>
+
+<p>Your margin also communicates something to the market. A company that works on very low margins to win projects is positioning itself as the cheap option. That works in the short term but is unsustainable and attracts the type of client who always pushes for more discounts.</p>
+
+<p>Building a profitable business requires being able to defend higher margins with clearer value propositions. It's not a matter of greed: it's a matter of having the resources to deliver good service, hire good professionals and still be in the market in five years.</p>
+
+<h2>How to apply margin calculation in practice</h2>
+
+<p>The theory is fine, but what matters is the process you follow when you prepare a quote. Here's a five-step method applicable to any kind of services business:</p>
+
+<h3>Step 1: Identify all the direct costs</h3>
+
+<p>For this specific project or service, what do you have to spend directly? Materials, subcontractors, travel, project-specific licences or permits, direct staff hours (at cost, not sale price).</p>
+
+<p>Be specific. If you estimate "roughly", the quote will go off track. If you have a history of similar projects, use it. If not, be conservative: it's better to over-estimate the cost and adjust than to find yourself mid-project with no margin.</p>
+
+<h3>Step 2: Add the apportioned indirect costs</h3>
+
+<p>The percentage of fixed costs that corresponds to this project, calculated using the method we described earlier (annual fixed costs ÷ estimated number of projects, or a proportion of the time spent).</p>
+
+<h3>Step 3: Add the cost of your management time</h3>
+
+<p>Honestly estimate how many hours of management, coordination and follow-up you'll spend on this project beyond the direct technical work. Multiply it by your internal rate.</p>
+
+<h3>Step 4: Add the contingency</h3>
+
+<p>Between 5% and 15% of the total calculated costs, depending on the project's complexity and risk. Projects where the scope is very well defined → 5%. Projects with a lot of uncertainty or clients with a history of changes → 15%.</p>
+
+<h3>Step 5: Calculate the price with the target margin</h3>
+
+<p>With the sum of all the costs (total project cost), apply the formula:</p>
+
+<p><strong>Sale price = Total cost ÷ (1 - Target margin)</strong></p>
+
+<p>Complete example:</p>
+<ul>
+<li>Materials: £800</li>
+<li>Direct labour: £400</li>
+<li>Apportioned fixed costs: £200</li>
+<li>Management and coordination (5h × £40/h): £200</li>
+<li>Contingency (10%): £160</li>
+<li><strong>Total cost: £1,760</strong></li>
+<li>Target margin: 30%</li>
+<li><strong>Sale price: 1,760 ÷ 0.70 = £2,514</strong></li>
+</ul>
+
+<p>If the client asks for a discount and you give way to £2,200, you now know exactly what you're giving up: your margin drops from 30% to 20%, and your real net profit reduces proportionally. That information lets you negotiate with judgement, not blindly.</p>
+
+<h2>Profitability analysis by client: the exercise that changes perspectives</h2>
+
+<p>Once you have the calculation method clear, there's an exercise I recommend doing at least once a year: analysing the real profitability of each client or type of project.</p>
+
+<p>The result is usually surprising. In almost all services businesses there's an uneven distribution:</p>
+
+<ul>
+<li>20-30% of clients generate 70-80% of the real profit</li>
+<li>30-40% of clients have acceptable but not extraordinary profitability</li>
+<li>20-30% of clients generate income but little or no real profitability, or even losses once all costs are allocated</li>
+</ul>
+
+<p>The client who seems "easy" because they always have work may be the one who generates the most management hours, last-minute changes and price pressure. The most demanding client on quality may be the one who pays best and gives the fewest problems in execution.</p>
+
+<p>Doing that analysis requires keeping a record of the time spent on each client and comparing it with the billing. You don't need a complex system: a spreadsheet with the real time spent and the income per client is enough to see the pattern.</p>
+
+<h2>When and how to review your margins</h2>
+
+<p>Margins aren't static. Costs change, the market changes, your competitive position evolves. These are the moments when you should actively review your margins:</p>
+
+<h3>Annually at a minimum</h3>
+
+<p>Once a year, review whether your rates still cover your updated real costs. Cost inflation (materials, energy, labour) isn't always passed on automatically to prices. If your costs have risen 8% but your prices only 3%, your real margin has dropped five points.</p>
+
+<h3>When the cost structure changes</h3>
+
+<p>You hire someone, change premises, invest in equipment. Every significant change in the cost structure requires reviewing whether the current prices are still appropriate.</p>
+
+<h3>When you repeatedly detect unprofitable projects</h3>
+
+<p>If in the last six months three projects of the same type have ended with a margin below target, there's a systematic estimation problem. Either the direct cost is higher than you calculate, or the management time is undervalued, or that type of project has more unforeseen events than you account for. Adjust the calculation methodology, not just the prices.</p>
+
+<h3>When the market changes</h3>
+
+<p>If the competition has raised prices, if there's a shortage of materials or labour, if a new technology appears that changes production costs. The margin that was reasonable two years ago may not be today.</p>
+
+<h2>The role of quoting software in margin control</h2>
+
+<p>Calculating margins correctly by hand or in Excel is possible, but it has a cost: time and the risk of error. When you send twenty quotes a month, the probability of making an error in one of them is high. And a margin calculation error isn't visible until the project ends and you review the numbers.</p>
+
+<p>Professional quoting software lets you configure costs parametrically: you define the components (materials, labour, apportioned fixed costs, contingency) and the system automatically calculates the price with the correct margin. Every new quote applies that logic with no possibility of arithmetic error.</p>
+
+<p>With <a href="/registro?lang=en">DealForge</a> you can create quote templates where the target margin is preconfigured by type of service. When you create a new proposal, you select the components, the system calculates the correct price and presents it professionally to the client. The margin is protected from the first moment, without relying on someone remembering to apply the formula correctly each time.</p>
+
+<h2>What to do when the client says it's expensive</h2>
+
+<p>Client price pressure is the moment where margin control is put to the test. If you don't know exactly how much margin your quote has, any discount you give will be blind. If you do know, you can make informed decisions.</p>
+
+<p>Some possible responses when the client asks for a discount, based on real knowledge of your margins:</p>
+
+<ul>
+<li><strong>If you have room to manoeuvre:</strong> "I can adjust the price if we reduce the scope. If we remove [component X], the price drops to [£Y]." You give the discount by changing the scope, not sacrificing the margin.</li>
+<li><strong>If you're at the limit:</strong> "This price is the minimum at which I can guarantee the quality you need. If I lower it further, I'd have to reduce [materials, time, warranty], and I don't think that's what you're looking for." Honest and professional.</li>
+<li><strong>If the requested discount exceeds what's possible:</strong> "The price you propose doesn't let me cover the real costs of the project with the quality you need. I can recommend other options if that's the budget." Losing a project that wasn't going to be profitable isn't a loss.</li>
+</ul>
+
+<p>Having the numbers clear gives you the confidence to hold the price. And clients notice: a supplier who knows their costs and defends their price with arguments is more credible than one who drops at the first ask with no explanation.</p>
+
+<h2>Conclusion: the numbers you don't calculate, calculate you</h2>
+
+<p>Not calculating the margin correctly doesn't mean you don't pay the costs. It means you pay them without knowing it: with unrecognised overtime, with projects that don't generate the expected profit, with clients who consume more resources than they contribute.</p>
+
+<p>The key points of this article to apply from today:</p>
+
+<ul>
+<li>Use the correct formula: Price = Cost ÷ (1 - Target margin). Don't multiply by the margin, divide by it.</li>
+<li>Include in the cost all the real components: materials, labour, apportioned fixed costs, management time and contingency.</li>
+<li>Calculate your minimum internal hourly rate based on your needed income and the hours you can really bill.</li>
+<li>Review profitability by client at least once a year to identify which jobs suit you and which don't.</li>
+<li>When the client asks for a discount, reduce the scope before the margin.</li>
+<li>Update your rates at least once a year to absorb cost increases.</li>
+</ul>
+
+<p>A business that controls its margins can make decisions: which projects to accept, which clients to prioritise, when to hire, when to invest. A business that doesn't control them survives on revenue and wonders at the end of the year why there's nothing left over.</p>
+
+<p><strong>Want to quote with correct margins from the first click, with no manual formulas or risk of error?</strong> Try <a href="/registro?lang=en">DealForge</a> free and set up your quote templates with the margin you need to make your business genuinely profitable.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: ["profit margins", "how to calculate margin", "quote profitability", "sale price", "SME financial management", "sole traders", "professional quotes"],
+    publishedAt: "2026-06-15T13:30:00.000Z",
+    metaTitulo: "How to calculate profit margins in quotes: a practical guide — DealForge",
+    metaDescripcion: "Learn to calculate the real profit margin in your quotes: correct formulas, costs that are always forgotten and how to defend your price when the client asks for a discount.",
+    metaKeywords: "how to calculate profit margin, margin in quotes, calculate sale price with margin, gross net margin difference, quote profitability SMEs, profit margin formula, markup vs margin, price with margin sole traders",
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
