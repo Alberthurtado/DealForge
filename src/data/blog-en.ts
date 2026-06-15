@@ -1655,6 +1655,209 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p><strong>Want your quotes to always have this structure without having to think about it?</strong> <a href="/registro?lang=en">DealForge</a> generates professional quotes in minutes, with all the required fields, automatic VAT and digital signature included. Try it free, no credit card required.</p>`,
   },
+  // ─── 12. Why you lose deals by quoting slowly ───
+  {
+    slug: "why-you-lose-deals-by-quoting-slowly",
+    titulo: "Why you lose 60% of deals by quoting slowly (and how to fix it this week)",
+    extracto:
+      "Every hour you take to send a quote is money slipping away. We analyse why response speed is the most underestimated factor in the sales process and what you can do today to stop losing sales by arriving late.",
+    categoria: "ventas",
+    tags: ["fast quotes", "sales speed", "closing sales", "sales process", "estimates", "small business", "sales pipeline", "response time"],
+    autor: "DealForge",
+    publishedAt: "2026-04-26T09:00:00Z",
+    metaTitulo: "Why You Lose 60% of Deals by Quoting Slowly — DealForge",
+    metaDescripcion:
+      "Quote speed is the most underestimated factor in the sales process. Discover why you arrive late to your sales and how to go from quoting in days to quoting in minutes.",
+    metaKeywords:
+      "quoting slowly losing sales, quote speed, quote response time, quote fast, improve quoting process, losing deals, sales pipeline small business, fast quotes",
+    contenido: `<p>There's an unwritten rule in B2B sales that very few companies apply: the first to quote has a disproportionate advantage over the rest.</p>
+
+<p>It's not intuition. There's data behind it. Studies on B2B buyer behaviour consistently show that companies responding to a quote request within the first 60 minutes are 7 to 10 times more likely to close than those responding after 24 hours. And if we're talking about more than 48 hours, many prospects have already made a decision without you.</p>
+
+<p>Yet most small businesses still send quotes days late, convinced that the quality of the quote makes up for the wait. They're wrong.</p>
+
+<p>In this article we'll dismantle that myth, explain why speed matters more than you think, and give you a concrete plan to go from quoting in days to quoting in minutes.</p>
+
+<h2>The real cost of quoting late</h2>
+
+<p>Picture this: a potential client requests a quote from three companies on Monday morning. You reply on Wednesday with an impeccable document. By then, company A has already sent something the same Monday, spoken to them by phone on Tuesday and has a follow-up meeting on Thursday.</p>
+
+<p>Your quote arrives in an inbox where the decision is almost made. You can be better, cheaper and more professional, but you're late to the game.</p>
+
+<p>This isn't an extreme case. It's the daily reality of thousands of small businesses that lose contracts they deserved to win, simply because their quoting process is slow.</p>
+
+<p>The problem has three dimensions:</p>
+
+<ul>
+<li><strong>Economic:</strong> Every deal lost to slowness is revenue that doesn't come in. If you have an average ticket of £3,000 and lose two sales a month for this reason, you're leaving £72,000 a year on the table.</li>
+<li><strong>Commercial:</strong> The prospect that doesn't close with you doesn't disappear. They close with your competition and build a relationship with them. That client doesn't come back.</li>
+<li><strong>Reputational:</strong> In small markets or specific verticals, the perception of being "slow to respond" spreads. Clients talk about these experiences.</li>
+</ul>
+
+<h2>Why speed matters psychologically</h2>
+
+<p>Something happens in the buyer's mind when they request a quote that many salespeople ignore: at that moment, their level of interest is at its peak.</p>
+
+<p>When someone requests a quote, they've already gone through the phase of recognising they have a problem, already considered possible solutions, and already decided they want to explore working with someone like you. They're hot. They're motivated. They have the energy to make a decision.</p>
+
+<p>That state doesn't last. The buyer's life goes on: other projects come up, urgencies arise, priorities change. Every hour that passes without a reply, the level of activation drops. At 48 hours, many buyers have mentally moved on to something else. If your quote arrives then, they have to reactivate their interest from scratch. And that's hard.</p>
+
+<p>A fast quote, on the other hand, arrives while the client is still in decision mode. They feel looked after. They perceive you as agile. And that first positive impression colours the entire commercial relationship that follows.</p>
+
+<h2>The 4 reasons small businesses quote slowly</h2>
+
+<p>It's not a lack of willingness. Most businesses that quote late do so for structural reasons that have a solution.</p>
+
+<h3>1. The quoting process is manual and from scratch</h3>
+
+<p>Each quote is built by hand: open Word or Excel, find last time's template, copy the items, look up prices in your email or from memory, calculate the VAT by hand, export to PDF, attach it to the email. A simple quote can take 45 minutes. A complex one, hours.</p>
+
+<p>When the salesperson has three other urgent things in the day, the quote becomes "when I can". And "when I can" arrives on Wednesday.</p>
+
+<h3>2. Prices aren't centralised or up to date</h3>
+
+<p>In many small businesses, prices live in the owner's head, in a spreadsheet no one updates, or scattered across emails with suppliers. Every time you need to quote, you have to research the correct price. That adds time and creates errors.</p>
+
+<p>I've seen businesses where the salesperson needs to ask the boss the price before they can finish the quote. If the boss is in a meeting, the quote waits.</p>
+
+<h3>3. There are too many internal approvers</h3>
+
+<p>In companies with some structure, quotes go through review before going out. The salesperson prepares it, sends it to the boss, the boss reviews it when they can, suggests changes, back to the salesperson... Days lost in an internal ping-pong the client doesn't see but feels.</p>
+
+<h3>4. There's no internal sense of urgency</h3>
+
+<p>If no one measures the response time of quotes, no one feels the pressure to reduce it. Sales teams usually have close metrics, pipeline metrics, activity metrics. But rarely quote-speed metrics.</p>
+
+<p>What isn't measured doesn't improve. And what doesn't improve becomes the norm.</p>
+
+<h2>How much time is too much</h2>
+
+<p>It depends on the sector and the type of sale, but there are useful benchmarks:</p>
+
+<ul>
+<li><strong>Under 2 hours:</strong> Optimal for low or mid-ticket services with relatively standardised prices (cleaning, design, entry-level consulting, training).</li>
+<li><strong>Same day:</strong> Acceptable for more complex services or projects that require some prior analysis.</li>
+<li><strong>24 hours:</strong> The reasonable limit for almost any kind of B2B sale. Going beyond this starts to cost you deals.</li>
+<li><strong>More than 48 hours:</strong> High-risk zone. Prospects start to assume that working with you means slowness, and many have already moved forward with another option.</li>
+</ul>
+
+<p>If your average right now is 3-5 days, you're not competing on the same terms as someone who responds in 2 hours. Even if your product is better.</p>
+
+<h2>The thought experiment of the three competitors</h2>
+
+<p>Think about the last time a potential client asked you for a quote. They probably also asked two or three competitors.</p>
+
+<p>Now imagine one of those competitors has a process to respond in 90 minutes, with a well-presented document and a personalised message. What cumulative advantage do they have over you if you take 3 days?</p>
+
+<ol>
+<li>They already spoke to the client while you were still preparing the quote.</li>
+<li>They already resolved initial doubts and built a bit of rapport.</li>
+<li>Their proposal is in the client's mind as a reference when yours arrives.</li>
+<li>If the client is in a hurry, they may have already decided without waiting to see more options.</li>
+</ol>
+
+<p>Speed isn't just one more factor. It's a compounding advantage that multiplies with every hour that passes.</p>
+
+<h2>How to reduce quoting time: a practical plan</h2>
+
+<p>There's no magic here. There's process. These are the concrete changes with the biggest impact.</p>
+
+<h3>Step 1: Build an up-to-date price catalogue</h3>
+
+<p>Centralise all your prices in a single place anyone on the team can consult. Not in the boss's head. Not in five different spreadsheets. In one place, accessible, with up-to-date prices.</p>
+
+<p>This alone removes one of the biggest bottlenecks: the research time before you can put a number in the quote.</p>
+
+<h3>Step 2: Create templates by service or product type</h3>
+
+<p>80% of your quotes probably cover the same 10-15 items with variations. Create base templates for each type of proposal that you can fill in minutes, not hours.</p>
+
+<p>A well-made template isn't a copy-paste with no personalisation. It's a pre-built structure where you only need to adjust quantities, timelines and the client's name. The real personalisation time of a quote should be 10 minutes, not 45.</p>
+
+<h3>Step 3: Remove intermediate approvers for standard quotes</h3>
+
+<p>Clearly define which types of quotes can go out without review (within predefined ranges of price, discount and scope) and which need approval. Most should be able to go out without passing through the boss.</p>
+
+<p>If you trust your team to talk to clients, you can trust them to send a quote within the agreed parameters.</p>
+
+<h3>Step 4: Measure response time</h3>
+
+<p>Start recording when each quote request comes in and when the quote goes out. Just being aware that this number exists already creates positive pressure to improve it.</p>
+
+<p>Set the team a goal: respond in under X hours. Review it in the weekly. Treat the outliers for what they are: process problems, not individual failings.</p>
+
+<h3>Step 5: Use tools that speed up generation</h3>
+
+<p>This is probably the highest-impact change in the short term. If your quoting process is manual, switching to dedicated software can cut generation time from 45 minutes to 5-10 minutes per quote.</p>
+
+<p>Not by magic, but because you already have the prices loaded, the templates built, the VAT configured, and the PDF generates automatically.</p>
+
+<h2>The side effect no one mentions</h2>
+
+<p>When you reduce quoting time, something unexpected happens: you quote more.</p>
+
+<p>When quoting is fast, there's less friction to doing it. Salespeople send quotes they didn't used to send because "it wasn't worth the time". Leads that used to be left to cool off now get worked.</p>
+
+<p>The volume of quotes sent goes up. And even if the close rate stays the same, more quotes means more sales closed in absolute numbers.</p>
+
+<p>It's the same effect online stores get when they simplify the checkout process: fewer steps, more conversions. Not because the customer wants more, but because there's less friction to completing the action.</p>
+
+<h2>Speed vs. quality: the false dilemma</h2>
+
+<p>There's a recurring objection when you talk about quoting faster: "If I rush, I lower the quality."</p>
+
+<p>This objection confuses speed with sloppiness. They're not the same.</p>
+
+<p>A fast, well-made quote is possible when you have the process sorted. Speed is a consequence of having things organised, not of skipping steps.</p>
+
+<p>What is true: if your quality depends on spending 3 hours on each quote because you have to build everything from scratch every time, then you have a process problem, not a virtue of perfectionism. And that problem has a solution.</p>
+
+<p>The goal isn't to quote fast and badly. It's to quote fast and well. They're compatible when you have the right tools and process.</p>
+
+<h2>How to know if you're losing deals to speed</h2>
+
+<p>There are clear signs:</p>
+
+<ul>
+<li>Clients who tell you "we've already covered it with another supplier" when you finally send the quote</li>
+<li>Prospects who stop replying after requesting a quote (disengagement during the wait)</li>
+<li>Deals that close very quickly when you send the quote the same day, but cool off when you take longer</li>
+<li>Client feedback mentioning that "you took a while to respond"</li>
+<li>Comparisons where you lost despite having a better price or quality (the competitor won for other reasons, and speed is usually one of them)</li>
+</ul>
+
+<p>If you recognise any of these situations, quote speed is probably one of your biggest leaks in the pipeline.</p>
+
+<h2>The standard to aim for</h2>
+
+<p>For service businesses with relatively predictable prices, the standard to aim for is this: if a client requests a quote before 5pm, they receive it that same day. If they request it in the evening or at the weekend, they receive it first thing the next day.</p>
+
+<p>That level of response doesn't require working 24 hours. It requires having the process sorted so that generating the quote is a task of minutes, not hours.</p>
+
+<p>In <a href="/registro?lang=en">DealForge</a>, the average time to generate and send a complete quote is 7 minutes. That includes opening the platform, finding the client, selecting the items from the catalogue, adjusting quantities and prices, generating the PDF and sending it with a digital acceptance link. Seven minutes.</p>
+
+<p>With that generation time, responding the same day stops being a heroic effort and becomes the norm.</p>
+
+<h2>In summary: speed is a real competitive advantage</h2>
+
+<p>In a market where everyone offers similar quality, the one who responds first has a real, measurable advantage. Not because clients are impatient or irrational, but because response speed communicates something about how you'll work with them.</p>
+
+<p>A supplier who responds in 90 minutes conveys: organisation, respect for the client's time, ability to execute. One who takes 3 days conveys the opposite, even if it's unfair.</p>
+
+<p>The levers to improve are clear:</p>
+
+<ol>
+<li>Centralise your prices</li>
+<li>Build reusable templates</li>
+<li>Reduce intermediate approvers</li>
+<li>Measure response time</li>
+<li>Use tools that remove manual work</li>
+</ol>
+
+<p>You don't need to change everything at once. Pick one of these points, implement it this week, and measure the impact. In a month you'll probably have cut your quoting time in half.</p>
+
+<p><strong>Want to start today?</strong> <a href="/registro?lang=en">DealForge</a> is designed for exactly this: generating professional quotes in minutes, with an integrated price catalogue, templates by service type and sending with a digital signature. Start free, no credit card, and send your first quote in under 10 minutes.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
