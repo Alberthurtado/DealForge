@@ -2296,6 +2296,257 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p><strong>Want to create renovation quotes in minutes, with the line-item breakdown and a professional PDF included?</strong> Try <a href="/registro?lang=en">DealForge</a> free and start quoting like a big company, even if you're a sole trader or a small business.</p>`,
   },
+  // ─── 15. Quotes for marketing agencies ───
+  {
+    slug: "marketing-agency-quotes-guide",
+    titulo: "Quotes for marketing agencies: a practical guide to charging what you're worth",
+    extracto:
+      "Learn to structure and present quotes at your marketing agency that justify your price, reduce haggling and close more contracts. With real examples and a practical template.",
+    categoria: "guias",
+    tags: ["marketing quotes", "marketing agencies", "service quotes", "agency retainer", "selling digital services", "small business", "freelance marketing"],
+    autor: "DealForge",
+    publishedAt: "2026-05-08T09:00:00Z",
+    metaTitulo: "Quotes for marketing agencies: a practical guide 2026 — DealForge",
+    metaDescripcion:
+      "How to structure and present quotes at your marketing agency: pricing models, service breakdown, how to avoid haggling and an example template.",
+    metaKeywords:
+      "marketing agency quote, marketing services quote, quote digital services, marketing agency retainer, how to charge for marketing services, marketing quote template, agency quoting software",
+    contenido: `<p>If you run a marketing agency — or work as a freelancer in the sector — you know perfectly well that <strong>quoting is one of the most uncomfortable parts of the business</strong>. The services are intangible, the scope can be blurry, and the client always has a cousin who does it cheaper. The result: many agencies end up charging less than they should, or waste time on proposals that never close.</p>
+
+<p>This guide is for that. Let's look at how to structure quotes that communicate value, protect your margin and speed up the client's decision. No fluff.</p>
+
+<h2>Why quoting marketing services is different from other sectors</h2>
+
+<p>In construction, you quote square metres and materials. In logistics, you quote tonnes and kilometres. In marketing, you quote <strong>results you can't 100% guarantee</strong>, delivered by people whose time is hard to measure, with tools that change every six months.</p>
+
+<p>That combination makes marketing quotes especially hard to defend in front of a sceptical client. The most common problems:</p>
+
+<ul>
+<li>"My client doesn't understand why I charge so much if it's 'only' a post a day"</li>
+<li>"I lose the contract because someone else does it cheaper, even though I know it'll fail"</li>
+<li>"The client constantly asks for changes and I had quoted something specific"</li>
+<li>"I don't know whether to charge by the hour, by results or by monthly retainer"</li>
+</ul>
+
+<p>All these problems have their root in the same place: <strong>a quote that doesn't communicate the work, the process or the value well</strong>. Let's fix it.</p>
+
+<h2>The three quoting models for marketing agencies</h2>
+
+<p>Before talking about structure, you have to decide how you charge. In marketing there are basically three models, and each has its ideal context.</p>
+
+<h3>1. Monthly flat fee (retainer)</h3>
+
+<p>The model preferred by most established agencies. The client pays a fixed monthly fee in exchange for a defined set of services: social media management, a weekly newsletter, monthly reports and X hours of consulting.</p>
+
+<p><strong>Advantages:</strong> predictable income, an ongoing relationship with the client, the chance to specialise in their sector over time.</p>
+
+<p><strong>Downside:</strong> if you don't define the scope well, the client pushes to fit more and more work into the retainer. The key is a contract with a very precise scope.</p>
+
+<p><strong>When to use it:</strong> when the client needs an ongoing presence (social, content, SEO, email marketing). It works especially well when the relationship is long-term and trust is established.</p>
+
+<h3>2. Per project</h3>
+
+<p>A fixed price for a specific deliverable: a campaign launch, a rebrand, a new website, a six-month content strategy.</p>
+
+<p><strong>Advantages:</strong> easy for the client to understand, no commitment to continuity, allows large projects with high budgets.</p>
+
+<p><strong>Downside:</strong> scope creep (when the project grows out of control) can eat your margin if you don't clearly define what's included and what isn't.</p>
+
+<p><strong>When to use it:</strong> for new clients who want to "test" before committing, or for defined projects like a launch, a seasonal campaign or an audit.</p>
+
+<h3>3. By hours or days</h3>
+
+<p>The most flexible model but the one that scales worst. You charge a price per hour of work. Some senior consultants work this way for one-off strategic projects.</p>
+
+<p><strong>Advantages:</strong> protects your time, transparent for the client, easy to adjust.</p>
+
+<p><strong>Downside:</strong> it penalises efficiency (the better you are, the less you charge), hard to sell to clients who aren't used to it, creates friction on every invoice.</p>
+
+<p><strong>When to use it:</strong> for one-off consulting, training, audits or when there's a lot of uncertainty about the real scope.</p>
+
+<h2>How to structure a marketing agency quote that converts</h2>
+
+<p>Whatever model you choose, the structure of the quote matters a lot. Here's the one that works best for marketing agencies:</p>
+
+<h3>1. Executive summary (the part that gets read most)</h3>
+
+<p>In one or two pages, explain what problem the client has and how you're going to solve it. Before talking about prices. This positions the conversation on the right ground: not "how much does it cost?" but "what result am I going to get?".</p>
+
+<p>Include: the client's current situation (as you understood it in the meeting), the main objective, your general approach and why your agency is the right one for this.</p>
+
+<h3>2. Service breakdown</h3>
+
+<p>This is where most agencies fall short. Instead of writing "social media management: £1,000/month", detail:</p>
+
+<ul>
+<li>Which networks (Instagram, LinkedIn, TikTok…)</li>
+<li>How many posts per week and of what type (carousel, short video, story, reels…)</li>
+<li>Who creates the assets (you, the client, an external designer)</li>
+<li>Whether it includes community management (replying to comments, DMs…)</li>
+<li>How often and in what format they'll receive reports</li>
+</ul>
+
+<p>This level of detail removes ambiguity, justifies the price and drastically reduces later arguments about "but I thought this included...".</p>
+
+<h3>3. What the proposal does NOT include</h3>
+
+<p>This section is pure gold and almost no agency includes it. Write explicitly what's out of scope: paid advertising spend (if you only charge for management), product photography, web design, translations, travel, etc.</p>
+
+<p>For example: <em>"This proposal doesn't include the spend on Meta Ads or Google Ads. The media budget is managed by the client directly or can be quoted separately."</em></p>
+
+<p>This protects both parties and stops the client assuming everything is covered.</p>
+
+<h3>4. Deliverables and timelines</h3>
+
+<p>What exactly will the client receive and when? A deliverables schedule, even an approximate one, gives a lot of reassurance. For launch campaigns it's especially important: week 1 strategy, weeks 2-3 asset production, week 4 activation and first results.</p>
+
+<h3>5. Price and terms</h3>
+
+<p>Present the price clearly. If there are options (for example, three packages), make them easy to compare. Always include:</p>
+
+<ul>
+<li>Monthly or total project price (with VAT broken down)</li>
+<li>Payment method (50% upfront, 50% on delivery is usual for projects; monthly in advance for retainers)</li>
+<li>Minimum contract duration (for retainers, 3 or 6 months is usual)</li>
+<li>Cancellation policy (what happens if the client cancels before the term)</li>
+<li>Quote validity (15-30 days)</li>
+</ul>
+
+<h3>6. Next steps</h3>
+
+<p>Don't end the quote with "I remain at your disposal for any questions". Close with a concrete action step: <em>"To confirm the start, we need the signed contract and the first payment before [date]. If you have questions, we can do a 20-minute call this week."</em></p>
+
+<p>A clear CTA reduces the client's paralysis.</p>
+
+<h2>How to calculate your rates without leaving money on the table</h2>
+
+<p>The most expensive mistake small agencies make is calculating the price based solely on direct working hours. They forget factors that erode the real margin:</p>
+
+<ul>
+<li><strong>Client communication time:</strong> meetings, emails, revisions, briefings. On many projects this adds up to 20-30% of the total time.</li>
+<li><strong>Internal management time:</strong> team coordination, training, tools.</li>
+<li><strong>Revisions and changes:</strong> if not limited in the contract, they can multiply the time invested.</li>
+<li><strong>Tool costs:</strong> design licences, scheduling platforms, analytics tools, stock images.</li>
+<li><strong>Margin for error:</strong> there are always surprises. A 10-15% buffer is healthy.</li>
+</ul>
+
+<p>A basic formula to calculate a retainer price:</p>
+
+<p><strong>Estimated hours × real hourly rate × 1.25 (overhead) = base price</strong></p>
+
+<p>What's your real hourly rate? Take the annual salary you want to earn (or your team's cost), add taxes, tools and margin, and divide it by the billable hours per year (normally 1,200-1,400 hours for a full-time person). That number often surprises agencies that have spent years charging "by eye".</p>
+
+<h2>The haggling problem: how to respond without lowering the price</h2>
+
+<p>The client says "it's too expensive". Typical agency response: lower the price. The correct response: <strong>reduce the scope, not the price</strong>.</p>
+
+<p>When you lower the price without changing the scope, you're implicitly saying you were overcharging before. Instead, if you say "I can adjust the proposal to that budget, but then we'd do X instead of X+Y+Z", the message is different: your prices are fair, and the client decides what level of service they want.</p>
+
+<p>Prepare two or three versions of the proposal in advance: a full one, a mid one and a basic one. That way, when the client asks for a discount, the conversation shifts from "how much will you knock off?" to "which package fits your budget best right now?".</p>
+
+<h2>When and how to follow up on a marketing quote</h2>
+
+<p>Most agencies send the quote by email and wait. A costly mistake.</p>
+
+<p>What works:</p>
+
+<ol>
+<li><strong>Send the quote and call or write the next day</strong> to confirm it arrived OK and whether they have any initial questions. Not to pressure, but to open a conversation.</li>
+<li><strong>At 3-4 days,</strong> a specific follow-up: "Have you had a chance to review it? If you like, we can do a 15-minute call to clear up questions."</li>
+<li><strong>At 7-10 days,</strong> if there's no reply: "The proposal expires on [date]. Do you want us to extend it or is there something we can adjust?"</li>
+</ol>
+
+<p>Three contacts are enough for most decisions in marketing services. If after that there's no reply, it's the client's decision, not a lack of persistence on your part.</p>
+
+<p>Managing these follow-ups manually with a spreadsheet is exhausting when you have several proposals open at once. With a tool like <strong>DealForge</strong> you can see at a glance the status of each quote — sent, viewed, awaiting reply — and schedule reminders without relying on memory.</p>
+
+<h2>Typical mistakes in marketing agency quotes</h2>
+
+<h3>Mixing price and justification</h3>
+<p>Presenting the price before explaining the value is the most expensive mistake. The client sees the number before understanding what's behind it, and the mental anchor is "expensive". First the problem, then the solution, then the price.</p>
+
+<h3>Using industry jargon without explaining it</h3>
+<p>"We'll do an inbound strategy with lead nurturing in the TOFU and MOFU." The client may nod politely and have no idea what it means. Speak the client's language: more sales, more visibility, more repeat customers.</p>
+
+<h3>Not including success stories or references in the proposal</h3>
+<p>In marketing, your previous work is your best sales argument. A concrete success story ("we helped a B2B software company triple its organic leads in 9 months with this methodology") does more than three pages of service descriptions.</p>
+
+<h3>Proposals that are too long</h3>
+<p>More isn't more. A 40-page proposal for a £2,000/month retainer scares more than it convinces. The client doesn't have time to read it. Keep the core to 5-8 well-structured pages, with the technical details in optional appendices.</p>
+
+<h3>Not keeping previous versions</h3>
+<p>When a client comes back six months later and says "what did that proposal you sent me say?", you can't have the quotes lost among emails. Keep an organised record of all your proposals, with the versions and statuses. This also gives you data to analyse which types of proposals have the best close rate.</p>
+
+<h2>VAT and tax aspects in marketing quotes</h2>
+
+<p>Most marketing services carry the standard VAT rate; there are no specific reduced rates for the sector in most countries (unless the activity is exempt, such as accredited training or certain cultural services, which isn't usually the case for commercial agencies).</p>
+
+<p>If you work with clients in other countries, the rules for cross-border B2B services vary (in the EU, for example, the reverse-charge mechanism often applies: you invoice without VAT and the client accounts for it in their country). Check the rules that apply to your situation.</p>
+
+<p>For consumer clients (B2C), remember the price you show in the quote should include VAT broken down. For businesses (B2B), the standard is to show the net price + VAT separately.</p>
+
+<h2>How to scale the quoting process in your agency</h2>
+
+<p>When you start, every proposal is hand-crafted. When you have 10 or 20 potential clients a month, you need a process.</p>
+
+<p>What agencies that scale well do:</p>
+
+<ul>
+<li><strong>They have base templates by service type</strong> (social retainer, launch project, SEO audit…) that they customise, not create from scratch every time.</li>
+<li><strong>They keep their service catalogue with up-to-date prices</strong>, so calculating a proposal is combining modules, not doing mental arithmetic.</li>
+<li><strong>They have an internal approval process</strong> for discounts: if someone on the team wants to offer a special price, they need approval. This stops the "softer" salespeople from eroding the whole agency's margin.</li>
+<li><strong>They measure the close rate by proposal type</strong> to know which services sell best and where they're wasting time on proposals that never close.</li>
+</ul>
+
+<p>A platform like <strong>DealForge</strong> is designed for exactly this: keeping a service catalogue with prices, building proposals quickly by combining modules, applying automatic discount rules and tracking the pipeline. For an agency handling more than 15-20 proposals a month, the time recovered is significant.</p>
+
+<h2>Example quote for a marketing agency</h2>
+
+<p>To make this concrete, here's a simplified example of how to present a social media + newsletter retainer:</p>
+
+<hr/>
+
+<p><strong>DIGITAL SERVICES PROPOSAL — [AGENCY NAME]</strong><br/>
+Client: XYZ Ltd | Date: April 2026 | Ref: QUO-2026-0047 | Valid until: 15/05/2026</p>
+
+<p><strong>Current situation:</strong> XYZ has a presence on Instagram and LinkedIn but posts irregularly, with no content strategy or metrics tracking. The stated objective is to increase brand visibility to support the sales team.</p>
+
+<p><strong>Our proposal: Monthly digital management retainer</strong></p>
+
+<table>
+<thead><tr><th>Service</th><th>Detail</th><th>Price/month</th></tr></thead>
+<tbody>
+<tr><td>Instagram + LinkedIn management</td><td>4 posts/week (mix of carousel, static, short reels). Monthly editorial calendar. Community management Mon-Fri (reply within 24h).</td><td>£1,050</td></tr>
+<tr><td>Monthly newsletter</td><td>1 monthly email to the client's database. Copy, design and sending via Mailchimp. Open and click report.</td><td>£350</td></tr>
+<tr><td>Monthly reporting</td><td>Dashboard with key KPIs: reach, engagement, follower growth, email opens.</td><td>Included</td></tr>
+</tbody>
+<tfoot>
+<tr><td colspan="2"><strong>Monthly subtotal</strong></td><td><strong>£1,400</strong></td></tr>
+<tr><td colspan="2">VAT (20%)</td><td>£280</td></tr>
+<tr><td colspan="2"><strong>Monthly total</strong></td><td><strong>£1,680</strong></td></tr>
+</tfoot>
+</table>
+
+<p><strong>Does not include:</strong> paid advertising spend (Meta Ads, LinkedIn Ads), product photography/video, landing page design, translations.</p>
+
+<p><strong>Terms:</strong> minimum duration 3 months, monthly payment in advance, cancellation with 30 days' notice.</p>
+
+<p><strong>Next steps:</strong> To confirm the start in May, we need the signed contract and the first payment before 5 May. Shall we do a call this week to clear up any questions?</p>
+
+<hr/>
+
+<p>See the difference with a simple "social management: £1,050/month"? The level of detail justifies the price, reduces doubts and protects both parties.</p>
+
+<h2>Conclusion: your quote is your first deliverable</h2>
+
+<p>In the marketing sector, where everyone promises incredible results, <strong>a clear, detailed and professional quote already sets you apart before you've done any work</strong>. It's the first sample of how you work.</p>
+
+<p>If your proposal arrives quickly, is well structured, speaks the client's language and has a justified price, you've already won half the battle. The other half is executing what you promised.</p>
+
+<p>Apply the structure in this guide, define your business model well (retainer, project or hours) and set up a process so you don't create every quote from scratch. Your time is the agency's scarcest resource — don't spend it on ad hoc proposals when there's a more efficient way to do it.</p>
+
+<p><strong>Want to create marketing quotes in minutes, with your service catalogue and a professional PDF included?</strong> Try <a href="/registro?lang=en">DealForge</a> free and start closing more contracts with less time spent on sales admin.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
