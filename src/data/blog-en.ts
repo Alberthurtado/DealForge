@@ -1432,6 +1432,229 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p><strong>If you want to stop following up by hand and have total visibility of your open quotes</strong>, <a href="/registro?lang=en">DealForge</a> includes automatic reminders, open tracking and pipeline management from day one. Try it free, no credit card required.</p>`,
   },
+  // ─── 11. The 7 things every professional quote must include ───
+  {
+    slug: "7-things-every-professional-quote-must-include",
+    titulo: "The 7 things every professional quote must include (and the 3 that ruin your close)",
+    extracto:
+      "A badly structured quote is money slipping away. We review the 7 essential elements that must appear in any professional quote, why each one matters, and the most common mistakes that stop the client from signing.",
+    categoria: "guias",
+    tags: ["professional quotes", "estimates", "how to create a quote", "quote structure", "B2B sales", "small business", "freelancers", "closing sales"],
+    autor: "DealForge",
+    publishedAt: "2026-04-22T09:00:00Z",
+    metaTitulo: "The 7 Things Every Professional Quote Must Include — DealForge",
+    metaDescripcion:
+      "A practical guide to the 7 essential elements in any professional quote: identification, prices with VAT, payment terms, timelines and more. Checklist included.",
+    metaKeywords:
+      "professional quote details, what a quote must include, professional quote structure, how to create a quote, quote elements, perfect quote, professional quote small business, quote checklist",
+    contenido: `<p>You spend hours preparing a proposal. You calculate prices, adjust margins, carefully write the email. You send it. And nothing happens.</p>
+
+<p>In many cases the problem isn't the price. It's that the quote itself doesn't convey professionalism, doesn't resolve the client's doubts before they arise, or simply lacks information they need to make a decision.</p>
+
+<p>A quote isn't just a document with numbers. It's a sales tool. And like any tool, it works badly if pieces are missing.</p>
+
+<p>Here are the 7 things that can't be missing from any professional quote, explained from the perspective of what the client needs to see to say yes.</p>
+
+<h2>1. Complete identification of both parties</h2>
+
+<p>It seems obvious, but the number of quotes that arrive with no letterhead, no tax number, no address or no contact name is surprisingly high.</p>
+
+<p>The minimum that should appear:</p>
+
+<ul>
+<li>Your company's name</li>
+<li>Tax/VAT number</li>
+<li>Registered address</li>
+<li>Contact phone and email</li>
+<li>The full name of the client or recipient company</li>
+<li>The client's tax number (if a company)</li>
+</ul>
+
+<p>Why does it matter? Because a quote without these details has no legal validity in a dispute. But beyond the legal side: a client who receives a document with no letterhead perceives they're dealing with someone disorganised. That bias affects the buying decision, even unconsciously.</p>
+
+<p>If your company is small or you're a freelancer, this matters twice as much. A professional presentation makes up for a lack of size.</p>
+
+<h2>2. Quote number and issue date</h2>
+
+<p>Every quote should have a unique number and a date. Without that, you can't track it internally, you can't reference the proposal in later conversations and, if the client accepts weeks later, it's unclear which version they approved.</p>
+
+<p>The quote number serves several functions:</p>
+
+<ul>
+<li>Unambiguous identification of the document</li>
+<li>A reference for sales follow-up</li>
+<li>Traceability if there are revisions or later versions</li>
+<li>A basis for numbering the corresponding invoice</li>
+</ul>
+
+<p>The issue date, in addition, is directly tied to the next point.</p>
+
+<h2>3. Validity date of the offer</h2>
+
+<p>A quote with no expiry date is an indefinite promise that can cost you dearly.</p>
+
+<p>Costs change. Suppliers update their rates. Your capacity varies. If you sent a quote six months ago with prices from back then and the client now turns up wanting to accept it, you have a problem.</p>
+
+<p>The norm is to include a validity of 15 to 30 days. In sectors with volatile materials (construction, technology, energy), it can be even less. For stable services, you can stretch it to 60 days.</p>
+
+<p>Validity also creates legitimate urgency. It's not artificial pressure: it's real management of your business. And the client understands it perfectly when it's well explained: <em>"This proposal is valid until 30 April; after that date we'll review prices subject to availability."</em></p>
+
+<h2>4. Detailed description of the work or product</h2>
+
+<p>This is the point where most quotes fail, and the one that most influences the close.</p>
+
+<p>A vague quote breeds distrust. If the client doesn't know exactly what they're hiring, the comparison with the competition is made on price alone. And there's always someone cheaper than you.</p>
+
+<p>A good description should include:</p>
+
+<ul>
+<li><strong>What's done</strong>: the exact scope of the work or the products included</li>
+<li><strong>What's not done</strong>: the exclusions, just as important as the above</li>
+<li><strong>How it's done</strong>: methodology or process if relevant</li>
+<li><strong>With what materials or tools</strong>: if applicable to the sector</li>
+<li><strong>How many revisions or iterations</strong>: key in creative or consulting services</li>
+</ul>
+
+<p>The rule of thumb: if the client can misinterpret something, write it explicitly. Post-project disputes almost always originate in an ambiguous quote.</p>
+
+<p>Example of a weak description: <em>"Website design: £1,200"</em></p>
+
+<p>Example of a solid description: <em>"Design and development of a corporate website in WordPress: up to 5 pages (Home, Services, About us, Blog, Contact), contact form, mobile optimisation, Google Analytics integration, 2 rounds of design revisions. Does not include copywriting, photography or web hosting."</em></p>
+
+<p>The second version justifies the price. The first invites you to negotiate it.</p>
+
+<h2>5. Itemised price with VAT shown separately</h2>
+
+<p>The price should appear clearly, itemised and with VAT always visible and separate from the net amount.</p>
+
+<p>The recommended structure:</p>
+
+<ul>
+<li>Unit price per item or service</li>
+<li>Quantity</li>
+<li>Line subtotal</li>
+<li>Total net amount</li>
+<li>Applicable VAT rate (standard, reduced or zero-rated, with justification)</li>
+<li>VAT amount</li>
+<li>Total to pay</li>
+</ul>
+
+<p>Why itemise instead of just stating the total? For two reasons:</p>
+
+<p>First: the business client needs to see the net amount separately for their accounting. If you only see a total of £1,452 with no breakdown, you have to start calculating. That creates friction.</p>
+
+<p>Second: the breakdown makes the price look more reasonable. Three lines of £300, £400 and £500 are perceived differently from a single block of £1,200, even though they're the same.</p>
+
+<p>If you've applied discounts, show them explicitly too. A visible discount has commercial value. A price quietly cut does not.</p>
+
+<h2>6. Payment terms</h2>
+
+<p>None of this: <em>"Payment to be agreed."</em></p>
+
+<p>Payment terms should be written into the quote. Don't leave this point for later, because later is always more awkward.</p>
+
+<p>What should be clear:</p>
+
+<ul>
+<li><strong>Payment method</strong>: bank transfer, direct debit, card...</li>
+<li><strong>Schedule</strong>: 50% upfront, 50% on delivery; single payment within 30 days; monthly payment...</li>
+<li><strong>Bank details or payment instructions</strong>: account details if by transfer</li>
+<li><strong>Late-payment terms</strong> (optional but recommended on large projects): interest or penalties for delay</li>
+</ul>
+
+<p>Including this from the start filters out problematic clients before they sign, and avoids awkward conversations at the end of the project when the work is already done.</p>
+
+<p>A serious client has no problem with clear payment terms. On the contrary: they value them, because they show you're running your business professionally.</p>
+
+<h2>7. Delivery or completion time</h2>
+
+<p>When it starts and when it finishes. For services, how many working days it involves. For products, when it's delivered.</p>
+
+<p>This detail is critical for the client because it affects their own planning. If they need the work finished before a specific date, the quote must make clear whether that's possible or not.</p>
+
+<p>Also detail the conditions that affect the timeline:</p>
+
+<ul>
+<li><em>"The timeline starts from receipt of the initial payment and the necessary materials."</em></li>
+<li><em>"Timelines may be affected if the client's revisions exceed a 48-hour response time."</em></li>
+<li><em>"Estimated delivery: 3 weeks from signing the contract."</em></li>
+</ul>
+
+<p>This doesn't just manage expectations. It also protects you if the project drags on for reasons beyond your control.</p>
+
+<h2>Bonus: the 3 things that ruin your close even if the rest is perfect</h2>
+
+<p>A quote can have all 7 points above and still fail if it makes any of these mistakes.</p>
+
+<h3>Mistake 1: The formatting is a mess</h3>
+
+<p>A badly laid-out Word document, a PDF with inconsistent fonts, or worse, an email with the prices in the body of the text with no structure. Formatting communicates before content does. If the presentation is careless, the client assumes the work will be too.</p>
+
+<p>You don't need to be a designer. You need consistency: one typeface, brand colours, uniform margins, a logo in the header.</p>
+
+<h3>Mistake 2: Technical language with no translation</h3>
+
+<p>If your client isn't from the sector, every technical term you use without explaining is a barrier. Barriers create doubts. Doubts create silence.</p>
+
+<p>Write for the person who's going to read the document, not for an industry colleague. If the final decision-maker is the general manager and not the technician, the language has to be executive.</p>
+
+<h3>Mistake 3: There's no clear next step</h3>
+
+<p>Many quotes end and the client doesn't know what to do to accept. Reply to the email? Sign something? Make a transfer? Call?</p>
+
+<p>The document should end with a clear instruction: <em>"To accept this proposal, reply to this email with your confirmation or sign the attached document and send it back to us."</em></p>
+
+<p>Friction in the acceptance process kills sales that were already won.</p>
+
+<h2>The quote as a sales tool, not just information</h2>
+
+<p>The difference between a quote that closes and one that ends up in limbo isn't always the price. Often it's the structure, the clarity and the feeling the document conveys.</p>
+
+<p>A client who reads a well-built quote thinks: <em>"This company knows what it's doing."</em> A client who reads an ambiguous or careless quote thinks: <em>"Better get a second opinion."</em></p>
+
+<p>The 7 points in this guide aren't bureaucracy. They're the answers to the questions the client asks themselves while reading your proposal:</p>
+
+<ul>
+<li><em>Who am I dealing with?</em> → Identification</li>
+<li><em>Which proposal are we talking about?</em> → Number and date</li>
+<li><em>How long do I have to decide?</em> → Validity</li>
+<li><em>What exactly am I buying?</em> → Detailed description</li>
+<li><em>How much will it really cost me?</em> → Itemised price with VAT</li>
+<li><em>How and when do I have to pay?</em> → Payment terms</li>
+<li><em>When will I have it ready?</em> → Delivery time</li>
+</ul>
+
+<p>If your quote answers all these questions before the client asks them, you reduce friction to a minimum and increase the chances of closing.</p>
+
+<h2>How to simplify all this in practice</h2>
+
+<p>Keeping these 7 elements consistent in every quote is easy if you have a template or a system. Hard if you build each quote from scratch in Word or Excel.</p>
+
+<p>In <a href="/registro?lang=en">DealForge</a>, every quote automatically includes all these elements: a sequential number, dates, configurable validity, VAT breakdown, payment terms and a digital acceptance button so the client signs in one click. You don't have to remember what to put: the structure is already there.</p>
+
+<p>The result is that every quote you send goes out with the same level of professionalism, regardless of whether you prepared it in ten minutes or an hour.</p>
+
+<h2>Quick checklist before sending any quote</h2>
+
+<p>Before hitting send, run through this list:</p>
+
+<ol>
+<li>Does your company's name, tax number and contact details appear?</li>
+<li>Do the client's details appear?</li>
+<li>Does it have a quote number and issue date?</li>
+<li>Does it state how long the offer is valid?</li>
+<li>Is the description of the work specific enough? Does it include what's NOT included?</li>
+<li>Is the price itemised with the net amount and VAT shown separately?</li>
+<li>Are the payment terms and schedule clear?</li>
+<li>Does the delivery or completion time appear?</li>
+<li>Is the formatting clean and consistent with your brand image?</li>
+<li>Is there a clear next step for the client to accept?</li>
+</ol>
+
+<p>If you can tick all the points, you're sending a quote that works for you.</p>
+
+<p><strong>Want your quotes to always have this structure without having to think about it?</strong> <a href="/registro?lang=en">DealForge</a> generates professional quotes in minutes, with all the required fields, automatic VAT and digital signature included. Try it free, no credit card required.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
