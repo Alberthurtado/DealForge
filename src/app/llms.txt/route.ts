@@ -68,6 +68,14 @@ Todos los precios en EUR, IVA no incluido. Sin permanencia.
 - [Free Quote Generator](https://dealforge.es/en/free-quote-generator): create a PDF quote online for free, no signup, in USD/EUR/GBP
 - [Contact](https://dealforge.es/en/contact): request a demo or ask about Enterprise
 
+### English blog — cornerstone guides
+- [Blog](https://dealforge.es/en/blog): guides on quoting, CPQ, sales and pricing for small businesses
+- [What is a CPQ and how it works](https://dealforge.es/en/blog/what-is-cpq-how-it-works): Configure, Price, Quote explained step by step, with the 5 problems it solves
+- [How to create a professional quote (complete guide)](https://dealforge.es/en/blog/how-to-create-professional-quote-complete-guide): every section a winning quote needs, with structure and examples
+- [How to calculate profit margins in quotes](https://dealforge.es/en/blog/how-to-calculate-profit-margins-in-quotes): the correct formula (Price = Cost ÷ (1 − margin)), margin vs markup, with worked examples
+- [Quoting software for small businesses](https://dealforge.es/en/blog/quoting-software-small-business-guide): what to look for and when to switch from spreadsheets
+- [CPQ vs CRM: the differences](https://dealforge.es/en/blog/cpq-vs-crm-differences): which tool does what, and why you may need both
+
 ### FAQ (English)
 - What is DealForge: AI-powered CPQ/quoting software for small businesses, with a free plan.
 - Is DealForge free: yes, the Starter plan is free forever, and there is a free online quote generator with no signup.

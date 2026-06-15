@@ -56,6 +56,12 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: privatePaths,
       },
+      // OpenAI dedicated search bot (distinct from GPTBot) — powers ChatGPT search citations
+      {
+        userAgent: "OAI-SearchBot",
+        allow: "/",
+        disallow: privatePaths,
+      },
       // Google Gemini
       {
         userAgent: "Google-Extended",

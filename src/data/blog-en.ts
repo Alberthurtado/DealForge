@@ -4637,7 +4637,7 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
 <p>If any of these points sounds familiar, a CPQ could be the solution:</p>
 
 <h3>1. Slow quotes that lose opportunities</h3>
-<p>According to industry studies, companies that respond to a quote request in under an hour are <strong>7 times more likely</strong> to close the sale. With a CPQ, your team can generate a professional quote in minutes, not days.</p>
+<p>According to a Harvard Business Review study (&ldquo;The Short Life of Online Sales Leads&rdquo;), companies that respond to a lead within the first hour are <strong>nearly 7 times more likely</strong> to have a meaningful conversation with a decision-maker than those that wait even an hour longer. With a CPQ, your team can generate a professional quote in minutes, not days.</p>
 
 <h3>2. Errors in prices and calculations</h3>
 <p>Manual errors in quotes aren't just embarrassing, they can cost you real money. A CPQ eliminates manual calculations. Prices are updated centrally and business rules are applied automatically.</p>
