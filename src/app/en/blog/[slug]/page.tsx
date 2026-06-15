@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { blogPostsEn, getBlogPostEn } from "@/data/blog-en";
+import { AUTHOR, authorPersonJsonLd } from "@/data/author";
 import { Calendar, Clock, ArrowLeft, Flame } from "lucide-react";
 
 interface Props {
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
-      authors: [post.autor],
+      authors: [AUTHOR.name],
       ...(post.imagen && {
         images: [{ url: post.imagen, width: 1200, height: 630, alt: post.titulo }],
       }),
@@ -93,7 +94,7 @@ export default async function EnBlogPostPage({ params }: Props) {
     inLanguage: "en",
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
-    author: { "@type": "Organization", name: post.autor, url: "https://dealforge.es" },
+    author: authorPersonJsonLd,
     publisher: {
       "@type": "Organization",
       name: "DealForge",
@@ -170,6 +171,13 @@ export default async function EnBlogPostPage({ params }: Props) {
                 {post.titulo}
               </h1>
               <p className="text-lg text-gray-600">{post.extracto}</p>
+              <p className="mt-4 text-sm text-gray-500">
+                By{" "}
+                <Link href="/about/albert-hurtado" className="font-medium text-gray-700 hover:text-[#3a9bb5]">
+                  {AUTHOR.name}
+                </Link>
+                , {AUTHOR.jobTitle}
+              </p>
             </header>
 
             {post.imagen && (

@@ -116,6 +116,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/generador-cotizacion-gratis`,
       lastModified: new Date("2026-04-14"),
     },
+    // Author / profile page
+    {
+      url: `${baseUrl}/about/albert-hurtado`,
+      lastModified: new Date("2026-06-15"),
+    },
   ];
 
   // Dynamic blog posts (lastModified from DB — correct)

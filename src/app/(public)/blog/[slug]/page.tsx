@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+import { AUTHOR, authorPersonJsonLd } from "@/data/author";
 import { Calendar, Clock, ArrowLeft, Flame } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: post.publishedAt?.toISOString(),
       modifiedTime: post.updatedAt.toISOString(),
-      authors: [post.autor],
+      authors: [AUTHOR.name],
       ...(post.imagen && {
         images: [{ url: post.imagen, width: 1200, height: 630, alt: post.titulo }],
       }),
@@ -111,11 +112,7 @@ export default async function BlogPostPage({ params }: Props) {
     url: `https://dealforge.es/blog/${post.slug}`,
     datePublished: post.publishedAt?.toISOString(),
     dateModified: post.updatedAt.toISOString(),
-    author: {
-      "@type": "Organization",
-      name: post.autor,
-      url: "https://dealforge.es",
-    },
+    author: authorPersonJsonLd,
     publisher: {
       "@type": "Organization",
       name: "DealForge",
@@ -225,6 +222,13 @@ export default async function BlogPostPage({ params }: Props) {
                 {post.titulo}
               </h1>
               <p className="text-lg text-gray-600">{post.extracto}</p>
+              <p className="mt-4 text-sm text-gray-500">
+                Por{" "}
+                <Link href="/about/albert-hurtado" className="font-medium text-gray-700 hover:text-[#3a9bb5]">
+                  {AUTHOR.name}
+                </Link>
+                , {AUTHOR.jobTitle}
+              </p>
             </header>
 
             {/* Featured image */}
