@@ -3562,6 +3562,788 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
     metaDescripcion: "Learn to set rates, choose the right pricing model and create consulting proposals that win projects. With practical examples and a quote structure.",
     metaKeywords: "how to quote consulting, consulting quote, consultant rate, consulting pricing proposal, consulting services price, how to charge for consulting, professional services quote, consulting retainer",
   },
+  {
+    slug: "professional-photography-quotes-complete-guide",
+    titulo: "Professional photography quotes: a complete guide for photographers",
+    extracto: "How to calculate your real rate, what to include in every quote and how to defend your price without losing clients. A practical guide for professional photographers and photography studios.",
+    contenido: `<p>One of the topics that causes the most discomfort among professional photographers isn't the technique or the gear: it's the price. How much do I charge for a session? How do I respond when the client tells me another photographer does it cheaper? Am I undervaluing my work?</p>
+
+<p>If you recognise yourself in any of those questions, this article is for you. We'll look, without beating around the bush, at how to structure your photography quotes so they're profitable, professional and easy to defend to any client.</p>
+
+<h2>Why photography is especially hard to quote</h2>
+
+<p>Photography has a value-perception problem that few sectors have to the same degree. The client sees the final result — some photos — and doesn't see the invisible work behind it: the equipment worth thousands, the hours of editing, the years of training, the travel time, the admin, the insurance and the licences.</p>
+
+<p>On top of this, we live in a world where everyone carries a reasonably good camera in their pocket. The client knows they can take photos. What they often don't understand is why yours are worth what they're worth.</p>
+
+<p>The result is that many professional photographers end up charging less than they need to be sustainable, or lose clients because they don't know how to present and defend their price. Neither situation is acceptable if you want to make a living from this in the long term.</p>
+
+<h2>Pricing models in professional photography</h2>
+
+<p>There's no single correct way to charge. These are the most common models, with their real advantages and disadvantages:</p>
+
+<h3>Price per session (fixed price)</h3>
+
+<p>You define a closed price per type of session: a wedding, a product session, a corporate shoot. The client knows exactly what they'll pay from the start.</p>
+
+<p><strong>When it works well:</strong> when the type of work is highly standardised and the execution time is predictable. Portrait sessions, studio product photos or company shoots fit well here.</p>
+
+<p><strong>Risk:</strong> if the project runs longer than planned or the client asks for more than agreed, you're working for free during that extra time. The key is to define very well what the price includes.</p>
+
+<h3>Hourly rate</h3>
+
+<p>You charge an hourly rate for the time you spend on the job, including travel and editing if agreed.</p>
+
+<p><strong>When it works well:</strong> on event coverage where the duration is uncertain, on corporate video sessions with multiple scenes, or when the client wants total flexibility.</p>
+
+<p><strong>Risk:</strong> the client starts timing what you do. If you use an hourly rate, be very explicit about which hours are included and which are billed separately.</p>
+
+<h3>Price per deliverable</h3>
+
+<p>The price doesn't depend on time but on the number of edited photos delivered. Twenty retouched photos cost X; forty cost Y.</p>
+
+<p><strong>When it works well:</strong> in product photography for e-commerce, where the client has a catalogue with a concrete number of items to photograph. Also in corporate portraits where a number of images per person is agreed.</p>
+
+<p><strong>Risk:</strong> the client may try to renegotiate by asking for more deliverables at the end of the project. Always put in writing what happens if the agreed deliverables are exceeded: an additional price per extra unit.</p>
+
+<h3>Price packages</h3>
+
+<p>You offer three or four closed packages with different service levels. The client chooses the one that suits them best.</p>
+
+<p><strong>When it works well:</strong> in wedding photography, newborn sessions, property shoots. Any type of photography where the client arrives without knowing exactly what they want.</p>
+
+<p><strong>Key advantage:</strong> instead of deciding whether to hire, the client decides which package. That completely changes the dynamic of the sales conversation.</p>
+
+<h2>How to calculate your real rate</h2>
+
+<p>This is where most photographers go wrong. They calculate how much they want to charge per hour of shooting, but forget everything else.</p>
+
+<p>Your real rate has to cover:</p>
+
+<ul>
+<li><strong>Your cost of living:</strong> what you need to earn per month to pay your personal bills. Not what you want to earn: the minimum you need.</li>
+<li><strong>The business costs:</strong> equipment (depreciation of camera, lenses, flashes, computer), storage, editing software, insurance, tax management, website, lead-generation platforms...</li>
+<li><strong>Non-billable time:</strong> quotes that don't close, client management, training, editing, travel, admin. Only part of your working time generates direct billing; the rest also has to be in your rate.</li>
+<li><strong>The profit margin:</strong> to grow, invest in better equipment and have reserves for the bad months.</li>
+</ul>
+
+<p>A practical way to calculate it: add all your monthly costs (personal and business), divide by the number of projects you can realistically do per month, and that's your minimum price per project. If you're charging less than that, you're losing money on every job.</p>
+
+<p>Example: if your total costs are £3,500/month and you can do 8 projects a month, your minimum price is £437 per project. To that you add your desired profit margin and you reach the market price you should charge.</p>
+
+<h2>What a photography quote must include</h2>
+
+<p>A good photography quote isn't just a figure. It's a document that explains what the client will receive, under what conditions and with what guarantees. These are the elements that can't be missing:</p>
+
+<h3>Detailed service description</h3>
+
+<p>Type of session, date and place, estimated duration, number of locations if applicable. The more concrete you are, the fewer disputes there'll be afterwards.</p>
+
+<h3>Exact deliverables</h3>
+
+<p>Number of retouched photos that will be delivered, format (JPEG, TIFF, RAW), resolution, delivery method (online gallery, download, USB) and delivery time. If you include a selection gallery for the client to choose from, state how many photos they'll have available to choose and how many they'll receive edited at the end.</p>
+
+<h3>What the quote does NOT include</h3>
+
+<p>Just as important as the above. Does it include travel? Extra hours if the session runs over? Advanced retouching or just basic editing? Usage rights for advertising or only for personal use? Be explicit about what's outside the price to avoid misunderstandings.</p>
+
+<h3>Payment terms</h3>
+
+<p>The most common in professional photography is:</p>
+
+<ul>
+<li>50% on confirming the booking (non-refundable deposit)</li>
+<li>The remaining 50% on the day of the session or before delivery of the photos</li>
+</ul>
+
+<p>The deposit is fundamental. You reserve time in your diary, perhaps coordinate locations, models or additional equipment. If the client cancels at the last minute with no deposit, you lose that availability and the preparation work. The deposit isn't greed: it's your legitimate protection.</p>
+
+<h3>Cancellation and rescheduling policy</h3>
+
+<p>Clearly define what happens if the client cancels, wants to change the date or if there's a force majeure event. The clearer this is in writing from the start, the fewer conflicts you'll have if something goes wrong.</p>
+
+<h3>Usage rights</h3>
+
+<p>The photos you take have copyright that belongs to you. The client pays to use those photos under certain conditions. Can they use them for social media? For paid advertising? For billboards? For how long and in which territories?</p>
+
+<p>In commercial and advertising photography, usage rights are an important part of the price. A photo for a national advertising campaign is worth far more than the same photo for the client's personal Instagram. Knowing how to identify the final use lets you set the right price.</p>
+
+<h3>Quote validity</h3>
+
+<p>State how long it's valid for. Thirty days is standard. After that, prices may change.</p>
+
+<h2>How much to charge by type of photography</h2>
+
+<p>Price ranges vary a lot depending on the speciality, location and experience level. These are typical market ranges, as an indicative reference:</p>
+
+<h3>Wedding photography</h3>
+
+<p>Weddings are probably the most in-demand and most competitive speciality. The price range goes from around £700 for a photographer just starting out to £4,000-6,000 or more for professionals with an established portfolio.</p>
+
+<p>The most common mistake is competing on price with the cheapest photographers in the market. If your niche is elegant weddings with a luxury album, you're in a different market from someone doing budget shoots. Don't compete with people who aren't your direct competition.</p>
+
+<h3>Corporate and business photography</h3>
+
+<p>Corporate portrait sessions, photos for websites and communications, team and office shoots. The usual range: between £450 and £2,500 per session, depending on the scope, the number of people and the locations.</p>
+
+<p>In this segment, clients usually have a budget, but they need to clearly see the ROI: these photos go on their website, on LinkedIn, in marketing materials. When you frame them in that context — "these photos will be the first thing a potential client sees when they visit your website" — the price justifies itself.</p>
+
+<h3>Product photography for e-commerce</h3>
+
+<p>The most common pricing is structured by number of items and by type of image (product only, with model, lifestyle). Usual ranges: £12-45 per item for basic studio product photography; £70-180 or more for lifestyle photography with model and props.</p>
+
+<p>In this segment, batch pricing works very well: a progressive discount above a certain volume of items. A client with 200 items a year is much more valuable than one with 20, and deserves a different price.</p>
+
+<h3>Property photography</h3>
+
+<p>Between £130 and £450 per property, depending on the size, the area and whether it includes video or aerial drone photography. Typical clients are estate agencies and developers with a constant volume of work, which makes the price per project lower but the commercial relationship more stable.</p>
+
+<h3>Event photography</h3>
+
+<p>From company presentations to trade shows and conferences. The range goes from £280 for a short event to £1,500-3,000 for full-day or multi-day events. Including travel and clearly defining the coverage hours is essential in this type of work.</p>
+
+<h3>Fashion and advertising photography</h3>
+
+<p>This is where prices vary the most. An advertising production can go from £450 for a small local brand to tens of thousands for a national campaign. Here, usage rights carry enormous weight in the final price.</p>
+
+<h2>How to present and defend your price</h2>
+
+<p>Knowing how much to charge is half the job. The other half is knowing how to present it.</p>
+
+<h3>Present the value before the price</h3>
+
+<p>Before mentioning any figure, make sure the client understands what problem you solve. If you photograph corporate websites, you don't sell photos: you sell the first impression their company gives every visitor. If you photograph e-commerce products, you don't sell images: you sell conversions.</p>
+
+<p>When the value is clear in the client's mind, the price that comes after is evaluated in that context. Not as "expensive or cheap", but as "worth it or not".</p>
+
+<h3>Use price anchoring</h3>
+
+<p>Always present three options instead of just one. When you have a basic package, a standard one and a premium one, the client doesn't decide whether to hire: they decide which level to hire. And the middle option — the one you most want to sell — is perceived as the most reasonable by contrast with the other two.</p>
+
+<h3>Respond to "it's too expensive" without lowering the price</h3>
+
+<p>When a client says it's expensive, in most cases they're not telling you they can't pay it: they're telling you they don't understand why it's worth that.</p>
+
+<p>The answer isn't to lower the price. It's to explain the value better: "I understand it may seem like a lot. Can I explain what's included and why the price is structured this way?"</p>
+
+<p>And if after the explanation the client still says it's expensive because another photographer does it cheaper, the honest answer is: "There are photographers for every budget. What I offer includes [X, Y, Z]. If price is the deciding factor, perhaps that other photographer fits better with what you're looking for."</p>
+
+<p>You don't have to win every quote. You have to win the right ones.</p>
+
+<h3>Never give the price verbally first</h3>
+
+<p>If a client asks how much you charge over the phone or by message, don't reply with a loose figure. First you need to understand the project, and then you present the quote in writing, professionally, with all the detail.</p>
+
+<p>A price given without context always seems more expensive. A price within a proposal that explains what's included and what value it generates seems more reasonable, even if it's the same number.</p>
+
+<h2>Common mistakes when quoting photography</h2>
+
+<h3>Not including editing time in the price</h3>
+
+<p>Shooting time is only part of the work. A two-hour session can take four or six hours of editing afterwards. If you don't factor that time into your rate, you're charging much less than you think.</p>
+
+<h3>Giving discounts to win the client</h3>
+
+<p>Giving discounts to close a first project has a serious problem: the client learns you can lower the price and will always try. The discount you gave to win them becomes the price they'll expect on every subsequent project.</p>
+
+<p>If you want to offer something special to a new client, do it as added value (more edited photos, faster delivery, an extra service), not as a price reduction.</p>
+
+<h3>Not charging for extras</h3>
+
+<p>The client arrives half an hour late. They ask for one more location that wasn't in the plan. They want ten additional edited photos. All of that has a cost and you have the right to charge for it.</p>
+
+<p>If you haven't defined in writing from the start what happens in those situations, it'll be very awkward to claim that money later. Define the extras protocol in the initial quote and that way you won't have to have that difficult conversation.</p>
+
+<h3>Not requesting a deposit</h3>
+
+<p>Working without a deposit means taking on all the risk. The client cancels the day before and you lose that diary reservation with no compensation. Always ask for a deposit, no exceptions. If the client doesn't want to pay it, that fact tells you a lot about how the commercial relationship will go.</p>
+
+<h3>Delivering the work before getting paid</h3>
+
+<p>Once the client has the photos, they've lost any incentive to pay you quickly. Agree and collect the outstanding payment before final delivery. It's not distrust: it's a standard commercial practice in all creative sectors.</p>
+
+<h2>Automate and professionalise your quotes</h2>
+
+<p>If every time you have to send a quote you spend an hour building the document in Word or in an email, you're wasting time you could spend photographing. And the result is probably not as professional as it could be.</p>
+
+<p>Quote management tools like <a href="/registro?lang=en">DealForge</a> let you create templates for your most common session types, generate proposals with your branding in minutes and track which clients have opened your quote and when. For photographers handling several projects at once, the difference in time and presentation is notable.</p>
+
+<p>A quote that reaches the client the same day they ask, looking professional and with all the information clear, has a much higher chance of closing than one that arrives three days later in an email with loose prices.</p>
+
+<h2>The conversation about price: a practical example</h2>
+
+<p>To make all this more concrete, imagine this situation: a tech company contacts you to take photos of the team (fifteen people) for their website and LinkedIn profiles.</p>
+
+<p>Before giving any price, you ask the right questions:</p>
+
+<ul>
+<li>Where do they want to take the photos? (at their office, a neutral location, outdoors)</li>
+<li>What use will they make of the photos? (website and LinkedIn only, or also advertising)</li>
+<li>Do they have a style preference? (neutral background, work environment, casual)</li>
+<li>When do they need it? (urgency, available dates)</li>
+<li>Is there anything special to consider? (people who don't speak English, scheduling difficulties, accessibility)</li>
+</ul>
+
+<p>With that information, you prepare a proposal with three options:</p>
+
+<ul>
+<li><strong>Basic:</strong> session at their offices, a neutral background, two edited photos per person. £850.</li>
+<li><strong>Standard:</strong> session at their offices, two different backgrounds (formal and informal), three edited photos per person, a selection gallery of five options per person. £1,250.</li>
+<li><strong>Premium:</strong> all of the above plus a group session and work-environment photos, five edited photos per person, delivery in five working days. £1,700.</li>
+</ul>
+
+<p>You present the three options with a description of what each includes, payment terms (50% deposit, 50% before delivery), cancellation policy and a 30-day validity.</p>
+
+<p>The client has all the information to decide without needing more back-and-forth emails. And you've presented your work professionally from the first contact.</p>
+
+<h2>Conclusion: quote your work like the professional you are</h2>
+
+<p>Professional photography is a business. And like any business, it needs prices that are sustainable, processes that are efficient and a way of presenting the work that builds trust.</p>
+
+<p>The key points of this article:</p>
+
+<ul>
+<li>Calculate your real rate including all costs, not just shooting time</li>
+<li>Choose the most suitable pricing model for each type of work</li>
+<li>Always define in writing what the quote includes and doesn't include</li>
+<li>Charge a deposit without exceptions and deliver after the final payment</li>
+<li>Present three options instead of one to improve your close rate</li>
+<li>Defend your price with the value you offer, not with arguments about time spent</li>
+</ul>
+
+<p>The photographer who wins more profitable projects isn't the cheapest in the market: it's the one who best communicates their value and presents their work most professionally. Start with the quote.</p>
+
+<p><strong>Want to create professional photography quotes in minutes, with your branding and status tracking included?</strong> Try <a href="/registro?lang=en">DealForge</a> and stop wasting time on documents that don't close projects.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: ["professional photography", "photography quote", "photographer quote", "how much to charge for photography", "photographer rates", "sole traders", "small business"],
+    publishedAt: "2026-06-15T12:00:00.000Z",
+    metaTitulo: "Professional photography quotes: a complete guide for photographers — DealForge",
+    metaDescripcion: "How to calculate your real rate, what to include in every quote and how to defend your price without losing clients. A practical guide for professional photographers.",
+    metaKeywords: "professional photography quote, photographer quote, how much to charge for photography, professional photographer rates, photo session price, how to quote photography, photo session quote, photographer rate",
+  },
+  {
+    slug: "accounting-bookkeeping-service-quotes-guide",
+    titulo: "Accounting and advisory service quotes: a practical guide for firms and advisers",
+    extracto: "How to structure and present your accounting, tax, payroll and legal advisory quotes to win more clients and charge what your services are really worth.",
+    contenido: `<p>If you run an accounting practice or handle companies' books as a sole trader, you know first-hand how hard it is to answer the question "how much do you charge?". The problem isn't that you don't know what your work is worth. The problem is that this value is invisible to the client until they need it, and by then you've already had to give a figure with no context.</p>
+
+<p>This article is a practical guide to structuring, presenting and defending your quotes for accounting and advisory services. No fluff, with real market examples.</p>
+
+<h2>Why advisory services are especially hard to quote</h2>
+
+<p>There's a reason many advisers end up charging less than they should: the client doesn't see the work. They see the result — the VAT return filed, the payslip generated, the contract reviewed — but not the hours of keeping up with regulation, the years of training, or the response time to urgent queries nobody explicitly asked for but everyone expects.</p>
+
+<p>On top of this, advisory is a service built on trust and the long term. The client who arrives asking about price almost never buys "a tax return": they're buying peace of mind, legal certainty and someone who'll warn them when the rules affecting their business change. That value is very hard to put into a number without first explaining it well.</p>
+
+<p>The usual result: advisers who give a price over the phone before understanding the case, clients who compare that number with a competitor's without understanding what each includes, and a client base where the ones who give the most work are the ones who pay the least.</p>
+
+<h2>Pricing models in accounting and advisory</h2>
+
+<p>There's no single correct model. What there is are models more or less suited to the type of service and the client profile.</p>
+
+<h3>Fixed monthly fee</h3>
+
+<p>It's the most common model in business and sole-trader advisory. The client pays a fixed amount per month and in return receives a defined set of services: bookkeeping, periodic returns, payroll, queries included within a certain volume.</p>
+
+<p><strong>Why it works:</strong> it gives predictability to both parties. The client knows what they pay. You know what you bring in. And when the relationship is well structured, client loyalty is very high because changing advisers has a real cost (handover of documentation, a new process of getting to know the business).</p>
+
+<p><strong>The risk:</strong> the fixed fee tends to stagnate. You set a price for a sole trader with three invoices a month and three years later that same client has a limited company with five employees and twenty suppliers, but still pays the same. Review fees annually and adjust them to the client's reality.</p>
+
+<h3>Price per service or project</h3>
+
+<p>You charge for specific actions: filing the personal tax return, incorporating a company, drafting a lease, processing a grant. Each service has its fixed price or range.</p>
+
+<p><strong>Why it works:</strong> it's very clear for the client. They know exactly what they're paying for. And you can capture value on high-value services like incorporations, restructurings or special tax procedures.</p>
+
+<p><strong>The risk:</strong> complex projects are hard to close at a fixed price if you haven't done the prior analysis well. A tax enquiry that looked simple can get complicated. Define the scope well before giving a closed price.</p>
+
+<h3>Hourly rate</h3>
+
+<p>You charge an hourly rate for the time spent. Common in legal services, high-level consultancy and one-off actions outside the scope of the monthly fee.</p>
+
+<p><strong>Why it works:</strong> it protects you on projects of uncertain scope. If the client wants you to accompany them in a negotiation with the tax authority that could last two hours or ten, the hourly rate is the reasonable option.</p>
+
+<p><strong>The risk:</strong> the client perceives a meter running when they call you. Some clients hold back from making queries they should make for fear you'll "charge them". That's bad for everyone: the client doesn't get the service they need and you don't find out about problems you could solve before they become urgent.</p>
+
+<h3>Value-based pricing</h3>
+
+<p>The most sophisticated and most profitable when applied well. Instead of charging for time or service, you charge based on the economic value you generate for the client: the tax saving you achieve, the penalty you avoid, the financing you facilitate, the sale you structure tax-efficiently.</p>
+
+<p><strong>Why it works:</strong> it decouples the price from the time spent. If you structure a business sale so the client pays £40,000 less in tax, charging £5,000 for that work is reasonable even if it took you twenty hours, not a hundred.</p>
+
+<p><strong>The risk:</strong> it requires a high level of trust with the client and the ability to quantify the value with data. It's not the model for acquiring new clients; it's the model for billing well to high-value clients who already trust you.</p>
+
+<h2>What to include in an advisory quote</h2>
+
+<p>A poorly structured advisory quote generates more confusion than clarity. The client doesn't know what they're buying and ends up comparing prices on the wrong criteria. A good advisory quote has to answer five questions before the client asks them:</p>
+
+<h3>1. What exactly does it include?</h3>
+
+<p>A specific list of services. Not "tax and payroll advice": name each return, each report, each task included. If you include unlimited queries, say so. If queries have a monthly hour limit, also say so.</p>
+
+<p>Example of a clear description: "Quarterly VAT returns, annual accounts and Corporation Tax filing, monthly bookkeeping up to 50 entries, payroll for two employees (joiners, leavers, monthly payslips and PAYE submissions), and email query support within 24 working hours."</p>
+
+<h3>2. What does it NOT include?</h3>
+
+<p>Equally important. Are dealings with the tax authority beyond the routine included? And representation in the event of an enquiry? And year-end statutory filings beyond the standard set?</p>
+
+<p>Being explicit about what isn't included doesn't make the quote look worse: it makes it look professional. And it protects the commercial relationship long-term because the client knows what to expect without nasty surprises.</p>
+
+<h3>3. How much does it cost and how is it billed?</h3>
+
+<p>Monthly, annual or per-action price. Payment method (direct debit, transfer). Cancellation notice. Terms in the event of late delivery of documentation by the client, which delays your work and creates extra cost.</p>
+
+<h3>4. What do you need from the client to deliver the service?</h3>
+
+<p>Many advisers don't include this in the quote and then have chronic problems: the client hands over invoices at the end of the quarter with two days to spare, or doesn't provide access to the payroll portal, or changes bank without telling you. Define what you need from the client to meet deadlines and what happens if that information doesn't arrive on time.</p>
+
+<h3>5. What response time can you guarantee?</h3>
+
+<p>The service level is a pricing variable, although it's rarely mentioned explicitly. An adviser who responds within 24 hours and another who responds within a week aren't offering the same service even if the list of tasks is identical. If you have a differential response time, put it in writing: it's a real value argument.</p>
+
+<h2>How much to charge: typical market ranges</h2>
+
+<p>Prices vary significantly depending on the type of firm, the specialisation, the geographic area and the client profile. These ranges are indicative:</p>
+
+<h3>Accounting and tax for sole traders</h3>
+
+<p>The most competitive segment. Monthly fee prices go from around £30-50/month for online firms with a standardised model to £150-300/month for firms with personalised attention and sector specialisation.</p>
+
+<p>The most common mistake here is competing on price with low-cost online firms. That's a game you can't win if you have real overhead costs. The alternative is to differentiate on specialisation (sole traders in the tech sector, international freelancers, content creators with foreign-currency income) or on service level (same-day response, proactive advice, quarterly review of the tax position).</p>
+
+<h3>Accounting and tax for SMEs (limited companies with up to 10 employees)</h3>
+
+<p>The usual range for a complete monthly fee (bookkeeping, VAT, Corporation Tax, payroll) is between £200 and £600/month depending on the volume of transactions, the number of employees and the complexity of the activity.</p>
+
+<p>An SME with five employees, twenty suppliers and a hundred invoices a month requires substantially more work than a sole trader with simple activity. The quote has to reflect that reality.</p>
+
+<h3>Company incorporation</h3>
+
+<p>Between £300 and £800 for the advisory service of incorporating a company, not including registration fees which are the client's costs. The variation depends on whether you include drafting bespoke articles, initial tax planning and the first registrations with the tax and payroll authorities.</p>
+
+<h3>Personal tax return (Self Assessment)</h3>
+
+<p>From £60-80 for simple returns (an employee with no complications) to £200-500 or more for complex returns (self-employment income, rental property, capital gains, crypto-assets, benefits in kind, income from multiple sources).</p>
+
+<h3>Procedures with the tax authority (enquiries, investigations)</h3>
+
+<p>Here the hourly rate is more common. Rates go from £80-120/hour for firms with no specific specialisation to £200-400/hour for specialists in tax procedures or international taxation.</p>
+
+<h3>Payroll and employment advice</h3>
+
+<p>The cost per employee per month is usually between £10 and £25 per employee, depending on the total number (more employees, lower unit cost) and the complexity of the contracts. Special processes (redundancies, collective dismissals) are quoted separately.</p>
+
+<h2>How to present the price without losing the client</h2>
+
+<h3>Never give the price before understanding the case</h3>
+
+<p>When someone calls asking "how much do you charge to do my company's accounts?", the correct answer isn't to give a price range. The correct answer is to ask the questions you need to give a real price: type of company? activity? number of employees? approximate volume of invoices a month? are they up to date with the tax authority?</p>
+
+<p>A price given without context always seems too high or too low. A price given after understanding the case has a natural justification.</p>
+
+<h3>Present the price within a proposal, not in a loose email</h3>
+
+<p>A professional advisory services proposal, with your logo, with the breakdown of included services, with the terms of the relationship and with the price presented clearly, conveys trust before the client has read a single line. The same price in an informal email saying "it would be £X a month" seems arbitrary.</p>
+
+<p>Tools like <a href="/registro?lang=en">DealForge</a> let you create those proposals quickly with custom templates, including the option for the client to accept them with an electronic signature from the document itself. For firms sending ten or fifteen proposals a month, the time saving and the improvement in presentation are immediate.</p>
+
+<h3>Offer options, not a single price</h3>
+
+<p>Presenting a single option puts the client in "accept it or reject it" mode. Presenting three options puts them in "which of these fits me best?" mode. The psychology of choice works in your favour when you have several well-differentiated service levels.</p>
+
+<p>Example structure for an SME:</p>
+
+<ul>
+<li><strong>Basic (£320/month):</strong> monthly bookkeeping, quarterly VAT returns, annual accounts and Corporation Tax filing, online document portal.</li>
+<li><strong>Standard (£480/month):</strong> all of the above plus payroll for up to five employees, the director's personal tax return, query support within 24 hours.</li>
+<li><strong>Premium (£680/month):</strong> all of the above plus quarterly tax planning, review of supplier and client contracts, a monthly report on the business's financial position, direct phone access to the responsible adviser.</li>
+</ul>
+
+<p>With this structure, the client doesn't evaluate whether your price is expensive or cheap. They evaluate which service level they need.</p>
+
+<h3>Talk about what you prevent, not just what you do</h3>
+
+<p>The value of a good adviser isn't only in filing returns: it's in the penalties that never arrive, the bookkeeping errors that aren't made, the tax opportunities seized before it's too late. When you present your proposal, include concrete examples of situations you manage for the client: "we warn you before each quarter-end so you can adjust deductible expenses", "we check each month that payroll submissions are up to date to avoid surcharges".</p>
+
+<p>That turns the monthly price from an "advisory fee" into "an investment in peace of mind and money saved".</p>
+
+<h2>Common mistakes when quoting advisory services</h2>
+
+<h3>Setting prices without calculating the real time you spend</h3>
+
+<p>Many advisers set the monthly fee "by eye" or by comparing with what the competition charges, without calculating how many hours they actually devote to that client. When you do the maths, you discover that some "cheap" clients are actually the most costly in time per pound billed.</p>
+
+<p>Do the exercise once: log the time you spend on each client over a full quarter (including calls, emails, one-off tasks and time keeping up with regulation that affects them). Divide that client's billing by the hours spent. If the result is below your minimum hourly rate, you have a pricing problem to fix.</p>
+
+<h3>Not updating long-standing clients' fees</h3>
+
+<p>The client you've had for five years who started as a sole trader now has a company with three employees and has tripled their turnover. But their fee is still what it was when you signed up. Reviewing and updating prices isn't a lack of consideration towards the loyal client: it's a healthy commercial practice both of you understand if the relationship is good.</p>
+
+<p>Establish a clear policy: fee review every twelve months, with written communication and justification for the adjustment. A client who's been with you for years and values the service won't leave over a reasonable update. The one who leaves purely over price was a client who would have been a problem at some point.</p>
+
+<h3>Accepting all the work that comes in without filtering the client</h3>
+
+<p>Not all clients are good clients. The one who always hands over documentation late, the one who calls every day with urgencies that aren't urgencies, the one who questions every invoice and constantly asks for discounts: these clients consume more resources than they generate.</p>
+
+<p>A well-structured quote is also a filter. When you present a professional proposal with clear collaboration terms, clients looking for cheap advice with no commitment tend to rule themselves out. And that, in the medium term, improves the profitability and quality of life of your firm.</p>
+
+<h3>Not documenting agreements in writing</h3>
+
+<p>Advisory is a long-term relationship with a lot of verbal and informal communication. But when there's a misunderstanding about what was included in the fee, you only have two options: absorb the cost or have a conflict with the client. The third option — the correct one — is to have the agreement documented from the start.</p>
+
+<p>Always send a formal proposal before starting any relationship. Have the client accept it in writing. And keep that documentation. With <a href="/registro?lang=en">DealForge</a> you can manage acceptance with an electronic signature and have a centralised history of proposals sent and accepted, which hugely simplifies things when you need to review what was agreed with whom and when.</p>
+
+<h2>The first meeting with a prospective client: how to turn it into a won quote</h2>
+
+<p>Most advisory clients don't decide on price: they decide on trust. And trust is built (or destroyed) in the first meeting.</p>
+
+<p>These are the points that make the difference in that first conversation:</p>
+
+<ul>
+<li><strong>Listen more than you talk:</strong> the client wants to feel you understand their specific situation, not that you're giving them a generic pitch. Ask about their activity, their concerns, the problems they've had with previous advisers.</li>
+<li><strong>Identify the specific pain:</strong> are they worried about an investigation? do they have doubts about how to tax a specific transaction? are they growing and don't know how to structure the business? The price you defend afterwards has to resonate with that specific pain.</li>
+<li><strong>Show you know their sector:</strong> if you handle several clients in the same sector, say so. If you know the tax casuistry of their activity, say so. Specialisation justifies higher prices without having to argue them.</li>
+<li><strong>Don't commit to a price in the meeting:</strong> "I'll send you a detailed proposal in 24 hours" is more professional than giving a number on the spot and then having to backtrack. The written proposal gives time to think, to structure the service well and to present it professionally.</li>
+</ul>
+
+<h2>What to do when the client says it's expensive</h2>
+
+<p>It's going to happen. And the correct response isn't to justify yourself or automatically lower the price.</p>
+
+<p>The first thing is to understand what "it's expensive" means. In most cases it means one of these three things:</p>
+
+<ol>
+<li><strong>They don't understand what the price includes.</strong> Solution: explain the scope of the service and what it prevents in more detail. "For that £400 a month you get X annual tasks that, if you did them yourself or they were urgencies with another firm, would cost you much more."</li>
+<li><strong>They've seen a lower price elsewhere.</strong> Solution: ask what that other proposal includes. In 80% of cases it includes less. If it includes the same, then there genuinely is a price difference you have to defend with quality or specialisation arguments, not by matching the price.</li>
+<li><strong>They don't have a real budget for this.</strong> Solution: propose a more basic version of the service or be honest: "what you describe needs a service level with a minimum cost of £X. If that budget doesn't fit right now, I can recommend more economical options for this phase."</li>
+</ol>
+
+<p>What you must not do is lower the price without changing the scope of the service. Every time you do that, the client learns your prices are negotiable and will use that information at every renewal. If you lower the price, reduce the service proportionally and make it clear that's the case.</p>
+
+<h2>Automate quote management without losing personalisation</h2>
+
+<p>An advisory firm can handle dozens of active proposals at the same time: renewals for existing clients, quotes for new clients, proposals for additional services. Managing all that manually in Word or email is slow and leads to lost follow-ups.</p>
+
+<p>Having a system that lets you create proposals from standardised templates, customise them for each client and track which proposals are pending a reply changes the efficiency of the process. <a href="/registro?lang=en">DealForge</a> is designed specifically for this kind of flow: you create the proposal in minutes, send it with an electronic signature link and get notified when the client has opened it and when they accept. Nothing gets lost in a forgotten email thread.</p>
+
+<h2>Conclusion: quote like the professional you are</h2>
+
+<p>Advisory and accounting are services where the price is the first indicator of quality the client has. A firm charging £80 a month conveys a very different message from one charging £400, even before the client has seen what each includes.</p>
+
+<p>The key points of this article:</p>
+
+<ul>
+<li>Choose the most suitable pricing model for each type of client and service</li>
+<li>Always define in writing what your service includes and doesn't include</li>
+<li>Present formal proposals, not verbal prices or informal emails</li>
+<li>Offer options (basic, standard, premium) instead of a single figure</li>
+<li>Review existing clients' fees at least once a year</li>
+<li>Defend your price with the value you bring, not by lowering it automatically</li>
+<li>Log the time you spend on each client to spot unprofitable relationships</li>
+</ul>
+
+<p>The adviser or firm that wins the best clients isn't the cheapest: it's the one who best communicates what they do, presents their services clearly and builds trust from the first contact. The quote is the first step of that trust.</p>
+
+<p><strong>Want to send advisory service proposals professionally, with electronic signature and tracking included?</strong> Try <a href="/registro?lang=en">DealForge</a> free and stop losing clients over how you present your price, not over what you charge.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: ["advisory quotes", "accounting quote", "accounting firm", "tax adviser rates", "how much to charge for advisory", "sole traders", "small business"],
+    publishedAt: "2026-06-15T12:30:00.000Z",
+    metaTitulo: "Accounting and advisory service quotes: a practical guide — DealForge",
+    metaDescripcion: "How to structure and present your accounting, tax, payroll and legal advisory quotes to win more clients and charge what your services are really worth.",
+    metaKeywords: "advisory quotes, accounting quote, tax adviser rates, how much to charge for accounting advisory, advisory price SMEs, accounting services quote, bookkeeping quote, tax advisory",
+  },
+  {
+    slug: "security-company-quotes-guide",
+    titulo: "Security company quotes: how to price and win contracts",
+    extracto: "Everything you need to structure private security service quotes: manned guarding, alarms, CCTV and access control. With real market price ranges.",
+    contenido: `<p>If you run a private security company or install protection systems, you know that winning a new contract rarely depends only on having the best service. It depends on how you present your proposal, on whether the client understands what they're buying and on whether your price reflects the real value of what you offer.</p>
+
+<p>The private security market is large and serves everyone from residential blocks to major retail complexes. Competition is high, margins are tight and the client — often — compares proposals without knowing exactly what sets one company apart from another. Your quote has to do that differentiation work before you even get to the meeting.</p>
+
+<p>This guide is for security companies of all sizes: from sole-trader alarm installers to companies with their own in-house guarding staff. No unnecessary theory, with real examples.</p>
+
+<h2>The main problem with quotes in the security sector</h2>
+
+<p>Most security companies make the same mistake: they send a quote that's basically a list of services with a price next to each. No explanation of value, no clear breakdown, no differentiation from the competition.</p>
+
+<p>The result is predictable: the client compares that number with a competitor's, chooses the cheapest (even if it's not the most suitable) and then complains that the service wasn't what they expected.</p>
+
+<p>A well-made security quote doesn't compete on price. It competes on trust. And trust is built before the signature, with documentation that shows you understand the client's risk and have the capacity to manage it.</p>
+
+<h2>Types of security service and their pricing models</h2>
+
+<p>The private security sector has several subsectors with very different pricing logic. Before talking about how to quote, it's important to understand which one you operate in or which services you combine.</p>
+
+<h3>Manned guarding and security officers</h3>
+
+<p>It's the most labour-intensive service. The price is heavily determined by wage costs (which set minimum labour costs by role and shift). The room for manoeuvre is in operational efficiency, staff rotation and the complementary services you add.</p>
+
+<p>The usual pricing model is <strong>billing per hour of service</strong>: the client pays a price per officer-hour (or post), which includes the worker's cost plus the company's margin. Contracts are usually monthly with a guaranteed minimum number of hours.</p>
+
+<p>Indicative market price ranges:</p>
+<ul>
+<li>Security officer (daytime, weekdays): £14-20/hour</li>
+<li>Security officer (night shift or weekend): £18-26/hour</li>
+<li>Officer with specialist training (close protection, cash transport): £22-35/hour</li>
+<li>Supervisor or security manager: £28-45/hour</li>
+</ul>
+
+<p>These rates vary significantly by region (large cities have higher labour costs), the size of the contract (more hours, lower unit price) and the specific licensing of the staff.</p>
+
+<h3>Alarm system installation</h3>
+
+<p>Here the pricing model has two components: the installation cost (one-off payment) and the maintenance and monitoring fee (recurring monthly).</p>
+
+<p>The most common mistake is focusing only on the installation price and using monitoring as a secondary argument, when in reality it's the higher-value component long-term: it's what turns your company into a recurring security provider, not a one-off installer.</p>
+
+<p>Usual ranges:</p>
+<ul>
+<li>Basic installation for a home or small premises (panel + 4-6 detectors + keypad): £400-900</li>
+<li>Medium installation for an SME or commercial premises (panel + 8-15 detectors + dual communicator): £900-2,500</li>
+<li>Complex installation (industrial unit, multi-zone, integration with access control): £2,500-8,000 or more</li>
+<li>Basic monitoring fee: £15-35/month</li>
+<li>Monitoring with keyholding/guard response: £35-80/month</li>
+<li>Annual maintenance (equipment inspection, updates): £80-200/year depending on the installation</li>
+</ul>
+
+<h3>CCTV and video surveillance</h3>
+
+<p>The price depends fundamentally on three factors: number of cameras, resolution and storage capacity, and whether the installation includes remote management or cloud access.</p>
+
+<p>With the proliferation of low-cost IP cameras, the client tends to undervalue the professional installation service. Your proposal has to make clear what differentiates a well-installed system (with structured cabling, optimal angles, secure storage and GDPR compliance) from a camera anyone can buy online.</p>
+
+<p>Indicative ranges:</p>
+<ul>
+<li>Domestic or small premises system (4 HD cameras, local NVR): £600-1,500 installed</li>
+<li>SME system (8-16 4K IP cameras, NVR with disk, remote access): £1,500-5,000 installed</li>
+<li>Enterprise system (more than 16 cameras, centralised management, integration with other systems): from £5,000</li>
+<li>Cloud storage: £10-30/camera/month depending on video retention</li>
+</ul>
+
+<h3>Access control</h3>
+
+<p>It's one of the fastest-growing segments in the sector, driven by the digitalisation of businesses and security requirements in industrial facilities. The price combines hardware (readers, turnstiles, barriers, electronic locks) with management software and the installation.</p>
+
+<p>Typical ranges:</p>
+<ul>
+<li>Basic access control for one door (card reader + magnetic lock + basic software): £500-1,200</li>
+<li>System for an office building (5-10 doors, centralised management, HR integration): £3,000-12,000</li>
+<li>Industrial system (perimeter access, turnstiles, video integration): from £10,000</li>
+<li>Maintenance and software licence: £200-500/year for small installations, more for large ones</li>
+</ul>
+
+<h3>Event security</h3>
+
+<p>A special segment with its own logic: the service is one-off, the risk is high and the staff's licensing is critical (regulation is strict about the training required for event stewards and officers).</p>
+
+<p>The price is usually calculated per officer/hour with a minimum number of hours, plus a surcharge for event complexity (capacity, alcohol sales, incident history). Ranges run from £18 to £40/hour depending on the staff profile and the type of event.</p>
+
+<h2>What a professional security quote must include</h2>
+
+<p>A security quote that loses business looks like this: "Security officer, daytime shift: £X/hour. VAT not included." The client doesn't know what they're buying, and can only compare that number with a competitor's.</p>
+
+<p>A security quote that wins contracts has seven components that go beyond the price:</p>
+
+<h3>1. A diagnosis of the client's risk</h3>
+
+<p>Before giving a price, show you've analysed the client's situation. What type of facility is it? What are the assets to protect? What's the incident history in the area? Do they have specific legal security obligations (regulated activities, storage of hazardous substances, access by minors)?</p>
+
+<p>A paragraph analysing the situation at the start of the proposal shows you're not sending a generic quote: you're proposing a specific solution. That justifies the price before the client sees it.</p>
+
+<h3>2. Detailed service description</h3>
+
+<p>Not "perimeter guarding". Specify: number of patrols per shift, incident protocol, response times of the Alarm Receiving Centre (ARC), staff insurance cover, the assigned officer's specific training, the communication system with the client.</p>
+
+<p>The more specific you are, the harder a direct comparison with a competitor who just puts "security officer" becomes. And the more the client perceives they're buying quality.</p>
+
+<h3>3. Explicit regulatory compliance</h3>
+
+<p>Security regulation sets very concrete requirements on staff licensing, company authorisation, insurance cover and other aspects. Many clients don't know this regulation exists, nor do they know whether their current provider complies with it.</p>
+
+<p>Including in your quote a section on your company's regulatory compliance (SIA licensing of officers, company approval/accreditation, public liability insurance, staff training) isn't bureaucracy: it's a real competitive advantage. If the client doesn't see it in your proposal, they assume all providers are the same. If they see it, they understand they're not.</p>
+
+<h3>4. A transparent price breakdown</h3>
+
+<p>For guarding services, show the breakdown: estimated labour cost of the post, coordination and supervision cost, insurance, company margin. You don't have to give all the internal detail, but you should show the price has a logic.</p>
+
+<p>For installations, always break down equipment and labour separately. The client who understands that 40% of the price is equipment and 60% is installation and configuration has far more context to evaluate the proposal than the one who only sees a total.</p>
+
+<h3>5. Service options (not just one option)</h3>
+
+<p>Presenting a single proposal puts the client in "accept or reject" mode. Presenting two or three options puts them in "which is most suitable for me?" mode.</p>
+
+<p>Example for an alarm installation at an SME:</p>
+<ul>
+<li><strong>Basic:</strong> panel with GSM communicator, six motion detectors, external sounder, no monitoring. Ideal for clients who already have insurance and just need deterrence.</li>
+<li><strong>Standard:</strong> all of the above plus ARC connection with a 20-minute guard response. Low monthly price but with the reassurance of professional response.</li>
+<li><strong>Premium:</strong> complete system with CCTV integration, remote access from a smartphone, annual maintenance included and a guaranteed 15-minute response time.</li>
+</ul>
+
+<p>With this structure, the client doesn't evaluate whether your price is expensive. They evaluate what level of protection they actually need.</p>
+
+<h3>6. Contract terms made visible</h3>
+
+<p>Minimum contract duration, cancellation terms, billing frequency, price-review clauses, responsibilities in the event of service failure. The client who discovers these terms after signing feels misled. The client who knows them before signing trusts you because you're transparent.</p>
+
+<h3>7. References or similar cases</h3>
+
+<p>If you've protected similar facilities, mentioning it (without breaching the previous client's confidentiality) is a powerful sales argument. "We manage security for three logistics warehouses in the same industrial estate" or "we installed equivalent systems in twelve premises in the same sector" conveys specialisation without embellishment.</p>
+
+<h2>How to calculate the price of a guarding contract without losing money</h2>
+
+<p>The most common mistake in security companies starting out — and also in some with years of experience — is calculating the price of the guarding service without including all the real costs.</p>
+
+<p>These are the components that must go into the calculation:</p>
+
+<h3>Direct labour costs</h3>
+
+<p>The officer's wage. Add: employer's National Insurance and pension contributions on top of the gross wage, holidays and rest days (the officer doesn't work 365 days a year, but the post must be covered), night or bank-holiday premiums depending on the shift, and the cost of covering absences.</p>
+
+<p>A 24-hours/day, 7-days/week post doesn't need one officer: it needs between 4.5 and 5 full-time-equivalent officers when shifts, rest periods and cover are calculated correctly.</p>
+
+<h3>Coordination and supervision costs</h3>
+
+<p>The supervisor's time visiting the post, the cost of the coordination centre, the electronic patrol system, the contract manager. These costs are invisible in the proposal but very real in operations.</p>
+
+<h3>Equipment and uniform costs</h3>
+
+<p>The officer's uniform, communication equipment, torch, defensive equipment if applicable. On posts with a patrol vehicle, the cost of the vehicle and fuel.</p>
+
+<h3>Public liability insurance</h3>
+
+<p>Essential. The cost varies depending on the type of service and the sum insured, but it should be included in the service price, not treated as a separate expense.</p>
+
+<h3>Company margin</h3>
+
+<p>After covering all the above costs, the net margin on guarding contracts for medium-sized companies is usually between 10% and 20%. On system installations the margin can be higher (25-40%) given there's more of a technical-knowledge component and less mass labour.</p>
+
+<p>A quoting tool that automatically calculates these costs and applies the right margin can prevent costly mistakes. With <a href="/registro?lang=en">DealForge</a> you can create quote templates specific to each type of security service, with the parametric costs already configured, so every new proposal is quick and doesn't require recalculating from scratch.</p>
+
+<h2>Common mistakes when quoting private security</h2>
+
+<h3>Lowering the price to win the contract without recalculating costs</h3>
+
+<p>It's the most common trap. The client asks for a discount, you grant it without checking whether it's still profitable, and you end up running a contract that loses money. In security, where labour costs are fixed and don't forgive, a badly calculated price isn't offset by efficiency: it eats your margin directly.</p>
+
+<p>Before granting any discount, calculate what margin you have left. If the price the client wants doesn't cover the real costs, better not to sign than to sign at a loss.</p>
+
+<h3>Not updating contracts when wages rise</h3>
+
+<p>Sector wages rise practically every year. If you have contracts signed at a fixed price with no review clause linked to inflation or wage agreements, you're taking on the risk of a cost increase you can't pass on to the client.</p>
+
+<p>Always include in the contract an annual price-review clause linked to inflation or sector wage rises. It's a standard clause in the sector and the client who knows the market accepts it without a problem.</p>
+
+<h3>Quoting installations without a site visit</h3>
+
+<p>Giving a price for a CCTV, alarm or access-control installation without physically seeing the site is a mistake that ends up costing dearly. Surprises in the installation phase — complicated cabling, the need for building work, longer distances than expected, incompatibilities with existing systems — can double or triple the estimated work time.</p>
+
+<p>Always do a prior technical site visit. If the client won't see you before having the quote, give an estimated range and make clear the final price requires a visit. A client who won't invest half an hour in a technical visit probably won't be easy during the installation either.</p>
+
+<h3>Not including maintenance in the initial proposal</h3>
+
+<p>Security systems need maintenance. Regulation requires periodic inspections of installations connected to an ARC. If you don't include maintenance in your initial proposal, the client sees it as an unexpected expense when it arises, and that creates friction.</p>
+
+<p>Always include the maintenance contract option from the first proposal. It's a source of recurring revenue and builds client loyalty because you become the technical point of reference for their installation.</p>
+
+<h3>Sending the quote by email with no follow-up</h3>
+
+<p>A quote sent by email and forgotten is a lost quote. The client receives it, leaves it for later, compares it with others and makes the decision without you having had the chance to resolve their doubts.</p>
+
+<p>Establish a follow-up protocol: three days after sending the proposal, call or write to confirm they've received it and whether they have questions. Seven days later, if there's no reply, a second brief contact. Beyond that, the client has made their decision.</p>
+
+<p>With tools like <a href="/registro?lang=en">DealForge</a> you can see in real time when the client has opened your proposal, which gives you the exact moment to follow up: not blindly three days later, but when the client has just read it and has it fresh in mind.</p>
+
+<h2>How to differentiate in a market with a lot of price competition</h2>
+
+<p>The private security market has many companies competing on price. If you enter that war, you'll win some contracts at margins that won't sustain your business long-term.</p>
+
+<p>These are the differentiation levers that justify a higher price:</p>
+
+<h3>Sector specialisation</h3>
+
+<p>Protecting a school isn't the same as protecting a jeweller, a hazardous-materials warehouse or a data centre. Each sector has specific risks, its own regulatory requirements and different officer-profile needs. A company that says "we specialise in security for the hospitality sector" or "we've been in industrial security for fifteen years" conveys much more trust than a generalist company.</p>
+
+<p>If you have experience in a sector, communicate it actively. In your proposal, on your website, in your references. Specialisation is the most powerful argument against price pressure.</p>
+
+<h3>Verifiable response time</h3>
+
+<p>Any company can promise "rapid response". Few can show real data on the average response time of their ARC. If you have that data and it's good, include it in your proposals. "Our ARC's average response time: 8 minutes" is a sales argument the competitor who doesn't measure can't rebut.</p>
+
+<h3>Technology and integration</h3>
+
+<p>The client who wants an officer sitting in a hut has a last-century security mindset. The client who understands security as an integrated system — intelligent video surveillance, digital access control, real-time alerts to their smartphone — is willing to pay more for a more complete solution.</p>
+
+<p>If you offer system integration (alarm + CCTV + access control managed from a single platform), that proposal has a clear differential value over someone who only installs components separately.</p>
+
+<h3>Transparency and compliance</h3>
+
+<p>The client who has had a problem with an unlicensed security company or unlicensed staff knows what that mistake costs. Proactively showing your company accreditation, your SIA-licensed staff, your insurance cover and your staff's certifications is a real differentiation, not a bureaucratic one.</p>
+
+<h2>GDPR and security: a consideration that affects your proposals</h2>
+
+<p>Any video surveillance or access-control service that involves processing personal data (images, access logs) is subject to the UK GDPR and the Data Protection Act. This has direct implications for your quotes.</p>
+
+<p>As installer or service provider, you are in many cases a processor of the data your system captures. The contract with the client should include the data-processing clauses the GDPR requires, and the client must meet their obligations as data controller: informing employees or visitors about the surveillance, registering the system in their record of processing activities, and limiting image retention to the legal period.</p>
+
+<p>Including in your proposal a section on the GDPR compliance of the system you're going to install isn't just a legal matter: it's another element of differentiation. Many installers don't mention it. Clients who have had problems with the ICO know what it costs to ignore this part.</p>
+
+<h2>The proposal that closes contracts: a five-part structure</h2>
+
+<p>After seeing all the components above, this is the structure that works for security proposals that get accepted:</p>
+
+<ol>
+<li><strong>Analysis of the client's situation</strong> (half a page): what you've observed, what risks their facility has, what regulation applies to them. Show you've done your homework before sending the price.</li>
+<li><strong>Proposed solution</strong> (one or two pages): a detailed description of the service, equipment or staff included, protocols, response times, integrations. Specific, not generic.</li>
+<li><strong>Service options</strong> (if applicable): basic, standard, premium. Lets the client choose rather than reject.</li>
+<li><strong>Price and terms</strong>: a clear breakdown, contract duration, review terms, payment method. No small print appearing later.</li>
+<li><strong>About the company</strong> (half a page): accreditation, years of experience, sector references, staff certifications. It's not the most important part, but it seals the trust.</li>
+</ol>
+
+<p>This structure can be created in minutes with custom templates. If you send ten or twenty proposals a month, having that template set up in a tool like <a href="/registro?lang=en">DealForge</a> and being able to generate each proposal in five minutes by ticking the services that apply to the specific client completely changes the efficiency of your sales process.</p>
+
+<h2>What to do when the client just wants the lowest price</h2>
+
+<p>It's going to happen. The client who calls with "give me the cheapest price for a guard" isn't looking for security: they're looking to tick a box. That client is free to do that, but they don't have to be your client if they don't fit your value proposition.</p>
+
+<p>Before entering that price war, try to reframe the conversation:</p>
+
+<ul>
+<li>"What exactly are you worried about protecting?" — if the answer is specific, there's room for a real value proposition.</li>
+<li>"Have you had incidents in the past?" — a client who has already suffered a break-in understands the value of security much better.</li>
+<li>"Do you have any legal or insurance requirement?" — many sectors have security obligations that aren't optional.</li>
+</ul>
+
+<p>If after those questions the client still focuses only on the lowest price, you can give them your most basic option with its limitations clearly explained, or tell them directly that you're not the most suitable company for what they're looking for. Losing that client isn't a loss: it's a saving of time and problems.</p>
+
+<h2>Conclusion: quote like the security company you want to be</h2>
+
+<p>The security companies that grow sustainably aren't necessarily the cheapest. They're the ones that get the client to understand what they're buying, trust they'll deliver what they promise and feel the price is justified by the value received.</p>
+
+<p>The key points to put into practice:</p>
+
+<ul>
+<li>Always calculate the real costs before giving a price, including all labour and structure components</li>
+<li>Include in your proposals an analysis of the client's risk, not just the service price</li>
+<li>Proactively show your regulatory compliance: licensing, insurance, staff training</li>
+<li>Always present at least two service options so the client chooses, rather than rejects</li>
+<li>Include an annual price-review clause in all guarding contracts</li>
+<li>Actively follow up on the proposals you send: the one who doesn't chase, loses</li>
+<li>Differentiate on sector specialisation and verifiable response time, not on price</li>
+</ul>
+
+<p>The client who understands the value of security — and there are many — is willing to pay for a company that conveys trust from the first document they receive. Your pricing proposal is that first document.</p>
+
+<p><strong>Want to create professional security proposals in minutes, with electronic signature and open-tracking included?</strong> Try <a href="/registro?lang=en">DealForge</a> free and stop losing contracts over how you present your price, not over what you charge.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: ["security quotes", "security company quote", "manned guarding prices", "alarm installation quote", "private security", "small business", "security contracts"],
+    publishedAt: "2026-06-15T13:00:00.000Z",
+    metaTitulo: "Security company quotes: how to price and win contracts — DealForge",
+    metaDescripcion: "How to structure security service quotes: manned guarding, alarms, CCTV and access control. With real market price ranges and mistakes to avoid.",
+    metaKeywords: "security company quotes, manned guarding quote, how to quote private security, security officer price, alarm installation price, CCTV quote, access control quote, private security price",
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
