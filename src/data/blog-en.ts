@@ -1243,6 +1243,195 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p><strong>Want to see how it works in practice?</strong> <a href="/registro?lang=en">DealForge</a> has a free trial with no credit card required. In under an hour you can have your catalogue loaded and your first quote sent.</p>`,
   },
+  // ─── 10. How to follow up on quotes without being pushy ───
+  {
+    slug: "how-to-follow-up-on-quotes-without-being-pushy",
+    titulo: "How to follow up on quotes without looking desperate",
+    extracto:
+      "Following up on quotes is where the sale is won or lost. Learn when to call, what to say and how to use automation to follow up without overwhelming the client.",
+    categoria: "ventas",
+    tags: ["quote follow-up", "sales follow-up", "closing sales", "quotes", "estimates", "B2B sales", "small business", "sales process"],
+    autor: "DealForge",
+    publishedAt: "2026-04-18T09:00:00Z",
+    metaTitulo: "How to Follow Up on Quotes Without Being Pushy — DealForge",
+    metaDescripcion:
+      "A step-by-step protocol for following up on quotes: when to call, what to say and how to automate follow-up without overwhelming the client or losing sales.",
+    metaKeywords:
+      "quote follow-up, follow up on estimates, sales follow-up, how to follow up on a quote, sales follow-up small business, automate quote follow-up, close more sales, sales process",
+    contenido: `<p>You've sent the quote. The client said it looked good. Five days have passed and there's no news. Do you call? Wait? Send an email? How many times?</p>
+
+<p>This moment — the post-quote silence — is where small businesses lose the most sales. Not because the price was bad. Not because the client wasn't interested. But because the follow-up is done badly: too early, too late, with the wrong message, or simply not done at all.</p>
+
+<p>Let's solve this once and for all.</p>
+
+<h2>Why follow-up matters more than you think</h2>
+
+<p>There's a figure that circulates a lot in B2B sales and that, while it varies by sector, reflects a reality any salesperson recognises: <strong>most sales close after the fifth contact</strong>, but most salespeople give up after the second.</p>
+
+<p>It's not about being pushy. It's about being present at the moment the client makes the decision. And that moment is rarely the day they receive the quote.</p>
+
+<p>The reality on the client's side is this: they received your quote, they're interested, but they have ten urgent things on their desk. Your proposal is in their inbox, marked "to review", competing with everything else. If you don't show up again, they'll simply forget. With no ill intent.</p>
+
+<h2>The most common mistake: reactive follow-up</h2>
+
+<p>Most small businesses do reactive follow-up: they wait for the client to show signs of life and, if there are none, either do nothing or call at the worst possible moment — when they're anxious, not when the client is ready to decide.</p>
+
+<p>Effective follow-up is <strong>proactive and structured</strong>. You have a plan before sending the quote, not after three days of silence.</p>
+
+<h2>The follow-up protocol that works</h2>
+
+<p>Here's a framework that works for most small-business sales cycles, with mid-ticket services (between £1,000 and £20,000). Adjust it to your sector, but use it as a starting point:</p>
+
+<h3>Day 0: the quote and closing the first contact</h3>
+
+<p>The mistake starts here. Many companies send the quote by email and wait. <strong>Don't do that.</strong></p>
+
+<p>When you send the quote, close that very moment with a confirmation question:</p>
+
+<ul>
+<li>"Do you have everything you need to make the decision, or is there anything you'd like us to clarify?"</li>
+<li>"When do you think you might have an answer?"</li>
+</ul>
+
+<p>That second question is the most important. If the client tells you "by the end of next week", you've just removed all the uncertainty. You know exactly when to make the next contact and you have their implicit permission to do so.</p>
+
+<h3>Day 1-2: confirmation of receipt</h3>
+
+<p>If you sent it by email with no prior call, send a short email the next day. Not to pressure, but to confirm it arrived:</p>
+
+<blockquote>
+<p>"Hi [name], just writing to confirm the proposal arrived safely. I'm here if you have any questions. Best regards."</p>
+</blockquote>
+
+<p>Two lines. No pressure. This also gives you information: if they don't even reply to this, the lead is colder than it seemed.</p>
+
+<h3>Day 3-5: the first real follow-up</h3>
+
+<p>This is the most important contact. Don't send another generic email. <strong>Call.</strong></p>
+
+<p>The goal of this call isn't to ask "how's the proposal?". The goal is to give them something of value or resolve a question they probably have. Examples:</p>
+
+<ul>
+<li>"I was calling because we've had a couple of clients in the [X] sector with the same situation as you, and I wanted to share how they solved it, in case it's useful before you decide."</li>
+<li>"I remembered you mentioned delivery time was an important factor for you. I wanted to confirm that, with your timeline, we can guarantee it without any problem."</li>
+</ul>
+
+<p>You're adding value, not asking for a yes. That completely changes the tone of the conversation.</p>
+
+<h3>Day 7-10: second follow-up</h3>
+
+<p>If after the call there's still no answer, an email with a direct but pressure-free question:</p>
+
+<blockquote>
+<p>"Hi [name], I know you've got a lot on. I just wanted to know whether you're going ahead with the project or whether priorities have changed. No problem at all if so — just to be clear on where we stand. Best regards."</p>
+</blockquote>
+
+<p>This email has a trick: you give them permission to say no. That removes the perceived pressure and, paradoxically, increases the chances they reply. Also, if the project really has been cancelled, it's better to know now than to keep investing time in a dead lead.</p>
+
+<h3>Day 14-21: long-term follow-up</h3>
+
+<p>If there's no answer by this point, the sale isn't closed but it isn't lost either. Switch to <strong>maintenance mode</strong>: a monthly contact with useful content, no closing pressure.</p>
+
+<ul>
+<li>An article relevant to their sector</li>
+<li>A piece of company news that might interest them</li>
+<li>A success story from a similar client</li>
+</ul>
+
+<p>The goal here is to stay relevant until the buying moment arrives. And it will.</p>
+
+<h2>What to say (and what not to say) in follow-up</h2>
+
+<p>There are phrases that kill a sale during follow-up. These are the worst:</p>
+
+<ul>
+<li><strong>"I was calling to see if you'd made a decision."</strong> It sounds like pressure. The client feels chased.</li>
+<li><strong>"How's my proposal?"</strong> You put the focus on you, not on them.</li>
+<li><strong>"Just a reminder that the offer expires on Friday."</strong> If it's an artificial excuse, the client notices and loses trust.</li>
+</ul>
+
+<p>The phrases that work always have something in common: <strong>they add value or show genuine interest in the client's situation</strong>, not in your sale.</p>
+
+<ul>
+<li>"Talking to another client in the sector, I thought of your case and wanted to share something."</li>
+<li>"Has anything changed in the project since we last spoke?"</li>
+<li>"Is there anything in the proposal that wasn't quite clear or that you have doubts about?"</li>
+</ul>
+
+<h2>The channel matters: email vs. call vs. messaging</h2>
+
+<p>There's no universally best channel, but there are patterns that work:</p>
+
+<h3>Email</h3>
+<p>Ideal for the first send of the quote and written follow-ups where you want a record. Bad for urgent follow-up or when the lead has gone days without replying: emails get lost easily.</p>
+
+<h3>Phone call</h3>
+<p>The most effective channel for direct follow-up. It's more personal, lets you detect objections in real time and shows a level of commitment that email doesn't convey. The problem is that many people don't pick up calls from unknown numbers. Solution: let them know by email that you'll call.</p>
+
+<h3>Messaging (WhatsApp, etc.)</h3>
+<p>Instant messaging has become a perfectly valid follow-up channel, especially in commercial relationships where there's already prior trust. It's more informal, but also more direct. Use it when the client has already used it with you or when their profile suggests it.</p>
+
+<p>The general rule: <strong>use the channel the client already uses with you</strong>. If all the conversations have been by email, don't send a message out of the blue. If you've already spoken by phone several times, a call is natural.</p>
+
+<h2>How to know when to stop</h2>
+
+<p>One of the most frequent questions: how many follow-ups are too many?</p>
+
+<p>The honest answer: it depends on the ticket and the sales cycle. For a £2,000 sale with a quick decision, three contacts over two weeks is enough. For a £50,000 sale with multiple stakeholders, you can spend six months in active follow-up without it being excessive.</p>
+
+<p>The stop signal isn't time, but the client's response. If they explicitly ask you to stop, you stop. If they tell you the project has been cancelled, you thank them and close. If they simply don't respond after five or six well-spaced attempts, you move them to passive follow-up (an email a month) and spend your energy on hotter leads.</p>
+
+<p><strong>Don't confuse persistence with harassment.</strong> Persistence respects the client's timing. Harassment ignores it.</p>
+
+<h2>The structural problem: doing this by hand doesn't scale</h2>
+
+<p>Here's the real problem for most small businesses: manual follow-up doesn't scale.</p>
+
+<p>When you have five open quotes, you can keep the follow-up in your head. When you have twenty, you need a system. When you have fifty, without a system you lose sales for sure.</p>
+
+<p>The chaos of manual follow-up has a direct cost: leads that expire because no one followed them up in time, quotes that never closed because the salesperson forgot to call on Tuesday, opportunities lost from having no visibility of each deal's status.</p>
+
+<p>The solution isn't to work more hours. It's to have a system that reminds you when to do what, with which client and through which channel.</p>
+
+<h2>Automating follow-up without losing the human touch</h2>
+
+<p>Automating follow-up doesn't mean sending robotic emails en masse. It means having a system that:</p>
+
+<ul>
+<li>Alerts you when a quote has gone X days without a reply</li>
+<li>Shows you the full history of each client before you call</li>
+<li>Automatically records every contact so you don't lose the thread</li>
+<li>Lets you set up custom follow-up reminders per deal</li>
+</ul>
+
+<p>With DealForge, for example, when you send a quote you can set up automatic reminders: "if there's no reply in 3 days, alert me". The system reminds you, you decide what to do. The automation handles the logistics; you handle the relationship.</p>
+
+<p>What's more, with email open tracking — knowing whether the client opened the quote or not — you have information that completely changes your strategy. If the client opened the proposal four times in two days and hasn't replied, it's very different from never having opened it. In the first case, there's interest but a doubt or a blocker. In the second, maybe it never even reached their inbox.</p>
+
+<h2>A practical example: a renovation company</h2>
+
+<p>Imagine a renovation company that sends between 15 and 25 quotes a month. The average ticket is £8,000. With a 20% close rate, they win 3-5 projects a month.</p>
+
+<p>The problem: many quotes go without systematic follow-up because the manager also handles the technical side. Result: leads that cool off, clients who end up hiring the competition not because they were cheaper, but because they were more consistent in their contact.</p>
+
+<p>With a structured protocol and automatic reminders, that same company can raise its close rate to 28-30% without increasing the number of quotes sent. In economic terms: 1-2 additional projects a month, £8,000-£16,000 more revenue with the same sales effort.</p>
+
+<p>Follow-up isn't an extra. It's part of the sales process.</p>
+
+<h2>Summary: the protocol in five points</h2>
+
+<ol>
+<li><strong>Close the first contact with a timing question</strong>: "When do you think you'll have an answer?" That way you know when to make the next contact and have implicit permission to do so.</li>
+<li><strong>Confirm receipt the next day</strong> if you sent it by email. Two lines, no pressure.</li>
+<li><strong>The first real follow-up, at 3-5 days, by phone and adding value</strong>. Don't ask about the decision: resolve a doubt or share something useful.</li>
+<li><strong>The second follow-up, at 7-10 days, giving them permission to say no</strong>. This reduces perceived pressure and increases responses.</li>
+<li><strong>After two weeks with no answer, maintenance mode</strong>: a contact a month with relevant content until the moment comes.</li>
+</ol>
+
+<p>Following up on quotes isn't an awkward chore to be done grudgingly. It's a sales skill that, well executed, can double your close rate without adding a single pound to the marketing budget.</p>
+
+<p><strong>If you want to stop following up by hand and have total visibility of your open quotes</strong>, <a href="/registro?lang=en">DealForge</a> includes automatic reminders, open tracking and pipeline management from day one. Try it free, no credit card required.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
