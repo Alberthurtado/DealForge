@@ -1858,6 +1858,213 @@ export const blogPostsEn: BlogPostEn[] = [
 
 <p><strong>Want to start today?</strong> <a href="/registro?lang=en">DealForge</a> is designed for exactly this: generating professional quotes in minutes, with an integrated price catalogue, templates by service type and sending with a digital signature. Start free, no credit card, and send your first quote in under 10 minutes.</p>`,
   },
+  // ─── 13. Common mistakes when sending quotes by email ───
+  {
+    slug: "common-mistakes-sending-quotes-by-email",
+    titulo: "12 common mistakes when sending quotes by email (and how to avoid them)",
+    extracto:
+      "Email is still the main channel for sending quotes, but most businesses make the same mistakes that get their quotes ignored, delayed or simply lost. Here are the 12 most frequent ones and how to fix them today.",
+    categoria: "ventas",
+    tags: ["quotes by email", "sending quotes", "sales mistakes", "sales process", "professional quotes", "small business", "sales email", "sales follow-up"],
+    autor: "DealForge",
+    publishedAt: "2026-04-30T09:00:00Z",
+    metaTitulo: "12 Mistakes When Sending Quotes by Email (and How to Avoid Them) — DealForge",
+    metaDescripcion:
+      "Email is the main channel for sending quotes, but most businesses make mistakes that get their quotes ignored. Discover the 12 most common slip-ups and how to fix them.",
+    metaKeywords:
+      "quote email mistakes, send quote by email, how to send a quote, professional quote email, quote follow-up, quote PDF email, quote email template, quotes small business",
+    contenido: `<p>Think about it for a moment: you spend time preparing a detailed quote, you take care over the numbers, the presentation, the terms. And then you send it by email with "please find the quote attached, I remain at your disposal". And you never hear back.</p>
+
+<p>The problem isn't always in the price or in what you offer. Often it's in how you send it.</p>
+
+<p>The quote email is one of the most critical moments of the sales process, and also one of the most neglected. In this article we review the 12 most common mistakes small businesses and freelancers make when sending quotes by email, and what you can do to fix them without reinventing anything.</p>
+
+<h2>Mistake 1: Generic subject line with no context</h2>
+
+<p>The subject line is the first thing the client reads. If it says "Quote" or "Requested quote", you're competing with dozens of emails without standing out in the slightest.</p>
+
+<p>An effective subject includes the client or company name, the type of service and sometimes a signal of urgency or relevance. Examples:</p>
+
+<ul>
+<li><strong>Bad:</strong> "Quote"</li>
+<li><strong>Bad:</strong> "Requested quote"</li>
+<li><strong>Good:</strong> "Web design quote for García Construction — valid until 25 April"</li>
+<li><strong>Good:</strong> "Your maintenance quote is ready, María"</li>
+</ul>
+
+<p>The subject has to answer, in two seconds, the question: "What's in here for me and why should I open it now?"</p>
+
+<h2>Mistake 2: The email body is the quote itself</h2>
+
+<p>Many businesses include all the quote details directly in the email body: items, prices, terms, all pasted in there. The problem is that makes the email very long, hard to read on mobile, and complex for the client to save or print.</p>
+
+<p>The email body should be short: two or three paragraphs of context, a summary of the value you offer, and the quote as an attached document or link. The email is the wrapping; the quote is the gift.</p>
+
+<p>A structure that works:</p>
+
+<ol>
+<li>Personalised greeting</li>
+<li>A sentence recalling the context ("as we discussed on Thursday...")</li>
+<li>The main benefit of your proposal in a single sentence</li>
+<li>Link or attachment to the document</li>
+<li>A clear next step ("if you have any questions, call me directly on...")</li>
+</ol>
+
+<h2>Mistake 3: Not personalising the message</h2>
+
+<p>An email that starts with "Dear customer" or that is clearly an untouched template sends an unmistakable signal: you didn't matter enough for me to write you two lines of my own.</p>
+
+<p>You don't need to write an essay. It's enough to include the name, mention something from the previous conversation ("you mentioned you needed it ready by June") and adapt the tone to the client. Ten minutes of personalisation can make the difference between getting a reply or being ignored.</p>
+
+<h2>Mistake 4: Sending the quote with no prior context</h2>
+
+<p>This is especially common in businesses that get enquiries via the web or social media: someone asks for a price, and the direct response is to send the PDF with the numbers and nothing else.</p>
+
+<p>The problem is the client doesn't yet understand well what you offer or why it's worth that price. A quote with no context is just a list of numbers. Before sending the quote, or in the email itself, you need to anchor the value: what problem you solve, what result the client can expect, why your proposal is right for their situation.</p>
+
+<p>If you haven't had a prior conversation with the client, consider a quick call before sending the quote. You'll raise the close rate considerably.</p>
+
+<h2>Mistake 5: Not stating the validity date</h2>
+
+<p>A quote with no validity date is an invitation to procrastinate. The client has no incentive to decide quickly because the offer will always be there.</p>
+
+<p>Setting a reasonable validity date (10-15 days is usual for services) serves two functions: it creates real urgency and protects you from having to honour a price you may no longer be able to after some time.</p>
+
+<p>Make sure the validity date appears in the document and that you also mention it in the email: "This quote is valid until 30 April. If you have any questions, I'm available this week to talk it through."</p>
+
+<h2>Mistake 6: Not making the next step clear</h2>
+
+<p>What do you want the client to do after reading your quote? If you don't tell them explicitly, they probably won't do anything.</p>
+
+<p>The email should end with a clear, specific call to action. Not "I remain at your disposal" (vague), but something concrete:</p>
+
+<ul>
+<li>"If you agree, you can accept the quote by clicking the link."</li>
+<li>"Do you have a slot on Wednesday at 11 to discuss it by phone?"</li>
+<li>"Reply to this email with any questions and I'll get back to you the same day."</li>
+</ul>
+
+<p>The ideal next step is one the client can complete in under two minutes. The easier you make it, the more likely it is to happen.</p>
+
+<h2>Mistake 7: Sending the quote as an editable Word or Excel file</h2>
+
+<p>Sending the quote in .docx or .xlsx format has several problems:</p>
+
+<ul>
+<li>The client can modify it accidentally (or intentionally)</li>
+<li>The design can break in different versions of Office</li>
+<li>It doesn't convey professionalism</li>
+<li>If the client prints or forwards it, the numbers can appear wrong</li>
+</ul>
+
+<p>The standard is PDF. Always. A PDF has a fixed design, can't be edited without specific tools, and looks the same on any device. If you use quoting software, the PDF is generated automatically in the correct format.</p>
+
+<h2>Mistake 8: Using an unprofessional email address</h2>
+
+<p>It may seem a minor detail, but sending a quote from <em>yourbusiness2009@gmail.com</em> or <em>pete.smith.plumber@hotmail.com</em> sends a signal about how formal your business is.</p>
+
+<p>If you don't have your own domain, get one. An email like <em>quotes@yourbusiness.com</em> or <em>hello@yourbusiness.com</em> costs less than £10 a year and projects a radically different image. It's one of the highest-ROI investments you can make in your professional image.</p>
+
+<h2>Mistake 9: Not following up</h2>
+
+<p>According to B2B sales behaviour data, 80% of deals close after the fifth contact, but most salespeople give up after the first or second. You send the quote, wait for a reply, and if it doesn't come within three days, you assume they weren't interested.</p>
+
+<p>Silence doesn't mean "no". It means "I'm busy", "I left it for later" or "I have a question I don't know how to raise". A well-done follow-up isn't pushy: it's a help.</p>
+
+<p>A simple cadence that works:</p>
+
+<ul>
+<li><strong>Day 1:</strong> You send the quote</li>
+<li><strong>Day 3:</strong> A short email asking if it arrived OK and whether they have any questions</li>
+<li><strong>Day 7:</strong> A call or email reminding them of the validity date and offering a conversation</li>
+<li><strong>Day 12-14:</strong> A final contact before the validity expires</li>
+</ul>
+
+<p>You don't need more. But you do need to do those steps.</p>
+
+<h2>Mistake 10: Ignoring how it looks on mobile</h2>
+
+<p>More than 60% of emails are opened on mobile devices. If your quote email has huge paragraphs, embedded price tables, or attachments that can't be viewed without downloading, the mobile experience is awful.</p>
+
+<p>Some practical tips:</p>
+
+<ul>
+<li>Short paragraphs (3-4 lines maximum)</li>
+<li>A single visible, clickable CTA</li>
+<li>The attachment as a PDF (it opens on the phone itself with no extra apps)</li>
+<li>If you use a link to the online quote, make sure the destination is responsive</li>
+</ul>
+
+<h2>Mistake 11: Not including direct contact information</h2>
+
+<p>The client has a question. They want to resolve it quickly so they can make the decision. But your signature only has the company name and a general email. They have to write an email, wait for a reply, and by then they've lost the momentum to decide.</p>
+
+<p>Your signature should always include:</p>
+
+<ul>
+<li>Your full name</li>
+<li>Your role or title</li>
+<li>A direct phone (or mobile) — this is the most important</li>
+<li>The company website</li>
+</ul>
+
+<p>Reducing the friction to contact you directly is one of the easiest ways to increase the response rate to your quotes.</p>
+
+<h2>Mistake 12: Not knowing whether the client has opened the email</h2>
+
+<p>If you send a quote by email and have no way of knowing whether they opened it, you're making follow-up decisions blind. You call on day three without knowing whether they saw it two hours ago. Or you don't call because "they're surely considering it" when in reality the email never even reached the inbox.</p>
+
+<p>Professional quoting tools like <a href="/registro?lang=en">DealForge</a> show you exactly when the client opened the quote, how many times they've viewed it, and which pages they've reviewed most. With that information, follow-up becomes much smarter: if you see they opened it three times but haven't replied, it's the perfect moment to call. If they haven't opened it, it makes more sense to follow up through another channel.</p>
+
+<h2>The perfect quote email: a base template</h2>
+
+<p>So you have a practical reference, here's an email structure that works well in most contexts:</p>
+
+<p><strong>Subject:</strong> [service] quote for [company name] — valid until [date]</p>
+
+<p><strong>Body:</strong></p>
+
+<p>Hi [name],</p>
+
+<p>As we discussed [reference to the conversation], here's the quote for [brief description of the project or service].</p>
+
+<p>The quote covers [main benefit or expected result] with [key differentiator if any].</p>
+
+<p>You have it attached as a PDF. The price is valid until [date].</p>
+
+<p>If you have any questions or want to adjust anything, write to me or call me directly on [phone]. If you agree, you can confirm by replying to this email or [acceptance link if applicable].</p>
+
+<p>Best regards,<br>[Name]<br>[Role]<br>[Phone]<br>[Website]</p>
+
+<p>Simple. Personalised. With context. With a clear CTA. With direct contact information.</p>
+
+<h2>The underlying problem: email isn't the best way to send quotes</h2>
+
+<p>That said, there's something important to mention: email as a channel for quotes has structural limitations. The quote gets lost among other messages, you don't know when they see it, the client can't comfortably accept it, and you have no visibility of what happens with it.</p>
+
+<p>More and more businesses are moving to sending quotes as web links: the client receives a short email with a link, clicks it, sees the quote on a clean, well-designed page, can ask questions, and if they agree, accepts digitally with one click. Everything is recorded.</p>
+
+<p>In <a href="/registro?lang=en">DealForge</a> it works exactly like this: you generate the quote, send it as a link, and in real time you see when they open it and how many times. The client can accept with a digital signature without downloading or printing anything. The process becomes radically smoother for both parties.</p>
+
+<h2>Conclusion: the email matters more than it seems</h2>
+
+<p>An excellent quote sent badly has far less chance of closing than a good quote sent well. The email is part of the sale, not a mere delivery formality.</p>
+
+<p>The mistakes we've seen aren't hard to fix. Most are changes of habit or process you can apply this very week:</p>
+
+<ul>
+<li>A specific subject with name and validity date</li>
+<li>A short body with context and a clear CTA</li>
+<li>Always in PDF, never in Word</li>
+<li>Systematic follow-up at 3, 7 and 12 days</li>
+<li>A signature with a direct phone</li>
+<li>A professional email with your own domain</li>
+</ul>
+
+<p>If you fix even half of these points, you'll notice the difference in the response rate to your quotes. Not because the client wants more from you, but because you're making it much easier for them to say yes.</p>
+
+<p><strong>Want to simplify the whole process?</strong> With <a href="/registro?lang=en">DealForge</a> you can generate professional quotes in minutes, send them as a link or PDF, and see in real time when they're opened. Start free, no credit card required.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
