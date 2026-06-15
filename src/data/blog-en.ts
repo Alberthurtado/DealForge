@@ -735,6 +735,342 @@ export const blogPostsEn: BlogPostEn[] = [
 <p><strong>Try AI applied to sales:</strong> <a href="/registro?lang=en">Create your free DealForge account</a> and discover how Forge AI can help you quote faster, personalise better and sell more.</p>
 `.trim(),
   },
+  // ─── 6. How to create a professional quote: complete guide ───
+  {
+    slug: "how-to-create-professional-quote-complete-guide",
+    titulo: "How to create a professional quote: the complete guide to closing more sales",
+    extracto:
+      "Learn to create professional quotes and estimates that convert. Discover the key elements, common mistakes and how quoting software can save you hours of work.",
+    categoria: "ventas",
+    tags: ["quotes", "estimates", "sales", "quoting software", "CPQ", "guide", "small business"],
+    autor: "DealForge",
+    publishedAt: "2026-04-02T09:00:00Z",
+    metaTitulo: "How to create a professional quote | Complete guide 2026 — DealForge",
+    metaDescripcion:
+      "Learn to create professional quotes and estimates that close sales. Key elements, mistakes to avoid and how quoting software saves you hours.",
+    metaKeywords:
+      "how to create a quote, create estimates, quoting software, quote template, quote professional, online quote, CPQ, quoting software small business",
+    contenido: `<p>If you've ever lost a client because your quote arrived late, had errors or simply didn't convey professionalism, this article is for you. <strong>Creating estimates and quotes</strong> is one of those tasks that seems simple, but that marks the difference between closing a sale or losing it.</p>
+
+<p>Let's look, step by step, at how to create a quote that really works. No fluff, with practical examples and the kind of polish that makes your client say &ldquo;yes, I want to work with you&rdquo;.</p>
+
+<h2>Estimate vs. quote: are they the same?</h2>
+
+<p>Before we dive in, let's clear up something that causes a lot of confusion. An <strong>estimate</strong> is an approximation of what something will cost. A <strong>quote</strong>, on the other hand, is the formal document where you tell your client exactly how much what they need will cost.</p>
+
+<p>In practice, many companies use both terms interchangeably. What matters isn't what you call it, but that the document is clear, professional and arrives on time.</p>
+
+<h2>The 7 elements every professional quote must have</h2>
+
+<p>An effective quote isn't just a price list. It's your commercial calling card. These are the essentials:</p>
+
+<h3>1. Your company details</h3>
+<p>Logo, business name, tax/VAT number, address, phone and email. It seems obvious, but you'd be surprised how many quotes arrive without complete contact details. Your client needs to know exactly who they're dealing with.</p>
+
+<h3>2. The client's details</h3>
+<p>Company name, point of contact, email and phone. Personalising the quote with the client's name already creates a far more professional impression than a generic &ldquo;Dear customer&rdquo;.</p>
+
+<h3>3. Reference number</h3>
+<p>A consecutive numbering system (for example, QUO-2026-0042) lets you stay organised and makes communication easier. When your client says &ldquo;I've seen your proposal&rdquo;, you'll both know exactly which one they mean.</p>
+
+<h3>4. Detailed description of products or services</h3>
+<p>This is where many fail. It's not enough to put &ldquo;Consulting service: £5,000&rdquo;. Break down each line with a clear description, quantity, unit price and discounts if any. <strong>The more transparent you are, the more trust you build.</strong></p>
+
+<h3>5. Taxes and totals</h3>
+<p>Clearly state the subtotal, the VAT (or applicable tax) and the final total. Don't make your client do mental maths. Make things easy.</p>
+
+<h3>6. Commercial terms</h3>
+<p>Payment method, delivery time, quote validity and any special conditions. This avoids misunderstandings and protects both parties. A quote with no terms is a ticking time bomb.</p>
+
+<h3>7. Expiry date</h3>
+<p>Set a clear deadline. This creates urgency (without being aggressive) and lets you manage your sales pipeline better. The norm is 15 or 30 days, depending on the sector.</p>
+
+<h2>The 5 mistakes that kill your quotes</h2>
+
+<p>Now that you know what to include, let's look at what to avoid. These are the most common and most damaging:</p>
+
+<ol>
+<li><strong>Taking too long to send it.</strong> If your competition sends the quote the same day and you take a week, you've already lost. Speed matters — a lot.</li>
+<li><strong>Calculation errors.</strong> Nothing destroys trust more than a quote with numbers that don't add up. Checking the totals should be sacred.</li>
+<li><strong>Lack of personalisation.</strong> Sending the same generic quote to every client is like sending a CV with no cover letter. Tailor each proposal.</li>
+<li><strong>Unprofessional design.</strong> Your quote reflects your brand. If it looks like it was made in 5 minutes in a spreadsheet, that will be the perception of your service.</li>
+<li><strong>No follow-up.</strong> Send and forget. 80% of sales require at least 5 follow-up contacts. Don't let your quote get lost in the inbox.</li>
+</ol>
+
+<h2>Excel template or quoting software?</h2>
+
+<p>The eternal question. Let's be honest: <strong>an Excel template is fine to start with</strong>, but it has clear limits. It doesn't scale, it's easy to make copy-paste errors, you can't generate professional PDFs automatically, and follow-up is manual.</p>
+
+<p>Quoting software like DealForge lets you:</p>
+
+<ul>
+<li>Create professional quotes in minutes, not hours</li>
+<li>Keep a product catalogue with up-to-date prices</li>
+<li>Generate PDFs with your branding (logo, colours, custom template)</li>
+<li>Send by email directly from the platform</li>
+<li>Apply automatic business rules (discount limits, approvals)</li>
+<li>Track the status of every quote</li>
+<li>Use artificial intelligence to optimise your proposals</li>
+</ul>
+
+<p>The real difference isn't in the tool itself, but in the time you get back. If you spend 45 minutes on each manual quote and can reduce it to 5 minutes with software, the maths speaks for itself.</p>
+
+<h2>How artificial intelligence is changing the game</h2>
+
+<p>AI is no longer science fiction in the sales world. Tools with <strong>built-in AI</strong> can suggest complementary products, detect when a discount is too aggressive, or even write the accompanying text for your quote.</p>
+
+<p>In DealForge, for example, Forge AI analyses the context of each quote and helps with smart suggestions: from recommending the optimal price to alerting you if a commercial term could cause problems. All without leaving the platform.</p>
+
+<h2>Quick checklist before sending your quote</h2>
+
+<p>Before clicking &ldquo;Send&rdquo;, run through this list:</p>
+
+<ul>
+<li>Are your company and client details complete and correct?</li>
+<li>Is each line's description clear and detailed?</li>
+<li>Do the calculations add up (subtotal, discounts, VAT, total)?</li>
+<li>Have you included the commercial terms and the expiry date?</li>
+<li>Does the design reflect the quality of your company?</li>
+<li>Have you checked the spelling?</li>
+</ul>
+
+<p>If you've ticked everything, you're ready to send a quote that builds trust and closes sales.</p>
+
+<h2>Conclusion</h2>
+
+<p>Making a professional quote isn't complicated, but it requires attention to detail and the right tools. Whether you use a template or specialised software, what matters is that every proposal you send conveys professionalism, transparency and trust.</p>
+
+<p>Because in the end, a good quote isn't just a document with prices. It's the first step of a commercial relationship that can last for years.</p>`,
+  },
+
+  // ─── 7. Electronic signature on quotes ───
+  {
+    slug: "electronic-signature-quotes-close-sales-faster",
+    titulo: "Electronic signatures on quotes: how to close sales faster and with legal validity",
+    extracto:
+      "Discover how electronic signatures on your quotes speed up closing, eliminate paper and carry full legal validity. A practical guide for small businesses with real examples.",
+    categoria: "ventas",
+    tags: ["electronic signature", "quotes", "eIDAS", "sales", "CPQ", "small business", "digital signature", "closing sales"],
+    autor: "DealForge",
+    publishedAt: "2026-04-06T09:00:00Z",
+    metaTitulo: "Electronic signatures on quotes: close sales faster | DealForge",
+    metaDescripcion:
+      "Learn how electronic signatures on quotes speed up closing with legal validity. A practical guide for small businesses with the eIDAS legal framework and a checklist.",
+    metaKeywords:
+      "electronic signature quotes, digital signature estimates, sign quote online, eIDAS electronic signature, e-signature small business, close sales fast, quoting software electronic signature, electronic signature legal validity",
+    contenido: `<p>Picture this: you've prepared the perfect quote, the client says yes, but then takes a week to print, sign, scan and send the document back. By the time it arrives, the quote has expired or, worse, they've chosen a more agile supplier.</p>
+
+<p>This problem has a name: <strong>friction at the close</strong>. And the solution is simpler than you think: electronic signatures built into your quotes.</p>
+
+<h2>What is an electronic signature and why does it matter in sales?</h2>
+
+<p>An electronic signature is a mechanism that lets a person express their agreement with a document digitally, with no need for paper, printer or scanner. In the context of quotes, it means your client can <strong>approve and sign your proposal from any device</strong> in seconds.</p>
+
+<p>But it's not just about convenience. Under the EU eIDAS Regulation, electronic signatures carry full legal validity. This means a quote signed electronically has the same legal weight as one signed by hand.</p>
+
+<h2>The 5 benefits of signing quotes electronically</h2>
+
+<h3>1. Close sales in minutes, not days</h3>
+<p>The main benefit is speed. When you remove the print-sign-scan-send process, you cut the closing time from days to minutes. Your client receives a link, signs with a finger or mouse, and that's it. <strong>No friction, no excuses, no waiting.</strong></p>
+
+<h3>2. Reduce the drop-out rate</h3>
+<p>Every extra step in the approval process is a chance for the client to get distracted, postpone it or simply forget. Electronic signatures remove all those intermediate steps. The result: fewer quotes left in limbo.</p>
+
+<h3>3. Full legal validity</h3>
+<p>The eIDAS Regulation (EU 910/2014) sets three levels of electronic signature: simple, advanced and qualified. For commercial B2B quotes, the simple electronic signature (like the one most CPQ platforms offer) is perfectly valid and admissible as evidence in a dispute.</p>
+
+<h3>4. Full traceability</h3>
+<p>Each signature is recorded with the date, time, IP address and the signer's details. This gives you <strong>complete traceability</strong> that paper can never offer. How many times have you had to hunt for a signed document in a drawer or an email from months ago?</p>
+
+<h3>5. A professional, modern image</h3>
+<p>Sending a link to sign electronically conveys modernity and professionalism. Your client perceives that you work with up-to-date tools and that you value their time. In a competitive market, these details make the difference.</p>
+
+<h2>How an electronic signature works on a quote</h2>
+
+<p>The process is simpler than it seems. Here's how it works on a modern CPQ platform:</p>
+
+<ol>
+<li><strong>You create the quote</strong> with all the details: products, prices, terms and conditions.</li>
+<li><strong>You request the signature</strong> by entering the signer's name and email (it can be the client's main contact or any authorised person).</li>
+<li><strong>The client receives an email</strong> with a unique, secure link to sign.</li>
+<li><strong>The client reviews and signs</strong> directly from the browser, drawing their signature with the mouse or finger on mobile.</li>
+<li><strong>Both parties receive confirmation</strong> and the signature is embedded in the quote PDF.</li>
+</ol>
+
+<p>The whole process can be completed in under 2 minutes from when you send the request.</p>
+
+<h2>Electronic signature vs. approval: which do you need?</h2>
+
+<p>It's important to distinguish between these two concepts that are sometimes confused:</p>
+
+<p><strong>Internal approval:</strong> the process where someone from your own company (a sales director, a finance manager) must approve the quote before it's sent to the client. It's usually triggered by automatic rules, for example when a discount exceeds a certain percentage.</p>
+
+<p><strong>Electronic signature:</strong> the client's agreement with the proposal. It's requested after the quote has been sent and the client agrees with the terms.</p>
+
+<p>In a complete workflow, the order would be: <strong>create quote → internal approval → send to client → client's electronic signature</strong>. Both processes complement each other and, together, ensure the whole chain is valid.</p>
+
+<h2>The legal framework for electronic signatures</h2>
+
+<p>If you're worried about legal validity, these are the key points:</p>
+
+<ul>
+<li><strong>eIDAS Regulation (EU 910/2014):</strong> recognises electronic signatures across all EU member states. It can't be rejected as evidence in court just for being electronic.</li>
+<li><strong>National transposition laws:</strong> each country transposes the eIDAS regulation into its own legal system regulating trusted electronic services.</li>
+<li><strong>Contract law:</strong> consent expressed by electronic means is generally accepted as valid for forming contracts.</li>
+</ul>
+
+<p>For commercial B2B quotes, you don't need a qualified signature with a digital certificate. The simple electronic signature (drawing the signature + recording IP and date) is sufficient and legally valid.</p>
+
+<h2>Common mistakes when implementing electronic signatures</h2>
+
+<p>Although the technology is simple, there are mistakes to avoid:</p>
+
+<ol>
+<li><strong>Not including the terms and conditions.</strong> The signature only has value if the signer has been able to clearly read what they're accepting. Make sure the commercial terms are visible before the signature.</li>
+<li><strong>Not keeping the evidence.</strong> Always store the date, time, IP and signer's details alongside the signed document. This evidence is crucial in a dispute.</li>
+<li><strong>Using unsecure tools.</strong> An email with a &ldquo;yes, I accept&rdquo; isn't the same as an electronic signature with traceability. Use tools that generate an auditable record.</li>
+<li><strong>Forgetting follow-up.</strong> Sending the signature request doesn't mean the client completes it immediately. Automatic reminders are essential.</li>
+</ol>
+
+<h2>How DealForge integrates electronic signatures</h2>
+
+<p>In DealForge, the electronic signature is built directly into the quoting flow. You don't need external tools or complicated integrations:</p>
+
+<ul>
+<li><strong>Request the signature</strong> from the quote page itself with a single click.</li>
+<li><strong>The client signs from any device</strong> via a secure, unique link.</li>
+<li><strong>The signature appears automatically in the quote PDF</strong>, along with the signer's name and the date.</li>
+<li><strong>You get a notification</strong> when the client signs, so you can move on to the next step.</li>
+<li><strong>Everything is recorded</strong> in the quote's activity history with full traceability.</li>
+</ul>
+
+<p>Available from the Pro plan, alongside other features like automatic reminders and quote versioning.</p>
+
+<h2>Checklist to implement electronic signatures in your company</h2>
+
+<ul>
+<li>Do your quotes include clear terms and conditions?</li>
+<li>Does your quoting tool support built-in electronic signatures?</li>
+<li>Do you keep a record of the date, time and IP of each signature?</li>
+<li>Do you have automatic reminders set up for pending signatures?</li>
+<li>Is the signature embedded in the final quote PDF?</li>
+<li>Have you briefed your sales team on the new flow?</li>
+</ul>
+
+<p>If you've ticked everything, you're ready to close sales faster and with full legal certainty.</p>
+
+<h2>Conclusion</h2>
+
+<p>The electronic signature isn't a luxury or a tech fad. It's a practical tool that <strong>reduces closing times, removes friction and carries full legal validity</strong>. For small businesses competing on speed and professionalism, building it into the quoting flow is a real competitive advantage.</p>
+
+<p>Because at the end of the day, the most beautiful quote in the world is useless if the client takes a week to sign it. Make it a matter of one click.</p>`,
+  },
+
+  // ─── 8. Quoting software for small businesses ───
+  {
+    slug: "quoting-software-small-business-guide",
+    titulo: "Quoting software for small businesses: what it is, how it works and how to choose the best",
+    extracto:
+      "Discover what quoting software (CPQ) is, how it can transform your sales process and what criteria to use to choose the right tool for your business.",
+    categoria: "producto",
+    tags: ["quoting software", "CPQ", "estimates", "small business", "sales automation", "sales tools", "productivity"],
+    autor: "DealForge",
+    publishedAt: "2026-04-10T09:00:00Z",
+    metaTitulo: "Quoting Software for Small Businesses: Complete Guide 2026 — DealForge",
+    metaDescripcion:
+      "What quoting software (CPQ) is, how it works and how to choose the best for your business. Key features, comparison with Excel and ERP, and selection criteria.",
+    metaKeywords:
+      "quoting software, estimate software, CPQ for small business, quoting tool, quote software, automate quotes, free quoting software, best CPQ",
+    contenido: `<p>If you still make quotes in Excel or Word, you're losing time and sales. <strong>Quoting software</strong> automates the creation of professional estimates, eliminates errors and lets you close deals faster. In this guide we explain everything you need to know.</p>
+
+<h2>What is quoting software?</h2>
+
+<p>Quoting software, also known as <strong>CPQ (Configure, Price, Quote)</strong>, is a tool that automates the process of creating, sending and managing commercial quotes. Instead of copying and pasting into spreadsheets, the CPQ centralises your products, prices, clients and commercial terms in one place.</p>
+
+<p>The result: professional quotes in minutes, not hours. No calculation errors, no inconsistent formats and with automatic follow-up.</p>
+
+<h2>Signs you need quoting software</h2>
+
+<p>If you recognise yourself in any of these situations, it's time to leave Excel behind:</p>
+
+<ul>
+<li>You spend <strong>more than 30 minutes</strong> preparing each quote</li>
+<li>You've sent quotes with <strong>pricing or calculation errors</strong></li>
+<li>You don't know the status of each proposal or when to follow up</li>
+<li>Each salesperson uses a <strong>different format</strong> for quotes</li>
+<li>You lose deals because <strong>the competition responds first</strong></li>
+<li>You have no visibility over your <strong>sales pipeline</strong></li>
+</ul>
+
+<h2>Key features of a good CPQ</h2>
+
+<h3>1. Centralised product catalogue</h3>
+<p>All your products, services and prices in one place. When you change a price, it updates automatically in all future quotes. Goodbye to out-of-date spreadsheets.</p>
+
+<h3>2. Automatic quote generation</h3>
+<p>Select the client, add the products and the system automatically calculates subtotals, discounts and taxes. Some CPQs like DealForge include <strong>artificial intelligence</strong> that can generate complete quotes from a description.</p>
+
+<h3>3. Professional PDF templates</h3>
+<p>A well-designed quote conveys professionalism. The software generates PDFs with your logo, brand colours and a clean design that impresses the client.</p>
+
+<h3>4. Built-in electronic signature</h3>
+<p>Send the quote and the client signs from their phone or computer. No printing, no scanning. With legal validity under the EU eIDAS Regulation.</p>
+
+<h3>5. Tracking and notifications</h3>
+<p>Know when the client opens your quote, get automatic reminders and never miss a follow-up. The visual pipeline shows all your opportunities at a glance.</p>
+
+<h3>6. Business rules and approvals</h3>
+<p>Define maximum discounts, minimum margins and approval flows. If a salesperson applies an out-of-policy discount, the system requires manager approval before sending.</p>
+
+<h2>CPQ vs. Excel vs. ERP: which to use?</h2>
+
+<p>Each tool has its place. The key is understanding when each one makes sense:</p>
+
+<p><strong>Excel/Google Sheets:</strong> Works when you make few quotes a month and work alone. But as you grow, errors multiply and management becomes chaotic.</p>
+
+<p><strong>ERP (SAP, Odoo, etc.):</strong> Powerful but complex and costly. Designed for large companies with implementation teams. For a small business, it's usually overkill.</p>
+
+<p><strong>CPQ software:</strong> The ideal middle ground. Specialised in the quoting process, easy to implement and affordable. Perfect for small businesses that want to professionalise their sales without the complexity of an ERP.</p>
+
+<h2>How to choose the best quoting software</h2>
+
+<p>Not all CPQs are the same. These are the criteria you should evaluate:</p>
+
+<h3>Ease of use</h3>
+<p>If your team needs a week of training to use the software, something's wrong. The tool should be intuitive from day one. Look for clean interfaces and simple workflows.</p>
+
+<h3>Customisation</h3>
+<p>Can you adapt the templates to your brand? Does it support your specific commercial terms? Does it work with your currency and tax system?</p>
+
+<h3>Integrations</h3>
+<p>Check that it integrates with the tools you already use: CRM, email, invoicing. An isolated tool creates more work, not less.</p>
+
+<h3>Fair price</h3>
+<p>Many CPQs are designed for large companies with prices starting in the hundreds per month. For a small business, look for options with a free or affordable entry plan.</p>
+
+<h3>Good support</h3>
+<p>When you have a problem, you need fast, responsive help. Prioritise tools with responsive support and clear documentation.</p>
+
+<h2>The real impact on your business</h2>
+
+<p>Implementing quoting software isn't just an operational improvement. It's a competitive advantage. Companies that respond quickly with professional proposals win more deals. It's that simple.</p>
+
+<p>Think about it: when a potential client requests a quote from three suppliers, the first to respond with a clear, professional quote has a huge advantage. Speed and professionalism build trust.</p>
+
+<h2>First steps</h2>
+
+<p>You don't need to migrate everything at once. Start small:</p>
+
+<ol>
+<li><strong>Load your product catalogue</strong> with up-to-date prices</li>
+<li><strong>Import your main clients</strong> from your current database</li>
+<li><strong>Create your first quote</strong> with the new system</li>
+<li><strong>Send it with an electronic signature</strong> and measure the response time</li>
+<li><strong>Review and adjust</strong> to your workflow</li>
+</ol>
+
+<p>The learning curve is minimal and the results are immediate. Your sales team will thank you.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
