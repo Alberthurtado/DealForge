@@ -4605,6 +4605,115 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
     metaDescripcion: "Learn to calculate the real profit margin in your quotes: correct formulas, costs that are always forgotten and how to defend your price when the client asks for a discount.",
     metaKeywords: "how to calculate profit margin, margin in quotes, calculate sale price with margin, gross net margin difference, quote profitability SMEs, profit margin formula, markup vs margin, price with margin sole traders",
   },
+  {
+    slug: "what-is-cpq-how-it-works",
+    titulo: "CPQ: what it is, how it works and why your sales team needs it",
+    extracto: "Discover what CPQ software (Configure, Price, Quote) is, how it automates the quoting process and why more and more small businesses are adopting it to sell faster and with fewer errors.",
+    contenido: `<p>If you work in B2B sales, you've probably lived this: a client asks you for a quote, you open your Excel sheet, look up the current prices, apply discounts by hand, check everything adds up and finally generate a PDF you send by email. The process can take hours. And if there's an error, back to the start.</p>
+
+<p>There's a better way to do it. It's called <strong>CPQ</strong>, and it's transforming how companies create and manage their quotes.</p>
+
+<h2>What CPQ means</h2>
+
+<p><strong>CPQ</strong> stands for <strong>Configure, Price, Quote</strong>. It's a type of software designed to automate the complete process of creating sales quotes, from product selection to generating the final document.</p>
+
+<p>Instead of looking up prices in spreadsheets, calculating discounts manually and formatting documents one by one, a CPQ system centralises everything in a single platform. The result: faster quotes, with no errors and a professional appearance.</p>
+
+<h2>How CPQ software works step by step</h2>
+
+<p>A modern CPQ follows three phases that reflect its name exactly:</p>
+
+<h3>1. Configure</h3>
+<p>You select the products or services your client needs. The system knows your complete catalogue, with variants, options and dependencies. If you sell a product that requires mandatory accessories, the CPQ detects it automatically. Nothing gets left out.</p>
+
+<h3>2. Price</h3>
+<p>The software applies your company's pricing rules: price lists by segment, volume discounts, active promotions, minimum margins. Everything is calculated instantly, without anyone having to open a calculator. If a discount exceeds the permitted limit, the system can block it or send the quote for approval.</p>
+
+<h3>3. Quote</h3>
+<p>A professional document (PDF, email or link) is generated automatically with all the information: client details, product breakdown, commercial terms, taxes and total. Ready to send in minutes, not hours.</p>
+
+<h2>5 problems a CPQ solves on your sales team</h2>
+
+<p>If any of these points sounds familiar, a CPQ could be the solution:</p>
+
+<h3>1. Slow quotes that lose opportunities</h3>
+<p>According to industry studies, companies that respond to a quote request in under an hour are <strong>7 times more likely</strong> to close the sale. With a CPQ, your team can generate a professional quote in minutes, not days.</p>
+
+<h3>2. Errors in prices and calculations</h3>
+<p>Manual errors in quotes aren't just embarrassing, they can cost you real money. A CPQ eliminates manual calculations. Prices are updated centrally and business rules are applied automatically.</p>
+
+<h3>3. Discounts with no control</h3>
+<p>Without a system, each salesperson applies discounts at their own discretion. With a CPQ you can set clear limits: maximum discount by product, by volume or by client type. If someone needs to exceed that limit, an automatic approval flow is triggered.</p>
+
+<h3>4. Lack of visibility into the pipeline</h3>
+<p>When quotes live in each salesperson's folders, no one has the full picture. A CPQ centralises all the information: how many quotes are active, their total value, how many are awaiting a reply and which need follow-up.</p>
+
+<h3>5. Inconsistent brand image</h3>
+<p>Each salesperson uses their own format, fonts and style. The result: documents that look like they're from different companies. A CPQ guarantees that all quotes follow the same template, with your logo, corporate colours and a professional format.</p>
+
+<h2>CPQ for small businesses: no longer just for large companies</h2>
+
+<p>Traditionally, CPQ systems were reserved for large corporations with six-figure implementation budgets. Platforms like Salesforce CPQ or Oracle CPQ are powerful but complex and expensive.</p>
+
+<p>Today, there are alternatives designed specifically for small businesses and small teams. Tools like <strong>DealForge</strong> offer the essential features of a CPQ (product catalogue, pricing rules, PDF generation, email sending) without the complexity or cost of enterprise solutions.</p>
+
+<p>The key is to choose a CPQ that fits your current size but can grow with you. You don't need every feature from day one; you need the ones that solve your real problems.</p>
+
+<h2>CPQ with artificial intelligence: the next level</h2>
+
+<p>The new generation of CPQ tools integrates <strong>artificial intelligence</strong> to go beyond simple automation:</p>
+
+<ul>
+<li><strong>Product suggestions:</strong> the AI analyses the client's context and recommends complementary products or services that increase the value of the quote.</li>
+<li><strong>Price optimisation:</strong> algorithms that suggest the optimal price based on sales history, the client profile and the competition.</li>
+<li><strong>Text generation:</strong> the AI automatically writes covering notes, personalised descriptions and terms adapted to each client.</li>
+<li><strong>Risk detection:</strong> alerts when a quote has terms that have historically resulted in rejection or post-sale problems.</li>
+</ul>
+
+<p>In DealForge, <strong>Forge AI</strong> combines these capabilities in an integrated assistant that helps your team create better quotes without needing to be sales experts.</p>
+
+<h2>What to look for when choosing CPQ software</h2>
+
+<p>Not all CPQs are the same. These are the key criteria for choosing the one that best fits your company:</p>
+
+<ul>
+<li><strong>Ease of use:</strong> if your team needs weeks of training, something is wrong. A good CPQ is learned in minutes.</li>
+<li><strong>A flexible product catalogue:</strong> it should support variants, options, bundles and different prices by client segment.</li>
+<li><strong>Business rules:</strong> the ability to define discount limits, approvals and automatic commercial terms.</li>
+<li><strong>Document generation:</strong> professional PDFs with your branding, not generic documents.</li>
+<li><strong>Integrations:</strong> connection with your existing CRM, ERP or email tools.</li>
+<li><strong>Fair price:</strong> especially for small businesses, the cost should be proportional to the value it brings.</li>
+</ul>
+
+<h2>CPQ vs. ERP vs. CRM: which do you need</h2>
+
+<p>It's common to confuse these tools. Here's a quick distinction:</p>
+
+<ul>
+<li><strong>CRM</strong> (Customer Relationship Management): manages the client relationship. Contacts, opportunities, interaction history. Example: HubSpot, Pipedrive.</li>
+<li><strong>ERP</strong> (Enterprise Resource Planning): manages the company's internal processes. Invoicing, inventory, accounting. Example: SAP, Xero.</li>
+<li><strong>CPQ</strong> (Configure, Price, Quote): manages the quoting process. Catalogue, prices, commercial rules, document generation. Example: DealForge.</li>
+</ul>
+
+<p>Ideally, these three tools work together. A modern CPQ integrates with your CRM to pull in client data and with your ERP to sync prices and availability. The result is a frictionless sales flow.</p>
+
+<h2>Conclusion: CPQ as a competitive advantage</h2>
+
+<p>In a market where speed and professionalism make the difference, a CPQ isn't a luxury, it's a necessity. It lets your sales team focus on what they do best (selling) instead of wasting time on admin tasks.</p>
+
+<p>Whether you manage 10 quotes a month or 1,000, automating this process gives you a real advantage over competitors who still do everything by hand.</p>
+
+<p>The question isn't whether you need a CPQ. The question is how much longer you can afford not to have one.</p>
+
+<p><strong>Want to automate your quotes with a CPQ designed for small businesses?</strong> Try <a href="/registro?lang=en">DealForge</a> free and start sending professional quotes in minutes.</p>`,
+    autor: "DealForge",
+    categoria: "cpq",
+    tags: ["CPQ", "CPQ software", "configure price quote", "automate quotes", "quoting software", "B2B sales", "small business", "automated quotes"],
+    publishedAt: "2026-06-15T14:00:00.000Z",
+    metaTitulo: "What is a CPQ: a complete guide to Configure, Price, Quote for small businesses | DealForge",
+    metaDescripcion: "Discover what a CPQ (Configure, Price, Quote) is, how it automates your quotes and why small businesses need it. A complete guide with practical examples.",
+    metaKeywords: "CPQ, what is CPQ, CPQ software, configure price quote, quoting software, automate quotes, automated quotes, CPQ for small business, quoting tool, quote software",
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
