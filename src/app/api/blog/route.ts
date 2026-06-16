@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/lib/auth";
+import { getSession, isPlatformAdmin } from "@/lib/auth";
 import { validateBody } from "@/lib/validate";
 import { blogPostCreateSchema } from "@/lib/validations";
 
@@ -21,6 +21,11 @@ export async function POST(request: NextRequest) {
   const session = await getSession();
   if (!session) {
     return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  }
+  // The blog is global content, not tenant-scoped. Restrict authoring to
+  // platform admins — a per-tenant "ADMIN" rol would let any signup publish.
+  if (!isPlatformAdmin(session.email)) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 403 });
   }
 
   const body = await request.json();

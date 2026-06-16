@@ -127,3 +127,17 @@ export async function getSession(): Promise<JWTPayload | null> {
 export function getCookieName(): string {
   return COOKIE_NAME;
 }
+
+// ─── Platform admin (site-wide, NOT per-tenant) ──
+// The per-tenant "ADMIN" rol only makes a user admin of their own empresa.
+// Global resources (e.g. the shared public blog) must be gated on a separate
+// platform-admin allowlist, configured via the PLATFORM_ADMIN_EMAILS env var
+// (comma-separated). Empty/unset → nobody is a platform admin.
+export function isPlatformAdmin(email: string | null | undefined): boolean {
+  if (!email) return false;
+  const allow = (process.env.PLATFORM_ADMIN_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return allow.includes(email.toLowerCase());
+}

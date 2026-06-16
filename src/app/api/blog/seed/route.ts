@@ -1,15 +1,18 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { getSession } from "@/lib/auth";
+import { getSession, isPlatformAdmin } from "@/lib/auth";
 import { notifyIndexNow } from "@/lib/indexnow";
 
-// One-time seed endpoint for blog posts — requires authentication
-// GET alias so it can be triggered directly from the browser while logged in
+// One-time seed endpoint for blog posts — platform admins only.
+// GET alias so it can be triggered directly from the browser while logged in.
 export { POST as GET };
 export async function POST() {
   const session = await getSession();
   if (!session) {
     return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  }
+  if (!isPlatformAdmin(session.email)) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 403 });
   }
 
   const post = {

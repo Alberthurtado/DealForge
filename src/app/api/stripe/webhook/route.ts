@@ -23,14 +23,17 @@ export async function POST(request: NextRequest) {
 
   try {
     if (webhookSecret) {
-      // Verify signature in production
       event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-    } else {
-      // In development without webhook secret, parse directly
+    } else if (process.env.NODE_ENV !== "production") {
+      // Dev only: allow unverified events when no secret is configured.
       console.warn(
-        "STRIPE_WEBHOOK_SECRET not set — skipping signature verification"
+        "STRIPE_WEBHOOK_SECRET not set — skipping signature verification (dev only)"
       );
       event = JSON.parse(body) as Stripe.Event;
+    } else {
+      // Fail closed in production rather than process forgeable events.
+      console.error("STRIPE_WEBHOOK_SECRET not configured in production");
+      return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
     }
   } catch (err) {
     console.error("Webhook signature verification failed:", err);
