@@ -17,7 +17,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogPostEn(slug);
-  if (!post) return { title: "Article not found" };
+  if (!post) return { title: "Article not found — DealForge" };
 
   const title = post.metaTitulo || `${post.titulo} — DealForge Blog`;
   const description = post.metaDescripcion || post.extracto;

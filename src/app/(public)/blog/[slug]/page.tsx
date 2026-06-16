@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     where: { slug, publicado: true },
   });
 
-  if (!post) return { title: "Articulo no encontrado" };
+  if (!post) return { title: "Artículo no encontrado — DealForge" };
 
   const title = post.metaTitulo || `${post.titulo} — DealForge Blog`;
   const description = post.metaDescripcion || post.extracto;

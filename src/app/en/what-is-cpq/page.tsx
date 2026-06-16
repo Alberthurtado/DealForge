@@ -5,7 +5,7 @@ import { Navbar } from "../../_landing/navbar";
 import { FooterEn } from "../../_landing/footer-en";
 
 export const metadata: Metadata = {
-  title: "What is CPQ? Configure, Price, Quote explained (2026 guide)",
+  title: "What is CPQ? Configure, Price, Quote explained (2026 guide) — DealForge",
   description:
     "CPQ stands for Configure, Price, Quote — software that automates how businesses build quotes. Learn what CPQ is, how it works, who needs it, and how it compares to spreadsheets.",
   keywords: [

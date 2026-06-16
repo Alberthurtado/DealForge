@@ -128,6 +128,8 @@ export function Navbar({ locale = "es", altHref }: Props) {
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 text-gray-600 hover:text-gray-900"
             aria-label="Menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -136,7 +138,7 @@ export function Navbar({ locale = "es", altHref }: Props) {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+        <div id="mobile-menu" className="md:hidden bg-white border-t border-gray-100 shadow-lg">
           <div className="px-4 py-4 space-y-1">
             {cfg.links.map((link) =>
               link.href.startsWith("#") ? (

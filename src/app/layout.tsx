@@ -20,7 +20,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: "DealForge - CPQ Inteligente para PYMEs",
-    template: "%s | DealForge",
+    // Pages set their own fully-branded titles (e.g. "Pricing — DealForge"),
+    // so the template must NOT append the brand again (was "%s | DealForge",
+    // which produced "… — DealForge | DealForge"). Brandless pages add the
+    // brand in their own title string.
+    template: "%s",
   },
   description:
     "Sistema CPQ (Configure, Price, Quote) inteligente para PYMEs. Gestiona clientes, productos y cotizaciones con asistente IA integrado.",

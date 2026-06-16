@@ -17,7 +17,7 @@ function headshotExists(): boolean {
 }
 
 export const metadata: Metadata = {
-  title: `${AUTHOR.name} — Founder / Product Lead`,
+  title: `${AUTHOR.name} — Founder / Product Lead | DealForge`,
   description: AUTHOR.bio,
   alternates: { canonical: AUTHOR.url },
   openGraph: {

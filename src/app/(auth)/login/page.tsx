@@ -31,6 +31,13 @@ function LoginForm() {
     }
   }, []);
 
+  // The page metadata title is static Spanish (set in the layout); localize the
+  // browser tab title for English visitors (?lang=en). Page is noindex, so this
+  // is purely cosmetic — no SEO impact.
+  useEffect(() => {
+    document.title = `${t.signIn} — DealForge`;
+  }, [t.signIn]);
+
   const handleToken = useCallback((token: string | null) => {
     setTurnstileToken(token);
   }, []);

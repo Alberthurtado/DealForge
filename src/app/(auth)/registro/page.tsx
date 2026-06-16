@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useCallback } from "react";
+import { Suspense, useState, useCallback, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Flame, Eye, EyeOff, Loader2, CheckCircle } from "lucide-react";
@@ -22,6 +22,12 @@ function RegistroForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  // Localize the browser tab title for English visitors (?lang=en); the layout
+  // metadata title is static Spanish. Page is noindex — cosmetic only.
+  useEffect(() => {
+    document.title = `${t.createAccount} — DealForge`;
+  }, [t.createAccount]);
 
   const handleToken = useCallback((token: string | null) => {
     setTurnstileToken(token);
