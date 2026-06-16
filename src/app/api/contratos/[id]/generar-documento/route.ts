@@ -64,14 +64,9 @@ export async function POST(
     return NextResponse.json({ error: "Contrato no encontrado" }, { status: 404 });
   }
 
-  // Load empresa data
-  const empresa = await prisma.empresa.findFirst({
-    where: {
-      OR: [
-        { id: empresaId },
-        { id: "default" },
-      ],
-    },
+  // Load empresa data (the contract owner's tenant)
+  const empresa = await prisma.empresa.findUnique({
+    where: { id: empresaId },
     select: {
       nombre: true,
       cif: true,
@@ -80,7 +75,6 @@ export async function POST(
       direccion: true,
       web: true,
     },
-    orderBy: { createdAt: "asc" },
   });
 
   // Get template

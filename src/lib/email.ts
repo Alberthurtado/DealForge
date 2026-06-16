@@ -11,8 +11,10 @@ interface SmtpConfig {
   nombre: string;
 }
 
-export async function getSmtpConfig(): Promise<SmtpConfig | null> {
-  const empresa = await prisma.empresa.findUnique({ where: { id: "default" } });
+// Resolves the SMTP config for a specific empresa (tenant). Each tenant sends
+// through their own configured mail server — never a shared singleton.
+export async function getSmtpConfig(empresaId: string): Promise<SmtpConfig | null> {
+  const empresa = await prisma.empresa.findUnique({ where: { id: empresaId } });
   if (!empresa?.smtpHost || !empresa?.smtpUser || !empresa?.smtpPass) {
     return null;
   }
@@ -47,12 +49,13 @@ function createTransporter(config: SmtpConfig) {
 }
 
 export async function sendEmail(options: {
+  empresaId: string;
   to: string;
   subject: string;
   html: string;
   attachments?: Array<{ filename: string; content: Buffer; contentType?: string }>;
 }) {
-  const config = await getSmtpConfig();
+  const config = await getSmtpConfig(options.empresaId);
   if (!config) {
     throw new Error("SMTP no configurado. Ve a Configuración para configurar el email.");
   }
@@ -75,8 +78,8 @@ export async function sendEmail(options: {
   });
 }
 
-export async function testSmtpConnection() {
-  const config = await getSmtpConfig();
+export async function testSmtpConnection(empresaId: string) {
+  const config = await getSmtpConfig(empresaId);
   if (!config) {
     throw new Error("SMTP no configurado");
   }

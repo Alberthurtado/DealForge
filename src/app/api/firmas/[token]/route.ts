@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { empresaForCotizacion, empresaForContrato } from "@/lib/empresa-context";
 import { sendSystemEmail } from "@/lib/system-email";
 import { buildSignatureNotificationEmail } from "@/lib/signature-email";
 import { NextRequest, NextResponse } from "next/server";
@@ -41,10 +42,7 @@ export async function GET(
     return NextResponse.json({ error: "Token inválido" }, { status: 404 });
   }
 
-  const empresa = await prisma.empresa.findUnique({
-    where: { id: "default" },
-    select: { nombre: true, logoUrl: true, colorPrimario: true, condicionesDefecto: true },
-  });
+  const empresa = await empresaForCotizacion(firma.cotizacionId);
 
   // If this is a contract signature, return contract data
   if (firma.contratoId && firma.contrato) {
@@ -178,10 +176,7 @@ export async function PUT(
         : null;
 
       if (seller?.email) {
-        const empresa = await prisma.empresa.findUnique({
-          where: { id: "default" },
-          select: { nombre: true, colorPrimario: true },
-        });
+        const empresa = firma.contratoId ? await empresaForContrato(firma.contratoId) : null;
         const color = empresa?.colorPrimario || "#3a9bb5";
         const origin = request.headers.get("origin") || `https://${request.headers.get("host")}`;
 
@@ -269,10 +264,7 @@ export async function PUT(
       : null;
 
     if (seller?.email) {
-      const empresa = await prisma.empresa.findUnique({
-        where: { id: "default" },
-        select: { nombre: true, colorPrimario: true },
-      });
+      const empresa = await empresaForCotizacion(firma.cotizacionId);
 
       const origin = request.headers.get("origin") || `https://${request.headers.get("host")}`;
 

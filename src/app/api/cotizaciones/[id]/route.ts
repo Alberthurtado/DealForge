@@ -116,7 +116,7 @@ async function evaluateAndCreateApprovals(
     });
     try {
       const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
-      const empresaData = await prisma.empresa.findUnique({ where: { id: "default" }, select: { nombre: true, colorPrimario: true } });
+      const empresaData = empresaId ? await prisma.empresa.findUnique({ where: { id: empresaId }, select: { nombre: true, colorPrimario: true } }) : null;
       for (const aprob of newApprovals) {
         if (!aprob.token) continue;
         try {

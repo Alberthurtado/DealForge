@@ -107,10 +107,10 @@ export async function POST(request: NextRequest) {
 
   // Prefer company SMTP (so invite comes from the admin's brand); fallback to
   // system email (MailerSend) to guarantee delivery when SMTP isn't configured.
-  const smtpConfig = await getSmtpConfig();
+  const smtpConfig = await getSmtpConfig(session.empresaId);
   try {
     if (smtpConfig) {
-      await sendEmail({ to: email, subject: invitationSubject, html: invitationHtml });
+      await sendEmail({ empresaId: session.empresaId, to: email, subject: invitationSubject, html: invitationHtml });
     } else {
       const { sendSystemEmail } = await import("@/lib/system-email");
       await sendSystemEmail({ to: email, subject: invitationSubject, html: invitationHtml });

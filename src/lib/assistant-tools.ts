@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { empresaIdForUser } from "@/lib/empresa-context";
 import type Anthropic from "@anthropic-ai/sdk";
 
 // Tool definitions for Claude
@@ -367,8 +368,8 @@ export async function executeToolCall(
     case "crear_regla": return crearRegla(toolInput, userId);
     case "editar_regla": return editarRegla(toolInput, userId);
     case "eliminar_regla": return eliminarRegla(toolInput, userId);
-    case "actualizar_empresa": return actualizarEmpresa(toolInput);
-    case "obtener_empresa": return obtenerEmpresa();
+    case "actualizar_empresa": return actualizarEmpresa(toolInput, userId);
+    case "obtener_empresa": return obtenerEmpresa(userId);
     case "guardar_memoria": return guardarMemoria(toolInput, userId);
     case "borrar_memoria": return borrarMemoria(toolInput, userId);
     default: return JSON.stringify({ error: `Tool desconocido: ${toolName}` });
@@ -634,7 +635,8 @@ async function crearCotizacion(input: Record<string, unknown>, userId: string) {
     const cliente = await prisma.cliente.findFirst({ where: { id: input.clienteId as string, usuarioId: userId }, select: { nombre: true } });
     if (!cliente) return JSON.stringify({ error: "Cliente no encontrado" });
 
-    const empresa = await prisma.empresa.findUnique({ where: { id: "default" }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true } });
+    const empId = await empresaIdForUser(userId);
+    const empresa = empId ? await prisma.empresa.findUnique({ where: { id: empId }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true } }) : null;
     const prefijo = empresa?.prefijoCotizacion || "COT";
     const diasVencimiento = empresa?.diasVencimiento ?? 30;
     const count = await prisma.cotizacion.count({ where: { usuarioId: userId } });
@@ -782,13 +784,15 @@ async function eliminarRegla(input: Record<string, unknown>, userId: string) {
 
 // ===== EMPRESA CONFIG HANDLERS =====
 
-async function actualizarEmpresa(input: Record<string, unknown>) {
+async function actualizarEmpresa(input: Record<string, unknown>, userId: string) {
   try {
     const data: Record<string, unknown> = {};
     const campos = ["nombre", "cif", "email", "telefono", "direccion", "ciudad", "pais", "web", "plantillaPdf", "colorPrimario", "prefijoCotizacion", "diasVencimiento", "condicionesDefecto"];
     for (const campo of campos) { if (input[campo] !== undefined) data[campo] = input[campo]; }
     if (Object.keys(data).length === 0) return JSON.stringify({ error: "No se proporcionaron campos para actualizar" });
-    const empresa = await prisma.empresa.upsert({ where: { id: "default" }, update: data, create: { id: "default", ...data } });
+    const empId = await empresaIdForUser(userId);
+    if (!empId) return JSON.stringify({ error: "Empresa no encontrada" });
+    const empresa = await prisma.empresa.update({ where: { id: empId }, data });
     return JSON.stringify({ success: true, mensaje: `Configuración de empresa actualizada: ${Object.keys(data).join(", ")}`, empresa: { nombre: empresa.nombre, cif: empresa.cif, email: empresa.email, telefono: empresa.telefono, direccion: empresa.direccion, ciudad: empresa.ciudad, pais: empresa.pais, web: empresa.web, plantillaPdf: empresa.plantillaPdf, colorPrimario: empresa.colorPrimario, prefijoCotizacion: empresa.prefijoCotizacion, diasVencimiento: empresa.diasVencimiento, condicionesDefecto: empresa.condicionesDefecto } });
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : "Error desconocido";
@@ -796,8 +800,9 @@ async function actualizarEmpresa(input: Record<string, unknown>) {
   }
 }
 
-async function obtenerEmpresa() {
-  const empresa = await prisma.empresa.findUnique({ where: { id: "default" } });
+async function obtenerEmpresa(userId: string) {
+  const empId = await empresaIdForUser(userId);
+  const empresa = empId ? await prisma.empresa.findUnique({ where: { id: empId } }) : null;
   if (!empresa) return JSON.stringify({ error: "Empresa no configurada" });
   return JSON.stringify({ nombre: empresa.nombre, cif: empresa.cif, email: empresa.email, telefono: empresa.telefono, direccion: empresa.direccion, ciudad: empresa.ciudad, pais: empresa.pais, web: empresa.web, logoUrl: empresa.logoUrl, plantillaPdf: empresa.plantillaPdf, colorPrimario: empresa.colorPrimario, prefijoCotizacion: empresa.prefijoCotizacion, diasVencimiento: empresa.diasVencimiento, condicionesDefecto: empresa.condicionesDefecto });
 }

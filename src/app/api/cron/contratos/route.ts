@@ -109,15 +109,21 @@ export async function GET(request: NextRequest) {
   let notificationsSent = 0;
 
   try {
-    // Get empresa info for email branding
-    const empresa = await prisma.empresa.findUnique({
-      where: { id: "default" },
-      select: { nombre: true, colorPrimario: true },
-    });
-    const empresaInfo = {
-      nombre: empresa?.nombre || "DealForge",
-      colorPrimario: empresa?.colorPrimario || "#3a9bb5",
-    };
+    // Resolve each contract's OWN empresa branding (cached per tenant) so a
+    // tenant's notification never carries another company's name/colour.
+    const empresaInfoCache = new Map<string, { nombre: string; colorPrimario: string }>();
+    async function empresaInfoFor(equipoId: string | null) {
+      const key = equipoId || "";
+      let info = empresaInfoCache.get(key);
+      if (!info) {
+        const e = equipoId
+          ? await prisma.empresa.findUnique({ where: { id: equipoId }, select: { nombre: true, colorPrimario: true } })
+          : null;
+        info = { nombre: e?.nombre || "DealForge", colorPrimario: e?.colorPrimario || "#3a9bb5" };
+        empresaInfoCache.set(key, info);
+      }
+      return info;
+    }
 
     // Per-request cache: resolve each company's activity-log language once
     const langCache = new Map<string, ActividadLang>();
@@ -183,7 +189,7 @@ export async function GET(request: NextRequest) {
             valorMensual: contrato.valorMensual,
             moneda: contrato.moneda,
           },
-          empresa: empresaInfo,
+          empresa: await empresaInfoFor(contrato.equipoId),
           vendedorNombre: contrato.usuario.nombre,
           lang: clang,
         });
@@ -248,7 +254,7 @@ export async function GET(request: NextRequest) {
               valorMensual: contrato.valorMensual,
               moneda: contrato.moneda,
             },
-            empresa: empresaInfo,
+            empresa: await empresaInfoFor(contrato.equipoId),
             vendedorNombre: contrato.usuario.nombre,
             lang: clang,
           });
@@ -309,7 +315,7 @@ export async function GET(request: NextRequest) {
             valorMensual: contrato.valorMensual,
             moneda: contrato.moneda,
           },
-          empresa: empresaInfo,
+          empresa: await empresaInfoFor(contrato.equipoId),
           vendedorNombre: contrato.usuario.nombre,
           lang: clang,
         });

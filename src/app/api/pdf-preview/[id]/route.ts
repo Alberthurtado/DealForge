@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { empresaForCotizacion } from "@/lib/empresa-context";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { createHmac } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
@@ -45,7 +46,7 @@ export async function GET(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const empresa = await prisma.empresa.findUnique({ where: { id: "default" } });
+  const empresa = await empresaForCotizacion(id);
   if (!empresa) {
     return NextResponse.json({ error: "Empresa not found" }, { status: 404 });
   }

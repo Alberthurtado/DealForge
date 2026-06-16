@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { empresaForCotizacion } from "@/lib/empresa-context";
 import { sendSystemEmail } from "@/lib/system-email";
 import { buildApprovalResolvedEmail } from "@/lib/approval-email";
 import { NextRequest, NextResponse } from "next/server";
@@ -43,10 +44,7 @@ export async function GET(
     select: { nombre: true },
   });
 
-  const empresa = await prisma.empresa.findUnique({
-    where: { id: "default" },
-    select: { nombre: true, logoUrl: true, colorPrimario: true },
-  });
+  const empresa = await empresaForCotizacion(aprobacion.cotizacionId);
 
   return NextResponse.json({
     aprobacion: {
@@ -152,10 +150,7 @@ export async function PUT(
           })
         : null;
 
-      const empresa = await prisma.empresa.findUnique({
-        where: { id: "default" },
-        select: { nombre: true, colorPrimario: true },
-      });
+      const empresa = await empresaForCotizacion(aprobacion.cotizacionId);
 
       const toEmail = creator?.email;
       if (toEmail) {

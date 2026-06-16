@@ -84,7 +84,7 @@ export async function POST(
   // Send email (non-blocking)
   if (isSystemEmailConfigured()) {
     const empresa = await prisma.empresa.findUnique({
-      where: { id: "default" },
+      where: { id: session.empresaId },
       select: { nombre: true, colorPrimario: true },
     });
 

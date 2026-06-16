@@ -66,6 +66,7 @@ export async function POST(
     const pdfBuffer = await generateCotizacionPdf(origin, id);
 
     await sendEmail({
+      empresaId: session.empresaId,
       to: data.to,
       subject: data.subject,
       html: safeHtmlBody || defaultEmailBody(cotizacion.numero, emailLang),

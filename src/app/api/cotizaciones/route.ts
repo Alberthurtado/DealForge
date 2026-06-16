@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Generate quote number with configurable prefix
-  const empresa = await prisma.empresa.findUnique({ where: { id: "default" }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true, condicionesTransaccional: true, condicionesContractual: true } });
+  const empresa = await prisma.empresa.findUnique({ where: { id: session.empresaId }, select: { prefijoCotizacion: true, diasVencimiento: true, condicionesDefecto: true, condicionesTransaccional: true, condicionesContractual: true } });
   const prefijo = empresa?.prefijoCotizacion || "COT";
   const diasVencimiento = empresa?.diasVencimiento ?? 30;
   const count = await prisma.cotizacion.count({
@@ -217,7 +217,7 @@ export async function POST(request: NextRequest) {
 
       const origin = request.headers.get("origin") || `http://${request.headers.get("host")}`;
       const empresaData = await prisma.empresa.findUnique({
-        where: { id: "default" },
+        where: { id: session.empresaId },
         select: { nombre: true, colorPrimario: true },
       });
       for (const aprob of createdAprobaciones) {

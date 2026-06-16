@@ -38,10 +38,9 @@ export async function POST(request: NextRequest) {
   const base64 = buffer.toString("base64");
   const logoUrl = `data:${file.type};base64,${base64}`;
 
-  await prisma.empresa.upsert({
-    where: { id: "default" },
-    update: { logoUrl },
-    create: { id: "default", logoUrl },
+  await prisma.empresa.update({
+    where: { id: session.empresaId },
+    data: { logoUrl },
   });
 
   return NextResponse.json({ logoUrl });

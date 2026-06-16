@@ -114,7 +114,7 @@ export async function POST(
 
   // Calculate new expiry
   const empresa = await prisma.empresa.findUnique({
-    where: { id: "default" },
+    where: { id: session.empresaId },
     select: { diasVencimiento: true },
   });
   const diasVencimiento = empresa?.diasVencimiento ?? 30;

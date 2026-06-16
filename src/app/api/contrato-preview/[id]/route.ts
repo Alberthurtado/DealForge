@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { empresaIdForContrato } from "@/lib/empresa-context";
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac } from "crypto";
 import {
@@ -59,14 +60,10 @@ export async function GET(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  // Get empresa
-  const empresa = await prisma.empresa.findFirst({
-    where: {
-      OR: [
-        { id: contrato.equipoId ?? "" },
-        { id: "default" },
-      ],
-    },
+  // Get the contract's owning empresa (team, or the owner's empresa)
+  const empId = await empresaIdForContrato(id);
+  const empresa = empId ? await prisma.empresa.findUnique({
+    where: { id: empId },
     select: {
       nombre: true,
       cif: true,
@@ -75,8 +72,7 @@ export async function GET(
       direccion: true,
       web: true,
     },
-    orderBy: { createdAt: "asc" },
-  });
+  }) : null;
 
   // Determine documentoHtml - use stored or generate on-the-fly
   let documentoHtml = contrato.documentoHtml;

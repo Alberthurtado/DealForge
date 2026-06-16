@@ -9,7 +9,7 @@ export async function POST() {
   }
 
   try {
-    await testSmtpConnection();
+    await testSmtpConnection(session.empresaId);
     return NextResponse.json({ success: true });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Error desconocido";

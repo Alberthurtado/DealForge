@@ -113,16 +113,10 @@ export async function POST(
     },
   });
 
-  // Get empresa info for email
-  const empresa = await prisma.empresa.findFirst({
-    where: {
-      OR: [
-        { id: empresaId },
-        { id: "default" },
-      ],
-    },
+  // Get empresa info for email (the contract owner's tenant)
+  const empresa = await prisma.empresa.findUnique({
+    where: { id: empresaId },
     select: { nombre: true, colorPrimario: true },
-    orderBy: { createdAt: "asc" },
   });
 
   const origin = request.headers.get("origin") || `https://${request.headers.get("host")}`;

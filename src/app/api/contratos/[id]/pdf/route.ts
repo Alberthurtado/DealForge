@@ -50,13 +50,8 @@ export async function GET(
 
   // Auto-generate documentoHtml if missing
   if (!contrato.documentoHtml) {
-    const empresa = await prisma.empresa.findFirst({
-      where: {
-        OR: [
-          { id: empresaId },
-          { id: "default" },
-        ],
-      },
+    const empresa = await prisma.empresa.findUnique({
+      where: { id: empresaId },
       select: {
         nombre: true,
         cif: true,
@@ -65,7 +60,6 @@ export async function GET(
         direccion: true,
         web: true,
       },
-      orderBy: { createdAt: "asc" },
     });
 
     let templateContent = DEFAULT_CONTRACT_TEMPLATE;

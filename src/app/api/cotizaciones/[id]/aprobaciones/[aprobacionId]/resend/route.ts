@@ -61,7 +61,7 @@ export async function POST(
   });
 
   const empresa = await prisma.empresa.findUnique({
-    where: { id: "default" },
+    where: { id: session.empresaId },
     select: { nombre: true, logoUrl: true, colorPrimario: true },
   });
 
