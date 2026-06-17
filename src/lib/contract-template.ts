@@ -1,3 +1,5 @@
+import { escapeHtml } from "./sanitize";
+
 // Available variables for contract templates
 export const TEMPLATE_VARIABLES = [
   { key: "{{contrato.numero}}", label: "Número de contrato" },
@@ -188,11 +190,11 @@ export function buildItemsTable(lineItems: Array<{
 
   const rows = lineItems.map(item => `
     <tr>
-      <td style="padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e7eb;">${item.descripcion}</td>
+      <td style="padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e7eb;">${escapeHtml(item.descripcion)}</td>
       <td style="padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e7eb; text-align: center;">${item.cantidad}</td>
       <td style="padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e7eb; text-align: right;">${formatCurrency(item.precioUnitario, "EUR")}</td>
       <td style="padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e7eb; text-align: center;">
-        <span style="background: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 100px;">${FRECUENCIA_LABEL[item.frecuencia] || item.frecuencia}</span>
+        <span style="background: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 100px;">${escapeHtml(FRECUENCIA_LABEL[item.frecuencia] || item.frecuencia)}</span>
       </td>
       <td style="padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #e5e7eb; text-align: right; font-weight: bold;">${formatCurrency(item.total, "EUR")}</td>
     </tr>
@@ -246,7 +248,10 @@ export function fillTemplate(template: string, data: ContratoTemplateData): stri
   };
 
   for (const [key, value] of Object.entries(replacements)) {
-    html = html.split(key).join(value);
+    // {{items}} is pre-built HTML (already escaped per-field); every other
+    // placeholder is a scalar field and must be HTML-escaped.
+    const safe = key === "{{items}}" ? value : escapeHtml(value);
+    html = html.split(key).join(safe);
   }
 
   return html;
@@ -362,7 +367,7 @@ export function buildEnmiendasAnexo(enmiendas: Array<{
           </div>
           <span style="font-size:10px;font-weight:600;color:#059669;background:#ecfdf5;padding:2px 8px;border-radius:999px;white-space:nowrap;">Aceptada</span>
         </div>
-        <p style="font-size:12px;color:#374151;margin:0 0 10px;line-height:1.5;">${e.descripcion}</p>
+        <p style="font-size:12px;color:#374151;margin:0 0 10px;line-height:1.5;">${escapeHtml(e.descripcion)}</p>
         ${mismoValor ? "" : `
         <div style="display:flex;gap:24px;font-size:11px;color:#6b7280;border-top:1px solid #e5e7eb;padding-top:8px;">
           <span>Valor anterior: <strong style="color:#374151;text-decoration:line-through;">${valorAnterior}/mes</strong></span>

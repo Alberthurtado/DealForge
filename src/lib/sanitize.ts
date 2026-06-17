@@ -7,6 +7,22 @@ export function stripHtml(input: string): string {
 }
 
 /**
+ * HTML-escape a scalar value before interpolating it into a server-built
+ * HTML string (PDF templates, emails). Use for any DB/user field that is
+ * plain text and must NOT be interpreted as markup (names, addresses,
+ * descriptions, conditions, etc.). Safe in both text and attribute contexts.
+ */
+export function escapeHtml(value: unknown): string {
+  if (value === null || value === undefined) return "";
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/**
  * Sanitize HTML for email bodies. Allows basic formatting tags
  * but removes dangerous elements (script, iframe, event handlers).
  */

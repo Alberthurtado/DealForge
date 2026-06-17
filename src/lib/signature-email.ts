@@ -1,4 +1,5 @@
 import { formatCurrency } from "./utils";
+import { escapeHtml } from "./sanitize";
 
 type EmailLang = "es" | "en";
 
@@ -17,7 +18,7 @@ interface SignatureRequestData {
 }
 
 export function buildSignatureRequestEmail(data: SignatureRequestData): string {
-  const c = data.empresa.colorPrimario || "#3a9bb5";
+  const c = escapeHtml(data.empresa.colorPrimario || "#3a9bb5");
   const lang: EmailLang = data.lang === "en" ? "en" : "es";
   const numLocale = lang === "en" ? "en-GB" : "es-ES";
   const money = (n: number) => formatCurrency(n, data.cotizacion.moneda || "EUR", numLocale);
@@ -33,19 +34,19 @@ export function buildSignatureRequestEmail(data: SignatureRequestData): string {
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f7;">
   <div style="max-width:600px;margin:0 auto;padding:20px;">
     <div style="background:${c};padding:24px 30px;border-radius:12px 12px 0 0;">
-      <h1 style="color:white;margin:0;font-size:18px;">${data.empresa.nombre}</h1>
+      <h1 style="color:white;margin:0;font-size:18px;">${escapeHtml(data.empresa.nombre)}</h1>
       <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">${t.subtitle}</p>
     </div>
     <div style="background:white;padding:30px;border-radius:0 0 12px 12px;border:1px solid #e5e5e5;border-top:none;">
-      <p style="margin:0 0 16px;font-size:15px;color:#333;">${t.greeting} ${data.signerName},</p>
+      <p style="margin:0 0 16px;font-size:15px;color:#333;">${t.greeting} ${escapeHtml(data.signerName)},</p>
       <p style="margin:0 0 20px;font-size:14px;color:#555;">
         ${t.intro}
       </p>
 
       <div style="background:#f8f9fa;border-radius:8px;padding:16px;margin:0 0 24px;">
         <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.quote}</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:14px;">${data.cotizacion.numero}</td></tr>
-          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.client}</td><td style="padding:4px 0;text-align:right;font-size:13px;">${data.cotizacion.cliente}</td></tr>
+          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.quote}</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:14px;">${escapeHtml(data.cotizacion.numero)}</td></tr>
+          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.client}</td><td style="padding:4px 0;text-align:right;font-size:13px;">${escapeHtml(data.cotizacion.cliente)}</td></tr>
           <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.total}</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:16px;color:${c};">${money(data.cotizacion.total)}</td></tr>
         </table>
       </div>
@@ -58,7 +59,7 @@ export function buildSignatureRequestEmail(data: SignatureRequestData): string {
         ${t.note}
       </p>
     </div>
-    <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${data.empresa.nombre} &bull; DealForge</p>
+    <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${escapeHtml(data.empresa.nombre)} &bull; DealForge</p>
   </div>
 </body>
 </html>`;
@@ -75,7 +76,7 @@ interface SignatureNotificationData {
 }
 
 export function buildSignatureNotificationEmail(data: SignatureNotificationData): string {
-  const c = data.empresa.colorPrimario || "#3a9bb5";
+  const c = escapeHtml(data.empresa.colorPrimario || "#3a9bb5");
   const lang: EmailLang = data.lang === "en" ? "en" : "es";
   const numLocale = lang === "en" ? "en-GB" : "es-ES";
   const money = (n: number) => formatCurrency(n, data.cotizacion.moneda || "EUR", numLocale);
@@ -91,7 +92,7 @@ export function buildSignatureNotificationEmail(data: SignatureNotificationData)
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f7;">
   <div style="max-width:600px;margin:0 auto;padding:20px;">
     <div style="background:${c};padding:24px 30px;border-radius:12px 12px 0 0;">
-      <h1 style="color:white;margin:0;font-size:18px;">${data.empresa.nombre}</h1>
+      <h1 style="color:white;margin:0;font-size:18px;">${escapeHtml(data.empresa.nombre)}</h1>
       <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">${t.subtitle}</p>
     </div>
     <div style="background:white;padding:30px;border-radius:0 0 12px 12px;border:1px solid #e5e5e5;border-top:none;">
@@ -99,14 +100,14 @@ export function buildSignatureNotificationEmail(data: SignatureNotificationData)
         <div style="display:inline-block;background:#16a34a;color:white;padding:8px 24px;border-radius:20px;font-weight:bold;font-size:14px;">${t.badge}</div>
       </div>
       <p style="margin:0 0 16px;font-size:14px;color:#555;text-align:center;">
-        ${t.quotePre} <strong>${data.cotizacion.numero}</strong> ${t.forWord} <strong>${data.cotizacion.cliente}</strong>
-        (${money(data.cotizacion.total)}) ${t.signedBy} <strong>${data.signerName}</strong>.
+        ${t.quotePre} <strong>${escapeHtml(data.cotizacion.numero)}</strong> ${t.forWord} <strong>${escapeHtml(data.cotizacion.cliente)}</strong>
+        (${money(data.cotizacion.total)}) ${t.signedBy} <strong>${escapeHtml(data.signerName)}</strong>.
       </p>
       <div style="text-align:center;margin:20px 0 0;">
         <a href="${detailUrl}" style="display:inline-block;padding:10px 28px;background:${c};color:white;text-decoration:none;border-radius:8px;font-size:13px;">${t.viewQuote}</a>
       </div>
     </div>
-    <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${data.empresa.nombre} &bull; DealForge</p>
+    <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${escapeHtml(data.empresa.nombre)} &bull; DealForge</p>
   </div>
 </body>
 </html>`;

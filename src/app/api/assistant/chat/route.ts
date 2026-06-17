@@ -59,6 +59,7 @@ export async function POST(request: NextRequest) {
   // Get user plan from DB (fresh, not from JWT which may be stale after upgrade)
   let userPlan = "starter";
   const userId = session?.userId;
+  const rol = session?.rol;
   if (userId) {
     const dbUser = await prisma.usuario.findUnique({
       where: { id: userId },
@@ -124,7 +125,8 @@ export async function POST(request: NextRequest) {
         const result = await executeToolCall(
           toolUse.name,
           toolUse.input as Record<string, unknown>,
-          userId
+          userId,
+          rol
         );
         toolResults.push({
           type: "tool_result",

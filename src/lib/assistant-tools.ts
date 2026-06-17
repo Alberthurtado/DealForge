@@ -338,13 +338,33 @@ export const toolDefinitions: Anthropic.Tool[] = [
 ];
 
 // ===== TOOL DISPATCH =====
-// userId is REQUIRED for all data-access tools to enforce tenant isolation
+// Tools that create/update/delete data. VIEWER (read-only) may not run these.
+const WRITE_TOOLS = new Set([
+  "editar_producto", "crear_cliente", "agregar_contacto", "crear_producto",
+  "crear_cotizacion", "cambiar_estado_cotizacion", "registrar_actividad",
+  "crear_regla", "editar_regla", "eliminar_regla", "actualizar_empresa",
+  "guardar_memoria", "borrar_memoria",
+]);
+// Tools reserved for ADMIN (company settings).
+const ADMIN_TOOLS = new Set(["actualizar_empresa"]);
+
+// userId is REQUIRED for all data-access tools to enforce tenant isolation.
+// rol enforces the same read/write policy as the API middleware.
 export async function executeToolCall(
   toolName: string,
   toolInput: Record<string, unknown>,
-  userId?: string
+  userId?: string,
+  rol?: string
 ): Promise<string> {
   if (!userId) return JSON.stringify({ error: "Usuario no autenticado" });
+
+  const role = rol || "ADMIN";
+  if (role === "VIEWER" && WRITE_TOOLS.has(toolName)) {
+    return JSON.stringify({ error: "Tu rol (solo lectura) no permite modificar datos." });
+  }
+  if (role !== "ADMIN" && ADMIN_TOOLS.has(toolName)) {
+    return JSON.stringify({ error: "Solo los administradores pueden cambiar la configuración de la empresa." });
+  }
 
   switch (toolName) {
     case "buscar_clientes": return buscarClientes(toolInput, userId);

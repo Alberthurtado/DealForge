@@ -55,6 +55,18 @@ const PROTECTED_API_PREFIXES = [
   "/api/contratos",
 ];
 
+// ─── Role-based access control (M3) ───
+// Roles: ADMIN (full), SALES (manage business data), VIEWER (read-only).
+// Enforced centrally for write methods on protected APIs, using the rol claim
+// in the JWT (no DB call). Legacy tokens without a rol claim default to ADMIN
+// (matches the login fallback) so existing solo-admin sessions aren't locked out.
+const WRITE_METHODS = ["POST", "PUT", "DELETE", "PATCH"];
+// Writes under these prefixes require ADMIN (company settings, billing).
+const ADMIN_ONLY_WRITE_PREFIXES = ["/api/empresa", "/api/stripe"];
+// POSTs that don't mutate business data — allowed for any authenticated role.
+// (assistant is gated at the tool layer so VIEWER can read but not write via AI.)
+const READONLY_POST_PREFIXES = ["/api/reglas/validar", "/api/assistant"];
+
 // Always public
 const PUBLIC_PATHS = [
   "/",
@@ -135,10 +147,31 @@ export async function middleware(request: NextRequest) {
     const { payload } = await jwtVerify(token, JWT_SECRET);
 
     // Rate limit write operations on protected APIs (60/min per IP)
-    if (isProtectedAPI && ["POST", "PUT", "DELETE", "PATCH"].includes(request.method)) {
+    if (isProtectedAPI && WRITE_METHODS.includes(request.method)) {
       const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
       const limit = checkRateLimit(`api-write:${ip}`, { maxRequests: 60, windowSeconds: 60 });
       if (!limit.allowed) return rateLimitResponse(limit.resetAt);
+    }
+
+    // ─── Role guard: block VIEWER from writes; restrict settings/billing to ADMIN ───
+    if (isProtectedAPI && WRITE_METHODS.includes(request.method)) {
+      const rol = typeof payload.rol === "string" && payload.rol ? payload.rol : "ADMIN";
+      const isReadOnlyPost = READONLY_POST_PREFIXES.some((p) => pathname.startsWith(p));
+      if (!isReadOnlyPost) {
+        const needsAdmin = ADMIN_ONLY_WRITE_PREFIXES.some((p) => pathname.startsWith(p));
+        if (needsAdmin && rol !== "ADMIN") {
+          return NextResponse.json(
+            { error: "Solo los administradores pueden realizar esta acción." },
+            { status: 403 }
+          );
+        }
+        if (!needsAdmin && rol === "VIEWER") {
+          return NextResponse.json(
+            { error: "Tu rol (solo lectura) no permite esta acción." },
+            { status: 403 }
+          );
+        }
+      }
     }
 
     const response = NextResponse.next();

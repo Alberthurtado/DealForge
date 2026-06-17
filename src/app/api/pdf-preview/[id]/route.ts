@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { empresaForCotizacion } from "@/lib/empresa-context";
+import { escapeHtml } from "@/lib/sanitize";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { createHmac } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
@@ -51,7 +52,7 @@ export async function GET(
     return NextResponse.json({ error: "Empresa not found" }, { status: 404 });
   }
 
-  const color = empresa.colorPrimario || "#3a9bb5";
+  const color = escapeHtml(empresa.colorPrimario || "#3a9bb5");
   const plantilla = empresa.plantillaPdf || "moderna";
   const primaryContact = cotizacion.cliente.contactos?.[0] || null;
   const firma = cotizacion.firmas?.[0] || null;
@@ -75,8 +76,8 @@ export async function GET(
       return `<tr style="${rowBg}">
         <td style="padding:10px 12px;color:#9ca3af;font-size:12px;${borderStyle}">${i + 1}</td>
         <td style="padding:10px 12px;${borderStyle}">
-          <div style="font-weight:500;color:#1f2937;">${item.descripcion}${item.frecuencia ? ` <span style="display:inline-block;font-size:9px;font-weight:600;color:#3a9bb5;background:#e0f2f7;padding:1px 5px;border-radius:3px;margin-left:4px;">/${item.frecuencia === "MENSUAL" ? "mes" : item.frecuencia === "TRIMESTRAL" ? "trim" : "año"}</span>` : ""}</div>
-          ${skuText ? `<div style="font-size:10px;color:#9ca3af;margin-top:2px;">SKU: ${skuText}</div>` : ""}
+          <div style="font-weight:500;color:#1f2937;">${escapeHtml(item.descripcion)}${item.frecuencia ? ` <span style="display:inline-block;font-size:9px;font-weight:600;color:#3a9bb5;background:#e0f2f7;padding:1px 5px;border-radius:3px;margin-left:4px;">/${item.frecuencia === "MENSUAL" ? "mes" : item.frecuencia === "TRIMESTRAL" ? "trim" : "año"}</span>` : ""}</div>
+          ${skuText ? `<div style="font-size:10px;color:#9ca3af;margin-top:2px;">SKU: ${escapeHtml(skuText)}</div>` : ""}
         </td>
         <td style="padding:10px 12px;text-align:right;color:#374151;${borderStyle}">${item.cantidad}</td>
         <td style="padding:10px 12px;text-align:right;color:#374151;${borderStyle}">${formatCurrency(item.precioUnitario)}</td>
@@ -94,18 +95,18 @@ export async function GET(
         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
           <div style="display:flex;align-items:center;gap:16px;">
             ${empresa.logoUrl
-              ? `<img src="${empresa.logoUrl}" alt="${empresa.nombre}" width="52" height="52" style="border-radius:8px;background:rgba(255,255,255,0.2);padding:4px;" />`
-              : `<div style="width:52px;height:52px;border-radius:8px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold;color:white;">${empresa.nombre.charAt(0)}</div>`
+              ? `<img src="${escapeHtml(empresa.logoUrl)}" alt="${escapeHtml(empresa.nombre)}" width="52" height="52" style="border-radius:8px;background:rgba(255,255,255,0.2);padding:4px;" />`
+              : `<div style="width:52px;height:52px;border-radius:8px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold;color:white;">${escapeHtml(empresa.nombre.charAt(0))}</div>`
             }
             <div>
-              <h1 style="margin:0;font-size:20px;font-weight:bold;">${empresa.nombre}</h1>
-              ${empresa.cif ? `<p style="margin:2px 0 0;font-size:12px;color:rgba(255,255,255,0.7);">CIF: ${empresa.cif}</p>` : ""}
-              ${empresa.web ? `<p style="margin:0;font-size:12px;color:rgba(255,255,255,0.7);">${empresa.web}</p>` : ""}
+              <h1 style="margin:0;font-size:20px;font-weight:bold;">${escapeHtml(empresa.nombre)}</h1>
+              ${empresa.cif ? `<p style="margin:2px 0 0;font-size:12px;color:rgba(255,255,255,0.7);">CIF: ${escapeHtml(empresa.cif)}</p>` : ""}
+              ${empresa.web ? `<p style="margin:0;font-size:12px;color:rgba(255,255,255,0.7);">${escapeHtml(empresa.web)}</p>` : ""}
             </div>
           </div>
           <div style="text-align:right;">
             <h2 style="margin:0;font-size:24px;font-weight:bold;letter-spacing:-0.5px;">COTIZACIÓN</h2>
-            <p style="margin:4px 0 0;font-size:18px;font-weight:600;">${cotizacion.numero}</p>
+            <p style="margin:4px 0 0;font-size:18px;font-weight:600;">${escapeHtml(cotizacion.numero)}</p>
             <div style="margin-top:8px;">
               <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.7);">Emisión: ${formatDate(cotizacion.fechaEmision)}</p>
               ${cotizacion.fechaVencimiento ? `<p style="margin:2px 0 0;font-size:12px;color:${isExpired ? "#fecaca" : "rgba(255,255,255,0.7)"};">Validez: ${formatDate(cotizacion.fechaVencimiento)}${isExpired ? " (VENCIDA)" : ""}</p>` : ""}
@@ -119,18 +120,18 @@ export async function GET(
         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
           <div style="display:flex;align-items:center;gap:16px;">
             ${empresa.logoUrl
-              ? `<img src="${empresa.logoUrl}" alt="${empresa.nombre}" width="48" height="48" />`
-              : `<div style="width:48px;height:48px;background:#e5e7eb;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:bold;color:#374151;">${empresa.nombre.charAt(0)}</div>`
+              ? `<img src="${escapeHtml(empresa.logoUrl)}" alt="${escapeHtml(empresa.nombre)}" width="48" height="48" />`
+              : `<div style="width:48px;height:48px;background:#e5e7eb;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:bold;color:#374151;">${escapeHtml(empresa.nombre.charAt(0))}</div>`
             }
             <div>
-              <h1 style="margin:0;font-size:20px;font-weight:bold;color:#111827;">${empresa.nombre}</h1>
-              ${empresa.cif ? `<p style="margin:2px 0 0;font-size:12px;color:#6b7280;">CIF: ${empresa.cif}</p>` : ""}
-              ${empresa.web ? `<p style="margin:0;font-size:12px;color:#9ca3af;">${empresa.web}</p>` : ""}
+              <h1 style="margin:0;font-size:20px;font-weight:bold;color:#111827;">${escapeHtml(empresa.nombre)}</h1>
+              ${empresa.cif ? `<p style="margin:2px 0 0;font-size:12px;color:#6b7280;">CIF: ${escapeHtml(empresa.cif)}</p>` : ""}
+              ${empresa.web ? `<p style="margin:0;font-size:12px;color:#9ca3af;">${escapeHtml(empresa.web)}</p>` : ""}
             </div>
           </div>
           <div style="text-align:right;">
             <h2 style="margin:0;font-size:24px;font-weight:bold;color:#1f2937;letter-spacing:2px;">COTIZACIÓN</h2>
-            <p style="margin:4px 0 0;font-size:18px;font-weight:600;color:#1f2937;">${cotizacion.numero}</p>
+            <p style="margin:4px 0 0;font-size:18px;font-weight:600;color:#1f2937;">${escapeHtml(cotizacion.numero)}</p>
             <div style="margin-top:8px;">
               <p style="margin:0;font-size:12px;color:#6b7280;">Emisión: ${formatDate(cotizacion.fechaEmision)}</p>
               ${cotizacion.fechaVencimiento ? `<p style="margin:2px 0 0;font-size:12px;color:${isExpired ? "#dc2626" : "#6b7280"};">Validez: ${formatDate(cotizacion.fechaVencimiento)}${isExpired ? " (VENCIDA)" : ""}</p>` : ""}
@@ -145,15 +146,15 @@ export async function GET(
         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
           <div>
             ${empresa.logoUrl
-              ? `<img src="${empresa.logoUrl}" alt="${empresa.nombre}" width="40" height="40" style="margin-bottom:8px;" />`
-              : `<div style="width:40px;height:40px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:#6b7280;margin-bottom:8px;">${empresa.nombre.charAt(0)}</div>`
+              ? `<img src="${escapeHtml(empresa.logoUrl)}" alt="${escapeHtml(empresa.nombre)}" width="40" height="40" style="margin-bottom:8px;" />`
+              : `<div style="width:40px;height:40px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:#6b7280;margin-bottom:8px;">${escapeHtml(empresa.nombre.charAt(0))}</div>`
             }
-            <h1 style="margin:0;font-size:18px;font-weight:500;color:#374151;">${empresa.nombre}</h1>
-            ${empresa.web ? `<p style="margin:0;font-size:12px;color:#9ca3af;font-weight:300;">${empresa.web}</p>` : ""}
+            <h1 style="margin:0;font-size:18px;font-weight:500;color:#374151;">${escapeHtml(empresa.nombre)}</h1>
+            ${empresa.web ? `<p style="margin:0;font-size:12px;color:#9ca3af;font-weight:300;">${escapeHtml(empresa.web)}</p>` : ""}
           </div>
           <div style="text-align:right;">
             <h2 style="margin:0;font-size:20px;color:#9ca3af;font-weight:300;letter-spacing:4px;">COTIZACIÓN</h2>
-            <p style="margin:4px 0 0;font-size:16px;color:#4b5563;">${cotizacion.numero}</p>
+            <p style="margin:4px 0 0;font-size:16px;color:#4b5563;">${escapeHtml(cotizacion.numero)}</p>
             <div style="margin-top:8px;">
               <p style="margin:0;font-size:12px;color:#9ca3af;">${formatDate(cotizacion.fechaEmision)}</p>
               ${cotizacion.fechaVencimiento ? `<p style="margin:2px 0 0;font-size:12px;color:${isExpired ? "#ef4444" : "#9ca3af"};">Válida hasta: ${formatDate(cotizacion.fechaVencimiento)}${isExpired ? " (VENCIDA)" : ""}</p>` : ""}
@@ -194,9 +195,9 @@ export async function GET(
       <div style="height:1px;background:#f3f4f6;margin-bottom:16px;"></div>
       <div>
         <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:#9ca3af;margin:0 0 8px;">Firma del Cliente</p>
-        <img src="${firma.signatureData}" alt="Firma" style="height:64px;max-width:200px;object-fit:contain;" />
+        <img src="${escapeHtml(firma.signatureData)}" alt="Firma" style="height:64px;max-width:200px;object-fit:contain;" />
         <div style="height:1px;background:#d1d5db;margin-top:4px;width:192px;"></div>
-        <p style="font-size:12px;color:#4b5563;margin:4px 0 0;">${firma.signerName}</p>
+        <p style="font-size:12px;color:#4b5563;margin:4px 0 0;">${escapeHtml(firma.signerName)}</p>
         <p style="font-size:10px;color:#9ca3af;margin:0;">Firmado el ${formatDate(firma.signedAt!)}</p>
       </div>
     </div>` : "";
@@ -206,7 +207,7 @@ export async function GET(
   const footerHtml = `
     <div style="padding:24px 40px;background:${footerBg};border-radius:0 0 8px 8px;">
       <div style="display:flex;justify-content:space-between;">
-        <p style="margin:0;font-size:10px;color:#9ca3af;">Cotización generada por ${empresa.nombre}${empresa.web ? ` \u2022 ${empresa.web}` : ""}</p>
+        <p style="margin:0;font-size:10px;color:#9ca3af;">Cotización generada por ${escapeHtml(empresa.nombre)}${empresa.web ? ` \u2022 ${escapeHtml(empresa.web)}` : ""}</p>
         <p style="margin:0;font-size:10px;color:#9ca3af;">${cotizacion.fechaVencimiento ? `Válida hasta: ${formatDate(cotizacion.fechaVencimiento)}` : `Emitida: ${formatDate(cotizacion.fechaEmision)}`}</p>
       </div>
     </div>`;
@@ -216,7 +217,7 @@ export async function GET(
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${cotizacion.numero}</title>
+  <title>${escapeHtml(cotizacion.numero)}</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f3f4f6; -webkit-font-smoothing: antialiased; }
@@ -231,20 +232,20 @@ export async function GET(
       <div style="display:flex;gap:32px;">
         <div style="flex:1;">
           <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:#9ca3af;margin-bottom:8px;">Cliente</p>
-          <p style="font-size:14px;font-weight:600;color:#111827;">${cotizacion.cliente.nombre}</p>
-          ${cotizacion.cliente.ruc ? `<p style="font-size:12px;color:#6b7280;margin-top:2px;">CIF/NIF: ${cotizacion.cliente.ruc}</p>` : ""}
-          ${cotizacion.cliente.direccion ? `<p style="font-size:12px;color:#6b7280;margin-top:2px;">${cotizacion.cliente.direccion}</p>` : ""}
-          ${(cotizacion.cliente.ciudad || cotizacion.cliente.pais) ? `<p style="font-size:12px;color:#6b7280;">${[cotizacion.cliente.ciudad, cotizacion.cliente.pais].filter(Boolean).join(", ")}</p>` : ""}
-          ${cotizacion.cliente.email ? `<p style="font-size:12px;color:#6b7280;margin-top:4px;">${cotizacion.cliente.email}</p>` : ""}
-          ${cotizacion.cliente.telefono ? `<p style="font-size:12px;color:#6b7280;">${cotizacion.cliente.telefono}</p>` : ""}
+          <p style="font-size:14px;font-weight:600;color:#111827;">${escapeHtml(cotizacion.cliente.nombre)}</p>
+          ${cotizacion.cliente.ruc ? `<p style="font-size:12px;color:#6b7280;margin-top:2px;">CIF/NIF: ${escapeHtml(cotizacion.cliente.ruc)}</p>` : ""}
+          ${cotizacion.cliente.direccion ? `<p style="font-size:12px;color:#6b7280;margin-top:2px;">${escapeHtml(cotizacion.cliente.direccion)}</p>` : ""}
+          ${(cotizacion.cliente.ciudad || cotizacion.cliente.pais) ? `<p style="font-size:12px;color:#6b7280;">${escapeHtml([cotizacion.cliente.ciudad, cotizacion.cliente.pais].filter(Boolean).join(", "))}</p>` : ""}
+          ${cotizacion.cliente.email ? `<p style="font-size:12px;color:#6b7280;margin-top:4px;">${escapeHtml(cotizacion.cliente.email)}</p>` : ""}
+          ${cotizacion.cliente.telefono ? `<p style="font-size:12px;color:#6b7280;">${escapeHtml(cotizacion.cliente.telefono)}</p>` : ""}
         </div>
         <div style="flex:1;">
           <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:#9ca3af;margin-bottom:8px;">Contacto</p>
           ${cotizacion.contactoNombre
-            ? `<p style="font-size:14px;font-weight:600;color:#111827;">${cotizacion.contactoNombre}</p>
-               ${primaryContact?.cargo ? `<p style="font-size:12px;color:#6b7280;margin-top:2px;">${primaryContact.cargo}</p>` : ""}
-               ${primaryContact?.email ? `<p style="font-size:12px;color:#6b7280;margin-top:2px;">${primaryContact.email}</p>` : ""}
-               ${primaryContact?.telefono ? `<p style="font-size:12px;color:#6b7280;">${primaryContact.telefono}</p>` : ""}`
+            ? `<p style="font-size:14px;font-weight:600;color:#111827;">${escapeHtml(cotizacion.contactoNombre)}</p>
+               ${primaryContact?.cargo ? `<p style="font-size:12px;color:#6b7280;margin-top:2px;">${escapeHtml(primaryContact.cargo)}</p>` : ""}
+               ${primaryContact?.email ? `<p style="font-size:12px;color:#6b7280;margin-top:2px;">${escapeHtml(primaryContact.email)}</p>` : ""}
+               ${primaryContact?.telefono ? `<p style="font-size:12px;color:#6b7280;">${escapeHtml(primaryContact.telefono)}</p>` : ""}`
             : `<p style="font-size:12px;color:#9ca3af;font-style:italic;">No especificado</p>`
           }
         </div>
@@ -256,10 +257,10 @@ export async function GET(
     <div style="padding:0 40px 24px;">
       <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:#9ca3af;margin-bottom:8px;">Datos del Emisor</p>
       <div style="font-size:12px;color:#6b7280;">
-        ${empresa.direccion ? `<p style="margin:0;">${empresa.direccion}</p>` : ""}
-        ${(empresa.ciudad || empresa.pais) ? `<p style="margin:0;">${[empresa.ciudad, empresa.pais].filter(Boolean).join(", ")}</p>` : ""}
-        ${empresa.email ? `<p style="margin:0;">${empresa.email}</p>` : ""}
-        ${empresa.telefono ? `<p style="margin:0;">${empresa.telefono}</p>` : ""}
+        ${empresa.direccion ? `<p style="margin:0;">${escapeHtml(empresa.direccion)}</p>` : ""}
+        ${(empresa.ciudad || empresa.pais) ? `<p style="margin:0;">${escapeHtml([empresa.ciudad, empresa.pais].filter(Boolean).join(", "))}</p>` : ""}
+        ${empresa.email ? `<p style="margin:0;">${escapeHtml(empresa.email)}</p>` : ""}
+        ${empresa.telefono ? `<p style="margin:0;">${escapeHtml(empresa.telefono)}</p>` : ""}
       </div>
     </div>` : ""}
 
@@ -313,12 +314,12 @@ export async function GET(
       ${notas ? `
       <div style="margin-bottom:16px;">
         <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:#9ca3af;margin-bottom:6px;">Notas</p>
-        <p style="font-size:12px;color:#4b5563;line-height:1.6;white-space:pre-line;">${notas}</p>
+        <p style="font-size:12px;color:#4b5563;line-height:1.6;white-space:pre-line;">${escapeHtml(notas)}</p>
       </div>` : ""}
       ${condiciones ? `
       <div>
         <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:#9ca3af;margin-bottom:6px;">Términos y Condiciones</p>
-        <p style="font-size:12px;color:#4b5563;line-height:1.6;white-space:pre-line;">${condiciones}</p>
+        <p style="font-size:12px;color:#4b5563;line-height:1.6;white-space:pre-line;">${escapeHtml(condiciones)}</p>
       </div>` : ""}
     </div>` : ""}
 

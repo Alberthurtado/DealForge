@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { Loader2, CheckCircle, XCircle, FileText, PenLine } from "lucide-react";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface FirmaData {
   firma: {
@@ -252,7 +253,7 @@ export default function FirmarContratoPage() {
           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
             <div
               className="p-4 max-h-[500px] overflow-y-auto text-sm"
-              dangerouslySetInnerHTML={{ __html: firmaData.contrato.documentoHtml }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(firmaData.contrato.documentoHtml) }}
             />
           </div>
         )}

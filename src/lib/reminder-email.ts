@@ -1,4 +1,5 @@
 import { formatCurrency, formatDate } from "./utils";
+import { escapeHtml } from "./sanitize";
 
 type EmailLang = "es" | "en";
 
@@ -20,7 +21,7 @@ interface SellerFollowUpData {
 }
 
 export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
-  const c = data.empresa.colorPrimario || "#3a9bb5";
+  const c = escapeHtml(data.empresa.colorPrimario || "#3a9bb5");
   const lang: EmailLang = data.lang === "en" ? "en" : "es";
   const numLocale = lang === "en" ? "en-GB" : "es-ES";
   const money = (n: number) => formatCurrency(n, data.cotizacion.moneda || "EUR", numLocale);
@@ -46,7 +47,7 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
           <!-- Header -->
           <tr>
             <td style="background:linear-gradient(135deg,${c},${c}dd);padding:32px 40px;border-radius:16px 16px 0 0;">
-              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">${data.empresa.nombre}</p>
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">${escapeHtml(data.empresa.nombre)}</p>
               <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:0.3px;text-transform:uppercase;">${t.subtitle}</p>
             </td>
           </tr>
@@ -54,7 +55,7 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
           <tr>
             <td style="background:#ffffff;padding:40px;border-left:1px solid #e8ecf0;border-right:1px solid #e8ecf0;">
               <p style="margin:0 0 24px;font-size:16px;color:#1a1a2e;line-height:1.5;">
-                ${t.greeting} <strong>${data.vendedorNombre}</strong>,
+                ${t.greeting} <strong>${escapeHtml(data.vendedorNombre)}</strong>,
               </p>
               <p style="margin:0 0 28px;font-size:15px;color:#4a5568;line-height:1.6;">
                 ${t.intro}
@@ -68,7 +69,7 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
                       <tr>
                         <td style="padding:0 0 12px;">
                           <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">${t.quote}</p>
-                          <p style="margin:4px 0 0;font-size:18px;font-weight:700;color:#1a1a2e;">${data.cotizacion.numero}</p>
+                          <p style="margin:4px 0 0;font-size:18px;font-weight:700;color:#1a1a2e;">${escapeHtml(data.cotizacion.numero)}</p>
                         </td>
                         <td style="padding:0 0 12px;text-align:right;">
                           <span style="display:inline-block;padding:4px 12px;background:${c}18;color:${c};font-size:12px;font-weight:600;border-radius:20px;">${estadoLabel}</span>
@@ -80,7 +81,7 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
                             <tr>
                               <td width="50%" style="padding:8px 0;">
                                 <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">${t.client}</p>
-                                <p style="margin:3px 0 0;font-size:14px;color:#334155;font-weight:500;">${data.cotizacion.cliente}</p>
+                                <p style="margin:3px 0 0;font-size:14px;color:#334155;font-weight:500;">${escapeHtml(data.cotizacion.cliente)}</p>
                               </td>
                               <td width="50%" style="padding:8px 0;text-align:right;">
                                 <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;">${t.issued}</p>
@@ -126,7 +127,7 @@ export function buildSellerFollowUpEmail(data: SellerFollowUpData): string {
           <tr>
             <td style="background:#f8fafc;padding:24px 40px;border-radius:0 0 16px 16px;border:1px solid #e8ecf0;border-top:none;">
               <p style="margin:0;font-size:12px;color:#94a3b8;text-align:center;">
-                ${t.footerSent} <strong style="color:#64748b;">${data.empresa.nombre}</strong> ${t.footerVia}
+                ${t.footerSent} <strong style="color:#64748b;">${escapeHtml(data.empresa.nombre)}</strong> ${t.footerVia}
               </p>
               <p style="margin:8px 0 0;font-size:11px;color:#cbd5e1;text-align:center;">
                 ${t.footerOptOut}
@@ -158,7 +159,7 @@ interface ClientExpiryData {
 }
 
 export function buildClientExpiryEmail(data: ClientExpiryData): string {
-  const c = data.empresa.colorPrimario || "#3a9bb5";
+  const c = escapeHtml(data.empresa.colorPrimario || "#3a9bb5");
   const lang: EmailLang = data.lang === "en" ? "en" : "es";
   const numLocale = lang === "en" ? "en-GB" : "es-ES";
   const money = (n: number) => formatCurrency(n, data.cotizacion.moneda || "EUR", numLocale);
@@ -206,7 +207,7 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
           <!-- Header -->
           <tr>
             <td style="background:linear-gradient(135deg,${c},${c}dd);padding:32px 40px;border-radius:16px 16px 0 0;">
-              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">${data.empresa.nombre}</p>
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">${escapeHtml(data.empresa.nombre)}</p>
               <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:0.3px;text-transform:uppercase;">${t.subtitle}</p>
             </td>
           </tr>
@@ -214,7 +215,7 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
           <tr>
             <td style="background:#ffffff;padding:40px;border-left:1px solid #e8ecf0;border-right:1px solid #e8ecf0;">
               <p style="margin:0 0 24px;font-size:16px;color:#1a1a2e;line-height:1.5;">
-                ${t.greeting} <strong>${data.contactoNombre}</strong>,
+                ${t.greeting} <strong>${escapeHtml(data.contactoNombre)}</strong>,
               </p>
               <p style="margin:0 0 28px;font-size:15px;color:#4a5568;line-height:1.6;">
                 ${t.intro}
@@ -228,7 +229,7 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
                       <tr>
                         <td style="padding:0 0 12px;">
                           <p style="margin:0;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">${t.quote}</p>
-                          <p style="margin:4px 0 0;font-size:18px;font-weight:700;color:#1a1a2e;">${data.cotizacion.numero}</p>
+                          <p style="margin:4px 0 0;font-size:18px;font-weight:700;color:#1a1a2e;">${escapeHtml(data.cotizacion.numero)}</p>
                         </td>
                         <td style="padding:0 0 12px;text-align:right;">
                           <span style="display:inline-block;padding:4px 12px;background:${urgencyColor}18;color:${urgencyColor};font-size:12px;font-weight:600;border-radius:20px;">
@@ -284,7 +285,7 @@ export function buildClientExpiryEmail(data: ClientExpiryData): string {
           <tr>
             <td style="background:#f8fafc;padding:24px 40px;border-radius:0 0 16px 16px;border:1px solid #e8ecf0;border-top:none;">
               <p style="margin:0;font-size:12px;color:#94a3b8;text-align:center;">
-                ${t.footerSent} <strong style="color:#64748b;">${data.empresa.nombre}</strong> ${t.footerVia}
+                ${t.footerSent} <strong style="color:#64748b;">${escapeHtml(data.empresa.nombre)}</strong> ${t.footerVia}
               </p>
             </td>
           </tr>

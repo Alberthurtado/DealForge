@@ -1,4 +1,5 @@
 import { formatCurrency, formatDate } from "./utils";
+import { escapeHtml } from "./sanitize";
 
 type EmailLang = "es" | "en";
 
@@ -20,7 +21,7 @@ interface ApprovalRequestData {
 }
 
 export function buildApprovalRequestEmail(data: ApprovalRequestData): string {
-  const c = data.empresa.colorPrimario || "#3a9bb5";
+  const c = escapeHtml(data.empresa.colorPrimario || "#3a9bb5");
   const lang: EmailLang = data.lang === "en" ? "en" : "es";
   const numLocale = lang === "en" ? "en-GB" : "es-ES";
   const cur = data.cotizacion.moneda || "EUR";
@@ -36,7 +37,7 @@ export function buildApprovalRequestEmail(data: ApprovalRequestData): string {
     .slice(0, 5)
     .map(
       (item) =>
-        `<tr><td style="padding:6px 8px;border-bottom:1px solid #eee;">${item.descripcion}</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">${item.cantidad}</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">${money(item.total)}</td></tr>`
+        `<tr><td style="padding:6px 8px;border-bottom:1px solid #eee;">${escapeHtml(item.descripcion)}</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">${item.cantidad}</td><td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:right;">${money(item.total)}</td></tr>`
     )
     .join("");
 
@@ -52,24 +53,24 @@ export function buildApprovalRequestEmail(data: ApprovalRequestData): string {
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f7;">
   <div style="max-width:600px;margin:0 auto;padding:20px;">
     <div style="background:${c};padding:24px 30px;border-radius:12px 12px 0 0;">
-      <h1 style="color:white;margin:0;font-size:18px;">${data.empresa.nombre}</h1>
+      <h1 style="color:white;margin:0;font-size:18px;">${escapeHtml(data.empresa.nombre)}</h1>
       <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">${t.subtitle}</p>
     </div>
     <div style="background:white;padding:30px;border-radius:0 0 12px 12px;border:1px solid #e5e5e5;border-top:none;">
-      <p style="margin:0 0 16px;font-size:15px;color:#333;">${t.greeting} ${data.aprobadorNombre},</p>
+      <p style="margin:0 0 16px;font-size:15px;color:#333;">${t.greeting} ${escapeHtml(data.aprobadorNombre)},</p>
       <p style="margin:0 0 20px;font-size:14px;color:#555;">${t.intro}</p>
 
       <div style="background:#f8f9fa;border-radius:8px;padding:16px;margin:0 0 20px;">
         <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.quote}</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:14px;">${data.cotizacion.numero}</td></tr>
-          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.client}</td><td style="padding:4px 0;text-align:right;font-size:13px;">${data.cotizacion.cliente}</td></tr>
+          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.quote}</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:14px;">${escapeHtml(data.cotizacion.numero)}</td></tr>
+          <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.client}</td><td style="padding:4px 0;text-align:right;font-size:13px;">${escapeHtml(data.cotizacion.cliente)}</td></tr>
           <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.total}</td><td style="padding:4px 0;text-align:right;font-weight:bold;font-size:16px;color:${c};">${money(data.cotizacion.total)}</td></tr>
           <tr><td style="padding:4px 0;color:#888;font-size:12px;">${t.date}</td><td style="padding:4px 0;text-align:right;font-size:13px;">${formatDate(data.cotizacion.fechaEmision, numLocale)}</td></tr>
         </table>
       </div>
 
       <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin:0 0 20px;">
-        <p style="margin:0;font-size:13px;color:#856404;"><strong>${t.reason}</strong> ${data.razon}</p>
+        <p style="margin:0;font-size:13px;color:#856404;"><strong>${t.reason}</strong> ${escapeHtml(data.razon)}</p>
       </div>
 
       ${
@@ -90,7 +91,7 @@ export function buildApprovalRequestEmail(data: ApprovalRequestData): string {
         ${t.reviewPre}<a href="${reviewUrl}" style="color:${c};">${t.reviewLink}</a>
       </p>
     </div>
-    <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${data.empresa.nombre} &bull; DealForge</p>
+    <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${escapeHtml(data.empresa.nombre)} &bull; DealForge</p>
   </div>
 </body>
 </html>`;
@@ -108,7 +109,7 @@ interface ApprovalResolvedData {
 }
 
 export function buildApprovalResolvedEmail(data: ApprovalResolvedData): string {
-  const c = data.empresa.colorPrimario || "#3a9bb5";
+  const c = escapeHtml(data.empresa.colorPrimario || "#3a9bb5");
   const lang: EmailLang = data.lang === "en" ? "en" : "es";
   const numLocale = lang === "en" ? "en-GB" : "es-ES";
   const money = (n: number) => formatCurrency(n, data.cotizacion.moneda || "EUR", numLocale);
@@ -127,7 +128,7 @@ export function buildApprovalResolvedEmail(data: ApprovalResolvedData): string {
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f7;">
   <div style="max-width:600px;margin:0 auto;padding:20px;">
     <div style="background:${c};padding:24px 30px;border-radius:12px 12px 0 0;">
-      <h1 style="color:white;margin:0;font-size:18px;">${data.empresa.nombre}</h1>
+      <h1 style="color:white;margin:0;font-size:18px;">${escapeHtml(data.empresa.nombre)}</h1>
       <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">${t.subtitle}</p>
     </div>
     <div style="background:white;padding:30px;border-radius:0 0 12px 12px;border:1px solid #e5e5e5;border-top:none;">
@@ -135,16 +136,16 @@ export function buildApprovalResolvedEmail(data: ApprovalResolvedData): string {
         <div style="display:inline-block;background:${statusColor};color:white;padding:8px 24px;border-radius:20px;font-weight:bold;font-size:14px;">${statusLabel}</div>
       </div>
       <p style="margin:0 0 16px;font-size:14px;color:#555;text-align:center;">
-        ${t.quotePre} <strong>${data.cotizacion.numero}</strong> ${t.forWord} <strong>${data.cotizacion.cliente}</strong>
+        ${t.quotePre} <strong>${escapeHtml(data.cotizacion.numero)}</strong> ${t.forWord} <strong>${escapeHtml(data.cotizacion.cliente)}</strong>
         (${money(data.cotizacion.total)}) ${lang === "en" ? "was" : "ha sido"} <strong style="color:${statusColor};">${t.statusLower}</strong>
-        ${t.byWord} <strong>${data.aprobadorNombre}</strong>.
+        ${t.byWord} <strong>${escapeHtml(data.aprobadorNombre)}</strong>.
       </p>
-      ${data.comentario ? `<div style="background:#f8f9fa;border-radius:8px;padding:12px 16px;margin:0 0 20px;"><p style="margin:0;font-size:13px;color:#555;"><strong>${t.comment}</strong> ${data.comentario}</p></div>` : ""}
+      ${data.comentario ? `<div style="background:#f8f9fa;border-radius:8px;padding:12px 16px;margin:0 0 20px;"><p style="margin:0;font-size:13px;color:#555;"><strong>${t.comment}</strong> ${escapeHtml(data.comentario)}</p></div>` : ""}
       <div style="text-align:center;margin:20px 0 0;">
         <a href="${detailUrl}" style="display:inline-block;padding:10px 28px;background:${c};color:white;text-decoration:none;border-radius:8px;font-size:13px;">${t.viewQuote}</a>
       </div>
     </div>
-    <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${data.empresa.nombre} &bull; DealForge</p>
+    <p style="text-align:center;font-size:11px;color:#aaa;margin:16px 0 0;">${escapeHtml(data.empresa.nombre)} &bull; DealForge</p>
   </div>
 </body>
 </html>`;

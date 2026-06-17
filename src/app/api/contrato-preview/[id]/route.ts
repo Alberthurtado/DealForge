@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { empresaIdForContrato } from "@/lib/empresa-context";
+import { escapeHtml, sanitizeHtml } from "@/lib/sanitize";
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac } from "crypto";
 import {
@@ -147,12 +148,12 @@ export async function GET(
     ? `
     <div class="signature-section" style="margin-top: 40px; padding: 24px 40px; border-top: 1px solid #e5e7eb;">
       <p style="font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; margin: 0 0 8px;">Firma Electrónica</p>
-      <img src="${firma.signatureData}" alt="Firma" style="height: 64px; max-width: 200px; object-fit: contain;" />
+      <img src="${escapeHtml(firma.signatureData)}" alt="Firma" style="height: 64px; max-width: 200px; object-fit: contain;" />
       <div style="height: 1px; background: #d1d5db; margin-top: 4px; width: 192px;"></div>
-      <p style="font-size: 12px; color: #4b5563; margin: 4px 0 0;">${firma.signerName}</p>
-      <p style="font-size: 11px; color: #9ca3af; margin: 2px 0 0;">${firma.signerEmail}</p>
+      <p style="font-size: 12px; color: #4b5563; margin: 4px 0 0;">${escapeHtml(firma.signerName)}</p>
+      <p style="font-size: 11px; color: #9ca3af; margin: 2px 0 0;">${escapeHtml(firma.signerEmail)}</p>
       <p style="font-size: 10px; color: #9ca3af; margin: 2px 0 0;">Firmado el ${firma.signedAt ? new Date(firma.signedAt).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" }) : ""}</p>
-      ${firma.ipAddress ? `<p style="font-size: 10px; color: #9ca3af; margin: 2px 0 0;">IP: ${firma.ipAddress}</p>` : ""}
+      ${firma.ipAddress ? `<p style="font-size: 10px; color: #9ca3af; margin: 2px 0 0;">IP: ${escapeHtml(firma.ipAddress)}</p>` : ""}
     </div>`
     : "";
 
@@ -161,7 +162,7 @@ export async function GET(
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contrato ${contrato.numero}</title>
+  <title>Contrato ${escapeHtml(contrato.numero)}</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     @page { margin: 20mm; size: A4; }
@@ -171,7 +172,7 @@ export async function GET(
 </head>
 <body>
   <div id="pdf-root" style="max-width: 800px; margin: 32px auto; background: white; border-radius: 8px; overflow: hidden;">
-    ${documentoHtml}
+    ${sanitizeHtml(documentoHtml)}
     ${enmiendasAnexo}
     ${signatureHtml}
   </div>
