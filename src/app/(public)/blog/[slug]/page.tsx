@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { prisma } from "@/lib/prisma";
+import { blogPostsEs, getBlogPostEs } from "@/data/blog-es";
 import { notFound } from "next/navigation";
 import { AUTHOR, authorPersonJsonLd } from "@/data/author";
 import { Calendar, Clock, ArrowLeft, Flame } from "lucide-react";
-
-export const dynamic = "force-dynamic";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -14,9 +12,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await prisma.blogPost.findFirst({
-    where: { slug, publicado: true },
-  });
+  const post = getBlogPostEs(slug);
 
   if (!post) return { title: "Artículo no encontrado — DealForge" };
 
@@ -37,8 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "DealForge",
       locale: "es_ES",
       type: "article",
-      publishedTime: post.publishedAt?.toISOString(),
-      modifiedTime: post.updatedAt.toISOString(),
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt || post.publishedAt,
       authors: [AUTHOR.name],
       ...(post.imagen && {
         images: [{ url: post.imagen, width: 1200, height: 630, alt: post.titulo }],
@@ -56,20 +52,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  try {
-    const posts = await prisma.blogPost.findMany({
-      where: { publicado: true },
-      select: { slug: true },
-    });
-    return posts.map((post) => ({ slug: post.slug }));
-  } catch {
-    return [];
-  }
+export function generateStaticParams() {
+  return blogPostsEs.map((post) => ({ slug: post.slug }));
 }
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString("es-ES", {
+function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -92,16 +80,12 @@ const CATEGORIAS: Record<string, { label: string; color: string }> = {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await prisma.blogPost.findFirst({
-    where: { slug, publicado: true },
-  });
+  const post = getBlogPostEs(slug);
 
   if (!post) notFound();
 
   const cat = CATEGORIAS[post.categoria] || CATEGORIAS.general;
-  const tags: string[] = (() => {
-    try { return JSON.parse(post.tags); } catch { return []; }
-  })();
+  const tags: string[] = post.tags;
 
   // Structured data for this article
   const articleJsonLd = {
@@ -110,8 +94,8 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.titulo,
     description: post.extracto,
     url: `https://dealforge.es/blog/${post.slug}`,
-    datePublished: post.publishedAt?.toISOString(),
-    dateModified: post.updatedAt.toISOString(),
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt || post.publishedAt,
     author: authorPersonJsonLd,
     publisher: {
       "@type": "Organization",

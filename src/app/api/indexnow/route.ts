@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { notifyIndexNow, getAllPublicUrls } from "@/lib/indexnow";
-import { prisma } from "@/lib/prisma";
+import { blogPostsEs } from "@/data/blog-es";
 
 /**
  * POST /api/indexnow — Notify search engines about new/updated URLs
@@ -30,11 +30,7 @@ export async function POST(request: NextRequest) {
     urls = getAllPublicUrls();
 
     // Add all blog post URLs
-    const posts = await prisma.blogPost.findMany({
-      where: { publicado: true },
-      select: { slug: true },
-    });
-    for (const post of posts) {
+    for (const post of blogPostsEs) {
       urls.push(`/blog/${post.slug}`);
     }
   }

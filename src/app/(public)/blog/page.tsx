@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { prisma } from "@/lib/prisma";
+import { blogPostsEs } from "@/data/blog-es";
 import { Calendar, Clock, ArrowRight, Flame } from "lucide-react";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Blog — DealForge",
@@ -46,8 +44,8 @@ const CATEGORIAS: Record<string, { label: string; color: string }> = {
   general: { label: "General", color: "bg-gray-50 text-gray-700" },
 };
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString("es-ES", {
+function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -59,11 +57,10 @@ function readingTime(content: string): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
-export default async function BlogPage() {
-  const posts = await prisma.blogPost.findMany({
-    where: { publicado: true },
-    orderBy: { publishedAt: "desc" },
-  });
+export default function BlogPage() {
+  const posts = [...blogPostsEs].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 
   return (
     <>
@@ -91,8 +88,8 @@ export default async function BlogPage() {
               headline: post.titulo,
               description: post.extracto,
               url: `https://dealforge.es/blog/${post.slug}`,
-              datePublished: post.publishedAt?.toISOString(),
-              dateModified: post.updatedAt.toISOString(),
+              datePublished: post.publishedAt,
+              dateModified: post.updatedAt || post.publishedAt,
               author: {
                 "@type": "Organization",
                 name: post.autor,
@@ -177,7 +174,7 @@ export default async function BlogPage() {
                 const cat = CATEGORIAS[post.categoria] || CATEGORIAS.general;
                 return (
                   <article
-                    key={post.id}
+                    key={post.slug}
                     className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:shadow-gray-200/50 transition-all"
                   >
                     {post.imagen && (

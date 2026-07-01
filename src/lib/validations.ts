@@ -273,23 +273,6 @@ export const stripeCheckoutSchema = z.object({
   interval: z.enum(["monthly", "annual"]).default("monthly"),
 });
 
-// ─── Blog ───────────────────────────────────────
-
-export const blogPostCreateSchema = z.object({
-  titulo: requiredString("Título"),
-  slug: z.string().optional(),
-  extracto: requiredString("Extracto"),
-  contenido: z.string().min(1, "Contenido es obligatorio"),
-  imagen: optionalString,
-  autor: z.string().default("DealForge"),
-  categoria: z.enum(["ventas", "cpq", "ia", "producto", "guias", "general"]).default("general"),
-  tags: z.array(z.string()).optional(),
-  publicado: z.boolean().default(false),
-  metaTitulo: optionalString,
-  metaDescripcion: optionalString,
-  metaKeywords: optionalString,
-});
-
 // ─── AI Assistant ────────────────────────────────
 
 export const assistantChatSchema = z.object({

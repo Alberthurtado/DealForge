@@ -1,6 +1,6 @@
-// English blog posts. Unlike the Spanish blog (DB-driven via prisma.blogPost),
-// the English blog is data-file based — same pattern as recursos-en / industrias-en —
-// so it deploys with the code and needs no DB seeding. Routes: /en/blog + /en/blog/[slug].
+// English blog posts. Data-file based — same pattern as the Spanish blog (blog-es.ts)
+// and recursos-en / industrias-en — so it deploys with the code and needs no DB seeding.
+// Routes: /en/blog + /en/blog/[slug].
 
 export interface BlogPostEn {
   slug: string;

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { prisma } from "@/lib/prisma";
+import { blogPostsEs } from "@/data/blog-es";
 import { industrias } from "@/data/industrias";
 import { features } from "@/data/features";
 import { comparaciones } from "@/data/comparaciones";
@@ -123,22 +123,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic blog posts (lastModified from DB — correct)
-  let blogPosts: MetadataRoute.Sitemap = [];
-  try {
-    const posts = await prisma.blogPost.findMany({
-      where: { publicado: true },
-      select: { slug: true, updatedAt: true },
-      orderBy: { publishedAt: "desc" },
-    });
-
-    blogPosts = posts.map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: post.updatedAt,
-    }));
-  } catch {
-    // BlogPost model may not exist yet — skip
-  }
+  // Spanish blog posts (data-file based, like the English blog)
+  const blogPosts: MetadataRoute.Sitemap = blogPostsEs.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.updatedAt || post.publishedAt),
+  }));
 
   // English blog (data-file based)
   const blogPagesEn: MetadataRoute.Sitemap = [
