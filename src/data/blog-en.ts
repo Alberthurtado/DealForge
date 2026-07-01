@@ -4714,6 +4714,186 @@ Sale price = (Total cost × 100) / (100 &minus; desired margin %)</p>
     metaDescripcion: "Discover what a CPQ (Configure, Price, Quote) is, how it automates your quotes and why small businesses need it. A complete guide with practical examples.",
     metaKeywords: "CPQ, what is CPQ, CPQ software, configure price quote, quoting software, automate quotes, automated quotes, CPQ for small business, quoting tool, quote software",
   },
+  {
+    slug: "gardening-landscaping-quotes-guide",
+    titulo: "Gardening and landscaping quotes: how to price your work without giving it away",
+    extracto:
+      "A practical guide to profitable gardening and landscaping quotes: how to price maintenance, pruning and design projects, the costs everyone forgets, and how to present your quote to win more contracts.",
+    categoria: "guias",
+    tags: [
+      "gardening quotes",
+      "landscaping quotes",
+      "gardening prices",
+      "garden maintenance",
+      "how to price gardening",
+      "self-employed gardeners",
+      "professional quotes",
+    ],
+    autor: "DealForge",
+    publishedAt: "2026-07-01T09:00:00.000Z",
+    metaTitulo:
+      "Gardening and landscaping quotes: how to price your work (2026 guide) | DealForge",
+    metaDescripcion:
+      "How to build profitable gardening and landscaping quotes: pricing models, the costs everyone forgets (machinery, green waste, transport) and how to present your quote to win more contracts.",
+    metaKeywords:
+      "gardening quotes, how to price gardening, gardening prices, landscaping quotes, how much to charge for garden maintenance, tree pruning quote, artificial turf quote, gardener hourly rate",
+    contenido: `<p>Gardening is one of those trades where the work is visible, enjoyable and appreciated... but poorly paid. Not because clients are stingy, but because many gardeners and landscaping businesses quote by eye, without counting the machinery, the green waste transport or the dead hours spent driving between jobs. By the end of the year there's a lot of work done and little money in the bank.</p>
+
+<p>If you run a gardening business, you're a self-employed gardener or you're setting up a landscaping company, this guide is for you. We'll look at how to build quotes that cover all your real costs, which pricing model suits each type of work, and how to present the quote so the client says yes without haggling.</p>
+
+<h2>Why quoting for gardening is harder than it looks</h2>
+
+<p>An electrician or a plumber usually work on fairly predictable elements. Gardening, on the other hand, deals with living material, with the weather and with spaces that change from one plot to the next. That introduces an uncertainty you have to know how to price.</p>
+
+<p>Think about the variables affecting a single job: the slope of the ground, machinery access, the distance to the waste disposal point, the time of year, the starting condition of the garden. Trimming ten hedges at a house with direct access is nothing like doing it on a sloped property where you have to carry the tools up by hand.</p>
+
+<p>That's why the most expensive mistake in gardening isn't setting a low hourly rate: it's not visiting the site before quoting. A gardening quote given over the phone or from photos is a lottery. And you almost always lose.</p>
+
+<h2>Types of gardening work and how to quote each one</h2>
+
+<p>Not every job is quoted the same way. Lumping everything into a single "gardening services" bucket is the first step to losing money. Distinguish at least these four types:</p>
+
+<h3>Recurring maintenance</h3>
+
+<p>Lawn mowing, hedge trimming, leaf clearing, fertilising, weed control. This is recurring, predictable work, and it's what gives your business stability. It's normally quoted as a <strong>monthly fee or per visit</strong>, with a defined number of interventions per year.</p>
+
+<p>The key here is to correctly calculate how much real time you spend on each visit across the year (grass grows far more in spring and summer than in winter) and spread it into a stable fee. A client would rather pay 90 a month all year round than 150 in summer and 30 in winter.</p>
+
+<h3>One-off jobs: pruning, felling and clearing</h3>
+
+<p>This is where large tree pruning, felling, clearing overgrown plots and stump removal come in. These are higher-risk jobs, sometimes requiring heavy machinery or work at height, and they're quoted as a <strong>fixed-price project</strong> after a site visit.</p>
+
+<p>In these jobs, the risk factor is part of the price. Pruning at height with a chainsaw is not the same as trimming a hedge. If you work with elevated platforms, climbing or the removal of large logs, your quote has to reflect the equipment, the insurance and the specialisation, not just the hours.</p>
+
+<h3>Garden design and creation (landscaping)</h3>
+
+<p>Here we're talking about construction work: earthmoving, turf installation (natural or artificial), planting, building flower beds, laying stone, garden lighting, outdoor furniture. It's the closest thing to a renovation and it's quoted <strong>by project line items</strong>, with a clear breakdown of each section.</p>
+
+<p>A well-priced landscaping project looks like a construction quote: broken down by sections (site preparation, irrigation, planting, hard elements, lighting), with measurements, unit prices and a contingency line. It's the most profitable work in the sector when priced well, and the one that loses the most money when done by eye.</p>
+
+<h3>Irrigation systems</h3>
+
+<p>Design and installation of automatic drip or sprinkler irrigation, controllers, moisture sensors. It usually sits within a landscaping project, but it's also sold as a standalone service. It's quoted by <strong>metres of installation, number of zones and components</strong>, plus the labour of trenching and assembly.</p>
+
+<h2>How to calculate the price: the costs you can't forget</h2>
+
+<p>This is the heart of the matter. Most gardening quotes that go wrong do so because they only count the visible labour and forget half the real costs. These are the ones you always have to include:</p>
+
+<h3>Labour (at cost, not sale price)</h3>
+
+<p>Work out how much an hour of an operative's work really costs you, including wages, social security, holidays, PPE and non-productive time. If a labourer costs you 12 an hour in gross wages, their real cost per hour worked (with contributions and non-billable hours) can be around 18-20. That's the number you have to use in your calculations, not the wage.</p>
+
+<h3>Machinery and its depreciation</h3>
+
+<p>The mower, the brushcutter, the hedge trimmer, the chainsaw, the wood chipper, the vehicle. All of that costs money: purchase, maintenance, fuel, repairs and replacement when it breaks. Many gardeners charge nothing for machinery because "they already own it". Mistake: machinery wears out and has to be replaced, and that cost has to come out of your jobs.</p>
+
+<p>Calculate an hourly machinery cost: add up what you spend per year on depreciation, maintenance and fuel, divide it by the hours of use, and add it to the price of each job. On machine-intensive jobs (clearing, chipping), this line item matters.</p>
+
+<h3>Materials, plants and consumables</h3>
+
+<p>Plants, substrate, turf, fertiliser, irrigation systems, stone, mulch, brushcutter line, oil and petrol for the mix. On planting and landscaping jobs, materials can be the biggest line item. Always apply a margin on the material (don't pass it on at cost price): you select it, transport it, handle it and stand behind its quality. That service is paid for.</p>
+
+<h3>Transport and green waste disposal</h3>
+
+<p>This is the most-forgotten line item and the one that eats the most money. The pruning, mowing and clearing waste has to be loaded, transported and taken to a recycling centre or authorised handler, and you often pay to dispose of it. A large pruning job can generate several trailers of waste. If you don't charge for transport and disposal, you're paying for that job out of your own pocket.</p>
+
+<h3>Travel and journey time</h3>
+
+<p>The time your team spends in the van going from one garden to another is time you pay for and don't bill directly. If you have scattered clients, that time adds up. Factor it in when setting your maintenance fees, especially for clients far from your usual area. A client 40 minutes away has to cost more than one around the corner.</p>
+
+<h2>Pricing models: by the hour, by square metre or fixed project price</h2>
+
+<p>Choosing the right pricing model completely changes the profitability of a job. These are the three used in the sector, with their pros and cons:</p>
+
+<h3>By the hour</h3>
+
+<p>You charge the hours of work at a rate. It's transparent and fair when the scope isn't clear (for example, clearing a plot you can't tell the state of from the outside). The risk: if you're very efficient, you earn less, and the client may perceive that you "work slowly". Use it for jobs of uncertain scope, not for predictable ones.</p>
+
+<h3>By square metre or unit</h3>
+
+<p>Ideal for measurable, repetitive work: artificial turf installation per m², hedge planting per linear metre, mowing by surface area. It requires you to know your output rates well (how many m² you do per hour) so the unit price is profitable. It's the most professional model for landscaping and the one the client understands best.</p>
+
+<h3>Fixed project price</h3>
+
+<p>You give a total price for the complete job. It's what gives the client the most peace of mind (they know what they'll pay) and the most profitable for you if you price well, because the benefit of your efficiency is yours. The risk is yours too: if you've underestimated, you pay for it. That's why the fixed price demands a prior visit and a contingency line.</p>
+
+<p>In practice, a healthy gardening business combines all three: a fixed fee for recurring maintenance, a fixed price for landscaping projects and large pruning jobs, and by the hour for the unpredictable. Having quote templates for each model saves you hours of admin. With a tool like <a href="/registro?lang=en">DealForge</a> you can prepare templates by service type and generate the quote in minutes instead of starting each one from scratch in a spreadsheet.</p>
+
+<h2>What a professional gardening quote must include</h2>
+
+<p>A quote isn't just a number. It's your calling card and, often, what decides whether the client chooses you or the one next door. These are the elements that can't be missing:</p>
+
+<ul>
+<li><strong>Your full details</strong>: name or business name, tax number, phone, email and, if you have it, your accreditation as a pesticide applicator or your certified training. It builds trust.</li>
+<li><strong>Client details</strong> and the exact address of the plot.</li>
+<li><strong>Reference number and date</strong>, to keep an orderly record.</li>
+<li><strong>Detailed description of the work</strong>, broken down by line items: exactly what's being done, with which materials and in what quantity. "Tree pruning: 350" says little. "Pruning at height of 4 large pines, including climbing, collection and removal of waste to an authorised handler: 350" says a lot.</li>
+<li><strong>Unit prices and totals</strong>, with subtotal, VAT and a clear final total.</li>
+<li><strong>What is NOT included</strong>: this is as important as what's included. Put in writing whether the price doesn't cover removing a stump, repairing a pipe that turns up when digging, or plants the client chooses on their own. This saves you arguments.</li>
+<li><strong>Terms</strong>: payment method, quote validity (plant and material prices change; set 15-30 days), completion time and a plant warranty if you offer one.</li>
+</ul>
+
+<h2>Mistakes that make you lose money or the client</h2>
+
+<p>After seeing hundreds of quotes in this sector, these are the mistakes that repeat the most and cost the most:</p>
+
+<h3>Not visiting the plot before quoting</h3>
+
+<p>We've said it already, but it's worth repeating because it's mistake number one. Quoting without seeing the access, the slope, the real condition and the distance to disposal is betting blind. A 20-minute visit saves you from losing hundreds on a badly calculated job.</p>
+
+<h3>Forgetting waste management</h3>
+
+<p>The second most expensive mistake. Green waste takes up a lot of space, weighs a lot and costs money to dispose of legally. Always charge for it as its own line item or include it explicitly in the price.</p>
+
+<h3>Charging zero for machinery</h3>
+
+<p>"I already own the machine" doesn't mean it's free. If you don't allocate its depreciation and maintenance, when the mower breaks you won't have the money to replace it and you'll have to take it out of your own pocket.</p>
+
+<h3>Taking days to send the quote</h3>
+
+<p>In gardening, many jobs are won by whoever responds well first. If the client asks you for a quote on Monday and you send it on Friday, they've probably already hired someone else. Speed closes sales. Having ready-made templates and being able to generate the quote the same day as the visit makes a huge difference.</p>
+
+<h3>Competing on price alone</h3>
+
+<p>There will always be someone who does it cheaper, often without an invoice, without insurance and without handling the waste properly. Don't get into that war. Compete on professionalism: clear quotes, good service, plant warranty, well-finished work. The client who only wants the lowest price is not the client who grows your business.</p>
+
+<h2>How to present the quote to win more jobs</h2>
+
+<p>Two gardeners with the same price don't win the same jobs. The difference is in how they present the proposal. Some ideas that work:</p>
+
+<ul>
+<li><strong>Be fast</strong>: the same day as the visit, or the next day at the latest. Speed is perceived as professionalism and eagerness to work.</li>
+<li><strong>Mind your image</strong>: a quote with your logo, tidy and free of spelling mistakes, conveys far more than a text message with a loose number. The document speaks to how you'll work.</li>
+<li><strong>Offer options</strong>: in landscaping, presenting two or three levels (basic, recommended, premium) helps the client decide and usually raises the average ticket. Many choose the middle one.</li>
+<li><strong>Explain the value, not just the price</strong>: if you remove waste to an authorised handler, if you give a plant warranty, if you use professional-grade product, say so. Justify why you're not the cheapest.</li>
+<li><strong>Make the yes easy</strong>: include a simple way to accept the quote. The less friction, the sooner you close.</li>
+</ul>
+
+<h2>Recurring maintenance: your best asset</h2>
+
+<p>One-off landscaping jobs bring good income, but they're irregular. What really gives a gardening business stability are the <strong>maintenance contracts</strong>: that portfolio of clients who pay you a fixed fee every month to care for their garden all year round.</p>
+
+<p>A good maintenance contract gives you predictable income, lets you plan your workload and multiplies the value of your business. Ten houses on a monthly maintenance fee of 100 are 12,000 a year that you can count on almost for certain, and on top of that they're the gateway to later selling them a big pruning job, an irrigation system or a garden redesign.</p>
+
+<p>That's why, whenever you do a one-off job, consider offering maintenance afterwards. "Now that the garden is perfect, I'd suggest a monthly maintenance plan to keep it that way all year." It's the easiest and most profitable sale in the sector. Keeping track of which clients have a contract, when each visit is due and when to renew is far easier with a system that manages your quotes and clients in one place, instead of keeping it all in your head and in scattered folders.</p>
+
+<h2>Conclusion: quote with your head and charge what you're worth</h2>
+
+<p>Gardening and landscaping are profitable trades when they're priced well. The problem is almost never that clients don't want to pay: it's that many professionals don't calculate their real costs, forget about transport and machinery, and compete on price against someone working without an invoice or insurance.</p>
+
+<p>The key points to apply from today:</p>
+
+<ul>
+<li>Always visit the plot before giving a price.</li>
+<li>Count every cost: real labour, machinery, materials with margin, waste transport and travel.</li>
+<li>Choose the pricing model to fit the job: fixed fee for maintenance, fixed price for landscaping, by the hour for the uncertain.</li>
+<li>Make quotes clear, itemised and with what's not included in writing.</li>
+<li>Be fast: the first to present a professional proposal usually wins the job.</li>
+<li>Turn every one-off job into a recurring maintenance contract.</li>
+</ul>
+
+<p><strong>Want to stop wasting hours building quotes in spreadsheets and send professional proposals the same day as the visit?</strong> Try <a href="/registro?lang=en">DealForge</a> free, create your quote templates by service type and spend your time on what really matters: caring for gardens, not fighting with spreadsheets.</p>`,
+  },
 ];
 
 export function getBlogPostEn(slug: string): BlogPostEn | undefined {
