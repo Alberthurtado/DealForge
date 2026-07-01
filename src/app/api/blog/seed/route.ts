@@ -4287,7 +4287,188 @@ Precio de venta = (Coste total × 100) / (100 &minus; margen deseado %)</p>
       "cómo calcular margen de beneficio, margen en presupuestos, calcular precio de venta con margen, margen bruto neto diferencia, rentabilidad presupuestos pymes, fórmula margen beneficio, markup vs margen, precio con margen autónomos",
   };
 
-  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16, post17, post18, post19];
+  const post20 = {
+    slug: "presupuestos-jardineria-paisajismo-guia-completa",
+    titulo: "Presupuestos de jardinería y paisajismo: cómo cotizar sin regalar tu trabajo",
+    extracto: "Guía práctica para hacer presupuestos de jardinería y paisajismo rentables: cómo cobrar el mantenimiento, las podas y los proyectos de diseño, qué costes se olvidan siempre y cómo presentar la cotización para ganar más contratos.",
+    contenido: `<p>La jardinería es uno de esos oficios donde el trabajo se ve, se disfruta y se valora... pero se paga mal. No porque los clientes sean tacaños, sino porque muchos jardineros y empresas de paisajismo presupuestan a ojo, sin contar la maquinaria, el transporte de residuos ni las horas muertas de desplazamiento. Al final del año hay mucho trabajo hecho y poco dinero en la cuenta.</p>
+
+<p>Si tienes una empresa de jardinería, eres autónomo del sector o estás montando un negocio de paisajismo, esta guía es para ti. Vamos a ver cómo calcular presupuestos que cubran todos tus costes reales, qué modelo de cobro conviene según el tipo de trabajo y cómo presentar la cotización para que el cliente diga que sí sin regatear.</p>
+
+<h2>Por qué presupuestar jardinería es más difícil de lo que parece</h2>
+
+<p>Un electricista o un fontanero suelen trabajar sobre elementos bastante predecibles. La jardinería, en cambio, trabaja con material vivo, con el clima y con espacios que cambian de una parcela a otra. Eso introduce una incertidumbre que hay que saber presupuestar.</p>
+
+<p>Piensa en las variables que afectan a un mismo trabajo: la pendiente del terreno, el acceso para la maquinaria, la distancia al punto de vertido de residuos, la época del año, el estado de partida del jardín. Podar diez setos en un chalet con acceso directo no tiene nada que ver con hacerlo en una finca en cuesta a la que hay que subir las herramientas a mano.</p>
+
+<p>Por eso el error más caro en jardinería no es poner un precio hora bajo: es no visitar la parcela antes de presupuestar. Un presupuesto de jardinería hecho por teléfono o por fotos es una lotería. Y casi siempre pierdes tú.</p>
+
+<h2>Los tipos de trabajo de jardinería y cómo se cotiza cada uno</h2>
+
+<p>No todos los trabajos se presupuestan igual. Meter todo en el mismo saco de "servicios de jardinería" es el primer paso para perder dinero. Distingue al menos estos cuatro tipos:</p>
+
+<h3>Mantenimiento periódico</h3>
+
+<p>Siega de césped, recorte de setos, limpieza de hojas, abonado, control de malas hierbas. Es trabajo recurrente y predecible, y es el que da estabilidad a tu negocio. Se cotiza normalmente como una <strong>cuota mensual o por visita</strong>, con un número de intervenciones al año definido.</p>
+
+<p>La clave aquí es calcular bien cuánto tiempo real dedicas a cada visita a lo largo del año (en primavera y verano el césped crece mucho más que en invierno) y prorratearlo en una cuota estable. Un cliente prefiere pagar 90 EUR al mes todo el año que 150 EUR en verano y 30 EUR en invierno.</p>
+
+<h3>Trabajos puntuales: podas, talas y desbroces</h3>
+
+<p>Aquí entra la poda de árboles grandes, la tala, el desbroce de parcelas abandonadas, el destoconado. Son trabajos de mayor riesgo, a veces con necesidad de maquinaria pesada o trabajos en altura, y se cotizan <strong>por proyecto cerrado</strong> tras visita.</p>
+
+<p>En estos trabajos, el factor riesgo es parte del precio. Una poda en altura con motosierra no es lo mismo que recortar un seto. Si trabajas con plataformas elevadoras, trepa o retirada de troncos de gran porte, tu presupuesto tiene que reflejar el equipo, el seguro y la especialización, no solo las horas.</p>
+
+<h3>Diseño y creación de jardines (paisajismo)</h3>
+
+<p>Aquí hablamos de obra: movimiento de tierras, instalación de césped (natural o artificial), plantación, construcción de parterres, colocación de piedra, iluminación de jardín, mobiliario exterior. Es lo más parecido a una reforma y se cotiza <strong>por partidas de proyecto</strong>, con un desglose claro de cada capítulo.</p>
+
+<p>Un proyecto de paisajismo bien presupuestado se parece a un presupuesto de construcción: por capítulos (preparación del terreno, riego, plantación, elementos duros, iluminación), con mediciones, precios unitarios y una partida de imprevistos. Es el trabajo más rentable del sector si se presupuesta bien, y el que más dinero pierde si se hace a ojo.</p>
+
+<h3>Sistemas de riego</h3>
+
+<p>Diseño e instalación de riego automático por goteo o aspersión, programadores, sensores de humedad. Suele ir dentro de un proyecto de paisajismo, pero también se vende como servicio independiente. Se cotiza por <strong>metros de instalación, número de sectores y elementos</strong>, más la mano de obra de zanjado y montaje.</p>
+
+<h2>Cómo calcular el precio: los costes que no puedes olvidar</h2>
+
+<p>Este es el corazón del asunto. La mayoría de los presupuestos de jardinería que salen mal es porque solo cuentan la mano de obra visible y se olvidan de la mitad de los costes reales. Estos son los que tienes que meter siempre:</p>
+
+<h3>Mano de obra (a coste, no a precio de venta)</h3>
+
+<p>Calcula cuánto te cuesta de verdad una hora de trabajo de un operario, incluyendo salario, seguridad social, vacaciones, EPIs y el tiempo no productivo. Si un peón te cuesta 12 EUR/hora de salario bruto, su coste real por hora trabajada (con cotizaciones y horas no facturables) puede rondar los 18-20 EUR. Ese es el número que tienes que usar en tus cálculos, no el salario.</p>
+
+<h3>Maquinaria y su amortización</h3>
+
+<p>La cortacésped, la desbrozadora, el cortasetos, la motosierra, el biotriturador, el vehículo. Todo eso cuesta dinero: compra, mantenimiento, combustible, reparaciones y sustitución cuando se rompe. Muchos jardineros no imputan nada por la maquinaria porque "ya la tienen comprada". Error: la maquinaria se desgasta y hay que reponerla, y ese coste tiene que salir de tus trabajos.</p>
+
+<p>Calcula un coste horario de maquinaria: suma lo que gastas al año en amortización, mantenimiento y combustible, divídelo entre las horas de uso, y añádelo al precio de cada trabajo. En trabajos intensivos en máquina (desbroces, triturado), esta partida es importante.</p>
+
+<h3>Materiales, plantas y consumibles</h3>
+
+<p>Plantas, sustrato, césped, abono, sistemas de riego, piedra, mantillo, hilo de desbrozadora, aceite y gasolina de la mezcla. En trabajos de plantación y paisajismo, los materiales pueden ser la mayor partida. Aplica siempre un margen sobre el material (no lo pases a precio de coste): tú lo seleccionas, lo transportas, lo manipulas y respondes de su calidad. Ese servicio se paga.</p>
+
+<h3>Transporte y retirada de residuos verdes</h3>
+
+<p>Esta es la partida que más se olvida y la que más dinero se come. Los restos de poda, siega y desbroce hay que cargarlos, transportarlos y llevarlos a un punto verde o gestor autorizado, y muchas veces se paga por descargarlos. Una poda grande puede generar varios remolques de restos. Si no cobras el transporte y el vertido, ese trabajo lo estás pagando tú de tu bolsillo.</p>
+
+<h3>Desplazamientos y tiempo de trayecto</h3>
+
+<p>El tiempo que tu equipo pasa en la furgoneta yendo de un jardín a otro es tiempo que pagas y no facturas directamente. Si tienes clientes dispersos, ese tiempo se acumula. Tenlo en cuenta al fijar tus cuotas de mantenimiento, sobre todo para clientes alejados de tu zona habitual. Un cliente a 40 minutos de distancia tiene que costar más que uno a la vuelta de la esquina.</p>
+
+<h2>Modelos de cobro: por hora, por metro cuadrado o por proyecto cerrado</h2>
+
+<p>Elegir bien el modelo de cobro cambia por completo la rentabilidad de un trabajo. Estos son los tres que se usan en el sector, con sus pros y sus contras:</p>
+
+<h3>Por horas</h3>
+
+<p>Cobras las horas de trabajo por una tarifa. Es transparente y justo cuando el alcance no está claro (por ejemplo, un desbroce de una parcela que no sabes cómo estará por dentro). El riesgo: si eres muy eficiente, ganas menos, y el cliente puede percibir que "vas despacio". Úsalo para trabajos de alcance incierto, no para lo predecible.</p>
+
+<h3>Por metro cuadrado o unidad</h3>
+
+<p>Ideal para trabajos medibles y repetitivos: instalación de césped artificial por m², plantación de seto por metro lineal, siega por superficie. Requiere que conozcas bien tus rendimientos (cuántos m² haces por hora) para que el precio unitario te sea rentable. Es el modelo más profesional para paisajismo y el que mejor entiende el cliente.</p>
+
+<h3>Por proyecto cerrado</h3>
+
+<p>Das un precio total por el trabajo completo. Es lo que más tranquilidad da al cliente (sabe lo que va a pagar) y lo más rentable para ti si presupuestas bien, porque el beneficio de tu eficiencia es tuyo. El riesgo es tuyo también: si te has quedado corto en la estimación, lo pagas. Por eso el precio cerrado exige visita previa y una partida de imprevistos.</p>
+
+<p>En la práctica, un negocio de jardinería sano combina los tres: cuota fija para el mantenimiento recurrente, precio cerrado para proyectos de paisajismo y podas grandes, y por horas para lo imprevisible. Tener plantillas de presupuesto para cada modelo te ahorra horas de trabajo administrativo. Con una herramienta como <a href="https://dealforge.es">DealForge</a> puedes preparar plantillas por tipo de servicio y generar el presupuesto en minutos en lugar de empezar cada uno desde cero en Excel.</p>
+
+<h2>Qué debe incluir un presupuesto de jardinería profesional</h2>
+
+<p>Un presupuesto no es solo un número. Es tu carta de presentación y, muchas veces, lo que decide si el cliente te elige a ti o al de al lado. Estos son los elementos que no pueden faltar:</p>
+
+<ul>
+<li><strong>Tus datos completos</strong>: nombre o razón social, NIF/CIF, teléfono, email y, si la tienes, tu inscripción como empresa aplicadora de fitosanitarios o tu formación acreditada. Genera confianza.</li>
+<li><strong>Datos del cliente</strong> y dirección exacta de la parcela.</li>
+<li><strong>Número de referencia y fecha</strong>, para llevar un control ordenado.</li>
+<li><strong>Descripción detallada del trabajo</strong>, desglosada por partidas: qué se hace exactamente, con qué materiales y en qué cantidad. "Poda de arbolado: 350 EUR" dice poco. "Poda en altura de 4 pinos de gran porte, incluida trepa, recogida y retirada de restos a gestor autorizado: 350 EUR" dice mucho.</li>
+<li><strong>Precios unitarios y totales</strong>, con subtotal, IVA (21% en la mayoría de servicios de jardinería en España) y total final claro.</li>
+<li><strong>Qué NO incluye</strong>: es tan importante como lo que incluye. Deja por escrito si el precio no cubre la retirada de un tocón, la reparación de una tubería que aparezca al cavar o las plantas que el cliente elija por su cuenta. Esto te evita discusiones.</li>
+<li><strong>Condiciones</strong>: forma de pago, validez del presupuesto (los precios de plantas y materiales cambian; pon 15-30 días), plazo de ejecución y garantía de las plantas si la ofreces.</li>
+</ul>
+
+<h2>Errores que hacen que pierdas dinero o el cliente</h2>
+
+<p>Después de ver cientos de presupuestos de este sector, estos son los fallos que más se repiten y más caros salen:</p>
+
+<h3>No visitar la parcela antes de presupuestar</h3>
+
+<p>Ya lo hemos dicho, pero merece repetirse porque es el error número uno. Presupuestar sin ver el acceso, la pendiente, el estado real y la distancia al vertido es apostar a ciegas. Una visita de 20 minutos te ahorra perder cientos de euros en un trabajo mal calculado.</p>
+
+<h3>Olvidar la gestión de residuos</h3>
+
+<p>El segundo error más caro. Los restos verdes ocupan mucho, pesan y cuesta dinero deshacerse de ellos legalmente. Cóbralo siempre como partida propia o inclúyelo explícitamente en el precio.</p>
+
+<h3>Cobrar la maquinaria a cero</h3>
+
+<p>"La máquina ya la tengo" no significa que sea gratis. Si no imputas su amortización y mantenimiento, cuando se rompa la cortacésped no tendrás con qué reponerla y tendrás que sacarlo de tu bolsillo.</p>
+
+<h3>Tardar días en enviar el presupuesto</h3>
+
+<p>En jardinería, muchos trabajos se contratan al primero que responde bien. Si el cliente te pide presupuesto un lunes y se lo mandas el viernes, es probable que ya haya contratado a otro. La rapidez cierra ventas. Tener plantillas listas y poder generar el presupuesto el mismo día de la visita marca una diferencia enorme.</p>
+
+<h3>Competir solo por precio</h3>
+
+<p>Siempre habrá alguien que lo haga más barato, muchas veces sin factura, sin seguro y sin gestionar los residuos como toca. No entres en esa guerra. Compite con profesionalidad: presupuestos claros, buen trato, garantía de las plantas, trabajo bien acabado. El cliente que solo quiere el precio más bajo no es el cliente que hace crecer tu negocio.</p>
+
+<h2>Cómo presentar el presupuesto para ganar más trabajos</h2>
+
+<p>Dos jardineros con el mismo precio no cierran los mismos trabajos. La diferencia está en cómo presentan la propuesta. Algunas ideas que funcionan:</p>
+
+<ul>
+<li><strong>Sé rápido</strong>: el mismo día de la visita, o al día siguiente como máximo. La velocidad se percibe como profesionalidad y ganas de trabajar.</li>
+<li><strong>Cuida la imagen</strong>: un presupuesto con tu logo, ordenado y sin faltas de ortografía transmite mucho más que un mensaje de móvil con un número suelto. El documento habla de cómo trabajarás.</li>
+<li><strong>Ofrece opciones</strong>: en paisajismo, presentar dos o tres niveles (básico, recomendado, premium) ayuda al cliente a decidir y suele subir el ticket medio. Muchos eligen el intermedio.</li>
+<li><strong>Explica el valor, no solo el precio</strong>: si retiras los residuos a un gestor autorizado, si das garantía de las plantas, si usas producto profesional, dilo. Justifica por qué no eres el más barato.</li>
+<li><strong>Facilita el sí</strong>: incluye una forma sencilla de aceptar el presupuesto. Cuanto menos fricción, antes cierras.</li>
+</ul>
+
+<h2>El mantenimiento recurrente: tu mejor activo</h2>
+
+<p>Los trabajos puntuales de paisajismo dan buenos ingresos, pero son irregulares. Lo que de verdad da estabilidad a un negocio de jardinería son los <strong>contratos de mantenimiento</strong>: esa cartera de clientes que te pagan una cuota fija cada mes por cuidar su jardín todo el año.</p>
+
+<p>Un buen contrato de mantenimiento te da ingresos predecibles, te permite planificar tu carga de trabajo y multiplica el valor de tu negocio. Diez chalets con mantenimiento mensual de 100 EUR son 12.000 EUR anuales que puedes dar casi por seguros, y encima son la puerta de entrada para venderles después una poda grande, un sistema de riego o un rediseño del jardín.</p>
+
+<p>Por eso, siempre que hagas un trabajo puntual, plantéate ofrecer el mantenimiento después. "Ahora que el jardín está perfecto, te propongo un mantenimiento mensual para que se mantenga así todo el año." Es la venta más fácil y más rentable del sector. Llevar el control de qué clientes tienen contrato, cuándo toca cada visita y cuándo renovar es mucho más sencillo con un sistema que gestione tus presupuestos y clientes en un solo sitio, en lugar de tenerlo todo en la cabeza y en carpetas sueltas.</p>
+
+<h2>Conclusión: presupuesta con cabeza y cobra lo que vales</h2>
+
+<p>La jardinería y el paisajismo son oficios rentables cuando se presupuestan bien. El problema casi nunca es que los clientes no quieran pagar: es que muchos profesionales no calculan sus costes reales, se olvidan del transporte y la maquinaria, y compiten por precio contra quien trabaja sin factura ni seguro.</p>
+
+<p>Los puntos clave para aplicar desde hoy:</p>
+
+<ul>
+<li>Visita siempre la parcela antes de dar un precio.</li>
+<li>Cuenta todos los costes: mano de obra real, maquinaria, materiales con margen, transporte de residuos y desplazamientos.</li>
+<li>Elige el modelo de cobro según el trabajo: cuota fija para mantenimiento, precio cerrado para paisajismo, por horas para lo incierto.</li>
+<li>Haz presupuestos claros, desglosados y con lo que no incluye por escrito.</li>
+<li>Sé rápido: el primero en presentar una propuesta profesional suele llevarse el trabajo.</li>
+<li>Convierte cada trabajo puntual en un contrato de mantenimiento recurrente.</li>
+</ul>
+
+<p><strong>¿Quieres dejar de perder horas haciendo presupuestos en Excel y enviar propuestas profesionales el mismo día de la visita?</strong> Prueba <a href="https://dealforge.es">DealForge</a> gratis, crea tus plantillas de presupuesto por tipo de servicio y dedica tu tiempo a lo que de verdad importa: cuidar jardines, no pelearte con hojas de cálculo.</p>`,
+    autor: "DealForge",
+    categoria: "guias",
+    tags: JSON.stringify([
+      "presupuestos jardinería",
+      "cotización paisajismo",
+      "precios jardinería",
+      "mantenimiento de jardines",
+      "cómo cobrar jardinería",
+      "autónomos jardinería",
+      "presupuestos profesionales",
+    ]),
+    publicado: true,
+    publishedAt: new Date(),
+    metaTitulo:
+      "Presupuestos de jardinería y paisajismo: cómo cotizar bien (guía 2026) — DealForge",
+    metaDescripcion:
+      "Cómo hacer presupuestos de jardinería y paisajismo rentables: modelos de cobro, los costes que se olvidan siempre (maquinaria, residuos, transporte) y cómo presentar la cotización para ganar más contratos.",
+    metaKeywords:
+      "presupuestos de jardinería, cómo cotizar jardinería, precios de jardinería, presupuesto paisajismo, cuánto cobrar por mantenimiento de jardín, cotización poda de árboles, presupuesto césped artificial, precio hora jardinero",
+  };
+
+  const posts = [post, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12, post13, post14, post15, post16, post17, post18, post19, post20];
   const results = [];
 
   for (const p of posts) {
